@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { decideReview } from './contexts/review.js';
 export const caseSchema = z.object({ id: z.string().regex(/^[a-zA-Z0-9_-]{1,40}$/), name: z.string().min(2).max(100), prompt: z.string().min(1).max(2000), rule: z.enum(['contains', 'not_contains', 'exact', 'json_keys', 'not_empty']), expected: z.string().max(500), critical: z.boolean() }).strict().refine(c => c.rule === 'not_empty' || c.expected.trim().length > 0, 'Expected value required').refine(c => c.rule !== 'json_keys' || c.expected.split(',').every(k => k.trim()), 'JSON keys must be nonempty');
 export const policySchema = z.object({ minScore: z.number().min(0).max(100), maxLatencyMs: z.number().int().min(1).max(600000).nullable() }).strict();
 export const suiteSchema = z.object({ name: z.string().min(2).max(100), description: z.string().min(5).max(1000), cases: z.array(caseSchema).min(1).max(60), policy: policySchema, parentId: z.string().uuid().optional() }).strict().refine(s => new Set(s.cases.map(c => c.id)).size === s.cases.length, 'Duplicate case IDs');
@@ -33,5 +34,5 @@ export function evaluate(cases: Case[], policy: z.infer<typeof policySchema>, ou
   return { results, total: results.length, passed, errors, criticalFailures, score, gate: score >= policy.minScore && errors === 0 && criticalFailures === 0 ? 'passed' : 'blocked' };
 }
 export function reviewAllowed(input: { actor: string; creator: string; requester: string; status: string; gate: string }) {
-  return input.status === 'pending' && input.gate === 'passed' && input.actor !== input.creator && input.actor !== input.requester;
+  return decideReview({ ...input, version: 1 }, { actor: input.actor, decision: 'approved', expectedVersion: 1 }).ok;
 }

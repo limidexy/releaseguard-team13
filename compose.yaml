@@ -1,7 +1,7 @@
-name: releaseguard-course-v2
+name: releaseguard-team13
 x-service: &service
   build: .
-  image: releaseguard-course-v2:local
+  image: releaseguard-team13:local
   restart: unless-stopped
   init: true
   mem_limit: 384m
@@ -25,7 +25,7 @@ services:
     build:
       context: .
       dockerfile: deploy/postgres/Dockerfile
-    image: releaseguard-postgres-v2:local
+    image: releaseguard-team13-postgres:local
     environment:
       POSTGRES_USER: rg_admin
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -107,8 +107,8 @@ services:
       REGISTRY_URL: http://registry:8080
       EVALUATION_URL: http://evaluation:8080
       GOVERNANCE_URL: http://governance:8080
-      PUBLIC_ORIGIN: http://localhost:5189
-    ports: ["127.0.0.1:5189:8080"]
+      PUBLIC_ORIGIN: http://localhost:${RG_PORT:-5193}
+    ports: ["127.0.0.1:${RG_PORT:-5193}:8080"]
     depends_on:
       governance: { condition: service_healthy }
 volumes:

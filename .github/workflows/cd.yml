@@ -13,6 +13,7 @@ permissions:
   actions: read
 jobs:
   check:
+    if: vars.RG_ENABLE_CLOUD_CD == 'true'
     runs-on: ubuntu-latest
     outputs:
       source: ${{ steps.verify.outputs.source }}

@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-export const base = process.env.RELEASEGUARD_URL ?? 'http://localhost:5189';
+export const base = process.env.RELEASEGUARD_URL ?? 'http://localhost:5193';
 export async function request(path, token, body, key) {
   const response = await fetch(base + '/api/v2/' + path, { method: body === undefined ? 'GET' : 'POST', headers: { authorization: 'Bearer ' + token, ...(body === undefined ? {} : { 'content-type': 'application/json' }), ...(key ? { 'idempotency-key': key } : {}) }, body: body === undefined ? undefined : JSON.stringify(body), signal: AbortSignal.timeout(15000) });
   return { status: response.status, data: await response.json() };
