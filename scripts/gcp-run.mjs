@@ -5,8 +5,9 @@ const c=JSON.parse(await readFile('deploy/gcp/trial-config.json','utf8')),s=JSON
 Object.assign(process.env,{RELEASEGUARD_URL:c.PUBLIC_ORIGIN,RG_CLOUD_ALLOWED_ORIGINS:c.PUBLIC_ORIGIN,RG_APPROVED_ORIGIN:c.PUBLIC_ORIGIN,AUTH_ISSUER:c.PUBLIC_ORIGIN+'/auth/realms/releaseguard',OIDC_CLIENT_ID:'rg-ci',OIDC_CLIENT_SECRET:s.ci,OIDC_VIEWER_SECRET:s.viewer,RG_ALLOW_CLOUD_SMOKE:'true'});
 const mode=process.argv[2],scripts={smoke:['scripts/cloud-smoke.mjs'],acceptance:['scripts/cloud-acceptance.mjs'],real:['scripts/compare-prompts.mjs','real'],benchmark:['scripts/cloud-benchmark.mjs'],autoscale:['scripts/cloud-autoscale.mjs']};
 scripts.backup=['scripts/cloud-backup-restore.mjs'];
+scripts.rescore=['scripts/cloud-rescore-retained.mjs',process.argv[3]];
 scripts['autoscale-fault']=['scripts/cloud-autoscale-worker-pause.mjs'];
-if(!scripts[mode])throw Error('Choose smoke, acceptance, real, benchmark, autoscale, autoscale-fault or backup');
+if(!scripts[mode]||(mode==='rescore'&&!process.argv[3]))throw Error('Choose smoke, acceptance, real, benchmark, autoscale, autoscale-fault, backup or rescore <retained-report>');
 const deployed=JSON.parse(execFileSync('kubectl',['-n','releaseguard','get','deployment','gateway','-o','json'],{encoding:'utf8'}));
 const source=deployed.metadata.annotations?.['releaseguard/source'];
 if(!/^[a-f0-9]{40}$/.test(source??''))throw Error('Cloud source annotation must be recorded before acceptance');

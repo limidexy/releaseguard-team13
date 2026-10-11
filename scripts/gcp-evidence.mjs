@@ -8,6 +8,8 @@ const nodes=g('compute','instances','list','--filter=name~^gke-rg-trial-');
 const pvcs=JSON.parse(execFileSync('kubectl',['-n','releaseguard','get','pvc','-o','json'],{encoding:'utf8',timeout:60000})).items;
 const report={at:new Date().toISOString(),project:c.project,cluster:cluster.name,zone:c.zone,status:cluster.status,currentNodeCount:cluster.currentNodeCount??0,nodePools:cluster.nodePools.map(p=>({name:p.name,machineType:p.config.machineType,diskSizeGb:p.config.diskSizeGb,autoscaling:p.autoscaling??null})),instances:nodes.map(n=>({name:n.name,status:n.status,zone:n.zone.split('/').at(-1)})),computeStopped:nodes.length===0,dataVolumes:pvcs.map(p=>({name:p.metadata.name,status:p.status.phase,capacity:p.status.capacity})),paidUpgradeAuthorized:false,warning:'Zero compute nodes does not stop storage, static IP, load balancer, registry or other retained-resource credit consumption. Billing data can lag.'};
 await writeFile(root+'/cloud-power-state.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
+// Routine power checks must not overwrite the immutable earlier experiment archive.
+if(process.argv.includes('--power-only'))process.exit(0);
 // Keep original observations intact. Correct only the aggregate median in a
 // separate derivation with an explicit provenance note.
 const b=JSON.parse(await readFile(root+'/cloud-benchmark.json','utf8'));

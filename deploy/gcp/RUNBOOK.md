@@ -10,7 +10,7 @@
 gcloud container clusters resize rg-trial --node-pool=default-pool --num-nodes=2 --zone=asia-southeast1-a --project=project-dcf9bb6a-7310-4602-aea
 gcloud container clusters get-credentials rg-trial --zone=asia-southeast1-a --project=project-dcf9bb6a-7310-4602-aea --dns-endpoint
 kubectl -n releaseguard get pods,pvc
-kubectl -n releaseguard rollout status deployment/gateway --timeout=240s
+kubectl -n releaseguard wait --for=condition=Available deployment --all --timeout=600s
 node scripts/gcp-run.mjs acceptance
 ```
 
@@ -23,7 +23,7 @@ node scripts/gcp-run.mjs acceptance
 ```sh
 gcloud container clusters resize rg-trial --node-pool=default-pool --num-nodes=0 --zone=asia-southeast1-a --project=project-dcf9bb6a-7310-4602-aea
 gcloud compute instances list --filter='name~^gke-rg-trial-' --project=project-dcf9bb6a-7310-4602-aea
-node scripts/gcp-evidence.mjs
+node scripts/gcp-evidence.mjs --power-only
 ```
 
 确认计算实例列表为空。不要删除 namespace、PVC、持久盘或数据库。缩到零后网站离线，恢复步骤完成后才可演示。负载均衡、IP、镜像存储、持久盘等保留资源仍可能消耗试用赠金；若不再需要环境，应另行确认数据导出和资源删除范围。S$40 预算提醒不会自动停机。
@@ -35,7 +35,7 @@ node scripts/gcp-evidence.mjs
 3. 在 `Trial cloud deployment (manual)` 输入该 run ID。需要演练镜像回退时启用 `prove_rollback`，且旧镜像必须健康并不同于候选镜像。
 4. 检查 `check` 和 `deploy` 都成功，以及 `deployment-evidence` 中的候选、旧版、再次候选 smoke 结果。发生错误时检查恢复证据，不把绿色子步骤当成整体成功。
 
-GitHub 私有免费方案没有独立人工批准门禁。手动触发不等于同学批准。工作流使用绑定本仓库和分支的短期身份联合凭据；不要额外创建长期云服务账号 key。
+仓库已按所有者要求公开，但当前工作流仍未配置独立人工批准门禁。手动触发不等于同学批准。工作流使用绑定本仓库和分支的短期身份联合凭据；不要额外创建长期云服务账号 key。冷启动后须先等待全部服务健康，不应绕过部署前置检查。
 
 ## 扩容和恢复测试边界
 

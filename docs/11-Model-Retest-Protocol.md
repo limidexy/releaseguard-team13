@@ -22,11 +22,19 @@ Because both output budget and scoring method changed, the old 20/60 scores cann
 
 For each failed case, inspect the complete raw answer and the exact check failure. Unknown or misleading cases remain visible for a human reviewer; do not rewrite old scores. Record any future evaluator change as another version.
 
+### Post-run correction, explicitly not pre-registered
+
+Inspection of the 20 retained answers exposed two false negatives in v2.0: asking how long ago the item was purchased, and forwarding a damaged-item case to the returns team. It also exposed a false positive: contracted or intervening-verb refund promises such as “we'll ... process a refund” were missed. These fixes are isolated in new rule `returns_policy_v2_1`, evaluator `returns-policy-v2.1`. `returns_policy_v2` keeps its old behaviour. The same 52 literal regression fixtures are checked against both rules; ten additional tests cover the correction and negative controls. The complete TypeScript suite now has 138 tests, plus a separate image-identity test.
+
+`node scripts/rescore-retained.mjs <raw-report>` creates a separate, hashed offline derivation with zero provider calls. It preserves original job IDs, results, provider errors and raw answer bytes. Because this rule revision used the observed answers, its scores are explanatory re-scoring, not a blind holdout result. The next independent model experiment must freeze a rubric beforehand. Do not overwrite the real jobs or claim another 20 calls occurred.
+
 After capture of raw results, bilingual UI evidence and CI/CD links, stop the two trial compute nodes and verify no compute instances remain. Preserve data volumes. Retained disks, IP, load balancer and images may still consume trial credit; billing reports can lag. Never upgrade to a paid account.
 
 ## Team sharing
 
-The repository remains private: `https://github.com/limidexy/releaseguard-team13`. Invite the four actual teammates by their confirmed GitHub usernames; they accept invitations using their own accounts. No shared password, token or cloud administrator credential. GitHub Free supports collaborators on private personal repositories ([GitHub documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/repository-access-and-collaboration/inviting-collaborators-to-a-personal-repository)). Personal-repository collaborators receive code collaboration permissions; do not confuse this with cloud administrator access or a read-only public preview.
+At the owner's explicit request, the repository was made public on 11 October 2026: `https://github.com/limidexy/releaseguard-team13`. Unauthenticated GitHub API access confirmed HTTP 200 and `private=false`. Lecturers and teammates can read code, commit history and Actions without invitations. The current implementation remains on `feat/local-course-evidence`, with draft PR #1 awaiting genuine team review; publication is not a merge or approval.
+
+Write access remains separate. Invite the four actual teammates only by their confirmed GitHub usernames. No shared password, token or cloud administrator credential. The existing manually dispatched CD has no independent approval gate configured; publication does not itself add one. Public Actions logs and artifacts were included in the publication check. Future submissions must also exclude credentials and private customer data.
 
 For immediate group discussion, distribute a sanitized source-and-evidence archive. Exclude `.env`, `evidence/private/`, credentials, database dumps and kubeconfig. Keep A/B/C/D/E responsibilities unchanged. The website and GitHub repository have separate access controls; a stopped website cannot be made available by sharing a GitHub link.
 

@@ -2,7 +2,9 @@
 
 **Current working copy: 11 October 2026.** This repository continues the preserved 7/8 October baseline in a separate directory and Docker project. Start with [DDD decisions](docs/07-DDD-Design.md) and [five-member delivery workflow](docs/08-Team-Workflow.md). Prior dated documents below are historical; they are not fresh verification or the approved Word proposal. The lecturer has approved the revised proposal; implementation/cloud acceptance remains separate.
 
-[**Fresh measured results and remaining gaps**](docs/09-Local-Evidence-20261011.md): 11 local acceptance stages, 18 unit tests, 18 integration groups, 4 regressions and 5 outage contracts passed. The report preserves the observed lack of scaling speedup and distinguishes local/browser/replay checks from cloud/provider/team evidence.
+**Public review edition.** The owner requested public access for teammates and the lecturer. Use [the current working branch](https://github.com/limidexy/releaseguard-team13/tree/feat/local-course-evidence), not the older `main` snapshot. [Draft PR #1](https://github.com/limidexy/releaseguard-team13/pull/1) is still awaiting genuine team review. Public read access does not grant push, deployment or model access. See [the real-model re-test and current delivery record](docs/12-Real-Retest-20261011.md) for the latest measured results, exact tested source, CI/CD links and shutdown evidence. Historical failures remain intact.
+
+[**Earlier local results and remaining gaps**](docs/09-Local-Evidence-20261011.md): 11 local acceptance stages, 18 unit tests, 18 integration groups, 4 regressions and 5 outage contracts passed in that dated run. The report preserves the observed lack of scaling speedup and distinguishes local/browser/replay checks from cloud/provider/team evidence. The corrected evaluator's later suite has 138 TypeScript tests plus one image-identity test; synthetic tests are not live model calls.
 
 This edition uses http://localhost:5193, image `releaseguard-team13:local`, and Compose project `releaseguard-team13`. It does not modify the earlier stack on port 5189. Set `RELEASEGUARD_URL` consistently if changing `RG_PORT`.
 
@@ -21,11 +23,11 @@ Open http://localhost:5193. Use the developer token to set up the ten-case examp
 
 `scripts/acceptance.mjs` runs real local containers, integration/security/outage contracts, worker crash recovery, paired 1/3-worker bursts, two mixed read/write stages and a dependency audit. It produces `evidence/current/acceptance.json` with commit, source hashes, exit codes and logs. It refuses a non-loopback target or enabled real-model configuration. A pass proves only the enumerated local checks. Scaling figures may be worse with more workers; retain them unchanged.
 
-The repository's hosted CI and cloud CD are **disabled by default** using `RG_ENABLE_HOSTED_CI` and `RG_ENABLE_CLOUD_CD`. The owner must confirm included CI minutes/zero-spend limits before enabling CI; cloud requires separate account and budget approval. A skipped hosted workflow is NOT a passed CI run. See [team workflow](docs/08-Team-Workflow.md) for local pre-push verification and PR review.
+The repository's hosted CI and cloud CD have been explicitly enabled for the owner's free-trial acceptance using `RG_ENABLE_HOSTED_CI` and `RG_ENABLE_CLOUD_CD`. They are not automatically enabled in a new fork. Recheck free-plan limits before running; never upgrade to paid billing. A skipped hosted workflow is NOT a passed CI run. See [team workflow](docs/08-Team-Workflow.md) for local pre-push verification and PR review. The actual cloud is Google Cloud GKE, not GitHub. Stopping its compute nodes pauses the site but not the public repository.
 
 ## Historical baseline instructions (7 October)
 
-The text below describes the imported baseline; replace port 5189 with 5193 in this checkout. Historical result files were deliberately not copied as current evidence.
+The text below describes the imported baseline, not the current deployment. Replace port 5189 with 5193 in this checkout. Statements about an unselected cloud, unexecuted hosted workflows and retry behaviour are historical; current operation is governed by the dated records above and [re-test protocol](docs/11-Model-Retest-Protocol.md). Real jobs now fail rather than automatically repeating provider calls after recovery. Historical result files were deliberately not copied as current evidence.
 
 Current delivery: 7 October 2026, local improvement edition 2.1. Start with `docs/05-Current-Handoff.md`. Historical reports in `evidence/baseline-original/` are from the supplied ZIP, not this machine. Fresh execution is recorded in `evidence/current/acceptance.json`; root-level integration/fault reports are from the latest local verification. No real provider, cloud deployment or hosted CI has been executed in this edition.
 

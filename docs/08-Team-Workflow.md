@@ -2,7 +2,9 @@
 
 更新：2026-10-11。保留已确认分工。Sprint 1：10 月 8–13 日；Sprint 2：10 月 14–20 日，为计划日期，实际完成时间据实记录。
 
-私有仓库：https://github.com/limidexy/releaseguard-team13
+公开仓库：https://github.com/limidexy/releaseguard-team13
+
+老师/组员查看当前版本：[feat/local-course-evidence](https://github.com/limidexy/releaseguard-team13/tree/feat/local-course-evidence)。2026-10-11 经所有者明确要求改为公开，已用无登录请求验证可读。`main` 尚未合并这个工作分支；不要把公开可见说成已获团队批准。
 
 ## 每个人负责什么
 
@@ -22,7 +24,7 @@
 
 ## 每个人的操作顺序
 
-1. 接受仓库邀请并克隆；安装 Node.js 24+ 与 Docker。阅读 README，单独生成 `.env`，不要共享任何人的密钥文件。
+1. 公开阅读/克隆无需邀请；向团队仓库 push 仍需所有者邀请真实 GitHub 账号。安装 Node.js 24+ 与 Docker。阅读 README，单独生成 `.env`，不要共享任何人的密钥文件。
 2. 从团队实际工作分支/已合并主分支创建任务分支。例如 `feat/a-uat-errors`、`feat/b-review-policy`、`feat/c-provider-evidence`、`ci/d-cloud-smoke`、`test/e-mixed-load`。
 3. 先写/调整测试，再实现自己的任务，保留失败原因和复测结果。不要为了凑 Git 记录而制造无意义提交。
 4. 在此克隆目录启用本地检查：`git config core.hooksPath .githooks`。macOS/Linux 首次运行 `chmod +x .githooks/pre-push`。这是本地辅助门禁，可被绕过，不能替代受保护分支/远端 CI。
@@ -37,7 +39,7 @@
 - 一个真实成员 PR：需求 → 代码/test diff → 本地测试 → `git push` → 另一位成员评论/批准 → 合并。
 - `evidence/git/pre-push.json` 仅证明本地 hook 执行，不是 hosted CI。
 - `.github/workflows/ci.yml` 已开启并实际运行；展示 Actions 链接、exact source commit、镜像 ID、测试日志、失败阻断和 artifact。**Skipped ≠ Passed。**
-- `.github/workflows/cd.yml` 使用手动触发，核对同一个 commit 的成功 CI，再以短期身份凭据发布并部署经过测试的同一镜像。试用方案没有独立人工审批门禁；不能把手动触发说成另一位组员批准。各次 rollout、smoke 和回滚结果见 [云端验收记录](10-Cloud-Acceptance-20261011.md)。
+- `.github/workflows/cd.yml` 使用手动触发，核对同一个 commit 的成功 CI，再以短期身份凭据发布并部署经过测试的同一镜像。本次仍未配置独立人工审批门禁；公开仓库不等于门禁自动启用，不能把手动触发说成另一位组员批准。各次 rollout、smoke 和回滚结果见 [云端验收记录](10-Cloud-Acceptance-20261011.md) 和 [真实复测记录](12-Real-Retest-20261011.md)。
 
 ## 不收费边界 / 待账号事项
 
