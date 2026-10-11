@@ -6,6 +6,7 @@ for(const value of [origin,issuer,jwks])if(new URL(value).protocol!=='https:'||n
 const namespace='releaseguard',documents=[],roles=['registry','evaluation','governance','support','worker','gateway'];
 documents.push({apiVersion:'v1',kind:'Namespace',metadata:{name:namespace}});
 documents.push({apiVersion:'v1',kind:'ConfigMap',metadata:{name:'rg-config',namespace},data:{AUTH_MODE:'oidc',AUTH_ISSUER:issuer,OIDC_JWKS_URL:jwks,PUBLIC_ORIGIN:origin,RUNNER_ORIGINS:'http://support:8080',REGISTRY_URL:'http://registry:8080',EVALUATION_URL:'http://evaluation:8080',GOVERNANCE_URL:'http://governance:8080',LEASE_MS:'60000'}});
+if(process.env.RG_DEPLOYMENT_ENV==='gcp-trial')documents.find(d=>d.kind==='ConfigMap').data.RG_DEPLOYMENT_ENV='gcp-trial';
 const fromSecret=(name,key,optional=false)=>({secretKeyRef:{name,key,optional}});
 for(const role of roles){
   const env=[{name:'SERVICE_ROLE',value:role},{name:'INTERNAL_SECRET',valueFrom:fromSecret('rg-internal','INTERNAL_SECRET')}];

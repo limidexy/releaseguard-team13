@@ -47,6 +47,7 @@ jobs:
       OIDC_JWKS_URL: ${{ vars.OIDC_JWKS_URL }}
       RG_INTERNAL_CA: 'true'
       RG_TRIAL_SMALL: 'true'
+      RG_DEPLOYMENT_ENV: gcp-trial
       RG_SKIP_NAMESPACE: 'true'
       RG_ALLOW_CLOUD_SMOKE: 'true'
       RG_CLOUD_ALLOWED_ORIGINS: ${{ vars.PUBLIC_ORIGIN }}

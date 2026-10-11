@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { decideReview } from './contexts/review.js';
-export const caseSchema = z.object({ id: z.string().regex(/^[a-zA-Z0-9_-]{1,40}$/), name: z.string().min(2).max(100), prompt: z.string().min(1).max(2000), rule: z.enum(['contains', 'not_contains', 'exact', 'json_keys', 'not_empty']), expected: z.string().max(500), critical: z.boolean() }).strict().refine(c => c.rule === 'not_empty' || c.expected.trim().length > 0, 'Expected value required').refine(c => c.rule !== 'json_keys' || c.expected.split(',').every(k => k.trim()), 'JSON keys must be nonempty');
+import { checkReturnsPolicy, returnsCriteria } from './returns-policy.js';
+export const caseSchema = z.object({ id: z.string().regex(/^[a-zA-Z0-9_-]{1,40}$/), name: z.string().min(2).max(100), prompt: z.string().min(1).max(2000), rule: z.enum(['contains', 'not_contains', 'exact', 'json_keys', 'not_empty', 'returns_policy_v2']), expected: z.string().max(500), critical: z.boolean() }).strict().refine(c => c.rule === 'not_empty' || c.expected.trim().length > 0, 'Expected value required').refine(c => c.rule !== 'json_keys' || c.expected.split(',').every(k => k.trim()), 'JSON keys must be nonempty').refine(c => c.rule !== 'returns_policy_v2' || (returnsCriteria as readonly string[]).includes(c.expected), 'Unknown returns policy criterion');
 export const policySchema = z.object({ minScore: z.number().min(0).max(100), maxLatencyMs: z.number().int().min(1).max(600000).nullable() }).strict();
 export const suiteSchema = z.object({ name: z.string().min(2).max(100), description: z.string().min(5).max(1000), cases: z.array(caseSchema).min(1).max(60), policy: policySchema, parentId: z.string().uuid().optional() }).strict().refine(s => new Set(s.cases.map(c => c.id)).size === s.cases.length, 'Duplicate case IDs');
 export const outputSchema = z.object({ caseId: z.string().max(40), output: z.string().max(10000).optional(), latencyMs: z.number().finite().min(0).max(600000).optional(), error: z.string().min(1).max(500).optional() }).strict();
@@ -14,6 +15,7 @@ export function evaluate(cases: Case[], policy: z.infer<typeof policySchema>, ou
   const results = cases.map(c => {
     const o = byId.get(c.id), actual = o?.output?.trim();
     let status = 'failed', reason = 'Rule failed';
+    let policyCheck: ReturnType<typeof checkReturnsPolicy> | undefined;
     if (!o || o.error !== undefined || actual === undefined || actual.length === 0 || (policy.maxLatencyMs !== null && o.latencyMs === undefined)) { status = 'error'; reason = o?.error ?? 'Required non-empty evidence missing'; }
     else {
       let passed = false;
@@ -23,10 +25,11 @@ export function evaluate(cases: Case[], policy: z.infer<typeof policySchema>, ou
       if (c.rule === 'exact') passed = actual === expected;
       if (c.rule === 'not_empty') passed = actual.length > 0;
       if (c.rule === 'json_keys') { try { const v = JSON.parse(actual); passed = v !== null && typeof v === 'object' && !Array.isArray(v) && expected.split(',').every(k => Object.hasOwn(v, k.trim())); } catch {} }
+      if (c.rule === 'returns_policy_v2') { policyCheck = checkReturnsPolicy(expected, actual); passed = policyCheck.passed; reason = policyCheck.reason; }
       if (policy.maxLatencyMs !== null && (o.latencyMs ?? Infinity) > policy.maxLatencyMs) { passed = false; reason = 'Latency exceeds policy'; }
-      status = passed ? 'passed' : 'failed'; if (passed) reason = 'Rule passed';
+      status = passed ? 'passed' : 'failed'; if (passed && !policyCheck) reason = 'Rule passed';
     }
-    return { caseId: c.id, critical: c.critical, rule: c.rule, expected: c.expected, output: o?.output ?? null, latencyMs: o?.latencyMs ?? null, status, reason };
+    return { caseId: c.id, critical: c.critical, rule: c.rule, expected: c.expected, output: o?.output ?? null, latencyMs: o?.latencyMs ?? null, status, reason, ...(policyCheck ? { checks: policyCheck.checks, evaluatorVersion: policyCheck.evaluatorVersion } : {}) };
   });
   const passed = results.filter(r => r.status === 'passed').length, errors = results.filter(r => r.status === 'error').length;
   const criticalFailures = results.filter(r => r.critical && r.status !== 'passed').length;

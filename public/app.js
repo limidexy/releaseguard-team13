@@ -14,14 +14,15 @@ const copy = {
 Object.assign(copy, {
   skip:['跳至主要内容','Skip to main content'],workspace:['评测与发布审核','Evaluation workspace'],
   navEvidence:['评测证据','Evidence'],navHistory:['任务历史','History'],navCompare:['版本比较','Compare'],navReview:['人工审核','Reviews'],
-  localOnly:['本地环境','Local environment'],sidebarHint:['评测、核验证据，再决定是否发布。','Evaluate, inspect the evidence, then make the release decision.'],
+  localOnly:['部署位置待确认','Environment unconfirmed'],sidebarHint:['评测、核验证据，再决定是否发布。','Evaluate, inspect the evidence, then make the release decision.'],
   evidenceLead:['每一次发布决定，都有可检查的依据。','Every release decision starts with evidence you can inspect.'],
   historyLead:['追踪候选版本，区分执行状态与规则结论。','Track candidates with execution and rule outcomes kept separate.'],
   compareLead:['相同测试条件下，逐项检查回答的变化。','Inspect answer changes under the same test conditions.'],
   reviewLead:['规则检查之后，由独立审核人作出决定。','An independent reviewer decides after the rule checks.'],
   newEvaluation:['新建评测','New evaluation'],evidenceBoundary:['证据边界','Evidence boundary'],
-  boundary:['本地课程基线；静态回放不是模型实测。规则通过不等于业务正确，人工批准不会自动部署。','Local course baseline. Replay is not a model run. Passing rules does not prove correctness; approval does not deploy.'],
+  boundary:['真实调用、静态回放与导入证据分别标注。规则通过不等于业务正确；人工批准不会自动部署。','Real calls, replay and imported evidence are labelled separately. Passing rules does not prove correctness; approval does not deploy.'],
   identity:['工作空间配置','Workspace connection'],notConnected:['尚未连接','Not connected'],connected:['已载入当前身份的数据','Current identity loaded'],
+  tokenHint:['仅保留在当前页面。请使用当前环境获授权身份的令牌；审核人须独立于提交者，不要共享维护人凭据。','Kept only in this page. Use an authorized identity for this environment. Reviewers must be independent of submitters; do not share maintainer credentials.'],
   setupHint:['首次使用？登记示例应用与 10 条固定测试用例。已有资产可直接填写 ID。','First time? Register the sample app and 10 fixed cases, or enter existing asset IDs.'],
   submitTitle:['提交候选评测','Submit a candidate'],emptyTitle:['从一份评测证据开始','Start with evaluation evidence'],
   emptyResult:['连接工作空间后，新建评测或从任务历史选择一项。这里会显示原始回答与发布门禁结论。','Connect your workspace, then create an evaluation or select a historical job to inspect its answers and release gate.'],
@@ -44,14 +45,23 @@ Object.assign(copy, {
   none:['未提供','Not provided'],missingInput:['请填写必填项后重试。','Complete the required field and try again.'],
   shortNote:['审核理由至少需要 10 个字符。请说明判断依据。','Use at least 10 characters to explain your decision.'],
   noAccess:['当前身份不能执行此操作。请在工作空间配置中使用相应角色的令牌。','This identity cannot perform the action. Use the appropriate role in workspace connection.'],
-  expiredToken:['令牌无效或已过期。请生成新的本地令牌并重新连接。','The token is invalid or expired. Generate a fresh local token and reconnect.'],
-  offline:['请求未完成。请检查本地服务，然后重试；不要重复提交不同候选。','The request did not finish. Check the local service, then retry without changing the candidate.'],
+  expiredToken:['令牌无效或已过期。请取得当前环境的新令牌后重新连接，不要共享维护人凭据。','The token is invalid or expired. Obtain a fresh token for this environment and reconnect; do not share maintainer credentials.'],
+  offline:['请求未完成。请检查网络，并确认环境已启动；试用环境停机时暂不可访问。','The request did not finish. Check the connection and confirm the environment is running; stopped trial environments are unavailable.'],
   invalidJson:['导入内容不是有效 JSON，请检查格式。','The imported content is not valid JSON. Check its format.'],
-  footer:['本地课程原型；云端验收与真实模型实验尚未完成。','Local course prototype. Cloud acceptance and real-model experiments remain pending.'],
+  footer:['部署位置尚未确认。实验结论以具体任务证据为准，不代表课程全部验收完成。','Deployment location is unconfirmed. Consult individual job evidence; this does not indicate full course acceptance.'],
   done:['操作完成，证据已更新。','Done. Evidence updated.'],error:['执行错误示例','Execution error fixture'],evidenceError:['证据错误','Evidence error']
 });
-let language='zh', offset=0, jobs=[], releases=[], selected=null, comparePair=null, lastBody='',lastKey='',busy=false, connected=false, attentionOnly=false;
-const t=key=>copy[key]?.[language==='zh'?0:1]??key;
+const environmentCopy={
+  'gcp-trial':{
+    localOnly:['Google Cloud · 试用','Google Cloud · Trial'],
+    tokenHint:['仅保留在当前页面。云端使用获授权的个人身份；自动测试服务身份不能代替独立审核人。请勿共享维护人凭据。','Kept only in this page. Use an authorized individual cloud identity. Automated test identities cannot act as independent reviewers. Do not share maintainer credentials.'],
+    footer:['部署于 Google Cloud GKE · 新加坡。演示结束后停止计算节点，网站暂停访问；数据保留。模型质量以任务结果及独立人工审核为准。','Hosted on Google Cloud GKE · Singapore. Compute stops after demonstrations; the site becomes unavailable while data is retained. Model quality requires job evidence and independent human review.']
+  },
+  local:{localOnly:['本地环境','Local environment'],footer:['当前运行在本地。回放不是模型实测；云端和真实调用结果须查看对应的实验记录。','Running locally. Replay is not a model test; consult the relevant records for cloud and real-provider experiments.']}
+};
+let environment='unconfirmed', language='zh', offset=0, jobs=[], releases=[], selected=null, comparePair=null, lastBody='',lastKey='',busy=false, connected=false, attentionOnly=false;
+const t=key=>(environmentCopy[environment]?.[key]??copy[key])?.[language==='zh'?0:1]??key;
+async function loadEnvironment(){try{const r=await fetch('/environment.json',{cache:'no-store',signal:AbortSignal.timeout(5000)});if(!r.ok)throw Error('Environment unavailable');const v=await r.json();environment=['gcp-trial','local'].includes(v.environment)?v.environment:'unconfirmed';}catch{environment='unconfirmed';}setLanguage();}
 const number=value=>typeof value==='number'?new Intl.NumberFormat(language==='zh'?'zh-CN':'en-US').format(value):value;
 function message(text,error=false){$('message').textContent=text;$('message').className=error?'error':busy&&text===t('working')?'working':'';}
 function openConnection(){ $('connection').open=true; $('token').focus(); }
@@ -94,9 +104,9 @@ function renderLists(){
 }
 async function requestReview(id){await api('releases',{jobId:id,note:$('note').value||'Please independently review the candidate evidence'});await load();location.hash='reviewPanel';}
 function renderComparison(a,b){comparePair=[a,b];$('comparisonNotice').textContent=t(a.input.source==='replay'?'replayWarning':a.input.source==='real'?'realWarning':'importWarning');$('comparison').replaceChildren();for(const c of a.snapshot.suite.data.cases){const row=$('comparison').insertRow();cell(row,c.name+'\n'+c.prompt);for(const j of [a,b]){const r=j.result.results.find(x=>x.caseId===c.id),td=cell(row,'');const badge=pill(r?.status??'error');if(r?.status==='failed')badge.textContent=t('ruleFailed');const output=document.createElement('p');output.textContent=r?.output??r?.reason??t('none');output.translate=false;td.append(badge,output);}}}
-$('setup').onclick=()=>safe(async()=>{const f=await(await fetch('/demo-fixtures.json')).json();const a=await api('applications',f.application),s=await api('suites',f.suite);$('appId').value=a.id;$('suiteId').value=s.id;await load();});
+$('setup').onclick=()=>safe(async()=>{const f=await(await fetch('/returns-fixtures-v2.json')).json();const a=await api('applications',f.application),s=await api('suites',f.suite);$('appId').value=a.id;$('suiteId').value=s.id;await load();});
 $('refresh').onclick=()=>safe(load);
-$('submit').onclick=()=>safe(async()=>{for(const id of ['appId','suiteId','candidate','commitRef']){$(id).removeAttribute('aria-invalid');if(!$(id).value.trim()){if(['appId','suiteId'].includes(id))$('connection').open=true;$(id).setAttribute('aria-invalid','true');$(id).focus();throw Error(t('missingInput'));}}const body={appId:$('appId').value.trim(),suiteId:$('suiteId').value.trim(),candidate:$('candidate').value.trim(),commitRef:$('commitRef').value.trim(),source:$('source').value};if(body.source==='imported'){try{body.outputs=JSON.parse($('outputs').value);}catch{$('outputs').focus();throw Error(t('invalidJson'));}}else{body.promptVersion=$('prompt').value;if(body.source==='replay')body.scenario=$('scenario').value;}const encoded=JSON.stringify(body);if(encoded!==lastBody){lastBody=encoded;lastKey=crypto.randomUUID();}const q=await api('jobs',body,lastKey);$('composer').open=false;location.hash='details';const deadline=Date.now()+180000;let j;do{j=await api('jobs/'+q.id);renderJob(j);if(['succeeded','failed'].includes(j.status))break;await new Promise(r=>setTimeout(r,500));}while(Date.now()<deadline);if(!['succeeded','failed'].includes(j.status))throw Error(t('waiting'));lastBody='';lastKey='';offset=0;await load();});
+$('submit').onclick=()=>safe(async()=>{for(const id of ['appId','suiteId','candidate','commitRef']){$(id).removeAttribute('aria-invalid');if(!$(id).value.trim()){if(['appId','suiteId'].includes(id))$('connection').open=true;$(id).setAttribute('aria-invalid','true');$(id).focus();throw Error(t('missingInput'));}}const body={appId:$('appId').value.trim(),suiteId:$('suiteId').value.trim(),candidate:$('candidate').value.trim(),commitRef:$('commitRef').value.trim(),source:$('source').value};if(body.source==='imported'){try{body.outputs=JSON.parse($('outputs').value);}catch{$('outputs').focus();throw Error(t('invalidJson'));}}else{body.promptVersion=$('prompt').value;if(body.source==='replay')body.scenario=$('scenario').value;}const encoded=JSON.stringify(body);if(encoded!==lastBody){lastBody=encoded;lastKey=crypto.randomUUID();}const q=await api('jobs',body,lastKey);$('composer').open=false;location.hash='details';const deadline=Date.now()+450000;let j;do{j=await api('jobs/'+q.id);renderJob(j);if(['succeeded','failed'].includes(j.status))break;await new Promise(r=>setTimeout(r,2000));}while(Date.now()<deadline);if(!['succeeded','failed'].includes(j.status))throw Error(t('waiting'));lastBody='';lastKey='';offset=0;await load();});
 $('compare').onclick=()=>safe(async()=>{const left=$('leftJob').value,right=$('rightJob').value;if(!left||!right||left===right)throw Error(t('pickTwo'));const [a,b]=await Promise.all([api('jobs/'+left),api('jobs/'+right)]);if(a.input.appId!==b.input.appId||a.input.suiteId!==b.input.suiteId||a.input.source!==b.input.source||a.status!=='succeeded'||b.status!=='succeeded')throw Error(t('incompatible'));renderComparison(a,b);});
 $('previous').onclick=()=>safe(async()=>{offset=Math.max(0,offset-25);await load();});$('next').onclick=()=>safe(async()=>{offset+=25;await load();});
 $('token').addEventListener('change',()=>{jobs=[];releases=[];selected=null;comparePair=null;connected=false;offset=0;lastBody='';lastKey='';$('cases').replaceChildren();$('kpis').replaceChildren();$('comparison').replaceChildren();$('comparisonNotice').textContent='';$('result').textContent='';$('resultSummary').textContent='';$('resultContent').hidden=true;$('emptyState').hidden=false;message('');renderLists();});
@@ -105,4 +115,4 @@ $('startSetup').onclick=openConnection;
 $('requestSelected').onclick=()=>safe(()=>requestReview(selected.id));
 $('allCases').onclick=()=>{attentionOnly=false;if(selected)renderJob(selected);};$('failedCases').onclick=()=>{attentionOnly=true;if(selected)renderJob(selected);};
 window.addEventListener('hashchange',showView);
-$('language').onchange=setLanguage;$('source').onchange=sourceChanged;setLanguage();
+$('language').onchange=setLanguage;$('source').onchange=sourceChanged;setLanguage();void loadEnvironment();

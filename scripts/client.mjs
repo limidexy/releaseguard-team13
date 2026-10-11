@@ -5,9 +5,9 @@ export async function request(path, token, body, key) {
   return { status: response.status, data: await response.json() };
 }
 export async function required(path, token, body, key) { const r = await request(path, token, body, key); if (r.status >= 400) throw new Error(`${path}: HTTP ${r.status} ${JSON.stringify(r.data)}`); return r.data; }
-export async function completed(id, token, timeout = 120000) {
+export async function completed(id, token, timeout = 120000, interval = 150) {
   const deadline = Date.now() + timeout;
-  while (Date.now() < deadline) { const j = await required('jobs/' + id, token); if (['succeeded', 'failed'].includes(j.status)) return j; await new Promise(r => setTimeout(r, 150)); }
+  while (Date.now() < deadline) { const j = await required('jobs/' + id, token); if (['succeeded', 'failed'].includes(j.status)) return j; await new Promise(r => setTimeout(r, interval)); }
   throw new Error('Job completion deadline exceeded: ' + id);
 }
 export const key = () => randomUUID();

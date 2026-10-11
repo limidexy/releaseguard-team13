@@ -3,6 +3,8 @@ import { z } from 'zod';
 import { internal, HttpError } from './common.js';
 import { caseSchema, type Output } from './domain.js';
 import { providerAnswer, promptSnapshot } from './provider.js';
+import { setTimeout as delay } from 'node:timers/promises';
+let nextProviderSlot = 0;
 const replay: Record<string, string> = {
   eligibility: 'Unused products can be returned within 30 days with a receipt.',
   receipt: 'Please provide a receipt or order reference before eligibility can be checked.',
@@ -36,13 +38,22 @@ export async function support(app: FastifyInstance) {
     const outputs: Output[] = [];
     const requestMetadata: unknown[] = [];
     for (const c of input.cases) {
+      // One support replica in the trial; serialize starts even across concurrent jobs.
+      // This is NOT a distributed quota. Provider-side Free limits remain authoritative.
+      const slot = Math.max(Date.now(), nextProviderSlot); nextProviderSlot = slot + 20000;
+      await delay(Math.max(0, slot - Date.now()));
       const start = performance.now();
       try {
         const { output, metadata, error } = await providerAnswer({ url: providerUrl, key, model }, input.promptVersion, c.prompt);
         outputs.push({ caseId: c.id, output, ...(error ? { error } : {}), latencyMs: performance.now() - start });
         requestMetadata.push({ caseId: c.id, ...metadata });
-      } catch (e) { outputs.push({ caseId: c.id, error: e instanceof Error ? e.message.slice(0, 500) : 'Provider error', latencyMs: performance.now() - start }); }
+      } catch (e) {
+        // Do not propagate fetch errors that may contain URLs or credentials.
+        const error = e instanceof Error && /^Provider (HTTP \d{3}$|response (?:body missing|exceeds size limit)$)/.test(e.message) ? e.message : e instanceof Error && ['TimeoutError', 'AbortError'].includes(e.name) ? 'Provider request timed out' : 'Provider transport or JSON parse error';
+        outputs.push({ caseId: c.id, error, latencyMs: performance.now() - start });
+        requestMetadata.push({ caseId: c.id, error, requestId: null, finishReason: null, usage: {} });
+      }
     }
-    return { outputs, provenance: { source: 'real', providerOrigin: new URL(providerUrl).origin, model, promptVersion: input.promptVersion, promptSnapshot: promptSnapshot(input.promptVersion), requestMetadata, executedAt: new Date().toISOString(), trust: 'application_reported_provider_execution' } };
+    return { outputs, provenance: { source: 'real', providerOrigin: new URL(providerUrl).origin, model, promptVersion: input.promptVersion, promptSnapshot: promptSnapshot(input.promptVersion), requestMetadata, minimumStartIntervalMs: 20000, executedAt: new Date().toISOString(), trust: 'application_reported_provider_execution' } };
   });
 }

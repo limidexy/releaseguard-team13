@@ -34,6 +34,8 @@ jobs:
       - run: node scripts/verify-contracts.mjs
       - run: node scripts/fault-test.mjs
       - run: node scripts/compare-prompts.mjs replay
+      - name: Verify revised policy with replay (zero model calls)
+        run: RG_SUITE_REVISION=v2 node scripts/compare-prompts.mjs replay
       - name: Dependency advisory gate
         run: npm audit --audit-level=high --json > evidence/dependency-audit.json
       - name: Image advisory gate
