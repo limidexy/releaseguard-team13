@@ -7,6 +7,13 @@ COPY tests ./tests
 RUN npm test
 RUN npm prune --omit=dev
 FROM node:24-bookworm-slim
+# Patch the OS finding from the real CI scan. npm is build tooling only;
+# this runtime starts node directly and must not ship npm's vulnerable tree.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends --only-upgrade perl-base \
+    && apt-get clean \
+    && rm -rf /usr/local/lib/node_modules/npm \
+    && rm -f /usr/local/bin/npm /usr/local/bin/npx
 ENV NODE_ENV=production
 WORKDIR /app
 COPY --from=build --chown=node:node /app/node_modules ./node_modules
