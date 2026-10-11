@@ -36,13 +36,15 @@
 - GitHub commit 页面：真实时间、作者、diff。基础导入和 AI 辅助提交诚实标注。
 - 一个真实成员 PR：需求 → 代码/test diff → 本地测试 → `git push` → 另一位成员评论/批准 → 合并。
 - `evidence/git/pre-push.json` 仅证明本地 hook 执行，不是 hosted CI。
-- `.github/workflows/ci.yml` 开启后，展示实际 Actions 链接、exact source commit、镜像 ID、测试日志、失败阻断和 artifact。**Skipped ≠ Passed。**
-- `.github/workflows/cd.yml` 配好云账号和受保护环境后，再展示人工批准、同一镜像部署、smoke 和回滚。现在不把 YAML 文件冒充部署成功。
+- `.github/workflows/ci.yml` 已开启并实际运行；展示 Actions 链接、exact source commit、镜像 ID、测试日志、失败阻断和 artifact。**Skipped ≠ Passed。**
+- `.github/workflows/cd.yml` 使用手动触发，核对同一个 commit 的成功 CI，再以短期身份凭据发布并部署经过测试的同一镜像。试用方案没有独立人工审批门禁；不能把手动触发说成另一位组员批准。各次 rollout、smoke 和回滚结果见 [云端验收记录](10-Cloud-Acceptance-20261011.md)。
 
 ## 不收费边界 / 待账号事项
 
-Hosted CI 需要仓库变量 `RG_ENABLE_HOSTED_CI=true`。开启前由 owner 核实私有仓库当前套餐剩余免费分钟、存储和零支出预算；本次默认不开启，避免未经授权费用。工作流还会上传镜像，有存储占用。cloud CD 另需 `RG_ENABLE_CLOUD_CD=true`，云账号、预算、OIDC/HTTPS、DB/broker、镜像仓库、KUBE_CONFIG 和 smoke 身份。
+Hosted CI 和 cloud CD 已经用户授权开启。GitHub 仍使用免费方案；镜像 artifact 保留 1 天，CI/CD 报告短期保留后复制到仓库的非敏感证据目录。后续启动前检查免费分钟和存储，不能自动购买额外用量。GCP 使用免费试用；40 新元预算是提醒，不是硬限额。验收后按用户要求缩到零计算节点，保留数据和证据；磁盘、负载均衡和 IP 等仍可能消耗试用额度。
 
-模型需要平台名、已登录情况、允许的模型和明确额度。密钥只放本地 `.env` 或服务端 secret，不发聊天。没有账号时只运行明确标注的 replay，并把真实 prompt 比较/人工 rubric 保留为未完成。
+GitHub 到 GCP 使用绑定本仓库、分支和手动工作流的 Workload Identity Federation，不保存云服务账号 JSON 私钥。部署身份只能在指定命名空间发布应用；拥有 Deployment 修改权仍能影响该命名空间中的应用，应仅向受信任维护人开放。
+
+Groq Free 的真实调用已经执行，具体原始回答和失败结果见云端记录。密钥只放本地私有文件或服务端 Secret，不发聊天、不提交仓库、不放进分工 ZIP。人工 rubric 仍由独立人员真实填写，不能用自动分数替代。
 
 GitHub 官方参考：[工作流触发](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow)、[Actions 用量与计费](https://docs.github.com/en/billing/concepts/product-billing/github-actions)。免费额度需按账户现状核实。

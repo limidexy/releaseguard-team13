@@ -1,0 +1,73 @@
+{
+  "at": "2026-10-11T12:58:22.794Z",
+  "source": "27f9027b8043b9f96e99571357c801d498753620",
+  "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:66a60591f817a3f4f4b8812fd4b93fc08160c569f5babc4a5382e06d9ce5463e",
+  "ciRun": "38140883871",
+  "approval": "Manual workflow dispatch; no independent human approval gate on this free-private trial.",
+  "stages": [
+    {
+      "name": "candidate",
+      "passed": true,
+      "jobId": "d7af9a87-8fd4-43ae-98f1-64b07993efbb"
+    },
+    {
+      "name": "previous",
+      "passed": true,
+      "jobId": "5cbefb00-25e7-4b38-add4-29aff50557d4"
+    },
+    {
+      "name": "failure-recovery",
+      "passed": true,
+      "jobId": "32a36721-28a3-43fb-9e7e-2ad42be04df2"
+    }
+  ],
+  "before": [
+    {
+      "role": "registry",
+      "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:d49d75f32f57d4c7ace5de1059ddf5a4d7e305aab67bfa717b36497e7f6c6632",
+      "source": "d43fc5de0b22c9d9e5f75532b58e03ae0f96e77f",
+      "desired": 1,
+      "ready": 1
+    },
+    {
+      "role": "evaluation",
+      "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:d49d75f32f57d4c7ace5de1059ddf5a4d7e305aab67bfa717b36497e7f6c6632",
+      "source": "d43fc5de0b22c9d9e5f75532b58e03ae0f96e77f",
+      "desired": 1,
+      "ready": 1
+    },
+    {
+      "role": "governance",
+      "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:d49d75f32f57d4c7ace5de1059ddf5a4d7e305aab67bfa717b36497e7f6c6632",
+      "source": "d43fc5de0b22c9d9e5f75532b58e03ae0f96e77f",
+      "desired": 1,
+      "ready": 1
+    },
+    {
+      "role": "support",
+      "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:d49d75f32f57d4c7ace5de1059ddf5a4d7e305aab67bfa717b36497e7f6c6632",
+      "source": "d43fc5de0b22c9d9e5f75532b58e03ae0f96e77f",
+      "desired": 1,
+      "ready": 1
+    },
+    {
+      "role": "worker",
+      "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:d49d75f32f57d4c7ace5de1059ddf5a4d7e305aab67bfa717b36497e7f6c6632",
+      "source": "d43fc5de0b22c9d9e5f75532b58e03ae0f96e77f",
+      "desired": 1,
+      "ready": 1
+    },
+    {
+      "role": "gateway",
+      "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:d49d75f32f57d4c7ace5de1059ddf5a4d7e305aab67bfa717b36497e7f6c6632",
+      "source": "d43fc5de0b22c9d9e5f75532b58e03ae0f96e77f",
+      "desired": 2,
+      "ready": 2
+    }
+  ],
+  "rollbackTested": true,
+  "passed": false,
+  "error": "Error: Command failed: kubectl -n releaseguard apply --server-side --field-manager=kubectl -f deploy/k8s/rendered/services.yaml\nApply failed with 1 conflict: conflict with \"kubectl\" using apps/v1: .spec.template.spec.containers[name=\"registry\"].image\nPlease review the fields above--they currently have other managers. Here\nare the ways you can resolve this warning:\n* If you intend to manage all of these fields, please re-run the apply\n  command with the `--force-conflicts` flag.\n* If you do not intend to manage all of the fields, please edit your\n  manifest to remove references to the fields that should keep their\n  current managers.\n* You may co-own fields by updating your manifest to match the existing\n  value; in this case, you'll become the manager if the other manager(s)\n  stop managing the field (remove it from their configuration).\nSee https://kubernetes.io/docs/reference/using-api/server-side-apply/#conflicts\nApply failed with 1 conflict: conflict with \"kubectl\" using apps/v1: .spec.template.spec.containers[name=\"evaluation\"].image\nPlease review the fields above--they currently have other managers. Here\nare the ways you can resolve this warning:\n* If you intend to manage all of these fields, please re-run the apply\n  command with the `--force-conflicts` flag.\n* If you do not intend to manage all of the fields, please edit your\n  manifest to remove references to the fields that should keep their\n  current managers.\n* You may co-own fields by updating your manifest to match the existing\n  value; in this case, you'll become the manager if the other manager(s)\n  stop managing the field (remove it from their configuration).\nSee https://kubernetes.io/docs/reference/using-api/server-side-apply/#conflicts\nApply failed with 1 conflict: conflict with \"kubectl\" using apps/v1: .spec.template.spec.containers[name=\"governance\"].image\nPlease review the fields above--they currently have other managers. Here\nare the ways you can resolve this warning:\n* If you intend to manage all of these fields, please re-run the apply\n  command with the `--force-conflicts` flag.\n* If you do not intend to manage all of the fields, please edit your\n  manifest to remove references to the fields that should keep their\n  current managers.\n* You may co-own fields by updating your manifest to match the existing\n  value; in this case, you'll become the manager if the other manager(s)\n  stop managing the field (remove it from their configuration).\nSee https://kubernetes.io/docs/reference/using-api/server-side-apply/#conflicts\nApply failed with 1 conflict: conflict with \"kubectl\" using apps/v1: .spec.template.spec.containers[name=\"support\"].image\nPlease review the fields above--they currently have other managers. Here\nare the ways you can resolve this warning:\n* If you intend to manage all of these fields, please re-run the apply\n  command with the `--force-conflicts` flag.\n* If you do not intend to manage all of the fields, please edit your\n  manifest to remove references to the fields that should keep their\n  current managers.\n* You may co-own fields by updating your manifest to match the existing\n  value; in this case, you'll become the manager if the other manager(s)\n  stop managing the field (remove it from their configuration).\nSee https://kubernetes.io/docs/reference/using-api/server-side-apply/#conflicts\nApply failed with 1 conflict: conflict with \"kubectl\" using apps/v1: .spec.template.spec.containers[name=\"worker\"].image\nPlease review the fields above--they currently have other managers. Here\nare the ways you can resolve this warning:\n* If you intend to manage all of these fields, please re-run the apply\n  command with the `--force-conflicts` flag.\n* If you do not intend to manage all of the fields, please edit your\n  manifest to remove references to the fields that should keep their\n  current managers.\n* You may co-own fields by updating your manifest to match the existing\n  value; in this case, you'll become the manager if the other manager(s)\n  stop managing the field (remove it from their configuration).\nSee https://kubernetes.io/docs/reference/using-api/server-side-apply/#conflicts\nApply failed with 1 conflict: conflict with \"kubectl\" using apps/v1: .spec.template.spec.containers[name=\"gateway\"].image\nPlease review the fields above--they currently have other managers. Here\nare the ways you can resolve this warning:\n* If you intend to manage all of these fields, please re-run the apply\n  command with the `--force-conflicts` flag.\n* If you do not intend to manage all of the fields, please edit your\n  manifest to remove references to the fields that should keep their\n  current managers.\n* You may co-own fields by updating your manifest to match the existing\n  value; in this case, you'll become the manager if the other manager(s)\n  stop managing the field (remove it from their configuration).\nSee https://kubernetes.io/docs/reference/using-api/server-side-apply/#conflicts\n",
+  "recoveredPrevious": true,
+  "finishedAt": "2026-10-11T13:00:13.113Z"
+}

@@ -1,0 +1,35 @@
+{
+  "startedAt": "2026-10-11T13:10:28.686Z",
+  "workspace": "contracts-1791724228682",
+  "environment": "Local Docker / real HTTP and database / replay answers / development identities",
+  "checks": [
+    {
+      "name": "Assets cannot be referenced from another workspace, including suite parents",
+      "passed": true,
+      "durationMs": 25.722842999999997
+    },
+    {
+      "name": "Stored idempotent retry works during Asset service outage; new job fails closed",
+      "passed": true,
+      "durationMs": 5882.855284
+    },
+    {
+      "name": "A requester distinct from the job author still cannot approve their own request",
+      "passed": true,
+      "durationMs": 7.675737000000481
+    },
+    {
+      "name": "Captured review evidence stays usable while Evaluation service is down",
+      "passed": true,
+      "durationMs": 5856.2472290000005
+    },
+    {
+      "name": "Metrics and arbitrary runner origins are not exposed to external callers",
+      "passed": true,
+      "durationMs": 168.23653999999988
+    }
+  ],
+  "finishedAt": "2026-10-11T13:10:41.024Z",
+  "passed": 5,
+  "failed": 0
+}

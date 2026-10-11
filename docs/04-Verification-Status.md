@@ -1,5 +1,7 @@
 # Verification status on 7 October 2026
 
+For the later cloud deployment and its actual limitations, read [Cloud acceptance on 11 October](10-Cloud-Acceptance-20261011.md). The statements below are historical, not the current account/deployment status. Lecturer acceptance of the revised proposal was subsequently supplied by the student; it does not establish implementation acceptance.
+
 ## Historical baseline notice
 
 The Windows results below describe the supplied ZIP before the current improvements. They are retained for traceability, not presented as fresh verification. Original raw reports are now in `evidence/baseline-original/`. For current Mac results, see `05-Current-Handoff.md`, `evidence/current/acceptance.json`, and `evidence/current/scaling-repeated.json`. Do not compare cross-machine throughput as a software speedup. The delivery now has 16 unit/adapter tests and 4 additional integration regression groups, plus the original 18 groups.

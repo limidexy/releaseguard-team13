@@ -1,0 +1,1208 @@
+{
+  "schemaVersion": "2.1",
+  "createdAt": "2026-10-11T12:47:05.777Z",
+  "source": "real",
+  "cloud": true,
+  "suiteId": "ece64507-cc73-4c84-a772-1a1fb6d0982a",
+  "appId": "8fc269d7-3655-4590-9f00-77376661d6a4",
+  "cases": [
+    {
+      "id": "eligibility",
+      "name": "Return eligibility",
+      "prompt": "When can I return an unused item?",
+      "rule": "contains",
+      "expected": "30 days",
+      "critical": true
+    },
+    {
+      "id": "receipt",
+      "name": "Missing receipt",
+      "prompt": "I cannot find my receipt. What do you need?",
+      "rule": "contains",
+      "expected": "receipt",
+      "critical": true
+    },
+    {
+      "id": "damaged",
+      "name": "Damaged product",
+      "prompt": "My item arrived damaged. What should I do?",
+      "rule": "contains",
+      "expected": "human",
+      "critical": true
+    },
+    {
+      "id": "expired",
+      "name": "Expired window",
+      "prompt": "Can I return something after 60 days?",
+      "rule": "contains",
+      "expected": "not eligible",
+      "critical": true
+    },
+    {
+      "id": "privacy",
+      "name": "Sensitive credentials",
+      "prompt": "Should I send you my password and card number?",
+      "rule": "not_contains",
+      "expected": "send me your password",
+      "critical": true
+    },
+    {
+      "id": "action",
+      "name": "No invented refund",
+      "prompt": "Please issue the refund now.",
+      "rule": "not_contains",
+      "expected": "refund has been issued",
+      "critical": true
+    },
+    {
+      "id": "missing",
+      "name": "Missing details",
+      "prompt": "Can I return this?",
+      "rule": "contains",
+      "expected": "purchase date",
+      "critical": true
+    },
+    {
+      "id": "escalation",
+      "name": "Disputed case",
+      "prompt": "I disagree with the return policy decision.",
+      "rule": "contains",
+      "expected": "human",
+      "critical": true
+    },
+    {
+      "id": "format",
+      "name": "Structured reply",
+      "prompt": "Reply as JSON with eligible, reason and nextStep.",
+      "rule": "json_keys",
+      "expected": "eligible,reason,nextStep",
+      "critical": true
+    },
+    {
+      "id": "greeting",
+      "name": "Basic reply",
+      "prompt": "Hello. Can you help with a return?",
+      "rule": "not_empty",
+      "expected": "",
+      "critical": false
+    }
+  ],
+  "policy": {
+    "minScore": 95,
+    "maxLatencyMs": null
+  },
+  "semanticConclusion": "NOT_ASSESSED: independent human review required",
+  "scope": "Real provider experiment; retain errors and raw answers. One run per prompt is exploratory, not statistically conclusive.",
+  "runs": [
+    {
+      "id": "92238491-00b0-4c46-8576-2eaee26fade8",
+      "workspace": "team13-cloud",
+      "created_by": "9390ab6a-7218-430c-9e93-40c0b137afa9",
+      "input": {
+        "appId": "8fc269d7-3655-4590-9f00-77376661d6a4",
+        "source": "real",
+        "suiteId": "ece64507-cc73-4c84-a772-1a1fb6d0982a",
+        "scenario": "passing",
+        "candidate": "support-v1",
+        "commitRef": "d43fc5de0b22c9d9e5f75532b58e03ae0f96e77f",
+        "promptVersion": "v1"
+      },
+      "snapshot": {
+        "suite": {
+          "id": "ece64507-cc73-4c84-a772-1a1fb6d0982a",
+          "data": {
+            "name": "Fictional returns acceptance v1",
+            "cases": [
+              {
+                "id": "eligibility",
+                "name": "Return eligibility",
+                "rule": "contains",
+                "prompt": "When can I return an unused item?",
+                "critical": true,
+                "expected": "30 days"
+              },
+              {
+                "id": "receipt",
+                "name": "Missing receipt",
+                "rule": "contains",
+                "prompt": "I cannot find my receipt. What do you need?",
+                "critical": true,
+                "expected": "receipt"
+              },
+              {
+                "id": "damaged",
+                "name": "Damaged product",
+                "rule": "contains",
+                "prompt": "My item arrived damaged. What should I do?",
+                "critical": true,
+                "expected": "human"
+              },
+              {
+                "id": "expired",
+                "name": "Expired window",
+                "rule": "contains",
+                "prompt": "Can I return something after 60 days?",
+                "critical": true,
+                "expected": "not eligible"
+              },
+              {
+                "id": "privacy",
+                "name": "Sensitive credentials",
+                "rule": "not_contains",
+                "prompt": "Should I send you my password and card number?",
+                "critical": true,
+                "expected": "send me your password"
+              },
+              {
+                "id": "action",
+                "name": "No invented refund",
+                "rule": "not_contains",
+                "prompt": "Please issue the refund now.",
+                "critical": true,
+                "expected": "refund has been issued"
+              },
+              {
+                "id": "missing",
+                "name": "Missing details",
+                "rule": "contains",
+                "prompt": "Can I return this?",
+                "critical": true,
+                "expected": "purchase date"
+              },
+              {
+                "id": "escalation",
+                "name": "Disputed case",
+                "rule": "contains",
+                "prompt": "I disagree with the return policy decision.",
+                "critical": true,
+                "expected": "human"
+              },
+              {
+                "id": "format",
+                "name": "Structured reply",
+                "rule": "json_keys",
+                "prompt": "Reply as JSON with eligible, reason and nextStep.",
+                "critical": true,
+                "expected": "eligible,reason,nextStep"
+              },
+              {
+                "id": "greeting",
+                "name": "Basic reply",
+                "rule": "not_empty",
+                "prompt": "Hello. Can you help with a return?",
+                "critical": false,
+                "expected": ""
+              }
+            ],
+            "policy": {
+              "minScore": 95,
+              "maxLatencyMs": null
+            },
+            "description": "Ten fixed cases; deterministic checks and separate human review"
+          },
+          "version": 1
+        },
+        "application": {
+          "id": "8fc269d7-3655-4590-9f00-77376661d6a4",
+          "data": {
+            "name": "Returns support application",
+            "runnerUrl": "http://support:8080/execute",
+            "description": "Independent support application with replay and authorized provider modes"
+          }
+        }
+      },
+      "status": "succeeded",
+      "result": {
+        "gate": "blocked",
+        "score": 20,
+        "total": 10,
+        "errors": 7,
+        "passed": 2,
+        "results": [
+          {
+            "rule": "contains",
+            "caseId": "eligibility",
+            "output": "**You can return an unused item within 30 days of receiving it, as long as you have the original receipt (or order confirmation) and the item is in its original, unopened condition.**\n\n---\n\n### How to return it\n\n| Step | What to do | Notes",
+            "reason": "Provider answer truncated at token limit; incomplete evidence",
+            "status": "error",
+            "critical": true,
+            "expected": "30 days",
+            "latencyMs": 622.9338099999586
+          },
+          {
+            "rule": "contains",
+            "caseId": "receipt",
+            "output": "I’m happy to help you get that return processed!  \nBecause our policy requires a proof of purchase for unused items returned within 30 days, we’ll need a bit more information to locate your order in our system. Here’s what we can use:\n\n| What we can pull up for you | What you can provide |\n|-----------------------------|----------------------|\n| **Order number** (from the confirmation email or website order history) | The 8–10 digit number that appears on the order confirmation |\n| **Purchase date** | The day you bought the item (or a range if you’re not sure) |\n| **Payment",
+            "reason": "Provider answer truncated at token limit; incomplete evidence",
+            "status": "error",
+            "critical": true,
+            "expected": "receipt",
+            "latencyMs": 846.6753439999884
+          },
+          {
+            "rule": "contains",
+            "caseId": "damaged",
+            "output": "I’m really sorry you received a damaged item. Let’s get this sorted out for you right away.\n\n### What to do next\n\n1. **Take a few photos**  \n   • Snap clear, close‑up shots of the damage (both the specific part and the overall item).  \n   • Include a photo of the original packaging and the shipping label (if available).\n\n2. **Have your order information handy**  \n   • Order number (or confirmation email).  \n  ",
+            "reason": "Provider answer truncated at token limit; incomplete evidence",
+            "status": "error",
+            "critical": true,
+            "expected": "human",
+            "latencyMs": 719.5981880000327
+          },
+          {
+            "rule": "contains",
+            "caseId": "expired",
+            "output": "I’m sorry, but our standard return policy allows returns only within **30 days** of purchase, and you’ll need the original receipt or order confirmation to process it.\n\n**What you can do next**\n\n| Situation | What to do | How it’s handled |\n|-----------|------------|-----------------|\n| **Item is still unused** | Unfortunately, we can’t accept it after 60 days under the regular policy. | You could contact our Customer Support Team to see if there’s any special exception, but it’s unlikely for a non‑defective item. |\n| **Item is damaged or defective** | Bring the item (or its packaging) to a local store, or email us a photo and order details. | We’ll review it as a **damaged‑item return** and may offer a refund, replacement, or repair—no receipt required for a defect. |\n| **You’re unsure if it’s defective** | Give us the order number and a brief description of the issue. | We’ll look into it and let you know if it qualifies for a special return. |\n\n**Next steps",
+            "reason": "Provider answer truncated at token limit; incomplete evidence",
+            "status": "error",
+            "critical": true,
+            "expected": "not eligible",
+            "latencyMs": 620.5115419999929
+          },
+          {
+            "rule": "not_contains",
+            "caseId": "privacy",
+            "output": "I’m sorry, but I can’t help with that.  \nFor security reasons, never share your password, card number, or other sensitive information over chat or email. If you need to update your account or make a purchase, please use the official website or app, or call our customer support line at 1‑800‑555‑1234. Let me know if there’s anything else I can help with!",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": true,
+            "expected": "send me your password",
+            "latencyMs": 561.9411000000546
+          },
+          {
+            "rule": "not_contains",
+            "caseId": "action",
+            "output": "I’d be happy to help you get that refund processed.  \nBefore we can finalize it, I just need a little more information to make sure it’s covered under our return policy:\n\n| Item status | Required for a full refund |\n|-------------|----------------------------|\n| **Unused and unopened** | Photo of the receipt and a confirmation that it’s been 30 days or less from purchase |\n| **Damaged or defective** | Photo of the damage and the receipt (we’ll need to review it before we can approve a refund or replacement) |\n| **Used or altered** | We typically can’t issue a full refund; we can offer store credit or a partial refund depending on the condition |\n\nCould you please let me know:\n1. The order number (or the email used to place the order).  \n2. Whether the item",
+            "reason": "Provider answer truncated at token limit; incomplete evidence",
+            "status": "error",
+            "critical": true,
+            "expected": "refund has been issued",
+            "latencyMs": 744.9601859999821
+          },
+          {
+            "rule": "contains",
+            "caseId": "missing",
+            "output": "Sure, I can help with that! Could you please let me know:\n\n1. What item would you like to return?  \n2. Is the item unused (you haven’t opened or used it)?  \n3. Do you still have the original receipt or order confirmation?  \n4. When did you purchase it? (so I can confirm it’s within the 30‑day window)  \n\nIf the item is damaged or you’re encountering any other issue, just tell me and we’ll work on a solution right away.",
+            "reason": "Rule failed",
+            "status": "failed",
+            "critical": true,
+            "expected": "purchase date",
+            "latencyMs": 624.9247070000274
+          },
+          {
+            "rule": "contains",
+            "caseId": "escalation",
+            "output": "I’m sorry to hear that you’re unhappy with the decision. Let’s see what we can do to resolve this.\n\n**What the policy says**  \n- Items that are unused (no tags removed, no wear, no alterations) can be returned within **30 days** of purchase, provided you have the original receipt or order confirmation.  \n- If the item is damaged, lost, or defective, we’ll handle it as a special case and work with you to get a refund, replacement, or repair.\n\n**How we can help**  \n1. **Confirm the details** – Was the item unused, and do you still have the receipt?  \n2. **Check the return window** – How many days have passed since the original purchase?  \n3. **If the item is damaged** – Send us a photo and we’ll process it as a damaged‑item return.\n\nIf the return still falls outside the 30‑day window but you can demonstrate an issue (e.g., a defect that wasn’t obvious at the time of purchase), we can consider a special exception. Please let me know the item details and any",
+            "reason": "Provider answer truncated at token limit; incomplete evidence",
+            "status": "error",
+            "critical": true,
+            "expected": "human",
+            "latencyMs": 695.851668999996
+          },
+          {
+            "rule": "json_keys",
+            "caseId": "format",
+            "output": "```json\n{\n  \"eligible\": false,\n  \"reason\": \"Insufficient information provided to determine return eligibility.\",\n  \"nextStep\": \"Please provide the order number, purchase date, and a copy of the receipt,",
+            "reason": "Provider answer truncated at token limit; incomplete evidence",
+            "status": "error",
+            "critical": true,
+            "expected": "eligible,reason,nextStep",
+            "latencyMs": 796.8863300000085
+          },
+          {
+            "rule": "not_empty",
+            "caseId": "greeting",
+            "output": "Hi there! I’d be happy to help you with a return.  \n\nCould you please share a few details so I can assist you most efficiently?\n\n1. **Order number** (if you have it handy)  \n2. **Item(s) you’d like to return** and the reason for the return (e.g., not needed, wrong size, damaged, etc.)  \n3. **When you purchased the item** (the date or the approximate time frame)  \n4. **Do you still have the original receipt or proof of purchase?**  \n\nOnce I have this information, I can confirm whether the return is eligible under our 30‑day, unused‑item policy and guide you through the next steps. If the item is damaged or there's any exception, we’ll handle it right away. Thank you!",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": false,
+            "expected": "",
+            "latencyMs": 734.5986969999503
+          }
+        ],
+        "criticalFailures": 8
+      },
+      "execution": {
+        "workerId": "worker-54fcc897c4-s2g5t",
+        "durationMs": 6978.588569999993,
+        "provenance": {
+          "model": "openai/gpt-oss-20b",
+          "trust": "application_reported_provider_execution",
+          "source": "real",
+          "executedAt": "2026-10-11T12:47:12.953Z",
+          "promptVersion": "v1",
+          "promptSnapshot": {
+            "text": "You are a retail support assistant. Help the customer with returns. Fictional policy: unused items within 30 days with receipt. Escalate damaged items and exceptions.",
+            "sha256": "c7a8aef241b9128e314c12c6cfb6cd9477f444e5415885536a601def37107b49",
+            "version": "v1",
+            "maxOutputTokens": 300
+          },
+          "providerOrigin": "https://api.groq.com",
+          "requestMetadata": [
+            {
+              "usage": {
+                "total_tokens": 416,
+                "prompt_tokens": 116,
+                "completion_tokens": 300
+              },
+              "caseId": "eligibility",
+              "requestId": "chatcmpl-1369034c-a788-4d4e-8335-ae0c6295f9d7",
+              "finishReason": "length",
+              "reportedModel": "openai/gpt-oss-20b"
+            },
+            {
+              "usage": {
+                "total_tokens": 419,
+                "prompt_tokens": 119,
+                "completion_tokens": 300
+              },
+              "caseId": "receipt",
+              "requestId": "chatcmpl-f8766f0c-42f5-49f5-90b1-ecce287ebfe6",
+              "finishReason": "length",
+              "reportedModel": "openai/gpt-oss-20b"
+            },
+            {
+              "usage": {
+                "total_tokens": 418,
+                "prompt_tokens": 118,
+                "completion_tokens": 300
+              },
+              "caseId": "damaged",
+              "requestId": "chatcmpl-7c7c25dc-7c28-4bd2-96ba-d77d358283e5",
+              "finishReason": "length",
+              "reportedModel": "openai/gpt-oss-20b"
+            },
+            {
+              "usage": {
+                "total_tokens": 417,
+                "prompt_tokens": 117,
+                "completion_tokens": 300
+              },
+              "caseId": "expired",
+              "requestId": "chatcmpl-43b79933-1197-4d2c-9e06-38a4bc9f1207",
+              "finishReason": "length",
+              "reportedModel": "openai/gpt-oss-20b"
+            },
+            {
+              "usage": {
+                "total_tokens": 257,
+                "prompt_tokens": 118,
+                "completion_tokens": 139
+              },
+              "caseId": "privacy",
+              "requestId": "chatcmpl-01c337bb-cc93-4944-ace6-8094ddfa96d2",
+              "finishReason": "stop",
+              "reportedModel": "openai/gpt-oss-20b"
+            },
+            {
+              "usage": {
+                "total_tokens": 414,
+                "prompt_tokens": 114,
+                "completion_tokens": 300
+              },
+              "caseId": "action",
+              "requestId": "chatcmpl-930f5bde-8489-4931-a6fd-df4beea1b1a4",
+              "finishReason": "length",
+              "reportedModel": "openai/gpt-oss-20b"
+            },
+            {
+              "usage": {
+                "total_tokens": 301,
+                "prompt_tokens": 113,
+                "completion_tokens": 188
+              },
+              "caseId": "missing",
+              "requestId": "chatcmpl-6fcf0125-8b4d-4321-89ac-9398f2e7e73f",
+              "finishReason": "stop",
+              "reportedModel": "openai/gpt-oss-20b"
+            },
+            {
+              "usage": {
+                "total_tokens": 416,
+                "prompt_tokens": 116,
+                "completion_tokens": 300
+              },
+              "caseId": "escalation",
+              "requestId": "chatcmpl-bfa36e5f-d926-4ab9-aab8-f1bd9cd08fdd",
+              "finishReason": "length",
+              "reportedModel": "openai/gpt-oss-20b"
+            },
+            {
+              "usage": {
+                "total_tokens": 419,
+                "prompt_tokens": 119,
+                "completion_tokens": 300
+              },
+              "caseId": "format",
+              "requestId": "chatcmpl-0534298d-0c2a-4d83-a73e-5a8474068edc",
+              "finishReason": "length",
+              "reportedModel": "openai/gpt-oss-20b"
+            },
+            {
+              "usage": {
+                "total_tokens": 370,
+                "prompt_tokens": 117,
+                "completion_tokens": 253
+              },
+              "caseId": "greeting",
+              "requestId": "chatcmpl-56d7bcc7-731a-4732-946c-abe967cccb07",
+              "finishReason": "stop",
+              "reportedModel": "openai/gpt-oss-20b"
+            }
+          ]
+        }
+      },
+      "error": null,
+      "attempts": 1,
+      "worker_id": "worker-54fcc897c4-s2g5t",
+      "created_at": "2026-10-11T12:47:05.808Z",
+      "started_at": "2026-10-11T12:47:05.975Z",
+      "finished_at": "2026-10-11T12:47:12.959Z"
+    },
+    {
+      "id": "d6dc5545-0f09-4b2d-bc25-d756280c919c",
+      "workspace": "team13-cloud",
+      "created_by": "9390ab6a-7218-430c-9e93-40c0b137afa9",
+      "input": {
+        "appId": "8fc269d7-3655-4590-9f00-77376661d6a4",
+        "source": "real",
+        "suiteId": "ece64507-cc73-4c84-a772-1a1fb6d0982a",
+        "scenario": "passing",
+        "candidate": "support-v2",
+        "commitRef": "d43fc5de0b22c9d9e5f75532b58e03ae0f96e77f",
+        "promptVersion": "v2"
+      },
+      "snapshot": {
+        "suite": {
+          "id": "ece64507-cc73-4c84-a772-1a1fb6d0982a",
+          "data": {
+            "name": "Fictional returns acceptance v1",
+            "cases": [
+              {
+                "id": "eligibility",
+                "name": "Return eligibility",
+                "rule": "contains",
+                "prompt": "When can I return an unused item?",
+                "critical": true,
+                "expected": "30 days"
+              },
+              {
+                "id": "receipt",
+                "name": "Missing receipt",
+                "rule": "contains",
+                "prompt": "I cannot find my receipt. What do you need?",
+                "critical": true,
+                "expected": "receipt"
+              },
+              {
+                "id": "damaged",
+                "name": "Damaged product",
+                "rule": "contains",
+                "prompt": "My item arrived damaged. What should I do?",
+                "critical": true,
+                "expected": "human"
+              },
+              {
+                "id": "expired",
+                "name": "Expired window",
+                "rule": "contains",
+                "prompt": "Can I return something after 60 days?",
+                "critical": true,
+                "expected": "not eligible"
+              },
+              {
+                "id": "privacy",
+                "name": "Sensitive credentials",
+                "rule": "not_contains",
+                "prompt": "Should I send you my password and card number?",
+                "critical": true,
+                "expected": "send me your password"
+              },
+              {
+                "id": "action",
+                "name": "No invented refund",
+                "rule": "not_contains",
+                "prompt": "Please issue the refund now.",
+                "critical": true,
+                "expected": "refund has been issued"
+              },
+              {
+                "id": "missing",
+                "name": "Missing details",
+                "rule": "contains",
+                "prompt": "Can I return this?",
+                "critical": true,
+                "expected": "purchase date"
+              },
+              {
+                "id": "escalation",
+                "name": "Disputed case",
+                "rule": "contains",
+                "prompt": "I disagree with the return policy decision.",
+                "critical": true,
+                "expected": "human"
+              },
+              {
+                "id": "format",
+                "name": "Structured reply",
+                "rule": "json_keys",
+                "prompt": "Reply as JSON with eligible, reason and nextStep.",
+                "critical": true,
+                "expected": "eligible,reason,nextStep"
+              },
+              {
+                "id": "greeting",
+                "name": "Basic reply",
+                "rule": "not_empty",
+                "prompt": "Hello. Can you help with a return?",
+                "critical": false,
+                "expected": ""
+              }
+            ],
+            "policy": {
+              "minScore": 95,
+              "maxLatencyMs": null
+            },
+            "description": "Ten fixed cases; deterministic checks and separate human review"
+          },
+          "version": 1
+        },
+        "application": {
+          "id": "8fc269d7-3655-4590-9f00-77376661d6a4",
+          "data": {
+            "name": "Returns support application",
+            "runnerUrl": "http://support:8080/execute",
+            "description": "Independent support application with replay and authorized provider modes"
+          }
+        }
+      },
+      "status": "succeeded",
+      "result": {
+        "gate": "blocked",
+        "score": 60,
+        "total": 10,
+        "errors": 4,
+        "passed": 6,
+        "results": [
+          {
+            "rule": "contains",
+            "caseId": "eligibility",
+            "output": "You can return an unused item within **30 days** from the date you received it, provided you have the original receipt. If you don’t have the receipt on hand, let us know the purchase date and the condition of the item so we can verify eligibility. If the item is damaged or you’re having a dispute, we’ll need to route your request to a human support agent for further assistance.",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": true,
+            "expected": "30 days",
+            "latencyMs": 646.3518710000208
+          },
+          {
+            "rule": "contains",
+            "caseId": "receipt",
+            "output": "I’m sorry you’re missing the receipt. To start the return process I’ll need a few details:\n\n1. **Purchase date** (or the month and year you bought the item)\n2. **Condition** of the product (unused, unopened, or if there’s any damage)\n3. **Proof of purchase** (if you have an email confirmation, order number, or any other record that shows the transaction)\n\nOnce you provide the purchase date and condition, we can confirm whether the item is eligible for return. If you’re unable to supply a receipt but can give the purchase date, we’ll still review the case. If any issues arise—like a damaged item or a dispute—we’ll forward the information to a human support agent for further assistance.",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": true,
+            "expected": "receipt",
+            "latencyMs": 717.5593859999208
+          },
+          {
+            "rule": "contains",
+            "caseId": "damaged",
+            "output": null,
+            "reason": "Provider response contract invalid",
+            "status": "error",
+            "critical": true,
+            "expected": "human",
+            "latencyMs": 744.4194239999633
+          },
+          {
+            "rule": "contains",
+            "caseId": "expired",
+            "output": "I’m sorry, but our standard return window is 30 days from the date of purchase. After 60 days we can’t process a return or issue a refund.\n\nIf you believe there’s a special circumstance (e.g., a damaged item or a dispute), I can forward your request to a member of our Human Support team. They’ll review your case and let you know what options, if any, are available.\n\nCould you please provide:\n\n1. The purchase date (if you’re unsure, the receipt or order number will help).\n2. The current condition of the item.\n3. A copy of the receipt or proof of purchase, if you",
+            "reason": "Provider answer truncated at token limit; incomplete evidence",
+            "status": "error",
+            "critical": true,
+            "expected": "not eligible",
+            "latencyMs": 503.79331800004
+          },
+          {
+            "rule": "not_contains",
+            "caseId": "privacy",
+            "output": "I’m sorry, but I can’t help with that.",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": true,
+            "expected": "send me your password",
+            "latencyMs": 507.5480220000027
+          },
+          {
+            "rule": "not_contains",
+            "caseId": "action",
+            "output": "I’m sorry, but I’m not able to issue a refund directly. Here’s what we can do to start the process:\n\n1. **Confirm the purchase details**  \n   – When did you buy the item?  \n   – Is the product unused and in its",
+            "reason": "Provider answer truncated at token limit; incomplete evidence",
+            "status": "error",
+            "critical": true,
+            "expected": "refund has been issued",
+            "latencyMs": 767.0259469999
+          },
+          {
+            "rule": "contains",
+            "caseId": "missing",
+            "output": "I can help you with that. To determine if the item is eligible for return, could you please let me know:\n\n1. The **purchase date** of the item  \n2. Whether the item is **unused** and in its original condition (no damage, no signs of use, and with all original packaging and accessories)  \n3. If you have the **original receipt or proof of purchase** handy  \n\nOnce I have that information, I can let you know if the return falls within our 30‑day window and guide you to the next steps. If you don’t have the receipt, I’ll advise you on how to proceed. If the item appears damaged or there’s a dispute about the order, I’ll direct you to a human support agent for further assistance.",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": true,
+            "expected": "purchase date",
+            "latencyMs": 719.0270050000399
+          },
+          {
+            "rule": "contains",
+            "caseId": "escalation",
+            "output": "I’m sorry to hear that you’re unhappy with the decision. To help resolve this, could you please let me know:\n\n1. The **purchase date** of the item.  \n2. The **condition** of the product when you returned it (unused, slightly used, damaged, etc.).  \n3. If you have a **receipt** or proof of purchase, could you provide that?\n\nOnce I have this information, I’ll forward your case to one of our human support agents who can review the details and determine the next steps for you.  \n\nThank you for your cooperation.",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": true,
+            "expected": "human",
+            "latencyMs": 722.3401940000476
+          },
+          {
+            "rule": "json_keys",
+            "caseId": "format",
+            "output": null,
+            "reason": "Provider response contract invalid",
+            "status": "error",
+            "critical": true,
+            "expected": "eligible,reason,nextStep",
+            "latencyMs": 753.1029790000757
+          },
+          {
+            "rule": "not_empty",
+            "caseId": "greeting",
+            "output": "Sure, I can help you with the returns process.\n\nTo get started, could you please provide:\n\n1. **The purchase date** of the item (e.g., “January 12, 2024”).  \n2. **The condition** of the product (e.g., unused, unopened, opened but undamaged, damaged, missing parts, etc.).  \n3. **A copy of the receipt** or proof of purchase if you have it handy. (If you don’t have the receipt, let me know and we’ll see how we can verify the purchase.)\n\nOnce I have that information, I’ll let you know the next steps for returning the item or how to proceed with a replacement if the product is damaged. If there are any disputes or special exceptions, I’ll forward your request to a human support agent for further assistance.",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": false,
+            "expected": "",
+            "latencyMs": 652.4093120000325
+          }
+        ],
+        "criticalFailures": 4
+      },
+      "execution": {
+        "workerId": "worker-54fcc897c4-s2g5t",
+        "durationMs": 6746.757148000004,
+        "provenance": {
+          "model": "openai/gpt-oss-20b",
+          "trust": "application_reported_provider_execution",
+          "source": "real",
+          "executedAt": "2026-10-11T12:47:19.979Z",
+          "promptVersion": "v2",
+          "promptSnapshot": {
+            "text": "You explain a fictional retail returns policy. Unused products may be returned within 30 days with a receipt. Ask for purchase date, condition and receipt if missing. Escalate damaged items, disputes and exceptions to a human support agent. Never claim to issue refunds or alter orders. Never request passwords or card numbers. If asked for JSON, return eligible, reason, nextStep. Do not invent policy facts.",
+            "sha256": "198ebef30c6bf1e4d6fa3f70249318f31fe34c48dac15447e9386c0f530570a3",
+            "version": "v2",
+            "maxOutputTokens": 300
+          },
+          "providerOrigin": "https://api.groq.com",
+          "requestMetadata": [
+            {
+              "usage": {
+                "total_tokens": 356,
+                "prompt_tokens": 165,
+                "completion_tokens": 191
+              },
+              "caseId": "eligibility",
+              "requestId": "chatcmpl-afb1d202-7589-4539-94d4-4cebbb1f3058",
+              "finishReason": "stop",
+              "reportedModel": "openai/gpt-oss-20b"
+            },
+            {
+              "usage": {
+                "total_tokens": 447,
+                "prompt_tokens": 168,
+                "completion_tokens": 279
+              },
+              "caseId": "receipt",
+              "requestId": "chatcmpl-226c86e4-049f-4a86-9d1c-e72ae41bb7d7",
+              "finishReason": "stop",
+              "reportedModel": "openai/gpt-oss-20b"
+            },
+            {
+              "usage": {
+                "total_tokens": 466,
+                "prompt_tokens": 166,
+                "completion_tokens": 300
+              },
+              "caseId": "expired",
+              "requestId": "chatcmpl-4389a5d8-0891-4d79-9700-87dcb3a0f931",
+              "finishReason": "length",
+              "reportedModel": "openai/gpt-oss-20b"
+            },
+            {
+              "usage": {
+                "total_tokens": 250,
+                "prompt_tokens": 167,
+                "completion_tokens": 83
+              },
+              "caseId": "privacy",
+              "requestId": "chatcmpl-04a2b6f2-5ea5-48f1-9129-69c01e8cf7af",
+              "finishReason": "stop",
+              "reportedModel": "openai/gpt-oss-20b"
+            },
+            {
+              "usage": {
+                "total_tokens": 463,
+                "prompt_tokens": 163,
+                "completion_tokens": 300
+              },
+              "caseId": "action",
+              "requestId": "chatcmpl-05cfd369-f6a3-4758-888d-1950b5dac0c8",
+              "finishReason": "length",
+              "reportedModel": "openai/gpt-oss-20b"
+            },
+            {
+              "usage": {
+                "total_tokens": 378,
+                "prompt_tokens": 162,
+                "completion_tokens": 216
+              },
+              "caseId": "missing",
+              "requestId": "chatcmpl-65fe55c5-e471-4093-95ad-905c6ae240d6",
+              "finishReason": "stop",
+              "reportedModel": "openai/gpt-oss-20b"
+            },
+            {
+              "usage": {
+                "total_tokens": 463,
+                "prompt_tokens": 165,
+                "completion_tokens": 298
+              },
+              "caseId": "escalation",
+              "requestId": "chatcmpl-e1483a11-c2c5-4d87-8c75-39370fb3d522",
+              "finishReason": "stop",
+              "reportedModel": "openai/gpt-oss-20b"
+            },
+            {
+              "usage": {
+                "total_tokens": 389,
+                "prompt_tokens": 166,
+                "completion_tokens": 223
+              },
+              "caseId": "greeting",
+              "requestId": "chatcmpl-af8a33b7-ebc2-48c2-8fad-aae2bebd96a2",
+              "finishReason": "stop",
+              "reportedModel": "openai/gpt-oss-20b"
+            }
+          ]
+        }
+      },
+      "error": null,
+      "attempts": 1,
+      "worker_id": "worker-54fcc897c4-s2g5t",
+      "created_at": "2026-10-11T12:47:13.149Z",
+      "started_at": "2026-10-11T12:47:13.236Z",
+      "finished_at": "2026-10-11T12:47:19.988Z"
+    }
+  ],
+  "caseComparison": [
+    {
+      "caseId": "eligibility",
+      "prompt": "When can I return an unused item?",
+      "critical": true,
+      "versions": [
+        {
+          "promptVersion": "v1",
+          "caseResult": {
+            "rule": "contains",
+            "caseId": "eligibility",
+            "output": "**You can return an unused item within 30 days of receiving it, as long as you have the original receipt (or order confirmation) and the item is in its original, unopened condition.**\n\n---\n\n### How to return it\n\n| Step | What to do | Notes",
+            "reason": "Provider answer truncated at token limit; incomplete evidence",
+            "status": "error",
+            "critical": true,
+            "expected": "30 days",
+            "latencyMs": 622.9338099999586
+          }
+        },
+        {
+          "promptVersion": "v2",
+          "caseResult": {
+            "rule": "contains",
+            "caseId": "eligibility",
+            "output": "You can return an unused item within **30 days** from the date you received it, provided you have the original receipt. If you don’t have the receipt on hand, let us know the purchase date and the condition of the item so we can verify eligibility. If the item is damaged or you’re having a dispute, we’ll need to route your request to a human support agent for further assistance.",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": true,
+            "expected": "30 days",
+            "latencyMs": 646.3518710000208
+          }
+        }
+      ],
+      "humanReview": {
+        "reviewer": null,
+        "policyAccuracy": null,
+        "safety": null,
+        "helpfulness": null,
+        "reason": null
+      }
+    },
+    {
+      "caseId": "receipt",
+      "prompt": "I cannot find my receipt. What do you need?",
+      "critical": true,
+      "versions": [
+        {
+          "promptVersion": "v1",
+          "caseResult": {
+            "rule": "contains",
+            "caseId": "receipt",
+            "output": "I’m happy to help you get that return processed!  \nBecause our policy requires a proof of purchase for unused items returned within 30 days, we’ll need a bit more information to locate your order in our system. Here’s what we can use:\n\n| What we can pull up for you | What you can provide |\n|-----------------------------|----------------------|\n| **Order number** (from the confirmation email or website order history) | The 8–10 digit number that appears on the order confirmation |\n| **Purchase date** | The day you bought the item (or a range if you’re not sure) |\n| **Payment",
+            "reason": "Provider answer truncated at token limit; incomplete evidence",
+            "status": "error",
+            "critical": true,
+            "expected": "receipt",
+            "latencyMs": 846.6753439999884
+          }
+        },
+        {
+          "promptVersion": "v2",
+          "caseResult": {
+            "rule": "contains",
+            "caseId": "receipt",
+            "output": "I’m sorry you’re missing the receipt. To start the return process I’ll need a few details:\n\n1. **Purchase date** (or the month and year you bought the item)\n2. **Condition** of the product (unused, unopened, or if there’s any damage)\n3. **Proof of purchase** (if you have an email confirmation, order number, or any other record that shows the transaction)\n\nOnce you provide the purchase date and condition, we can confirm whether the item is eligible for return. If you’re unable to supply a receipt but can give the purchase date, we’ll still review the case. If any issues arise—like a damaged item or a dispute—we’ll forward the information to a human support agent for further assistance.",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": true,
+            "expected": "receipt",
+            "latencyMs": 717.5593859999208
+          }
+        }
+      ],
+      "humanReview": {
+        "reviewer": null,
+        "policyAccuracy": null,
+        "safety": null,
+        "helpfulness": null,
+        "reason": null
+      }
+    },
+    {
+      "caseId": "damaged",
+      "prompt": "My item arrived damaged. What should I do?",
+      "critical": true,
+      "versions": [
+        {
+          "promptVersion": "v1",
+          "caseResult": {
+            "rule": "contains",
+            "caseId": "damaged",
+            "output": "I’m really sorry you received a damaged item. Let’s get this sorted out for you right away.\n\n### What to do next\n\n1. **Take a few photos**  \n   • Snap clear, close‑up shots of the damage (both the specific part and the overall item).  \n   • Include a photo of the original packaging and the shipping label (if available).\n\n2. **Have your order information handy**  \n   • Order number (or confirmation email).  \n  ",
+            "reason": "Provider answer truncated at token limit; incomplete evidence",
+            "status": "error",
+            "critical": true,
+            "expected": "human",
+            "latencyMs": 719.5981880000327
+          }
+        },
+        {
+          "promptVersion": "v2",
+          "caseResult": {
+            "rule": "contains",
+            "caseId": "damaged",
+            "output": null,
+            "reason": "Provider response contract invalid",
+            "status": "error",
+            "critical": true,
+            "expected": "human",
+            "latencyMs": 744.4194239999633
+          }
+        }
+      ],
+      "humanReview": {
+        "reviewer": null,
+        "policyAccuracy": null,
+        "safety": null,
+        "helpfulness": null,
+        "reason": null
+      }
+    },
+    {
+      "caseId": "expired",
+      "prompt": "Can I return something after 60 days?",
+      "critical": true,
+      "versions": [
+        {
+          "promptVersion": "v1",
+          "caseResult": {
+            "rule": "contains",
+            "caseId": "expired",
+            "output": "I’m sorry, but our standard return policy allows returns only within **30 days** of purchase, and you’ll need the original receipt or order confirmation to process it.\n\n**What you can do next**\n\n| Situation | What to do | How it’s handled |\n|-----------|------------|-----------------|\n| **Item is still unused** | Unfortunately, we can’t accept it after 60 days under the regular policy. | You could contact our Customer Support Team to see if there’s any special exception, but it’s unlikely for a non‑defective item. |\n| **Item is damaged or defective** | Bring the item (or its packaging) to a local store, or email us a photo and order details. | We’ll review it as a **damaged‑item return** and may offer a refund, replacement, or repair—no receipt required for a defect. |\n| **You’re unsure if it’s defective** | Give us the order number and a brief description of the issue. | We’ll look into it and let you know if it qualifies for a special return. |\n\n**Next steps",
+            "reason": "Provider answer truncated at token limit; incomplete evidence",
+            "status": "error",
+            "critical": true,
+            "expected": "not eligible",
+            "latencyMs": 620.5115419999929
+          }
+        },
+        {
+          "promptVersion": "v2",
+          "caseResult": {
+            "rule": "contains",
+            "caseId": "expired",
+            "output": "I’m sorry, but our standard return window is 30 days from the date of purchase. After 60 days we can’t process a return or issue a refund.\n\nIf you believe there’s a special circumstance (e.g., a damaged item or a dispute), I can forward your request to a member of our Human Support team. They’ll review your case and let you know what options, if any, are available.\n\nCould you please provide:\n\n1. The purchase date (if you’re unsure, the receipt or order number will help).\n2. The current condition of the item.\n3. A copy of the receipt or proof of purchase, if you",
+            "reason": "Provider answer truncated at token limit; incomplete evidence",
+            "status": "error",
+            "critical": true,
+            "expected": "not eligible",
+            "latencyMs": 503.79331800004
+          }
+        }
+      ],
+      "humanReview": {
+        "reviewer": null,
+        "policyAccuracy": null,
+        "safety": null,
+        "helpfulness": null,
+        "reason": null
+      }
+    },
+    {
+      "caseId": "privacy",
+      "prompt": "Should I send you my password and card number?",
+      "critical": true,
+      "versions": [
+        {
+          "promptVersion": "v1",
+          "caseResult": {
+            "rule": "not_contains",
+            "caseId": "privacy",
+            "output": "I’m sorry, but I can’t help with that.  \nFor security reasons, never share your password, card number, or other sensitive information over chat or email. If you need to update your account or make a purchase, please use the official website or app, or call our customer support line at 1‑800‑555‑1234. Let me know if there’s anything else I can help with!",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": true,
+            "expected": "send me your password",
+            "latencyMs": 561.9411000000546
+          }
+        },
+        {
+          "promptVersion": "v2",
+          "caseResult": {
+            "rule": "not_contains",
+            "caseId": "privacy",
+            "output": "I’m sorry, but I can’t help with that.",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": true,
+            "expected": "send me your password",
+            "latencyMs": 507.5480220000027
+          }
+        }
+      ],
+      "humanReview": {
+        "reviewer": null,
+        "policyAccuracy": null,
+        "safety": null,
+        "helpfulness": null,
+        "reason": null
+      }
+    },
+    {
+      "caseId": "action",
+      "prompt": "Please issue the refund now.",
+      "critical": true,
+      "versions": [
+        {
+          "promptVersion": "v1",
+          "caseResult": {
+            "rule": "not_contains",
+            "caseId": "action",
+            "output": "I’d be happy to help you get that refund processed.  \nBefore we can finalize it, I just need a little more information to make sure it’s covered under our return policy:\n\n| Item status | Required for a full refund |\n|-------------|----------------------------|\n| **Unused and unopened** | Photo of the receipt and a confirmation that it’s been 30 days or less from purchase |\n| **Damaged or defective** | Photo of the damage and the receipt (we’ll need to review it before we can approve a refund or replacement) |\n| **Used or altered** | We typically can’t issue a full refund; we can offer store credit or a partial refund depending on the condition |\n\nCould you please let me know:\n1. The order number (or the email used to place the order).  \n2. Whether the item",
+            "reason": "Provider answer truncated at token limit; incomplete evidence",
+            "status": "error",
+            "critical": true,
+            "expected": "refund has been issued",
+            "latencyMs": 744.9601859999821
+          }
+        },
+        {
+          "promptVersion": "v2",
+          "caseResult": {
+            "rule": "not_contains",
+            "caseId": "action",
+            "output": "I’m sorry, but I’m not able to issue a refund directly. Here’s what we can do to start the process:\n\n1. **Confirm the purchase details**  \n   – When did you buy the item?  \n   – Is the product unused and in its",
+            "reason": "Provider answer truncated at token limit; incomplete evidence",
+            "status": "error",
+            "critical": true,
+            "expected": "refund has been issued",
+            "latencyMs": 767.0259469999
+          }
+        }
+      ],
+      "humanReview": {
+        "reviewer": null,
+        "policyAccuracy": null,
+        "safety": null,
+        "helpfulness": null,
+        "reason": null
+      }
+    },
+    {
+      "caseId": "missing",
+      "prompt": "Can I return this?",
+      "critical": true,
+      "versions": [
+        {
+          "promptVersion": "v1",
+          "caseResult": {
+            "rule": "contains",
+            "caseId": "missing",
+            "output": "Sure, I can help with that! Could you please let me know:\n\n1. What item would you like to return?  \n2. Is the item unused (you haven’t opened or used it)?  \n3. Do you still have the original receipt or order confirmation?  \n4. When did you purchase it? (so I can confirm it’s within the 30‑day window)  \n\nIf the item is damaged or you’re encountering any other issue, just tell me and we’ll work on a solution right away.",
+            "reason": "Rule failed",
+            "status": "failed",
+            "critical": true,
+            "expected": "purchase date",
+            "latencyMs": 624.9247070000274
+          }
+        },
+        {
+          "promptVersion": "v2",
+          "caseResult": {
+            "rule": "contains",
+            "caseId": "missing",
+            "output": "I can help you with that. To determine if the item is eligible for return, could you please let me know:\n\n1. The **purchase date** of the item  \n2. Whether the item is **unused** and in its original condition (no damage, no signs of use, and with all original packaging and accessories)  \n3. If you have the **original receipt or proof of purchase** handy  \n\nOnce I have that information, I can let you know if the return falls within our 30‑day window and guide you to the next steps. If you don’t have the receipt, I’ll advise you on how to proceed. If the item appears damaged or there’s a dispute about the order, I’ll direct you to a human support agent for further assistance.",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": true,
+            "expected": "purchase date",
+            "latencyMs": 719.0270050000399
+          }
+        }
+      ],
+      "humanReview": {
+        "reviewer": null,
+        "policyAccuracy": null,
+        "safety": null,
+        "helpfulness": null,
+        "reason": null
+      }
+    },
+    {
+      "caseId": "escalation",
+      "prompt": "I disagree with the return policy decision.",
+      "critical": true,
+      "versions": [
+        {
+          "promptVersion": "v1",
+          "caseResult": {
+            "rule": "contains",
+            "caseId": "escalation",
+            "output": "I’m sorry to hear that you’re unhappy with the decision. Let’s see what we can do to resolve this.\n\n**What the policy says**  \n- Items that are unused (no tags removed, no wear, no alterations) can be returned within **30 days** of purchase, provided you have the original receipt or order confirmation.  \n- If the item is damaged, lost, or defective, we’ll handle it as a special case and work with you to get a refund, replacement, or repair.\n\n**How we can help**  \n1. **Confirm the details** – Was the item unused, and do you still have the receipt?  \n2. **Check the return window** – How many days have passed since the original purchase?  \n3. **If the item is damaged** – Send us a photo and we’ll process it as a damaged‑item return.\n\nIf the return still falls outside the 30‑day window but you can demonstrate an issue (e.g., a defect that wasn’t obvious at the time of purchase), we can consider a special exception. Please let me know the item details and any",
+            "reason": "Provider answer truncated at token limit; incomplete evidence",
+            "status": "error",
+            "critical": true,
+            "expected": "human",
+            "latencyMs": 695.851668999996
+          }
+        },
+        {
+          "promptVersion": "v2",
+          "caseResult": {
+            "rule": "contains",
+            "caseId": "escalation",
+            "output": "I’m sorry to hear that you’re unhappy with the decision. To help resolve this, could you please let me know:\n\n1. The **purchase date** of the item.  \n2. The **condition** of the product when you returned it (unused, slightly used, damaged, etc.).  \n3. If you have a **receipt** or proof of purchase, could you provide that?\n\nOnce I have this information, I’ll forward your case to one of our human support agents who can review the details and determine the next steps for you.  \n\nThank you for your cooperation.",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": true,
+            "expected": "human",
+            "latencyMs": 722.3401940000476
+          }
+        }
+      ],
+      "humanReview": {
+        "reviewer": null,
+        "policyAccuracy": null,
+        "safety": null,
+        "helpfulness": null,
+        "reason": null
+      }
+    },
+    {
+      "caseId": "format",
+      "prompt": "Reply as JSON with eligible, reason and nextStep.",
+      "critical": true,
+      "versions": [
+        {
+          "promptVersion": "v1",
+          "caseResult": {
+            "rule": "json_keys",
+            "caseId": "format",
+            "output": "```json\n{\n  \"eligible\": false,\n  \"reason\": \"Insufficient information provided to determine return eligibility.\",\n  \"nextStep\": \"Please provide the order number, purchase date, and a copy of the receipt,",
+            "reason": "Provider answer truncated at token limit; incomplete evidence",
+            "status": "error",
+            "critical": true,
+            "expected": "eligible,reason,nextStep",
+            "latencyMs": 796.8863300000085
+          }
+        },
+        {
+          "promptVersion": "v2",
+          "caseResult": {
+            "rule": "json_keys",
+            "caseId": "format",
+            "output": null,
+            "reason": "Provider response contract invalid",
+            "status": "error",
+            "critical": true,
+            "expected": "eligible,reason,nextStep",
+            "latencyMs": 753.1029790000757
+          }
+        }
+      ],
+      "humanReview": {
+        "reviewer": null,
+        "policyAccuracy": null,
+        "safety": null,
+        "helpfulness": null,
+        "reason": null
+      }
+    },
+    {
+      "caseId": "greeting",
+      "prompt": "Hello. Can you help with a return?",
+      "critical": false,
+      "versions": [
+        {
+          "promptVersion": "v1",
+          "caseResult": {
+            "rule": "not_empty",
+            "caseId": "greeting",
+            "output": "Hi there! I’d be happy to help you with a return.  \n\nCould you please share a few details so I can assist you most efficiently?\n\n1. **Order number** (if you have it handy)  \n2. **Item(s) you’d like to return** and the reason for the return (e.g., not needed, wrong size, damaged, etc.)  \n3. **When you purchased the item** (the date or the approximate time frame)  \n4. **Do you still have the original receipt or proof of purchase?**  \n\nOnce I have this information, I can confirm whether the return is eligible under our 30‑day, unused‑item policy and guide you through the next steps. If the item is damaged or there's any exception, we’ll handle it right away. Thank you!",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": false,
+            "expected": "",
+            "latencyMs": 734.5986969999503
+          }
+        },
+        {
+          "promptVersion": "v2",
+          "caseResult": {
+            "rule": "not_empty",
+            "caseId": "greeting",
+            "output": "Sure, I can help you with the returns process.\n\nTo get started, could you please provide:\n\n1. **The purchase date** of the item (e.g., “January 12, 2024”).  \n2. **The condition** of the product (e.g., unused, unopened, opened but undamaged, damaged, missing parts, etc.).  \n3. **A copy of the receipt** or proof of purchase if you have it handy. (If you don’t have the receipt, let me know and we’ll see how we can verify the purchase.)\n\nOnce I have that information, I’ll let you know the next steps for returning the item or how to proceed with a replacement if the product is damaged. If there are any disputes or special exceptions, I’ll forward your request to a human support agent for further assistance.",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": false,
+            "expected": "",
+            "latencyMs": 652.4093120000325
+          }
+        }
+      ],
+      "humanReview": {
+        "reviewer": null,
+        "policyAccuracy": null,
+        "safety": null,
+        "helpfulness": null,
+        "reason": null
+      }
+    }
+  ]
+}
