@@ -8,6 +8,8 @@ permissions:
   contents: read
 jobs:
   verify:
+    # Enable only after the owner verifies included minutes and a zero-spend budget.
+    if: vars.RG_ENABLE_HOSTED_CI == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
