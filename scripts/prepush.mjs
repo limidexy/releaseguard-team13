@@ -4,7 +4,7 @@ import { readFileSync, mkdirSync, writeFileSync } from 'node:fs';
 if (Number(process.versions.node.split('.')[0]) < 24) throw Error('Use Node.js 24+ before push');
 const files = execFileSync('git', ['ls-files', '-z'], { encoding: 'utf8' }).split('\0').filter(Boolean);
 const violations = [];
-const secrets = [/\bgh[pousr]_[A-Za-z0-9]{30,}\b/, /\bgithub_pat_[A-Za-z0-9_]{30,}\b/, /\bsk-proj-[A-Za-z0-9_-]{30,}\b/, /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/];
+const secrets = [/\bgh[pousr]_[A-Za-z0-9]{30,}\b/, /\bgithub_pat_[A-Za-z0-9_]{30,}\b/, /\bgsk_[A-Za-z0-9]{30,}\b/, /\bsk-proj-[A-Za-z0-9_-]{30,}\b/, /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/];
 for (const file of files) {
   if ((/(^|\/)\.env(?:\.|$)/.test(file) && !file.endsWith('.env.example')) || /(^|\/)(id_rsa|id_ed25519)$/.test(file)) violations.push(file);
   const content = readFileSync(file, 'utf8');

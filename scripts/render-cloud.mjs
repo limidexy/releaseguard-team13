@@ -9,6 +9,7 @@ documents.push({apiVersion:'v1',kind:'ConfigMap',metadata:{name:'rg-config',name
 const fromSecret=(name,key,optional=false)=>({secretKeyRef:{name,key,optional}});
 for(const role of roles){
   const env=[{name:'SERVICE_ROLE',value:role},{name:'INTERNAL_SECRET',valueFrom:fromSecret('rg-internal','INTERNAL_SECRET')}];
+  if(process.env.RG_INTERNAL_CA==='true')env.push({name:'NODE_EXTRA_CA_CERTS',value:'/trust/ca.crt'});
   if(['registry','evaluation','governance','worker'].includes(role))env.push({name:'DATABASE_URL',valueFrom:fromSecret('rg-'+(role==='worker'?'evaluation':role),'DATABASE_URL')});
   if(['evaluation','worker'].includes(role))env.push({name:'AMQP_URL',valueFrom:fromSecret('rg-broker','AMQP_URL')});
   if(role==='support'){for(const name of ['MODEL_API_URL','MODEL_API_KEY','MODEL_ID','ALLOW_REAL_MODEL'])env.push({name,valueFrom:fromSecret('rg-provider',name,true)})}
@@ -16,6 +17,13 @@ for(const role of roles){
   documents.push({apiVersion:'apps/v1',kind:'Deployment',metadata:{name:role,namespace},spec:{replicas:role==='gateway'?2:1,strategy:{type:'RollingUpdate',rollingUpdate:{maxUnavailable:0,maxSurge:1}},selector:{matchLabels:{app:role}},template:{metadata:{labels},spec:{automountServiceAccountToken:false,terminationGracePeriodSeconds:30,securityContext:{runAsNonRoot:true,runAsUser:1000,runAsGroup:1000},containers:[{name:role,image,imagePullPolicy:'IfNotPresent',envFrom:[{configMapRef:{name:'rg-config'}}],env,ports:[{containerPort:8080}],resources:{requests:{cpu:'250m',memory:'128Mi'},limits:{cpu:'500m',memory:'384Mi'}},securityContext:{allowPrivilegeEscalation:false,readOnlyRootFilesystem:true,capabilities:{drop:['ALL']}},startupProbe:{httpGet:{path:'/health/ready',port:8080},periodSeconds:5,failureThreshold:30},readinessProbe:{httpGet:{path:'/health/ready',port:8080},periodSeconds:5},livenessProbe:{httpGet:{path:'/health/live',port:8080},periodSeconds:10}}]}}}});
   documents.push({apiVersion:'v1',kind:'Service',metadata:{name:role,namespace},spec:{selector:{app:role},ports:[{port:8080,targetPort:8080}],type:'ClusterIP'}});
 }
+if(process.env.RG_INTERNAL_CA==='true')for(const d of documents.filter(d=>d.kind==='Deployment')){
+  d.spec.template.spec.volumes=[{name:'trust',secret:{secretName:'rg-internal-ca'}}];
+  d.spec.template.spec.containers[0].volumeMounts=[{name:'trust',mountPath:'/trust',readOnly:true}];
+}
+if(process.env.RG_TRIAL_SMALL==='true')for(const d of documents.filter(d=>d.kind==='Deployment')){
+  d.spec.template.spec.containers[0].resources.requests.cpu=d.metadata.name==='worker'?'250m':'100m';
+}
 await mkdir('deploy/k8s/rendered',{recursive:true});
-await writeFile('deploy/k8s/rendered/services.yaml',documents.map(d=>JSON.stringify(d,null,2)).join('\n---\n')+'\n');
+await writeFile('deploy/k8s/rendered/services.yaml',documents.filter(d=>process.env.RG_SKIP_NAMESPACE!=='true'||d.kind!=='Namespace').map(d=>JSON.stringify(d,null,2)).join('\n---\n')+'\n');
 console.log('Rendered cloud services. No deployment was performed. Provision secrets, private DB/broker and HTTPS ingress first.');

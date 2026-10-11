@@ -1,16 +1,20 @@
-name: Approved cloud deployment
+name: Trial cloud deployment (manual)
 on:
   workflow_dispatch:
     inputs:
       verify_run_id:
-        description: Successful CI run ID for the same source commit
+        description: Successful CI run ID for this exact source commit
         required: true
-      image:
-        description: Tested image pushed as repository@sha256:digest
-        required: true
+      prove_rollback:
+        description: Test the previous image and then restore the candidate
+        type: boolean
+        default: false
 permissions:
   contents: read
   actions: read
+concurrency:
+  group: releaseguard-trial-deployment
+  cancel-in-progress: false
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -27,13 +31,29 @@ jobs:
           EXPECTED_SHA: ${{ github.sha }}
         run: |
           gh api "repos/$REPOSITORY/actions/runs/$RUN_ID" > run.json
-          node -e "const r=require('./run.json');const reasons=[];if(r.conclusion!=='success')reasons.push('CI is not successful: '+r.conclusion);if(r.head_sha!==process.env.EXPECTED_SHA)reasons.push('CI source does not match deployment source');if(r.path!=='.github/workflows/ci.yml')reasons.push('Unexpected CI workflow');if(r.head_repository?.full_name!==process.env.REPOSITORY)reasons.push('Unexpected source repository');if(reasons.length){console.error(reasons.join('\n'));process.exit(1)}require('fs').appendFileSync(process.env.GITHUB_OUTPUT,'source='+r.head_sha+'\n');console.log('CI identity preflight passed; this is not deployment approval')"
+          node -e "const r=require('./run.json');const reasons=[];if(r.conclusion!=='success')reasons.push('CI is not successful: '+r.conclusion);if(r.head_sha!==process.env.EXPECTED_SHA)reasons.push('CI source does not match deployment source');if(r.path!=='.github/workflows/ci.yml')reasons.push('Unexpected CI workflow');if(r.head_repository?.full_name!==process.env.REPOSITORY)reasons.push('Unexpected source repository');if(reasons.length){console.error(reasons.join('\n'));process.exit(1)}require('fs').appendFileSync(process.env.GITHUB_OUTPUT,'source='+r.head_sha+'\n');console.log('CI identity passed. No independent human approval gate for this free-private trial.')"
   deploy:
     needs: check
     if: vars.RG_ENABLE_CLOUD_CD == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-    environment: cloud-test
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      actions: read
+      id-token: write
+    env:
+      PUBLIC_ORIGIN: ${{ vars.PUBLIC_ORIGIN }}
+      AUTH_ISSUER: ${{ vars.AUTH_ISSUER }}
+      OIDC_JWKS_URL: ${{ vars.OIDC_JWKS_URL }}
+      RG_INTERNAL_CA: 'true'
+      RG_TRIAL_SMALL: 'true'
+      RG_SKIP_NAMESPACE: 'true'
+      RG_ALLOW_CLOUD_SMOKE: 'true'
+      RG_CLOUD_ALLOWED_ORIGINS: ${{ vars.PUBLIC_ORIGIN }}
+      RELEASEGUARD_URL: ${{ vars.PUBLIC_ORIGIN }}
+      OIDC_CLIENT_ID: rg-ci
+      OIDC_CLIENT_SECRET: ${{ secrets.OIDC_CI_SECRET }}
+      RG_COMMIT: ${{ needs.check.outputs.source }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -41,49 +61,55 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Download CI identity evidence
-        uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v4
         with:
           name: verification-evidence
           run-id: ${{ inputs.verify_run_id }}
           github-token: ${{ github.token }}
           path: ci-evidence
-      - name: Compare pushed image identity to tested image
-        env:
-          RG_IMAGE: ${{ inputs.image }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: tested-image
+          run-id: ${{ inputs.verify_run_id }}
+          github-token: ${{ github.token }}
+          path: tested-image
+      - name: Verify the downloaded tested artifact
         run: |
-          node -e "if(!/^[a-zA-Z0-9./:_-]+@sha256:[a-f0-9]{64}$/.test(process.env.RG_IMAGE))process.exit(1)"
-          docker pull "$RG_IMAGE"
-          docker image inspect "$RG_IMAGE" --format '{{.Id}}' > pulled-id.txt
-          diff ci-evidence/image-id.txt pulled-id.txt
-      - name: Configure approved kube context
+          node scripts/image-identity.mjs archive tested-image/image.tar.gz actual-config-id.txt
+          diff ci-evidence/image-config-id.txt actual-config-id.txt
+          test "$(cat ci-evidence/source-commit.txt)" = "$RG_COMMIT"
+          docker load -i tested-image/image.tar.gz
+      - id: auth
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3
+        with:
+          workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
+          token_format: access_token
+          access_token_lifetime: 1200s
+      - name: Publish exactly the CI-tested image
         env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+          CLOUD_ACCESS_TOKEN: ${{ steps.auth.outputs.access_token }}
+          RG_REGISTRY: ${{ vars.GCP_IMAGE_REPOSITORY }}
         run: |
-          mkdir -p "$HOME/.kube"
-          printf '%s' "$KUBE_CONFIG" > "$HOME/.kube/config"
-          chmod 600 "$HOME/.kube/config"
-      - name: Render, deploy and verify rollouts
+          printf '%s' "$CLOUD_ACCESS_TOKEN" | docker login -u oauth2accesstoken --password-stdin https://asia-southeast1-docker.pkg.dev
+          docker tag releaseguard-team13:local "$RG_REGISTRY:$RG_COMMIT"
+          docker push "$RG_REGISTRY:$RG_COMMIT"
+          docker buildx imagetools inspect "$RG_REGISTRY:$RG_COMMIT" --format '{{json .Manifest}}' > published-descriptor.json
+          docker buildx imagetools inspect "$RG_REGISTRY:$RG_COMMIT" --raw > published-manifest.json
+          node scripts/image-identity.mjs compare published-manifest.json ci-evidence/image-config-id.txt
+          node -e "const d=require('./published-descriptor.json').digest;if(!/^sha256:[a-f0-9]{64}$/.test(d))throw Error('Invalid digest');require('fs').appendFileSync(process.env.GITHUB_ENV,'RG_IMAGE='+process.env.RG_REGISTRY+'@'+d+'\n')"
+      - uses: google-github-actions/get-gke-credentials@3da1e46a907576cefaa90c484278bb5b259dd395 # v3
+        with:
+          project_id: ${{ vars.GCP_PROJECT_ID }}
+          cluster_name: rg-trial
+          location: asia-southeast1-a
+          namespace: releaseguard
+          use_dns_based_endpoint: 'true'
+      - name: Deploy, smoke and optionally prove image rollback
         env:
-          RG_IMAGE: ${{ inputs.image }}
-          PUBLIC_ORIGIN: ${{ vars.PUBLIC_ORIGIN }}
-          AUTH_ISSUER: ${{ vars.AUTH_ISSUER }}
-          OIDC_JWKS_URL: ${{ vars.OIDC_JWKS_URL }}
-        run: |
-          node scripts/render-cloud.mjs
-          kubectl apply -f deploy/k8s/rendered/services.yaml
-          for service in registry evaluation governance support worker gateway; do
-            kubectl -n releaseguard rollout status "deployment/$service" --timeout=180s
-          done
-      - name: Authenticated replay smoke
-        env:
-          RG_ALLOW_CLOUD_SMOKE: 'true'
-          RG_CLOUD_ALLOWED_ORIGINS: ${{ vars.PUBLIC_ORIGIN }}
-          RELEASEGUARD_URL: ${{ vars.PUBLIC_ORIGIN }}
-          RELEASEGUARD_TOKEN: ${{ secrets.CLOUD_SMOKE_TOKEN }}
-          RG_IMAGE: ${{ inputs.image }}
-          RG_COMMIT: ${{ needs.check.outputs.source }}
-        run: node scripts/cloud-smoke.mjs
+          RG_PROVE_ROLLBACK: ${{ inputs.prove_rollback }}
+          RG_CI_RUN: ${{ inputs.verify_run_id }}
+        run: node scripts/cloud-deploy.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -92,4 +118,6 @@ jobs:
             evidence/
             !evidence/private/**
             deploy/k8s/rendered/
+            published-descriptor.json
+            published-manifest.json
           retention-days: 7

@@ -25,6 +25,7 @@ jobs:
           cache: npm
       - run: npm ci --no-audit --no-fund
       - run: npm test
+      - run: node --test tests/*.test.mjs
       - run: node scripts/setup-local.mjs
       - run: docker compose build gateway postgres
       - run: docker compose up -d --no-build --wait
@@ -49,6 +50,7 @@ jobs:
           docker image inspect releaseguard-team13:local --format '{{.Id}}' > evidence/image-id.txt
           git rev-parse HEAD > evidence/source-commit.txt
           docker save releaseguard-team13:local | gzip > image.tar.gz
+          node scripts/image-identity.mjs archive image.tar.gz evidence/image-config-id.txt
       - uses: actions/upload-artifact@v4
         with:
           name: tested-image

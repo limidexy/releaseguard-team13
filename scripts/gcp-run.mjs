@@ -1,0 +1,14 @@
+import { readFile } from 'node:fs/promises';
+import { execFileSync } from 'node:child_process';
+import { cloudToken } from './cloud-token.mjs';
+const c=JSON.parse(await readFile('deploy/gcp/trial-config.json','utf8')),s=JSON.parse(await readFile('evidence/private/gcp/secrets.json','utf8'));
+Object.assign(process.env,{RELEASEGUARD_URL:c.PUBLIC_ORIGIN,RG_CLOUD_ALLOWED_ORIGINS:c.PUBLIC_ORIGIN,RG_APPROVED_ORIGIN:c.PUBLIC_ORIGIN,AUTH_ISSUER:c.PUBLIC_ORIGIN+'/auth/realms/releaseguard',OIDC_CLIENT_ID:'rg-ci',OIDC_CLIENT_SECRET:s.ci,OIDC_VIEWER_SECRET:s.viewer,RG_ALLOW_CLOUD_SMOKE:'true'});
+const mode=process.argv[2],scripts={smoke:['scripts/cloud-smoke.mjs'],acceptance:['scripts/cloud-acceptance.mjs'],real:['scripts/compare-prompts.mjs','real'],benchmark:['scripts/cloud-benchmark.mjs']};
+if(!scripts[mode])throw Error('Choose smoke, acceptance, real or benchmark');
+const deployed=JSON.parse(execFileSync('kubectl',['-n','releaseguard','get','deployment','gateway','-o','json'],{encoding:'utf8'}));
+const source=deployed.metadata.annotations?.['releaseguard/source'];
+if(!/^[a-f0-9]{40}$/.test(source??''))throw Error('Cloud source annotation must be recorded before acceptance');
+Object.assign(process.env,{RG_COMMIT:source,RG_COMMIT_REF:source,RG_IMAGE:deployed.spec.template.spec.containers[0].image});
+if(mode==='real'&&process.env.RG_CONFIRM_REAL_CALLS!=='20')throw Error('Explicit 20-call confirmation required');
+process.env.RELEASEGUARD_TOKEN=await cloudToken();
+execFileSync(process.execPath,scripts[mode],{stdio:'inherit',env:process.env});
