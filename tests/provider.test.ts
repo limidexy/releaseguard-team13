@@ -15,6 +15,16 @@ test('provider contract retains unedited output and bounded usage metadata', asy
 test('provider HTTP failures are not converted to fabricated answers', async () => {
   await assert.rejects(providerAnswer(config, 'v1', 'q', fake({ error: 'private details' }, 429)), /^Error: Provider HTTP 429$/);
 });
+test('token-truncated answers retain the raw text and signal an error to the evaluation gate', async () => {
+  const result = await providerAnswer(config, 'v2', 'q', fake({
+    id: 'truncated-request', model: 'test-model',
+    choices: [{ message: { content: 'Eligible within 30 days, but' }, finish_reason: 'length' }],
+    usage: { completion_tokens: 300 },
+  }));
+  assert.equal(result.output, 'Eligible within 30 days, but');
+  assert.equal((result.metadata as any).finishReason, 'length');
+  assert.match((result as any).error, /truncated/);
+});
 test('missing, empty and oversized provider answers fail closed', async () => {
   for (const body of [{}, { choices: [] }, { choices: [{ message: { content: '  ' } }] }, { choices: [{ message: { content: 'x'.repeat(10001) } }] }])
     await assert.rejects(providerAnswer(config, 'v1', 'q', fake(body)), /contract invalid/);

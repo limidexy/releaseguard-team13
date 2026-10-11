@@ -6,6 +6,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   verify:
     # Enable only after the owner verifies included minutes and a zero-spend budget.
@@ -14,6 +17,8 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
@@ -43,17 +48,22 @@ jobs:
         run: |
           docker image inspect releaseguard-team13:local --format '{{.Id}}' > evidence/image-id.txt
           git rev-parse HEAD > evidence/source-commit.txt
-          docker save releaseguard-team13:local -o image.tar
+          docker save releaseguard-team13:local | gzip > image.tar.gz
       - uses: actions/upload-artifact@v4
         with:
           name: tested-image
-          path: image.tar
+          path: image.tar.gz
+          compression-level: 0
+          retention-days: 1
       - name: Preserve test reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: verification-evidence
-          path: evidence/
+          path: |
+            evidence/
+            !evidence/private/**
+          retention-days: 7
       - name: Stop containers
         if: always()
         run: docker compose stop

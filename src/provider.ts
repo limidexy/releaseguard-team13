@@ -40,5 +40,6 @@ export async function providerAnswer(config: { url: string; key: string; model: 
   for (const field of ['prompt_tokens', 'completion_tokens', 'total_tokens']) {
     const n = body.usage?.[field]; if (Number.isSafeInteger(n) && n >= 0) usage[field] = n;
   }
-  return { output, metadata: { requestId: typeof body.id === 'string' ? body.id.slice(0, 200) : null, reportedModel: typeof body.model === 'string' ? body.model.slice(0, 200) : null, usage } };
+  const finishReason = typeof body.choices[0].finish_reason === 'string' ? body.choices[0].finish_reason.slice(0, 80) : null;
+  return { output, ...(finishReason === 'length' ? { error: 'Provider answer truncated at token limit; incomplete evidence' } : {}), metadata: { requestId: typeof body.id === 'string' ? body.id.slice(0, 200) : null, reportedModel: typeof body.model === 'string' ? body.model.slice(0, 200) : null, finishReason, usage } };
 }

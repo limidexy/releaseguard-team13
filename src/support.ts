@@ -38,8 +38,8 @@ export async function support(app: FastifyInstance) {
     for (const c of input.cases) {
       const start = performance.now();
       try {
-        const { output, metadata } = await providerAnswer({ url: providerUrl, key, model }, input.promptVersion, c.prompt);
-        outputs.push({ caseId: c.id, output, latencyMs: performance.now() - start });
+        const { output, metadata, error } = await providerAnswer({ url: providerUrl, key, model }, input.promptVersion, c.prompt);
+        outputs.push({ caseId: c.id, output, ...(error ? { error } : {}), latencyMs: performance.now() - start });
         requestMetadata.push({ caseId: c.id, ...metadata });
       } catch (e) { outputs.push({ caseId: c.id, error: e instanceof Error ? e.message.slice(0, 500) : 'Provider error', latencyMs: performance.now() - start }); }
     }
