@@ -2,6 +2,8 @@
 
 **Current working copy: 11 October 2026.** This repository continues the preserved 7/8 October baseline in a separate directory and Docker project. Start with [DDD decisions](docs/07-DDD-Design.md) and [five-member delivery workflow](docs/08-Team-Workflow.md). Prior dated documents below are historical; they are not fresh verification or the approved Word proposal. The lecturer has approved the revised proposal; implementation/cloud acceptance remains separate.
 
+[**Fresh measured results and remaining gaps**](docs/09-Local-Evidence-20261011.md): 11 local acceptance stages, 18 unit tests, 18 integration groups, 4 regressions and 5 outage contracts passed. The report preserves the observed lack of scaling speedup and distinguishes local/browser/replay checks from cloud/provider/team evidence.
+
 This edition uses http://localhost:5193, image `releaseguard-team13:local`, and Compose project `releaseguard-team13`. It does not modify the earlier stack on port 5189. Set `RELEASEGUARD_URL` consistently if changing `RG_PORT`.
 
 ## First local run (free, no model account)

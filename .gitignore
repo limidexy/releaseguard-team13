@@ -3,9 +3,9 @@ dist/
 .env
 .env.*
 !.env.example
-evidence/
-!evidence/published/
+/evidence/
 deploy/k8s/rendered/
 .DS_Store
 *.zip
 *.log
+!docs/evidence/*/*.log

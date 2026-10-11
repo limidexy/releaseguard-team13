@@ -1,0 +1,362 @@
+{
+  "startedAt": "2026-10-11T06:30:38.463Z",
+  "scope": "Local Docker replay verification; no cloud/real provider/hosted CI claims",
+  "node": "v24.19.0",
+  "composeProject": "releaseguard-team13",
+  "gitCommit": "c0013a9a8ff4f30883092646455847a086d8844a",
+  "gitDirty": false,
+  "sourceFiles": [
+    {
+      "path": ".dockerignore",
+      "sha256": "5c52a42a803b5615dca830985acf2b656f0699cae32b8f873345a69641ab8915"
+    },
+    {
+      "path": ".githooks/pre-push",
+      "sha256": "98061bb6f65b617c9678f3f61e3f731bd66ab56ea44aa0d0c01d745347c90185"
+    },
+    {
+      "path": ".github/pull_request_template.md",
+      "sha256": "918220dc50f97193763f8b3c0d7d745ea7818b57f9be55e8f61474bbacc399bc"
+    },
+    {
+      "path": ".github/workflows/cd.yml",
+      "sha256": "f3403972eb3c0feb9fe7eec20b27dcae9737a5c440593c20ba9f563e0a586a75"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "e6696fcfe7092b4d0c5466600e6a934fad262fc606202b4cedde78291fd5dd57"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "61660b1849118a3e4a557759588705d84a720a5b03636a93a740f26609302d9d"
+    },
+    {
+      "path": "compose.yaml",
+      "sha256": "c52ed566430513f993e8f5b4aad74679388b877531260a6c922a2dbd2b4f91a9"
+    },
+    {
+      "path": "deploy/k8s/README.md",
+      "sha256": "37b6547425830b57681049c40585d4b0dfddcf1f810747754709199a5986b352"
+    },
+    {
+      "path": "deploy/k8s/worker-autoscale.yaml",
+      "sha256": "721ac1747c8f70f2acb855bf05d665e5466294a850e8893aa6d1da01a5beaf30"
+    },
+    {
+      "path": "deploy/postgres/Dockerfile",
+      "sha256": "0b88c94cb2cde8e66b94ea94bdfb92efc1de42956826121776fca043878d51d0"
+    },
+    {
+      "path": "deploy/postgres/init.sh",
+      "sha256": "ceb09f82928903181822938a9e38989defb8baecc6ac6faafebfb7e7d82e643c"
+    },
+    {
+      "path": "deploy/postgres/init.sql",
+      "sha256": "5413284bea8a9366fffabf4a5b869ccf0e8818cdffeeea8289ed89811d6b548c"
+    },
+    {
+      "path": "Dockerfile",
+      "sha256": "c7122aaac17268ba152f6b37db721e1667eea08270475123b050f6463f2ee957"
+    },
+    {
+      "path": "docs/01-Revised-Proposal.md",
+      "sha256": "849d8a899e0a9c74e3c9cc708c5b73c9b9da598170ba7b2205503a59a3ed5f18"
+    },
+    {
+      "path": "docs/02-Architecture.md",
+      "sha256": "52c76f5c3bd79dc40d05977d819bb4377ace5fce0ebfc41e4787acaabc579bf7"
+    },
+    {
+      "path": "docs/03-Course-Acceptance.md",
+      "sha256": "d27674b63f1382fa9f36506f2713f27a0c8884949bb590441ebd8e7cdec15242"
+    },
+    {
+      "path": "docs/04-Verification-Status.md",
+      "sha256": "cc33a81b2d95fb608cae610bfe2fa610132e44265bf89413568bce8279e637e4"
+    },
+    {
+      "path": "docs/05-Current-Handoff.md",
+      "sha256": "fc297670e0d8a7054ce4e4a543c4fb0f1c2adabaa72d96a77dc56c451f9ce8b4"
+    },
+    {
+      "path": "docs/06-UI-Polish.md",
+      "sha256": "7a7d3f1ce3c72dab16fed6ac2960e0b5f536023733cfe4db86a68b221d78d3f2"
+    },
+    {
+      "path": "docs/07-DDD-Design.md",
+      "sha256": "01764f7912ef338ee8629581a2238a0f5a3dd3a4cb0961cd65d7889623da654d"
+    },
+    {
+      "path": "docs/08-Team-Workflow.md",
+      "sha256": "29724626ef686b4cc2bfa7ce3d78b6cf2f0dee6a2e791ef0dc30cdc2fe62bc20"
+    },
+    {
+      "path": "docs/human-rubric.csv",
+      "sha256": "9afec0021e8d71f94435a111041e193120aeb4a3a5b22dcc6377746ea9130c30"
+    },
+    {
+      "path": "docs/team-effort.csv",
+      "sha256": "6406fe23ff3dee9bec80a3f1507fe808e7ee6232efe4b107eabd1cfb515dc9d7"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "edbec9021091f0b178c6e747372548ffdabbecbaac78cfca84f87987e251f3e8"
+    },
+    {
+      "path": "package.json",
+      "sha256": "194785d063f329d19350dcd7772717480ded73141bc56df83adf0b8ff64c3650"
+    },
+    {
+      "path": "public/app.js",
+      "sha256": "bf2c23bd427a7faff765070350713172bd92a2745766a0318f5a5a2b4188e29a"
+    },
+    {
+      "path": "public/demo-fixtures.json",
+      "sha256": "f2861c2608b7f97b510d5e8c0cd4706000bfd6efd3d58142cc90c474b9e688d2"
+    },
+    {
+      "path": "public/index.html",
+      "sha256": "1d2451cf2072f2ccf69b9149a544e0f3e1633d112ca3aae99c5b83bf92c684a6"
+    },
+    {
+      "path": "public/style.css",
+      "sha256": "b580a260891c23a7bfd95a2f8375e851aa7f022515e331d41fed4ddc41a52baf"
+    },
+    {
+      "path": "README.md",
+      "sha256": "2e4bb1a473a67402f60f07a0587d8216b5ef67787dca6bf0a101bcf66734b936"
+    },
+    {
+      "path": "scripts/acceptance.mjs",
+      "sha256": "e3a0824f551cef92fa4d40c9f0fd4ab8d8be32f0bd5eed949f04ddd520a6ff6f"
+    },
+    {
+      "path": "scripts/benchmark-repeated.mjs",
+      "sha256": "bf214f51aa28d21947191f33ab326f9fd9b51c42d8b23db65fa73781571058bc"
+    },
+    {
+      "path": "scripts/benchmark.mjs",
+      "sha256": "c9c9c386696d82b8e12bf53eba8180b90f87cf0eefe5ffd3cb72c398d3e5a98e"
+    },
+    {
+      "path": "scripts/client.mjs",
+      "sha256": "b0ae1892e07843179672397cb6da865ae6da181dbe0ef6c5157bf60e7a5d3894"
+    },
+    {
+      "path": "scripts/cloud-smoke.mjs",
+      "sha256": "d0bec480ea1a90e200b6cf10032a6681f545df406ceb42639e32dca60475b41e"
+    },
+    {
+      "path": "scripts/compare-prompts.mjs",
+      "sha256": "7c5cc06ae06907dc1d22dfc444227303c4598e594515e344b07a6e7062136807"
+    },
+    {
+      "path": "scripts/dev-tokens.mjs",
+      "sha256": "ab8b730542c2cc8c2b4ad22768090d940197c11c0174c0ec2e8c4824aaad2288"
+    },
+    {
+      "path": "scripts/fault-test.mjs",
+      "sha256": "1b61ebc9396271c9d74eba03a4109a8083027f021590ffad2e758a9785b414ed"
+    },
+    {
+      "path": "scripts/fixtures.mjs",
+      "sha256": "46addaf6e0191a1701784b12e8697bb219f1d676397915005f122cdaae74d4ee"
+    },
+    {
+      "path": "scripts/mixed-load.mjs",
+      "sha256": "9dd122df72d57cd202aec941207bbc09400865dd9510746944d9f467981317b6"
+    },
+    {
+      "path": "scripts/prepush.mjs",
+      "sha256": "a6bcef4b52a95502ad02860a8ff79fcfa58dbff5fe0af5a09c4f3608fa2aa963"
+    },
+    {
+      "path": "scripts/releaseguard-cli.mjs",
+      "sha256": "129c0562941bd79d7e476e95b58f9665050b21a8995f246581e6933aeb74c8cb"
+    },
+    {
+      "path": "scripts/render-cloud.mjs",
+      "sha256": "b5b0b7078dc2023d06440da0b59eebb420182550c694be64d1df75782358a921"
+    },
+    {
+      "path": "scripts/setup-local.mjs",
+      "sha256": "2fe8d489e5894912bed87338db1e416a8944a1b756309ce5c1e25160e9ddaafa"
+    },
+    {
+      "path": "scripts/verify-contracts.mjs",
+      "sha256": "0f977c5d348607d48d584fc1b3c611e8c274bc6b7cf8542b94a051baeaafaf89"
+    },
+    {
+      "path": "scripts/verify-improvements.mjs",
+      "sha256": "e8837093c6331163103f0f8c7057ca8505cd3bee541233c7584ee598723f84a2"
+    },
+    {
+      "path": "scripts/verify-rollback.mjs",
+      "sha256": "2296a00814339a52465b33a327cc101a3c4772571303aecc56362affa150f0da"
+    },
+    {
+      "path": "scripts/verify.mjs",
+      "sha256": "7f6bc15d6392da4f494482245bf171832af884dc5fa98526798ad012e6e0d1ee"
+    },
+    {
+      "path": "src/common.ts",
+      "sha256": "c09ad325f2b01d190ab57af0f5a618783f1d6e6b5f52409bff54cb2fd48e3883"
+    },
+    {
+      "path": "src/contexts/review.ts",
+      "sha256": "8a7eed471337e738277c4ed0e9883ca8b0e261da930614115172f19f8125a7dd"
+    },
+    {
+      "path": "src/domain.ts",
+      "sha256": "061aed0a706bebb0834d8552d75f31b6c94d8c1996dd509c974290088f328e6d"
+    },
+    {
+      "path": "src/evaluation.ts",
+      "sha256": "7da49b4914b81b0e7b5004e862c1a82d88b8c18933cf42b1c5568a89134256b2"
+    },
+    {
+      "path": "src/gateway.ts",
+      "sha256": "24137215f7d05c3fc16f006aab70f13eeb5c72e221798ba0e8a0fcb0c8be9e8b"
+    },
+    {
+      "path": "src/governance.ts",
+      "sha256": "c08b6197e331b1e09c2a8c488402e114111528e9c6acb665252ac64d46a65b0b"
+    },
+    {
+      "path": "src/main.ts",
+      "sha256": "5029063f2c537d80072052c0d3d167fe5d733a65a4814ac6c4551c023aca4fcc"
+    },
+    {
+      "path": "src/provider.ts",
+      "sha256": "0c9213dae591e75efd1fcc3861d61c908ab984eadfd59587adb73352c30db930"
+    },
+    {
+      "path": "src/queue.ts",
+      "sha256": "708929e857cbc6fcbaf582e23ec8bc2a17ea3d44cb6a8d37b0f42114c7892a1c"
+    },
+    {
+      "path": "src/registry.ts",
+      "sha256": "afeb4e0949978731bfbbe668b41c45828a2ea90f7ea00ae3a333d37ee747ec0e"
+    },
+    {
+      "path": "src/support.ts",
+      "sha256": "791902d0f358386025c7da85ff1212186d63d2547a800d858fb18c3e91892684"
+    },
+    {
+      "path": "src/worker.ts",
+      "sha256": "bcdcc2777f1cfdd45b1ef77420320ef70d027a6415672d9f8922152b8a949e35"
+    },
+    {
+      "path": "tests/domain.test.ts",
+      "sha256": "c6102a5b944bcaf126979a0680af924de2ccf52f8935238214e8635bf5d27b9d"
+    },
+    {
+      "path": "tests/provider.test.ts",
+      "sha256": "a7fe8f1b00c9bf818df53661dba4e25cfcd5f5349564b425b8dae1f99b64dacf"
+    },
+    {
+      "path": "tests/review.test.ts",
+      "sha256": "a2a3d597cb1ebb448bedc8d29edc49b4b196b80d3ba0ac8bbb7ffe7091490fff"
+    },
+    {
+      "path": "tsconfig.json",
+      "sha256": "44a5d0fa9e58919a03de7cde53f33320aac407ffb4f87892a1dc50515a02df50"
+    }
+  ],
+  "steps": [
+    {
+      "name": "unit-tests",
+      "command": "npm test",
+      "exitCode": 0,
+      "durationMs": 897,
+      "error": null,
+      "log": "evidence/current/unit-tests.log"
+    },
+    {
+      "name": "container-build",
+      "command": "docker compose build gateway postgres",
+      "exitCode": 0,
+      "durationMs": 2447,
+      "error": null,
+      "log": "evidence/current/container-build.log"
+    },
+    {
+      "name": "container-start",
+      "command": "docker compose up -d --no-build --wait",
+      "exitCode": 0,
+      "durationMs": 28306,
+      "error": null,
+      "log": "evidence/current/container-start.log"
+    },
+    {
+      "name": "integration",
+      "command": "node scripts/verify.mjs --restart",
+      "exitCode": 0,
+      "durationMs": 3143,
+      "error": null,
+      "log": "evidence/current/integration.log"
+    },
+    {
+      "name": "improvements",
+      "command": "node scripts/verify-improvements.mjs",
+      "exitCode": 0,
+      "durationMs": 505,
+      "error": null,
+      "log": "evidence/current/improvements.log"
+    },
+    {
+      "name": "ddd-contracts",
+      "command": "node scripts/verify-contracts.mjs",
+      "exitCode": 0,
+      "durationMs": 12466,
+      "error": null,
+      "log": "evidence/current/ddd-contracts.log"
+    },
+    {
+      "name": "fault-recovery",
+      "command": "node scripts/fault-test.mjs",
+      "exitCode": 0,
+      "durationMs": 16077,
+      "error": null,
+      "log": "evidence/current/fault-recovery.log"
+    },
+    {
+      "name": "prompt-replay",
+      "command": "node scripts/compare-prompts.mjs replay",
+      "exitCode": 0,
+      "durationMs": 620,
+      "error": null,
+      "log": "evidence/current/prompt-replay.log"
+    },
+    {
+      "name": "repeated-scaling",
+      "command": "node scripts/benchmark-repeated.mjs",
+      "exitCode": 0,
+      "durationMs": 35765,
+      "error": null,
+      "log": "evidence/current/repeated-scaling.log"
+    },
+    {
+      "name": "mixed-read-write",
+      "command": "node scripts/mixed-load.mjs",
+      "exitCode": 0,
+      "durationMs": 54454,
+      "error": null,
+      "log": "evidence/current/mixed-read-write.log"
+    },
+    {
+      "name": "dependency-audit",
+      "command": "npm audit --audit-level=high --json",
+      "exitCode": 0,
+      "durationMs": 631,
+      "error": null,
+      "log": "evidence/current/dependency-audit.log"
+    }
+  ],
+  "finishedAt": "2026-10-11T06:33:13.819Z",
+  "allPlannedLocalStepsPassed": true,
+  "cloudDeployed": false,
+  "realModelExecuted": false,
+  "hostedCIExecuted": false,
+  "sourceUnchangedDuringRun": true
+}
