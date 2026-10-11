@@ -1,11 +1,23 @@
 import type { FastifyInstance } from 'fastify';
 import { readFile } from 'node:fs/promises';
 import { HttpError } from './common.js';
+import { revisedReturnsSuite } from './returns-policy.js';
 export async function gateway(app: FastifyInstance) {
   app.get('/', async (_req, reply) => reply.type('text/html').send(await readFile('public/index.html', 'utf8')));
   app.get('/app.js', async (_req, reply) => reply.type('application/javascript').send(await readFile('public/app.js', 'utf8')));
   app.get('/style.css', async (_req, reply) => reply.type('text/css').send(await readFile('public/style.css', 'utf8')));
   app.get('/demo-fixtures.json', async (_req, reply) => reply.type('application/json').send(await readFile('public/demo-fixtures.json', 'utf8')));
+  app.get('/returns-fixtures-v2.json', async () => {
+    const legacy = JSON.parse(await readFile('public/demo-fixtures.json', 'utf8'));
+    const suite = revisedReturnsSuite(legacy.suite);
+    return { application: legacy.application, cases: suite.cases, suite };
+  });
+  app.get('/environment.json', async (_req, reply) => {
+    reply.header('Cache-Control', 'no-store');
+    // Explicit server configuration, never guessed from hostname or client-side state.
+    const environment = process.env.RG_DEPLOYMENT_ENV === 'gcp-trial' ? 'gcp-trial' : process.env.AUTH_MODE === 'dev' ? 'local' : 'unconfirmed';
+    return { environment, provider: environment === 'gcp-trial' ? 'Google Cloud / GKE' : null, region: environment === 'gcp-trial' ? 'asia-southeast1' : null, modelApproval: 'See each job; human review required' };
+  });
   app.addHook('onSend', async (_req, reply) => { reply.header('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'").header('Referrer-Policy', 'no-referrer'); });
   app.all('/api/v2/*', async (req, reply) => {
     const tail = req.url.replace(/^\/api\/v2\//, ''), resource = tail.split(/[/?]/)[0];

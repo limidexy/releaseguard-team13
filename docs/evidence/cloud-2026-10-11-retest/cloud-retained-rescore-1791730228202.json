@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-11T14:50:28.160Z",
+  "kind": "CLOUD_IMPORTED_RESCORE",
+  "newProviderCalls": 0,
+  "origin": "https://rg-team13.34.21.137.20.sslip.io",
+  "sourceCommit": "362e8dde09b186d5d6e55e3bd71d67f73f17eaf9",
+  "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:bf65c5b7ceda61fd44af68c65b38e32dc22933b0809f3833b8a44a8d7dc9de6b",
+  "evaluatorVersion": "returns-policy-v2.1",
+  "sourceReportSha256": "5bcf29f90edac6c54c32e7e93d0cb3660a34579e2b1d24a064b8edc9d96840c6",
+  "suiteId": "8b3da6d5-06c2-4fa8-998e-489f88a85a49",
+  "runs": [],
+  "passed": false,
+  "note": "Source=imported. Original real jobs, their scores and answers remain unchanged. This verifies the new evaluator in cloud; it is not another model experiment or human approval.",
+  "error": "Error: jobs: HTTP 400 {\"error\":\"validation_error\",\"details\":[{\"path\":[],\"message\":\"Invalid\"}]}"
+}

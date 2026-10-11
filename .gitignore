@@ -1,7 +1,12 @@
 node_modules/
 dist/
+gha-creds-*.json
 .env
 .env.*
 !.env.example
-evidence/private/
+/evidence/
+deploy/k8s/rendered/
+.DS_Store
+*.zip
 *.log
+!docs/evidence/*/*.log

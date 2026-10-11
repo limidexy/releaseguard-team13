@@ -6,7 +6,7 @@ export const promptTemplates = {
 };
 export function promptSnapshot(version: keyof typeof promptTemplates) {
   const text = promptTemplates[version];
-  return { version, text, sha256: createHash('sha256').update(text).digest('hex'), maxOutputTokens: 300 };
+  return { version, text, sha256: createHash('sha256').update(text).digest('hex'), maxOutputTokens: 1536, requestTimeoutMs: 20000 };
 }
 export async function boundedJson(response: Response, maxBytes = 100000) {
   if (!response.body) throw new Error('Provider response body missing');
@@ -28,17 +28,19 @@ export async function providerAnswer(config: { url: string; key: string; model: 
   const snapshot = promptSnapshot(prompt);
   const response = await fetcher(url, {
     method: 'POST', headers: { authorization: 'Bearer ' + config.key, 'content-type': 'application/json' },
-    signal: AbortSignal.timeout(8000), redirect: 'error',
-    body: JSON.stringify({ model: config.model, messages: [{ role: 'system', content: snapshot.text }, { role: 'user', content: question }], max_tokens: snapshot.maxOutputTokens }),
+    signal: AbortSignal.timeout(snapshot.requestTimeoutMs), redirect: 'error',
+    body: JSON.stringify({ model: config.model, messages: [{ role: 'system', content: snapshot.text }, { role: 'user', content: question }], max_completion_tokens: snapshot.maxOutputTokens }),
   });
   if (!response.ok) { await response.body?.cancel(); throw new Error('Provider HTTP ' + response.status); }
   const body = await boundedJson(response);
-  const output = body.choices?.[0]?.message?.content;
-  if (typeof output !== 'string' || !output.trim() || output.length > 10000) throw new Error('Provider response contract invalid');
+  const output = body?.choices?.[0]?.message?.content;
   // Capture only bounded, known metadata. Provider error bodies may contain private data.
   const usage: Record<string, number> = {};
   for (const field of ['prompt_tokens', 'completion_tokens', 'total_tokens']) {
-    const n = body.usage?.[field]; if (Number.isSafeInteger(n) && n >= 0) usage[field] = n;
+    const n = body?.usage?.[field]; if (Number.isSafeInteger(n) && n >= 0) usage[field] = n;
   }
-  return { output, metadata: { requestId: typeof body.id === 'string' ? body.id.slice(0, 200) : null, reportedModel: typeof body.model === 'string' ? body.model.slice(0, 200) : null, usage } };
+  const finishReason = typeof body?.choices?.[0]?.finish_reason === 'string' ? body.choices[0].finish_reason.slice(0, 80) : null;
+  const valid = typeof output === 'string' && output.trim().length > 0 && output.length <= 10000;
+  const error = finishReason === 'length' ? 'Provider answer truncated at token limit; incomplete evidence' : !valid ? 'Provider response contract invalid: nonempty text answer required (max 10000 characters)' : finishReason && finishReason !== 'stop' ? 'Provider did not finish a text answer: ' + finishReason : undefined;
+  return { ...(typeof output === 'string' && output.length <= 10000 ? { output } : {}), ...(error ? { error } : {}), metadata: { requestId: typeof body?.id === 'string' ? body.id.slice(0, 200) : null, reportedModel: typeof body?.model === 'string' ? body.model.slice(0, 200) : null, finishReason, usage, httpStatus: response.status, contentType: typeof output, contentCharacters: typeof output === 'string' ? output.length : null } };
 }

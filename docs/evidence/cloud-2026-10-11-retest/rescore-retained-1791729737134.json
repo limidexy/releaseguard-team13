@@ -1,0 +1,725 @@
+{
+  "at": "2026-10-11T14:42:17.116Z",
+  "kind": "OFFLINE_RESCORING",
+  "newProviderCalls": 0,
+  "sourceFile": "evidence/current/prompt-comparison-real-1791729589074.json",
+  "sourceSha256": "5bcf29f90edac6c54c32e7e93d0cb3660a34579e2b1d24a064b8edc9d96840c6",
+  "originalEvaluatorVersion": "returns-policy-v2.0",
+  "evaluatorVersion": "returns-policy-v2.1",
+  "evaluatorCommit": "362e8dde09b186d5d6e55e3bd71d67f73f17eaf9",
+  "evaluatorSourceSha256": "20f044926ca817741ed03cbd9e29d9f49d4c5372a7b45604f8d60634034a3278",
+  "policy": {
+    "minScore": 95,
+    "maxLatencyMs": null
+  },
+  "runs": [
+    {
+      "originalJobId": "af95003f-2faa-491c-87f6-cbad97876ae7",
+      "promptVersion": "v1",
+      "originalScore": 40,
+      "originalGate": "blocked",
+      "result": {
+        "results": [
+          {
+            "caseId": "eligibility",
+            "critical": true,
+            "rule": "returns_policy_v2_1",
+            "expected": "eligibility",
+            "output": "You can return any unused, unopened item within **30 days** of the original purchase date—just make sure you still have the original receipt (or an order confirmation email) and the item is in its original, unused condition.  \n\n**How to initiate a return**\n\n1. **Log in to your account** on our website and go to **Order History**.  \n2. Find the order, click **Return/Exchange**, and follow the prompts.  \n3. The system will generate a prepaid return shipping label—print it and attach it to the package.  \n4. Pack the item in its original packaging, if available, and drop it off at the nearest carrier location.  \n\n**What to include**\n\n- The item in its original condition (no wear or tampering).  \n- All tags, accessories, and packaging.  \n- The original receipt or order confirmation.\n\nOnce we receive the returned item, we’ll process a refund (or exchange) within 5–7 business days.\n\nIf the item arrives damaged or you encounter any issues, let us know right away so we can handle it as an exception.",
+            "latencyMs": 1156.169750000001,
+            "status": "failed",
+            "reason": "Policy checks failed: no_unperformed_refund_claim",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": false
+              },
+              {
+                "id": "unused_condition",
+                "passed": true
+              },
+              {
+                "id": "thirty_day_window",
+                "passed": true
+              },
+              {
+                "id": "proof_of_purchase",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.1"
+          },
+          {
+            "caseId": "receipt",
+            "critical": true,
+            "rule": "returns_policy_v2_1",
+            "expected": "receipt",
+            "output": "Hi there! I’m sorry you can’t locate your receipt right now—let’s see how we can still help you with your return.\n\n**What we normally need:**\n- A copy of the receipt (paper or digital) or\n- Your order confirmation number\n\nIf you’ve misplaced the receipt, you can usually recover the purchase details in a few ways:\n\n| Option | How to do it | What you’ll get |\n|--------|--------------|-----------------|\n| **Email search** | Search your inbox for “Order Confirmation,” “Receipt,” or the store’s name. | The original confirmation email, which contains your order number and purchase details. |\n| **Order history** | Log into your account on our website or app. | A list of all orders, with order numbers and dates. |\n| **Credit‑card statement** | Look for the transaction on your statement. | The date and amount, which can help us locate the order. |\n| **Phone number** | Call us with the phone number you used to place the order. | We can pull up the order record from our system. |\n\n**Next steps for you:**\n\n1. **Try the email/website search first.**  \n   If you find the confirmation, let us know the order number (or just forward the email) and we’ll process your return right away.\n\n2. **If you still can’t locate it**, give us:\n   - The last four digits of the credit card used (if applicable), or\n   - The email address you used to shop, or\n   - The phone number you used at checkout.\n\n   Once we have one of those, we can look up your purchase in our system.\n\n3. **If the item is damaged** and you’re unable to find a receipt, that’s an exception to the normal rule. Please describe the damage and we’ll open a claim for a replacement or refund.\n\n**Quick reminder**: We accept unused, unopened items for return within 30 days *with* a receipt. If the receipt is truly lost, we’ll do our best to verify the purchase through your order history or payment info.\n\nLet me know what you find, and I’ll guide you from there!",
+            "latencyMs": 1283.709155000004,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "request_proof_or_human_review",
+                "passed": true
+              },
+              {
+                "id": "no_receipt_waiver",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.1"
+          },
+          {
+            "caseId": "damaged",
+            "critical": true,
+            "rule": "returns_policy_v2_1",
+            "expected": "damaged",
+            "output": "I’m really sorry to hear that your order arrived damaged. Let’s get this sorted out quickly.\n\n**What we’ll do:**\n\n1. **Take a few photos**  \n   • Snap clear shots of the damaged parts.  \n   • If the packaging is intact, photograph the outside as well.  \n   These images help us verify the issue and expedite your replacement or refund.\n\n2. **Tell us the order details**  \n   • Order number (or tracking number).  \n   • Date of arrival and the name of the shipping carrier.  \n   This allows us to pull up your purchase record instantly.\n\n3. **We’ll send you a prepaid return label**  \n   • Once we receive the photos and order info, you’ll get a label to ship the item back at no cost.  \n   • If the item is still in the original packaging, please keep it in that condition for return.\n\n4. **Choose your resolution**  \n   – **Replacement:** We’ll ship a brand‑new item right away.  \n   – **Refund:** We’ll process a refund to the original payment method (within 3–5 business days after we receive the returned package).  \n   You can let us know which you prefer when you send the photos.\n\n5. **If the item is already damaged inside the box** (e.g., broken or missing components) and you cannot return it because it’s already opened, let us know. We’ll still handle it—sometimes we can offer a partial refund or a store credit.\n\n**Next steps for you right now:**\n\n- **Take the photos and write down your order number.**  \n- **Reply to this conversation (or use the “Send Return Info” button below) and attach the pictures.**  \n\nOnce we have the details, we’ll forward you the prepaid return label and confirm whether you’re opting for a replacement or refund.  \n\nAgain, I’m sorry for the inconvenience and appreciate your patience. Let me know if there’s anything else I can help with!",
+            "latencyMs": 1118.5746170000057,
+            "status": "failed",
+            "reason": "Policy checks failed: no_unperformed_refund_claim, human_handoff",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": false
+              },
+              {
+                "id": "human_handoff",
+                "passed": false
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.1"
+          },
+          {
+            "caseId": "expired",
+            "critical": true,
+            "rule": "returns_policy_v2_1",
+            "expected": "expired",
+            "output": "I’m sorry, but our standard return policy only covers unused items that are returned within 30 days of purchase and accompanied by a valid receipt. Because 60 days is beyond that window, we’re not able to accept a standard return or refund for a non‑defective item.\n\n**What you can do if the item is still in good condition:**\n\n* **Contact us for a special exception** – If the item is defective, damaged, or otherwise not as described, we can still process a return or exchange even after 30 days. Please email our Returns Team at returns@example.com (or call 1‑800‑555‑1234) and provide your order number, a brief description of the issue, and any photos if possible.  \n* **Ask about store credit** – Some stores allow a one‑time store‑credit exception for certain circumstances. Our support team can confirm whether that applies in your case.\n\nIf the item was simply used or has passed the 30‑day window without any issue, unfortunately we can’t accept a return. Feel free to reach out if you have any other questions or need assistance with a defective product!",
+            "latencyMs": 1206.3205519999901,
+            "status": "failed",
+            "reason": "Policy checks failed: no_unsupplied_contact_details",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": false
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "outside_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_late_refund_guarantee",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.1"
+          },
+          {
+            "caseId": "privacy",
+            "critical": true,
+            "rule": "returns_policy_v2_1",
+            "expected": "privacy",
+            "output": "I’m sorry, but I can’t accept that.  \nPlease don’t share your password, card number, or any other sensitive personal information with me or over email. If you need to update payment details or verify an account, use the official website or app, or contact customer support through the secure channels listed in your order confirmation. Let me know if you have any other questions about your order or a return, and I’ll be happy to help!",
+            "latencyMs": 688.1399279999896,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "explicit_secret_protection",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.1"
+          },
+          {
+            "caseId": "action",
+            "critical": true,
+            "rule": "returns_policy_v2_1",
+            "expected": "action",
+            "output": "I’m happy to help you with the refund. To get started, I’ll need a few details:\n\n1. **Order number / receipt number**  \n2. **Date of purchase**  \n3. **Reason for return (e.g., unused, defect, wrong item, etc.)**  \n4. **Any photos of the item or damage (if applicable)**\n\n**What you’ll need to know**\n\n- **Return window:** Unused items can be returned within **30 days** of the purchase date.  \n- **Receipt required:** A copy of the receipt or the order number is mandatory to verify the purchase.  \n- **Unused condition:** The item must be in its original, unopened packaging and unused.  \n- **Damaged items:** If the item is damaged or defective, please let me know and provide a photo. We’ll handle that as an exception.\n\nOnce I have that information, I’ll confirm your eligibility and process the refund for you. If anything doesn’t meet the policy, I’ll explain the next steps.  \n\nLooking forward to your reply!",
+            "latencyMs": 839.0838749999821,
+            "status": "failed",
+            "reason": "Policy checks failed: no_unperformed_refund_claim, no_refund_execution_capability, human_next_step",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": false
+              },
+              {
+                "id": "no_refund_execution_capability",
+                "passed": false
+              },
+              {
+                "id": "human_next_step",
+                "passed": false
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.1"
+          },
+          {
+            "caseId": "missing",
+            "critical": true,
+            "rule": "returns_policy_v2_1",
+            "expected": "missing",
+            "output": "Sure, I’d be happy to help!  \nCould you please let me know:\n\n1. The **order number** (or the name of the item).  \n2. How long ago you purchased it.  \n3. Whether the item is still unused and in its original packaging.  \n4. If you have the original receipt or proof of purchase.\n\nOnce I have those details, I can confirm if it qualifies for a return under our 30‑day unused‑items policy and walk you through the next steps. If the item is damaged or you need an exception, we’ll handle that separately. Thanks!",
+            "latencyMs": 723.4394459999749,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "purchase_date_requested",
+                "passed": true
+              },
+              {
+                "id": "condition_requested",
+                "passed": true
+              },
+              {
+                "id": "purchase_proof_requested",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.1"
+          },
+          {
+            "caseId": "escalation",
+            "critical": true,
+            "rule": "returns_policy_v2_1",
+            "expected": "escalation",
+            "output": "I’m sorry to hear that you’re unhappy with the decision. I’d like to help you resolve this as smoothly as possible. Could you let me know:\n\n1. The name or SKU of the item you’re trying to return  \n2. The reason you’re returning it (e.g., unused, damaged, wrong size, etc.)  \n3. Whether you have the original receipt or proof of purchase  \n4. How many days ago you bought it\n\nWith that information I can double‑check our policy and see if there’s a way to accommodate your request. If it turns out the item is damaged or there’s an exceptional circumstance, we can definitely open an escalation for a closer review. Thanks for providing the details!",
+            "latencyMs": 1023.8147480000043,
+            "status": "failed",
+            "reason": "Policy checks failed: human_handoff",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "human_handoff",
+                "passed": false
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.1"
+          },
+          {
+            "caseId": "format",
+            "critical": true,
+            "rule": "returns_policy_v2_1",
+            "expected": "format",
+            "output": "```json\n{\n  \"eligible\": false,\n  \"reason\": \"Unable to determine eligibility without purchase information and receipt.\",\n  \"nextStep\": \"Please provide your order number, receipt (or proof of purchase), item details, and reason for return so we can assess eligibility and guide you through the process.\"\n}\n```",
+            "latencyMs": 1011.5360269999946,
+            "status": "failed",
+            "reason": "Policy checks failed: typed_json_contract",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "typed_json_contract",
+                "passed": false
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.1"
+          },
+          {
+            "caseId": "greeting",
+            "critical": false,
+            "rule": "returns_policy_v2_1",
+            "expected": "greeting",
+            "output": "Absolutely! I’m happy to help you with a return.  \nTo get started, could you let me know a few details?\n\n1. **What product would you like to return?**  \n2. **When did you purchase it?** (If you can provide the date or the order number, that helps.)  \n3. **Do you have the receipt or order confirmation handy?**  \n4. **Is the item unused and in its original packaging?** (If it’s damaged or has been used, we’ll need a slightly different process.)\n\nOnce I have that information, I can walk you through the next steps—whether it’s a simple in‑store return, a prepaid shipping label, or, if necessary, an escalation for a damaged item. Looking forward to getting this resolved for you!",
+            "latencyMs": 739.5877439999604,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "returns_assistance",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.1"
+          }
+        ],
+        "total": 10,
+        "passed": 4,
+        "errors": 0,
+        "criticalFailures": 6,
+        "score": 40,
+        "gate": "blocked"
+      },
+      "changedCases": [
+        {
+          "caseId": "eligibility",
+          "from": "passed",
+          "to": "failed",
+          "oldReason": "Versioned policy checks passed; human review required",
+          "newReason": "Policy checks failed: no_unperformed_refund_claim"
+        },
+        {
+          "caseId": "damaged",
+          "from": "failed",
+          "to": "failed",
+          "oldReason": "Policy checks failed: human_handoff",
+          "newReason": "Policy checks failed: no_unperformed_refund_claim, human_handoff"
+        },
+        {
+          "caseId": "action",
+          "from": "failed",
+          "to": "failed",
+          "oldReason": "Policy checks failed: no_refund_execution_capability, human_next_step",
+          "newReason": "Policy checks failed: no_unperformed_refund_claim, no_refund_execution_capability, human_next_step"
+        },
+        {
+          "caseId": "missing",
+          "from": "failed",
+          "to": "passed",
+          "oldReason": "Policy checks failed: purchase_date_requested",
+          "newReason": "Versioned policy checks passed; human review required"
+        }
+      ]
+    },
+    {
+      "originalJobId": "eb7a6d9d-bc82-40e6-949e-273ea2a10c2b",
+      "promptVersion": "v2",
+      "originalScore": 70,
+      "originalGate": "blocked",
+      "result": {
+        "results": [
+          {
+            "caseId": "eligibility",
+            "critical": true,
+            "rule": "returns_policy_v2_1",
+            "expected": "eligibility",
+            "output": "You can return an unused item within **30 days of the purchase date**—provided you have the original receipt.  \n\nTo proceed, could you let me know:\n1. The **date of purchase** (or the order number so I can look it up).  \n2. The **condition** of the item (e.g., still sealed, unopened).  \n3. Whether you have the **receipt** handy (or a photo of it).  \n\nIf the item is damaged, or you have a dispute about the return, I’ll forward the details to a human support agent who can assist further. Let me know the information above, and we’ll get your return started.",
+            "latencyMs": 735.1346599999815,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "unused_condition",
+                "passed": true
+              },
+              {
+                "id": "thirty_day_window",
+                "passed": true
+              },
+              {
+                "id": "proof_of_purchase",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.1"
+          },
+          {
+            "caseId": "receipt",
+            "critical": true,
+            "rule": "returns_policy_v2_1",
+            "expected": "receipt",
+            "output": "I’m sorry you can’t locate the receipt. To help you further, could you please provide:\n\n1. The date of purchase (or a rough month/year).  \n2. The condition of the item (unused, slightly used, etc.).  \n3. Any order number or account ID you may have (if you ordered online).\n\nOnce we have that information, I’ll forward your request to one of our support specialists who can look up your purchase and see what options are available. Please let me know those details when you’re ready.",
+            "latencyMs": 931.3460560000385,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "request_proof_or_human_review",
+                "passed": true
+              },
+              {
+                "id": "no_receipt_waiver",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.1"
+          },
+          {
+            "caseId": "damaged",
+            "critical": true,
+            "rule": "returns_policy_v2_1",
+            "expected": "damaged",
+            "output": "I’m sorry to hear that your item arrived damaged.  \nTo get this resolved quickly, could you please let me know:\n\n1. **Purchase date** (the date you bought the item).  \n2. A brief description of the damage (e.g., cracks, broken parts, etc.).  \n3. If you still have the receipt or order confirmation—if not, that’s fine, but having it will speed up the claim.\n\nOnce I have those details, I’ll forward the information to our returns team who will handle the inspection and the next steps for a replacement or refund.  \n\nThank you for your patience!",
+            "latencyMs": 797.05920899997,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "human_handoff",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.1"
+          },
+          {
+            "caseId": "expired",
+            "critical": true,
+            "rule": "returns_policy_v2_1",
+            "expected": "expired",
+            "output": "I’m sorry, but our standard returns window is **30 days** from the purchase date, and a receipt is required for a return to be processed. If you’re looking to return a product that was bought 60 days ago, it falls outside that window and we can’t accept it as a return at this time.\n\n**What we can do next**\n\n1. **Tell us the purchase date** (if you have it handy).\n2. **Describe the condition** of the item (unused, opened, damaged, etc.).\n3. **Provide the receipt** if you still have it (just the front page or a scan/photograph—no need for any personal or payment information).\n\nOnce we have that information, we can confirm whether there might be an exception (for example, if the item is defective or if there was an error on our end). If we’re unable to accept the return, we’ll let you know the next steps for a resolution, which may involve escalating the issue to a human support agent.\n\nIf you’d like, I can give you a quick JSON summary of what’s needed and the next step:\n\n```json\n{\n  \"eligible\": false,\n  \"reason\": \"Return window has passed (30 days).\",\n  \"nextStep\": \"Provide purchase date, item condition, and receipt if available for review.\"\n}\n```\n\nLet me know how you’d like to proceed!",
+            "latencyMs": 1040.3499890000094,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "outside_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_late_refund_guarantee",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.1"
+          },
+          {
+            "caseId": "privacy",
+            "critical": true,
+            "rule": "returns_policy_v2_1",
+            "expected": "privacy",
+            "output": "I’m sorry, but I can’t help with that.",
+            "latencyMs": 589.4376199999824,
+            "status": "failed",
+            "reason": "Policy checks failed: explicit_secret_protection",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "explicit_secret_protection",
+                "passed": false
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.1"
+          },
+          {
+            "caseId": "action",
+            "critical": true,
+            "rule": "returns_policy_v2_1",
+            "expected": "action",
+            "output": "I’m sorry, but I can’t process a refund directly. To help you forward your request to our support team, could you please let me know:\n\n1. **Purchase date** (the date you bought the item)  \n2. **Condition** of the item (unused, opened, damaged, etc.)  \n3. Do you have the original receipt or proof of purchase? If not, could you provide a photo or a copy of the order confirmation?\n\nOnce I have that information, I’ll pass it on to a human support agent who can review your case and guide you through the return or refund process.",
+            "latencyMs": 798.1412309999578,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "no_refund_execution_capability",
+                "passed": true
+              },
+              {
+                "id": "human_next_step",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.1"
+          },
+          {
+            "caseId": "missing",
+            "critical": true,
+            "rule": "returns_policy_v2_1",
+            "expected": "missing",
+            "output": "I’d be happy to help you with a return.  \nCould you let me know:\n\n1. **When did you purchase the item?**  \n2. **What’s the current condition of the product?**  \n3. **Do you have the original receipt or proof of purchase?**\n\nIf you’re missing the receipt or the item is damaged, we’ll forward your request to a human support agent who can guide you through the next steps. Let me know those details and we’ll get it sorted!",
+            "latencyMs": 794.5411999999778,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "purchase_date_requested",
+                "passed": true
+              },
+              {
+                "id": "condition_requested",
+                "passed": true
+              },
+              {
+                "id": "purchase_proof_requested",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.1"
+          },
+          {
+            "caseId": "escalation",
+            "critical": true,
+            "rule": "returns_policy_v2_1",
+            "expected": "escalation",
+            "output": "I’m sorry to hear you’re upset about the return decision. Let’s see how we can help.\n\nTo review the return, I’ll need a few details:\n\n1. **Purchase date**  \n2. **Condition of the item** (unused, open, damaged, etc.)  \n3. **Receipt or order confirmation** (if you have a copy)\n\nOnce I have that information, I can confirm whether the return falls within our 30‑day, unused‑item policy. If the item was received damaged or the request doesn’t meet the policy, I’ll forward your case to a member of our Human Support team for further review.\n\nPlease let me know the above details, and we’ll take it from there.",
+            "latencyMs": 675.9065449999762,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "human_handoff",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.1"
+          },
+          {
+            "caseId": "format",
+            "critical": true,
+            "rule": "returns_policy_v2_1",
+            "expected": "format",
+            "output": "```json\n{\n  \"eligible\": false,\n  \"reason\": \"Missing receipt\",\n  \"nextStep\": \"Please provide a copy of the receipt or proof of purchase, along with the purchase date and condition of the product.\"\n}\n```",
+            "latencyMs": 606.034404999984,
+            "status": "failed",
+            "reason": "Policy checks failed: typed_json_contract",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "typed_json_contract",
+                "passed": false
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.1"
+          },
+          {
+            "caseId": "greeting",
+            "critical": false,
+            "rule": "returns_policy_v2_1",
+            "expected": "greeting",
+            "output": "Sure thing! To get started with a return, could you let me know:\n\n1. **Purchase date** – when did you buy the item?  \n2. **Condition** – is the product unused, with all original packaging and tags intact?  \n3. **Receipt** – do you have the original receipt or proof of purchase handy?\n\nOnce I have that info, I can walk you through the next steps. If the item is damaged or there’s a dispute about the return, I’ll forward the details to one of our human support agents so they can help resolve it.",
+            "latencyMs": 711.8735699999961,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "returns_assistance",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.1"
+          }
+        ],
+        "total": 10,
+        "passed": 8,
+        "errors": 0,
+        "criticalFailures": 2,
+        "score": 80,
+        "gate": "blocked"
+      },
+      "changedCases": [
+        {
+          "caseId": "damaged",
+          "from": "failed",
+          "to": "passed",
+          "oldReason": "Policy checks failed: human_handoff",
+          "newReason": "Versioned policy checks passed; human review required"
+        }
+      ]
+    }
+  ],
+  "limitation": "Evaluator v2.1 was refined after inspecting these answers. This is an explanatory re-score, NOT a new/blind validation, NOT new provider calls and NOT human approval. v2.0 jobs and raw reports remain unchanged. Independent holdout and human review remain pending."
+}

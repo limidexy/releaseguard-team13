@@ -1,0 +1,15 @@
+{
+  "startedAt": "2026-10-11T06:33:34.897Z",
+  "cloud": false,
+  "databaseRestore": false,
+  "currentImageId": "sha256:148d28a50d95d17295813df19ece2b9d8974803e4c2438811057a78d7c666194",
+  "previousImage": "releaseguard-course-v2:local",
+  "previousImageId": "sha256:f57fc9e5473920eb62b9f50933806495fdc56fcee1963e7e91bf35221f2eb3ea",
+  "passed": true,
+  "notes": "Changes only governance service in this Compose project; image IDs prove artifact switch, not hosted CI lineage. Schema compatibility limited to this tested change.",
+  "releaseId": "4d897cb0-48df-4c74-baa3-f5e2bacb707f",
+  "evidenceDigest": "56599fe957655119efc39f521df1d4922978ad2305e0edaba8f5eca5a8a14013",
+  "previousVersionReadPassed": true,
+  "restoredImageId": "sha256:148d28a50d95d17295813df19ece2b9d8974803e4c2438811057a78d7c666194",
+  "finishedAt": "2026-10-11T06:33:47.025Z"
+}

@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-11T13:27:16.495Z",
+  "source": "cloud-benchmark.json",
+  "observedAt": "2026-10-11T12:50:31.240Z",
+  "sourceCommit": "d43fc5de0b22c9d9e5f75532b58e03ae0f96e77f",
+  "derivation": "Arithmetic mean of the two central observations for even-count median. No new execution or changed raw observation. Original .5 nearest-rank aggregate was not the usual even-count median.",
+  "summaries": [
+    {
+      "replicas": 1,
+      "rounds": 2,
+      "medianJobsPerSecond": 30.444720307970563,
+      "minJobsPerSecond": 29.036544932900366,
+      "maxJobsPerSecond": 31.852895683040757
+    },
+    {
+      "replicas": 3,
+      "rounds": 2,
+      "medianJobsPerSecond": 36.677071746844305,
+      "minJobsPerSecond": 31.867100597278913,
+      "maxJobsPerSecond": 41.4870428964097
+    }
+  ],
+  "throughputRatio": 1.2047104186154105,
+  "limitations": "Two short paired rounds only; no stable, proportional or sustained scaling claim."
+}

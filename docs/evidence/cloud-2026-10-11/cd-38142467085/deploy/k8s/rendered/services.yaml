@@ -1,0 +1,1061 @@
+{
+  "apiVersion": "v1",
+  "kind": "ConfigMap",
+  "metadata": {
+    "name": "rg-config",
+    "namespace": "releaseguard"
+  },
+  "data": {
+    "AUTH_MODE": "oidc",
+    "AUTH_ISSUER": "https://rg-team13.34.21.137.20.sslip.io/auth/realms/releaseguard",
+    "OIDC_JWKS_URL": "https://rg-team13.34.21.137.20.sslip.io/auth/realms/releaseguard/protocol/openid-connect/certs",
+    "PUBLIC_ORIGIN": "https://rg-team13.34.21.137.20.sslip.io",
+    "RUNNER_ORIGINS": "http://support:8080",
+    "REGISTRY_URL": "http://registry:8080",
+    "EVALUATION_URL": "http://evaluation:8080",
+    "GOVERNANCE_URL": "http://governance:8080",
+    "LEASE_MS": "60000"
+  }
+}
+---
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "name": "registry",
+    "namespace": "releaseguard"
+  },
+  "spec": {
+    "replicas": 1,
+    "strategy": {
+      "type": "RollingUpdate",
+      "rollingUpdate": {
+        "maxUnavailable": 0,
+        "maxSurge": 1
+      }
+    },
+    "selector": {
+      "matchLabels": {
+        "app": "registry"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "registry",
+          "app.kubernetes.io/part-of": "releaseguard"
+        }
+      },
+      "spec": {
+        "automountServiceAccountToken": false,
+        "terminationGracePeriodSeconds": 30,
+        "securityContext": {
+          "runAsNonRoot": true,
+          "runAsUser": 1000,
+          "runAsGroup": 1000
+        },
+        "containers": [
+          {
+            "name": "registry",
+            "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:909023689fb5a75b6c7b293b609a79b4bd23c410abd7d6dc2b1ccc96489e092b",
+            "imagePullPolicy": "IfNotPresent",
+            "envFrom": [
+              {
+                "configMapRef": {
+                  "name": "rg-config"
+                }
+              }
+            ],
+            "env": [
+              {
+                "name": "SERVICE_ROLE",
+                "value": "registry"
+              },
+              {
+                "name": "INTERNAL_SECRET",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "name": "rg-internal",
+                    "key": "INTERNAL_SECRET",
+                    "optional": false
+                  }
+                }
+              },
+              {
+                "name": "NODE_EXTRA_CA_CERTS",
+                "value": "/trust/ca.crt"
+              },
+              {
+                "name": "DATABASE_URL",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "name": "rg-registry",
+                    "key": "DATABASE_URL",
+                    "optional": false
+                  }
+                }
+              }
+            ],
+            "ports": [
+              {
+                "containerPort": 8080
+              }
+            ],
+            "resources": {
+              "requests": {
+                "cpu": "100m",
+                "memory": "128Mi"
+              },
+              "limits": {
+                "cpu": "500m",
+                "memory": "384Mi"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "readOnlyRootFilesystem": true,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              }
+            },
+            "startupProbe": {
+              "httpGet": {
+                "path": "/health/ready",
+                "port": 8080
+              },
+              "periodSeconds": 5,
+              "failureThreshold": 30
+            },
+            "readinessProbe": {
+              "httpGet": {
+                "path": "/health/ready",
+                "port": 8080
+              },
+              "periodSeconds": 5
+            },
+            "livenessProbe": {
+              "httpGet": {
+                "path": "/health/live",
+                "port": 8080
+              },
+              "periodSeconds": 10
+            },
+            "volumeMounts": [
+              {
+                "name": "trust",
+                "mountPath": "/trust",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "volumes": [
+          {
+            "name": "trust",
+            "secret": {
+              "secretName": "rg-internal-ca"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+---
+{
+  "apiVersion": "v1",
+  "kind": "Service",
+  "metadata": {
+    "name": "registry",
+    "namespace": "releaseguard"
+  },
+  "spec": {
+    "selector": {
+      "app": "registry"
+    },
+    "ports": [
+      {
+        "port": 8080,
+        "targetPort": 8080
+      }
+    ],
+    "type": "ClusterIP"
+  }
+}
+---
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "name": "evaluation",
+    "namespace": "releaseguard"
+  },
+  "spec": {
+    "replicas": 1,
+    "strategy": {
+      "type": "RollingUpdate",
+      "rollingUpdate": {
+        "maxUnavailable": 0,
+        "maxSurge": 1
+      }
+    },
+    "selector": {
+      "matchLabels": {
+        "app": "evaluation"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "evaluation",
+          "app.kubernetes.io/part-of": "releaseguard"
+        }
+      },
+      "spec": {
+        "automountServiceAccountToken": false,
+        "terminationGracePeriodSeconds": 30,
+        "securityContext": {
+          "runAsNonRoot": true,
+          "runAsUser": 1000,
+          "runAsGroup": 1000
+        },
+        "containers": [
+          {
+            "name": "evaluation",
+            "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:909023689fb5a75b6c7b293b609a79b4bd23c410abd7d6dc2b1ccc96489e092b",
+            "imagePullPolicy": "IfNotPresent",
+            "envFrom": [
+              {
+                "configMapRef": {
+                  "name": "rg-config"
+                }
+              }
+            ],
+            "env": [
+              {
+                "name": "SERVICE_ROLE",
+                "value": "evaluation"
+              },
+              {
+                "name": "INTERNAL_SECRET",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "name": "rg-internal",
+                    "key": "INTERNAL_SECRET",
+                    "optional": false
+                  }
+                }
+              },
+              {
+                "name": "NODE_EXTRA_CA_CERTS",
+                "value": "/trust/ca.crt"
+              },
+              {
+                "name": "DATABASE_URL",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "name": "rg-evaluation",
+                    "key": "DATABASE_URL",
+                    "optional": false
+                  }
+                }
+              },
+              {
+                "name": "AMQP_URL",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "name": "rg-broker",
+                    "key": "AMQP_URL",
+                    "optional": false
+                  }
+                }
+              }
+            ],
+            "ports": [
+              {
+                "containerPort": 8080
+              }
+            ],
+            "resources": {
+              "requests": {
+                "cpu": "100m",
+                "memory": "128Mi"
+              },
+              "limits": {
+                "cpu": "500m",
+                "memory": "384Mi"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "readOnlyRootFilesystem": true,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              }
+            },
+            "startupProbe": {
+              "httpGet": {
+                "path": "/health/ready",
+                "port": 8080
+              },
+              "periodSeconds": 5,
+              "failureThreshold": 30
+            },
+            "readinessProbe": {
+              "httpGet": {
+                "path": "/health/ready",
+                "port": 8080
+              },
+              "periodSeconds": 5
+            },
+            "livenessProbe": {
+              "httpGet": {
+                "path": "/health/live",
+                "port": 8080
+              },
+              "periodSeconds": 10
+            },
+            "volumeMounts": [
+              {
+                "name": "trust",
+                "mountPath": "/trust",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "volumes": [
+          {
+            "name": "trust",
+            "secret": {
+              "secretName": "rg-internal-ca"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+---
+{
+  "apiVersion": "v1",
+  "kind": "Service",
+  "metadata": {
+    "name": "evaluation",
+    "namespace": "releaseguard"
+  },
+  "spec": {
+    "selector": {
+      "app": "evaluation"
+    },
+    "ports": [
+      {
+        "port": 8080,
+        "targetPort": 8080
+      }
+    ],
+    "type": "ClusterIP"
+  }
+}
+---
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "name": "governance",
+    "namespace": "releaseguard"
+  },
+  "spec": {
+    "replicas": 1,
+    "strategy": {
+      "type": "RollingUpdate",
+      "rollingUpdate": {
+        "maxUnavailable": 0,
+        "maxSurge": 1
+      }
+    },
+    "selector": {
+      "matchLabels": {
+        "app": "governance"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "governance",
+          "app.kubernetes.io/part-of": "releaseguard"
+        }
+      },
+      "spec": {
+        "automountServiceAccountToken": false,
+        "terminationGracePeriodSeconds": 30,
+        "securityContext": {
+          "runAsNonRoot": true,
+          "runAsUser": 1000,
+          "runAsGroup": 1000
+        },
+        "containers": [
+          {
+            "name": "governance",
+            "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:909023689fb5a75b6c7b293b609a79b4bd23c410abd7d6dc2b1ccc96489e092b",
+            "imagePullPolicy": "IfNotPresent",
+            "envFrom": [
+              {
+                "configMapRef": {
+                  "name": "rg-config"
+                }
+              }
+            ],
+            "env": [
+              {
+                "name": "SERVICE_ROLE",
+                "value": "governance"
+              },
+              {
+                "name": "INTERNAL_SECRET",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "name": "rg-internal",
+                    "key": "INTERNAL_SECRET",
+                    "optional": false
+                  }
+                }
+              },
+              {
+                "name": "NODE_EXTRA_CA_CERTS",
+                "value": "/trust/ca.crt"
+              },
+              {
+                "name": "DATABASE_URL",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "name": "rg-governance",
+                    "key": "DATABASE_URL",
+                    "optional": false
+                  }
+                }
+              }
+            ],
+            "ports": [
+              {
+                "containerPort": 8080
+              }
+            ],
+            "resources": {
+              "requests": {
+                "cpu": "100m",
+                "memory": "128Mi"
+              },
+              "limits": {
+                "cpu": "500m",
+                "memory": "384Mi"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "readOnlyRootFilesystem": true,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              }
+            },
+            "startupProbe": {
+              "httpGet": {
+                "path": "/health/ready",
+                "port": 8080
+              },
+              "periodSeconds": 5,
+              "failureThreshold": 30
+            },
+            "readinessProbe": {
+              "httpGet": {
+                "path": "/health/ready",
+                "port": 8080
+              },
+              "periodSeconds": 5
+            },
+            "livenessProbe": {
+              "httpGet": {
+                "path": "/health/live",
+                "port": 8080
+              },
+              "periodSeconds": 10
+            },
+            "volumeMounts": [
+              {
+                "name": "trust",
+                "mountPath": "/trust",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "volumes": [
+          {
+            "name": "trust",
+            "secret": {
+              "secretName": "rg-internal-ca"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+---
+{
+  "apiVersion": "v1",
+  "kind": "Service",
+  "metadata": {
+    "name": "governance",
+    "namespace": "releaseguard"
+  },
+  "spec": {
+    "selector": {
+      "app": "governance"
+    },
+    "ports": [
+      {
+        "port": 8080,
+        "targetPort": 8080
+      }
+    ],
+    "type": "ClusterIP"
+  }
+}
+---
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "name": "support",
+    "namespace": "releaseguard"
+  },
+  "spec": {
+    "replicas": 1,
+    "strategy": {
+      "type": "RollingUpdate",
+      "rollingUpdate": {
+        "maxUnavailable": 0,
+        "maxSurge": 1
+      }
+    },
+    "selector": {
+      "matchLabels": {
+        "app": "support"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "support",
+          "app.kubernetes.io/part-of": "releaseguard"
+        }
+      },
+      "spec": {
+        "automountServiceAccountToken": false,
+        "terminationGracePeriodSeconds": 30,
+        "securityContext": {
+          "runAsNonRoot": true,
+          "runAsUser": 1000,
+          "runAsGroup": 1000
+        },
+        "containers": [
+          {
+            "name": "support",
+            "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:909023689fb5a75b6c7b293b609a79b4bd23c410abd7d6dc2b1ccc96489e092b",
+            "imagePullPolicy": "IfNotPresent",
+            "envFrom": [
+              {
+                "configMapRef": {
+                  "name": "rg-config"
+                }
+              }
+            ],
+            "env": [
+              {
+                "name": "SERVICE_ROLE",
+                "value": "support"
+              },
+              {
+                "name": "INTERNAL_SECRET",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "name": "rg-internal",
+                    "key": "INTERNAL_SECRET",
+                    "optional": false
+                  }
+                }
+              },
+              {
+                "name": "NODE_EXTRA_CA_CERTS",
+                "value": "/trust/ca.crt"
+              },
+              {
+                "name": "MODEL_API_URL",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "name": "rg-provider",
+                    "key": "MODEL_API_URL",
+                    "optional": true
+                  }
+                }
+              },
+              {
+                "name": "MODEL_API_KEY",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "name": "rg-provider",
+                    "key": "MODEL_API_KEY",
+                    "optional": true
+                  }
+                }
+              },
+              {
+                "name": "MODEL_ID",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "name": "rg-provider",
+                    "key": "MODEL_ID",
+                    "optional": true
+                  }
+                }
+              },
+              {
+                "name": "ALLOW_REAL_MODEL",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "name": "rg-provider",
+                    "key": "ALLOW_REAL_MODEL",
+                    "optional": true
+                  }
+                }
+              }
+            ],
+            "ports": [
+              {
+                "containerPort": 8080
+              }
+            ],
+            "resources": {
+              "requests": {
+                "cpu": "100m",
+                "memory": "128Mi"
+              },
+              "limits": {
+                "cpu": "500m",
+                "memory": "384Mi"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "readOnlyRootFilesystem": true,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              }
+            },
+            "startupProbe": {
+              "httpGet": {
+                "path": "/health/ready",
+                "port": 8080
+              },
+              "periodSeconds": 5,
+              "failureThreshold": 30
+            },
+            "readinessProbe": {
+              "httpGet": {
+                "path": "/health/ready",
+                "port": 8080
+              },
+              "periodSeconds": 5
+            },
+            "livenessProbe": {
+              "httpGet": {
+                "path": "/health/live",
+                "port": 8080
+              },
+              "periodSeconds": 10
+            },
+            "volumeMounts": [
+              {
+                "name": "trust",
+                "mountPath": "/trust",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "volumes": [
+          {
+            "name": "trust",
+            "secret": {
+              "secretName": "rg-internal-ca"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+---
+{
+  "apiVersion": "v1",
+  "kind": "Service",
+  "metadata": {
+    "name": "support",
+    "namespace": "releaseguard"
+  },
+  "spec": {
+    "selector": {
+      "app": "support"
+    },
+    "ports": [
+      {
+        "port": 8080,
+        "targetPort": 8080
+      }
+    ],
+    "type": "ClusterIP"
+  }
+}
+---
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "name": "worker",
+    "namespace": "releaseguard"
+  },
+  "spec": {
+    "replicas": 1,
+    "strategy": {
+      "type": "RollingUpdate",
+      "rollingUpdate": {
+        "maxUnavailable": 0,
+        "maxSurge": 1
+      }
+    },
+    "selector": {
+      "matchLabels": {
+        "app": "worker"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "worker",
+          "app.kubernetes.io/part-of": "releaseguard"
+        }
+      },
+      "spec": {
+        "automountServiceAccountToken": false,
+        "terminationGracePeriodSeconds": 30,
+        "securityContext": {
+          "runAsNonRoot": true,
+          "runAsUser": 1000,
+          "runAsGroup": 1000
+        },
+        "containers": [
+          {
+            "name": "worker",
+            "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:909023689fb5a75b6c7b293b609a79b4bd23c410abd7d6dc2b1ccc96489e092b",
+            "imagePullPolicy": "IfNotPresent",
+            "envFrom": [
+              {
+                "configMapRef": {
+                  "name": "rg-config"
+                }
+              }
+            ],
+            "env": [
+              {
+                "name": "SERVICE_ROLE",
+                "value": "worker"
+              },
+              {
+                "name": "INTERNAL_SECRET",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "name": "rg-internal",
+                    "key": "INTERNAL_SECRET",
+                    "optional": false
+                  }
+                }
+              },
+              {
+                "name": "NODE_EXTRA_CA_CERTS",
+                "value": "/trust/ca.crt"
+              },
+              {
+                "name": "DATABASE_URL",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "name": "rg-evaluation",
+                    "key": "DATABASE_URL",
+                    "optional": false
+                  }
+                }
+              },
+              {
+                "name": "AMQP_URL",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "name": "rg-broker",
+                    "key": "AMQP_URL",
+                    "optional": false
+                  }
+                }
+              }
+            ],
+            "ports": [
+              {
+                "containerPort": 8080
+              }
+            ],
+            "resources": {
+              "requests": {
+                "cpu": "150m",
+                "memory": "128Mi"
+              },
+              "limits": {
+                "cpu": "500m",
+                "memory": "384Mi"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "readOnlyRootFilesystem": true,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              }
+            },
+            "startupProbe": {
+              "httpGet": {
+                "path": "/health/ready",
+                "port": 8080
+              },
+              "periodSeconds": 5,
+              "failureThreshold": 30
+            },
+            "readinessProbe": {
+              "httpGet": {
+                "path": "/health/ready",
+                "port": 8080
+              },
+              "periodSeconds": 5
+            },
+            "livenessProbe": {
+              "httpGet": {
+                "path": "/health/live",
+                "port": 8080
+              },
+              "periodSeconds": 10
+            },
+            "volumeMounts": [
+              {
+                "name": "trust",
+                "mountPath": "/trust",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "volumes": [
+          {
+            "name": "trust",
+            "secret": {
+              "secretName": "rg-internal-ca"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+---
+{
+  "apiVersion": "v1",
+  "kind": "Service",
+  "metadata": {
+    "name": "worker",
+    "namespace": "releaseguard"
+  },
+  "spec": {
+    "selector": {
+      "app": "worker"
+    },
+    "ports": [
+      {
+        "port": 8080,
+        "targetPort": 8080
+      }
+    ],
+    "type": "ClusterIP"
+  }
+}
+---
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "name": "gateway",
+    "namespace": "releaseguard"
+  },
+  "spec": {
+    "replicas": 2,
+    "strategy": {
+      "type": "RollingUpdate",
+      "rollingUpdate": {
+        "maxUnavailable": 0,
+        "maxSurge": 1
+      }
+    },
+    "selector": {
+      "matchLabels": {
+        "app": "gateway"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "gateway",
+          "app.kubernetes.io/part-of": "releaseguard"
+        }
+      },
+      "spec": {
+        "automountServiceAccountToken": false,
+        "terminationGracePeriodSeconds": 30,
+        "securityContext": {
+          "runAsNonRoot": true,
+          "runAsUser": 1000,
+          "runAsGroup": 1000
+        },
+        "containers": [
+          {
+            "name": "gateway",
+            "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:909023689fb5a75b6c7b293b609a79b4bd23c410abd7d6dc2b1ccc96489e092b",
+            "imagePullPolicy": "IfNotPresent",
+            "envFrom": [
+              {
+                "configMapRef": {
+                  "name": "rg-config"
+                }
+              }
+            ],
+            "env": [
+              {
+                "name": "SERVICE_ROLE",
+                "value": "gateway"
+              },
+              {
+                "name": "INTERNAL_SECRET",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "name": "rg-internal",
+                    "key": "INTERNAL_SECRET",
+                    "optional": false
+                  }
+                }
+              },
+              {
+                "name": "NODE_EXTRA_CA_CERTS",
+                "value": "/trust/ca.crt"
+              }
+            ],
+            "ports": [
+              {
+                "containerPort": 8080
+              }
+            ],
+            "resources": {
+              "requests": {
+                "cpu": "100m",
+                "memory": "128Mi"
+              },
+              "limits": {
+                "cpu": "500m",
+                "memory": "384Mi"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "readOnlyRootFilesystem": true,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              }
+            },
+            "startupProbe": {
+              "httpGet": {
+                "path": "/health/ready",
+                "port": 8080
+              },
+              "periodSeconds": 5,
+              "failureThreshold": 30
+            },
+            "readinessProbe": {
+              "httpGet": {
+                "path": "/health/ready",
+                "port": 8080
+              },
+              "periodSeconds": 5
+            },
+            "livenessProbe": {
+              "httpGet": {
+                "path": "/health/live",
+                "port": 8080
+              },
+              "periodSeconds": 10
+            },
+            "volumeMounts": [
+              {
+                "name": "trust",
+                "mountPath": "/trust",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "volumes": [
+          {
+            "name": "trust",
+            "secret": {
+              "secretName": "rg-internal-ca"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+---
+{
+  "apiVersion": "v1",
+  "kind": "Service",
+  "metadata": {
+    "name": "gateway",
+    "namespace": "releaseguard"
+  },
+  "spec": {
+    "selector": {
+      "app": "gateway"
+    },
+    "ports": [
+      {
+        "port": 8080,
+        "targetPort": 8080
+      }
+    ],
+    "type": "ClusterIP"
+  }
+}

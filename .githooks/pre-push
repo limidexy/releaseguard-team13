@@ -1,0 +1,3 @@
+#!/bin/sh
+# Opt in per checkout with: git config core.hooksPath .githooks
+exec node scripts/prepush.mjs

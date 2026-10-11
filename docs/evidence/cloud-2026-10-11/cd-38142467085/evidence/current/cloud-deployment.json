@@ -1,0 +1,115 @@
+{
+  "at": "2026-10-11T13:16:43.803Z",
+  "source": "dbf6a4be21a978e96510f16837f732b12401d096",
+  "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:909023689fb5a75b6c7b293b609a79b4bd23c410abd7d6dc2b1ccc96489e092b",
+  "ciRun": "38142038864",
+  "approval": "Manual workflow dispatch; no independent human approval gate on this free-private trial.",
+  "stages": [
+    {
+      "name": "candidate",
+      "passed": true,
+      "jobId": "d28e3627-f1c0-4ef8-a603-91239bf279d4"
+    },
+    {
+      "name": "previous",
+      "passed": true,
+      "jobId": "d7411206-a434-430c-9643-0ad43bc3c697"
+    },
+    {
+      "name": "restored-candidate",
+      "passed": true,
+      "jobId": "b4e7e4a6-9b2b-41a8-86f3-f429a15bfd60"
+    }
+  ],
+  "before": [
+    {
+      "role": "registry",
+      "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:d49d75f32f57d4c7ace5de1059ddf5a4d7e305aab67bfa717b36497e7f6c6632",
+      "source": "d43fc5de0b22c9d9e5f75532b58e03ae0f96e77f",
+      "desired": 1,
+      "ready": 1
+    },
+    {
+      "role": "evaluation",
+      "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:d49d75f32f57d4c7ace5de1059ddf5a4d7e305aab67bfa717b36497e7f6c6632",
+      "source": "d43fc5de0b22c9d9e5f75532b58e03ae0f96e77f",
+      "desired": 1,
+      "ready": 1
+    },
+    {
+      "role": "governance",
+      "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:d49d75f32f57d4c7ace5de1059ddf5a4d7e305aab67bfa717b36497e7f6c6632",
+      "source": "d43fc5de0b22c9d9e5f75532b58e03ae0f96e77f",
+      "desired": 1,
+      "ready": 1
+    },
+    {
+      "role": "support",
+      "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:d49d75f32f57d4c7ace5de1059ddf5a4d7e305aab67bfa717b36497e7f6c6632",
+      "source": "d43fc5de0b22c9d9e5f75532b58e03ae0f96e77f",
+      "desired": 1,
+      "ready": 1
+    },
+    {
+      "role": "worker",
+      "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:d49d75f32f57d4c7ace5de1059ddf5a4d7e305aab67bfa717b36497e7f6c6632",
+      "source": "d43fc5de0b22c9d9e5f75532b58e03ae0f96e77f",
+      "desired": 1,
+      "ready": 1
+    },
+    {
+      "role": "gateway",
+      "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:d49d75f32f57d4c7ace5de1059ddf5a4d7e305aab67bfa717b36497e7f6c6632",
+      "source": "d43fc5de0b22c9d9e5f75532b58e03ae0f96e77f",
+      "desired": 2,
+      "ready": 2
+    }
+  ],
+  "rollbackTested": true,
+  "after": [
+    {
+      "role": "registry",
+      "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:909023689fb5a75b6c7b293b609a79b4bd23c410abd7d6dc2b1ccc96489e092b",
+      "source": "dbf6a4be21a978e96510f16837f732b12401d096",
+      "desired": 1,
+      "ready": 1
+    },
+    {
+      "role": "evaluation",
+      "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:909023689fb5a75b6c7b293b609a79b4bd23c410abd7d6dc2b1ccc96489e092b",
+      "source": "dbf6a4be21a978e96510f16837f732b12401d096",
+      "desired": 1,
+      "ready": 1
+    },
+    {
+      "role": "governance",
+      "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:909023689fb5a75b6c7b293b609a79b4bd23c410abd7d6dc2b1ccc96489e092b",
+      "source": "dbf6a4be21a978e96510f16837f732b12401d096",
+      "desired": 1,
+      "ready": 1
+    },
+    {
+      "role": "support",
+      "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:909023689fb5a75b6c7b293b609a79b4bd23c410abd7d6dc2b1ccc96489e092b",
+      "source": "dbf6a4be21a978e96510f16837f732b12401d096",
+      "desired": 1,
+      "ready": 1
+    },
+    {
+      "role": "worker",
+      "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:909023689fb5a75b6c7b293b609a79b4bd23c410abd7d6dc2b1ccc96489e092b",
+      "source": "dbf6a4be21a978e96510f16837f732b12401d096",
+      "desired": 1,
+      "ready": 1
+    },
+    {
+      "role": "gateway",
+      "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:909023689fb5a75b6c7b293b609a79b4bd23c410abd7d6dc2b1ccc96489e092b",
+      "source": "dbf6a4be21a978e96510f16837f732b12401d096",
+      "desired": 2,
+      "ready": 2
+    }
+  ],
+  "passed": true,
+  "finishedAt": "2026-10-11T13:19:03.737Z"
+}

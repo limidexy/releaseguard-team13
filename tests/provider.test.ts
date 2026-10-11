@@ -9,15 +9,28 @@ test('provider contract retains unedited output and bounded usage metadata', asy
   const result = await providerAnswer(config, 'v2', 'Can I return this?', fetcher);
   assert.equal(result.output, ' Raw answer. '); assert.equal(result.metadata.requestId, 'req-1');
   assert.deepEqual(result.metadata.usage, { total_tokens: 17 });
-  assert.equal(submitted.messages[1].content, 'Can I return this?'); assert.equal(submitted.max_tokens, 300);
+  assert.equal(submitted.messages[1].content, 'Can I return this?'); assert.ok(submitted.max_completion_tokens >= 800 && submitted.max_completion_tokens <= 2048);
   assert.match(submitted.messages[0].content, /Never claim to issue refunds/);
 });
 test('provider HTTP failures are not converted to fabricated answers', async () => {
   await assert.rejects(providerAnswer(config, 'v1', 'q', fake({ error: 'private details' }, 429)), /^Error: Provider HTTP 429$/);
 });
+test('token-truncated answers retain the raw text and signal an error to the evaluation gate', async () => {
+  const result = await providerAnswer(config, 'v2', 'q', fake({
+    id: 'truncated-request', model: 'test-model',
+    choices: [{ message: { content: 'Eligible within 30 days, but' }, finish_reason: 'length' }],
+    usage: { completion_tokens: 300 },
+  }));
+  assert.equal(result.output, 'Eligible within 30 days, but');
+  assert.equal((result.metadata as any).finishReason, 'length');
+  assert.match((result as any).error, /truncated/);
+});
 test('missing, empty and oversized provider answers fail closed', async () => {
-  for (const body of [{}, { choices: [] }, { choices: [{ message: { content: '  ' } }] }, { choices: [{ message: { content: 'x'.repeat(10001) } }] }])
-    await assert.rejects(providerAnswer(config, 'v1', 'q', fake(body)), /contract invalid/);
+  for (const body of [{}, { choices: [] }, { choices: [{ message: { content: '  ' } }] }, { choices: [{ message: { content: 'x'.repeat(10001) } }] }]) {
+    const result = await providerAnswer(config, 'v1', 'q', fake(body));
+    assert.match(result.error ?? '', /contract invalid/);
+    assert.ok((result.output?.length ?? 0) <= 10000);
+  }
 });
 test('stream byte limit works without a Content-Length header', async () => {
   await assert.rejects(boundedJson(new Response('x'.repeat(101)), 100), /size limit/);
@@ -31,4 +44,20 @@ test('prompt snapshot distinguishes versions and preserves exact prompt', () => 
   const a = promptSnapshot('v1'), b = promptSnapshot('v2');
   assert.notEqual(a.sha256, b.sha256); assert.match(b.sha256, /^[a-f0-9]{64}$/);
   assert.match(b.text, /Never request passwords/);
+});
+test('bounded provider budget can finish a response needing more than 300 tokens', async () => {
+  const fetcher = (async (_url: any, init: any) => {
+    const budget = JSON.parse(init.body).max_completion_tokens ?? JSON.parse(init.body).max_tokens;
+    return new Response(JSON.stringify({ choices: [{ message: { content: budget >= 800 ? 'Complete answer.' : 'Partial' }, finish_reason: budget >= 800 ? 'stop' : 'length' }] }));
+  }) as typeof fetch;
+  const result = await providerAnswer(config, 'v1', 'q', fetcher);
+  assert.equal(result.output, 'Complete answer.');
+  assert.equal(result.error, undefined);
+});
+test('empty truncated answer retains finish reason and usage without exposing reasoning', async () => {
+  const result = await providerAnswer(config, 'v2', 'q', fake({ id: 'empty-1', model: 'test-model', choices: [{ message: { content: null, reasoning: 'do not retain this' }, finish_reason: 'length' }], usage: { completion_tokens: 300 } }));
+  assert.equal(result.metadata.finishReason, 'length');
+  assert.equal(result.metadata.usage.completion_tokens, 300);
+  assert.match(result.error ?? '', /truncated/);
+  assert.equal(JSON.stringify(result).includes('do not retain this'), false);
 });

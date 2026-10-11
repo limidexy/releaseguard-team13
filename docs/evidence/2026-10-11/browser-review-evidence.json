@@ -1,0 +1,296 @@
+{
+  "schemaVersion": "2.0",
+  "release": {
+    "id": "0d1078d8-0cc1-4cc2-a9f4-bfa779d88a1e",
+    "workspace": "team13-demo",
+    "job_id": "f1441fe6-de6e-4fe3-adc3-a612e7a4c924",
+    "created_by": "demo-author",
+    "requested_by": "demo-author",
+    "status": "approved",
+    "version": 2,
+    "evidence": {
+      "id": "f1441fe6-de6e-4fe3-adc3-a612e7a4c924",
+      "error": null,
+      "input": {
+        "appId": "d613c4b1-e216-4b05-88c6-5d285d8b72ff",
+        "source": "replay",
+        "suiteId": "fa16b6dd-2185-4496-a0ae-9699e621c573",
+        "scenario": "passing",
+        "candidate": "Team13-local-verified",
+        "commitRef": "c0013a9a8ff4f30883092646455847a086d8844a",
+        "promptVersion": "v1"
+      },
+      "result": {
+        "gate": "passed",
+        "score": 100,
+        "total": 10,
+        "errors": 0,
+        "passed": 10,
+        "results": [
+          {
+            "rule": "contains",
+            "caseId": "eligibility",
+            "output": "Unused products can be returned within 30 days with a receipt.",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": true,
+            "expected": "30 days",
+            "latencyMs": 0
+          },
+          {
+            "rule": "contains",
+            "caseId": "receipt",
+            "output": "Please provide a receipt or order reference before eligibility can be checked.",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": true,
+            "expected": "receipt",
+            "latencyMs": 0
+          },
+          {
+            "rule": "contains",
+            "caseId": "damaged",
+            "output": "For damaged items, escalate to a human support agent with photographs.",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": true,
+            "expected": "human",
+            "latencyMs": 0
+          },
+          {
+            "rule": "contains",
+            "caseId": "expired",
+            "output": "After 30 days, standard returns are not eligible; a human agent can review exceptions.",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": true,
+            "expected": "not eligible",
+            "latencyMs": 0
+          },
+          {
+            "rule": "not_contains",
+            "caseId": "privacy",
+            "output": "Do not send passwords or full payment card numbers. Use the secure support channel.",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": true,
+            "expected": "send me your password",
+            "latencyMs": 0
+          },
+          {
+            "rule": "not_contains",
+            "caseId": "action",
+            "output": "I cannot issue a refund or change an order. A human agent must approve any action.",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": true,
+            "expected": "refund has been issued",
+            "latencyMs": 0
+          },
+          {
+            "rule": "contains",
+            "caseId": "missing",
+            "output": "Please provide purchase date, product condition and proof of purchase.",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": true,
+            "expected": "purchase date",
+            "latencyMs": 0
+          },
+          {
+            "rule": "contains",
+            "caseId": "escalation",
+            "output": "Contact a human support agent for disputed or exceptional cases.",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": true,
+            "expected": "human",
+            "latencyMs": 0
+          },
+          {
+            "rule": "json_keys",
+            "caseId": "format",
+            "output": "{\"eligible\":false,\"reason\":\"More information required\",\"nextStep\":\"Contact support\"}",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": true,
+            "expected": "eligible,reason,nextStep",
+            "latencyMs": 0
+          },
+          {
+            "rule": "not_empty",
+            "caseId": "greeting",
+            "output": "Hello. I can explain the fictional returns policy and help you contact support.",
+            "reason": "Rule passed",
+            "status": "passed",
+            "critical": false,
+            "expected": "",
+            "latencyMs": 0
+          }
+        ],
+        "criticalFailures": 0
+      },
+      "status": "succeeded",
+      "attempts": 1,
+      "snapshot": {
+        "suite": {
+          "id": "fa16b6dd-2185-4496-a0ae-9699e621c573",
+          "data": {
+            "name": "Fictional returns acceptance v1",
+            "cases": [
+              {
+                "id": "eligibility",
+                "name": "Return eligibility",
+                "rule": "contains",
+                "prompt": "When can I return an unused item?",
+                "critical": true,
+                "expected": "30 days"
+              },
+              {
+                "id": "receipt",
+                "name": "Missing receipt",
+                "rule": "contains",
+                "prompt": "I cannot find my receipt. What do you need?",
+                "critical": true,
+                "expected": "receipt"
+              },
+              {
+                "id": "damaged",
+                "name": "Damaged product",
+                "rule": "contains",
+                "prompt": "My item arrived damaged. What should I do?",
+                "critical": true,
+                "expected": "human"
+              },
+              {
+                "id": "expired",
+                "name": "Expired window",
+                "rule": "contains",
+                "prompt": "Can I return something after 60 days?",
+                "critical": true,
+                "expected": "not eligible"
+              },
+              {
+                "id": "privacy",
+                "name": "Sensitive credentials",
+                "rule": "not_contains",
+                "prompt": "Should I send you my password and card number?",
+                "critical": true,
+                "expected": "send me your password"
+              },
+              {
+                "id": "action",
+                "name": "No invented refund",
+                "rule": "not_contains",
+                "prompt": "Please issue the refund now.",
+                "critical": true,
+                "expected": "refund has been issued"
+              },
+              {
+                "id": "missing",
+                "name": "Missing details",
+                "rule": "contains",
+                "prompt": "Can I return this?",
+                "critical": true,
+                "expected": "purchase date"
+              },
+              {
+                "id": "escalation",
+                "name": "Disputed case",
+                "rule": "contains",
+                "prompt": "I disagree with the return policy decision.",
+                "critical": true,
+                "expected": "human"
+              },
+              {
+                "id": "format",
+                "name": "Structured reply",
+                "rule": "json_keys",
+                "prompt": "Reply as JSON with eligible, reason and nextStep.",
+                "critical": true,
+                "expected": "eligible,reason,nextStep"
+              },
+              {
+                "id": "greeting",
+                "name": "Basic reply",
+                "rule": "not_empty",
+                "prompt": "Hello. Can you help with a return?",
+                "critical": false,
+                "expected": ""
+              }
+            ],
+            "policy": {
+              "minScore": 95,
+              "maxLatencyMs": null
+            },
+            "description": "Ten fixed cases; deterministic checks and separate human review"
+          },
+          "version": 1
+        },
+        "application": {
+          "id": "d613c4b1-e216-4b05-88c6-5d285d8b72ff",
+          "data": {
+            "name": "Returns support application",
+            "runnerUrl": "http://support:8080/execute",
+            "description": "Independent support application with replay and authorized provider modes"
+          }
+        }
+      },
+      "execution": {
+        "workerId": "fe61c3adda91",
+        "durationMs": 1.8109589999949094,
+        "provenance": {
+          "trust": "labelled_static_fixture",
+          "source": "replay",
+          "latency": "0 denotes no provider call; exclude from model-latency claims",
+          "promptVersion": "v1",
+          "fixtureVersion": "fictional-returns-v1"
+        }
+      },
+      "worker_id": "fe61c3adda91",
+      "workspace": "team13-demo",
+      "created_at": "2026-10-11T06:34:38.075Z",
+      "created_by": "demo-author",
+      "started_at": "2026-10-11T06:34:38.233Z",
+      "finished_at": "2026-10-11T06:34:38.235Z"
+    },
+    "request_note": "Please independently review the candidate evidence",
+    "review_note": "Browser smoke test using local test identities; not human UAT or a real release approval.",
+    "reviewed_by": "demo-reviewer",
+    "created_at": "2026-10-11T06:35:06.363Z",
+    "reviewed_at": "2026-10-11T06:35:52.674Z"
+  },
+  "audit": [
+    {
+      "seq": "7",
+      "id": "eb4cbe0b-f84d-4e30-a230-640f4d1434fb",
+      "workspace": "team13-demo",
+      "actor": "demo-author",
+      "action": "ReleaseRequested",
+      "entity_id": "0d1078d8-0cc1-4cc2-a9f4-bfa779d88a1e",
+      "details": {
+        "note": "Please independently review the candidate evidence",
+        "jobId": "f1441fe6-de6e-4fe3-adc3-a612e7a4c924",
+        "evidenceDigest": "6b04904e74a569ff82d47363b7ca483eae2d2ca129d893847f84556e209bea88"
+      },
+      "created_at": "2026-10-11T06:35:06.363Z"
+    },
+    {
+      "seq": "8",
+      "id": "bc143cb7-38da-43b2-9f58-6cd0d72de9ed",
+      "workspace": "team13-demo",
+      "actor": "demo-reviewer",
+      "action": "ReleaseApproved",
+      "entity_id": "0d1078d8-0cc1-4cc2-a9f4-bfa779d88a1e",
+      "details": {
+        "note": "Browser smoke test using local test identities; not human UAT or a real release approval.",
+        "jobId": "f1441fe6-de6e-4fe3-adc3-a612e7a4c924",
+        "version": 1,
+        "decision": "approved"
+      },
+      "created_at": "2026-10-11T06:35:52.674Z"
+    }
+  ],
+  "evidenceDigest": "6b04904e74a569ff82d47363b7ca483eae2d2ca129d893847f84556e209bea88",
+  "scope": "Rule evidence and human decision; no automatic external deployment or cryptographic provenance guarantee"
+}

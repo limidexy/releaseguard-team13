@@ -1,7 +1,8 @@
 import { mkdir,writeFile } from 'node:fs/promises';
 import { application,suite } from './fixtures.mjs';
 import { base,required,completed,key } from './client.mjs';
-const token=process.env.RELEASEGUARD_TOKEN;
+import { cloudToken } from './cloud-token.mjs';
+const token=process.env.RELEASEGUARD_TOKEN ?? await cloudToken();
 const allow=(process.env.RG_CLOUD_ALLOWED_ORIGINS??'').split(',');
 if(process.env.RG_ALLOW_CLOUD_SMOKE!=='true'||new URL(base).protocol!=='https:'||!allow.includes(new URL(base).origin)||!token)throw new Error('Cloud smoke requires explicit allowed HTTPS target, authorized token and RG_ALLOW_CLOUD_SMOKE=true');
 const a=await required('applications',token,{...application,name:'Cloud smoke '+Date.now()}),s=await required('suites',token,suite);

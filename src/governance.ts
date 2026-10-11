@@ -1,7 +1,7 @@
 import type { FastifyInstance } from 'fastify';
 import { z } from 'zod';
 import { actor, accountable, write, review, pool, transaction, uuid, digest, HttpError, serviceFetch } from './common.js';
-import { reviewAllowed } from './domain.js';
+import { decideReview } from './contexts/review.js';
 export async function governance(app: FastifyInstance) {
   await pool.query(`CREATE TABLE IF NOT EXISTS releases(id uuid PRIMARY KEY,workspace text NOT NULL,job_id uuid NOT NULL UNIQUE,created_by text NOT NULL,requested_by text NOT NULL,status text NOT NULL DEFAULT 'pending' CHECK(status IN ('pending','approved','rejected')),version integer NOT NULL DEFAULT 1,evidence jsonb NOT NULL,request_note text NOT NULL,review_note text,reviewed_by text,created_at timestamptz NOT NULL DEFAULT now(),reviewed_at timestamptz);
   CREATE INDEX IF NOT EXISTS releases_workspace ON releases(workspace,created_at DESC);
@@ -23,11 +23,11 @@ export async function governance(app: FastifyInstance) {
     return transaction(async c => {
       const row = (await c.query('SELECT * FROM releases WHERE id=$1 AND workspace=$2 FOR UPDATE', [id, a.workspace])).rows[0];
       if (!row) throw new HttpError(404, 'Release not found');
-      if (!reviewAllowed({ actor: a.sub, creator: row.created_by, requester: row.requested_by, status: row.status, gate: row.evidence.result.gate })) throw new HttpError(409, 'Independent pending review required');
-      if (data.version !== row.version) throw new HttpError(409, 'Stale review version');
+      const transition = decideReview({ creator: row.created_by, requester: row.requested_by, status: row.status, version: row.version, gate: row.evidence.result.gate }, { actor: a.sub, decision: data.decision, expectedVersion: data.version });
+      if (!transition.ok) throw new HttpError(409, transition.reason);
       await c.query('UPDATE releases SET status=$3,version=version+1,review_note=$4,reviewed_by=$5,reviewed_at=now() WHERE id=$1 AND workspace=$2', [id, a.workspace, data.decision, data.note, a.sub]);
-      await c.query('INSERT INTO audit(id,workspace,actor,action,entity_id,details) VALUES($1,$2,$3,$4,$5,$6)', [uuid(), a.workspace, a.sub, data.decision === 'approved' ? 'ReleaseApproved' : 'ReleaseRejected', id, { ...data, jobId: row.job_id }]);
-      return { id, status: data.decision, version: row.version + 1 };
+      await c.query('INSERT INTO audit(id,workspace,actor,action,entity_id,details) VALUES($1,$2,$3,$4,$5,$6)', [uuid(), a.workspace, a.sub, transition.action, id, { ...data, jobId: row.job_id }]);
+      return { id, status: transition.status, version: transition.version };
     });
   });
   app.get('/evidence/:id', async req => {
