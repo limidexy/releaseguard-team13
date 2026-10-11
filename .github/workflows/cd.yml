@@ -31,7 +31,7 @@ jobs:
           EXPECTED_SHA: ${{ github.sha }}
         run: |
           gh api "repos/$REPOSITORY/actions/runs/$RUN_ID" > run.json
-          node -e "const r=require('./run.json');const reasons=[];if(r.conclusion!=='success')reasons.push('CI is not successful: '+r.conclusion);if(r.head_sha!==process.env.EXPECTED_SHA)reasons.push('CI source does not match deployment source');if(r.path!=='.github/workflows/ci.yml')reasons.push('Unexpected CI workflow');if(r.head_repository?.full_name!==process.env.REPOSITORY)reasons.push('Unexpected source repository');if(reasons.length){console.error(reasons.join('\n'));process.exit(1)}require('fs').appendFileSync(process.env.GITHUB_OUTPUT,'source='+r.head_sha+'\n');console.log('CI identity passed. No independent human approval gate for this free-private trial.')"
+          node -e "const r=require('./run.json');const reasons=[];if(r.conclusion!=='success')reasons.push('CI is not successful: '+r.conclusion);if(r.head_sha!==process.env.EXPECTED_SHA)reasons.push('CI source does not match deployment source');if(r.path!=='.github/workflows/ci.yml')reasons.push('Unexpected CI workflow');if(r.head_repository?.full_name!==process.env.REPOSITORY)reasons.push('Unexpected source repository');if(reasons.length){console.error(reasons.join('\n'));process.exit(1)}require('fs').appendFileSync(process.env.GITHUB_OUTPUT,'source='+r.head_sha+'\n');console.log('CI identity passed. No independent human approval gate configured for this trial.')"
   deploy:
     needs: check
     if: vars.RG_ENABLE_CLOUD_CD == 'true'

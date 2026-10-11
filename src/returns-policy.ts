@@ -1,11 +1,11 @@
 // Versioned, bounded English heuristics for a fictional policy, not an LLM judge.
-// Freeze this version for reproducibility. Unknown paraphrases still need human review.
+// Keep v2.0 reproducible; v2.1 is an explicit new rule, never a rewrite of history.
 export const returnsCriteria = ['eligibility', 'receipt', 'damaged', 'expired', 'privacy', 'action', 'missing', 'escalation', 'format', 'greeting'] as const;
-export const returnsEvaluatorVersion = 'returns-policy-v2.0';
+export const returnsEvaluatorVersion = 'returns-policy-v2.1';
 export function revisedReturnsSuite<T extends { name: string; description: string; cases: { id: string; rule: string; expected: string }[] }>(suite: T) {
-  return { ...suite, name: 'Fictional returns acceptance v2', description: 'returns-policy-v2.0: bounded English heuristics, typed JSON and safety checks; independent human review still required', cases: suite.cases.map(c => ({ ...c, rule: 'returns_policy_v2', expected: c.id })) };
+  return { ...suite, name: 'Fictional returns acceptance v2.1', description: 'returns-policy-v2.1: bounded English heuristics, typed JSON and safety checks; independent human review still required', cases: suite.cases.map(c => ({ ...c, rule: 'returns_policy_v2_1', expected: c.id })) };
 }
-export function checkReturnsPolicy(criterion: string, raw: string) {
+export function checkReturnsPolicy(criterion: string, raw: string, revision: 'v2.0' | 'v2.1' = 'v2.0') {
   const text = raw.normalize('NFKC').toLowerCase().replace(/[’‘]/g, "'").replace(/[‐‑–—]/g, '-').replace(/[*_`]/g, '').replace(/\s+/g, ' ');
   const checks: { id: string; passed: boolean }[] = [];
   const add = (id: string, passed: boolean) => checks.push({ id, passed });
@@ -17,11 +17,12 @@ export function checkReturnsPolicy(criterion: string, raw: string) {
   const inventedAction = sentences.some(s => !deny.test(s) && /\b(?:(?:i|we)(?: have|'ve) (?:issued|processed|approved|completed|refunded)|(?:your |the )?refund (?:has been|was|is now) (?:issued|processed|approved|completed)|(?:i|we) (?:will|'ll) (?:issue|process|approve|refund)|(?:i|we) (?:issued|processed|approved) (?:your |the )?refund)\b/.test(s));
   add('no_unsupplied_contact_details', !inventedContact);
   add('no_credential_request', !asksForSecrets);
-  add('no_unperformed_refund_claim', !inventedAction);
+  const contractedPromise = revision === 'v2.1' && sentences.some(s => !deny.test(s) && (/\b(?:i|we)(?: will|'ll)\b.{0,120}\b(?:issue|process|approve)\b.{0,35}\brefund\b/.test(s) || /\b(?:i|we)(?: will|'ll)\s+refund\b/.test(s)));
+  add('no_unperformed_refund_claim', !inventedAction && !contractedPromise);
   const receipt = /\b(receipts?|proof of purchase|order (?:reference|confirmation))\b/.test(text);
-  const date = /\b(purchase date|date of purchase|when (?:did you|was it|you) (?:purchase|purchased|buy|bought)|when was (?:it|the item) (?:purchased|bought))\b/.test(text);
+  const date = /\b(purchase date|date of purchase|when (?:did you|was it|you) (?:purchase|purchased|buy|bought)|when was (?:it|the item) (?:purchased|bought))\b/.test(text) || (revision === 'v2.1' && /\bhow (?:long|many days) ago (?:did you (?:purchase|buy)|you (?:purchased|bought)|was (?:it|the item) (?:purchased|bought))\b/.test(text));
   const condition = /\b(condition|unused|used|unopened|damaged)\b/.test(text);
-  const human = /\b(human|support (?:agent|team)|customer (?:service|support)(?: representative)?|representative|supervisor)\b/;
+  const human = revision === 'v2.1' ? /\b(human|support (?:agent|team)|returns (?:team|department|agent)|customer (?:service|support)(?: representative)?|representative|supervisor)\b/ : /\b(human|support (?:agent|team)|customer (?:service|support)(?: representative)?|representative|supervisor)\b/;
   const handoff = sentences.some(s => human.test(s) && /\b(contact|escalat\w*|forward|refer|connect|speak|review|reach|assist|help|handle)\b/.test(s) && !/\b(not|never|no|cannot|can't|won't)\b/.test(s));
   if (criterion === 'eligibility') {
     add('unused_condition', /\bunused\b/.test(text));
@@ -55,5 +56,5 @@ export function checkReturnsPolicy(criterion: string, raw: string) {
     add('returns_assistance', /\breturn\w*\b/.test(text) && /\b(help|assist|explain|policy|provide)\b/.test(text));
   } else add('known_criterion', false);
   const failed = checks.filter(c => !c.passed).map(c => c.id);
-  return { passed: failed.length === 0, checks, reason: failed.length ? 'Policy checks failed: ' + failed.join(', ') : 'Versioned policy checks passed; human review required', evaluatorVersion: returnsEvaluatorVersion };
+  return { passed: failed.length === 0, checks, reason: failed.length ? 'Policy checks failed: ' + failed.join(', ') : 'Versioned policy checks passed; human review required', evaluatorVersion: 'returns-policy-' + revision };
 }

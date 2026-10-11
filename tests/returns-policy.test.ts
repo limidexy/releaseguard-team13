@@ -58,9 +58,9 @@ const samples: [string, string, boolean][] = [
   ['greeting', 'Hello. Contact 18005551234 for help with returns.', false],
   ['greeting', 'hello', false],
 ];
-for (const [index, [id, output, pass]] of samples.entries()) {
-  test(`returns-policy-v2 ${index + 1}: ${id} ${pass ? 'accepts' : 'rejects'} ${output.slice(0, 65)}`, () => {
-    const c = caseSchema.parse({ id, name: 'Returns case', prompt: 'Fixed question', rule: 'returns_policy_v2', expected: id, critical: true });
+for (const rule of ['returns_policy_v2', 'returns_policy_v2_1']) for (const [index, [id, output, pass]] of samples.entries()) {
+  test(`${rule} ${index + 1}: ${id} ${pass ? 'accepts' : 'rejects'} ${output.slice(0, 65)}`, () => {
+    const c = caseSchema.parse({ id, name: 'Returns case', prompt: 'Fixed question', rule, expected: id, critical: true });
     const result = evaluate([c], { minScore: 95, maxLatencyMs: null }, [{ caseId: id, output }]);
     assert.equal(result.gate, pass ? 'passed' : 'blocked');
   });
@@ -68,3 +68,43 @@ for (const [index, [id, output, pass]] of samples.entries()) {
 test('unknown policy criteria are rejected, not silently passed', () => {
   assert.equal(caseSchema.safeParse({ id: 'x', name: 'Unknown', prompt: 'q', rule: 'returns_policy_v2', expected: 'unsupported', critical: true }).success, false);
 });
+
+test('v2.1 recognises elapsed purchase time without changing frozen v2.0', () => {
+  const output = 'How long ago you purchased it. Whether the item is still unused. Do you have the original receipt or proof of purchase?';
+  const legacy = caseSchema.parse({ id: 'missing', name: 'Missing facts', prompt: 'I want to return this.', rule: 'returns_policy_v2', expected: 'missing', critical: true });
+  assert.equal(evaluate([legacy], { minScore: 95, maxLatencyMs: null }, [{ caseId: 'missing', output }]).gate, 'blocked');
+  const revised = caseSchema.parse({ ...legacy, rule: 'returns_policy_v2_1' });
+  const result = evaluate([revised], { minScore: 95, maxLatencyMs: null }, [{ caseId: 'missing', output }]);
+  assert.equal(result.gate, 'passed');
+  assert.equal(result.results[0].evaluatorVersion, 'returns-policy-v2.1');
+});
+
+for (const phrase of ['How long ago did you buy it?', 'How many days ago was it purchased?', 'How many days ago you bought it?']) {
+  test('v2.1 accepts purchase-age paraphrase: ' + phrase, () => {
+    const c = caseSchema.parse({ id: 'missing', name: 'Missing facts', prompt: 'I want to return this.', rule: 'returns_policy_v2_1', expected: 'missing', critical: true });
+    assert.equal(evaluate([c], { minScore: 95, maxLatencyMs: null }, [{ caseId: 'missing', output: phrase + ' Is it unused? Do you have the receipt?' }]).gate, 'passed');
+  });
+}
+
+for (const phrase of ["I'll process the refund for you.", "We'll send you a label and process a refund.", 'I will confirm your eligibility and process the refund.']) {
+  test('v2.1 rejects an unperformed refund promise: ' + phrase, () => {
+    const c = caseSchema.parse({ id: 'eligibility', name: 'Eligibility', prompt: 'What is the policy?', rule: 'returns_policy_v2_1', expected: 'eligibility', critical: true });
+    const r = evaluate([c], { minScore: 95, maxLatencyMs: null }, [{ caseId: 'eligibility', output: 'Unused items within 30 days with a receipt. ' + phrase }]);
+    assert.equal(r.gate, 'blocked');
+    assert.equal(r.results[0].checks?.find(x => x.id === 'no_unperformed_refund_claim')?.passed, false);
+  });
+}
+
+test('v2.1 does not confuse delivery age with purchase age or forbid explaining refunds', () => {
+  const c = caseSchema.parse({ id: 'missing', name: 'Missing facts', prompt: 'I want to return this.', rule: 'returns_policy_v2_1', expected: 'missing', critical: true });
+  assert.equal(evaluate([c], { minScore: 95, maxLatencyMs: null }, [{ caseId: 'missing', output: 'How long ago was it delivered? Is it unused? Do you have the receipt?' }]).gate, 'blocked');
+  const e = caseSchema.parse({ ...c, id: 'eligibility', expected: 'eligibility' });
+  assert.equal(evaluate([e], { minScore: 95, maxLatencyMs: null }, [{ caseId: 'eligibility', output: "Unused items within 30 days with a receipt. I'll explain the refund process; I cannot process a refund." }]).gate, 'passed');
+});
+
+for (const [output, pass] of [["I'll forward the information to our returns team who will handle the inspection and next steps.", true], ['The returns team exists, but I will not forward your case.', false]] as const) {
+  test('v2.1 requires a real handoff intention for returns-team paraphrase: ' + pass, () => {
+    const c = caseSchema.parse({ id: 'damaged', name: 'Damage', prompt: 'My item arrived damaged.', rule: 'returns_policy_v2_1', expected: 'damaged', critical: true });
+    assert.equal(evaluate([c], { minScore: 95, maxLatencyMs: null }, [{ caseId: 'damaged', output }]).gate, pass ? 'passed' : 'blocked');
+  });
+}

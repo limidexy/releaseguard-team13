@@ -36,7 +36,7 @@ test('new suite keeps the same questions, thresholds and critical flags without 
     assert.equal(suiteSchema.safeParse(revised.suite).success, true);
     assert.deepEqual(revised.suite.cases.map((c: any) => [c.id,c.prompt,c.critical]), legacy.suite.cases.map((c: any) => [c.id,c.prompt,c.critical]));
     assert.deepEqual(revised.suite.policy, legacy.suite.policy);
-    assert.equal(revised.suite.cases[0].rule, 'returns_policy_v2');
+    assert.equal(revised.suite.cases[0].rule, 'returns_policy_v2_1');
     assert.equal(legacy.suite.cases[0].rule, 'contains');
   } finally { await app.close(); }
 });

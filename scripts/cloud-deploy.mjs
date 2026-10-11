@@ -13,7 +13,7 @@ const rollout=()=>{for(const role of roles)console.log(k('rollout','status','dep
 // Explicitly update only the six owned image fields first; SSA then co-owns
 // matching values without forcing ownership of unrelated fields.
 const applyCandidate=()=>{for(const role of roles)k('set','image','deployment/'+role,role+'='+image,'--field-manager=kubectl');console.log(k('apply','--server-side','--field-manager=kubectl','-f','deploy/k8s/rendered/services.yaml'));rollout()};
-const report={at:new Date().toISOString(),source,image,ciRun:process.env.RG_CI_RUN,approval:'Manual workflow dispatch; no independent human approval gate on this free-private trial.',stages:[]};
+const report={at:new Date().toISOString(),source,image,ciRun:process.env.RG_CI_RUN,approval:'Manual workflow dispatch; no independent human approval gate configured for this trial.',stages:[]};
 await mkdir('evidence/current',{recursive:true});
 const smoke=async(label,env={})=>{node('scripts/cloud-smoke.mjs',env);const s=JSON.parse(await readFile('evidence/cloud-smoke.json','utf8'));await writeFile('evidence/current/cloud-smoke-'+label+'.json',JSON.stringify(s,null,2));report.stages.push({name:label,passed:true,jobId:s.job.id})};
 let before,changed=false;
