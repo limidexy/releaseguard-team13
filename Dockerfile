@@ -4,6 +4,7 @@ COPY package*.json tsconfig.json ./
 RUN npm ci --no-audit --no-fund
 COPY src ./src
 COPY tests ./tests
+COPY public ./public
 RUN npm test
 RUN npm prune --omit=dev
 FROM node:24-bookworm-slim

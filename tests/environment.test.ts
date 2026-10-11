@@ -28,8 +28,11 @@ test('environment comes from explicit server deployment config and fails to unco
 test('new suite keeps the same questions, thresholds and critical flags without replacing legacy fixture', async () => {
   const app = Fastify(); await gateway(app);
   try {
-    const legacy = (await app.inject('/demo-fixtures.json')).json();
-    const revised = (await app.inject('/returns-fixtures-v2.json')).json();
+    const legacyResponse = await app.inject('/demo-fixtures.json');
+    const revisedResponse = await app.inject('/returns-fixtures-v2.json');
+    assert.equal(legacyResponse.statusCode, 200);
+    assert.equal(revisedResponse.statusCode, 200);
+    const legacy = legacyResponse.json(), revised = revisedResponse.json();
     assert.equal(suiteSchema.safeParse(revised.suite).success, true);
     assert.deepEqual(revised.suite.cases.map((c: any) => [c.id,c.prompt,c.critical]), legacy.suite.cases.map((c: any) => [c.id,c.prompt,c.critical]));
     assert.deepEqual(revised.suite.policy, legacy.suite.policy);
