@@ -22,7 +22,7 @@ if(process.env.RG_INTERNAL_CA==='true')for(const d of documents.filter(d=>d.kind
   d.spec.template.spec.containers[0].volumeMounts=[{name:'trust',mountPath:'/trust',readOnly:true}];
 }
 if(process.env.RG_TRIAL_SMALL==='true')for(const d of documents.filter(d=>d.kind==='Deployment')){
-  d.spec.template.spec.containers[0].resources.requests.cpu=d.metadata.name==='worker'?'250m':'100m';
+  d.spec.template.spec.containers[0].resources.requests.cpu=d.metadata.name==='worker'?'150m':'100m';
 }
 await mkdir('deploy/k8s/rendered',{recursive:true});
 await writeFile('deploy/k8s/rendered/services.yaml',documents.filter(d=>process.env.RG_SKIP_NAMESPACE!=='true'||d.kind!=='Namespace').map(d=>JSON.stringify(d,null,2)).join('\n---\n')+'\n');

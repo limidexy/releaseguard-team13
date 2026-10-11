@@ -8,6 +8,11 @@ const k=(...args)=>execFileSync('kubectl',['-n','releaseguard',...args],{encodin
 const node=(file,env={})=>execFileSync(process.execPath,[file],{stdio:'inherit',timeout:180000,env:{...process.env,...env}});
 const snapshot=()=>roles.map(role=>{const d=JSON.parse(k('get','deployment',role,'-o','json'));return{role,image:d.spec.template.spec.containers[0].image,source:d.metadata.annotations?.['releaseguard/source']??null,desired:d.spec.replicas,ready:d.status.readyReplicas??0}});
 const rollout=()=>{for(const role of roles)console.log(k('rollout','status','deployment/'+role,'--timeout=240s').trim())};
+// Rollback uses an Update operation. Applying a different image afterward
+// conflicts even with the same field-manager name (Apply and Update differ).
+// Explicitly update only the six owned image fields first; SSA then co-owns
+// matching values without forcing ownership of unrelated fields.
+const applyCandidate=()=>{for(const role of roles)k('set','image','deployment/'+role,role+'='+image,'--field-manager=kubectl');console.log(k('apply','--server-side','--field-manager=kubectl','-f','deploy/k8s/rendered/services.yaml'));rollout()};
 const report={at:new Date().toISOString(),source,image,ciRun:process.env.RG_CI_RUN,approval:'Manual workflow dispatch; no independent human approval gate on this free-private trial.',stages:[]};
 await mkdir('evidence/current',{recursive:true});
 const smoke=async(label,env={})=>{node('scripts/cloud-smoke.mjs',env);const s=JSON.parse(await readFile('evidence/cloud-smoke.json','utf8'));await writeFile('evidence/current/cloud-smoke-'+label+'.json',JSON.stringify(s,null,2));report.stages.push({name:label,passed:true,jobId:s.job.id})};
@@ -18,11 +23,11 @@ try{
  if(before.some(d=>!d.ready||!/@sha256:[a-f0-9]{64}$/.test(d.image)))throw Error('Previous deployments must be healthy and digest-pinned');
  if(process.env.RG_PROVE_ROLLBACK==='true'&&before.some(d=>d.image===image))throw Error('Rollback proof needs a different previous image');
  node('scripts/render-cloud.mjs');changed=true;
- console.log(k('apply','--server-side','--field-manager=kubectl','-f','deploy/k8s/rendered/services.yaml'));rollout();
+ applyCandidate();
  await smoke('candidate');
  if(process.env.RG_PROVE_ROLLBACK==='true'){
    restore();await smoke('previous',{RG_COMMIT:before[0].source??'unrecorded',RG_IMAGE:before[0].image});report.rollbackTested=true;
-   console.log(k('apply','--server-side','--field-manager=kubectl','-f','deploy/k8s/rendered/services.yaml'));rollout();await smoke('restored-candidate');
+   applyCandidate();await smoke('restored-candidate');
  }
  for(const role of roles)k('annotate','deployment/'+role,'releaseguard/source='+source,'--overwrite','--field-manager=kubectl');
  report.after=snapshot();
