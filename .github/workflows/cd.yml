@@ -1,0 +1,90 @@
+name: Approved cloud deployment
+on:
+  workflow_dispatch:
+    inputs:
+      verify_run_id:
+        description: Successful CI run ID for the same source commit
+        required: true
+      image:
+        description: Tested image pushed as repository@sha256:digest
+        required: true
+permissions:
+  contents: read
+  actions: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      source: ${{ steps.verify.outputs.source }}
+    steps:
+      - name: Validate successful CI workflow and source
+        id: verify
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ inputs.verify_run_id }}
+          REPOSITORY: ${{ github.repository }}
+          EXPECTED_SHA: ${{ github.sha }}
+        run: |
+          gh api "repos/$REPOSITORY/actions/runs/$RUN_ID" > run.json
+          node -e "const r=require('./run.json');if(r.conclusion!=='success'||r.head_sha!==process.env.EXPECTED_SHA||r.path!=='.github/workflows/ci.yml'||r.head_repository.full_name!==process.env.REPOSITORY)process.exit(1);require('fs').appendFileSync(process.env.GITHUB_OUTPUT,'source='+r.head_sha+'\n')"
+  deploy:
+    needs: check
+    runs-on: ubuntu-latest
+    environment: cloud-test
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.check.outputs.source }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Download CI identity evidence
+        uses: actions/download-artifact@v4
+        with:
+          name: verification-evidence
+          run-id: ${{ inputs.verify_run_id }}
+          github-token: ${{ github.token }}
+          path: ci-evidence
+      - name: Compare pushed image identity to tested image
+        env:
+          RG_IMAGE: ${{ inputs.image }}
+        run: |
+          node -e "if(!/^[a-zA-Z0-9./:_-]+@sha256:[a-f0-9]{64}$/.test(process.env.RG_IMAGE))process.exit(1)"
+          docker pull "$RG_IMAGE"
+          docker image inspect "$RG_IMAGE" --format '{{.Id}}' > pulled-id.txt
+          diff ci-evidence/image-id.txt pulled-id.txt
+      - name: Configure approved kube context
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+        run: |
+          mkdir -p "$HOME/.kube"
+          printf '%s' "$KUBE_CONFIG" > "$HOME/.kube/config"
+          chmod 600 "$HOME/.kube/config"
+      - name: Render, deploy and verify rollouts
+        env:
+          RG_IMAGE: ${{ inputs.image }}
+          PUBLIC_ORIGIN: ${{ vars.PUBLIC_ORIGIN }}
+          AUTH_ISSUER: ${{ vars.AUTH_ISSUER }}
+          OIDC_JWKS_URL: ${{ vars.OIDC_JWKS_URL }}
+        run: |
+          node scripts/render-cloud.mjs
+          kubectl apply -f deploy/k8s/rendered/services.yaml
+          for service in registry evaluation governance support worker gateway; do
+            kubectl -n releaseguard rollout status "deployment/$service" --timeout=180s
+          done
+      - name: Authenticated replay smoke
+        env:
+          RG_ALLOW_CLOUD_SMOKE: 'true'
+          RG_CLOUD_ALLOWED_ORIGINS: ${{ vars.PUBLIC_ORIGIN }}
+          RELEASEGUARD_URL: ${{ vars.PUBLIC_ORIGIN }}
+          RELEASEGUARD_TOKEN: ${{ secrets.CLOUD_SMOKE_TOKEN }}
+          RG_IMAGE: ${{ inputs.image }}
+          RG_COMMIT: ${{ needs.check.outputs.source }}
+        run: node scripts/cloud-smoke.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: deployment-evidence
+          path: |
+            evidence/
+            deploy/k8s/rendered/

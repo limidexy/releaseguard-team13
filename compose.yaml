@@ -1,0 +1,116 @@
+name: releaseguard-course-v2
+x-service: &service
+  build: .
+  image: releaseguard-course-v2:local
+  restart: unless-stopped
+  init: true
+  mem_limit: 384m
+  cpus: 0.5
+  security_opt: ["no-new-privileges:true"]
+  cap_drop: [ALL]
+  read_only: true
+  healthcheck:
+    test: [CMD, node, -e, "fetch('http://127.0.0.1:8080/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+    interval: 5s
+    timeout: 3s
+    retries: 20
+x-auth: &auth
+  AUTH_MODE: dev
+  ALLOW_DEV_AUTH: "true"
+  AUTH_SECRET: ${AUTH_SECRET:?Run scripts/setup-local.mjs first}
+  INTERNAL_SECRET: ${INTERNAL_SECRET:?Run scripts/setup-local.mjs first}
+  RUNNER_ORIGINS: http://support:8080
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: deploy/postgres/Dockerfile
+    image: releaseguard-postgres-v2:local
+    environment:
+      POSTGRES_USER: rg_admin
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: postgres
+      REGISTRY_DB_PASSWORD: ${REGISTRY_DB_PASSWORD}
+      EVALUATION_DB_PASSWORD: ${EVALUATION_DB_PASSWORD}
+      GOVERNANCE_DB_PASSWORD: ${GOVERNANCE_DB_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U rg_admin -d postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  rabbitmq:
+    image: rabbitmq:4-management-alpine
+    environment:
+      RABBITMQ_DEFAULT_USER: rg
+      RABBITMQ_DEFAULT_PASS: ${RABBIT_PASSWORD}
+    volumes: [rabbitdata:/var/lib/rabbitmq]
+    healthcheck:
+      test: [CMD, rabbitmq-diagnostics, -q, ping]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  registry:
+    <<: *service
+    environment:
+      <<: *auth
+      SERVICE_ROLE: registry
+      DATABASE_URL: postgres://rg_registry:${REGISTRY_DB_PASSWORD}@postgres:5432/rg_registry
+    depends_on:
+      postgres: { condition: service_healthy }
+  evaluation:
+    <<: *service
+    environment:
+      <<: *auth
+      SERVICE_ROLE: evaluation
+      DATABASE_URL: postgres://rg_evaluation:${EVALUATION_DB_PASSWORD}@postgres:5432/rg_evaluation
+      AMQP_URL: amqp://rg:${RABBIT_PASSWORD}@rabbitmq:5672
+      REGISTRY_URL: http://registry:8080
+    depends_on:
+      registry: { condition: service_healthy }
+      rabbitmq: { condition: service_healthy }
+  governance:
+    <<: *service
+    environment:
+      <<: *auth
+      SERVICE_ROLE: governance
+      DATABASE_URL: postgres://rg_governance:${GOVERNANCE_DB_PASSWORD}@postgres:5432/rg_governance
+      EVALUATION_URL: http://evaluation:8080
+    depends_on:
+      evaluation: { condition: service_healthy }
+  support:
+    <<: *service
+    environment:
+      <<: *auth
+      SERVICE_ROLE: support
+      MODEL_API_URL: ${MODEL_API_URL:-}
+      MODEL_API_KEY: ${MODEL_API_KEY:-}
+      MODEL_ID: ${MODEL_ID:-}
+      ALLOW_REAL_MODEL: ${ALLOW_REAL_MODEL:-false}
+  worker:
+    <<: *service
+    environment:
+      <<: *auth
+      SERVICE_ROLE: worker
+      DATABASE_URL: postgres://rg_evaluation:${EVALUATION_DB_PASSWORD}@postgres:5432/rg_evaluation
+      AMQP_URL: amqp://rg:${RABBIT_PASSWORD}@rabbitmq:5672
+      LEASE_MS: "15000"
+    depends_on:
+      evaluation: { condition: service_healthy }
+      support: { condition: service_healthy }
+  gateway:
+    <<: *service
+    environment:
+      <<: *auth
+      SERVICE_ROLE: gateway
+      REGISTRY_URL: http://registry:8080
+      EVALUATION_URL: http://evaluation:8080
+      GOVERNANCE_URL: http://governance:8080
+      PUBLIC_ORIGIN: http://localhost:5189
+    ports: ["127.0.0.1:5189:8080"]
+    depends_on:
+      governance: { condition: service_healthy }
+volumes:
+  pgdata:
+  rabbitdata:

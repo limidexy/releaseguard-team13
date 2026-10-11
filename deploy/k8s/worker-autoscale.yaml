@@ -1,0 +1,43 @@
+apiVersion: keda.sh/v1alpha1
+kind: TriggerAuthentication
+metadata:
+  name: rg-rabbit-scaler
+  namespace: releaseguard
+spec:
+  secretTargetRef:
+    - parameter: host
+      name: rg-broker
+      key: KEDA_MANAGEMENT_URL
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: evaluation-worker
+  namespace: releaseguard
+spec:
+  scaleTargetRef:
+    name: worker
+  pollingInterval: 5
+  cooldownPeriod: 120
+  minReplicaCount: 1
+  maxReplicaCount: 5
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleDown:
+          stabilizationWindowSeconds: 120
+          policies:
+            - type: Pods
+              value: 1
+              periodSeconds: 60
+  triggers:
+    - type: rabbitmq
+      metadata:
+        protocol: http
+        mode: QueueLength
+        value: "10"
+        queueName: releaseguard.evaluate
+        excludeUnacknowledged: "false"
+        unsafeSsl: "false"
+      authenticationRef:
+        name: rg-rabbit-scaler

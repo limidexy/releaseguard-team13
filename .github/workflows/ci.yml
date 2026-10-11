@@ -1,0 +1,54 @@
+name: ReleaseGuard verification
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm test
+      - run: node scripts/setup-local.mjs
+      - run: docker compose build gateway postgres
+      - run: docker compose up -d --no-build --wait
+      - run: node scripts/verify.mjs --restart
+      - run: node scripts/fault-test.mjs
+      - name: Dependency advisory gate
+        run: npm audit --audit-level=high --json > evidence/dependency-audit.json
+      - name: Image advisory gate
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # verified v0.36.0
+        with:
+          image-ref: releaseguard-course-v2:local
+          format: json
+          output: evidence/image-audit.json
+          exit-code: '1'
+          ignore-unfixed: true
+          severity: HIGH,CRITICAL
+      - name: Save tested image and source identity
+        run: |
+          docker image inspect releaseguard-course-v2:local --format '{{.Id}}' > evidence/image-id.txt
+          git rev-parse HEAD > evidence/source-commit.txt
+          docker save releaseguard-course-v2:local -o image.tar
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tested-image
+          path: image.tar
+      - name: Preserve test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verification-evidence
+          path: evidence/
+      - name: Stop containers
+        if: always()
+        run: docker compose stop

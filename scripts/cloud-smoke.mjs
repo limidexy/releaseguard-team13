@@ -1,0 +1,10 @@
+import { mkdir,writeFile } from 'node:fs/promises';
+import { application,suite } from './fixtures.mjs';
+import { base,required,completed,key } from './client.mjs';
+const token=process.env.RELEASEGUARD_TOKEN;
+const allow=(process.env.RG_CLOUD_ALLOWED_ORIGINS??'').split(',');
+if(process.env.RG_ALLOW_CLOUD_SMOKE!=='true'||new URL(base).protocol!=='https:'||!allow.includes(new URL(base).origin)||!token)throw new Error('Cloud smoke requires explicit allowed HTTPS target, authorized token and RG_ALLOW_CLOUD_SMOKE=true');
+const a=await required('applications',token,{...application,name:'Cloud smoke '+Date.now()}),s=await required('suites',token,suite);
+const q=await required('jobs',token,{appId:a.id,suiteId:s.id,candidate:'smoke-'+Date.now(),commitRef:process.env.RG_COMMIT??'cloud-smoke',source:'replay'},key());
+const job=await completed(q.id,token);if(job.status!=='succeeded'||job.result?.gate!=='passed')throw new Error('Cloud smoke job did not pass');
+await mkdir('evidence',{recursive:true});await writeFile('evidence/cloud-smoke.json',JSON.stringify({time:new Date().toISOString(),origin:new URL(base).origin,commit:process.env.RG_COMMIT,image:process.env.RG_IMAGE,job,limitations:'One authorized actor replay flow; independent review, cloud identity/role UAT and scaling require separate evidence'},null,2));console.log('Cloud replay smoke passed; independent review and scaling remain separate checks.');
