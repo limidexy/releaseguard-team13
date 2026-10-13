@@ -1,0 +1,84 @@
+{
+  "startedAt": "2026-10-13T03:00:09.516Z",
+  "sourceCommit": "e94d4f1c1b438a90551c18f832c7844e1a822df2",
+  "node": "v24.19.0",
+  "platform": "darwin",
+  "scope": "Local clean install, TypeScript build/unit, image identity unit, UI syntax and retained-answer offline rescore only",
+  "cloudStarted": false,
+  "newModelCalls": 0,
+  "hostedCITriggered": false,
+  "steps": [
+    {
+      "name": "dependency-install",
+      "command": "npm ci --no-audit --no-fund",
+      "exitCode": 0,
+      "durationMs": 662,
+      "log": "dependency-install.log"
+    },
+    {
+      "name": "unit-tests",
+      "command": "npm test",
+      "exitCode": 0,
+      "durationMs": 1113,
+      "log": "unit-tests.log",
+      "tests": 138,
+      "pass": 138,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "name": "image-identity",
+      "command": "node --test tests/image-identity.test.mjs",
+      "exitCode": 0,
+      "durationMs": 56,
+      "log": "image-identity.log",
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "name": "ui-syntax",
+      "command": "node --check public/app.js",
+      "exitCode": 0,
+      "durationMs": 20,
+      "log": "ui-syntax.log"
+    },
+    {
+      "name": "retained-offline-rescore",
+      "command": "node scripts/rescore-retained.mjs docs/evidence/cloud-2026-10-11-retest/prompt-comparison-real-1791729589074.json",
+      "exitCode": 0,
+      "durationMs": 43,
+      "log": "retained-offline-rescore.log"
+    }
+  ],
+  "retainedRescore": {
+    "sourceSha256": "5bcf29f90edac6c54c32e7e93d0cb3660a34579e2b1d24a064b8edc9d96840c6",
+    "newProviderCalls": 0,
+    "rows": [
+      {
+        "prompt": "v1",
+        "original": 40,
+        "rescored": 40,
+        "gate": "blocked"
+      },
+      {
+        "prompt": "v2",
+        "original": 70,
+        "rescored": 80,
+        "gate": "blocked"
+      }
+    ],
+    "limitation": "Evaluator v2.1 was refined after inspecting these answers. This is an explanatory re-score, NOT a new/blind validation, NOT new provider calls and NOT human approval. v2.0 jobs and raw reports remain unchanged. Independent holdout and human review remain pending."
+  },
+  "finishedAt": "2026-10-13T03:00:11.415Z",
+  "allPlannedChecksPassed": true,
+  "notExecuted": [
+    "Docker startup or integration/load/fault runs",
+    "Cloud resource inspection/start/stop/deployment",
+    "New provider calls or human scoring",
+    "Hosted CI/CD",
+    "Student PR/review/merge",
+    "Windows compatibility"
+  ]
+}
