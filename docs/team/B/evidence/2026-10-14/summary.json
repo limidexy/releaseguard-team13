@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-14",
+  "roleOwner": "B ZHU PENGXU",
+  "githubLogin": "Robinsonson",
+  "execution": "Commands and changes executed by Codex under the user's instruction; not a claim of independent human testing or peer approval.",
+  "baselineCommit": "e94d4f1c1b438a90551c18f832c7844e1a822df2",
+  "branch": "feat/b-api-review",
+  "os": "Windows",
+  "node": "24.19.0",
+  "docker": "29.8.0",
+  "composeProject": "rg-b-api-review-lf-20261014",
+  "unitTests": {
+    "passed": 138,
+    "failed": 0
+  },
+  "imageIdentityTests": {
+    "passed": 1,
+    "failed": 0
+  },
+  "frontendSyntax": "passed",
+  "integrationGroups": {
+    "passed": 18,
+    "failed": 0
+  },
+  "contractGroups": {
+    "passed": 9,
+    "failed": 0
+  },
+  "providerExecution": "replay only; no real jobs submitted",
+  "cloudOperations": false,
+  "humanApproval": "not performed",
+  "actualStudentHours": "not supplied",
+  "failuresBeforeFix": [
+    {
+      "stage": "Fresh local Postgres startup",
+      "message": "00-init.sh: line 2: set: -\\r: invalid option",
+      "cause": "Windows core.autocrlf=true checked out shell scripts with CRLF",
+      "resolution": "Track LF shell endings in .gitattributes; rebuild postgres with LF bootstrap; use a separate fresh test volume, preserve failed-run volume."
+    },
+    {
+      "stage": "Local pre-push npm startup",
+      "message": "spawnSync npm.cmd EINVAL",
+      "exitCode": null,
+      "resolution": "Use cmd.exe for fixed npm test command on Windows; report launch errors."
+    }
+  ]
+}

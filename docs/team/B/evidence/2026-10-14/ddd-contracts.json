@@ -1,0 +1,55 @@
+{
+  "startedAt": "2026-10-14T06:36:13.533Z",
+  "workspace": "contracts-1791959773521",
+  "environment": "Local Docker / real HTTP and database / replay answers / development identities",
+  "checks": [
+    {
+      "name": "Assets cannot be referenced from another workspace, including suite parents",
+      "passed": true,
+      "durationMs": 251.84079999999994
+    },
+    {
+      "name": "Idempotent retries preserve one job and one outbox record; conflicts do not mutate input",
+      "passed": true,
+      "durationMs": 931.1137000000001
+    },
+    {
+      "name": "Read-only and cross-workspace submission attempts create no jobs",
+      "passed": true,
+      "durationMs": 92.56150000000002
+    },
+    {
+      "name": "Stored idempotent retry works during Asset service outage; new job fails closed",
+      "passed": true,
+      "durationMs": 9334.2094
+    },
+    {
+      "name": "Rejected review commands leave pending state, evidence and audit unchanged",
+      "passed": true,
+      "durationMs": 118.14360000000124
+    },
+    {
+      "name": "A requester distinct from the job author still cannot approve their own request",
+      "passed": true,
+      "durationMs": 16.372299999999086
+    },
+    {
+      "name": "Captured review evidence stays usable while Evaluation service is down",
+      "passed": true,
+      "durationMs": 9181.3099
+    },
+    {
+      "name": "Competing decisions commit one terminal state and one matching decision audit",
+      "passed": true,
+      "durationMs": 616.8505999999979
+    },
+    {
+      "name": "Metrics and arbitrary runner origins are not exposed to external callers",
+      "passed": true,
+      "durationMs": 851.9238000000005
+    }
+  ],
+  "finishedAt": "2026-10-14T06:36:35.708Z",
+  "passed": 9,
+  "failed": 0
+}
