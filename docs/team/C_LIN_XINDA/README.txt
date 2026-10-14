@@ -2,9 +2,9 @@ C — LIN XINDA · 模型适配、Prompt、用例与评价
 交接 / 离线复核记录：2026-10-13（新加坡）
 
 来源与职责
-这份目录整理 C 负责的现有代码与本次实际离线复核。基线源 commit 为 e94d4f1c1b438a90551c18f832c7844e1a822df2。
-该基线已经在 feat/local-course-evidence，不重复导入或改变已有 Git 作者。这个新分支没有修改业务源码、prompt、评分规则或模型输出。
-本次整理、命令执行、测试和提交由 Codex 依用户授权完成并标为 AI-assisted，不代表 LIN XINDA 或其他成员已亲自做过独立人工评分、UAT 或代码审核。
+本目录记录 C 模块的代码入口与离线复核结果，基线 commit 为 e94d4f1c1b438a90551c18f832c7844e1a822df2。
+本分支在 feat/local-course-evidence 基础上补充交接说明和验证记录，未修改业务源码、prompt、评分规则或模型输出。
+独立人工评分、用户验收和组员代码审核仍待完成。
 
 负责的代码（以下路径均相对于仓库根目录）
 - src/provider.ts：v1/v2 prompt、哈希、输出预算、HTTPS 适配、结束原因和用量。
@@ -15,7 +15,7 @@ C — LIN XINDA · 模型适配、Prompt、用例与评价
 - scripts/rescore-retained.mjs：保留回答的离线复核。
 - scripts/provider-smoke.mjs：单次真实调用驱动，需要单独确认；本次没有执行。
 - scripts/cloud-rescore-retained.mjs：云端 imported 复核，需要云授权；本次没有执行。
-- docs/human-rubric.csv：独立人工评分模板，目前不由 AI 代填。
+- docs/human-rubric.csv：人工评分模板，由独立评审人员填写。
 相关测试：tests/provider.test.ts、tests/returns-policy.test.ts（与 E 协作）；共享契约 src/domain.ts 和恢复逻辑 src/worker.ts（与 B 协作）。
 
 本次实际执行与证据
@@ -33,7 +33,7 @@ node --test dist/tests/provider.test.js dist/tests/returns-policy.test.js
 node scripts/rescore-retained.mjs docs/evidence/cloud-2026-10-11-retest/prompt-comparison-real-1791729589074.json
 
 最后一个命令使用 git rev-parse 记录当前 commit，并在 evidence/current 创建新的带时间戳报告；不覆盖旧记录、不连接模型、不需要 Docker 或云账号。
-本次记录中的测试命令是 npm test（完整 138 项）而非上面两文件选择；上述选择是成员后续复现建议，不冒充新的执行记录。
+本次实测使用 npm test 运行完整的 138 项测试；上述两文件测试命令供后续针对性复现使用。
 
 复核结果
 数据源：docs/evidence/cloud-2026-10-11-retest/prompt-comparison-real-1791729589074.json
@@ -52,10 +52,13 @@ v2 的 damaged 用例因人工转交措辞识别修正由 failed 变为 passed�
 接下来由团队确认和执行，尚未记为完成
 1. C 与 B 确认隐私提醒和裸 JSON 消费契约，再设计下一版 prompt；保留旧版本和历史记录。
 2. C 与 E 在下一轮调用前冻结新的独立样本、评分规则、运行次数与失败保留方式。
-3. 指定真实独立人员逐条看回答并填写 human-rubric；AI 分析不替代这一步。
+3. 安排独立评审人员逐条查看回答，填写 human-rubric 并记录评分理由。
 4. 真实调用或云操作前由账号所有者与 D 核对免费额度、授权和窗口；不自动升级付费。
-5. 提交 PR 后请 B/E 本人审核；本目录的出现不表示他们已经审核或同意。
+5. PR 提交后由 B/E 审核，当前状态为待审核。
 
 提交与验证边界
 新增内容只有本说明与真实已生成的离线验证文件，没有新源码功能、部署、模型调用、人工评分、成员 approval 或合并。
 原始完整分工包仍对应 e94d4f1；新 C 分支只是在该基线上追加本目录和证据。其他成员继续从共同基线建立各自分支。
+
+工具使用说明
+本目录的文档整理、命令执行与提交使用了 Codex 辅助；独立人工评分、用户验收和组员审核由团队另行完成。
