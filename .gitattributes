@@ -1,3 +1,11 @@
-# Shell scripts run inside Linux containers or Git Bash, including on Windows.
+# D-03: Git for Windows defaults to core.autocrlf=true, which turns LF into CRLF on checkout.
+# Shell scripts and Git hooks run inside Linux containers / Git's sh and must stay LF everywhere,
+# otherwise deploy/postgres/init.sh fails in the postgres image ("set: illegal option", exit 2).
 *.sh text eol=lf
 .githooks/* text eol=lf
+Dockerfile text eol=lf
+# Binary evidence files must never be converted.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gz binary
