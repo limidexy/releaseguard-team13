@@ -24,7 +24,7 @@ The core domain is evidence-backed release assurance (Evaluation and Review). Te
 | Context | Aggregate roots and owned data | Commands / invariants | Why its own boundary |
 |---|---|---|---|
 | Test Assets (`registry`) | Application; SuiteVersion; `rg_registry` | RegisterApplication, CreateSuiteVersion. Tenant-scoped references, unique case IDs, immutable suite IDs, runner allowlist. | Asset authoring changes independently of execution; execution copies a stable snapshot rather than sharing tables. |
-| Evaluation (`evaluation` + `worker`) | EvaluationJob; job/result/lease/outbox; `rg_evaluation` | SubmitEvaluation, ClaimJob, CompleteJob, RecoverLease. Job + outbox atomic, bounded retries, no duplicate terminal write, missing evidence blocks. | Bursty/slow runner work needs a queue and independently scalable executors. Worker is part of this context, not a new business service. |
+| Evaluation (`evaluation` + `worker`) | EvaluationJob; job/result/lease/outbox; `rg_evaluation` | SubmitEvaluation, ClaimJob, CompleteJob, RecoverLease. Job + outbox atomic, no duplicate terminal write, missing evidence blocks. Replay/imported jobs allow up to three execution attempts. A real job allows one execution attempt; lease recovery fails it instead of calling the provider again. | Bursty/slow runner work needs a queue and independently scalable executors. Worker is part of this context, not a new business service. |
 | Review & Evidence (`governance`) | ReleaseRequest with decision version and audit; `rg_governance` | RequestReview, DecideReview. Passing snapshot required, creator/requester excluded, machines excluded, one terminal decision + audit in one transaction. | Human decision lifecycle and historical retention remain available after upstream execution outage. |
 
 An aggregate is a **transactional consistency boundary**, not one service per table or one service per member. The monorepo and common image are delivery choices; independent processes and data ownership implement the service boundaries. Shared database infrastructure is still a local single point of failure.
@@ -57,8 +57,8 @@ flowchart LR
 |---|---|---|---|
 | 1 | Contributor: SubmitEvaluation | Job queued + outbox committed | If Asset API unavailable, reject new admission. Reusing a committed key returns the existing job without an Asset lookup. |
 | 2 | Publisher: publish work | Broker-confirmed persistent message | Crash after confirm may duplicate delivery. No exactly-once claim. |
-| 3 | Worker: ClaimJob | Running lease + attempt | Conditional claim, heartbeat and bounded recovery. Stale worker cannot overwrite another lease's result. |
-| 4 | Runner + rules: CompleteJob | Succeeded with passed/blocked gate, or failed execution | Rules are five deterministic predicates, not an AI judge. Provider quota/retries can limit throughput. |
+| 3 | Worker: ClaimJob | Running lease + attempt | Conditional claim and heartbeat. Replay/imported execution permits three attempts; real execution permits one, after which recovery marks failure without another runner call. Stale workers cannot overwrite another lease's result. |
+| 4 | Runner + rules: CompleteJob | Succeeded with passed/blocked gate, or failed execution | Five general predicates plus versioned `returns_policy_v2` / `returns_policy_v2_1` / `returns_policy_v2_2` checks. v2.2 requires privacy protection and safe guidance while old results retain their original evaluator. These are bounded rules, not an AI judge. Provider quota limits real throughput. |
 | 5 | Contributor: RequestReview | ReleaseRequested + frozen evidence | Only a completed passing job. Upstream unavailable means no new snapshot. |
 | 6 | Independent reviewer: DecideReview | ReleaseApproved OR ReleaseRejected | Locked row + expected version + aggregate policy. Audit and decision commit together. Captured evidence remains usable during Evaluation outage. |
 
@@ -70,12 +70,12 @@ The pure aggregate transition is implemented in `src/contexts/review.ts`, invoke
 2. **Choose three contexts, not six arbitrary microservices.** Splitting every table/role would add distributed transactions without a demonstrated business boundary. Splitting Review from Evaluation does isolate human workflow and captured evidence availability.
 3. **Keep worker and Evaluation in one context.** They share aggregate ownership legitimately. Workers scale separately but must deploy schema-compatible versions.
 4. **Copy immutable evidence rather than synchronous decision-time orchestration.** More storage, but stable audit and independent review availability. This is not multi-service ACID.
-5. **Use queue-driven cloud autoscaling, not CPU alone.** Provider I/O can leave CPU low while work accumulates. KEDA manifests remain a target until configured and tested on a cloud account.
+5. **Use queue-driven cloud autoscaling, not CPU alone.** Provider I/O can leave CPU low while work accumulates. The original design treated KEDA as a target. Subsequent team cloud experiments are documented in `docs/10-Cloud-Acceptance-20261011.md`; those are historical results, not a new cloud verification in this review.
 6. **Keep shared image initially.** Independent process replicas are real; per-context build/release isolation is incomplete. Record this coupling honestly rather than call the baseline fully autonomous microservices.
 
 ## 6. Questions for the team, not fabricated decisions
 
-- B/A: confirm retention, who may author a suite, and whether a release request can ever be superseded (current terminal decisions cannot reopen).
+- B supplied policy confirmation on 15 October: retain evidence through grading/review, allow owners/contributors to create suite versions while reviewers/viewers remain read-only for suites, and keep terminal reviews closed. A new evaluation/review retains validated predecessor references. See `docs/team/B/Confirmed-Acceptance-Rules-20261015.md` and `docs/team/B/Reevaluation-Lineage-20261015.md` for the confirmed rules, linkage and tested scope; policy confirmation is not blanket implementation acceptance.
 - C: choose authorized provider/model and real support policy; have a different member complete the human rubric.
 - D/E: validate managed DB/broker availability, OIDC claim mapping, queue trigger threshold, cold-start delay, min/max workers and cost cap on the selected cloud.
 - All: review alternatives and commit actual rationale/changes through individual PRs. Record actual date, participants and effort, not generated meeting history.

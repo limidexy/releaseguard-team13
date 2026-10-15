@@ -1,7 +1,7 @@
 import type { FastifyInstance } from 'fastify';
 import { readFile } from 'node:fs/promises';
 import { HttpError } from './common.js';
-import { revisedReturnsSuite } from './returns-policy.js';
+import { revisedReturnsSuite, returnsSuiteV22 } from './returns-policy.js';
 export async function gateway(app: FastifyInstance) {
   app.get('/', async (_req, reply) => reply.type('text/html').send(await readFile('public/index.html', 'utf8')));
   app.get('/app.js', async (_req, reply) => reply.type('application/javascript').send(await readFile('public/app.js', 'utf8')));
@@ -10,6 +10,11 @@ export async function gateway(app: FastifyInstance) {
   app.get('/returns-fixtures-v2.json', async () => {
     const legacy = JSON.parse(await readFile('public/demo-fixtures.json', 'utf8'));
     const suite = revisedReturnsSuite(legacy.suite);
+    return { application: legacy.application, cases: suite.cases, suite };
+  });
+  app.get('/returns-fixtures-v2-2.json', async () => {
+    const legacy = JSON.parse(await readFile('public/demo-fixtures.json', 'utf8'));
+    const suite = returnsSuiteV22(legacy.suite);
     return { application: legacy.application, cases: suite.cases, suite };
   });
   app.get('/environment.json', async (_req, reply) => {

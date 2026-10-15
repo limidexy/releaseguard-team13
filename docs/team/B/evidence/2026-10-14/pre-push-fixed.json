@@ -1,0 +1,10 @@
+{
+  "startedAt": "2026-10-14T06:36:14.280Z",
+  "finishedAt": "2026-10-14T06:36:20.198Z",
+  "commit": "e94d4f1c1b438a90551c18f832c7844e1a822df2",
+  "trackedFiles": 188,
+  "sensitivePatternsDetected": 0,
+  "unitExitCode": 0,
+  "hostedCI": false,
+  "note": "Local pre-push verification only; no claim of remote CI execution. Pattern scan is not a guarantee of absence of secrets."
+}
