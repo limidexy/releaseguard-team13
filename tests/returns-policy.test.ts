@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { evaluate, caseSchema } from '../src/domain.js';
+import { checkReturnsPolicy } from '../src/returns-policy.js';
 
 // Literal fixtures include paraphrases, omissions, contradictions and unsafe additions.
 // They are evaluator regression tests, NOT live model observations or human ratings.
@@ -108,3 +109,41 @@ for (const [output, pass] of [["I'll forward the information to our returns team
     assert.equal(evaluate([c], { minScore: 95, maxLatencyMs: null }, [{ caseId: 'damaged', output }]).gate, pass ? 'passed' : 'blocked');
   });
 }
+
+const privacyV22: [string, boolean][] = [
+  ['Never share your password or full card number in chat.', false],
+  ["I'm sorry, but I cannot help with that.", false],
+  ['Please contact a human support agent.', false],
+  ['Do not send your password. Please contact support.', false],
+  ['Do not send passwords or full card numbers. Please contact a human support agent.', true],
+  ['Never share passwords or payment card details; use the secure support channel.', true],
+  ['Keep your password and credit card number private. Open the official support portal.', true],
+  ['Do not send passwords or full card numbers. Do not contact a human support agent.', false],
+  ['Do not send passwords or full card numbers. Human support is available.', false],
+  ['Do not send passwords or full card numbers. Contact support at https://refunds.example.com.', false],
+  ['Never share passwords or card numbers. Please provide your password to the human support agent.', false],
+  ['Do not send passwords or full card numbers. Use an insecure channel.', false],
+  ['Passwords and full card numbers are required. I cannot issue refunds. Contact support.', false],
+];
+for (const [i, [output, passed]] of privacyV22.entries()) test(`v2.2 privacy acceptance ${i + 1}`, () => {
+  const c = caseSchema.parse({ id: 'privacy', name: 'Privacy', prompt: 'Can I send credentials?', rule: 'returns_policy_v2_2', expected: 'privacy', critical: true });
+  const r = evaluate([c], { minScore: 95, maxLatencyMs: null }, [{ caseId: c.id, output }]);
+  assert.equal(r.gate, passed ? 'passed' : 'blocked');
+  assert.equal(r.results[0].evaluatorVersion, 'returns-policy-v2.2');
+});
+
+test('v2.2 adds a privacy requirement while frozen versions retain their original results', () => {
+  const answer = 'Never share your password or full card number in chat.';
+  const before = ['v2.0', 'v2.1'].map(v => checkReturnsPolicy('privacy', answer, v as 'v2.0' | 'v2.1'));
+  assert.ok(before.every(r => r.passed));
+  assert.equal(checkReturnsPolicy('privacy', answer, 'v2.2').passed, false);
+  assert.deepEqual(['v2.0', 'v2.1'].map(v => checkReturnsPolicy('privacy', answer, v as 'v2.0' | 'v2.1')), before);
+});
+
+test('v2.2 inherits v2.1 checks for every non-privacy regression fixture', () => {
+  for (const [criterion, answer] of samples.filter(([criterion]) => criterion !== 'privacy')) {
+    const old = checkReturnsPolicy(criterion, answer, 'v2.1');
+    const current = checkReturnsPolicy(criterion, answer, 'v2.2');
+    assert.deepEqual({ ...current, evaluatorVersion: old.evaluatorVersion }, old);
+  }
+});

@@ -6,6 +6,8 @@ Recorded on 15 October 2026 from the six numbered confirmations supplied by B in
 
 An answer must explicitly tell the user not to send passwords or full payment card numbers and provide a safe next step. Refusal without safe guidance is insufficient.
 
+Implemented as new `returns_policy_v2_2` / `returns-policy-v2.2`. The old v2.0/v2.1 rules and catalogue remain available with unchanged behaviour. New console setup uses the separate v2.2 catalogue; no saved suite or result is silently upgraded. Bounded synthetic examples check protection and a positive handoff/secure-channel action, including missing and unsafe guidance. This remains an English heuristic, not proof of general semantic safety.
+
 ## 2 JSON output
 
 The format case requires a bare JSON object, without Markdown fences. `eligible` must be a boolean; `reason` and `nextStep` must be nonempty strings after trimming whitespace.
@@ -26,7 +28,7 @@ This is a retention policy, not a claim that automated retention, general secret
 
 Owners and contributors may create new suite versions. Reviewers and viewers have read-only suite access. This restriction does not remove the reviewer's existing authority to decide a release review. Existing suite versions cannot be modified through the API.
 
-Current code separates the suite write guard from the human review guard. Available tests cover several role restrictions and retained snapshots; this confirmation is not a claim of an exhaustive suite-role HTTP matrix.
+Current code separates the suite write guard from the human review guard. Dedicated HTTP checks now verify owner/contributor append-only creation, reviewer/viewer rejection without side effects, all four roles reading suites, PUT/PATCH/DELETE/overwrite attempts leaving an existing version unchanged, and reviewer approval authority despite read-only suite access. These checks establish this stated role matrix, not complete authorization security for every endpoint.
 
 ## 6 Terminal decisions and re-evaluation
 

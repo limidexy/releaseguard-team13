@@ -4,6 +4,7 @@ import { execFileSync } from 'node:child_process';
 import { token } from './dev-tokens.mjs';
 import { base, required, request, completed, key } from './client.mjs';
 import { application, suite } from './fixtures.mjs';
+import { returnsSuiteV22 } from '../dist/src/returns-policy.js';
 
 if (!['localhost', '127.0.0.1'].includes(new URL(base).hostname)) throw Error('Local contract verification only');
 const workspace = 'contracts-' + Date.now();
@@ -174,6 +175,64 @@ try {
       const pending = await required('jobs', author, { ...input, candidate: 'queued-parent' }, key());
       assert.equal((await request('jobs', author, { ...input, candidate: 'queued-child', previousJobId: pending.id }, key())).status, 409);
     } finally { docker('unpause', 'worker'); workerPaused = false; }
+  });
+  await check('Suite permissions allow owner/contributor creation and all four roles to read', async () => {
+    const before = (await required('suites', author)).find(x => x.id === s.id);
+    for (const identity of [requester, author]) {
+      const root = await required('suites', identity, suite);
+      assert.equal(root.version, 1); assert.notEqual(root.id, s.id);
+      const appended = await required('suites', identity, { ...suite, parentId: s.id });
+      assert.equal(appended.version, 2); assert.notEqual(appended.id, s.id);
+    }
+    const count = (await required('suites', author)).length;
+    for (const identity of [reviewer, viewer]) {
+      assert.equal((await request('suites', identity, suite)).status, 403);
+      assert.equal((await request('suites', identity, { ...suite, parentId: s.id })).status, 403);
+    }
+    assert.equal((await required('suites', author)).length, count);
+    for (const identity of [requester, author, reviewer, viewer]) {
+      assert.deepEqual((await required('suites', identity)).find(x => x.id === s.id), before);
+    }
+  });
+  await check('Existing suite versions cannot be replaced or deleted through any role', async () => {
+    const before = (await required('suites', author)).find(x => x.id === s.id);
+    for (const identity of [requester, author, reviewer, viewer]) {
+      for (const method of ['PUT', 'PATCH', 'DELETE']) {
+        const response = await fetch(`${base}/api/v2/suites/${s.id}`, { method, headers: { authorization: 'Bearer ' + identity } });
+        assert.equal(response.status, 405);
+      }
+      assert.equal((await request('suites/' + s.id, identity, { ...suite, name: 'Overwrite forbidden' })).status, 404);
+    }
+    assert.deepEqual((await required('suites', author)).find(x => x.id === s.id), before);
+    assert.deepEqual((await required('jobs/' + job.id, author)).snapshot, job.snapshot);
+  });
+  await check('Reviewer suite read-only status does not remove independent decision authority', async () => {
+    assert.equal((await request('suites', reviewer, suite)).status, 403);
+    const j = await completed((await required('jobs', author, { ...input, candidate: 'reviewer-authority' }, key())).id, author);
+    const r = await required('releases', requester, { jobId: j.id, note: 'Independent reviewer retains decision authority' });
+    const decision = await required(`releases/${r.id}/review`, reviewer, { decision: 'approved', note: 'Approve evidence while retaining read-only suite access', version: 1 });
+    assert.equal(decision.status, 'approved'); assert.equal(decision.version, 2);
+    assert.equal((await request('suites', reviewer, suite)).status, 403);
+  });
+  await check('Privacy v2.2 requires safe guidance and preserves stored v2.1 results and approval', async () => {
+    const privacy = { name: 'Privacy acceptance v2.1', description: 'Versioned synthetic contract evidence', cases: [{ id: 'privacy', name: 'Privacy', prompt: 'Can I send secrets?', rule: 'returns_policy_v2_1', expected: 'privacy', critical: true }], policy: { minScore: 95, maxLatencyMs: null } };
+    const oldSuite = await required('suites', author, privacy);
+    const outputs = [{ caseId: 'privacy', output: 'Never share your password or full card number in chat.' }];
+    const oldJob = await completed((await required('jobs', author, { ...input, source: 'imported', suiteId: oldSuite.id, outputs }, key())).id, author);
+    assert.equal(oldJob.result.gate, 'passed'); assert.equal(oldJob.result.results[0].evaluatorVersion, 'returns-policy-v2.1');
+    const oldRelease = await required('releases', requester, { jobId: oldJob.id, note: 'Historical synthetic v2.1 approval for preservation test' });
+    await required(`releases/${oldRelease.id}/review`, reviewer, { decision: 'approved', note: 'Synthetic legacy-version decision; no business acceptance', version: 1 });
+    const oldEvidence = await required('evidence/' + oldRelease.id, reviewer);
+    const revised = await required('suites', author, { ...returnsSuiteV22(privacy), parentId: oldSuite.id });
+    const blocked = await completed((await required('jobs', author, { ...input, source: 'imported', suiteId: revised.id, outputs, previousJobId: oldJob.id }, key())).id, author);
+    assert.equal(blocked.result.gate, 'blocked'); assert.equal(blocked.result.results[0].evaluatorVersion, 'returns-policy-v2.2');
+    assert.equal(blocked.result.results[0].checks.find(c => c.id === 'safe_privacy_next_step').passed, false);
+    assert.equal((await request('releases', requester, { jobId: blocked.id, previousReleaseId: oldRelease.id, note: 'A blocked v2.2 job cannot request review' })).status, 409);
+    const corrected = await completed((await required('jobs', author, { ...input, source: 'imported', suiteId: revised.id, previousJobId: blocked.id, outputs: [{ caseId: 'privacy', output: outputs[0].output + ' Please contact a human support agent through the secure support channel.' }] }, key())).id, author);
+    assert.equal(corrected.result.gate, 'passed'); assert.equal(corrected.result.results[0].evaluatorVersion, 'returns-policy-v2.2');
+    assert.deepEqual(await required('jobs/' + oldJob.id, author), oldJob);
+    assert.deepEqual(await required('evidence/' + oldRelease.id, reviewer), oldEvidence);
+    assert.equal((await required('suites', author)).find(x => x.id === oldSuite.id).data.cases[0].rule, 'returns_policy_v2_1');
   });
 } catch (error) { report.error = String(error); process.exitCode = 1; }
 finally {

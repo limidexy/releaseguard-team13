@@ -58,7 +58,7 @@ flowchart LR
 | 1 | Contributor: SubmitEvaluation | Job queued + outbox committed | If Asset API unavailable, reject new admission. Reusing a committed key returns the existing job without an Asset lookup. |
 | 2 | Publisher: publish work | Broker-confirmed persistent message | Crash after confirm may duplicate delivery. No exactly-once claim. |
 | 3 | Worker: ClaimJob | Running lease + attempt | Conditional claim and heartbeat. Replay/imported execution permits three attempts; real execution permits one, after which recovery marks failure without another runner call. Stale workers cannot overwrite another lease's result. |
-| 4 | Runner + rules: CompleteJob | Succeeded with passed/blocked gate, or failed execution | Five general predicates plus versioned `returns_policy_v2` / `returns_policy_v2_1` checks; these are bounded rules, not an AI judge. Provider quota limits real throughput. |
+| 4 | Runner + rules: CompleteJob | Succeeded with passed/blocked gate, or failed execution | Five general predicates plus versioned `returns_policy_v2` / `returns_policy_v2_1` / `returns_policy_v2_2` checks. v2.2 requires privacy protection and safe guidance while old results retain their original evaluator. These are bounded rules, not an AI judge. Provider quota limits real throughput. |
 | 5 | Contributor: RequestReview | ReleaseRequested + frozen evidence | Only a completed passing job. Upstream unavailable means no new snapshot. |
 | 6 | Independent reviewer: DecideReview | ReleaseApproved OR ReleaseRejected | Locked row + expected version + aggregate policy. Audit and decision commit together. Captured evidence remains usable during Evaluation outage. |
 
