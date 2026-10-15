@@ -75,7 +75,7 @@ The pure aggregate transition is implemented in `src/contexts/review.ts`, invoke
 
 ## 6. Questions for the team, not fabricated decisions
 
-- B/A: confirm retention, who may author a suite, and whether a release request can ever be superseded (current terminal decisions cannot reopen).
+- B supplied policy confirmation on 15 October: retain evidence through grading/review, allow owners/contributors to create suite versions while reviewers/viewers remain read-only for suites, and keep terminal reviews closed. A new evaluation/review retains validated predecessor references. See `docs/team/B/Confirmed-Acceptance-Rules-20261015.md` and `docs/team/B/Reevaluation-Lineage-20261015.md` for the confirmed rules, linkage and tested scope; policy confirmation is not blanket implementation acceptance.
 - C: choose authorized provider/model and real support policy; have a different member complete the human rubric.
 - D/E: validate managed DB/broker availability, OIDC claim mapping, queue trigger threshold, cold-start delay, min/max workers and cost cap on the selected cloud.
 - All: review alternatives and commit actual rationale/changes through individual PRs. Record actual date, participants and effort, not generated meeting history.

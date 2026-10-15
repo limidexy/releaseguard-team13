@@ -15,7 +15,7 @@ const viewer = await token('observer', 'viewer', workspace);
 const outsider = await token('outsider', 'owner', 'other-' + workspace);
 const report = { startedAt: new Date().toISOString(), workspace, environment: 'Local Docker / real HTTP and database / replay answers / development identities', checks: [] };
 const docker = (...args) => execFileSync('docker', ['compose', ...args], { encoding: 'utf8', timeout: 120000, stdio: 'pipe' });
-let registryStopped = false, evaluationStopped = false;
+let registryStopped = false, evaluationStopped = false, workerPaused = false;
 async function check(name, fn) {
   const start = performance.now();
   try { await fn(); report.checks.push({ name, passed: true, durationMs: performance.now() - start }); console.log('PASS ' + name); }
@@ -115,11 +115,72 @@ try {
     const code = docker('exec', '-T', 'gateway', 'node', '-e', "fetch('http://evaluation:8080/metrics').then(r=>console.log(r.status))").trim();
     assert.equal(code, '401');
   });
+  let linkedJob, linkedRelease;
+  await check('Re-evaluation links a new job and review while preserving terminal history', async () => {
+    const oldJob = await required('jobs/' + job.id, author);
+    const oldReview = await required('evidence/' + release.id, reviewer);
+    const body = { ...input, candidate: 'linked-evaluation', previousJobId: job.id };
+    const k = key();
+    linkedJob = await completed((await required('jobs', author, body, k)).id, author);
+    assert.notEqual(linkedJob.id, job.id); assert.equal(linkedJob.input.previousJobId, job.id);
+    assert.equal((await required('jobs', author, body, k)).id, linkedJob.id);
+    assert.equal((await request('jobs', author, input, k)).status, 409);
+    linkedRelease = await required('releases', requester, { jobId: linkedJob.id, previousReleaseId: release.id, note: 'Re-evaluate while preserving the original decision' });
+    const linked = await required('evidence/' + linkedRelease.id, reviewer);
+    assert.equal(linked.release.previous_release_id, release.id);
+    assert.equal(linked.release.evidence.input.previousJobId, job.id);
+    assert.equal(linked.audit[0].details.previousReleaseId, release.id);
+    assert.equal(linked.audit[0].details.previousJobId, job.id);
+    assert.equal((await required('releases', reviewer)).find(r => r.id === linkedRelease.id).previous_release_id, release.id);
+    assert.equal((await required('jobs', author)).find(j => j.id === linkedJob.id).previous_job_id, job.id);
+    await required(`releases/${linkedRelease.id}/review`, reviewer, { decision: 'approved', note: 'Independent decision on the new linked evidence', version: 1 });
+    assert.deepEqual(await required('jobs/' + job.id, author), oldJob);
+    assert.deepEqual(await required('evidence/' + release.id, reviewer), oldReview);
+  });
+  await check('Job lineage rejects missing, foreign-workspace and different-application parents', async () => {
+    const otherApp = await required('applications', author, { ...application, name: 'Separate application' });
+    const before = await required('jobs', author);
+    assert.equal((await request('jobs', author, { ...input, previousJobId: key() }, key())).status, 404);
+    assert.equal((await request('jobs', outsider, { ...input, previousJobId: job.id }, key())).status, 404);
+    assert.equal((await request('jobs', author, { ...input, appId: otherApp.id, previousJobId: job.id }, key())).status, 409);
+    assert.deepEqual(await required('jobs', author), before);
+  });
+  await check('Review lineage cannot point at unrelated or foreign-workspace decisions', async () => {
+    const j = await completed((await required('jobs', author, { ...input, candidate: 'lineage-negative', previousJobId: job.id }, key())).id, author);
+    const before = await required('releases', reviewer);
+    assert.equal((await request('releases', requester, { jobId: j.id, previousReleaseId: key(), note: 'Missing previous review must be rejected' })).status, 404);
+    assert.equal((await request('releases', requester, { jobId: j.id, previousReleaseId: linkedRelease.id, note: 'Unrelated job lineage must be rejected' })).status, 409);
+    assert.deepEqual(await required('releases', reviewer), before);
+    const foreignApp = await required('applications', outsider, application), foreignSuite = await required('suites', outsider, suite);
+    const foreignJob = await completed((await required('jobs', outsider, { ...input, appId: foreignApp.id, suiteId: foreignSuite.id }, key())).id, outsider);
+    assert.equal((await request('releases', outsider, { jobId: foreignJob.id, previousReleaseId: release.id, note: 'Another workspace cannot reference this review' })).status, 404);
+    assert.deepEqual(await required('releases', outsider), []);
+    // If the client omits the review pointer, resolve it from the validated job lineage.
+    const automatic = await required('releases', requester, { jobId: j.id, note: 'Automatically retain the matching prior review' });
+    assert.equal((await required('evidence/' + automatic.id, reviewer)).release.previous_release_id, release.id);
+  });
+  await check('A pending predecessor cannot be bypassed by omitting the previous review ID', async () => {
+    const pendingJob = await completed((await required('jobs', author, { ...input, candidate: 'pending-predecessor' }, key())).id, author);
+    const pendingReview = await required('releases', requester, { jobId: pendingJob.id, note: 'Leave this predecessor pending for the test' });
+    const child = await completed((await required('jobs', author, { ...input, candidate: 'pending-child', previousJobId: pendingJob.id }, key())).id, author);
+    const before = await required('evidence/' + pendingReview.id, reviewer);
+    for (const extra of [{}, { previousReleaseId: pendingReview.id }]) assert.equal((await request('releases', requester, { jobId: child.id, note: 'Pending review is not a terminal predecessor', ...extra })).status, 409);
+    assert.deepEqual(await required('evidence/' + pendingReview.id, reviewer), before);
+    assert.equal((await required('releases', reviewer)).some(r => r.job_id === child.id), false);
+  });
+  await check('An unfinished job cannot be referenced as a completed predecessor', async () => {
+    docker('pause', 'worker'); workerPaused = true;
+    try {
+      const pending = await required('jobs', author, { ...input, candidate: 'queued-parent' }, key());
+      assert.equal((await request('jobs', author, { ...input, candidate: 'queued-child', previousJobId: pending.id }, key())).status, 409);
+    } finally { docker('unpause', 'worker'); workerPaused = false; }
+  });
 } catch (error) { report.error = String(error); process.exitCode = 1; }
 finally {
   try {
     if (registryStopped) docker('up', '-d', '--no-deps', '--wait', 'registry');
     if (evaluationStopped) docker('up', '-d', '--no-deps', '--wait', 'evaluation');
+    if (workerPaused) docker('unpause', 'worker');
   } catch (error) { report.cleanupError = String(error); process.exitCode = 1; }
   report.finishedAt = new Date().toISOString();
   report.passed = report.checks.filter(c => c.passed).length;
