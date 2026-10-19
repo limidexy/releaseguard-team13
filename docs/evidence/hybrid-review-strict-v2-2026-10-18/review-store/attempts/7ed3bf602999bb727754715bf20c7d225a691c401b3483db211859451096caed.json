@@ -1,0 +1,8 @@
+{
+  "attemptKey": "7ed3bf602999bb727754715bf20c7d225a691c401b3483db211859451096caed",
+  "experimentId": "releaseguard-semantic-review-strict-v2-20261018",
+  "cacheKey": "91397fd7892d9592ecb3656a2acd726f39ee1168f9a78f6d0cdd25de24aec0df",
+  "modelId": "openai/gpt-oss-120b",
+  "recordedAt": "2026-10-18T01:53:52.179Z",
+  "inputHash": "13d1e950bad804ddfa2d13f59ef2e1e2992e3ae1b3febc368b90e4aaa4d503b3"
+}

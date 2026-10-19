@@ -1,0 +1,103 @@
+{
+  "time": "2026-10-15T12:35:53.934Z",
+  "environment": "Local Docker containers; development JWT identities and replay fixtures",
+  "base": "http://localhost:5393",
+  "workspace": "verify-1792067750835",
+  "cloud": false,
+  "checks": [
+    {
+      "name": "Anonymous cannot read tenant data",
+      "passed": true,
+      "durationMs": 20.20225
+    },
+    {
+      "name": "Invalid identity and direct unauthenticated internal request rejected",
+      "passed": true,
+      "durationMs": 216.692167
+    },
+    {
+      "name": "Asset service database credential cannot connect to review database",
+      "passed": true,
+      "durationMs": 118.91779200000002
+    },
+    {
+      "name": "Viewer cannot create an application",
+      "passed": true,
+      "durationMs": 5.655208000000016
+    },
+    {
+      "name": "Create independent application and immutable suite",
+      "passed": true,
+      "durationMs": 12.602332999999987
+    },
+    {
+      "name": "Strict input rejects caller score and duplicate/unknown output IDs",
+      "passed": true,
+      "durationMs": 15.839374999999961
+    },
+    {
+      "name": "Concurrent same-key submission yields one job; different payload conflicts",
+      "passed": true,
+      "durationMs": 170.17329099999995
+    },
+    {
+      "name": "Suite v2 leaves prior job snapshot unchanged",
+      "passed": true,
+      "durationMs": 7.033957999999984
+    },
+    {
+      "name": "Cross-tenant job and release data unavailable",
+      "passed": true,
+      "durationMs": 3.291458000000034
+    },
+    {
+      "name": "Critical failure blocks even with minScore=0 and prevents review request",
+      "passed": true,
+      "durationMs": 329.7845000000001
+    },
+    {
+      "name": "Missing outputs and explicit execution errors fail closed",
+      "passed": true,
+      "durationMs": 483.765708
+    },
+    {
+      "name": "Create pending release; duplicate release conflicts",
+      "passed": true,
+      "durationMs": 10.985167000000047
+    },
+    {
+      "name": "Self-review and machine review are blocked",
+      "passed": true,
+      "durationMs": 6.5216669999999795
+    },
+    {
+      "name": "Machine submission retains human accountability and blocks issuer self-review",
+      "passed": true,
+      "durationMs": 172.83241599999997
+    },
+    {
+      "name": "Stale review rejected; competing reviewers produce one terminal decision",
+      "passed": true,
+      "durationMs": 14.558667000000014
+    },
+    {
+      "name": "Evidence preserves snapshot, request note and exactly one decision audit",
+      "passed": true,
+      "durationMs": 5.011417000000165
+    },
+    {
+      "name": "Consuming CLI exits 3 for blocked job and 0 only for rule eligibility",
+      "passed": true,
+      "durationMs": 601.09825
+    },
+    {
+      "name": "Committed evidence survives service container restart",
+      "passed": true,
+      "durationMs": 897.9792080000002
+    }
+  ],
+  "passed": 18,
+  "failed": 0,
+  "jobId": "950e4064-4892-486f-90b1-240ac27c91c9",
+  "releaseId": "fdea4cb1-01c9-4b44-8a71-fad1e4d33fb2"
+}

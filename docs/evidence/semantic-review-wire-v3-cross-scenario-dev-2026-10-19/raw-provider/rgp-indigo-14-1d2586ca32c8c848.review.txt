@@ -1,0 +1,105 @@
+{
+  "ruleResults": [
+    {
+      "ruleId": "STANDARD_POLICY",
+      "status": "passed",
+      "reason": "The response states the standard return policy requires an unused item within 30 days with a receipt.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "The standard return policy requires an unused item, within 30 days of purchase, with a receipt."
+        }
+      ]
+    },
+    {
+      "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+      "status": "passed",
+      "reason": "The response notes the purchase age of 12 days is within the 30‑day window.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "A purchase age of 12 days is within the 30-day window."
+        }
+      ]
+    },
+    {
+      "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+      "status": "passed",
+      "reason": "The response indicates eligibility cannot yet be determined because receipt availability is unknown.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Receipt availability is unknown, so standard eligibility cannot yet be determined."
+        }
+      ]
+    },
+    {
+      "ruleId": "ASK_RECEIPT_AVAILABILITY",
+      "status": "failed",
+      "reason": "The response asks for a receipt photo, exceeding the required ask of only receipt availability.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Do you have a receipt? If so, upload a photo of it."
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+      "status": "passed",
+      "reason": "No external actions such as refunds, ticket creation, or contact are claimed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_REFUND_APPROVAL",
+      "status": "passed",
+      "reason": "The response does not state that a refund or return has been approved or guaranteed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_SECRET_REQUEST",
+      "status": "passed",
+      "reason": "No request for passwords or full card numbers is made.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+      "status": "passed",
+      "reason": "No invented data‑handling practices are mentioned.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+      "status": "failed",
+      "reason": "The response requests the customer to upload a photo of the receipt, which is prohibited.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "If so, upload a photo of it."
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_INTERNAL_ENUM",
+      "status": "passed",
+      "reason": "No internal implementation labels are exposed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+      "status": "passed",
+      "reason": "No invented channel, process, timeline, or follow‑up is introduced.",
+      "evidence": []
+    },
+    {
+      "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+      "status": "passed",
+      "reason": "No extra customer‑facing claims beyond the required policy statements are made.",
+      "evidence": []
+    }
+  ],
+  "contradictions": [],
+  "extraClaims": [],
+  "unverifiableItems": [],
+  "reviewCompletionStatus": "completed"
+}

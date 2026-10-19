@@ -1,0 +1,21 @@
+{
+  "checkedAt": "2026-10-16T09:03:00Z",
+  "head": "20d258d891935b2d5bee3375ebf81b2872adf76f",
+  "commitCreated": false,
+  "pushed": false,
+  "cloudTouched": false,
+  "containers": {
+    "expected": 8,
+    "exitedWithCodeZero": 8
+  },
+  "volumesDeleted": false,
+  "retainedVolumes": [
+    "rg-v23-v6-20261015_pgdata",
+    "rg-v23-v6-20261015_rabbitdata"
+  ],
+  "previousArchive": {
+    "path": "../ReleaseGuard_v30_v15_Results_20261016.zip",
+    "sha256": "0caa7341bfc4ad8ca72fb7d5a5e877ffa7a5dc55587ee1998395d2d3c47b30d5"
+  },
+  "scope": "Local isolated stack only; no cloud deployment, hosted CI, commit, or push."
+}

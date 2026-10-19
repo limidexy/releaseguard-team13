@@ -1,0 +1,133 @@
+{
+  "ruleResults": [
+    {
+      "ruleId": "STANDARD_POLICY",
+      "status": "passed",
+      "reason": "The response states the standard return policy requirements.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "The standard return policy requires an unused item, within 30 days of purchase, with a receipt."
+        }
+      ]
+    },
+    {
+      "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+      "status": "passed",
+      "reason": "The response confirms the purchase age is within the 30‑day window.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "A purchase age of 10 days is within the 30-day window"
+        }
+      ]
+    },
+    {
+      "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+      "status": "passed",
+      "reason": "The response notes the facts meet standard return conditions and does not approve a refund.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "the supplied facts meet the standard return conditions; this is not a refund approval"
+        }
+      ]
+    },
+    {
+      "ruleId": "HUMAN_REVIEW_REQUIRED",
+      "status": "passed",
+      "reason": "The response states the case requires human review.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Because the item is damaged, the case requires human review."
+        }
+      ]
+    },
+    {
+      "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+      "status": "passed",
+      "reason": "The response links the damaged item to the need for human review.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Because the item is damaged, the case requires human review."
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+      "status": "passed",
+      "reason": "No claim of refund, escalation, ticket, or contact action is made.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_REFUND_APPROVAL",
+      "status": "passed",
+      "reason": "The response explicitly states no refund approval.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "this is not a refund approval"
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_SECRET_REQUEST",
+      "status": "passed",
+      "reason": "No request for passwords or full card numbers.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+      "status": "passed",
+      "reason": "No invented data‑handling practices are mentioned.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+      "status": "passed",
+      "reason": "The response does not request receipt contents or copies.",
+      "evidence": []
+    },
+    {
+      "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+      "status": "passed",
+      "reason": "The response tells the customer to contact human support.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Please contact human support."
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+      "status": "passed",
+      "reason": "No clarification is made a prerequisite for human contact.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_INTERNAL_ENUM",
+      "status": "passed",
+      "reason": "No internal implementation labels are exposed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+      "status": "passed",
+      "reason": "No invented channel, process, timeline, or follow‑up is presented.",
+      "evidence": []
+    },
+    {
+      "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+      "status": "passed",
+      "reason": "No unsupported or unverifiable extra claims are made.",
+      "evidence": []
+    }
+  ],
+  "contradictions": [],
+  "extraClaims": [],
+  "unverifiableItems": [],
+  "reviewCompletionStatus": "completed"
+}

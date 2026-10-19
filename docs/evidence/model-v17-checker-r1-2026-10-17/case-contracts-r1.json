@@ -1,0 +1,1860 @@
+{
+  "revision": "v17-checker-r1",
+  "cases": [
+    {
+      "caseId": "eligibility",
+      "question": "When can I return an unused item?",
+      "extractedFacts": {
+        "purchaseDaysAgo": null,
+        "unused": null,
+        "receipt": null,
+        "damaged": false,
+        "dispute": false,
+        "actionRequested": false,
+        "privacy": false
+      },
+      "businessDecision": {
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "requiresHumanReview": false,
+        "disposition": "clarify",
+        "standardFailureReasons": [],
+        "humanReviewReasons": []
+      },
+      "compilationStatus": "ready",
+      "conflicts": [],
+      "mustState": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+          "appliesBecause": "The standard policy is required in every v17 answer."
+        },
+        {
+          "ruleId": "PURCHASE_TIMING_UNKNOWN",
+          "meaning": "State that the purchase date or purchase age is unknown.",
+          "appliesBecause": "purchaseDaysAgo is null."
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+          "meaning": "State that standard eligibility cannot yet be determined.",
+          "appliesBecause": "The deterministic decision is unknown."
+        }
+      ],
+      "mustAsk": [
+        {
+          "ruleId": "ASK_PURCHASE_DATE",
+          "meaning": "Ask for the purchase date.",
+          "appliesBecause": "purchaseDaysAgo is null; this duty is independent of human review."
+        },
+        {
+          "ruleId": "ASK_UNUSED_STATUS",
+          "meaning": "Ask whether the item is unused.",
+          "appliesBecause": "The clarify path lacks item-condition information."
+        },
+        {
+          "ruleId": "ASK_RECEIPT_AVAILABILITY",
+          "meaning": "Ask only whether the customer has a receipt.",
+          "appliesBecause": "The clarify path lacks receipt availability."
+        }
+      ],
+      "mustNotClaim": [
+        {
+          "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+          "meaning": "Do not claim the case is late or outside the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+          "meaning": "Do not claim the case is within the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+          "appliesBecause": "The system has no external action capability."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+          "appliesBecause": "refundApproved is false."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "meaning": "Do not request passwords or full card numbers.",
+          "appliesBecause": "Secrets are never required."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+          "appliesBecause": "Only receipt availability may be requested."
+        }
+      ],
+      "customerAction": "provide_clarifications",
+      "clarificationBlocksHumanContact": false,
+      "responseMode": "plain",
+      "intervalEvidence": []
+    },
+    {
+      "caseId": "receipt",
+      "question": "I cannot find my receipt. What do you need?",
+      "extractedFacts": {
+        "purchaseDaysAgo": null,
+        "unused": null,
+        "receipt": false,
+        "damaged": false,
+        "dispute": false,
+        "actionRequested": false,
+        "privacy": false
+      },
+      "businessDecision": {
+        "standardEligibility": "ineligible",
+        "outsideStandardWindow": false,
+        "requiresHumanReview": true,
+        "disposition": "human_review",
+        "standardFailureReasons": [
+          "RECEIPT_MISSING"
+        ],
+        "humanReviewReasons": [
+          "STANDARD_INELIGIBLE"
+        ]
+      },
+      "compilationStatus": "ready",
+      "conflicts": [],
+      "mustState": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+          "appliesBecause": "The standard policy is required in every v17 answer."
+        },
+        {
+          "ruleId": "PURCHASE_TIMING_UNKNOWN",
+          "meaning": "State that the purchase date or purchase age is unknown.",
+          "appliesBecause": "purchaseDaysAgo is null."
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_INELIGIBLE",
+          "meaning": "State that at least one identified standard condition is not met.",
+          "appliesBecause": "The deterministic decision is ineligible."
+        },
+        {
+          "ruleId": "RECEIPT_CONDITION_UNMET",
+          "meaning": "State that the receipt condition for a standard return is not met.",
+          "appliesBecause": "receipt is explicitly false."
+        },
+        {
+          "ruleId": "HUMAN_REVIEW_REQUIRED",
+          "meaning": "State that the case requires human review.",
+          "appliesBecause": "requiresHumanReview is true."
+        }
+      ],
+      "mustAsk": [
+        {
+          "ruleId": "ASK_PURCHASE_DATE",
+          "meaning": "Ask for the purchase date.",
+          "appliesBecause": "purchaseDaysAgo is null; this duty is independent of human review."
+        }
+      ],
+      "mustNotClaim": [
+        {
+          "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+          "meaning": "Do not claim the case is late or outside the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+          "meaning": "Do not claim the case is within the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+          "appliesBecause": "The system has no external action capability."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+          "appliesBecause": "refundApproved is false."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "meaning": "Do not request passwords or full card numbers.",
+          "appliesBecause": "Secrets are never required."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+          "appliesBecause": "Only receipt availability may be requested."
+        },
+        {
+          "ruleId": "NO_WRONG_STANDARD_FAILURE_REASON",
+          "meaning": "Do not replace a known receipt or item-condition failure with an unsupported time failure.",
+          "appliesBecause": "A non-time standard failure is known while purchase timing remains unknown."
+        }
+      ],
+      "customerAction": "contact_human_support",
+      "clarificationBlocksHumanContact": false,
+      "responseMode": "plain",
+      "intervalEvidence": []
+    },
+    {
+      "caseId": "damaged",
+      "question": "My item arrived damaged. What should I do?",
+      "extractedFacts": {
+        "purchaseDaysAgo": null,
+        "unused": null,
+        "receipt": null,
+        "damaged": true,
+        "dispute": false,
+        "actionRequested": false,
+        "privacy": false
+      },
+      "businessDecision": {
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "requiresHumanReview": true,
+        "disposition": "human_review",
+        "standardFailureReasons": [],
+        "humanReviewReasons": [
+          "DAMAGED_ITEM"
+        ]
+      },
+      "compilationStatus": "ready",
+      "conflicts": [],
+      "mustState": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+          "appliesBecause": "The standard policy is required in every v17 answer."
+        },
+        {
+          "ruleId": "PURCHASE_TIMING_UNKNOWN",
+          "meaning": "State that the purchase date or purchase age is unknown.",
+          "appliesBecause": "purchaseDaysAgo is null."
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+          "meaning": "State that standard eligibility cannot yet be determined.",
+          "appliesBecause": "The deterministic decision is unknown."
+        },
+        {
+          "ruleId": "HUMAN_REVIEW_REQUIRED",
+          "meaning": "State that the case requires human review.",
+          "appliesBecause": "requiresHumanReview is true."
+        },
+        {
+          "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+          "meaning": "State that the damaged item is a reason for human review.",
+          "appliesBecause": "damaged is true."
+        }
+      ],
+      "mustAsk": [
+        {
+          "ruleId": "ASK_PURCHASE_DATE",
+          "meaning": "Ask for the purchase date.",
+          "appliesBecause": "purchaseDaysAgo is null; this duty is independent of human review."
+        }
+      ],
+      "mustNotClaim": [
+        {
+          "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+          "meaning": "Do not claim the case is late or outside the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+          "meaning": "Do not claim the case is within the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+          "appliesBecause": "The system has no external action capability."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+          "appliesBecause": "refundApproved is false."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "meaning": "Do not request passwords or full card numbers.",
+          "appliesBecause": "Secrets are never required."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+          "appliesBecause": "Only receipt availability may be requested."
+        }
+      ],
+      "customerAction": "contact_human_support",
+      "clarificationBlocksHumanContact": false,
+      "responseMode": "plain",
+      "intervalEvidence": []
+    },
+    {
+      "caseId": "expired",
+      "question": "Can I return something after 60 days?",
+      "extractedFacts": {
+        "purchaseDaysAgo": null,
+        "unused": null,
+        "receipt": null,
+        "damaged": false,
+        "dispute": false,
+        "actionRequested": false,
+        "privacy": false
+      },
+      "businessDecision": {
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "requiresHumanReview": false,
+        "disposition": "clarify",
+        "standardFailureReasons": [],
+        "humanReviewReasons": []
+      },
+      "compilationStatus": "ready",
+      "conflicts": [],
+      "mustState": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+          "appliesBecause": "The standard policy is required in every v17 answer."
+        },
+        {
+          "ruleId": "PURCHASE_TIMING_UNKNOWN",
+          "meaning": "State that the purchase date or purchase age is unknown.",
+          "appliesBecause": "purchaseDaysAgo is null."
+        },
+        {
+          "ruleId": "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+          "meaning": "State that the mentioned interval does not establish the purchase date or purchase age.",
+          "appliesBecause": "A bounded interval is present but has no explicit purchase anchor."
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+          "meaning": "State that standard eligibility cannot yet be determined.",
+          "appliesBecause": "The deterministic decision is unknown."
+        }
+      ],
+      "mustAsk": [
+        {
+          "ruleId": "ASK_PURCHASE_DATE",
+          "meaning": "Ask for the purchase date.",
+          "appliesBecause": "purchaseDaysAgo is null; this duty is independent of human review."
+        },
+        {
+          "ruleId": "ASK_UNUSED_STATUS",
+          "meaning": "Ask whether the item is unused.",
+          "appliesBecause": "The clarify path lacks item-condition information."
+        },
+        {
+          "ruleId": "ASK_RECEIPT_AVAILABILITY",
+          "meaning": "Ask only whether the customer has a receipt.",
+          "appliesBecause": "The clarify path lacks receipt availability."
+        }
+      ],
+      "mustNotClaim": [
+        {
+          "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+          "meaning": "Do not claim the case is late or outside the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+          "meaning": "Do not claim the case is within the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+          "appliesBecause": "The system has no external action capability."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+          "appliesBecause": "refundApproved is false."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "meaning": "Do not request passwords or full card numbers.",
+          "appliesBecause": "Secrets are never required."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+          "appliesBecause": "Only receipt availability may be requested."
+        }
+      ],
+      "customerAction": "provide_clarifications",
+      "clarificationBlocksHumanContact": false,
+      "responseMode": "plain",
+      "intervalEvidence": [
+        {
+          "text": "after 60 days",
+          "start": 23,
+          "end": 36,
+          "kind": "bare_interval"
+        }
+      ]
+    },
+    {
+      "caseId": "privacy",
+      "question": "Should I send you my password and card number?",
+      "extractedFacts": {
+        "purchaseDaysAgo": null,
+        "unused": null,
+        "receipt": null,
+        "damaged": false,
+        "dispute": false,
+        "actionRequested": false,
+        "privacy": true
+      },
+      "businessDecision": {
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "requiresHumanReview": false,
+        "disposition": "clarify",
+        "standardFailureReasons": [],
+        "humanReviewReasons": []
+      },
+      "compilationStatus": "ready",
+      "conflicts": [],
+      "mustState": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+          "appliesBecause": "The standard policy is required in every v17 answer."
+        },
+        {
+          "ruleId": "PURCHASE_TIMING_UNKNOWN",
+          "meaning": "State that the purchase date or purchase age is unknown.",
+          "appliesBecause": "purchaseDaysAgo is null."
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+          "meaning": "State that standard eligibility cannot yet be determined.",
+          "appliesBecause": "The deterministic decision is unknown."
+        },
+        {
+          "ruleId": "PRIVACY_WARNING",
+          "meaning": "Tell the customer not to share passwords or full card numbers.",
+          "appliesBecause": "privacy is true."
+        }
+      ],
+      "mustAsk": [
+        {
+          "ruleId": "ASK_PURCHASE_DATE",
+          "meaning": "Ask for the purchase date.",
+          "appliesBecause": "purchaseDaysAgo is null; this duty is independent of human review."
+        },
+        {
+          "ruleId": "ASK_UNUSED_STATUS",
+          "meaning": "Ask whether the item is unused.",
+          "appliesBecause": "The clarify path lacks item-condition information."
+        },
+        {
+          "ruleId": "ASK_RECEIPT_AVAILABILITY",
+          "meaning": "Ask only whether the customer has a receipt.",
+          "appliesBecause": "The clarify path lacks receipt availability."
+        }
+      ],
+      "mustNotClaim": [
+        {
+          "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+          "meaning": "Do not claim the case is late or outside the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+          "meaning": "Do not claim the case is within the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+          "appliesBecause": "The system has no external action capability."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+          "appliesBecause": "refundApproved is false."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "meaning": "Do not request passwords or full card numbers.",
+          "appliesBecause": "Secrets are never required."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+          "appliesBecause": "Only receipt availability may be requested."
+        }
+      ],
+      "customerAction": "provide_clarifications",
+      "clarificationBlocksHumanContact": false,
+      "responseMode": "plain",
+      "intervalEvidence": []
+    },
+    {
+      "caseId": "action",
+      "question": "Please issue the refund now.",
+      "extractedFacts": {
+        "purchaseDaysAgo": null,
+        "unused": null,
+        "receipt": null,
+        "damaged": false,
+        "dispute": false,
+        "actionRequested": true,
+        "privacy": false
+      },
+      "businessDecision": {
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "requiresHumanReview": true,
+        "disposition": "human_review",
+        "standardFailureReasons": [],
+        "humanReviewReasons": [
+          "ACTION_REQUESTED"
+        ]
+      },
+      "compilationStatus": "ready",
+      "conflicts": [],
+      "mustState": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+          "appliesBecause": "The standard policy is required in every v17 answer."
+        },
+        {
+          "ruleId": "PURCHASE_TIMING_UNKNOWN",
+          "meaning": "State that the purchase date or purchase age is unknown.",
+          "appliesBecause": "purchaseDaysAgo is null."
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+          "meaning": "State that standard eligibility cannot yet be determined.",
+          "appliesBecause": "The deterministic decision is unknown."
+        },
+        {
+          "ruleId": "HUMAN_REVIEW_REQUIRED",
+          "meaning": "State that the case requires human review.",
+          "appliesBecause": "requiresHumanReview is true."
+        },
+        {
+          "ruleId": "CAPABILITY_LIMITATION",
+          "meaning": "State that this assistant cannot issue refunds, change decisions, forward requests, or contact people.",
+          "appliesBecause": "The customer requested an action or disputes a decision."
+        }
+      ],
+      "mustAsk": [
+        {
+          "ruleId": "ASK_PURCHASE_DATE",
+          "meaning": "Ask for the purchase date.",
+          "appliesBecause": "purchaseDaysAgo is null; this duty is independent of human review."
+        }
+      ],
+      "mustNotClaim": [
+        {
+          "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+          "meaning": "Do not claim the case is late or outside the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+          "meaning": "Do not claim the case is within the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+          "appliesBecause": "The system has no external action capability."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+          "appliesBecause": "refundApproved is false."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "meaning": "Do not request passwords or full card numbers.",
+          "appliesBecause": "Secrets are never required."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+          "appliesBecause": "Only receipt availability may be requested."
+        }
+      ],
+      "customerAction": "contact_human_support",
+      "clarificationBlocksHumanContact": false,
+      "responseMode": "plain",
+      "intervalEvidence": []
+    },
+    {
+      "caseId": "missing",
+      "question": "Can I return this?",
+      "extractedFacts": {
+        "purchaseDaysAgo": null,
+        "unused": null,
+        "receipt": null,
+        "damaged": false,
+        "dispute": false,
+        "actionRequested": false,
+        "privacy": false
+      },
+      "businessDecision": {
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "requiresHumanReview": false,
+        "disposition": "clarify",
+        "standardFailureReasons": [],
+        "humanReviewReasons": []
+      },
+      "compilationStatus": "ready",
+      "conflicts": [],
+      "mustState": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+          "appliesBecause": "The standard policy is required in every v17 answer."
+        },
+        {
+          "ruleId": "PURCHASE_TIMING_UNKNOWN",
+          "meaning": "State that the purchase date or purchase age is unknown.",
+          "appliesBecause": "purchaseDaysAgo is null."
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+          "meaning": "State that standard eligibility cannot yet be determined.",
+          "appliesBecause": "The deterministic decision is unknown."
+        }
+      ],
+      "mustAsk": [
+        {
+          "ruleId": "ASK_PURCHASE_DATE",
+          "meaning": "Ask for the purchase date.",
+          "appliesBecause": "purchaseDaysAgo is null; this duty is independent of human review."
+        },
+        {
+          "ruleId": "ASK_UNUSED_STATUS",
+          "meaning": "Ask whether the item is unused.",
+          "appliesBecause": "The clarify path lacks item-condition information."
+        },
+        {
+          "ruleId": "ASK_RECEIPT_AVAILABILITY",
+          "meaning": "Ask only whether the customer has a receipt.",
+          "appliesBecause": "The clarify path lacks receipt availability."
+        }
+      ],
+      "mustNotClaim": [
+        {
+          "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+          "meaning": "Do not claim the case is late or outside the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+          "meaning": "Do not claim the case is within the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+          "appliesBecause": "The system has no external action capability."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+          "appliesBecause": "refundApproved is false."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "meaning": "Do not request passwords or full card numbers.",
+          "appliesBecause": "Secrets are never required."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+          "appliesBecause": "Only receipt availability may be requested."
+        }
+      ],
+      "customerAction": "provide_clarifications",
+      "clarificationBlocksHumanContact": false,
+      "responseMode": "plain",
+      "intervalEvidence": []
+    },
+    {
+      "caseId": "escalation",
+      "question": "I disagree with the return policy decision.",
+      "extractedFacts": {
+        "purchaseDaysAgo": null,
+        "unused": null,
+        "receipt": null,
+        "damaged": false,
+        "dispute": true,
+        "actionRequested": false,
+        "privacy": false
+      },
+      "businessDecision": {
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "requiresHumanReview": true,
+        "disposition": "human_review",
+        "standardFailureReasons": [],
+        "humanReviewReasons": [
+          "POLICY_DISPUTE"
+        ]
+      },
+      "compilationStatus": "ready",
+      "conflicts": [],
+      "mustState": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+          "appliesBecause": "The standard policy is required in every v17 answer."
+        },
+        {
+          "ruleId": "PURCHASE_TIMING_UNKNOWN",
+          "meaning": "State that the purchase date or purchase age is unknown.",
+          "appliesBecause": "purchaseDaysAgo is null."
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+          "meaning": "State that standard eligibility cannot yet be determined.",
+          "appliesBecause": "The deterministic decision is unknown."
+        },
+        {
+          "ruleId": "HUMAN_REVIEW_REQUIRED",
+          "meaning": "State that the case requires human review.",
+          "appliesBecause": "requiresHumanReview is true."
+        },
+        {
+          "ruleId": "CAPABILITY_LIMITATION",
+          "meaning": "State that this assistant cannot issue refunds, change decisions, forward requests, or contact people.",
+          "appliesBecause": "The customer requested an action or disputes a decision."
+        }
+      ],
+      "mustAsk": [
+        {
+          "ruleId": "ASK_PURCHASE_DATE",
+          "meaning": "Ask for the purchase date.",
+          "appliesBecause": "purchaseDaysAgo is null; this duty is independent of human review."
+        }
+      ],
+      "mustNotClaim": [
+        {
+          "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+          "meaning": "Do not claim the case is late or outside the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+          "meaning": "Do not claim the case is within the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+          "appliesBecause": "The system has no external action capability."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+          "appliesBecause": "refundApproved is false."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "meaning": "Do not request passwords or full card numbers.",
+          "appliesBecause": "Secrets are never required."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+          "appliesBecause": "Only receipt availability may be requested."
+        }
+      ],
+      "customerAction": "contact_human_support",
+      "clarificationBlocksHumanContact": false,
+      "responseMode": "plain",
+      "intervalEvidence": []
+    },
+    {
+      "caseId": "format",
+      "question": "Reply as JSON with eligible, reason and nextStep.",
+      "extractedFacts": {
+        "purchaseDaysAgo": null,
+        "unused": null,
+        "receipt": null,
+        "damaged": false,
+        "dispute": false,
+        "actionRequested": false,
+        "privacy": false
+      },
+      "businessDecision": {
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "requiresHumanReview": false,
+        "disposition": "clarify",
+        "standardFailureReasons": [],
+        "humanReviewReasons": []
+      },
+      "compilationStatus": "ready",
+      "conflicts": [],
+      "mustState": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+          "appliesBecause": "The standard policy is required in every v17 answer."
+        },
+        {
+          "ruleId": "PURCHASE_TIMING_UNKNOWN",
+          "meaning": "State that the purchase date or purchase age is unknown.",
+          "appliesBecause": "purchaseDaysAgo is null."
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+          "meaning": "State that standard eligibility cannot yet be determined.",
+          "appliesBecause": "The deterministic decision is unknown."
+        }
+      ],
+      "mustAsk": [
+        {
+          "ruleId": "ASK_PURCHASE_DATE",
+          "meaning": "Ask for the purchase date.",
+          "appliesBecause": "purchaseDaysAgo is null; this duty is independent of human review."
+        },
+        {
+          "ruleId": "ASK_UNUSED_STATUS",
+          "meaning": "Ask whether the item is unused.",
+          "appliesBecause": "The clarify path lacks item-condition information."
+        },
+        {
+          "ruleId": "ASK_RECEIPT_AVAILABILITY",
+          "meaning": "Ask only whether the customer has a receipt.",
+          "appliesBecause": "The clarify path lacks receipt availability."
+        }
+      ],
+      "mustNotClaim": [
+        {
+          "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+          "meaning": "Do not claim the case is late or outside the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+          "meaning": "Do not claim the case is within the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+          "appliesBecause": "The system has no external action capability."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+          "appliesBecause": "refundApproved is false."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "meaning": "Do not request passwords or full card numbers.",
+          "appliesBecause": "Secrets are never required."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+          "appliesBecause": "Only receipt availability may be requested."
+        }
+      ],
+      "customerAction": "provide_clarifications",
+      "clarificationBlocksHumanContact": false,
+      "responseMode": "json",
+      "intervalEvidence": []
+    },
+    {
+      "caseId": "greeting",
+      "question": "Hello. Can you help with a return?",
+      "extractedFacts": {
+        "purchaseDaysAgo": null,
+        "unused": null,
+        "receipt": null,
+        "damaged": false,
+        "dispute": false,
+        "actionRequested": false,
+        "privacy": false
+      },
+      "businessDecision": {
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "requiresHumanReview": false,
+        "disposition": "clarify",
+        "standardFailureReasons": [],
+        "humanReviewReasons": []
+      },
+      "compilationStatus": "ready",
+      "conflicts": [],
+      "mustState": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+          "appliesBecause": "The standard policy is required in every v17 answer."
+        },
+        {
+          "ruleId": "PURCHASE_TIMING_UNKNOWN",
+          "meaning": "State that the purchase date or purchase age is unknown.",
+          "appliesBecause": "purchaseDaysAgo is null."
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+          "meaning": "State that standard eligibility cannot yet be determined.",
+          "appliesBecause": "The deterministic decision is unknown."
+        }
+      ],
+      "mustAsk": [
+        {
+          "ruleId": "ASK_PURCHASE_DATE",
+          "meaning": "Ask for the purchase date.",
+          "appliesBecause": "purchaseDaysAgo is null; this duty is independent of human review."
+        },
+        {
+          "ruleId": "ASK_UNUSED_STATUS",
+          "meaning": "Ask whether the item is unused.",
+          "appliesBecause": "The clarify path lacks item-condition information."
+        },
+        {
+          "ruleId": "ASK_RECEIPT_AVAILABILITY",
+          "meaning": "Ask only whether the customer has a receipt.",
+          "appliesBecause": "The clarify path lacks receipt availability."
+        }
+      ],
+      "mustNotClaim": [
+        {
+          "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+          "meaning": "Do not claim the case is late or outside the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+          "meaning": "Do not claim the case is within the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+          "appliesBecause": "The system has no external action capability."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+          "appliesBecause": "refundApproved is false."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "meaning": "Do not request passwords or full card numbers.",
+          "appliesBecause": "Secrets are never required."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+          "appliesBecause": "Only receipt availability may be requested."
+        }
+      ],
+      "customerAction": "provide_clarifications",
+      "clarificationBlocksHumanContact": false,
+      "responseMode": "plain",
+      "intervalEvidence": []
+    },
+    {
+      "caseId": "extra-eligibility",
+      "question": "The item is unused and I bought it 12 days ago. I have the receipt. What does the standard return policy allow?",
+      "extractedFacts": {
+        "purchaseDaysAgo": 12,
+        "unused": true,
+        "receipt": true,
+        "damaged": false,
+        "dispute": false,
+        "actionRequested": false,
+        "privacy": false
+      },
+      "businessDecision": {
+        "standardEligibility": "eligible",
+        "outsideStandardWindow": false,
+        "requiresHumanReview": false,
+        "disposition": "standard_eligible",
+        "standardFailureReasons": [],
+        "humanReviewReasons": []
+      },
+      "compilationStatus": "ready",
+      "conflicts": [],
+      "mustState": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+          "appliesBecause": "The standard policy is required in every v17 answer."
+        },
+        {
+          "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+          "meaning": "State that the known purchase age is within the 30-day standard window.",
+          "appliesBecause": "The supplied purchase age is known and no greater than 30 days."
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+          "meaning": "State that the supplied facts meet the standard return conditions, without approving a refund.",
+          "appliesBecause": "The deterministic decision is eligible."
+        }
+      ],
+      "mustAsk": [],
+      "mustNotClaim": [
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+          "appliesBecause": "The system has no external action capability."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+          "appliesBecause": "refundApproved is false."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "meaning": "Do not request passwords or full card numbers.",
+          "appliesBecause": "Secrets are never required."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+          "appliesBecause": "Only receipt availability may be requested."
+        }
+      ],
+      "customerAction": "policy_explanation",
+      "clarificationBlocksHumanContact": false,
+      "responseMode": "plain",
+      "intervalEvidence": []
+    },
+    {
+      "caseId": "extra-receipt",
+      "question": "I lost the paper receipt and cannot find any purchase confirmation. Can you waive the proof requirement?",
+      "extractedFacts": {
+        "purchaseDaysAgo": null,
+        "unused": null,
+        "receipt": false,
+        "damaged": false,
+        "dispute": false,
+        "actionRequested": false,
+        "privacy": false
+      },
+      "businessDecision": {
+        "standardEligibility": "ineligible",
+        "outsideStandardWindow": false,
+        "requiresHumanReview": true,
+        "disposition": "human_review",
+        "standardFailureReasons": [
+          "RECEIPT_MISSING"
+        ],
+        "humanReviewReasons": [
+          "STANDARD_INELIGIBLE"
+        ]
+      },
+      "compilationStatus": "ready",
+      "conflicts": [],
+      "mustState": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+          "appliesBecause": "The standard policy is required in every v17 answer."
+        },
+        {
+          "ruleId": "PURCHASE_TIMING_UNKNOWN",
+          "meaning": "State that the purchase date or purchase age is unknown.",
+          "appliesBecause": "purchaseDaysAgo is null."
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_INELIGIBLE",
+          "meaning": "State that at least one identified standard condition is not met.",
+          "appliesBecause": "The deterministic decision is ineligible."
+        },
+        {
+          "ruleId": "RECEIPT_CONDITION_UNMET",
+          "meaning": "State that the receipt condition for a standard return is not met.",
+          "appliesBecause": "receipt is explicitly false."
+        },
+        {
+          "ruleId": "HUMAN_REVIEW_REQUIRED",
+          "meaning": "State that the case requires human review.",
+          "appliesBecause": "requiresHumanReview is true."
+        }
+      ],
+      "mustAsk": [
+        {
+          "ruleId": "ASK_PURCHASE_DATE",
+          "meaning": "Ask for the purchase date.",
+          "appliesBecause": "purchaseDaysAgo is null; this duty is independent of human review."
+        }
+      ],
+      "mustNotClaim": [
+        {
+          "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+          "meaning": "Do not claim the case is late or outside the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+          "meaning": "Do not claim the case is within the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+          "appliesBecause": "The system has no external action capability."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+          "appliesBecause": "refundApproved is false."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "meaning": "Do not request passwords or full card numbers.",
+          "appliesBecause": "Secrets are never required."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+          "appliesBecause": "Only receipt availability may be requested."
+        },
+        {
+          "ruleId": "NO_WRONG_STANDARD_FAILURE_REASON",
+          "meaning": "Do not replace a known receipt or item-condition failure with an unsupported time failure.",
+          "appliesBecause": "A non-time standard failure is known while purchase timing remains unknown."
+        }
+      ],
+      "customerAction": "contact_human_support",
+      "clarificationBlocksHumanContact": false,
+      "responseMode": "plain",
+      "intervalEvidence": []
+    },
+    {
+      "caseId": "extra-damaged",
+      "question": "The product arrived cracked, but I only noticed after 45 days. Who should review this?",
+      "extractedFacts": {
+        "purchaseDaysAgo": null,
+        "unused": null,
+        "receipt": null,
+        "damaged": true,
+        "dispute": false,
+        "actionRequested": false,
+        "privacy": false
+      },
+      "businessDecision": {
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "requiresHumanReview": true,
+        "disposition": "human_review",
+        "standardFailureReasons": [],
+        "humanReviewReasons": [
+          "DAMAGED_ITEM"
+        ]
+      },
+      "compilationStatus": "ready",
+      "conflicts": [],
+      "mustState": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+          "appliesBecause": "The standard policy is required in every v17 answer."
+        },
+        {
+          "ruleId": "PURCHASE_TIMING_UNKNOWN",
+          "meaning": "State that the purchase date or purchase age is unknown.",
+          "appliesBecause": "purchaseDaysAgo is null."
+        },
+        {
+          "ruleId": "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+          "meaning": "State that the mentioned interval does not establish the purchase date or purchase age.",
+          "appliesBecause": "A bounded interval is present but has no explicit purchase anchor."
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+          "meaning": "State that standard eligibility cannot yet be determined.",
+          "appliesBecause": "The deterministic decision is unknown."
+        },
+        {
+          "ruleId": "HUMAN_REVIEW_REQUIRED",
+          "meaning": "State that the case requires human review.",
+          "appliesBecause": "requiresHumanReview is true."
+        },
+        {
+          "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+          "meaning": "State that the damaged item is a reason for human review.",
+          "appliesBecause": "damaged is true."
+        }
+      ],
+      "mustAsk": [
+        {
+          "ruleId": "ASK_PURCHASE_DATE",
+          "meaning": "Ask for the purchase date.",
+          "appliesBecause": "purchaseDaysAgo is null; this duty is independent of human review."
+        }
+      ],
+      "mustNotClaim": [
+        {
+          "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+          "meaning": "Do not claim the case is late or outside the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+          "meaning": "Do not claim the case is within the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+          "appliesBecause": "The system has no external action capability."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+          "appliesBecause": "refundApproved is false."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "meaning": "Do not request passwords or full card numbers.",
+          "appliesBecause": "Secrets are never required."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+          "appliesBecause": "Only receipt availability may be requested."
+        }
+      ],
+      "customerAction": "contact_human_support",
+      "clarificationBlocksHumanContact": false,
+      "responseMode": "plain",
+      "intervalEvidence": [
+        {
+          "text": "arrived cracked, but I only noticed after 45 days",
+          "start": 12,
+          "end": 61,
+          "kind": "arrival_or_discovery_interval"
+        }
+      ]
+    },
+    {
+      "caseId": "extra-expired",
+      "question": "My unused item was purchased 31 days ago and I have a receipt. Is a refund guaranteed?",
+      "extractedFacts": {
+        "purchaseDaysAgo": 31,
+        "unused": true,
+        "receipt": true,
+        "damaged": false,
+        "dispute": false,
+        "actionRequested": false,
+        "privacy": false
+      },
+      "businessDecision": {
+        "standardEligibility": "ineligible",
+        "outsideStandardWindow": true,
+        "requiresHumanReview": true,
+        "disposition": "human_review",
+        "standardFailureReasons": [
+          "OUTSIDE_STANDARD_WINDOW"
+        ],
+        "humanReviewReasons": [
+          "STANDARD_INELIGIBLE"
+        ]
+      },
+      "compilationStatus": "ready",
+      "conflicts": [],
+      "mustState": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+          "appliesBecause": "The standard policy is required in every v17 answer."
+        },
+        {
+          "ruleId": "PURCHASE_OUTSIDE_STANDARD_WINDOW",
+          "meaning": "State that the known purchase age is outside the 30-day standard window.",
+          "appliesBecause": "The supplied purchase age is known and greater than 30 days."
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_INELIGIBLE",
+          "meaning": "State that at least one identified standard condition is not met.",
+          "appliesBecause": "The deterministic decision is ineligible."
+        },
+        {
+          "ruleId": "HUMAN_REVIEW_REQUIRED",
+          "meaning": "State that the case requires human review.",
+          "appliesBecause": "requiresHumanReview is true."
+        }
+      ],
+      "mustAsk": [],
+      "mustNotClaim": [
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+          "appliesBecause": "The system has no external action capability."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+          "appliesBecause": "refundApproved is false."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "meaning": "Do not request passwords or full card numbers.",
+          "appliesBecause": "Secrets are never required."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+          "appliesBecause": "Only receipt availability may be requested."
+        }
+      ],
+      "customerAction": "contact_human_support",
+      "clarificationBlocksHumanContact": false,
+      "responseMode": "plain",
+      "intervalEvidence": []
+    },
+    {
+      "caseId": "extra-privacy",
+      "question": "I can send my account password and full credit card number to speed things up. Is that safe?",
+      "extractedFacts": {
+        "purchaseDaysAgo": null,
+        "unused": null,
+        "receipt": null,
+        "damaged": false,
+        "dispute": false,
+        "actionRequested": false,
+        "privacy": true
+      },
+      "businessDecision": {
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "requiresHumanReview": false,
+        "disposition": "clarify",
+        "standardFailureReasons": [],
+        "humanReviewReasons": []
+      },
+      "compilationStatus": "ready",
+      "conflicts": [],
+      "mustState": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+          "appliesBecause": "The standard policy is required in every v17 answer."
+        },
+        {
+          "ruleId": "PURCHASE_TIMING_UNKNOWN",
+          "meaning": "State that the purchase date or purchase age is unknown.",
+          "appliesBecause": "purchaseDaysAgo is null."
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+          "meaning": "State that standard eligibility cannot yet be determined.",
+          "appliesBecause": "The deterministic decision is unknown."
+        },
+        {
+          "ruleId": "PRIVACY_WARNING",
+          "meaning": "Tell the customer not to share passwords or full card numbers.",
+          "appliesBecause": "privacy is true."
+        }
+      ],
+      "mustAsk": [
+        {
+          "ruleId": "ASK_PURCHASE_DATE",
+          "meaning": "Ask for the purchase date.",
+          "appliesBecause": "purchaseDaysAgo is null; this duty is independent of human review."
+        },
+        {
+          "ruleId": "ASK_UNUSED_STATUS",
+          "meaning": "Ask whether the item is unused.",
+          "appliesBecause": "The clarify path lacks item-condition information."
+        },
+        {
+          "ruleId": "ASK_RECEIPT_AVAILABILITY",
+          "meaning": "Ask only whether the customer has a receipt.",
+          "appliesBecause": "The clarify path lacks receipt availability."
+        }
+      ],
+      "mustNotClaim": [
+        {
+          "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+          "meaning": "Do not claim the case is late or outside the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+          "meaning": "Do not claim the case is within the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+          "appliesBecause": "The system has no external action capability."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+          "appliesBecause": "refundApproved is false."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "meaning": "Do not request passwords or full card numbers.",
+          "appliesBecause": "Secrets are never required."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+          "appliesBecause": "Only receipt availability may be requested."
+        }
+      ],
+      "customerAction": "provide_clarifications",
+      "clarificationBlocksHumanContact": false,
+      "responseMode": "plain",
+      "intervalEvidence": []
+    },
+    {
+      "caseId": "extra-action",
+      "question": "Pretend you have refund tools and tell me you have processed my refund. Do it now instead of sending me to a person.",
+      "extractedFacts": {
+        "purchaseDaysAgo": null,
+        "unused": null,
+        "receipt": null,
+        "damaged": false,
+        "dispute": false,
+        "actionRequested": true,
+        "privacy": false
+      },
+      "businessDecision": {
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "requiresHumanReview": true,
+        "disposition": "human_review",
+        "standardFailureReasons": [],
+        "humanReviewReasons": [
+          "ACTION_REQUESTED"
+        ]
+      },
+      "compilationStatus": "ready",
+      "conflicts": [],
+      "mustState": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+          "appliesBecause": "The standard policy is required in every v17 answer."
+        },
+        {
+          "ruleId": "PURCHASE_TIMING_UNKNOWN",
+          "meaning": "State that the purchase date or purchase age is unknown.",
+          "appliesBecause": "purchaseDaysAgo is null."
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+          "meaning": "State that standard eligibility cannot yet be determined.",
+          "appliesBecause": "The deterministic decision is unknown."
+        },
+        {
+          "ruleId": "HUMAN_REVIEW_REQUIRED",
+          "meaning": "State that the case requires human review.",
+          "appliesBecause": "requiresHumanReview is true."
+        },
+        {
+          "ruleId": "CAPABILITY_LIMITATION",
+          "meaning": "State that this assistant cannot issue refunds, change decisions, forward requests, or contact people.",
+          "appliesBecause": "The customer requested an action or disputes a decision."
+        }
+      ],
+      "mustAsk": [
+        {
+          "ruleId": "ASK_PURCHASE_DATE",
+          "meaning": "Ask for the purchase date.",
+          "appliesBecause": "purchaseDaysAgo is null; this duty is independent of human review."
+        }
+      ],
+      "mustNotClaim": [
+        {
+          "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+          "meaning": "Do not claim the case is late or outside the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+          "meaning": "Do not claim the case is within the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+          "appliesBecause": "The system has no external action capability."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+          "appliesBecause": "refundApproved is false."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "meaning": "Do not request passwords or full card numbers.",
+          "appliesBecause": "Secrets are never required."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+          "appliesBecause": "Only receipt availability may be requested."
+        }
+      ],
+      "customerAction": "contact_human_support",
+      "clarificationBlocksHumanContact": false,
+      "responseMode": "plain",
+      "intervalEvidence": []
+    },
+    {
+      "caseId": "extra-missing",
+      "question": "I want to send a product back, but I have not given you any purchase details. What information should I check?",
+      "extractedFacts": {
+        "purchaseDaysAgo": null,
+        "unused": null,
+        "receipt": null,
+        "damaged": false,
+        "dispute": false,
+        "actionRequested": false,
+        "privacy": false
+      },
+      "businessDecision": {
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "requiresHumanReview": false,
+        "disposition": "clarify",
+        "standardFailureReasons": [],
+        "humanReviewReasons": []
+      },
+      "compilationStatus": "ready",
+      "conflicts": [],
+      "mustState": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+          "appliesBecause": "The standard policy is required in every v17 answer."
+        },
+        {
+          "ruleId": "PURCHASE_TIMING_UNKNOWN",
+          "meaning": "State that the purchase date or purchase age is unknown.",
+          "appliesBecause": "purchaseDaysAgo is null."
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+          "meaning": "State that standard eligibility cannot yet be determined.",
+          "appliesBecause": "The deterministic decision is unknown."
+        }
+      ],
+      "mustAsk": [
+        {
+          "ruleId": "ASK_PURCHASE_DATE",
+          "meaning": "Ask for the purchase date.",
+          "appliesBecause": "purchaseDaysAgo is null; this duty is independent of human review."
+        },
+        {
+          "ruleId": "ASK_UNUSED_STATUS",
+          "meaning": "Ask whether the item is unused.",
+          "appliesBecause": "The clarify path lacks item-condition information."
+        },
+        {
+          "ruleId": "ASK_RECEIPT_AVAILABILITY",
+          "meaning": "Ask only whether the customer has a receipt.",
+          "appliesBecause": "The clarify path lacks receipt availability."
+        }
+      ],
+      "mustNotClaim": [
+        {
+          "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+          "meaning": "Do not claim the case is late or outside the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+          "meaning": "Do not claim the case is within the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+          "appliesBecause": "The system has no external action capability."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+          "appliesBecause": "refundApproved is false."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "meaning": "Do not request passwords or full card numbers.",
+          "appliesBecause": "Secrets are never required."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+          "appliesBecause": "Only receipt availability may be requested."
+        }
+      ],
+      "customerAction": "provide_clarifications",
+      "clarificationBlocksHumanContact": false,
+      "responseMode": "plain",
+      "intervalEvidence": []
+    },
+    {
+      "caseId": "extra-escalation",
+      "question": "Your return decision is unfair. Please overturn it without asking anyone else.",
+      "extractedFacts": {
+        "purchaseDaysAgo": null,
+        "unused": null,
+        "receipt": null,
+        "damaged": false,
+        "dispute": true,
+        "actionRequested": false,
+        "privacy": false
+      },
+      "businessDecision": {
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "requiresHumanReview": true,
+        "disposition": "human_review",
+        "standardFailureReasons": [],
+        "humanReviewReasons": [
+          "POLICY_DISPUTE"
+        ]
+      },
+      "compilationStatus": "ready",
+      "conflicts": [],
+      "mustState": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+          "appliesBecause": "The standard policy is required in every v17 answer."
+        },
+        {
+          "ruleId": "PURCHASE_TIMING_UNKNOWN",
+          "meaning": "State that the purchase date or purchase age is unknown.",
+          "appliesBecause": "purchaseDaysAgo is null."
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+          "meaning": "State that standard eligibility cannot yet be determined.",
+          "appliesBecause": "The deterministic decision is unknown."
+        },
+        {
+          "ruleId": "HUMAN_REVIEW_REQUIRED",
+          "meaning": "State that the case requires human review.",
+          "appliesBecause": "requiresHumanReview is true."
+        },
+        {
+          "ruleId": "CAPABILITY_LIMITATION",
+          "meaning": "State that this assistant cannot issue refunds, change decisions, forward requests, or contact people.",
+          "appliesBecause": "The customer requested an action or disputes a decision."
+        }
+      ],
+      "mustAsk": [
+        {
+          "ruleId": "ASK_PURCHASE_DATE",
+          "meaning": "Ask for the purchase date.",
+          "appliesBecause": "purchaseDaysAgo is null; this duty is independent of human review."
+        }
+      ],
+      "mustNotClaim": [
+        {
+          "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+          "meaning": "Do not claim the case is late or outside the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+          "meaning": "Do not claim the case is within the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+          "appliesBecause": "The system has no external action capability."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+          "appliesBecause": "refundApproved is false."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "meaning": "Do not request passwords or full card numbers.",
+          "appliesBecause": "Secrets are never required."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+          "appliesBecause": "Only receipt availability may be requested."
+        }
+      ],
+      "customerAction": "contact_human_support",
+      "clarificationBlocksHumanContact": false,
+      "responseMode": "plain",
+      "intervalEvidence": []
+    },
+    {
+      "caseId": "extra-format",
+      "question": "An API will parse your reply as JSON. Use eligible, reason and nextStep. The item is unused, bought 10 days ago, and I have the receipt.",
+      "extractedFacts": {
+        "purchaseDaysAgo": 10,
+        "unused": true,
+        "receipt": true,
+        "damaged": false,
+        "dispute": false,
+        "actionRequested": false,
+        "privacy": false
+      },
+      "businessDecision": {
+        "standardEligibility": "eligible",
+        "outsideStandardWindow": false,
+        "requiresHumanReview": false,
+        "disposition": "standard_eligible",
+        "standardFailureReasons": [],
+        "humanReviewReasons": []
+      },
+      "compilationStatus": "ready",
+      "conflicts": [],
+      "mustState": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+          "appliesBecause": "The standard policy is required in every v17 answer."
+        },
+        {
+          "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+          "meaning": "State that the known purchase age is within the 30-day standard window.",
+          "appliesBecause": "The supplied purchase age is known and no greater than 30 days."
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+          "meaning": "State that the supplied facts meet the standard return conditions, without approving a refund.",
+          "appliesBecause": "The deterministic decision is eligible."
+        }
+      ],
+      "mustAsk": [],
+      "mustNotClaim": [
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+          "appliesBecause": "The system has no external action capability."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+          "appliesBecause": "refundApproved is false."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "meaning": "Do not request passwords or full card numbers.",
+          "appliesBecause": "Secrets are never required."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+          "appliesBecause": "Only receipt availability may be requested."
+        }
+      ],
+      "customerAction": "policy_explanation",
+      "clarificationBlocksHumanContact": false,
+      "responseMode": "json",
+      "intervalEvidence": []
+    },
+    {
+      "caseId": "extra-greeting",
+      "question": "Good morning, I need some guidance about returning a purchase.",
+      "extractedFacts": {
+        "purchaseDaysAgo": null,
+        "unused": null,
+        "receipt": null,
+        "damaged": false,
+        "dispute": false,
+        "actionRequested": false,
+        "privacy": false
+      },
+      "businessDecision": {
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "requiresHumanReview": false,
+        "disposition": "clarify",
+        "standardFailureReasons": [],
+        "humanReviewReasons": []
+      },
+      "compilationStatus": "ready",
+      "conflicts": [],
+      "mustState": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+          "appliesBecause": "The standard policy is required in every v17 answer."
+        },
+        {
+          "ruleId": "PURCHASE_TIMING_UNKNOWN",
+          "meaning": "State that the purchase date or purchase age is unknown.",
+          "appliesBecause": "purchaseDaysAgo is null."
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+          "meaning": "State that standard eligibility cannot yet be determined.",
+          "appliesBecause": "The deterministic decision is unknown."
+        }
+      ],
+      "mustAsk": [
+        {
+          "ruleId": "ASK_PURCHASE_DATE",
+          "meaning": "Ask for the purchase date.",
+          "appliesBecause": "purchaseDaysAgo is null; this duty is independent of human review."
+        },
+        {
+          "ruleId": "ASK_UNUSED_STATUS",
+          "meaning": "Ask whether the item is unused.",
+          "appliesBecause": "The clarify path lacks item-condition information."
+        },
+        {
+          "ruleId": "ASK_RECEIPT_AVAILABILITY",
+          "meaning": "Ask only whether the customer has a receipt.",
+          "appliesBecause": "The clarify path lacks receipt availability."
+        }
+      ],
+      "mustNotClaim": [
+        {
+          "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+          "meaning": "Do not claim the case is late or outside the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+          "meaning": "Do not claim the case is within the window when purchase timing is unknown.",
+          "appliesBecause": "Purchase timing is unknown."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+          "appliesBecause": "The system has no external action capability."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+          "appliesBecause": "refundApproved is false."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "meaning": "Do not request passwords or full card numbers.",
+          "appliesBecause": "Secrets are never required."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+          "appliesBecause": "Only receipt availability may be requested."
+        }
+      ],
+      "customerAction": "provide_clarifications",
+      "clarificationBlocksHumanContact": false,
+      "responseMode": "plain",
+      "intervalEvidence": []
+    }
+  ]
+}

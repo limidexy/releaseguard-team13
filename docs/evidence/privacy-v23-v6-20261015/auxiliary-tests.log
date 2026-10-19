@@ -1,0 +1,15 @@
+✔ image identity is config digest, not index or manifest digest (0.448834ms)
+✔ npmSpawn starts npm.cmd through the shell on Windows with one fixed command line (0.535042ms)
+✔ npmSpawn runs npm directly elsewhere and keeps the caller options (0.107542ms)
+✔ npmSpawn rejects arguments that a shell could interpret (0.096792ms)
+✔ spawnFailure explains a start failure instead of failing silently (0.378541ms)
+✔ npm actually starts on this platform through npmSpawn (51.215583ms)
+✔ .gitattributes pins shell scripts and Git hooks to LF (21.984334ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 106.244667

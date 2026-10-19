@@ -1,0 +1,3 @@
+{"event":"semantic-review-wire-v3-attempt-completed","sequence":1,"sampleId":"v3r-complete-allow-01","protocolPassed":true,"referenceMatched":true,"at":"2026-10-19T02:19:05.558Z"}
+{"event":"semantic-review-wire-v3-attempt-completed","sequence":2,"sampleId":"v3r-missing-required-02","protocolPassed":true,"referenceMatched":true,"at":"2026-10-19T02:19:35.278Z"}
+{"event":"semantic-review-wire-v3-attempt-completed","sequence":3,"sampleId":"v3r-json-conflict-03","protocolPassed":true,"referenceMatched":true,"at":"2026-10-19T02:20:11.401Z"}

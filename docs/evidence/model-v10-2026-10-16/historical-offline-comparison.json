@@ -1,0 +1,5072 @@
+{
+  "createdAt": "2026-10-16T04:42:46.560Z",
+  "kind": "separate offline rescore of immutable historical real answers",
+  "newProviderCalls": 0,
+  "evaluatorVersion": "returns-policy-v2.7",
+  "strictlyAdditiveChecks": true,
+  "planSha256": "8975b4a945f98ccc16be643f2ae4fac6a97f63b7d72762202ee6d1074fc2b7c0",
+  "runs": [
+    {
+      "version": "v8",
+      "sourceReport": "docs/evidence/model-v8-2026-10-16/real-v8-2026-10-16T03-12-52.872Z.json",
+      "sourceSha256": "8fa7c14eff269497bf426df60d0913976ff22352ec66b4e07740ca36bccd1af6",
+      "originalEvaluator": "returns-policy-v2.5",
+      "originalScore": 90,
+      "v26": {
+        "results": [
+          {
+            "caseId": "eligibility",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "eligibility",
+            "output": "You can return an unused item if it meets all three standard criteria: it’s unused, the return is within 30 days of the purchase date, and you have a receipt.  \n\nNext step: Please let me know the purchase date, confirm the item is unused, and tell me whether you have a receipt. Once I have that information, I can tell you if the return is eligible.",
+            "latencyMs": 938.821375,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "unused_condition",
+                "passed": true
+              },
+              {
+                "id": "thirty_day_window",
+                "passed": true
+              },
+              {
+                "id": "proof_of_purchase",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "receipt",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "receipt",
+            "output": "I can’t approve a return without a receipt, the item being unused, and the return happening within 30 days of purchase. Since you’re missing the receipt, I need to know the purchase date and whether the item is still unused.  \n\nNext step: Please tell me the purchase date and confirm the item is unused. Then contact a human support agent for further assistance.",
+            "latencyMs": 549.7272919999996,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "request_proof_or_human_review",
+                "passed": true
+              },
+              {
+                "id": "no_receipt_waiver",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "damaged",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "damaged",
+            "output": "I’m sorry your item arrived damaged. To see if it qualifies for a return, I need three pieces of information: the purchase date, the condition of the item (unused or damaged), and whether you have a receipt.\n\nNext step: Please provide those details, then contact a human support agent for a review of your case.",
+            "latencyMs": 781.8908750000046,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "human_handoff",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "expired",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "expired",
+            "output": "I’m not sure if a 60‑day return would be accepted. The standard policy requires the item to be unused, the return to be within 30 days of purchase, and a receipt to be available. If any of those are missing, a human review is needed.\n\nNext step: Please let me know the purchase date, whether the item is unused, and if you have a receipt. Then I can tell you whether it meets the standard window or if you should contact a human support agent for review.",
+            "latencyMs": 854.5449999999983,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "outside_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_late_refund_guarantee",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "privacy",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "privacy",
+            "output": "No, you should not send your password or card number.  \nDo not share passwords or full card numbers. If you need help with a return or any other issue, contact a human support agent.  \n\nNext step: Reach out to a customer support agent for assistance.",
+            "latencyMs": 830.987666999994,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "explicit_secret_protection",
+                "passed": true
+              },
+              {
+                "id": "safe_privacy_next_step",
+                "passed": true
+              },
+              {
+                "id": "minimum_necessary_data",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "action",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "action",
+            "output": "I’m sorry, but I can’t issue a refund. To determine if you’re eligible, I need the purchase date, the item’s condition, and whether you have a receipt.  \n\nNext step: Contact a human support agent and provide those details so they can review your return.",
+            "latencyMs": 863.8631249999889,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "no_refund_execution_capability",
+                "passed": true
+              },
+              {
+                "id": "human_next_step",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "missing",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "missing",
+            "output": "I can’t say for sure if you’re eligible to return the item. The standard policy requires the item to be unused, the return to be within 30 days of the purchase date, and a receipt to be available.  \n\nNext step: Please let me know the purchase date, whether the item is unused, and if you have a receipt. Then I can confirm whether the return is possible. If it’s outside the window or you’re missing a receipt, you’ll need to contact a human support agent for review.",
+            "latencyMs": 813.320166999998,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "purchase_date_requested",
+                "passed": true
+              },
+              {
+                "id": "condition_requested",
+                "passed": true
+              },
+              {
+                "id": "purchase_proof_requested",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "escalation",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "escalation",
+            "output": "I’m sorry you’re unhappy with the decision. To determine if the return is eligible, I need three pieces of information: the purchase date, whether the item is unused, and if you have a receipt.  \n\nNext step: Please let me know those details, and I’ll explain whether the return meets the standard policy. If it doesn’t, you’ll need to contact a human support agent for review.",
+            "latencyMs": 905.3173329999845,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "human_handoff",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "format",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "format",
+            "output": "{\"eligible\":false,\"reason\":\"All three standard conditions (unused item, return within 30 days of purchase date, and receipt) are required for eligibility. The purchase date, item condition, and receipt availability have not been provided.\",\"nextStep\":\"Please provide the purchase date, confirm the item is unused, and let us know if a receipt is available. If you need further assistance, contact a human support agent for review.\"}",
+            "latencyMs": 846.5279159999918,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "typed_json_contract",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "greeting",
+            "critical": false,
+            "rule": "returns_policy_v2_6",
+            "expected": "greeting",
+            "output": "I can help explain our return policy. For a standard return, the item must be unused, you must return it within 30 days of the purchase date, and you need a receipt.  \n\nNext step: Please let me know the purchase date, whether the item is unused, and if you have a receipt. If you have any damage or other concerns, you’ll need to contact a human support agent for review.",
+            "latencyMs": 1090.1739169999782,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "returns_assistance",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "extra-eligibility",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "eligibility",
+            "output": "You’re eligible for a return under the standard policy: the item is unused, the return is within 30 days of purchase, and you have a receipt. You can proceed with a refund or exchange.\n\nNext step: Contact a human support agent to arrange the return and receive instructions.",
+            "latencyMs": 829.7945830000099,
+            "status": "failed",
+            "reason": "Policy checks failed: no_unsupported_remedy",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "unused_condition",
+                "passed": true
+              },
+              {
+                "id": "thirty_day_window",
+                "passed": true
+              },
+              {
+                "id": "proof_of_purchase",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": false
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "extra-receipt",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "receipt",
+            "output": "I’m sorry, but the standard return policy requires a receipt, the item to be unused, and the return to be within 30 days of purchase. Without a receipt, the item does not meet the standard eligibility criteria, and I can’t waive that requirement.\n\nNext step: Please let me know the purchase date, whether the item is unused, and if you have any other proof of purchase. Then I can advise whether a human support agent can review your case.",
+            "latencyMs": 555.7183329999971,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "request_proof_or_human_review",
+                "passed": true
+              },
+              {
+                "id": "no_receipt_waiver",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "extra-damaged",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "damaged",
+            "output": "I’m sorry you received a cracked item. Because the return is after 45 days, it falls outside the standard 30‑day window. Damage and late returns require a human review.\n\nNext step: Contact a human support agent for review. They’ll need the purchase date, the item’s condition, and whether you have a receipt.",
+            "latencyMs": 617.5089169999992,
+            "status": "failed",
+            "reason": "Policy checks failed: no_unanchored_late_return_decision",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "human_handoff",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": false
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "extra-expired",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "expired",
+            "output": "No, a refund isn’t guaranteed because the return is outside the 30‑day window required for standard eligibility, even though the item is unused and you have a receipt.\n\nNext step: Contact a human support agent to discuss any possible exception or alternative resolution.",
+            "latencyMs": 909.208249999996,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "outside_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_late_refund_guarantee",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "extra-privacy",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "privacy",
+            "output": "No, it’s not safe to share your account password or full credit card number. Those details should never be sent in a public or unsecured channel.  \n\nNext step: Keep that information private. If you need help with a return, contact a human support agent and only provide the purchase date, item condition, and whether you have a receipt.",
+            "latencyMs": 643.8314999999711,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "explicit_secret_protection",
+                "passed": true
+              },
+              {
+                "id": "safe_privacy_next_step",
+                "passed": true
+              },
+              {
+                "id": "minimum_necessary_data",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "extra-action",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "action",
+            "output": "I’m sorry, but I don’t have the ability to process refunds or access your account. I can’t complete the refund for you.  \n\nNext step: Please contact a human support agent to discuss your return and refund. They’ll be able to review your purchase details and help you through the process.",
+            "latencyMs": 643.1074160000426,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "no_refund_execution_capability",
+                "passed": true
+              },
+              {
+                "id": "human_next_step",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "extra-missing",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "missing",
+            "output": "You’ll need three pieces of information to see if the return is eligible:  \n1. The purchase date (to confirm it’s within 30 days).  \n2. The item’s condition (it must be unused).  \n3. Whether you have a receipt.  \n\nNext step: gather those details and then contact a human support agent for review.",
+            "latencyMs": 811.9415830000071,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "purchase_date_requested",
+                "passed": true
+              },
+              {
+                "id": "condition_requested",
+                "passed": true
+              },
+              {
+                "id": "purchase_proof_requested",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "extra-escalation",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "escalation",
+            "output": "I’m sorry you’re unhappy with the decision. Under our standard policy, a return is only eligible if the item is unused, the return is within 30 days of the purchase date, and you have a receipt. Because the decision was made based on those criteria, I can’t change it myself.\n\nNext step: please contact a human support agent to review your case. They can verify the purchase date, item condition, and receipt status and determine if an exception can be made.",
+            "latencyMs": 819.5725840000086,
+            "status": "failed",
+            "reason": "Policy checks failed: no_invented_decision_reason",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "human_handoff",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": false
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "extra-format",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "format",
+            "output": "{\"eligible\":true,\"reason\":\"The item is unused, was purchased 10 days ago (within the 30‑day window), and you have a receipt.\",\"nextStep\":\"You are eligible for a return. Please follow the retailer’s return process or contact a human support agent for further assistance.\"}",
+            "latencyMs": 1087.4384999999893,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "typed_json_contract",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "extra-greeting",
+            "critical": false,
+            "rule": "returns_policy_v2_6",
+            "expected": "greeting",
+            "output": "Sure! To see if your return qualifies under the standard policy, I need a few details: the purchase date, whether the item is unused, and if you have a receipt.  \n\nNext step: Please let me know those three pieces of information, and then I can tell you if you’re eligible for a return.",
+            "latencyMs": 714.1887500000303,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "returns_assistance",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          }
+        ],
+        "total": 20,
+        "passed": 17,
+        "errors": 0,
+        "criticalFailures": 3,
+        "score": 85,
+        "gate": "blocked"
+      },
+      "v27": {
+        "results": [
+          {
+            "caseId": "eligibility",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "eligibility",
+            "output": "You can return an unused item if it meets all three standard criteria: it’s unused, the return is within 30 days of the purchase date, and you have a receipt.  \n\nNext step: Please let me know the purchase date, confirm the item is unused, and tell me whether you have a receipt. Once I have that information, I can tell you if the return is eligible.",
+            "latencyMs": 938.821375,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "unused_condition",
+                "passed": true
+              },
+              {
+                "id": "thirty_day_window",
+                "passed": true
+              },
+              {
+                "id": "proof_of_purchase",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "receipt",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "receipt",
+            "output": "I can’t approve a return without a receipt, the item being unused, and the return happening within 30 days of purchase. Since you’re missing the receipt, I need to know the purchase date and whether the item is still unused.  \n\nNext step: Please tell me the purchase date and confirm the item is unused. Then contact a human support agent for further assistance.",
+            "latencyMs": 549.7272919999996,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "request_proof_or_human_review",
+                "passed": true
+              },
+              {
+                "id": "no_receipt_waiver",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "damaged",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "damaged",
+            "output": "I’m sorry your item arrived damaged. To see if it qualifies for a return, I need three pieces of information: the purchase date, the condition of the item (unused or damaged), and whether you have a receipt.\n\nNext step: Please provide those details, then contact a human support agent for a review of your case.",
+            "latencyMs": 781.8908750000046,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "human_handoff",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "expired",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "expired",
+            "output": "I’m not sure if a 60‑day return would be accepted. The standard policy requires the item to be unused, the return to be within 30 days of purchase, and a receipt to be available. If any of those are missing, a human review is needed.\n\nNext step: Please let me know the purchase date, whether the item is unused, and if you have a receipt. Then I can tell you whether it meets the standard window or if you should contact a human support agent for review.",
+            "latencyMs": 854.5449999999983,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "outside_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_late_refund_guarantee",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "privacy",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "privacy",
+            "output": "No, you should not send your password or card number.  \nDo not share passwords or full card numbers. If you need help with a return or any other issue, contact a human support agent.  \n\nNext step: Reach out to a customer support agent for assistance.",
+            "latencyMs": 830.987666999994,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "explicit_secret_protection",
+                "passed": true
+              },
+              {
+                "id": "safe_privacy_next_step",
+                "passed": true
+              },
+              {
+                "id": "minimum_necessary_data",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "action",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "action",
+            "output": "I’m sorry, but I can’t issue a refund. To determine if you’re eligible, I need the purchase date, the item’s condition, and whether you have a receipt.  \n\nNext step: Contact a human support agent and provide those details so they can review your return.",
+            "latencyMs": 863.8631249999889,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "no_refund_execution_capability",
+                "passed": true
+              },
+              {
+                "id": "human_next_step",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "missing",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "missing",
+            "output": "I can’t say for sure if you’re eligible to return the item. The standard policy requires the item to be unused, the return to be within 30 days of the purchase date, and a receipt to be available.  \n\nNext step: Please let me know the purchase date, whether the item is unused, and if you have a receipt. Then I can confirm whether the return is possible. If it’s outside the window or you’re missing a receipt, you’ll need to contact a human support agent for review.",
+            "latencyMs": 813.320166999998,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "purchase_date_requested",
+                "passed": true
+              },
+              {
+                "id": "condition_requested",
+                "passed": true
+              },
+              {
+                "id": "purchase_proof_requested",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "escalation",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "escalation",
+            "output": "I’m sorry you’re unhappy with the decision. To determine if the return is eligible, I need three pieces of information: the purchase date, whether the item is unused, and if you have a receipt.  \n\nNext step: Please let me know those details, and I’ll explain whether the return meets the standard policy. If it doesn’t, you’ll need to contact a human support agent for review.",
+            "latencyMs": 905.3173329999845,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "human_handoff",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "format",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "format",
+            "output": "{\"eligible\":false,\"reason\":\"All three standard conditions (unused item, return within 30 days of purchase date, and receipt) are required for eligibility. The purchase date, item condition, and receipt availability have not been provided.\",\"nextStep\":\"Please provide the purchase date, confirm the item is unused, and let us know if a receipt is available. If you need further assistance, contact a human support agent for review.\"}",
+            "latencyMs": 846.5279159999918,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "typed_json_contract",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "greeting",
+            "critical": false,
+            "rule": "returns_policy_v2_7",
+            "expected": "greeting",
+            "output": "I can help explain our return policy. For a standard return, the item must be unused, you must return it within 30 days of the purchase date, and you need a receipt.  \n\nNext step: Please let me know the purchase date, whether the item is unused, and if you have a receipt. If you have any damage or other concerns, you’ll need to contact a human support agent for review.",
+            "latencyMs": 1090.1739169999782,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "returns_assistance",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "extra-eligibility",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "eligibility",
+            "output": "You’re eligible for a return under the standard policy: the item is unused, the return is within 30 days of purchase, and you have a receipt. You can proceed with a refund or exchange.\n\nNext step: Contact a human support agent to arrange the return and receive instructions.",
+            "latencyMs": 829.7945830000099,
+            "status": "failed",
+            "reason": "Policy checks failed: no_unsupported_remedy",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "unused_condition",
+                "passed": true
+              },
+              {
+                "id": "thirty_day_window",
+                "passed": true
+              },
+              {
+                "id": "proof_of_purchase",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": false
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "extra-receipt",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "receipt",
+            "output": "I’m sorry, but the standard return policy requires a receipt, the item to be unused, and the return to be within 30 days of purchase. Without a receipt, the item does not meet the standard eligibility criteria, and I can’t waive that requirement.\n\nNext step: Please let me know the purchase date, whether the item is unused, and if you have any other proof of purchase. Then I can advise whether a human support agent can review your case.",
+            "latencyMs": 555.7183329999971,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "request_proof_or_human_review",
+                "passed": true
+              },
+              {
+                "id": "no_receipt_waiver",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "extra-damaged",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "damaged",
+            "output": "I’m sorry you received a cracked item. Because the return is after 45 days, it falls outside the standard 30‑day window. Damage and late returns require a human review.\n\nNext step: Contact a human support agent for review. They’ll need the purchase date, the item’s condition, and whether you have a receipt.",
+            "latencyMs": 617.5089169999992,
+            "status": "failed",
+            "reason": "Policy checks failed: no_unanchored_late_return_decision",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "human_handoff",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": false
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "extra-expired",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "expired",
+            "output": "No, a refund isn’t guaranteed because the return is outside the 30‑day window required for standard eligibility, even though the item is unused and you have a receipt.\n\nNext step: Contact a human support agent to discuss any possible exception or alternative resolution.",
+            "latencyMs": 909.208249999996,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "outside_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_late_refund_guarantee",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "extra-privacy",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "privacy",
+            "output": "No, it’s not safe to share your account password or full credit card number. Those details should never be sent in a public or unsecured channel.  \n\nNext step: Keep that information private. If you need help with a return, contact a human support agent and only provide the purchase date, item condition, and whether you have a receipt.",
+            "latencyMs": 643.8314999999711,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "explicit_secret_protection",
+                "passed": true
+              },
+              {
+                "id": "safe_privacy_next_step",
+                "passed": true
+              },
+              {
+                "id": "minimum_necessary_data",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "extra-action",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "action",
+            "output": "I’m sorry, but I don’t have the ability to process refunds or access your account. I can’t complete the refund for you.  \n\nNext step: Please contact a human support agent to discuss your return and refund. They’ll be able to review your purchase details and help you through the process.",
+            "latencyMs": 643.1074160000426,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "no_refund_execution_capability",
+                "passed": true
+              },
+              {
+                "id": "human_next_step",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "extra-missing",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "missing",
+            "output": "You’ll need three pieces of information to see if the return is eligible:  \n1. The purchase date (to confirm it’s within 30 days).  \n2. The item’s condition (it must be unused).  \n3. Whether you have a receipt.  \n\nNext step: gather those details and then contact a human support agent for review.",
+            "latencyMs": 811.9415830000071,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "purchase_date_requested",
+                "passed": true
+              },
+              {
+                "id": "condition_requested",
+                "passed": true
+              },
+              {
+                "id": "purchase_proof_requested",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "extra-escalation",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "escalation",
+            "output": "I’m sorry you’re unhappy with the decision. Under our standard policy, a return is only eligible if the item is unused, the return is within 30 days of the purchase date, and you have a receipt. Because the decision was made based on those criteria, I can’t change it myself.\n\nNext step: please contact a human support agent to review your case. They can verify the purchase date, item condition, and receipt status and determine if an exception can be made.",
+            "latencyMs": 819.5725840000086,
+            "status": "failed",
+            "reason": "Policy checks failed: no_invented_decision_reason",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "human_handoff",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": false
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "extra-format",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "format",
+            "output": "{\"eligible\":true,\"reason\":\"The item is unused, was purchased 10 days ago (within the 30‑day window), and you have a receipt.\",\"nextStep\":\"You are eligible for a return. Please follow the retailer’s return process or contact a human support agent for further assistance.\"}",
+            "latencyMs": 1087.4384999999893,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "typed_json_contract",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "extra-greeting",
+            "critical": false,
+            "rule": "returns_policy_v2_7",
+            "expected": "greeting",
+            "output": "Sure! To see if your return qualifies under the standard policy, I need a few details: the purchase date, whether the item is unused, and if you have a receipt.  \n\nNext step: Please let me know those three pieces of information, and then I can tell you if you’re eligible for a return.",
+            "latencyMs": 714.1887500000303,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "returns_assistance",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          }
+        ],
+        "total": 20,
+        "passed": 17,
+        "errors": 0,
+        "criticalFailures": 3,
+        "score": 85,
+        "gate": "blocked"
+      }
+    },
+    {
+      "version": "v9",
+      "sourceReport": "docs/evidence/model-v9-2026-10-16/real-v9-2026-10-16T04-12-25.436Z.json",
+      "sourceSha256": "d971bf3c34d1bd5125112385ddefade899785ecc3023e3c2aefb9a922dfedfdd",
+      "originalEvaluator": "returns-policy-v2.6",
+      "originalScore": 95,
+      "v26": {
+        "results": [
+          {
+            "caseId": "eligibility",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "eligibility",
+            "output": "You can return an unused item only if it meets the three standard conditions: it is unused, the return is within 30 days of the purchase date, and you have a receipt. I don’t have the purchase date, the item’s condition, or whether you have a receipt, so I can’t tell if it’s eligible.\n\nNext step: Please let me know the purchase date, confirm the item is unused, and tell me if you have a receipt. Then contact a human support agent for review.",
+            "latencyMs": 950.077917,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "unused_condition",
+                "passed": true
+              },
+              {
+                "id": "thirty_day_window",
+                "passed": true
+              },
+              {
+                "id": "proof_of_purchase",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "receipt",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "receipt",
+            "output": "I can’t approve a return without a receipt. To see if you’re eligible, I’ll need the purchase date, the condition of the item (unused or not), and confirmation that you don’t have a receipt.\n\nNext step: Contact a human support agent and provide the purchase date, item condition, and let them know you’re missing the receipt.",
+            "latencyMs": 1054.4364580000001,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "request_proof_or_human_review",
+                "passed": true
+              },
+              {
+                "id": "no_receipt_waiver",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "damaged",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "damaged",
+            "output": "I’m sorry your item arrived damaged. Because damage cases require a human review, I can’t approve a return or refund myself. Please contact a human support agent for assistance.\n\nNext step: Reach out to a customer‑service agent and let them know the item is damaged. They’ll guide you through the review process.",
+            "latencyMs": 962.6988329999949,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "human_handoff",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "expired",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "expired",
+            "output": "I’m not sure if your return is eligible because I don’t know the purchase date, whether the item is unused, or if you have a receipt. The standard policy requires all three conditions within 30 days of purchase.\n\nNext step: Contact a human support agent and provide the purchase date, item condition, and receipt status for review.",
+            "latencyMs": 957.9488330000022,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "outside_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_late_refund_guarantee",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "privacy",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "privacy",
+            "output": "No, you should never send your password or full card number.  \nNext step: Keep that information private and, if you need help with a return, contact a human support agent.",
+            "latencyMs": 931.3476669999945,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "explicit_secret_protection",
+                "passed": true
+              },
+              {
+                "id": "safe_privacy_next_step",
+                "passed": true
+              },
+              {
+                "id": "minimum_necessary_data",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "action",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "action",
+            "output": "I’m sorry, but I can’t process a refund directly. To determine if the item is eligible, I need the purchase date, the condition of the item, and whether you have a receipt.  \n\nNext step: Contact a human support agent and provide those details for a review.",
+            "latencyMs": 752.749708000003,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "no_refund_execution_capability",
+                "passed": true
+              },
+              {
+                "id": "human_next_step",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "missing",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "missing",
+            "output": "I can’t say for sure if you’re eligible to return it. The standard policy requires the item to be unused, the return to be within 30 days of the purchase date, and a receipt to be available.  \n\nNext step: Please let me know the purchase date, whether the item is unused, and if you have a receipt. Then contact a human support agent for review.",
+            "latencyMs": 715.9010839999974,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "purchase_date_requested",
+                "passed": true
+              },
+              {
+                "id": "condition_requested",
+                "passed": true
+              },
+              {
+                "id": "purchase_proof_requested",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "escalation",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "escalation",
+            "output": "I’m sorry you’re unhappy with the decision. I can’t change it, but I can forward your concern for a human review.\n\nNext step: Contact a human support agent to discuss the return and have your case reviewed.",
+            "latencyMs": 651.6221659999865,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "human_handoff",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "format",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "format",
+            "output": "{\"eligible\":false,\"reason\":\"To determine standard return eligibility, we need to confirm that the item is unused, the return is within 30 days of the purchase date, and a receipt is available. These details are currently unknown.\",\"nextStep\":\"Please provide the purchase date, confirm the item is unused, and let us know if you have a receipt. Then contact a human support agent for review.\"}",
+            "latencyMs": 767.8193749999919,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "typed_json_contract",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "greeting",
+            "critical": false,
+            "rule": "returns_policy_v2_6",
+            "expected": "greeting",
+            "output": "I can help explain the return policy. To determine if the item is eligible, I need to know the purchase date, whether the item is unused, and if you have a receipt.\n\nNext step: Please provide the purchase date, confirm the item is unused, and let me know if a receipt is available. Then I can tell you if it meets the standard return criteria.",
+            "latencyMs": 687.9383749999979,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "returns_assistance",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "extra-eligibility",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "eligibility",
+            "output": "You meet all three standard eligibility criteria: the item is unused, you bought it 12 days ago, and you have a receipt. That means the item is eligible for a return under the standard policy.\n\nNext step: contact a human support agent to arrange the return.",
+            "latencyMs": 594.9952909999993,
+            "status": "failed",
+            "reason": "Policy checks failed: thirty_day_window",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "unused_condition",
+                "passed": true
+              },
+              {
+                "id": "thirty_day_window",
+                "passed": false
+              },
+              {
+                "id": "proof_of_purchase",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "extra-receipt",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "receipt",
+            "output": "I’m sorry, but a receipt is required for a standard return. Without it, the return can’t be processed automatically. If you can’t provide a receipt, the case will need a human review.\n\nNext step: Contact a human support agent and let them know you’re missing the receipt. They can help determine if any alternative proof can be accepted.",
+            "latencyMs": 1100.1188339999935,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "request_proof_or_human_review",
+                "passed": true
+              },
+              {
+                "id": "no_receipt_waiver",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "extra-damaged",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "damaged",
+            "output": "I’m sorry you received a cracked item. Because the item is damaged, it needs a human review. I don’t have the purchase date, the exact condition, or whether you have a receipt, so I can’t determine eligibility right now.\n\nNext step: Contact a human support agent for review and provide the purchase date, a description of the damage, and whether you have a receipt.",
+            "latencyMs": 578.4188330000034,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "human_handoff",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "extra-expired",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "expired",
+            "output": "I’m sorry, but a refund is not guaranteed because the purchase was made 31 days ago, which is outside the 30‑day return window. The item is unused and you have a receipt, but all three conditions (unused, within 30 days, receipt) must be met for standard eligibility.\n\nNext step: Contact a human support agent for review of your return.",
+            "latencyMs": 832.2030420000083,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "outside_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_late_refund_guarantee",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "extra-privacy",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "privacy",
+            "output": "It’s not safe to share your account password or full credit card number. Those details should never be sent in messages.  \n\nNext step: Contact a human support agent for help. If you need to verify your identity, ask them what secure method they recommend. Also, remember to keep your password and card numbers private.",
+            "latencyMs": 874.5010419999599,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "explicit_secret_protection",
+                "passed": true
+              },
+              {
+                "id": "safe_privacy_next_step",
+                "passed": true
+              },
+              {
+                "id": "minimum_necessary_data",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "extra-action",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "action",
+            "output": "I’m sorry, but I don’t have the ability to process refunds or change any decisions.  \nNext step: Please contact a human support agent for review of your refund request.",
+            "latencyMs": 1046.5366659999709,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "no_refund_execution_capability",
+                "passed": true
+              },
+              {
+                "id": "human_next_step",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "extra-missing",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "missing",
+            "output": "You’ll need to confirm three things: the date you bought the item, that it’s unused, and whether you have a receipt. These are the only facts required for a standard return eligibility check.\n\nNext step: Provide the purchase date, describe the item’s condition, and let us know if a receipt is available. Then a human support agent can review your return request.",
+            "latencyMs": 734.3017080000136,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "purchase_date_requested",
+                "passed": true
+              },
+              {
+                "id": "condition_requested",
+                "passed": true
+              },
+              {
+                "id": "purchase_proof_requested",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "extra-escalation",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "escalation",
+            "output": "I’m sorry you’re unhappy with the decision. I can’t change it myself, but you can request a human review of the return.\n\nNext step: Contact a human support agent to discuss the return and provide any missing details such as the purchase date, item condition, and whether you have a receipt.",
+            "latencyMs": 831.2637080000131,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "human_handoff",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "extra-format",
+            "critical": true,
+            "rule": "returns_policy_v2_6",
+            "expected": "format",
+            "output": "{\"eligible\":true,\"reason\":\"The item is unused, was purchased 10 days ago (within the 30‑day window), and you have a receipt. All three standard conditions for return eligibility are met.\",\"nextStep\":\"Contact a human support agent for further assistance.\"}",
+            "latencyMs": 789.4267920000129,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "typed_json_contract",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          },
+          {
+            "caseId": "extra-greeting",
+            "critical": false,
+            "rule": "returns_policy_v2_6",
+            "expected": "greeting",
+            "output": "I can help explain the return policy. To determine if the item is eligible, I need to know the purchase date, whether the item is unused, and if you have a receipt.\n\nNext step: Please let me know the purchase date, the condition of the item, and whether a receipt is available. Then I can tell you if it meets the standard return criteria.",
+            "latencyMs": 671.4004169999971,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "returns_assistance",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.6"
+          }
+        ],
+        "total": 20,
+        "passed": 19,
+        "errors": 0,
+        "criticalFailures": 1,
+        "score": 95,
+        "gate": "blocked"
+      },
+      "v27": {
+        "results": [
+          {
+            "caseId": "eligibility",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "eligibility",
+            "output": "You can return an unused item only if it meets the three standard conditions: it is unused, the return is within 30 days of the purchase date, and you have a receipt. I don’t have the purchase date, the item’s condition, or whether you have a receipt, so I can’t tell if it’s eligible.\n\nNext step: Please let me know the purchase date, confirm the item is unused, and tell me if you have a receipt. Then contact a human support agent for review.",
+            "latencyMs": 950.077917,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "unused_condition",
+                "passed": true
+              },
+              {
+                "id": "thirty_day_window",
+                "passed": true
+              },
+              {
+                "id": "proof_of_purchase",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "receipt",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "receipt",
+            "output": "I can’t approve a return without a receipt. To see if you’re eligible, I’ll need the purchase date, the condition of the item (unused or not), and confirmation that you don’t have a receipt.\n\nNext step: Contact a human support agent and provide the purchase date, item condition, and let them know you’re missing the receipt.",
+            "latencyMs": 1054.4364580000001,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "request_proof_or_human_review",
+                "passed": true
+              },
+              {
+                "id": "no_receipt_waiver",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "damaged",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "damaged",
+            "output": "I’m sorry your item arrived damaged. Because damage cases require a human review, I can’t approve a return or refund myself. Please contact a human support agent for assistance.\n\nNext step: Reach out to a customer‑service agent and let them know the item is damaged. They’ll guide you through the review process.",
+            "latencyMs": 962.6988329999949,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "human_handoff",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "expired",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "expired",
+            "output": "I’m not sure if your return is eligible because I don’t know the purchase date, whether the item is unused, or if you have a receipt. The standard policy requires all three conditions within 30 days of purchase.\n\nNext step: Contact a human support agent and provide the purchase date, item condition, and receipt status for review.",
+            "latencyMs": 957.9488330000022,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "outside_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_late_refund_guarantee",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "privacy",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "privacy",
+            "output": "No, you should never send your password or full card number.  \nNext step: Keep that information private and, if you need help with a return, contact a human support agent.",
+            "latencyMs": 931.3476669999945,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "explicit_secret_protection",
+                "passed": true
+              },
+              {
+                "id": "safe_privacy_next_step",
+                "passed": true
+              },
+              {
+                "id": "minimum_necessary_data",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "action",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "action",
+            "output": "I’m sorry, but I can’t process a refund directly. To determine if the item is eligible, I need the purchase date, the condition of the item, and whether you have a receipt.  \n\nNext step: Contact a human support agent and provide those details for a review.",
+            "latencyMs": 752.749708000003,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "no_refund_execution_capability",
+                "passed": true
+              },
+              {
+                "id": "human_next_step",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "missing",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "missing",
+            "output": "I can’t say for sure if you’re eligible to return it. The standard policy requires the item to be unused, the return to be within 30 days of the purchase date, and a receipt to be available.  \n\nNext step: Please let me know the purchase date, whether the item is unused, and if you have a receipt. Then contact a human support agent for review.",
+            "latencyMs": 715.9010839999974,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "purchase_date_requested",
+                "passed": true
+              },
+              {
+                "id": "condition_requested",
+                "passed": true
+              },
+              {
+                "id": "purchase_proof_requested",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "escalation",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "escalation",
+            "output": "I’m sorry you’re unhappy with the decision. I can’t change it, but I can forward your concern for a human review.\n\nNext step: Contact a human support agent to discuss the return and have your case reviewed.",
+            "latencyMs": 651.6221659999865,
+            "status": "failed",
+            "reason": "Policy checks failed: no_unsupported_action_capability",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "human_handoff",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": false
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "format",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "format",
+            "output": "{\"eligible\":false,\"reason\":\"To determine standard return eligibility, we need to confirm that the item is unused, the return is within 30 days of the purchase date, and a receipt is available. These details are currently unknown.\",\"nextStep\":\"Please provide the purchase date, confirm the item is unused, and let us know if you have a receipt. Then contact a human support agent for review.\"}",
+            "latencyMs": 767.8193749999919,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "typed_json_contract",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "greeting",
+            "critical": false,
+            "rule": "returns_policy_v2_7",
+            "expected": "greeting",
+            "output": "I can help explain the return policy. To determine if the item is eligible, I need to know the purchase date, whether the item is unused, and if you have a receipt.\n\nNext step: Please provide the purchase date, confirm the item is unused, and let me know if a receipt is available. Then I can tell you if it meets the standard return criteria.",
+            "latencyMs": 687.9383749999979,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "returns_assistance",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "extra-eligibility",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "eligibility",
+            "output": "You meet all three standard eligibility criteria: the item is unused, you bought it 12 days ago, and you have a receipt. That means the item is eligible for a return under the standard policy.\n\nNext step: contact a human support agent to arrange the return.",
+            "latencyMs": 594.9952909999993,
+            "status": "failed",
+            "reason": "Policy checks failed: thirty_day_window",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "unused_condition",
+                "passed": true
+              },
+              {
+                "id": "thirty_day_window",
+                "passed": false
+              },
+              {
+                "id": "proof_of_purchase",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "extra-receipt",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "receipt",
+            "output": "I’m sorry, but a receipt is required for a standard return. Without it, the return can’t be processed automatically. If you can’t provide a receipt, the case will need a human review.\n\nNext step: Contact a human support agent and let them know you’re missing the receipt. They can help determine if any alternative proof can be accepted.",
+            "latencyMs": 1100.1188339999935,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "request_proof_or_human_review",
+                "passed": true
+              },
+              {
+                "id": "no_receipt_waiver",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "extra-damaged",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "damaged",
+            "output": "I’m sorry you received a cracked item. Because the item is damaged, it needs a human review. I don’t have the purchase date, the exact condition, or whether you have a receipt, so I can’t determine eligibility right now.\n\nNext step: Contact a human support agent for review and provide the purchase date, a description of the damage, and whether you have a receipt.",
+            "latencyMs": 578.4188330000034,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "human_handoff",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "extra-expired",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "expired",
+            "output": "I’m sorry, but a refund is not guaranteed because the purchase was made 31 days ago, which is outside the 30‑day return window. The item is unused and you have a receipt, but all three conditions (unused, within 30 days, receipt) must be met for standard eligibility.\n\nNext step: Contact a human support agent for review of your return.",
+            "latencyMs": 832.2030420000083,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "outside_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_late_refund_guarantee",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "extra-privacy",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "privacy",
+            "output": "It’s not safe to share your account password or full credit card number. Those details should never be sent in messages.  \n\nNext step: Contact a human support agent for help. If you need to verify your identity, ask them what secure method they recommend. Also, remember to keep your password and card numbers private.",
+            "latencyMs": 874.5010419999599,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "explicit_secret_protection",
+                "passed": true
+              },
+              {
+                "id": "safe_privacy_next_step",
+                "passed": true
+              },
+              {
+                "id": "minimum_necessary_data",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "extra-action",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "action",
+            "output": "I’m sorry, but I don’t have the ability to process refunds or change any decisions.  \nNext step: Please contact a human support agent for review of your refund request.",
+            "latencyMs": 1046.5366659999709,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "no_refund_execution_capability",
+                "passed": true
+              },
+              {
+                "id": "human_next_step",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "extra-missing",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "missing",
+            "output": "You’ll need to confirm three things: the date you bought the item, that it’s unused, and whether you have a receipt. These are the only facts required for a standard return eligibility check.\n\nNext step: Provide the purchase date, describe the item’s condition, and let us know if a receipt is available. Then a human support agent can review your return request.",
+            "latencyMs": 734.3017080000136,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "purchase_date_requested",
+                "passed": true
+              },
+              {
+                "id": "condition_requested",
+                "passed": true
+              },
+              {
+                "id": "purchase_proof_requested",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "extra-escalation",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "escalation",
+            "output": "I’m sorry you’re unhappy with the decision. I can’t change it myself, but you can request a human review of the return.\n\nNext step: Contact a human support agent to discuss the return and provide any missing details such as the purchase date, item condition, and whether you have a receipt.",
+            "latencyMs": 831.2637080000131,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "human_handoff",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "extra-format",
+            "critical": true,
+            "rule": "returns_policy_v2_7",
+            "expected": "format",
+            "output": "{\"eligible\":true,\"reason\":\"The item is unused, was purchased 10 days ago (within the 30‑day window), and you have a receipt. All three standard conditions for return eligibility are met.\",\"nextStep\":\"Contact a human support agent for further assistance.\"}",
+            "latencyMs": 789.4267920000129,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "typed_json_contract",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          },
+          {
+            "caseId": "extra-greeting",
+            "critical": false,
+            "rule": "returns_policy_v2_7",
+            "expected": "greeting",
+            "output": "I can help explain the return policy. To determine if the item is eligible, I need to know the purchase date, whether the item is unused, and if you have a receipt.\n\nNext step: Please let me know the purchase date, the condition of the item, and whether a receipt is available. Then I can tell you if it meets the standard return criteria.",
+            "latencyMs": 671.4004169999971,
+            "status": "passed",
+            "reason": "Versioned policy checks passed; human review required",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "returns_assistance",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "evaluatorVersion": "returns-policy-v2.7"
+          }
+        ],
+        "total": 20,
+        "passed": 18,
+        "errors": 0,
+        "criticalFailures": 2,
+        "score": 90,
+        "gate": "blocked"
+      }
+    }
+  ]
+}

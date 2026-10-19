@@ -1,0 +1,127 @@
+{
+  "ruleResults": [
+    {
+      "ruleId": "STANDARD_POLICY",
+      "status": "passed",
+      "reason": "The response states the standard return policy requires an unused item within 30 days with a receipt.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "The standard return policy requires an unused item, within 30 days of purchase, with a receipt."
+        }
+      ]
+    },
+    {
+      "ruleId": "PURCHASE_TIMING_UNKNOWN",
+      "status": "passed",
+      "reason": "The response explicitly says the purchase date and purchase age are unknown.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "The purchase date and purchase age are unknown"
+        }
+      ]
+    },
+    {
+      "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+      "status": "passed",
+      "reason": "The response notes that standard eligibility cannot yet be determined.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "standard eligibility cannot yet be determined"
+        }
+      ]
+    },
+    {
+      "ruleId": "ASK_PURCHASE_DATE",
+      "status": "passed",
+      "reason": "The response asks the customer for the purchase date.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "What was the purchase date?"
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+      "status": "failed",
+      "reason": "The response incorrectly claims the item is outside the 30‑day window despite unknown purchase timing.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "so the item is outside the 30-day window"
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+      "status": "passed",
+      "reason": "The response does not claim the item is within the window.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+      "status": "passed",
+      "reason": "No external actions such as refunds or ticket creation are claimed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_REFUND_APPROVAL",
+      "status": "passed",
+      "reason": "No statement of refund or return approval is made.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_SECRET_REQUEST",
+      "status": "passed",
+      "reason": "No request for passwords or full card numbers is present.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+      "status": "passed",
+      "reason": "No invented data‑handling practices are mentioned.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+      "status": "passed",
+      "reason": "The response does not request receipt contents or copies.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_INTERNAL_ENUM",
+      "status": "passed",
+      "reason": "No internal implementation labels are exposed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+      "status": "passed",
+      "reason": "No invented channel, process, timeline, or follow‑up is described.",
+      "evidence": []
+    },
+    {
+      "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+      "status": "passed",
+      "reason": "No extra unsupported or unverifiable claims are present beyond the prohibited outside‑window claim already addressed.",
+      "evidence": []
+    }
+  ],
+  "contradictions": [
+    {
+      "reason": "The response asserts the item is outside the 30‑day window despite purchase timing being unknown, violating the prohibition on ungrounded outside‑window claims.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "so the item is outside the 30-day window"
+        }
+      ]
+    }
+  ],
+  "extraClaims": [],
+  "unverifiableItems": [],
+  "reviewCompletionStatus": "completed"
+}

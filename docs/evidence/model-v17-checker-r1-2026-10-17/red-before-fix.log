@@ -1,0 +1,260 @@
+TAP version 13
+# Subtest: recognizes the unchanged v16 standard-eligible expressions
+not ok 1 - recognizes the unchanged v16 standard-eligible expressions
+  ---
+  duration_ms: 6.358291
+  location: '/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/response-contract-guard-v17-correctness.test.js:15:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    'failed' !== 'passed'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'failed'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/response-contract-guard-v17-correctness.test.js:18:12)
+    Test.runInAsyncScope (node:async_hooks:211:14)
+    Test.run (node:internal/test_runner/test:979:25)
+    Test.start (node:internal/test_runner/test:877:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: recognizes a normal receipt-availability question without allowing receipt collection
+not ok 2 - recognizes a normal receipt-availability question without allowing receipt collection
+  ---
+  duration_ms: 3.308084
+  location: '/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/response-contract-guard-v17-correctness.test.js:21:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    'failed' !== 'passed'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'failed'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/response-contract-guard-v17-correctness.test.js:25:12)
+    Test.runInAsyncScope (node:async_hooks:211:14)
+    Test.run (node:internal/test_runner/test:979:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:677:18)
+    Test.postRun (node:internal/test_runner/test:1090:19)
+    Test.run (node:internal/test_runner/test:1018:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: negating required human review blocks the full delivery chain
+not ok 3 - negating required human review blocks the full delivery chain
+  ---
+  duration_ms: 1.354708
+  location: '/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/response-contract-guard-v17-correctness.test.js:30:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    'passed' !== 'failed'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'failed'
+  actual: 'passed'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/response-contract-guard-v17-correctness.test.js:33:12)
+    Test.runInAsyncScope (node:async_hooks:211:14)
+    Test.run (node:internal/test_runner/test:979:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:677:18)
+    Test.postRun (node:internal/test_runner/test:1090:19)
+    Test.run (node:internal/test_runner/test:1018:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:677:7)
+  ...
+# Subtest: negating purchase-date uncertainty blocks the full delivery chain
+not ok 4 - negating purchase-date uncertainty blocks the full delivery chain
+  ---
+  duration_ms: 0.520708
+  location: '/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/response-contract-guard-v17-correctness.test.js:39:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    'passed' !== 'failed'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'failed'
+  actual: 'passed'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/response-contract-guard-v17-correctness.test.js:41:12)
+    Test.runInAsyncScope (node:async_hooks:211:14)
+    Test.run (node:internal/test_runner/test:979:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:677:18)
+    Test.postRun (node:internal/test_runner/test:1090:19)
+    Test.run (node:internal/test_runner/test:1018:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:677:7)
+  ...
+# Subtest: purchase-date clarification cannot be made a prerequisite for human contact
+not ok 5 - purchase-date clarification cannot be made a prerequisite for human contact
+  ---
+  duration_ms: 0.718959
+  location: '/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/response-contract-guard-v17-correctness.test.js:46:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + undefined
+    - 'failed'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'failed'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/response-contract-guard-v17-correctness.test.js:49:12)
+    Test.runInAsyncScope (node:async_hooks:211:14)
+    Test.run (node:internal/test_runner/test:979:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:677:18)
+    Test.postRun (node:internal/test_runner/test:1090:19)
+    Test.run (node:internal/test_runner/test:1018:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:677:7)
+  ...
+# Subtest: eligibility assertions distinguish positive, negative, conditional, quoted, and contradiction
+not ok 6 - eligibility assertions distinguish positive, negative, conditional, quoted, and contradiction
+  ---
+  duration_ms: 0.364708
+  location: '/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/response-contract-guard-v17-correctness.test.js:54:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Standard returns require an unused item within 30 days of purchase with a receipt. The purchase was made within the 30-day standard return window. Your return is eligible under the standard policy.
+    
+    'failed' !== 'passed'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'failed'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/response-contract-guard-v17-correctness.test.js:65:16)
+    Test.runInAsyncScope (node:async_hooks:211:14)
+    Test.run (node:internal/test_runner/test:979:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:677:18)
+    Test.postRun (node:internal/test_runner/test:1090:19)
+    Test.run (node:internal/test_runner/test:1018:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:677:7)
+  ...
+# Subtest: unknown-date assertions distinguish positive, negative, conditional, quoted, and contradiction
+not ok 7 - unknown-date assertions distinguish positive, negative, conditional, quoted, and contradiction
+  ---
+  duration_ms: 0.3155
+  location: '/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/response-contract-guard-v17-correctness.test.js:67:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Standard returns require an unused item within 30 days of purchase with a receipt. The purchase date is not unknown, so standard eligibility cannot yet be determined. The damaged item requires human review. Please provide the purchase date. Next step: Contact a human support agent for review.
+    
+    'passed' !== 'failed'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'failed'
+  actual: 'passed'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/response-contract-guard-v17-correctness.test.js:76:16)
+    Test.runInAsyncScope (node:async_hooks:211:14)
+    Test.run (node:internal/test_runner/test:979:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:677:18)
+    Test.postRun (node:internal/test_runner/test:1090:19)
+    Test.run (node:internal/test_runner/test:1018:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:677:7)
+  ...
+# Subtest: human-review assertions distinguish positive, negative, conditional, quoted, and contradiction
+not ok 8 - human-review assertions distinguish positive, negative, conditional, quoted, and contradiction
+  ---
+  duration_ms: 0.481375
+  location: '/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/response-contract-guard-v17-correctness.test.js:78:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Standard returns require an unused item within 30 days of purchase with a receipt. The purchase date is unknown, so standard eligibility cannot yet be determined. The damaged item does not require human review. Please provide the purchase date. Next step: Contact a human support agent for review.
+    
+    'passed' !== 'failed'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'failed'
+  actual: 'passed'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/response-contract-guard-v17-correctness.test.js:87:16)
+    Test.runInAsyncScope (node:async_hooks:211:14)
+    Test.run (node:internal/test_runner/test:979:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:677:18)
+    Test.postRun (node:internal/test_runner/test:1090:19)
+    Test.run (node:internal/test_runner/test:1018:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:677:7)
+  ...
+# Subtest: receipt questions distinguish request, negation, quotation, and later contradiction
+not ok 9 - receipt questions distinguish request, negation, quotation, and later contradiction
+  ---
+  duration_ms: 0.71
+  location: '/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/response-contract-guard-v17-correctness.test.js:89:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Standard returns require an unused item within 30 days of purchase with a receipt. The purchase date is unknown, so standard eligibility cannot yet be determined. Please provide the purchase date. Please confirm whether the item is unused. Please let us know if you have a receipt.
+    
+    'failed' !== 'passed'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  actual: 'failed'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/response-contract-guard-v17-correctness.test.js:99:16)
+    Test.runInAsyncScope (node:async_hooks:211:14)
+    Test.run (node:internal/test_runner/test:979:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:677:18)
+    Test.postRun (node:internal/test_runner/test:1090:19)
+    Test.run (node:internal/test_runner/test:1018:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:677:7)
+  ...
+# Subtest: quoted, conditional, or negated prerequisite wording is not treated as an asserted prerequisite
+not ok 10 - quoted, conditional, or negated prerequisite wording is not treated as an asserted prerequisite
+  ---
+  duration_ms: 0.418875
+  location: '/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/response-contract-guard-v17-correctness.test.js:101:1'
+  failureType: 'testCodeFailure'
+  error: |-
+     You do not need to provide the purchase date before contacting a human support agent.
+    + actual - expected
+    
+    + undefined
+    - 'passed'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'passed'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/response-contract-guard-v17-correctness.test.js:107:16)
+    Test.runInAsyncScope (node:async_hooks:211:14)
+    Test.run (node:internal/test_runner/test:979:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:677:18)
+    Test.postRun (node:internal/test_runner/test:1090:19)
+    Test.run (node:internal/test_runner/test:1018:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:677:7)
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 0
+# fail 10
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 64.357208

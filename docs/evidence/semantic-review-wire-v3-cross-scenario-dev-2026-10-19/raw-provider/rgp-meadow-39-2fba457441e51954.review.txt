@@ -1,0 +1,156 @@
+{
+  "ruleResults": [
+    {
+      "ruleId": "STANDARD_POLICY",
+      "status": "passed",
+      "reason": "The response states the standard return policy requiring an unused item within 30 days with a receipt.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "The standard return policy requires an unused item, within 30 days of purchase, with a receipt."
+        }
+      ]
+    },
+    {
+      "ruleId": "PURCHASE_TIMING_UNKNOWN",
+      "status": "passed",
+      "reason": "The response notes that the purchase date and purchase age are unknown.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "The purchase date and purchase age are unknown"
+        }
+      ]
+    },
+    {
+      "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+      "status": "passed",
+      "reason": "The response says standard eligibility cannot yet be determined.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "standard eligibility cannot yet be determined"
+        }
+      ]
+    },
+    {
+      "ruleId": "HUMAN_REVIEW_REQUIRED",
+      "status": "passed",
+      "reason": "The response indicates that the request requires human review.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Your request to overturn the decision requires human review."
+        }
+      ]
+    },
+    {
+      "ruleId": "CAPABILITY_LIMITATION",
+      "status": "passed",
+      "reason": "The response states the assistant cannot issue refunds, change decisions, forward requests, or contact people.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "I cannot issue a refund, change a decision, forward a request, or contact another person."
+        }
+      ]
+    },
+    {
+      "ruleId": "ASK_PURCHASE_DATE",
+      "status": "passed",
+      "reason": "The response asks the customer for the purchase date.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "What was the purchase date?"
+        }
+      ]
+    },
+    {
+      "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+      "status": "passed",
+      "reason": "The response tells the customer to contact human support directly.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Please contact human support directly"
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+      "status": "passed",
+      "reason": "The response does not claim the case is outside the return window.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+      "status": "passed",
+      "reason": "The response does not claim the case is within the return window.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+      "status": "passed",
+      "reason": "The response does not claim any external action such as refund or ticket will be performed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_REFUND_APPROVAL",
+      "status": "passed",
+      "reason": "The response does not state that a refund or return has been approved or processed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_SECRET_REQUEST",
+      "status": "passed",
+      "reason": "The response does not request passwords or full card numbers.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+      "status": "passed",
+      "reason": "The response does not invent any data‑handling practices.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+      "status": "passed",
+      "reason": "The response does not request receipt contents, copies, or uploads.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+      "status": "passed",
+      "reason": "The response explicitly states clarification is not required before contacting support.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "you do not need to wait for that clarification before contacting them."
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_INTERNAL_ENUM",
+      "status": "passed",
+      "reason": "No internal implementation labels are exposed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+      "status": "passed",
+      "reason": "The response does not invent any new channel, process, timeline, or follow‑up.",
+      "evidence": []
+    },
+    {
+      "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+      "status": "passed",
+      "reason": "No extra unsupported or unverifiable claims are present.",
+      "evidence": []
+    }
+  ],
+  "contradictions": [],
+  "extraClaims": [],
+  "unverifiableItems": [],
+  "reviewCompletionStatus": "completed"
+}

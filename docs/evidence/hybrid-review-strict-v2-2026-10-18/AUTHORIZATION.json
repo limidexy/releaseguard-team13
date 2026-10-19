@@ -1,0 +1,18 @@
+{
+  "version": "semantic-review-strict-v2-authorization",
+  "experimentId": "releaseguard-semantic-review-strict-v2-20261018",
+  "recordedAt": "2026-10-18T01:51:44Z",
+  "approvedBy": "LIN XINDA",
+  "approved": true,
+  "allowedProvider": "Groq",
+  "allowedModelId": "openai/gpt-oss-120b",
+  "maximumSemanticReviewRequests": 2,
+  "customerGenerationRequests": 0,
+  "automaticRetries": 0,
+  "providerSwitches": 0,
+  "paidCallsAllowed": false,
+  "deploymentAllowed": false,
+  "publicationAllowed": false,
+  "gitPushAllowed": false,
+  "scope": "One frozen correct fictional return answer followed, only after complete protocol success, by one frozen explicitly violating fictional return answer. Reference labels stay local."
+}

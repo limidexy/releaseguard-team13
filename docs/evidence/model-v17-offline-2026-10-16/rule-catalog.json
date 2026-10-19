@@ -1,0 +1,97 @@
+{
+  "contractVersion": "response-contract-v17",
+  "rules": [
+    {
+      "ruleId": "STANDARD_POLICY",
+      "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt."
+    },
+    {
+      "ruleId": "PURCHASE_TIMING_UNKNOWN",
+      "meaning": "State that the purchase date or purchase age is unknown."
+    },
+    {
+      "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+      "meaning": "State that standard eligibility cannot yet be determined."
+    },
+    {
+      "ruleId": "ASK_PURCHASE_DATE",
+      "meaning": "Ask for the purchase date."
+    },
+    {
+      "ruleId": "ASK_UNUSED_STATUS",
+      "meaning": "Ask whether the item is unused."
+    },
+    {
+      "ruleId": "ASK_RECEIPT_AVAILABILITY",
+      "meaning": "Ask only whether the customer has a receipt."
+    },
+    {
+      "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+      "meaning": "Do not claim the case is late or outside the window when purchase timing is unknown."
+    },
+    {
+      "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+      "meaning": "Do not claim the case is within the window when purchase timing is unknown."
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+      "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed."
+    },
+    {
+      "ruleId": "NO_REFUND_APPROVAL",
+      "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed."
+    },
+    {
+      "ruleId": "NO_SECRET_REQUEST",
+      "meaning": "Do not request passwords or full card numbers."
+    },
+    {
+      "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+      "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads."
+    },
+    {
+      "ruleId": "STANDARD_ELIGIBILITY_INELIGIBLE",
+      "meaning": "State that at least one identified standard condition is not met."
+    },
+    {
+      "ruleId": "RECEIPT_CONDITION_UNMET",
+      "meaning": "State that the receipt condition for a standard return is not met."
+    },
+    {
+      "ruleId": "HUMAN_REVIEW_REQUIRED",
+      "meaning": "State that the case requires human review."
+    },
+    {
+      "ruleId": "NO_WRONG_STANDARD_FAILURE_REASON",
+      "meaning": "Do not replace a known receipt or item-condition failure with an unsupported time failure."
+    },
+    {
+      "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+      "meaning": "State that the damaged item is a reason for human review."
+    },
+    {
+      "ruleId": "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+      "meaning": "State that the mentioned interval does not establish the purchase date or purchase age."
+    },
+    {
+      "ruleId": "PRIVACY_WARNING",
+      "meaning": "Tell the customer not to share passwords or full card numbers."
+    },
+    {
+      "ruleId": "CAPABILITY_LIMITATION",
+      "meaning": "State that this assistant cannot issue refunds, change decisions, forward requests, or contact people."
+    },
+    {
+      "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+      "meaning": "State that the known purchase age is within the 30-day standard window."
+    },
+    {
+      "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+      "meaning": "State that the supplied facts meet the standard return conditions, without approving a refund."
+    },
+    {
+      "ruleId": "PURCHASE_OUTSIDE_STANDARD_WINDOW",
+      "meaning": "State that the known purchase age is outside the 30-day standard window."
+    }
+  ]
+}

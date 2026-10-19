@@ -1,0 +1,17 @@
+PASS New evaluator blocks unsafe old output and refuses an approval request
+PASS Private password requests are blocked through the real Worker and database
+PASS Mixed need and require clauses blocks job and approval
+PASS Future passive credential requirement blocks job and approval
+PASS Remember not to share passes without editing its answer
+PASS Postfix protection passes without editing its answer
+PASS Safe paraphrase passes without editing its answer
+PASS Minimal factual next step passes without editing its answer
+PASS All v1-v12 traverse the real API/queue/support as explicitly labelled replay
+PASS New approval links the old decision while both old evidence records stay unchanged
+PASS v2.8 receipt correction and grounding failures traverse Worker and database
+PASS v2.8 blocks unsupported capabilities and preserves v2.6 history
+PASS Thirty-day statement remains mandatory in v2.8
+PASS Privacy refusal without a user warning is blocked; explicit warning passes
+PASS Discovery date cannot establish purchase deadline; clarification passes
+PASS Reviewer and viewer cannot author suites
+{"path":"docs/evidence/model-v12-2026-10-16/http-acceptance-1792135770044.json","passed":16,"error":null}

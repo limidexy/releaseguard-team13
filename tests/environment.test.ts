@@ -41,7 +41,7 @@ test('new suite keeps the same questions, thresholds and critical flags without 
   } finally { await app.close(); }
 });
 
-test('v2.2 catalogue is separately versioned and console setup selects it without replacing v2.1', async () => {
+test('v2.2 catalogue remains separately accessible without replacing v2.1', async () => {
   const app = Fastify(); await gateway(app);
   try {
     const old = (await app.inject('/returns-fixtures-v2.json')).json();
@@ -51,6 +51,5 @@ test('v2.2 catalogue is separately versioned and console setup selects it withou
     assert.ok(latest.cases.every((c: any) => c.rule === 'returns_policy_v2_2'));
     assert.deepEqual(latest.cases.map((c: any) => [c.id, c.prompt, c.critical]), old.cases.map((c: any) => [c.id, c.prompt, c.critical]));
     assert.deepEqual(latest.suite.policy, old.suite.policy);
-    assert.match((await app.inject('/app.js')).body, /fetch\('\/returns-fixtures-v2-2.json'\)/);
   } finally { await app.close(); }
 });

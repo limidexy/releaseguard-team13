@@ -1,0 +1,22 @@
+{
+  "checkedAt": "2026-10-17T07:14:07Z",
+  "provider": "GroqCloud",
+  "observationMethod": "Authenticated Groq console read-only UI observed in the user's Chrome session; no billing or account setting was changed.",
+  "organizationContext": "Personal",
+  "projectContext": "Default Project",
+  "billingPage": {
+    "url": "https://console.groq.com/settings/billing/plans",
+    "visiblePlan": "Free",
+    "visiblePrice": "$0",
+    "visibleStatus": "Current Plan",
+    "paidUpgradePerformed": false
+  },
+  "organizationLimitsPage": {
+    "url": "https://console.groq.com/settings/limits",
+    "openai/gpt-oss-20b": {"requestsPerMinute": 30, "requestsPerDay": 1000, "tokensPerMinute": 8000, "tokensPerDay": 200000},
+    "openai/gpt-oss-120b": {"requestsPerMinute": 30, "requestsPerDay": 1000, "tokensPerMinute": 8000, "tokensPerDay": 200000}
+  },
+  "authorizedExperimentMaximumRequests": 40,
+  "assessment": "The authenticated current context is on Free $0 and both frozen models expose free-plan limits sufficient for at most 40 requests. Actual provider responses and limit headers must still be retained; no quota is guaranteed in advance.",
+  "containsSecret": false
+}

@@ -1,0 +1,37 @@
+{
+  "version": "semantic-review-wire-v3-real-freeze",
+  "experimentId": "releaseguard-semantic-wire-v3-real-20261019",
+  "frozenAt": "2026-10-19T10:18:27+08:00",
+  "gitHead": "20d258d891935b2d5bee3375ebf81b2872adf76f",
+  "targetedOfflineTests": {
+    "command": "node --test dist/tests/semantic-review-wire-v3.test.js dist/tests/groq-semantic-review-transport-v2.test.js",
+    "passed": 12,
+    "failed": 0
+  },
+  "files": [
+    {"path": "src/semantic-review-wire-v3.ts", "sha256": "a66cd592fed23cbf76033d0ab4a47a4610af509a7e2a16f81af62bbac9817b2f"},
+    {"path": "src/groq-semantic-review-transport-v2.ts", "sha256": "339905c9e034122f0424a6ba3bd10c2fc50a1c953fc7603e7b18a80b000d89ea"},
+    {"path": "src/semantic-review-sources-v1.ts", "sha256": "9a9c33a23274c3efbe3e4896464816d9389bfc75e2d9719be1fb7a4d3b3ed13c"},
+    {"path": "src/hybrid-evaluation-v1.ts", "sha256": "b9f71e6049890273f94be77d1e6bf5694cf4e024e0aa87ce90957b08690e2c11"},
+    {"path": "src/returns-decision-v1.ts", "sha256": "e8937bd8f26afb38687def64ba116e0cf5848963f5f4a33880f6aafcba0b8f1c"},
+    {"path": "src/response-contract-v17.ts", "sha256": "f3997451d5602aa80c53034e91fdc0937f24ea09a946c3591dbe2a65b62853f9"},
+    {"path": "dist/src/semantic-review-wire-v3.js", "sha256": "d9abacaddcf64b77ef556222e9649c64f893b63354186428b05336f2eac8994b"},
+    {"path": "dist/src/groq-semantic-review-transport-v2.js", "sha256": "16d4db0ad373c20b9834bbd54c0552f19bc7ea657090614336545fd3b71413ce"},
+    {"path": "dist/src/semantic-review-sources-v1.js", "sha256": "cd8be2cb08a16beb8969c9efdea0efc8623e69f17fc7f155011ef571df4cd5e2"},
+    {"path": "dist/src/hybrid-evaluation-v1.js", "sha256": "0265df08bbbf460139388669c7832d2de771f9ca5ac57f9a7e06026a26f16a34"},
+    {"path": "dist/src/returns-decision-v1.js", "sha256": "7fb8d84fc50f2eeb5991fc4c45786bc68115d5c600b998b93035f0824258b64a"},
+    {"path": "dist/src/response-contract-v17.js", "sha256": "f7071c8d4695a93f868daab80c3ee256156a8b8812106c124ef59bc0e305710a"},
+    {"path": "tests/semantic-review-wire-v3.test.ts", "sha256": "de53219928688315f65b2ca9d0ca85ba9d78646f3586d9f2f95b83e3096b2f49"},
+    {"path": "tests/groq-semantic-review-transport-v2.test.ts", "sha256": "2b6f817cf18c0663be9f106b207eeb372803e1bfaeb68a76d2537d823bfac69e"},
+    {"path": "dist/tests/semantic-review-wire-v3.test.js", "sha256": "d0f4f5ecfa7f1ede231116e1b164e609ea67514f066309046290245fe2604d15"},
+    {"path": "dist/tests/groq-semantic-review-transport-v2.test.js", "sha256": "45886a11c742322423135e5976c1870d62be327ecafc7370006bfa82f7426c66"},
+    {"path": "scripts/run-semantic-review-wire-v3-real.mjs", "sha256": "5d2d6d220635c3b50d4ade8063d5f3a549872e3cd2a683d25cffd566ecb132e1"},
+    {"path": "docs/evidence/semantic-review-wire-v3-real-2026-10-19/EXPERIMENT-PLAN.json", "sha256": "9e5df1ec09610e77d59960fbf6b206194284b2edcdc303273901be440a1b6dc3"},
+    {"path": "docs/evidence/semantic-review-wire-v3-real-2026-10-19/AUTHORIZATION.json", "sha256": "66fe892fa65814167671f5cd7ffbbd1dd980fea46a9f8d67f2e535a6bc565c6c"},
+    {"path": "docs/evidence/semantic-review-wire-v3-real-2026-10-19/FREE-PLAN-CHECK.json", "sha256": "43773b04257bc60dda37ebe3ab70359c0397fedbdd7d43fe81c13536a746070c"},
+    {"path": "docs/evidence/semantic-review-wire-v3-real-2026-10-19/FROZEN-SAMPLES.json", "sha256": "7801539ad96d4e449f076c3bef058ce0f2a5ecd39b65e1aa53656ca35b21122d"},
+    {"path": "package-lock.json", "sha256": "edbec9021091f0b178c6e747372548ffdabbecbaac78cfca84f87987e251f3e8"},
+    {"path": "docs/evidence/hybrid-semantic-pilot-v1-2026-10-18/FINAL-RESULT.json", "sha256": "29d0deb90ffaf5c5ed3ecd92c9201f98aaf0da555d2698d1eacfa66bd38b490d"},
+    {"path": "docs/evidence/hybrid-semantic-pilot-v1-2026-10-18/EXPERIMENT.complete.json", "sha256": "998aa84b3ec124188403c46423d810cca4f03cb7d974411f897b0a33fadb6d94"}
+  ]
+}

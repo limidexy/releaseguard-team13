@@ -1,0 +1,9 @@
+b9f71e6049890273f94be77d1e6bf5694cf4e024e0aa87ce90957b08690e2c11  src/hybrid-evaluation-v1.ts
+3d1885937a8c87810bf2b957ed5e626ac91cd89838b075849a4debb505a55cc5  src/semantic-review-sources-v1.ts
+b19726b4fe09dee7f3b87c4629ec1bbc683701557bf24dd17a0240bc929d22d4  tests/hybrid-evaluation-v1.test.ts
+1b94833d574c1ca16f4152110551f8ab782942badd660491be7c5b18db0ba996  docs/evidence/hybrid-evaluation-v1-2026-10-17/SEMANTIC-REVIEW-PROTOCOL-v1.md
+9f0a9cecda2a694a698797049ca37c07bf83abb57b0a7cef3e7ae2b9c15adb62  docs/evidence/hybrid-evaluation-v1-2026-10-17/CALIBRATION-PLAN-v1.md
+d49e927daee0a7df26e2fc08718cd858be07d41297dcd74afd3c1922bf53e6fe  docs/evidence/hybrid-evaluation-v1-2026-10-17/VERIFICATION-LOG.md
+342169f5dbee1e1595f35147554b6bc02e6edf8a3c99d23307955773835f9077  docs/evidence/hybrid-evaluation-v1-2026-10-17/FINAL-REPORT-HYBRID-v1.md
+de31624111012d425ccb789e1fdd1a3d500a0916615ec4c3e4b51a404f259587  docs/evidence/model-v17-ab-r4-2026-10-17/ab-real-v17-r4-final.json
+8ab33ebb359043da4ccdc66695005022912e215495256a14d8bcbdc5d87e5697  docs/evidence/evaluator-next-v1-2026-10-17/ACCEPTANCE-METRICS-v1.json

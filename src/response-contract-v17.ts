@@ -1,0 +1,115 @@
+import type {ReturnDecision} from './returns-decision-v1.js';
+
+export type ResponseModeV17='plain'|'json';
+export type ContractRuleV17={ruleId:string;meaning:string;appliesBecause:string};
+export type IntervalEvidenceV17={text:string;start:number;end:number;kind:'bare_interval'|'arrival_or_discovery_interval'};
+export type ResponseContractV17={
+ contractVersion:'response-contract-v17';compilationStatus:'ready'|'CONTRACT_CONFLICT';conflicts:string[];
+ standardEligibility:ReturnDecision['standardEligibility'];timeWindowStatus:'within'|'outside'|'unknown';
+ standardFailureReasons:string[];humanReviewReasons:string[];mustState:ContractRuleV17[];mustAsk:ContractRuleV17[];
+ mustNotClaim:ContractRuleV17[];customerAction:'contact_human_support'|'provide_clarifications'|'policy_explanation';
+ clarificationBlocksHumanContact:false;responseMode:ResponseModeV17;unknownFields:string[];intervalEvidence:IntervalEvidenceV17[];
+};
+
+export const responseContractMeaningsV17:Record<string,string>={
+ STANDARD_POLICY:'State that standard returns require an unused item within 30 days of purchase with a receipt.',
+ PURCHASE_TIMING_UNKNOWN:'State that the purchase date or purchase age is unknown.',
+ PURCHASE_WITHIN_STANDARD_WINDOW:'State that the known purchase age is within the 30-day standard window.',
+ PURCHASE_OUTSIDE_STANDARD_WINDOW:'State that the known purchase age is outside the 30-day standard window.',
+ MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE:'State that the mentioned interval does not establish the purchase date or purchase age.',
+ STANDARD_ELIGIBILITY_ELIGIBLE:'State that the supplied facts meet the standard return conditions, without approving a refund.',
+ STANDARD_ELIGIBILITY_INELIGIBLE:'State that at least one identified standard condition is not met.',
+ STANDARD_ELIGIBILITY_UNKNOWN:'State that standard eligibility cannot yet be determined.',
+ RECEIPT_CONDITION_UNMET:'State that the receipt condition for a standard return is not met.',
+ ITEM_CONDITION_UNMET:'State that the unused-item condition for a standard return is not met.',
+ HUMAN_REVIEW_REQUIRED:'State that the case requires human review.',
+ DAMAGE_REQUIRES_HUMAN_REVIEW:'State that the damaged item is a reason for human review.',
+ PRIVACY_WARNING:'Tell the customer not to share passwords or full card numbers.',
+ CAPABILITY_LIMITATION:'State that this assistant cannot issue refunds, change decisions, forward requests, or contact people.',
+ ASK_PURCHASE_DATE:'Ask for the purchase date.',
+ ASK_UNUSED_STATUS:'Ask whether the item is unused.',
+ ASK_RECEIPT_AVAILABILITY:'Ask only whether the customer has a receipt.',
+ NO_UNGROUNDED_OUTSIDE_WINDOW:'Do not claim the case is late or outside the window when purchase timing is unknown.',
+ NO_UNGROUNDED_WITHIN_WINDOW:'Do not claim the case is within the window when purchase timing is unknown.',
+ NO_UNSUPPORTED_EXTERNAL_ACTION:'Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.',
+ NO_REFUND_APPROVAL:'Do not state that a refund or return has been approved, processed, or guaranteed.',
+ NO_SECRET_REQUEST:'Do not request passwords or full card numbers.',
+ NO_UNAUTHORIZED_DATA_HANDLING_CLAIM:'Do not invent storage, sharing, retention, deletion, encryption, or other data-handling practices that are absent from the supplied policy.',
+ NO_RECEIPT_MATERIAL_COLLECTION:'Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.',
+ NO_WRONG_STANDARD_FAILURE_REASON:'Do not replace a known receipt or item-condition failure with an unsupported time failure.',
+};
+const rule=(ruleId:string,appliesBecause:string):ContractRuleV17=>({ruleId,meaning:responseContractMeaningsV17[ruleId],appliesBecause});
+const unique=(items:ContractRuleV17[])=>items.filter((x,i,a)=>a.findIndex(y=>y.ruleId===x.ruleId)===i);
+
+function intervalEvidence(question:string):IntervalEvidenceV17[]{
+ const found:IntervalEvidenceV17[]=[];
+ const patterns:[RegExp,IntervalEvidenceV17['kind']][]=[
+  [/\b(?:noticed|discovered|found|arrived|delivered)\b[^.!?]{0,35}\bafter\s+\d{1,5}\s+(?:days?|weeks?|months?|years?)\b/gi,'arrival_or_discovery_interval'],
+  [/\bafter\s+\d{1,5}\s+(?:days?|weeks?|months?|years?)\b/gi,'bare_interval'],
+ ];
+ for(const [pattern,kind] of patterns)for(const match of question.matchAll(pattern)){
+  const start=match.index??0,end=start+match[0].length;
+  if(!found.some(x=>start>=x.start&&end<=x.end))found.push({text:match[0],start,end,kind});
+ }
+ return found.sort((a,b)=>a.start-b.start);
+}
+
+export function compileResponseContractV17(question:string,decision:ReturnDecision,responseMode:ResponseModeV17):ResponseContractV17{
+ const failures:string[]=[],review:string[]=[],mustState:ContractRuleV17[]=[],mustAsk:ContractRuleV17[]=[],mustNotClaim:ContractRuleV17[]=[];
+ const timeWindowStatus=decision.facts.purchaseDaysAgo===null?'unknown':decision.outsideStandardWindow?'outside':'within';
+ if(decision.outsideStandardWindow)failures.push('OUTSIDE_STANDARD_WINDOW');
+ if(decision.facts.unused===false)failures.push('ITEM_USED');
+ if(decision.facts.receipt===false)failures.push('RECEIPT_MISSING');
+ if(decision.facts.damaged)review.push('DAMAGED_ITEM');
+ if(decision.facts.dispute)review.push('POLICY_DISPUTE');
+ if(decision.facts.actionRequested)review.push('ACTION_REQUESTED');
+ if(decision.standardEligibility==='ineligible')review.push('STANDARD_INELIGIBLE');
+
+ mustState.push(rule('STANDARD_POLICY','The standard policy is required in every v17 answer.'));
+ if(timeWindowStatus==='unknown')mustState.push(rule('PURCHASE_TIMING_UNKNOWN','purchaseDaysAgo is null.'));
+ if(timeWindowStatus==='within')mustState.push(rule('PURCHASE_WITHIN_STANDARD_WINDOW','The supplied purchase age is known and no greater than 30 days.'));
+ if(timeWindowStatus==='outside')mustState.push(rule('PURCHASE_OUTSIDE_STANDARD_WINDOW','The supplied purchase age is known and greater than 30 days.'));
+ const intervals=timeWindowStatus==='unknown'?intervalEvidence(question):[];
+ if(intervals.length)mustState.push(rule('MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE','A bounded interval is present but has no explicit purchase anchor.'));
+ mustState.push(rule('STANDARD_ELIGIBILITY_'+decision.standardEligibility.toUpperCase(),`The deterministic decision is ${decision.standardEligibility}.`));
+ if(decision.facts.receipt===false)mustState.push(rule('RECEIPT_CONDITION_UNMET','receipt is explicitly false.'));
+ if(decision.facts.unused===false)mustState.push(rule('ITEM_CONDITION_UNMET','unused is explicitly false.'));
+ if(decision.requiresHumanReview)mustState.push(rule('HUMAN_REVIEW_REQUIRED','requiresHumanReview is true.'));
+ if(decision.facts.damaged)mustState.push(rule('DAMAGE_REQUIRES_HUMAN_REVIEW','damaged is true.'));
+ if(decision.facts.privacy)mustState.push(rule('PRIVACY_WARNING','privacy is true.'));
+ if(decision.facts.actionRequested||decision.facts.dispute)mustState.push(rule('CAPABILITY_LIMITATION','The customer requested an action or disputes a decision.'));
+
+ if(timeWindowStatus==='unknown')mustAsk.push(rule('ASK_PURCHASE_DATE','purchaseDaysAgo is null; this duty is independent of human review.'));
+ if(!decision.requiresHumanReview&&decision.standardEligibility==='unknown'){
+  if(decision.facts.unused===null)mustAsk.push(rule('ASK_UNUSED_STATUS','The clarify path lacks item-condition information.'));
+  if(decision.facts.receipt===null)mustAsk.push(rule('ASK_RECEIPT_AVAILABILITY','The clarify path lacks receipt availability.'));
+ }
+
+ if(timeWindowStatus==='unknown'){
+  mustNotClaim.push(rule('NO_UNGROUNDED_OUTSIDE_WINDOW','Purchase timing is unknown.'));
+  mustNotClaim.push(rule('NO_UNGROUNDED_WITHIN_WINDOW','Purchase timing is unknown.'));
+ }
+ mustNotClaim.push(rule('NO_UNSUPPORTED_EXTERNAL_ACTION','The system has no external action capability.'));
+ mustNotClaim.push(rule('NO_REFUND_APPROVAL','refundApproved is false.'));
+ mustNotClaim.push(rule('NO_SECRET_REQUEST','Secrets are never required.'));
+ mustNotClaim.push(rule('NO_UNAUTHORIZED_DATA_HANDLING_CLAIM','No data storage, sharing, retention, deletion, or encryption policy was supplied.'));
+ mustNotClaim.push(rule('NO_RECEIPT_MATERIAL_COLLECTION','Only receipt availability may be requested.'));
+ if(failures.some(x=>x==='RECEIPT_MISSING'||x==='ITEM_USED')&&timeWindowStatus==='unknown')
+  mustNotClaim.push(rule('NO_WRONG_STANDARD_FAILURE_REASON','A non-time standard failure is known while purchase timing remains unknown.'));
+
+ const conflicts:string[]=[];
+ if((decision.facts.purchaseDaysAgo===null)!==(timeWindowStatus==='unknown'))conflicts.push('PURCHASE_TIME_STATUS_MISMATCH');
+ if(decision.outsideStandardWindow!==(decision.facts.purchaseDaysAgo!==null&&decision.facts.purchaseDaysAgo>30))conflicts.push('OUTSIDE_WINDOW_DECISION_MISMATCH');
+ if(decision.standardEligibility==='eligible'&&failures.length)conflicts.push('ELIGIBLE_WITH_STANDARD_FAILURE');
+ if(decision.facts.purchaseDaysAgo!==null&&mustAsk.some(x=>x.ruleId==='ASK_PURCHASE_DATE'))conflicts.push('KNOWN_DATE_REQUESTED_AGAIN');
+ const customerAction=decision.requiresHumanReview?'contact_human_support':mustAsk.length?'provide_clarifications':'policy_explanation';
+ return {contractVersion:'response-contract-v17',compilationStatus:conflicts.length?'CONTRACT_CONFLICT':'ready',conflicts,
+  standardEligibility:decision.standardEligibility,timeWindowStatus,standardFailureReasons:failures,humanReviewReasons:review,
+  mustState:unique(mustState),mustAsk:unique(mustAsk),mustNotClaim:unique(mustNotClaim),customerAction,
+  clarificationBlocksHumanContact:false,responseMode,unknownFields:[...decision.missing],intervalEvidence:intervals};
+}
+
+export function responseContractContextV17(question:string,decision:ReturnDecision,responseMode:ResponseModeV17){
+ const contract=compileResponseContractV17(question,decision,responseMode);
+ return {contract,text:'AUTHORITATIVE RESPONSE CONTRACT (compiled before generation; satisfy every applicable rule):\n'+JSON.stringify(contract)};
+}

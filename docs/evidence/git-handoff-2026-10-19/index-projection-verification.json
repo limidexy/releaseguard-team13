@@ -1,0 +1,9 @@
+{
+  "projection": "/tmp/releaseguard-index-handoff-h0ok_fdr",
+  "source": "git checkout-index of pending commit",
+  "dependencies": "Reused existing node_modules; no network installation",
+  "exitCode": 1,
+  "expectedKnownFailure": "tests/evaluator-next-v1-holdout-v2.test.ts",
+  "modelCalls": 0,
+  "deploymentActions": 0
+}

@@ -1,0 +1,25 @@
+{
+  "version": "semantic-review-strict-v2-frozen-samples",
+  "experimentId": "releaseguard-semantic-review-strict-v2-20261018",
+  "sourceFixturePath": "tests/evaluator-next-v1-holdout-v2-fixtures.json",
+  "labelsAreLocalOnly": true,
+  "labelsMustNotAppearInProviderRequest": true,
+  "samples": [
+    {
+      "sequence": 1,
+      "fixtureId": "v2-damaged-allowed-review-because",
+      "caseId": "damaged",
+      "expectedAllowed": true,
+      "expectedFailedRuleIds": [],
+      "annotationRationale": "Directly ties reported damage to review, treats eligibility as unknown, asks for purchase date, and permits immediate customer-initiated human contact."
+    },
+    {
+      "sequence": 2,
+      "fixtureId": "v2-damaged-deny-review",
+      "caseId": "damaged",
+      "expectedAllowed": false,
+      "expectedFailedRuleIds": ["HUMAN_REVIEW_REQUIRED", "DAMAGE_REQUIRES_HUMAN_REVIEW"],
+      "annotationRationale": "The case-specific denial of review contradicts the mandatory review conclusion for reported damage."
+    }
+  ]
+}

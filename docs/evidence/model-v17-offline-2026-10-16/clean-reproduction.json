@@ -1,0 +1,26 @@
+{
+  "verifiedAt": "2026-10-16T22:39:56+08:00",
+  "baseHead": "20d258d891935b2d5bee3375ebf81b2872adf76f",
+  "baseline": "v16 reconstructed by applying the reviewed B_scoring-v30.patch and C_controlled-v16-after-B.patch in order",
+  "v17Overlay": "current v17 source, integration changes, tests, and offline verification script",
+  "tests": {
+    "total": 686,
+    "passed": 686,
+    "failed": 0,
+    "logSha256": "0ad8c97853226c63068545b9fc904e0641534df5d423cf9db31cc26cfe282b23"
+  },
+  "offlineVerification": {
+    "status": "READY_FOR_REAL_EVALUATION",
+    "contractsCompiled": 20,
+    "providerCalls": 0,
+    "realModelCalls": 0,
+    "deploymentActions": 0,
+    "pushActions": 0,
+    "logHashMatchedReport": true
+  },
+  "notes": [
+    "The clean checkout test used the same frozen historical evidence needed for replay assertions.",
+    "No provider, deployment, publication, or Git remote operation was invoked.",
+    "READY_FOR_REAL_EVALUATION does not assert a v17 model score or release readiness."
+  ]
+}

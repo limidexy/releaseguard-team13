@@ -1,0 +1,49 @@
+{
+  "revision": "v17-generation-view-r3-ab1",
+  "status": "PREPARED_NOT_AUTHORIZED",
+  "purpose": "Compare the same concise generation view on Groq openai/gpt-oss-20b and openai/gpt-oss-120b without changing policy, cases, sampling, scoring, or guards.",
+  "providerOrigin": "https://api.groq.com",
+  "providerEndpoint": "https://api.groq.com/openai/v1/chat/completions",
+  "sourceQuestionPlan": "docs/evidence/model-v17-real-r1-2026-10-17/plan.json",
+  "sourceQuestionPlanSha256": "c4eaeccf0e95e11ac1c1780c031e1bd8eca95d5f17c47fe23a4a3d8bf59fea6a",
+  "questionOrder": ["eligibility", "receipt", "damaged", "expired", "privacy", "action", "missing", "escalation", "format", "greeting", "extra-eligibility", "extra-receipt", "extra-damaged", "extra-expired", "extra-privacy", "extra-action", "extra-missing", "extra-escalation", "extra-format", "extra-greeting"],
+  "arms": [
+    {"arm": "A", "model": "openai/gpt-oss-20b", "calls": 20},
+    {"arm": "B", "model": "openai/gpt-oss-120b", "calls": 20}
+  ],
+  "totalBudgetedCalls": 40,
+  "automaticRetries": 0,
+  "selection": "No per-case model selection, replacement, correction, or best-of filtering.",
+  "executionOrder": "For each frozen case in order, call A once and B once, then continue to the next case.",
+  "configuration": {"temperature": 0.2, "reasoningEffort": "low", "maxOutputTokens": 3072, "requestTimeoutMs": 20000, "minimumStartIntervalMs": 20000},
+  "evaluation": {"evaluatorVersion": "returns-policy-v2.10", "minScore": 95, "criticalOrProviderErrorBlocks": true, "oldGuard": "explanation-guard-v2", "contractGuard": "response-contract-guard-v17-r3", "rawAnswersPreserved": true},
+  "generation": {"promptRevision": "generation-view-v17-r3", "fullContractRetainedForAudit": true, "fullContractSentToModel": false, "referenceAnswerSentToModel": false, "postGenerationRepair": false},
+  "frozenHashes": {
+    "src/generation-view-v17.ts": "156b55503bce23c012337894feda4b15f75a768ebb82498eea40f4dccd7c190e",
+    "src/response-contract-v17.ts": "f3997451d5602aa80c53034e91fdc0937f24ea09a946c3591dbe2a65b62853f9",
+    "src/response-contract-guard-v17.ts": "18b604df8a13aebaecae1b027a497760310f1237c02b88cebd421bed16505577",
+    "src/controlled-evaluation-v17.ts": "40c1b48ac85248e96b2c906e1267a1782d597f867021740ebd0656efe302531b",
+    "src/returns-decision-v1.ts": "e8937bd8f26afb38687def64ba116e0cf5848963f5f4a33880f6aafcba0b8f1c",
+    "src/domain.ts": "c5cafe9760a2329b6e4c13972cbc89b172f11a1ad916b19f51906bcfd1fb1e55",
+    "src/output-guard-v2.ts": "942df472a113b53e7a293e4753262522fcead2f853e78e6183d6ddddedc4e365",
+    "semantic-audit-v17-r3.json": "1e9a2a0800e3df128c80535bb6f8d65ae06b18b76d3ea19cc4af7eab5cd3c0ec",
+    "compiledCaseContractAndViewSet": "1e50659b42cafc5e1d169e817d42a5f62d278251cbe063ebf3b0c02b59700fe9",
+    "generationPrompt": "5a70f364bb9c3ae044c37e94ce3b2e8cd2aa6820390e6ab2ff63861d618243f2",
+    "responseModes": "4681455ef2e6c4e690f8dae0ecedeb61276acead3c9018cc141c0e135e6cc24a"
+    ,"scripts/run-v17-ab-r3.mjs": "1bac976a3445a62a945ef41e39082df0617d973728d173e4980ef7830b044cb9"
+  },
+  "preflight": {
+    "checkedAt": "2026-10-17T06:20:01.572Z",
+    "modelsEndpointHttpStatus": 200,
+    "credentialAccepted": true,
+    "models": [
+      {"id": "openai/gpt-oss-20b", "listed": true, "active": true},
+      {"id": "openai/gpt-oss-120b", "listed": true, "active": true}
+    ],
+    "generationCallsMade": 0,
+    "billingPlan": "not reverified by the models endpoint; previous Free-plan evidence is historical and must be refreshed before execution",
+    "quotaGuarantee": false
+  },
+  "authorization": {"authorizedNow": false, "requiredEnvironmentValue": "RG_CONFIRM_AB_CALLS=40", "freePlanRefreshRequired": true, "paidUpgradeAllowed": false, "providerSwitchAllowed": false},
+  "limitations": ["These 20 cases are development regressions, not a hidden test set.", "Model listing and credential acceptance do not guarantee 40-call quota at execution time.", "A successful result would apply only to this frozen 20-case experiment."]
+}

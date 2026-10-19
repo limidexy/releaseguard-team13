@@ -1,0 +1,46 @@
+{
+  "time": "2026-10-15T12:34:46.668Z",
+  "workspace": "v23-v6-1792067686663",
+  "source": "replay/imported",
+  "environment": "isolated local Docker; real HTTP/database; fictional answers and development identities",
+  "modelCalls": 0,
+  "humanApproval": false,
+  "checks": [
+    {
+      "name": "New evaluator blocks unsafe old output and refuses an approval request",
+      "passed": true
+    },
+    {
+      "name": "Private password requests are blocked through the real Worker and database",
+      "passed": true
+    },
+    {
+      "name": "Mixed need and require clauses blocks job and approval",
+      "passed": true
+    },
+    {
+      "name": "Future passive credential requirement blocks job and approval",
+      "passed": true
+    },
+    {
+      "name": "Safe paraphrase passes without editing its answer",
+      "passed": true
+    },
+    {
+      "name": "Minimal factual next step passes without editing its answer",
+      "passed": true
+    },
+    {
+      "name": "All v1-v6 traverse the real API/queue/support as explicitly labelled replay",
+      "passed": true
+    },
+    {
+      "name": "New approval links the old decision while both old evidence records stay unchanged",
+      "passed": true
+    },
+    {
+      "name": "Reviewer and viewer cannot author suites",
+      "passed": true
+    }
+  ]
+}

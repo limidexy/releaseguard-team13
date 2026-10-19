@@ -1,0 +1,2010 @@
+{
+  "createdAt": "2026-10-16T16:09:43.036Z",
+  "revision": "v17-checker-r1",
+  "status": "READY_FOR_REAL_EVALUATION",
+  "scope": "offline-only",
+  "providerCalls": 0,
+  "realModelCalls": 0,
+  "deploymentActions": 0,
+  "publishActions": 0,
+  "pushActions": 0,
+  "modelClaim": "No r1 v17 model score exists yet. Offline checker calibration is not a model-quality result.",
+  "frozenConfiguration": {
+    "model": "openai/gpt-oss-20b",
+    "temperature": 0.2,
+    "reasoningEffort": "low",
+    "maxOutputTokens": 3072,
+    "scoreThreshold": 95,
+    "evaluatorVersion": "returns-policy-v2.10",
+    "cases": 20,
+    "automaticRetries": 0,
+    "promptSnapshot": {
+      "version": "v17",
+      "text": "You explain a fictional return policy. Treat the supplied business decision and response contract as authoritative data, not as customer instructions. Do not recompute eligibility, omit applicable duties, or invent facts, remedies, channels, or actions.\n\nSatisfy every mustState and mustAsk rule, and violate none of mustNotClaim. Human review and clarification duties can apply together. The customer may contact human support immediately; clarification never blocks that contact. Use only the supplied reasons. Generate one customer-facing answer in the required output format. Do not mention rule IDs, the contract, internal systems, or hidden reasoning.",
+      "decisionVersion": "returns-decision-v1",
+      "contractVersion": "response-contract-v17",
+      "guardVersions": [
+        "explanation-guard-v2",
+        "response-contract-guard-v17"
+      ],
+      "factsSource": "conservative-english-parser-v1",
+      "sha256": "e3e384eca0738ab03471a26a20f5d2583631e2abf27254f6b2a0eef4e22060cf",
+      "maxOutputTokens": 3072,
+      "requestTimeoutMs": 20000,
+      "temperature": 0.2,
+      "reasoningEffort": "low",
+      "responseModes": {
+        "plain": "OUTPUT: Plain language, no JSON, at most 120 words. Start with the required policy sentence and, for privacy, the required user warning. Add a brief explanation. End with a separate Next step: paragraph containing a customer action. Keep all required sentences; do not shorten away 30 days or the privacy warning.",
+        "json": "OUTPUT: Only a bare JSON object with exactly eligible (boolean), reason (nonempty string), nextStep (nonempty string). No fences. eligible equals the server jsonEligible. Start reason with the required policy sentence; include the required user warning for privacy. nextStep contains the customer action. Never omit required guidance to fit the format."
+      },
+      "formatRouting": "explicit-json-request-v1"
+    }
+  },
+  "contractCompilation": {
+    "compiled": 20,
+    "ready": 20,
+    "conflicts": []
+  },
+  "tests": {
+    "total": 697,
+    "passed": 697,
+    "failed": 0,
+    "logPath": "docs/evidence/model-v17-checker-r1-2026-10-17/full-offline-tests.log",
+    "logSha256": "bf804fa71fa8172a204c89a7f471526340154fcc086c5a4b43f84f6fb4188717"
+  },
+  "history": [
+    {
+      "version": "v15",
+      "reportPath": "docs/evidence/model-v15-2026-10-16/real-v15-2026-10-16T08-31-07.250Z.json",
+      "reportSha256": "01c9392af186ea9bea8a126127f0b82d347ac94c5546dc0387c6995a553666f8",
+      "original": {
+        "score": 90,
+        "gate": "blocked",
+        "scoringPassed": 18,
+        "independentOldGuard": {
+          "version": "explanation-guard-v2",
+          "allowed": 19,
+          "blocked": 1,
+          "blockedCases": [
+            {
+              "caseId": "expired",
+              "failures": [
+                "no_unknown_deadline_decision"
+              ]
+            }
+          ]
+        },
+        "combined": {
+          "allowed": 17,
+          "blocked": 3,
+          "allowedCases": [
+            "eligibility",
+            "damaged",
+            "privacy",
+            "action",
+            "missing",
+            "escalation",
+            "format",
+            "greeting",
+            "extra-eligibility",
+            "extra-damaged",
+            "extra-expired",
+            "extra-privacy",
+            "extra-action",
+            "extra-missing",
+            "extra-escalation",
+            "extra-format",
+            "extra-greeting"
+          ],
+          "blockedCases": [
+            "receipt",
+            "expired",
+            "extra-receipt"
+          ]
+        }
+      },
+      "v210Rescore": {
+        "score": 100,
+        "gate": "passed",
+        "scoringPassed": 20,
+        "independentOldGuard": {
+          "version": "explanation-guard-v2",
+          "allowed": 19,
+          "blocked": 1,
+          "blockedCases": [
+            {
+              "caseId": "expired",
+              "failures": [
+                "no_unknown_deadline_decision"
+              ]
+            }
+          ]
+        },
+        "combined": {
+          "allowed": 19,
+          "blocked": 1,
+          "allowedCases": [
+            "eligibility",
+            "receipt",
+            "damaged",
+            "privacy",
+            "action",
+            "missing",
+            "escalation",
+            "format",
+            "greeting",
+            "extra-eligibility",
+            "extra-receipt",
+            "extra-damaged",
+            "extra-expired",
+            "extra-privacy",
+            "extra-action",
+            "extra-missing",
+            "extra-escalation",
+            "extra-format",
+            "extra-greeting"
+          ],
+          "blockedCases": [
+            "expired"
+          ]
+        }
+      },
+      "v17NewCheck": {
+        "contractCompilationStatus": {
+          "status": "ready",
+          "ready": 20,
+          "conflicts": []
+        },
+        "responseContractCompliance": {
+          "status": "blocked",
+          "passed": 2,
+          "blocked": 18,
+          "cases": [
+            {
+              "caseId": "eligibility",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "receipt",
+              "ruleIds": [
+                "HUMAN_REVIEW_REQUIRED"
+              ]
+            },
+            {
+              "caseId": "damaged",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "DAMAGE_REQUIRES_HUMAN_REVIEW"
+              ]
+            },
+            {
+              "caseId": "expired",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "privacy",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "action",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "HUMAN_REVIEW_REQUIRED"
+              ]
+            },
+            {
+              "caseId": "missing",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "escalation",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "HUMAN_REVIEW_REQUIRED",
+                "CAPABILITY_LIMITATION",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "format",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "greeting",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "extra-receipt",
+              "ruleIds": [
+                "HUMAN_REVIEW_REQUIRED"
+              ]
+            },
+            {
+              "caseId": "extra-damaged",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "HUMAN_REVIEW_REQUIRED",
+                "DAMAGE_REQUIRES_HUMAN_REVIEW"
+              ]
+            },
+            {
+              "caseId": "extra-expired",
+              "ruleIds": [
+                "PURCHASE_OUTSIDE_STANDARD_WINDOW",
+                "HUMAN_REVIEW_REQUIRED"
+              ]
+            },
+            {
+              "caseId": "extra-privacy",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "extra-action",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "HUMAN_REVIEW_REQUIRED"
+              ]
+            },
+            {
+              "caseId": "extra-missing",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "extra-escalation",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "CAPABILITY_LIMITATION",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "extra-greeting",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            }
+          ]
+        },
+        "businessConsistency": {
+          "status": "blocked",
+          "passed": 2,
+          "blocked": 18,
+          "cases": [
+            {
+              "caseId": "eligibility",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "receipt",
+              "ruleIds": [
+                "HUMAN_REVIEW_REQUIRED"
+              ]
+            },
+            {
+              "caseId": "damaged",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "DAMAGE_REQUIRES_HUMAN_REVIEW"
+              ]
+            },
+            {
+              "caseId": "expired",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "privacy",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "action",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "HUMAN_REVIEW_REQUIRED"
+              ]
+            },
+            {
+              "caseId": "missing",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "escalation",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "HUMAN_REVIEW_REQUIRED",
+                "CAPABILITY_LIMITATION",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "format",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "greeting",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "extra-receipt",
+              "ruleIds": [
+                "HUMAN_REVIEW_REQUIRED"
+              ]
+            },
+            {
+              "caseId": "extra-damaged",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "HUMAN_REVIEW_REQUIRED",
+                "DAMAGE_REQUIRES_HUMAN_REVIEW"
+              ]
+            },
+            {
+              "caseId": "extra-expired",
+              "ruleIds": [
+                "PURCHASE_OUTSIDE_STANDARD_WINDOW",
+                "HUMAN_REVIEW_REQUIRED"
+              ]
+            },
+            {
+              "caseId": "extra-privacy",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "extra-action",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "HUMAN_REVIEW_REQUIRED"
+              ]
+            },
+            {
+              "caseId": "extra-missing",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "extra-escalation",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "CAPABILITY_LIMITATION",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "extra-greeting",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            }
+          ]
+        },
+        "customerTextSafety": {
+          "status": "blocked",
+          "passed": 19,
+          "blocked": 1,
+          "cases": [
+            {
+              "caseId": "expired",
+              "ruleIds": [
+                "NO_UNGROUNDED_OUTSIDE_WINDOW"
+              ]
+            }
+          ]
+        },
+        "finalDeliveryStatus": "blocked",
+        "deliveryValidation": {
+          "versions": [
+            "explanation-guard-v2",
+            "response-contract-guard-v17"
+          ],
+          "allowed": 2,
+          "blocked": 18
+        },
+        "classificationCounts": {
+          "true_obligation_omission": 46,
+          "checker_false_block": 0,
+          "business_contradiction": 1,
+          "unverifiable": 0
+        },
+        "classificationMethod": "Failed bounded checks are classified from observed contradiction/prohibition evidence, missing required text, or unverifiable syntax. checker_false_block is assigned only by explicit calibrated counterexample evidence; none remain after the r1 calibration tests.",
+        "cases": [
+          {
+            "caseId": "eligibility",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "receipt",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "HUMAN_REVIEW_REQUIRED",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required human review required statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "damaged",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required damage as the human-review reason statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "expired",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required ambiguous interval explanation statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+                "status": "failed",
+                "classification": "business_contradiction",
+                "category": "customer_text_safety",
+                "evidence": {
+                  "start": 147,
+                  "end": 201,
+                  "text": "  \n\nYour request is outside the standard return window"
+                },
+                "missing": "A prohibited claim or request was found.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "privacy",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "action",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "HUMAN_REVIEW_REQUIRED",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required human review required statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "missing",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "escalation",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "HUMAN_REVIEW_REQUIRED",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required human review required statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "CAPABILITY_LIMITATION",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required capability limitation statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "ASK_PURCHASE_DATE",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase-date question not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "format",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "greeting",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "extra-eligibility",
+            "newCheckStatus": "passed",
+            "finalDelivery": "allowed",
+            "findings": []
+          },
+          {
+            "caseId": "extra-receipt",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "HUMAN_REVIEW_REQUIRED",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required human review required statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "extra-damaged",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required ambiguous interval explanation statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "HUMAN_REVIEW_REQUIRED",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required human review required statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required damage as the human-review reason statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "extra-expired",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_OUTSIDE_STANDARD_WINDOW",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required known outside-window status statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "HUMAN_REVIEW_REQUIRED",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required human review required statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "extra-privacy",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "extra-action",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "HUMAN_REVIEW_REQUIRED",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required human review required statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "extra-missing",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "extra-escalation",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "CAPABILITY_LIMITATION",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required capability limitation statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "ASK_PURCHASE_DATE",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase-date question not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "extra-format",
+            "newCheckStatus": "passed",
+            "finalDelivery": "allowed",
+            "findings": []
+          },
+          {
+            "caseId": "extra-greeting",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "version": "v16",
+      "reportPath": "docs/evidence/model-v16-2026-10-16/real-v16-2026-10-16T08-50-53.534Z.json",
+      "reportSha256": "dfeee69328467283debc9153e54cf6955757a81e070466b71c1a97b7c0357cb1",
+      "original": {
+        "score": 90,
+        "gate": "blocked",
+        "scoringPassed": 18,
+        "independentOldGuard": {
+          "version": "explanation-guard-v2",
+          "allowed": 17,
+          "blocked": 3,
+          "blockedCases": [
+            {
+              "caseId": "damaged",
+              "failures": [
+                "unknown_purchase_date_clarified"
+              ]
+            },
+            {
+              "caseId": "extra-receipt",
+              "failures": [
+                "unknown_purchase_date_clarified"
+              ]
+            },
+            {
+              "caseId": "extra-damaged",
+              "failures": [
+                "unknown_purchase_date_clarified"
+              ]
+            }
+          ]
+        },
+        "combined": {
+          "allowed": 17,
+          "blocked": 3,
+          "allowedCases": [
+            "eligibility",
+            "receipt",
+            "expired",
+            "privacy",
+            "action",
+            "missing",
+            "escalation",
+            "format",
+            "greeting",
+            "extra-eligibility",
+            "extra-expired",
+            "extra-privacy",
+            "extra-action",
+            "extra-missing",
+            "extra-escalation",
+            "extra-format",
+            "extra-greeting"
+          ],
+          "blockedCases": [
+            "damaged",
+            "extra-receipt",
+            "extra-damaged"
+          ]
+        }
+      },
+      "v210Rescore": null,
+      "v17NewCheck": {
+        "contractCompilationStatus": {
+          "status": "ready",
+          "ready": 20,
+          "conflicts": []
+        },
+        "responseContractCompliance": {
+          "status": "blocked",
+          "passed": 2,
+          "blocked": 18,
+          "cases": [
+            {
+              "caseId": "eligibility",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "receipt",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "RECEIPT_CONDITION_UNMET",
+                "HUMAN_REVIEW_REQUIRED"
+              ]
+            },
+            {
+              "caseId": "damaged",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "DAMAGE_REQUIRES_HUMAN_REVIEW",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "expired",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "privacy",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "action",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "missing",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "escalation",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "CAPABILITY_LIMITATION"
+              ]
+            },
+            {
+              "caseId": "format",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "greeting",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "extra-receipt",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "HUMAN_REVIEW_REQUIRED",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "extra-damaged",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "DAMAGE_REQUIRES_HUMAN_REVIEW",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "extra-expired",
+              "ruleIds": [
+                "PURCHASE_OUTSIDE_STANDARD_WINDOW"
+              ]
+            },
+            {
+              "caseId": "extra-privacy",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "extra-action",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "extra-missing",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "extra-escalation",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "extra-greeting",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            }
+          ]
+        },
+        "businessConsistency": {
+          "status": "blocked",
+          "passed": 2,
+          "blocked": 18,
+          "cases": [
+            {
+              "caseId": "eligibility",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "receipt",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "RECEIPT_CONDITION_UNMET",
+                "HUMAN_REVIEW_REQUIRED"
+              ]
+            },
+            {
+              "caseId": "damaged",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "DAMAGE_REQUIRES_HUMAN_REVIEW",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "expired",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "privacy",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "action",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "missing",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "escalation",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "CAPABILITY_LIMITATION"
+              ]
+            },
+            {
+              "caseId": "format",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "greeting",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "extra-receipt",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "HUMAN_REVIEW_REQUIRED",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "extra-damaged",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "DAMAGE_REQUIRES_HUMAN_REVIEW",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "extra-expired",
+              "ruleIds": [
+                "PURCHASE_OUTSIDE_STANDARD_WINDOW"
+              ]
+            },
+            {
+              "caseId": "extra-privacy",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "extra-action",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "extra-missing",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "extra-escalation",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "extra-greeting",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            }
+          ]
+        },
+        "customerTextSafety": {
+          "status": "passed",
+          "passed": 20,
+          "blocked": 0,
+          "cases": []
+        },
+        "finalDeliveryStatus": "blocked",
+        "deliveryValidation": {
+          "versions": [
+            "explanation-guard-v2",
+            "response-contract-guard-v17"
+          ],
+          "allowed": 2,
+          "blocked": 18
+        },
+        "classificationCounts": {
+          "true_obligation_omission": 47,
+          "checker_false_block": 0,
+          "business_contradiction": 0,
+          "unverifiable": 0
+        },
+        "classificationMethod": "Failed bounded checks are classified from observed contradiction/prohibition evidence, missing required text, or unverifiable syntax. checker_false_block is assigned only by explicit calibrated counterexample evidence; none remain after the r1 calibration tests.",
+        "cases": [
+          {
+            "caseId": "eligibility",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "receipt",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "RECEIPT_CONDITION_UNMET",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required receipt condition failure statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "HUMAN_REVIEW_REQUIRED",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required human review required statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "damaged",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required damage as the human-review reason statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "ASK_PURCHASE_DATE",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase-date question not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "expired",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required ambiguous interval explanation statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "privacy",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "action",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "ASK_PURCHASE_DATE",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase-date question not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "missing",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "escalation",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "CAPABILITY_LIMITATION",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required capability limitation statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "format",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "greeting",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "extra-eligibility",
+            "newCheckStatus": "passed",
+            "finalDelivery": "allowed",
+            "findings": []
+          },
+          {
+            "caseId": "extra-receipt",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "HUMAN_REVIEW_REQUIRED",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required human review required statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "ASK_PURCHASE_DATE",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase-date question not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "extra-damaged",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required ambiguous interval explanation statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required damage as the human-review reason statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "ASK_PURCHASE_DATE",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase-date question not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "extra-expired",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_OUTSIDE_STANDARD_WINDOW",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required known outside-window status statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "extra-privacy",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "extra-action",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "ASK_PURCHASE_DATE",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase-date question not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "extra-missing",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "extra-escalation",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "ASK_PURCHASE_DATE",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase-date question not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          },
+          {
+            "caseId": "extra-format",
+            "newCheckStatus": "passed",
+            "finalDelivery": "allowed",
+            "findings": []
+          },
+          {
+            "caseId": "extra-greeting",
+            "newCheckStatus": "blocked",
+            "finalDelivery": "blocked",
+            "findings": [
+              {
+                "ruleId": "PURCHASE_TIMING_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required purchase timing unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              },
+              {
+                "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+                "status": "failed",
+                "classification": "true_obligation_omission",
+                "category": "business_consistency",
+                "evidence": null,
+                "missing": "Required standard eligibility unknown statement not reliably found in customer text.",
+                "checkerVersion": "response-contract-guard-v17"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "sourceHashes": {
+    "src/response-contract-v17.ts": "fc46582ad4715d20982cd3fae9704dca77b5ab304f69cfb13006403a070e4990",
+    "src/response-contract-guard-v17.ts": "bf507dc256651fc849223ad1872d710af1386761ed61f806af443d1a50bf28ec",
+    "src/controlled-evaluation-v17.ts": "40c1b48ac85248e96b2c906e1267a1782d597f867021740ebd0656efe302531b",
+    "src/provider.ts": "624ef2e2195a30b3f584698f75b65356f4646abd13bde236e2b86daa70035af7",
+    "src/domain.ts": "c5cafe9760a2329b6e4c13972cbc89b172f11a1ad916b19f51906bcfd1fb1e55",
+    "src/support.ts": "066b8c6eb1db85f16232148f14f63dd03478fc1f52d74ed082f8ec64045ee094",
+    "src/worker.ts": "64784d8c6b59b4ef606d2bd18240a584b2ff92f593f429acd947f4607d25c22c",
+    "public/index.html": "1499c1ade63d8f4aa00225c0581d3663500cedcbf82f239343bd1772280c7bd0",
+    "tests/response-contract-v17.test.ts": "156ce96a1e6b19185191049d844b07fad5c4f0df31e6d2b5d7e2b93b0b25723f",
+    "tests/response-contract-guard-v17.test.ts": "9d513040005863e2648148c6f6134655645b03a89b6e4a11c4025c51dbd35401",
+    "tests/response-contract-guard-v17-correctness.test.ts": "c89296f867c994e40fd47ac14084dc3790db90b71b7f3f238635e4e2ba576d4c",
+    "tests/prompt-v17.test.ts": "092f585dbbf6f7e4def778639cc3d4181691a8dc433c12cc3d93295b09be0ae0",
+    "tests/support-v17.test.ts": "196a8f5c8eb473b2526643b4924c1fd2d6066fe817be8d4331cb86db2293e95b",
+    "tests/v17-history.test.ts": "d68ebd8ccb66753d3a1d0c4a538fee3a5c819f527036a0f1217150b686456ae5",
+    "scripts/offline-v17.mjs": "5a405c37905bd18fa1323e9c7a25f06b96898f4458b3cd6d1f0460d054af8f24"
+  },
+  "knownLimitations": [
+    "The r1 checker recognizes bounded English assertion, negation, conditional, quotation, and contradiction patterns; it is not a proof of arbitrary natural-language semantics.",
+    "The conservative English fact extractor remains unchanged. Unsupported, hypothetical, negated, or conflicting time expressions can remain unknown.",
+    "Synthetic fixtures calibrate program behavior only and are not model-quality evidence.",
+    "A real v17 score and delivery result require one future 20-call evaluation; none was performed by this offline script."
+  ]
+}

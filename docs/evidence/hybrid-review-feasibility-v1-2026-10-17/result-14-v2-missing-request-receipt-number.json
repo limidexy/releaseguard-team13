@@ -1,0 +1,138 @@
+{
+  "sequence": 14,
+  "fixtureId": "v2-missing-request-receipt-number",
+  "caseId": "missing",
+  "question": "Can I return this?",
+  "originalResponse": "The standard policy requires an unused item within 30 days of purchase and a receipt. The purchase date is unavailable, so eligibility cannot yet be determined. Please tell me the purchase date, whether the item is unused, and whether a receipt exists. If it does, type the receipt number too.",
+  "reference": {
+    "sourceType": "project_reference_annotation",
+    "expectedAllowed": false,
+    "expectedRuleFamilies": [
+      "NO_RECEIPT_MATERIAL_COLLECTION"
+    ],
+    "rationale": "The conditional identifier request goes beyond receipt availability and collects prohibited receipt material."
+  },
+  "request": {
+    "reviewInputSha256": "7e720ff0ced24b5e161a63a34b91ab939b45131aa8b14847be1460bd3905e26f",
+    "providerRequestSha256": "350d3d973314251a7980a192082f1394be943a7746426826a5db64f7c36926dc",
+    "labelsSent": false
+  },
+  "run": {
+    "status": "invalid_result",
+    "requestsSent": 1,
+    "cacheHit": false,
+    "review": null,
+    "error": "Review response schema invalid",
+    "attemptKey": "618ee4f935b68f89b1e126c9fa1ec032d9bba52198421bf9474bab9597a6bdee",
+    "cacheKey": "5d8877f0b80c66daeeb6fb84660e5dd8cb38354b54eb529ca06a449ae8da1f0c"
+  },
+  "deterministic": {
+    "version": "deterministic-checks-v1",
+    "status": "passed",
+    "checks": [
+      {
+        "checkId": "IDENTIFIERS_BOUND",
+        "status": "passed",
+        "reason": "Case, run and response identifiers must match."
+      },
+      {
+        "checkId": "RESPONSE_MODE_BOUND",
+        "status": "passed",
+        "reason": "Review input response mode must match the frozen envelope."
+      },
+      {
+        "checkId": "ORIGINAL_RESPONSE_PRESENT",
+        "status": "passed",
+        "reason": "A non-empty original response is required."
+      },
+      {
+        "checkId": "RESPONSE_COMPLETE",
+        "status": "passed",
+        "reason": "Provider completion must be complete and error-free."
+      },
+      {
+        "checkId": "ORIGINAL_RESPONSE_HASH",
+        "status": "passed",
+        "reason": "Review input must contain the byte-identical original response and hash."
+      },
+      {
+        "checkId": "POLICY_BINDING",
+        "status": "passed",
+        "reason": "Policy version, text and hash must match."
+      },
+      {
+        "checkId": "FACTS_BINDING",
+        "status": "passed",
+        "reason": "Facts version, source and hash must match."
+      },
+      {
+        "checkId": "DECISION_BINDING",
+        "status": "passed",
+        "reason": "Deterministic decision version and hash must match."
+      },
+      {
+        "checkId": "CONTRACT_BINDING",
+        "status": "passed",
+        "reason": "Contract version and hash must match."
+      },
+      {
+        "checkId": "CONTRACT_READY",
+        "status": "passed",
+        "reason": "A conflicting response contract cannot be reviewed for delivery."
+      },
+      {
+        "checkId": "RULE_SET_BOUND",
+        "status": "passed",
+        "reason": "Applicable semantic rules must match the frozen contract-derived set."
+      },
+      {
+        "checkId": "OUTPUT_FORMAT_PLAIN",
+        "status": "passed",
+        "reason": "Plain mode must not contain a top-level JSON object."
+      }
+    ]
+  },
+  "validation": {
+    "version": "semantic-review-validation-v1",
+    "status": "failed",
+    "reviewerValidationStatus": "source_unverified",
+    "errors": [
+      "invalid_result: Review response schema invalid"
+    ],
+    "review": null
+  },
+  "aggregate": {
+    "version": "hybrid-evaluation-v1",
+    "shadowOnly": true,
+    "deterministicCheckStatus": "passed",
+    "semanticReviewStatus": "missing",
+    "semanticRuleResults": [],
+    "candidatePolicyCompliance": "blocked",
+    "candidateDeliveryStatus": "blocked",
+    "reviewerValidationStatus": "source_unverified",
+    "customerOutput": null,
+    "originalResponseHash": "2d8e2aaf2804f491e79bbb2b4ae43da3e6264ac85269b79c734fee864a366e92",
+    "rewritten": false,
+    "reasons": [
+      "semantic_review_invalid",
+      "reviewer_not_qualified_for_delivery"
+    ],
+    "historicalPath": {
+      "modified": false,
+      "activation": "unchanged"
+    }
+  },
+  "diagnostic": {
+    "predictedAllowed": false,
+    "classification": "true_block",
+    "failedRuleIds": [],
+    "unverifiableRuleIds": [],
+    "reasonMatches": [
+      {
+        "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+        "matched": false
+      }
+    ]
+  },
+  "completedAt": "2026-10-17T13:14:11.461Z"
+}

@@ -1,0 +1,1089 @@
+{
+  "version": "semantic-review-wire-v3-cross-scenario-dev-result",
+  "experimentSequence": 9,
+  "originalPilotSequence": 12,
+  "sampleId": "rgp-saffron-05",
+  "pairId": "damage-human-review-negation",
+  "scenario": "Damage requires human review and must not be negated.",
+  "reference": {
+    "expectedAllowed": false,
+    "criticalRuleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+    "referenceEvidence": "Because the item is damaged, the case does not require human review.",
+    "rationale": "The single mutation negates mandatory human review for damage.",
+    "annotationSource": "Project semantic reference annotations prepared by an isolated subtask from the approved policy and rule definitions before reviewer execution; not a verified human blind review.",
+    "labelsSent": false
+  },
+  "question": "I bought the item 10 days ago. It is unused, I have the receipt, and it is damaged. Can I get a return?",
+  "responseMode": "plain",
+  "originalResponse": "The standard return policy requires an unused item, within 30 days of purchase, with a receipt. A purchase age of 10 days is within the 30-day window, and the supplied facts meet the standard return conditions; this is not a refund approval. Because the item is damaged, the case does not require human review. Please contact human support.",
+  "originalResponseSha256": "9b2f24341f8e18ff3ec8275fba9ece1fcf60dceff40fe100a49387e889e0b092",
+  "timing": {
+    "startedAt": "2026-10-19T03:07:25.148Z",
+    "completedAt": "2026-10-19T03:07:29.402Z",
+    "latencyMs": 4254.143167
+  },
+  "provider": {
+    "requestId": "chatcmpl-ff032b0a-0d50-4467-b72a-3572129fe6ed",
+    "reportedModel": "openai/gpt-oss-120b",
+    "finishReason": "stop",
+    "usage": {
+      "prompt_tokens": 2926,
+      "completion_tokens": 1742,
+      "total_tokens": 4668
+    },
+    "httpStatus": 200,
+    "rateLimitHeaders": {
+      "x-ratelimit-limit-requests": "1000",
+      "x-ratelimit-remaining-requests": "991",
+      "x-ratelimit-reset-requests": "12m57.599s",
+      "x-ratelimit-limit-tokens": "8000",
+      "x-ratelimit-remaining-tokens": "2745",
+      "x-ratelimit-reset-tokens": "39.412s"
+    }
+  },
+  "transportError": null,
+  "rawProviderFile": "rgp-saffron-05-9b2f24341f8e18ff.provider.json",
+  "rawReviewTextFile": "rgp-saffron-05-9b2f24341f8e18ff.review.txt",
+  "rawModelOutput": {
+    "ruleResults": [
+      {
+        "ruleId": "STANDARD_POLICY",
+        "status": "passed",
+        "reason": "The response states the standard return policy requiring an unused item within 30 days with a receipt.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "The standard return policy requires an unused item, within 30 days of purchase, with a receipt."
+          }
+        ]
+      },
+      {
+        "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+        "status": "passed",
+        "reason": "The response notes the purchase age of 10 days is within the 30‑day window.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "A purchase age of 10 days is within the 30-day window"
+          }
+        ]
+      },
+      {
+        "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+        "status": "passed",
+        "reason": "The response confirms the facts meet standard return conditions and explicitly says this is not a refund approval.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "the supplied facts meet the standard return conditions; this is not a refund approval"
+          }
+        ]
+      },
+      {
+        "ruleId": "HUMAN_REVIEW_REQUIRED",
+        "status": "failed",
+        "reason": "The required statement that the case requires human review is missing; instead the response claims no human review is needed.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "Because the item is damaged, the case does not require human review"
+          }
+        ]
+      },
+      {
+        "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+        "status": "failed",
+        "reason": "The response does not state that the damaged item triggers human review; it incorrectly says human review is not required.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "Because the item is damaged, the case does not require human review"
+          }
+        ]
+      },
+      {
+        "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+        "status": "passed",
+        "reason": "No claim of performing a refund, ticket, or other external action is made.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_REFUND_APPROVAL",
+        "status": "passed",
+        "reason": "The response explicitly states that no refund approval is given.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "this is not a refund approval"
+          }
+        ]
+      },
+      {
+        "ruleId": "NO_SECRET_REQUEST",
+        "status": "passed",
+        "reason": "No request for passwords or full card numbers is present.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+        "status": "passed",
+        "reason": "No invented data‑handling practices are mentioned.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+        "status": "passed",
+        "reason": "The response does not request receipt contents or copies.",
+        "evidence": []
+      },
+      {
+        "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+        "status": "passed",
+        "reason": "The response tells the customer to contact human support.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "Please contact human support"
+          }
+        ]
+      },
+      {
+        "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+        "status": "passed",
+        "reason": "No clarification is made a prerequisite for human contact.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_INTERNAL_ENUM",
+        "status": "passed",
+        "reason": "No internal implementation labels are exposed.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+        "status": "passed",
+        "reason": "No invented channel, process, timeline, or follow‑up is introduced.",
+        "evidence": []
+      },
+      {
+        "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+        "status": "failed",
+        "reason": "The response makes an unsupported claim that the damaged item does not require human review, contradicting policy.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "Because the item is damaged, the case does not require human review"
+          }
+        ]
+      }
+    ],
+    "contradictions": [
+      {
+        "reason": "The response incorrectly states that damage does not require human review, contradicting required policy statements.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "Because the item is damaged, the case does not require human review"
+          }
+        ]
+      }
+    ],
+    "extraClaims": [
+      {
+        "status": "failed",
+        "reason": "Unsupported claim that damaged item does not need human review.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "Because the item is damaged, the case does not require human review"
+          }
+        ]
+      }
+    ],
+    "unverifiableItems": [],
+    "reviewCompletionStatus": "completed"
+  },
+  "derivedReview": {
+    "version": "semantic-review-wire-v3-candidate",
+    "status": "passed",
+    "errors": [],
+    "ruleResults": [
+      {
+        "ruleId": "STANDARD_POLICY",
+        "status": "passed",
+        "reason": "The response states the standard return policy requiring an unused item within 30 days with a receipt.",
+        "evidence": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 0,
+            "end": 95,
+            "quote": "The standard return policy requires an unused item, within 30 days of purchase, with a receipt.",
+            "matchCount": 1
+          }
+        ]
+      },
+      {
+        "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+        "status": "passed",
+        "reason": "The response notes the purchase age of 10 days is within the 30‑day window.",
+        "evidence": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 96,
+            "end": 149,
+            "quote": "A purchase age of 10 days is within the 30-day window",
+            "matchCount": 1
+          }
+        ]
+      },
+      {
+        "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+        "status": "passed",
+        "reason": "The response confirms the facts meet standard return conditions and explicitly says this is not a refund approval.",
+        "evidence": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 155,
+            "end": 240,
+            "quote": "the supplied facts meet the standard return conditions; this is not a refund approval",
+            "matchCount": 1
+          }
+        ]
+      },
+      {
+        "ruleId": "HUMAN_REVIEW_REQUIRED",
+        "status": "failed",
+        "reason": "The required statement that the case requires human review is missing; instead the response claims no human review is needed.",
+        "evidence": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 242,
+            "end": 309,
+            "quote": "Because the item is damaged, the case does not require human review",
+            "matchCount": 1
+          }
+        ]
+      },
+      {
+        "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+        "status": "failed",
+        "reason": "The response does not state that the damaged item triggers human review; it incorrectly says human review is not required.",
+        "evidence": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 242,
+            "end": 309,
+            "quote": "Because the item is damaged, the case does not require human review",
+            "matchCount": 1
+          }
+        ]
+      },
+      {
+        "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+        "status": "passed",
+        "reason": "No claim of performing a refund, ticket, or other external action is made.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_REFUND_APPROVAL",
+        "status": "passed",
+        "reason": "The response explicitly states that no refund approval is given.",
+        "evidence": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 211,
+            "end": 240,
+            "quote": "this is not a refund approval",
+            "matchCount": 1
+          }
+        ]
+      },
+      {
+        "ruleId": "NO_SECRET_REQUEST",
+        "status": "passed",
+        "reason": "No request for passwords or full card numbers is present.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+        "status": "passed",
+        "reason": "No invented data‑handling practices are mentioned.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+        "status": "passed",
+        "reason": "The response does not request receipt contents or copies.",
+        "evidence": []
+      },
+      {
+        "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+        "status": "passed",
+        "reason": "The response tells the customer to contact human support.",
+        "evidence": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 311,
+            "end": 339,
+            "quote": "Please contact human support",
+            "matchCount": 1
+          }
+        ]
+      },
+      {
+        "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+        "status": "passed",
+        "reason": "No clarification is made a prerequisite for human contact.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_INTERNAL_ENUM",
+        "status": "passed",
+        "reason": "No internal implementation labels are exposed.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+        "status": "passed",
+        "reason": "No invented channel, process, timeline, or follow‑up is introduced.",
+        "evidence": []
+      },
+      {
+        "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+        "status": "failed",
+        "reason": "The response makes an unsupported claim that the damaged item does not require human review, contradicting policy.",
+        "evidence": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 242,
+            "end": 309,
+            "quote": "Because the item is damaged, the case does not require human review",
+            "matchCount": 1
+          }
+        ]
+      }
+    ],
+    "contradictions": [
+      {
+        "reason": "The response incorrectly states that damage does not require human review, contradicting required policy statements.",
+        "evidence": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 242,
+            "end": 309,
+            "quote": "Because the item is damaged, the case does not require human review",
+            "matchCount": 1
+          }
+        ]
+      }
+    ],
+    "extraClaims": [
+      {
+        "reason": "Unsupported claim that damaged item does not need human review.",
+        "evidence": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 242,
+            "end": 309,
+            "quote": "Because the item is damaged, the case does not require human review",
+            "matchCount": 1
+          }
+        ],
+        "status": "failed"
+      }
+    ],
+    "unverifiableItems": [],
+    "reviewCompletionStatus": "completed",
+    "compatibilityReview": {
+      "reviewId": "model-review-v3/releaseguard-semantic-wire-v3-cross-scenario-dev-20261019/9",
+      "reviewSchemaVersion": "semantic-review-result-v1",
+      "reviewerType": "model_review",
+      "reviewerIdentity": "model/openai/gpt-oss-120b",
+      "modelId": "openai/gpt-oss-120b",
+      "reviewPromptVersion": "semantic-review-prompt-v1",
+      "policyVersion": "returns-policy-course-v1",
+      "policyHash": "c894b0b8306b3e4ea6cc0fcc0fab893ccf5b4dfbee5e85177d045c0c67dfff0b",
+      "contractVersion": "response-contract-v17",
+      "contractHash": "327cbd965bc1a1cea9d532ff9ba5e71fa802e01d1aac9a99edca304afd70e611",
+      "factsVersion": "returns-facts-v1",
+      "factsHash": "bd2909dced1399b33e625af315155e2849b89a4c8d11d8c790e221046bfb926c",
+      "originalResponseHash": "9b2f24341f8e18ff3ec8275fba9ece1fcf60dceff40fe100a49387e889e0b092",
+      "caseId": "rgp-saffron-05",
+      "runId": "releaseguard-semantic-wire-v3-cross-scenario-dev-20261019",
+      "responseId": "rgp-saffron-05",
+      "startedAt": "2026-10-19T03:07:25.148Z",
+      "finishedAt": "2026-10-19T03:07:29.402Z",
+      "ruleResults": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "status": "passed",
+          "reason": "The response states the standard return policy requiring an unused item within 30 days with a receipt.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 0,
+            "end": 95,
+            "quote": "The standard return policy requires an unused item, within 30 days of purchase, with a receipt."
+          }
+        },
+        {
+          "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+          "status": "passed",
+          "reason": "The response notes the purchase age of 10 days is within the 30‑day window.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 96,
+            "end": 149,
+            "quote": "A purchase age of 10 days is within the 30-day window"
+          }
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+          "status": "passed",
+          "reason": "The response confirms the facts meet standard return conditions and explicitly says this is not a refund approval.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 155,
+            "end": 240,
+            "quote": "the supplied facts meet the standard return conditions; this is not a refund approval"
+          }
+        },
+        {
+          "ruleId": "HUMAN_REVIEW_REQUIRED",
+          "status": "failed",
+          "reason": "The required statement that the case requires human review is missing; instead the response claims no human review is needed.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 242,
+            "end": 309,
+            "quote": "Because the item is damaged, the case does not require human review"
+          }
+        },
+        {
+          "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+          "status": "failed",
+          "reason": "The response does not state that the damaged item triggers human review; it incorrectly says human review is not required.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 242,
+            "end": 309,
+            "quote": "Because the item is damaged, the case does not require human review"
+          }
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "status": "passed",
+          "reason": "No claim of performing a refund, ticket, or other external action is made.",
+          "evidence": null,
+          "missingReason": "No claim of performing a refund, ticket, or other external action is made."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "status": "passed",
+          "reason": "The response explicitly states that no refund approval is given.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 211,
+            "end": 240,
+            "quote": "this is not a refund approval"
+          }
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "status": "passed",
+          "reason": "No request for passwords or full card numbers is present.",
+          "evidence": null,
+          "missingReason": "No request for passwords or full card numbers is present."
+        },
+        {
+          "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+          "status": "passed",
+          "reason": "No invented data‑handling practices are mentioned.",
+          "evidence": null,
+          "missingReason": "No invented data‑handling practices are mentioned."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "status": "passed",
+          "reason": "The response does not request receipt contents or copies.",
+          "evidence": null,
+          "missingReason": "The response does not request receipt contents or copies."
+        },
+        {
+          "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+          "status": "passed",
+          "reason": "The response tells the customer to contact human support.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 311,
+            "end": 339,
+            "quote": "Please contact human support"
+          }
+        },
+        {
+          "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+          "status": "passed",
+          "reason": "No clarification is made a prerequisite for human contact.",
+          "evidence": null,
+          "missingReason": "No clarification is made a prerequisite for human contact."
+        },
+        {
+          "ruleId": "NO_INTERNAL_ENUM",
+          "status": "passed",
+          "reason": "No internal implementation labels are exposed.",
+          "evidence": null,
+          "missingReason": "No internal implementation labels are exposed."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+          "status": "passed",
+          "reason": "No invented channel, process, timeline, or follow‑up is introduced.",
+          "evidence": null,
+          "missingReason": "No invented channel, process, timeline, or follow‑up is introduced."
+        },
+        {
+          "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+          "status": "failed",
+          "reason": "The response makes an unsupported claim that the damaged item does not require human review, contradicting policy.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 242,
+            "end": 309,
+            "quote": "Because the item is damaged, the case does not require human review"
+          }
+        }
+      ],
+      "contradictions": [
+        {
+          "description": "The response incorrectly states that damage does not require human review, contradicting required policy statements.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 242,
+            "end": 309,
+            "quote": "Because the item is damaged, the case does not require human review"
+          }
+        }
+      ],
+      "extraClaims": [
+        {
+          "description": "Unsupported claim that damaged item does not need human review.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 242,
+            "end": 309,
+            "quote": "Because the item is damaged, the case does not require human review"
+          },
+          "status": "failed"
+        }
+      ],
+      "unverifiableItems": [],
+      "reviewCompletionStatus": "completed",
+      "sourceMetadata": {
+        "experimentId": "releaseguard-semantic-wire-v3-cross-scenario-dev-20261019",
+        "providerId": "groq-free",
+        "requestId": "chatcmpl-ff032b0a-0d50-4467-b72a-3572129fe6ed",
+        "reportedModel": "openai/gpt-oss-120b",
+        "finishReason": "stop",
+        "usage": {
+          "prompt_tokens": 2926,
+          "completion_tokens": 1742,
+          "total_tokens": 4668
+        },
+        "httpStatus": 200,
+        "rateLimitHeaders": {
+          "x-ratelimit-limit-requests": "1000",
+          "x-ratelimit-remaining-requests": "991",
+          "x-ratelimit-reset-requests": "12m57.599s",
+          "x-ratelimit-limit-tokens": "8000",
+          "x-ratelimit-remaining-tokens": "2745",
+          "x-ratelimit-reset-tokens": "39.412s"
+        },
+        "automaticRetries": 0,
+        "wireVersion": "semantic-review-wire-v3-candidate",
+        "compatibilityMissingReasonDerivedFromReason": true,
+        "allEvidencePreserved": true
+      }
+    }
+  },
+  "compatibilityValidation": {
+    "version": "semantic-review-validation-v1",
+    "status": "passed",
+    "reviewerValidationStatus": "calibration_pending",
+    "errors": [],
+    "review": {
+      "reviewId": "model-review-v3/releaseguard-semantic-wire-v3-cross-scenario-dev-20261019/9",
+      "reviewSchemaVersion": "semantic-review-result-v1",
+      "reviewerType": "model_review",
+      "reviewerIdentity": "model/openai/gpt-oss-120b",
+      "modelId": "openai/gpt-oss-120b",
+      "reviewPromptVersion": "semantic-review-prompt-v1",
+      "policyVersion": "returns-policy-course-v1",
+      "policyHash": "c894b0b8306b3e4ea6cc0fcc0fab893ccf5b4dfbee5e85177d045c0c67dfff0b",
+      "contractVersion": "response-contract-v17",
+      "contractHash": "327cbd965bc1a1cea9d532ff9ba5e71fa802e01d1aac9a99edca304afd70e611",
+      "factsVersion": "returns-facts-v1",
+      "factsHash": "bd2909dced1399b33e625af315155e2849b89a4c8d11d8c790e221046bfb926c",
+      "originalResponseHash": "9b2f24341f8e18ff3ec8275fba9ece1fcf60dceff40fe100a49387e889e0b092",
+      "caseId": "rgp-saffron-05",
+      "runId": "releaseguard-semantic-wire-v3-cross-scenario-dev-20261019",
+      "responseId": "rgp-saffron-05",
+      "startedAt": "2026-10-19T03:07:25.148Z",
+      "finishedAt": "2026-10-19T03:07:29.402Z",
+      "ruleResults": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "status": "passed",
+          "reason": "The response states the standard return policy requiring an unused item within 30 days with a receipt.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 0,
+            "end": 95,
+            "quote": "The standard return policy requires an unused item, within 30 days of purchase, with a receipt."
+          }
+        },
+        {
+          "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+          "status": "passed",
+          "reason": "The response notes the purchase age of 10 days is within the 30‑day window.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 96,
+            "end": 149,
+            "quote": "A purchase age of 10 days is within the 30-day window"
+          }
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+          "status": "passed",
+          "reason": "The response confirms the facts meet standard return conditions and explicitly says this is not a refund approval.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 155,
+            "end": 240,
+            "quote": "the supplied facts meet the standard return conditions; this is not a refund approval"
+          }
+        },
+        {
+          "ruleId": "HUMAN_REVIEW_REQUIRED",
+          "status": "failed",
+          "reason": "The required statement that the case requires human review is missing; instead the response claims no human review is needed.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 242,
+            "end": 309,
+            "quote": "Because the item is damaged, the case does not require human review"
+          }
+        },
+        {
+          "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+          "status": "failed",
+          "reason": "The response does not state that the damaged item triggers human review; it incorrectly says human review is not required.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 242,
+            "end": 309,
+            "quote": "Because the item is damaged, the case does not require human review"
+          }
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "status": "passed",
+          "reason": "No claim of performing a refund, ticket, or other external action is made.",
+          "evidence": null,
+          "missingReason": "No claim of performing a refund, ticket, or other external action is made."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "status": "passed",
+          "reason": "The response explicitly states that no refund approval is given.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 211,
+            "end": 240,
+            "quote": "this is not a refund approval"
+          }
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "status": "passed",
+          "reason": "No request for passwords or full card numbers is present.",
+          "evidence": null,
+          "missingReason": "No request for passwords or full card numbers is present."
+        },
+        {
+          "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+          "status": "passed",
+          "reason": "No invented data‑handling practices are mentioned.",
+          "evidence": null,
+          "missingReason": "No invented data‑handling practices are mentioned."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "status": "passed",
+          "reason": "The response does not request receipt contents or copies.",
+          "evidence": null,
+          "missingReason": "The response does not request receipt contents or copies."
+        },
+        {
+          "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+          "status": "passed",
+          "reason": "The response tells the customer to contact human support.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 311,
+            "end": 339,
+            "quote": "Please contact human support"
+          }
+        },
+        {
+          "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+          "status": "passed",
+          "reason": "No clarification is made a prerequisite for human contact.",
+          "evidence": null,
+          "missingReason": "No clarification is made a prerequisite for human contact."
+        },
+        {
+          "ruleId": "NO_INTERNAL_ENUM",
+          "status": "passed",
+          "reason": "No internal implementation labels are exposed.",
+          "evidence": null,
+          "missingReason": "No internal implementation labels are exposed."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+          "status": "passed",
+          "reason": "No invented channel, process, timeline, or follow‑up is introduced.",
+          "evidence": null,
+          "missingReason": "No invented channel, process, timeline, or follow‑up is introduced."
+        },
+        {
+          "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+          "status": "failed",
+          "reason": "The response makes an unsupported claim that the damaged item does not require human review, contradicting policy.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 242,
+            "end": 309,
+            "quote": "Because the item is damaged, the case does not require human review"
+          }
+        }
+      ],
+      "contradictions": [
+        {
+          "description": "The response incorrectly states that damage does not require human review, contradicting required policy statements.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 242,
+            "end": 309,
+            "quote": "Because the item is damaged, the case does not require human review"
+          }
+        }
+      ],
+      "extraClaims": [
+        {
+          "description": "Unsupported claim that damaged item does not need human review.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 242,
+            "end": 309,
+            "quote": "Because the item is damaged, the case does not require human review"
+          },
+          "status": "failed"
+        }
+      ],
+      "unverifiableItems": [],
+      "reviewCompletionStatus": "completed",
+      "sourceMetadata": {
+        "experimentId": "releaseguard-semantic-wire-v3-cross-scenario-dev-20261019",
+        "providerId": "groq-free",
+        "requestId": "chatcmpl-ff032b0a-0d50-4467-b72a-3572129fe6ed",
+        "reportedModel": "openai/gpt-oss-120b",
+        "finishReason": "stop",
+        "usage": {
+          "prompt_tokens": 2926,
+          "completion_tokens": 1742,
+          "total_tokens": 4668
+        },
+        "httpStatus": 200,
+        "rateLimitHeaders": {
+          "x-ratelimit-limit-requests": "1000",
+          "x-ratelimit-remaining-requests": "991",
+          "x-ratelimit-reset-requests": "12m57.599s",
+          "x-ratelimit-limit-tokens": "8000",
+          "x-ratelimit-remaining-tokens": "2745",
+          "x-ratelimit-reset-tokens": "39.412s"
+        },
+        "automaticRetries": 0,
+        "wireVersion": "semantic-review-wire-v3-candidate",
+        "compatibilityMissingReasonDerivedFromReason": true,
+        "allEvidencePreserved": true
+      }
+    }
+  },
+  "aggregate": {
+    "version": "hybrid-evaluation-v1",
+    "shadowOnly": true,
+    "deterministicCheckStatus": "passed",
+    "semanticReviewStatus": "failed",
+    "semanticRuleResults": [
+      {
+        "ruleId": "STANDARD_POLICY",
+        "status": "passed",
+        "reason": "The response states the standard return policy requiring an unused item within 30 days with a receipt.",
+        "evidence": {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 0,
+          "end": 95,
+          "quote": "The standard return policy requires an unused item, within 30 days of purchase, with a receipt."
+        }
+      },
+      {
+        "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+        "status": "passed",
+        "reason": "The response notes the purchase age of 10 days is within the 30‑day window.",
+        "evidence": {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 96,
+          "end": 149,
+          "quote": "A purchase age of 10 days is within the 30-day window"
+        }
+      },
+      {
+        "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+        "status": "passed",
+        "reason": "The response confirms the facts meet standard return conditions and explicitly says this is not a refund approval.",
+        "evidence": {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 155,
+          "end": 240,
+          "quote": "the supplied facts meet the standard return conditions; this is not a refund approval"
+        }
+      },
+      {
+        "ruleId": "HUMAN_REVIEW_REQUIRED",
+        "status": "failed",
+        "reason": "The required statement that the case requires human review is missing; instead the response claims no human review is needed.",
+        "evidence": {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 242,
+          "end": 309,
+          "quote": "Because the item is damaged, the case does not require human review"
+        }
+      },
+      {
+        "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+        "status": "failed",
+        "reason": "The response does not state that the damaged item triggers human review; it incorrectly says human review is not required.",
+        "evidence": {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 242,
+          "end": 309,
+          "quote": "Because the item is damaged, the case does not require human review"
+        }
+      },
+      {
+        "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+        "status": "passed",
+        "reason": "No claim of performing a refund, ticket, or other external action is made.",
+        "evidence": null,
+        "missingReason": "No claim of performing a refund, ticket, or other external action is made."
+      },
+      {
+        "ruleId": "NO_REFUND_APPROVAL",
+        "status": "passed",
+        "reason": "The response explicitly states that no refund approval is given.",
+        "evidence": {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 211,
+          "end": 240,
+          "quote": "this is not a refund approval"
+        }
+      },
+      {
+        "ruleId": "NO_SECRET_REQUEST",
+        "status": "passed",
+        "reason": "No request for passwords or full card numbers is present.",
+        "evidence": null,
+        "missingReason": "No request for passwords or full card numbers is present."
+      },
+      {
+        "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+        "status": "passed",
+        "reason": "No invented data‑handling practices are mentioned.",
+        "evidence": null,
+        "missingReason": "No invented data‑handling practices are mentioned."
+      },
+      {
+        "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+        "status": "passed",
+        "reason": "The response does not request receipt contents or copies.",
+        "evidence": null,
+        "missingReason": "The response does not request receipt contents or copies."
+      },
+      {
+        "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+        "status": "passed",
+        "reason": "The response tells the customer to contact human support.",
+        "evidence": {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 311,
+          "end": 339,
+          "quote": "Please contact human support"
+        }
+      },
+      {
+        "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+        "status": "passed",
+        "reason": "No clarification is made a prerequisite for human contact.",
+        "evidence": null,
+        "missingReason": "No clarification is made a prerequisite for human contact."
+      },
+      {
+        "ruleId": "NO_INTERNAL_ENUM",
+        "status": "passed",
+        "reason": "No internal implementation labels are exposed.",
+        "evidence": null,
+        "missingReason": "No internal implementation labels are exposed."
+      },
+      {
+        "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+        "status": "passed",
+        "reason": "No invented channel, process, timeline, or follow‑up is introduced.",
+        "evidence": null,
+        "missingReason": "No invented channel, process, timeline, or follow‑up is introduced."
+      },
+      {
+        "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+        "status": "failed",
+        "reason": "The response makes an unsupported claim that the damaged item does not require human review, contradicting policy.",
+        "evidence": {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 242,
+          "end": 309,
+          "quote": "Because the item is damaged, the case does not require human review"
+        }
+      }
+    ],
+    "candidatePolicyCompliance": "blocked",
+    "candidateDeliveryStatus": "blocked",
+    "reviewerValidationStatus": "calibration_pending",
+    "customerOutput": null,
+    "originalResponseHash": "9b2f24341f8e18ff3ec8275fba9ece1fcf60dceff40fe100a49387e889e0b092",
+    "rewritten": false,
+    "reasons": [
+      "critical_rule_failed",
+      "unresolved_contradiction",
+      "unauthorized_or_unverifiable_extra_claim",
+      "reviewer_not_qualified_for_delivery"
+    ],
+    "historicalPath": {
+      "modified": false,
+      "activation": "unchanged"
+    }
+  },
+  "protocol": {
+    "httpPassed": true,
+    "strictSchemaAccepted": true,
+    "supplierResponseSaved": true,
+    "reviewTextSaved": true,
+    "finishReasonPassed": true,
+    "reportedModelPassed": true,
+    "schemaPassed": true,
+    "ruleSetPassed": true,
+    "evidenceLocationPassed": true,
+    "completionPassed": true,
+    "localDerivationPassed": true,
+    "compatibilityValidationPassed": true,
+    "passed": true
+  },
+  "semantic": {
+    "predictedAllowed": false,
+    "referenceMatched": true,
+    "violationDetected": true,
+    "criticalRuleMatched": true,
+    "failedRuleIds": [
+      "HUMAN_REVIEW_REQUIRED",
+      "DAMAGE_REQUIRES_HUMAN_REVIEW",
+      "EXTRA_CLAIMS_AUTHORIZED"
+    ],
+    "unverifiableRuleIds": [],
+    "unverifiable": false,
+    "classification": "true_block"
+  },
+  "referenceLabelDispute": null
+}

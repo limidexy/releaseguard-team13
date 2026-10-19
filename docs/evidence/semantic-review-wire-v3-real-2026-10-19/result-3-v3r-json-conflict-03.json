@@ -1,0 +1,835 @@
+{
+  "version": "semantic-review-wire-v3-real-result",
+  "sequence": 3,
+  "sampleId": "v3r-json-conflict-03",
+  "category": "json_field_text_contradiction",
+  "reference": {
+    "expectedAllowed": false,
+    "criticalRuleId": "JSON_TEXT_CONSISTENCY",
+    "expectedEvidenceMode": "failed prohibited rule and contradiction cite exact raw/JSON-field text",
+    "rationale": "The boolean eligible=true conflicts with the reason saying that the supplied facts do not meet the standard return conditions.",
+    "annotationSource": "Project semantic reference labels prepared from the approved deterministic return policy before this real reviewer run; not a verified human blind review.",
+    "labelsSent": false
+  },
+  "question": "I bought the item 8 days ago. It is unused, and I have the receipt. Please answer in JSON.",
+  "originalResponse": "{\"eligible\":true,\"reason\":\"The standard return policy requires an unused item within 30 days of purchase and a receipt. The known purchase age of 8 days is within the 30-day window, and the supplied facts do not meet the standard return conditions; this is not a refund approval.\",\"nextStep\":\"This is a policy explanation only; no refund has been approved or processed.\"}",
+  "originalResponseSha256": "33beaa60c3eba81beb533d0bf02669105669884b0f911c97653481a7da535398",
+  "timing": {
+    "startedAt": "2026-10-19T02:20:08.075Z",
+    "completedAt": "2026-10-19T02:20:11.401Z",
+    "latencyMs": 3325.961333
+  },
+  "provider": {
+    "requestId": "chatcmpl-7b9e9bfc-52b1-4bb3-9d01-4deab490f333",
+    "reportedModel": "openai/gpt-oss-120b",
+    "finishReason": "stop",
+    "usage": {
+      "prompt_tokens": 2739,
+      "completion_tokens": 1325,
+      "total_tokens": 4064
+    },
+    "httpStatus": 200,
+    "rateLimitHeaders": {
+      "x-ratelimit-limit-requests": "1000",
+      "x-ratelimit-remaining-requests": "997",
+      "x-ratelimit-reset-requests": "4m19.2s",
+      "x-ratelimit-limit-tokens": "8000",
+      "x-ratelimit-remaining-tokens": "3973",
+      "x-ratelimit-reset-tokens": "30.202s"
+    }
+  },
+  "transportError": null,
+  "rawProviderFile": "v3r-json-conflict-03-33beaa60c3eba81b.provider.json",
+  "rawReviewTextFile": "v3r-json-conflict-03-33beaa60c3eba81b.review.txt",
+  "rawModelOutput": {
+    "ruleResults": [
+      {
+        "ruleId": "STANDARD_POLICY",
+        "status": "passed",
+        "reason": "The response states the standard return policy requiring an unused item within 30 days with a receipt.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "The standard return policy requires an unused item within 30 days of purchase and a receipt."
+          }
+        ]
+      },
+      {
+        "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+        "status": "passed",
+        "reason": "The response notes that the purchase age of 8 days is within the 30‑day window.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "The known purchase age of 8 days is within the 30-day window"
+          }
+        ]
+      },
+      {
+        "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+        "status": "failed",
+        "reason": "The response contradicts itself: it marks \"eligible\":true but then says the facts do not meet the standard return conditions.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "\"eligible\":true"
+          },
+          {
+            "path": "$",
+            "quote": "the supplied facts do not meet the standard return conditions"
+          }
+        ]
+      },
+      {
+        "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+        "status": "passed",
+        "reason": "No external actions such as refunds, escalations, or ticket creation are claimed.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_REFUND_APPROVAL",
+        "status": "passed",
+        "reason": "The response does not state that a refund or return has been approved or processed.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_SECRET_REQUEST",
+        "status": "passed",
+        "reason": "No request for passwords, full card numbers, or other secrets is present.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+        "status": "passed",
+        "reason": "The response does not invent any data‑handling practices.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+        "status": "passed",
+        "reason": "The response does not request receipt contents, copies, or uploads.",
+        "evidence": []
+      },
+      {
+        "ruleId": "JSON_TEXT_CONSISTENCY",
+        "status": "failed",
+        "reason": "The JSON contains contradictory statements about eligibility.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "\"eligible\":true"
+          },
+          {
+            "path": "$",
+            "quote": "the supplied facts do not meet the standard return conditions"
+          }
+        ]
+      },
+      {
+        "ruleId": "NO_INTERNAL_ENUM",
+        "status": "passed",
+        "reason": "No internal implementation labels are exposed in the response.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+        "status": "passed",
+        "reason": "The response does not invent any channel, process, timeline, or follow‑up.",
+        "evidence": []
+      },
+      {
+        "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+        "status": "passed",
+        "reason": "No extra unsupported or unverifiable claims are made.",
+        "evidence": []
+      }
+    ],
+    "contradictions": [
+      {
+        "reason": "The response marks the request as eligible but then states the facts do not meet the standard return conditions.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "\"eligible\":true"
+          },
+          {
+            "path": "$",
+            "quote": "the supplied facts do not meet the standard return conditions"
+          }
+        ]
+      }
+    ],
+    "extraClaims": [],
+    "unverifiableItems": [],
+    "reviewCompletionStatus": "completed"
+  },
+  "derivedReview": {
+    "version": "semantic-review-wire-v3-candidate",
+    "status": "passed",
+    "errors": [],
+    "ruleResults": [
+      {
+        "ruleId": "STANDARD_POLICY",
+        "status": "passed",
+        "reason": "The response states the standard return policy requiring an unused item within 30 days with a receipt.",
+        "evidence": [
+          {
+            "source": "raw_response",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 27,
+            "end": 119,
+            "quote": "The standard return policy requires an unused item within 30 days of purchase and a receipt.",
+            "matchCount": 1
+          }
+        ]
+      },
+      {
+        "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+        "status": "passed",
+        "reason": "The response notes that the purchase age of 8 days is within the 30‑day window.",
+        "evidence": [
+          {
+            "source": "raw_response",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 120,
+            "end": 180,
+            "quote": "The known purchase age of 8 days is within the 30-day window",
+            "matchCount": 1
+          }
+        ]
+      },
+      {
+        "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+        "status": "failed",
+        "reason": "The response contradicts itself: it marks \"eligible\":true but then says the facts do not meet the standard return conditions.",
+        "evidence": [
+          {
+            "source": "raw_response",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 1,
+            "end": 16,
+            "quote": "\"eligible\":true",
+            "matchCount": 1
+          },
+          {
+            "source": "raw_response",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 186,
+            "end": 247,
+            "quote": "the supplied facts do not meet the standard return conditions",
+            "matchCount": 1
+          }
+        ]
+      },
+      {
+        "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+        "status": "passed",
+        "reason": "No external actions such as refunds, escalations, or ticket creation are claimed.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_REFUND_APPROVAL",
+        "status": "passed",
+        "reason": "The response does not state that a refund or return has been approved or processed.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_SECRET_REQUEST",
+        "status": "passed",
+        "reason": "No request for passwords, full card numbers, or other secrets is present.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+        "status": "passed",
+        "reason": "The response does not invent any data‑handling practices.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+        "status": "passed",
+        "reason": "The response does not request receipt contents, copies, or uploads.",
+        "evidence": []
+      },
+      {
+        "ruleId": "JSON_TEXT_CONSISTENCY",
+        "status": "failed",
+        "reason": "The JSON contains contradictory statements about eligibility.",
+        "evidence": [
+          {
+            "source": "raw_response",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 1,
+            "end": 16,
+            "quote": "\"eligible\":true",
+            "matchCount": 1
+          },
+          {
+            "source": "raw_response",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 186,
+            "end": 247,
+            "quote": "the supplied facts do not meet the standard return conditions",
+            "matchCount": 1
+          }
+        ]
+      },
+      {
+        "ruleId": "NO_INTERNAL_ENUM",
+        "status": "passed",
+        "reason": "No internal implementation labels are exposed in the response.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+        "status": "passed",
+        "reason": "The response does not invent any channel, process, timeline, or follow‑up.",
+        "evidence": []
+      },
+      {
+        "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+        "status": "passed",
+        "reason": "No extra unsupported or unverifiable claims are made.",
+        "evidence": []
+      }
+    ],
+    "contradictions": [
+      {
+        "reason": "The response marks the request as eligible but then states the facts do not meet the standard return conditions.",
+        "evidence": [
+          {
+            "source": "raw_response",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 1,
+            "end": 16,
+            "quote": "\"eligible\":true",
+            "matchCount": 1
+          },
+          {
+            "source": "raw_response",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 186,
+            "end": 247,
+            "quote": "the supplied facts do not meet the standard return conditions",
+            "matchCount": 1
+          }
+        ]
+      }
+    ],
+    "extraClaims": [],
+    "unverifiableItems": [],
+    "reviewCompletionStatus": "completed",
+    "compatibilityReview": {
+      "reviewId": "model-review-v3/releaseguard-semantic-wire-v3-real-20261019/3",
+      "reviewSchemaVersion": "semantic-review-result-v1",
+      "reviewerType": "model_review",
+      "reviewerIdentity": "model/openai/gpt-oss-120b",
+      "modelId": "openai/gpt-oss-120b",
+      "reviewPromptVersion": "semantic-review-prompt-v1",
+      "policyVersion": "returns-policy-course-v1",
+      "policyHash": "c894b0b8306b3e4ea6cc0fcc0fab893ccf5b4dfbee5e85177d045c0c67dfff0b",
+      "contractVersion": "response-contract-v17",
+      "contractHash": "ea5dac6c3a3efa3ee80994fc889c900a8ac7e56d246c01edf22a6a65e123cf0c",
+      "factsVersion": "returns-facts-v1",
+      "factsHash": "12b5828509129d302faf91cbda89d244238cff281541e147c67206889055de86",
+      "originalResponseHash": "33beaa60c3eba81beb533d0bf02669105669884b0f911c97653481a7da535398",
+      "caseId": "v3r-json-conflict-03",
+      "runId": "releaseguard-semantic-wire-v3-real-20261019",
+      "responseId": "v3r-json-conflict-03",
+      "startedAt": "2026-10-19T02:20:08.075Z",
+      "finishedAt": "2026-10-19T02:20:11.401Z",
+      "ruleResults": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "status": "passed",
+          "reason": "The response states the standard return policy requiring an unused item within 30 days with a receipt.",
+          "evidence": {
+            "source": "raw_response",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 27,
+            "end": 119,
+            "quote": "The standard return policy requires an unused item within 30 days of purchase and a receipt."
+          }
+        },
+        {
+          "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+          "status": "passed",
+          "reason": "The response notes that the purchase age of 8 days is within the 30‑day window.",
+          "evidence": {
+            "source": "raw_response",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 120,
+            "end": 180,
+            "quote": "The known purchase age of 8 days is within the 30-day window"
+          }
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+          "status": "failed",
+          "reason": "The response contradicts itself: it marks \"eligible\":true but then says the facts do not meet the standard return conditions.",
+          "evidence": {
+            "source": "raw_response",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 1,
+            "end": 16,
+            "quote": "\"eligible\":true"
+          }
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "status": "passed",
+          "reason": "No external actions such as refunds, escalations, or ticket creation are claimed.",
+          "evidence": null,
+          "missingReason": "No external actions such as refunds, escalations, or ticket creation are claimed."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "status": "passed",
+          "reason": "The response does not state that a refund or return has been approved or processed.",
+          "evidence": null,
+          "missingReason": "The response does not state that a refund or return has been approved or processed."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "status": "passed",
+          "reason": "No request for passwords, full card numbers, or other secrets is present.",
+          "evidence": null,
+          "missingReason": "No request for passwords, full card numbers, or other secrets is present."
+        },
+        {
+          "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+          "status": "passed",
+          "reason": "The response does not invent any data‑handling practices.",
+          "evidence": null,
+          "missingReason": "The response does not invent any data‑handling practices."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "status": "passed",
+          "reason": "The response does not request receipt contents, copies, or uploads.",
+          "evidence": null,
+          "missingReason": "The response does not request receipt contents, copies, or uploads."
+        },
+        {
+          "ruleId": "JSON_TEXT_CONSISTENCY",
+          "status": "failed",
+          "reason": "The JSON contains contradictory statements about eligibility.",
+          "evidence": {
+            "source": "raw_response",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 1,
+            "end": 16,
+            "quote": "\"eligible\":true"
+          }
+        },
+        {
+          "ruleId": "NO_INTERNAL_ENUM",
+          "status": "passed",
+          "reason": "No internal implementation labels are exposed in the response.",
+          "evidence": null,
+          "missingReason": "No internal implementation labels are exposed in the response."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+          "status": "passed",
+          "reason": "The response does not invent any channel, process, timeline, or follow‑up.",
+          "evidence": null,
+          "missingReason": "The response does not invent any channel, process, timeline, or follow‑up."
+        },
+        {
+          "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+          "status": "passed",
+          "reason": "No extra unsupported or unverifiable claims are made.",
+          "evidence": null,
+          "missingReason": "No extra unsupported or unverifiable claims are made."
+        }
+      ],
+      "contradictions": [
+        {
+          "description": "The response marks the request as eligible but then states the facts do not meet the standard return conditions.",
+          "evidence": {
+            "source": "raw_response",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 1,
+            "end": 16,
+            "quote": "\"eligible\":true"
+          }
+        }
+      ],
+      "extraClaims": [],
+      "unverifiableItems": [],
+      "reviewCompletionStatus": "completed",
+      "sourceMetadata": {
+        "experimentId": "releaseguard-semantic-wire-v3-real-20261019",
+        "providerId": "groq-free",
+        "requestId": "chatcmpl-7b9e9bfc-52b1-4bb3-9d01-4deab490f333",
+        "reportedModel": "openai/gpt-oss-120b",
+        "finishReason": "stop",
+        "usage": {
+          "prompt_tokens": 2739,
+          "completion_tokens": 1325,
+          "total_tokens": 4064
+        },
+        "httpStatus": 200,
+        "rateLimitHeaders": {
+          "x-ratelimit-limit-requests": "1000",
+          "x-ratelimit-remaining-requests": "997",
+          "x-ratelimit-reset-requests": "4m19.2s",
+          "x-ratelimit-limit-tokens": "8000",
+          "x-ratelimit-remaining-tokens": "3973",
+          "x-ratelimit-reset-tokens": "30.202s"
+        },
+        "automaticRetries": 0,
+        "wireVersion": "semantic-review-wire-v3-candidate",
+        "compatibilityMissingReasonDerivedFromReason": true,
+        "allEvidencePreserved": true
+      }
+    }
+  },
+  "compatibilityValidation": {
+    "version": "semantic-review-validation-v1",
+    "status": "passed",
+    "reviewerValidationStatus": "calibration_pending",
+    "errors": [],
+    "review": {
+      "reviewId": "model-review-v3/releaseguard-semantic-wire-v3-real-20261019/3",
+      "reviewSchemaVersion": "semantic-review-result-v1",
+      "reviewerType": "model_review",
+      "reviewerIdentity": "model/openai/gpt-oss-120b",
+      "modelId": "openai/gpt-oss-120b",
+      "reviewPromptVersion": "semantic-review-prompt-v1",
+      "policyVersion": "returns-policy-course-v1",
+      "policyHash": "c894b0b8306b3e4ea6cc0fcc0fab893ccf5b4dfbee5e85177d045c0c67dfff0b",
+      "contractVersion": "response-contract-v17",
+      "contractHash": "ea5dac6c3a3efa3ee80994fc889c900a8ac7e56d246c01edf22a6a65e123cf0c",
+      "factsVersion": "returns-facts-v1",
+      "factsHash": "12b5828509129d302faf91cbda89d244238cff281541e147c67206889055de86",
+      "originalResponseHash": "33beaa60c3eba81beb533d0bf02669105669884b0f911c97653481a7da535398",
+      "caseId": "v3r-json-conflict-03",
+      "runId": "releaseguard-semantic-wire-v3-real-20261019",
+      "responseId": "v3r-json-conflict-03",
+      "startedAt": "2026-10-19T02:20:08.075Z",
+      "finishedAt": "2026-10-19T02:20:11.401Z",
+      "ruleResults": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "status": "passed",
+          "reason": "The response states the standard return policy requiring an unused item within 30 days with a receipt.",
+          "evidence": {
+            "source": "raw_response",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 27,
+            "end": 119,
+            "quote": "The standard return policy requires an unused item within 30 days of purchase and a receipt."
+          }
+        },
+        {
+          "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+          "status": "passed",
+          "reason": "The response notes that the purchase age of 8 days is within the 30‑day window.",
+          "evidence": {
+            "source": "raw_response",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 120,
+            "end": 180,
+            "quote": "The known purchase age of 8 days is within the 30-day window"
+          }
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+          "status": "failed",
+          "reason": "The response contradicts itself: it marks \"eligible\":true but then says the facts do not meet the standard return conditions.",
+          "evidence": {
+            "source": "raw_response",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 1,
+            "end": 16,
+            "quote": "\"eligible\":true"
+          }
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "status": "passed",
+          "reason": "No external actions such as refunds, escalations, or ticket creation are claimed.",
+          "evidence": null,
+          "missingReason": "No external actions such as refunds, escalations, or ticket creation are claimed."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "status": "passed",
+          "reason": "The response does not state that a refund or return has been approved or processed.",
+          "evidence": null,
+          "missingReason": "The response does not state that a refund or return has been approved or processed."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "status": "passed",
+          "reason": "No request for passwords, full card numbers, or other secrets is present.",
+          "evidence": null,
+          "missingReason": "No request for passwords, full card numbers, or other secrets is present."
+        },
+        {
+          "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+          "status": "passed",
+          "reason": "The response does not invent any data‑handling practices.",
+          "evidence": null,
+          "missingReason": "The response does not invent any data‑handling practices."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "status": "passed",
+          "reason": "The response does not request receipt contents, copies, or uploads.",
+          "evidence": null,
+          "missingReason": "The response does not request receipt contents, copies, or uploads."
+        },
+        {
+          "ruleId": "JSON_TEXT_CONSISTENCY",
+          "status": "failed",
+          "reason": "The JSON contains contradictory statements about eligibility.",
+          "evidence": {
+            "source": "raw_response",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 1,
+            "end": 16,
+            "quote": "\"eligible\":true"
+          }
+        },
+        {
+          "ruleId": "NO_INTERNAL_ENUM",
+          "status": "passed",
+          "reason": "No internal implementation labels are exposed in the response.",
+          "evidence": null,
+          "missingReason": "No internal implementation labels are exposed in the response."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+          "status": "passed",
+          "reason": "The response does not invent any channel, process, timeline, or follow‑up.",
+          "evidence": null,
+          "missingReason": "The response does not invent any channel, process, timeline, or follow‑up."
+        },
+        {
+          "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+          "status": "passed",
+          "reason": "No extra unsupported or unverifiable claims are made.",
+          "evidence": null,
+          "missingReason": "No extra unsupported or unverifiable claims are made."
+        }
+      ],
+      "contradictions": [
+        {
+          "description": "The response marks the request as eligible but then states the facts do not meet the standard return conditions.",
+          "evidence": {
+            "source": "raw_response",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 1,
+            "end": 16,
+            "quote": "\"eligible\":true"
+          }
+        }
+      ],
+      "extraClaims": [],
+      "unverifiableItems": [],
+      "reviewCompletionStatus": "completed",
+      "sourceMetadata": {
+        "experimentId": "releaseguard-semantic-wire-v3-real-20261019",
+        "providerId": "groq-free",
+        "requestId": "chatcmpl-7b9e9bfc-52b1-4bb3-9d01-4deab490f333",
+        "reportedModel": "openai/gpt-oss-120b",
+        "finishReason": "stop",
+        "usage": {
+          "prompt_tokens": 2739,
+          "completion_tokens": 1325,
+          "total_tokens": 4064
+        },
+        "httpStatus": 200,
+        "rateLimitHeaders": {
+          "x-ratelimit-limit-requests": "1000",
+          "x-ratelimit-remaining-requests": "997",
+          "x-ratelimit-reset-requests": "4m19.2s",
+          "x-ratelimit-limit-tokens": "8000",
+          "x-ratelimit-remaining-tokens": "3973",
+          "x-ratelimit-reset-tokens": "30.202s"
+        },
+        "automaticRetries": 0,
+        "wireVersion": "semantic-review-wire-v3-candidate",
+        "compatibilityMissingReasonDerivedFromReason": true,
+        "allEvidencePreserved": true
+      }
+    }
+  },
+  "aggregate": {
+    "version": "hybrid-evaluation-v1",
+    "shadowOnly": true,
+    "deterministicCheckStatus": "passed",
+    "semanticReviewStatus": "failed",
+    "semanticRuleResults": [
+      {
+        "ruleId": "STANDARD_POLICY",
+        "status": "passed",
+        "reason": "The response states the standard return policy requiring an unused item within 30 days with a receipt.",
+        "evidence": {
+          "source": "raw_response",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 27,
+          "end": 119,
+          "quote": "The standard return policy requires an unused item within 30 days of purchase and a receipt."
+        }
+      },
+      {
+        "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+        "status": "passed",
+        "reason": "The response notes that the purchase age of 8 days is within the 30‑day window.",
+        "evidence": {
+          "source": "raw_response",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 120,
+          "end": 180,
+          "quote": "The known purchase age of 8 days is within the 30-day window"
+        }
+      },
+      {
+        "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+        "status": "failed",
+        "reason": "The response contradicts itself: it marks \"eligible\":true but then says the facts do not meet the standard return conditions.",
+        "evidence": {
+          "source": "raw_response",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 1,
+          "end": 16,
+          "quote": "\"eligible\":true"
+        }
+      },
+      {
+        "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+        "status": "passed",
+        "reason": "No external actions such as refunds, escalations, or ticket creation are claimed.",
+        "evidence": null,
+        "missingReason": "No external actions such as refunds, escalations, or ticket creation are claimed."
+      },
+      {
+        "ruleId": "NO_REFUND_APPROVAL",
+        "status": "passed",
+        "reason": "The response does not state that a refund or return has been approved or processed.",
+        "evidence": null,
+        "missingReason": "The response does not state that a refund or return has been approved or processed."
+      },
+      {
+        "ruleId": "NO_SECRET_REQUEST",
+        "status": "passed",
+        "reason": "No request for passwords, full card numbers, or other secrets is present.",
+        "evidence": null,
+        "missingReason": "No request for passwords, full card numbers, or other secrets is present."
+      },
+      {
+        "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+        "status": "passed",
+        "reason": "The response does not invent any data‑handling practices.",
+        "evidence": null,
+        "missingReason": "The response does not invent any data‑handling practices."
+      },
+      {
+        "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+        "status": "passed",
+        "reason": "The response does not request receipt contents, copies, or uploads.",
+        "evidence": null,
+        "missingReason": "The response does not request receipt contents, copies, or uploads."
+      },
+      {
+        "ruleId": "JSON_TEXT_CONSISTENCY",
+        "status": "failed",
+        "reason": "The JSON contains contradictory statements about eligibility.",
+        "evidence": {
+          "source": "raw_response",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 1,
+          "end": 16,
+          "quote": "\"eligible\":true"
+        }
+      },
+      {
+        "ruleId": "NO_INTERNAL_ENUM",
+        "status": "passed",
+        "reason": "No internal implementation labels are exposed in the response.",
+        "evidence": null,
+        "missingReason": "No internal implementation labels are exposed in the response."
+      },
+      {
+        "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+        "status": "passed",
+        "reason": "The response does not invent any channel, process, timeline, or follow‑up.",
+        "evidence": null,
+        "missingReason": "The response does not invent any channel, process, timeline, or follow‑up."
+      },
+      {
+        "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+        "status": "passed",
+        "reason": "No extra unsupported or unverifiable claims are made.",
+        "evidence": null,
+        "missingReason": "No extra unsupported or unverifiable claims are made."
+      }
+    ],
+    "candidatePolicyCompliance": "blocked",
+    "candidateDeliveryStatus": "blocked",
+    "reviewerValidationStatus": "calibration_pending",
+    "customerOutput": null,
+    "originalResponseHash": "33beaa60c3eba81beb533d0bf02669105669884b0f911c97653481a7da535398",
+    "rewritten": false,
+    "reasons": [
+      "critical_rule_failed",
+      "unresolved_contradiction",
+      "reviewer_not_qualified_for_delivery"
+    ],
+    "historicalPath": {
+      "modified": false,
+      "activation": "unchanged"
+    }
+  },
+  "protocol": {
+    "httpPassed": true,
+    "strictSchemaAccepted": true,
+    "supplierResponseSaved": true,
+    "reviewTextSaved": true,
+    "finishReasonPassed": true,
+    "reportedModelPassed": true,
+    "schemaPassed": true,
+    "ruleSetPassed": true,
+    "evidenceLocationPassed": true,
+    "completionPassed": true,
+    "localDerivationPassed": true,
+    "compatibilityValidationPassed": true,
+    "passed": true
+  },
+  "semantic": {
+    "predictedAllowed": false,
+    "referenceMatched": true,
+    "criticalRuleMatched": true,
+    "failedRuleIds": [
+      "STANDARD_ELIGIBILITY_ELIGIBLE",
+      "JSON_TEXT_CONSISTENCY"
+    ],
+    "classification": "true_block"
+  }
+}

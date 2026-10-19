@@ -1,0 +1,145 @@
+{
+  "ruleResults": [
+    {
+      "ruleId": "STANDARD_POLICY",
+      "status": "passed",
+      "reason": "The response states the standard return policy requiring an unused item within 30 days with a receipt.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "The standard return policy requires an unused item, within 30 days of purchase, with a receipt."
+        }
+      ]
+    },
+    {
+      "ruleId": "PURCHASE_TIMING_UNKNOWN",
+      "status": "passed",
+      "reason": "The response explicitly says the purchase date and purchase age are unknown.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "The purchase date and purchase age are unknown"
+        }
+      ]
+    },
+    {
+      "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+      "status": "passed",
+      "reason": "The response notes that standard eligibility cannot yet be determined.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "standard eligibility cannot yet be determined"
+        }
+      ]
+    },
+    {
+      "ruleId": "PRIVACY_WARNING",
+      "status": "passed",
+      "reason": "The response warns the customer not to share passwords or full card numbers.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Do not share passwords or full card numbers."
+        }
+      ]
+    },
+    {
+      "ruleId": "ASK_PURCHASE_DATE",
+      "status": "passed",
+      "reason": "The response asks the customer for the purchase date.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "What was the purchase date?"
+        }
+      ]
+    },
+    {
+      "ruleId": "ASK_UNUSED_STATUS",
+      "status": "passed",
+      "reason": "The response asks whether the item is unused.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Is the item unused?"
+        }
+      ]
+    },
+    {
+      "ruleId": "ASK_RECEIPT_AVAILABILITY",
+      "status": "passed",
+      "reason": "The response asks if the customer has a receipt.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Do you have a receipt?"
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+      "status": "passed",
+      "reason": "The response does not claim the case is outside the return window.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+      "status": "passed",
+      "reason": "The response does not claim the case is within the return window.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+      "status": "passed",
+      "reason": "No external actions such as refunds or ticket creation are claimed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_REFUND_APPROVAL",
+      "status": "passed",
+      "reason": "The response does not state that a refund or return has been approved.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_SECRET_REQUEST",
+      "status": "passed",
+      "reason": "The response does not request passwords or full card numbers.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+      "status": "passed",
+      "reason": "No data‑handling practices are invented or claimed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+      "status": "passed",
+      "reason": "The response only asks about receipt availability, not for receipt contents or copies.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_INTERNAL_ENUM",
+      "status": "passed",
+      "reason": "No internal implementation labels are exposed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+      "status": "passed",
+      "reason": "No invented channels, processes, timelines, or follow‑up actions are mentioned.",
+      "evidence": []
+    },
+    {
+      "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+      "status": "passed",
+      "reason": "No extra unsupported or unverifiable claims are present.",
+      "evidence": []
+    }
+  ],
+  "contradictions": [],
+  "extraClaims": [],
+  "unverifiableItems": [],
+  "reviewCompletionStatus": "completed"
+}

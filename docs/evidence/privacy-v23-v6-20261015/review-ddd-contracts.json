@@ -1,0 +1,100 @@
+{
+  "startedAt": "2026-10-15T12:34:50.021Z",
+  "workspace": "contracts-1792067690018",
+  "environment": "Local Docker / real HTTP and database / replay answers / development identities",
+  "checks": [
+    {
+      "name": "Assets cannot be referenced from another workspace, including suite parents",
+      "passed": true,
+      "durationMs": 11.661667000000001
+    },
+    {
+      "name": "Idempotent retries preserve one job and one outbox record; conflicts do not mutate input",
+      "passed": true,
+      "durationMs": 192.759
+    },
+    {
+      "name": "Read-only and cross-workspace submission attempts create no jobs",
+      "passed": true,
+      "durationMs": 16.46474999999998
+    },
+    {
+      "name": "Stored idempotent retry works during Asset service outage; new job fails closed",
+      "passed": true,
+      "durationMs": 5871.3955000000005
+    },
+    {
+      "name": "Rejected review commands leave pending state, evidence and audit unchanged",
+      "passed": true,
+      "durationMs": 29.618416000000252
+    },
+    {
+      "name": "A requester distinct from the job author still cannot approve their own request",
+      "passed": true,
+      "durationMs": 3.361750000000029
+    },
+    {
+      "name": "Captured review evidence stays usable while Evaluation service is down",
+      "passed": true,
+      "durationMs": 5864.268416000001
+    },
+    {
+      "name": "Competing decisions commit one terminal state and one matching decision audit",
+      "passed": true,
+      "durationMs": 215.78020800000013
+    },
+    {
+      "name": "Metrics and arbitrary runner origins are not exposed to external callers",
+      "passed": true,
+      "durationMs": 121.77654200000143
+    },
+    {
+      "name": "Re-evaluation links a new job and review while preserving terminal history",
+      "passed": true,
+      "durationMs": 370.03854200000023
+    },
+    {
+      "name": "Job lineage rejects missing, foreign-workspace and different-application parents",
+      "passed": true,
+      "durationMs": 23.58941699999923
+    },
+    {
+      "name": "Review lineage cannot point at unrelated or foreign-workspace decisions",
+      "passed": true,
+      "durationMs": 399.32133299999987
+    },
+    {
+      "name": "A pending predecessor cannot be bypassed by omitting the previous review ID",
+      "passed": true,
+      "durationMs": 511.6688750000012
+    },
+    {
+      "name": "An unfinished job cannot be referenced as a completed predecessor",
+      "passed": true,
+      "durationMs": 142.8667089999999
+    },
+    {
+      "name": "Suite permissions allow owner/contributor creation and all four roles to read",
+      "passed": true,
+      "durationMs": 69.52029199999924
+    },
+    {
+      "name": "Existing suite versions cannot be replaced or deleted through any role",
+      "passed": true,
+      "durationMs": 58.79429100000016
+    },
+    {
+      "name": "Reviewer suite read-only status does not remove independent decision authority",
+      "passed": true,
+      "durationMs": 215.18637499999932
+    },
+    {
+      "name": "Privacy v2.2 requires safe guidance and preserves stored v2.1 results and approval",
+      "passed": true,
+      "durationMs": 835.4683750000004
+    }
+  ],
+  "finishedAt": "2026-10-15T12:35:05.173Z",
+  "passed": 18,
+  "failed": 0
+}

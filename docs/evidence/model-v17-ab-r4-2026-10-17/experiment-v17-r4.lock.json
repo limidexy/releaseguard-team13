@@ -1,0 +1,9 @@
+{
+  "experimentId": "releaseguard-v17-r4-ab-20261017",
+  "revision": "v17-generation-view-r4-ab1",
+  "planSha256": "7a96f5be0aef0ebaba154bbd50ded9fcdd6e0dd5d92abce20ffd0f71dc7df228",
+  "createdAt": "2026-10-17T07:17:34.552Z",
+  "state": "STARTED",
+  "maximumInferenceRequests": 40,
+  "noAutomaticRetry": true
+}

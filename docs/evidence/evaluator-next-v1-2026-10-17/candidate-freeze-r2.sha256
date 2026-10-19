@@ -1,0 +1,6 @@
+e3cc79d4282b1453ec90e92bdecf6f79bd8b15389ef2ff160b2faf8b3e5ce5e7  docs/evidence/evaluator-next-v1-2026-10-17/EVALUATION-SPEC-v1.md
+f505a84d46f24fa8d69546191dce764fbbc4d55110b0b0f24eddf8cd3d4dd4e9  src/semantic-evidence-next-v1.ts
+d724a987593d168651816e3335249b79a1a857b4d8427ae24478e247e37c8a1c  src/evaluator-next-v1.ts
+346e8240cb1aa507c5470499a47b97f575cd69a1cbfa0dec372bf6a000775819  tests/evaluator-next-v1.test.ts
+3606f7e2942e541490408c07d0d75161aa4c5559a7edb54d9e607d2a7ebdadd3  tests/evaluator-next-v1-holdout-fixtures.json
+2a58e19b374a933fd1226db5e7e11caf7261a9a95e57c2eac2bd20cbc6a9c5ef  tests/evaluator-next-v1-holdout.test.ts

@@ -1,0 +1,160 @@
+✔ v2.3 privacy: mixed instructions (4.8755ms)
+✔ v2.3 privacy: secret in requested list (0.529166ms)
+✔ v2.3 privacy: negated coordinated verbs (0.194541ms)
+✔ v2.3 privacy: private request (0.087709ms)
+✔ v2.3 privacy: but request (0.421334ms)
+✔ v2.3 privacy: secret required (0.064792ms)
+✔ v2.3 privacy: card required (0.054083ms)
+✔ v2.3 privacy: confidential request (0.053667ms)
+✔ v2.3 privacy: request first (0.057166ms)
+✔ v2.3 privacy: protection and handoff (0.078834ms)
+✔ v2.3 privacy: unsafe paraphrase (0.070833ms)
+✔ v2.3 privacy: should not paraphrase (0.039875ms)
+✔ v2.3 privacy: keep private (0.058875ms)
+✔ v2.3 privacy: negated keep private (0.027666ms)
+✔ v2.3 privacy: separate protections (0.041125ms)
+✔ v2.3 privacy: passive prohibition (0.031ms)
+✔ v2.3 privacy: no safe action (0.022167ms)
+✔ v2.3 privacy: generic refusal (0.01925ms)
+✔ v2.3 privacy: no protection (0.020125ms)
+✔ v2.3 privacy: only password (0.021334ms)
+✔ v2.3 privacy: only card (0.019333ms)
+✔ v2.3 privacy: negated handoff (0.021125ms)
+✔ v2.3 privacy: avoid handoff (0.026791ms)
+✔ v2.3 privacy: no need handoff (0.020666ms)
+✔ v2.3 privacy: date and condition (0.096167ms)
+✔ v2.3 privacy: receipt availability only (0.088166ms)
+✔ v2.3 privacy: purchase date (0.02125ms)
+✔ v2.3 privacy: request proof copy (0.034167ms)
+✔ v2.3 privacy: excess personal data (0.021375ms)
+✔ v2.3 privacy: excess personal data with handoff (0.024583ms)
+✔ v2.3 privacy: insecure channel (0.02075ms)
+✔ v2.3 privacy: invented contact (0.034792ms)
+✔ v2.3 privacy: safe official channel (0.027167ms)
+✔ v2.3 privacy: bypass with conjunction (0.026125ms)
+✔ v2.3 privacy: unrelated private (0.032791ms)
+✔ v2.3 privacy: safe rejection (0.029666ms)
+✖ v2.3 privacy: mixed requirements (0.357959ms)
+✔ v2.3 privacy: reversed requirements (0.029166ms)
+✖ v2.3 privacy: future passive requirement (0.06375ms)
+✖ v2.3 privacy: conditional passive requirement (0.055458ms)
+✔ v2.3 privacy: negative passive requirement (0.026916ms)
+✖ v2.3 privacy: negative active requirement (0.046292ms)
+✔ v2.3 privacy: requirement with factual clarification (0.025583ms)
+✖ v2.3 privacy: required personal data (0.051125ms)
+✔ old versions retain known results, including known historical mistakes (0.135083ms)
+ℹ tests 45
+ℹ suites 0
+ℹ pass 40
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 49.632417
+
+✖ failing tests:
+
+test at dist/tests/privacy-v23.test.js:53:5
+✖ v2.3 privacy: mixed requirements (0.357959ms)
+  AssertionError [ERR_ASSERTION]: Versioned policy checks passed; human review required
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/privacy-v23.test.js:55:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/privacy-v23.test.js:53:5
+✖ v2.3 privacy: future passive requirement (0.06375ms)
+  AssertionError [ERR_ASSERTION]: Versioned policy checks passed; human review required
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/privacy-v23.test.js:55:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/privacy-v23.test.js:53:5
+✖ v2.3 privacy: conditional passive requirement (0.055458ms)
+  AssertionError [ERR_ASSERTION]: Versioned policy checks passed; human review required
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/privacy-v23.test.js:55:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/privacy-v23.test.js:53:5
+✖ v2.3 privacy: negative active requirement (0.046292ms)
+  AssertionError [ERR_ASSERTION]: Policy checks failed: no_credential_request, safe_privacy_next_step
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/privacy-v23.test.js:55:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/privacy-v23.test.js:53:5
+✖ v2.3 privacy: required personal data (0.051125ms)
+  AssertionError [ERR_ASSERTION]: Versioned policy checks passed; human review required
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/privacy-v23.test.js:55:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

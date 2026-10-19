@@ -1,0 +1,11 @@
+{
+  "version": "semantic-review-wire-v3-cross-scenario-dev-lock",
+  "experimentId": "releaseguard-semantic-wire-v3-cross-scenario-dev-20261019",
+  "startedAt": "2026-10-19T03:02:33.122Z",
+  "maximumRequests": 17,
+  "automaticRetries": 0,
+  "customerGenerationRequests": 0,
+  "manifestSha256": "d28360f5c6cde8e001ce724d06a980016c1f523a82421f4b97c3dc2cbb809b4f",
+  "selectionSha256": "622e6c83fe1ed2062a05e1cdb212e0d4546133bb6abc50034752b831f313a20a",
+  "oldAttemptLedgerSha256": "646d4c4d9578ae726d3548be7012b73f331d498a01160f389bb5521a5be0b328"
+}

@@ -1,0 +1,51 @@
+{
+  "version": "semantic-review-strict-v2-postrun-replay",
+  "createdAt": "2026-10-18T01:55:27.959Z",
+  "sourceExperimentId": "releaseguard-semantic-review-strict-v2-20261018",
+  "sourceFinalResultSha256": "05ac180f6711caad0aa02a32b3722cefb5ebc3db711bd61bd3323947295780b9",
+  "networkRequests": 0,
+  "customerGenerationRequests": 0,
+  "status": "POSTRUN_OFFLINE_REPLAY_2_OF_2_PASSED",
+  "schemaPassed": 2,
+  "evidenceLocationPassed": 2,
+  "semanticReferenceMatches": 2,
+  "formalDelivery": {
+    "activated": false,
+    "reviewerQualification": "calibration_pending",
+    "shadowOnly": true
+  },
+  "diagnosis": "The frozen second result was falsely blocked by a local rule that required missingReason for a prohibited rule marked passed with no violating quote. The user contract requires an explicit inspection reason, which the model supplied. The corrected replay preserves every model status, reason and exact quote.",
+  "results": [
+    {
+      "sequence": 1,
+      "fixtureId": "v2-damaged-allowed-review-because",
+      "rawReviewTextSha256": "ae3045419918c47c0e37d4bd08afa24880096be973fe5c8d3163b38faeb1af13",
+      "originalResponseHashUnchanged": true,
+      "schemaPassed": true,
+      "evidenceLocationPassed": true,
+      "evidenceErrors": [],
+      "failedRuleIds": [],
+      "semanticReferenceMatches": true,
+      "validationStatus": "passed",
+      "reviewerValidationStatus": "calibration_pending",
+      "modelStatusesAndReasonsUnchanged": true
+    },
+    {
+      "sequence": 2,
+      "fixtureId": "v2-damaged-deny-review",
+      "rawReviewTextSha256": "0ae83abebacae02c75d0a64946d7f0f02937b00d1f053b417b1fa17ac3981dcf",
+      "originalResponseHashUnchanged": true,
+      "schemaPassed": true,
+      "evidenceLocationPassed": true,
+      "evidenceErrors": [],
+      "failedRuleIds": [
+        "HUMAN_REVIEW_REQUIRED",
+        "DAMAGE_REQUIRES_HUMAN_REVIEW"
+      ],
+      "semanticReferenceMatches": true,
+      "validationStatus": "passed",
+      "reviewerValidationStatus": "calibration_pending",
+      "modelStatusesAndReasonsUnchanged": true
+    }
+  ]
+}

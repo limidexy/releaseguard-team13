@@ -1,0 +1,19 @@
+node:internal/modules/run_main:122
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Old adapter has no independent delivery guard
++ actual - expected
+
++ undefined
+- false
+
+    at file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/scripts/characterize-pre-v13.mjs:6:8 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: undefined,
+  expected: false,
+  operator: 'strictEqual'
+}
+
+Node.js v22.14.0

@@ -1,0 +1,68 @@
+{
+  "version": "semantic-review-strict-v2-freeze-manifest",
+  "experimentId": "releaseguard-semantic-review-strict-v2-20261018",
+  "frozenAt": "2026-10-18T01:53:52.156Z",
+  "gitHead": "20d258d891935b2d5bee3375ebf81b2872adf76f",
+  "files": [
+    {
+      "path": "src/semantic-review-wire-v2.ts",
+      "sha256": "489ff64802178b3d3ea7e71d9a77d396130d21de0b6ad40b36319529424a3ec9"
+    },
+    {
+      "path": "src/groq-semantic-review-transport-v1.ts",
+      "sha256": "da80e4b7c3103d3d789a5318950a3a2c6fcf03aaab7c93343feabceb5e71fe4f"
+    },
+    {
+      "path": "src/semantic-review-sources-v1.ts",
+      "sha256": "9a9c33a23274c3efbe3e4896464816d9389bfc75e2d9719be1fb7a4d3b3ed13c"
+    },
+    {
+      "path": "dist/src/semantic-review-wire-v2.js",
+      "sha256": "aa158fc07ed2b67a09b2237d986f99272fef829fb17c273aaec8d56037d78001"
+    },
+    {
+      "path": "dist/src/groq-semantic-review-transport-v1.js",
+      "sha256": "36957c5e247560f4596abc8467c038f249c2427887da7d1715d18d89b09e6125"
+    },
+    {
+      "path": "dist/src/semantic-review-sources-v1.js",
+      "sha256": "cd8be2cb08a16beb8969c9efdea0efc8623e69f17fc7f155011ef571df4cd5e2"
+    },
+    {
+      "path": "tests/semantic-review-wire-v2.test.ts",
+      "sha256": "ee43f4310ecc2879c7b7f2d990556414aa24cff80ea8f69958b7638023bf2903"
+    },
+    {
+      "path": "tests/groq-semantic-review-transport-v1.test.ts",
+      "sha256": "210bfb0e4334e7c26e411a96df0dc8f9d833e3da9285103272b88079f118bba1"
+    },
+    {
+      "path": "scripts/run-semantic-review-strict-v2.mjs",
+      "sha256": "886c706145e6e9c45bd493b126c97bdeee154ffbe03e65f3329c880f2b44ac72"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "edbec9021091f0b178c6e747372548ffdabbecbaac78cfca84f87987e251f3e8"
+    },
+    {
+      "path": "docs/evidence/hybrid-review-strict-v2-2026-10-18/AUTHORIZATION.json",
+      "sha256": "f8220a852b0d6d7a9bea43057a94de9e846301c136eac5f0b7785896b345a02b"
+    },
+    {
+      "path": "docs/evidence/hybrid-review-strict-v2-2026-10-18/FREE-PLAN-CHECK.json",
+      "sha256": "69360ffbd66f6be401deb877334589e194a4907551ab0f62a11c176380456b83"
+    },
+    {
+      "path": "docs/evidence/hybrid-review-strict-v2-2026-10-18/EXPERIMENT-PLAN.json",
+      "sha256": "0edbf63dd2f405764392dd4e348d1235847959139a478038facd1060d83f7851"
+    },
+    {
+      "path": "docs/evidence/hybrid-review-strict-v2-2026-10-18/FROZEN-SAMPLES.json",
+      "sha256": "02c55d2c9128439e6f7642ea1eab9d8bf86abb7f9225c66f0cab3df4fb106dcb"
+    },
+    {
+      "path": "docs/evidence/hybrid-review-strict-v2-2026-10-18/OFFLINE-ACCEPTANCE.md",
+      "sha256": "9de2d28e50e3ab69a358167e30c8a2db88e192922db09e6a9b0d836cfc44c4b7"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+PASS Raw score 100 cannot release an answer inventing packaging and a store
+PASS Safe eligible answer passes byte-for-byte without server rewriting
+PASS Unknown purchase date cannot be overwritten by a true JSON answer
+PASS Separate guard blocks private-channel exception missed by old score
+PASS Damage discovery is not purchase date; original bad answer stays visible as evidence
+PASS v15 replay traverses queue and Support with independent guard and replay label
+PASS Passive transfer blocks release even though raw v2.8 gives 100
+PASS A valid conditional answer and let-us-know request pass unchanged
+PASS v2.10 published fixture retains frozen v2.8 endpoint
+PASS Policy plus availability-only privacy answer passes without rewriting
+PASS Actual receipt collection still blocks release
+PASS Ambiguous proof of receipt remains blocked and preserved
+PASS All 20 raw v15 answers are imported unchanged; unknown-deadline answer blocks release
+PASS All 20 archived v13 answers keep score 90 while v15 guard rechecks them as imported
+{"path":"docs/evidence/model-v15-2026-10-16/controlled-v30-http-1792140103517.json","passed":14,"error":null}

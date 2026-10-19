@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-10-17T07:17:08.608Z",
+  "endpoint": "https://api.groq.com/openai/v1/models",
+  "httpStatus": 200,
+  "credentialAccepted": true,
+  "models": [
+    {"id": "openai/gpt-oss-20b", "listed": true},
+    {"id": "openai/gpt-oss-120b", "listed": true}
+  ],
+  "generationCallsMade": 0,
+  "containsSecret": false
+}

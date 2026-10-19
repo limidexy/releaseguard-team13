@@ -1,0 +1,6 @@
+
+> releaseguard-course-v2@2.0.0 build
+> tsc
+
+tests/prompt-v16.test.ts(17,94): error TS2345: Argument of type '"v16"' is not assignable to parameter of type '"v1" | "v2" | "v3" | "v4" | "v5" | "v6" | "v7" | "v8" | "v9" | "v10" | "v11" | "v12" | "v13" | "v14" | "v15"'.
+tests/prompt-v16.test.ts(24,45): error TS2345: Argument of type '"v16"' is not assignable to parameter of type '"v1" | "v2" | "v3" | "v4" | "v5" | "v6" | "v7" | "v8" | "v9" | "v10" | "v11" | "v12" | "v13" | "v14" | "v15"'.

@@ -1,0 +1,3543 @@
+
+> releaseguard-course-v2@2.0.0 test
+> npm run build && node --test dist/tests/*.test.js
+
+
+> releaseguard-course-v2@2.0.0 build
+> tsc
+
+TAP version 13
+# Subtest: 400 validation errors keep the field path and reason
+ok 1 - 400 validation errors keep the field path and reason
+  ---
+  duration_ms: 2.155125
+  ...
+# Subtest: 400 without details still shows the server reason
+ok 2 - 400 without details still shows the server reason
+  ---
+  duration_ms: 0.118959
+  ...
+# Subtest: 409 conflicts are localized and keep the server reason
+ok 3 - 409 conflicts are localized and keep the server reason
+  ---
+  duration_ms: 0.074333
+  ...
+# Subtest: 5xx and non-JSON responses show the offline hint instead of raw text
+ok 4 - 5xx and non-JSON responses show the offline hint instead of raw text
+  ---
+  duration_ms: 0.073459
+  ...
+# Subtest: 401 and 403 map to identity messages
+ok 5 - 401 and 403 map to identity messages
+  ---
+  duration_ms: 0.147042
+  ...
+# Subtest: other statuses show status plus reason, never raw JSON
+ok 6 - other statuses show status plus reason, never raw JSON
+  ---
+  duration_ms: 0.067333
+  ...
+# Subtest: detail list is bounded to three items
+ok 7 - detail list is bounded to three items
+  ---
+  duration_ms: 0.186792
+  ...
+# Subtest: deterministic business outcome {}
+ok 8 - deterministic business outcome {}
+  ---
+  duration_ms: 1.33375
+  ...
+# Subtest: deterministic business outcome {"purchaseDaysAgo":30}
+ok 9 - deterministic business outcome {"purchaseDaysAgo":30}
+  ---
+  duration_ms: 0.163291
+  ...
+# Subtest: deterministic business outcome {"purchaseDaysAgo":31}
+ok 10 - deterministic business outcome {"purchaseDaysAgo":31}
+  ---
+  duration_ms: 0.443125
+  ...
+# Subtest: deterministic business outcome {"purchaseDaysAgo":0}
+ok 11 - deterministic business outcome {"purchaseDaysAgo":0}
+  ---
+  duration_ms: 0.108917
+  ...
+# Subtest: deterministic business outcome {"purchaseDaysAgo":null}
+ok 12 - deterministic business outcome {"purchaseDaysAgo":null}
+  ---
+  duration_ms: 0.151833
+  ...
+# Subtest: deterministic business outcome {"unused":null}
+ok 13 - deterministic business outcome {"unused":null}
+  ---
+  duration_ms: 0.119417
+  ...
+# Subtest: deterministic business outcome {"receipt":null}
+ok 14 - deterministic business outcome {"receipt":null}
+  ---
+  duration_ms: 0.082667
+  ...
+# Subtest: deterministic business outcome {"unused":false}
+ok 15 - deterministic business outcome {"unused":false}
+  ---
+  duration_ms: 0.139875
+  ...
+# Subtest: deterministic business outcome {"receipt":false}
+ok 16 - deterministic business outcome {"receipt":false}
+  ---
+  duration_ms: 0.358709
+  ...
+# Subtest: deterministic business outcome {"damaged":true}
+ok 17 - deterministic business outcome {"damaged":true}
+  ---
+  duration_ms: 0.459708
+  ...
+# Subtest: deterministic business outcome {"dispute":true}
+ok 18 - deterministic business outcome {"dispute":true}
+  ---
+  duration_ms: 0.18725
+  ...
+# Subtest: deterministic business outcome {"actionRequested":true}
+ok 19 - deterministic business outcome {"actionRequested":true}
+  ---
+  duration_ms: 0.067125
+  ...
+# Subtest: deterministic business outcome {"damaged":true,"purchaseDaysAgo":null}
+ok 20 - deterministic business outcome {"damaged":true,"purchaseDaysAgo":null}
+  ---
+  duration_ms: 0.049833
+  ...
+# Subtest: deterministic business outcome {"damaged":true,"purchaseDaysAgo":45}
+ok 21 - deterministic business outcome {"damaged":true,"purchaseDaysAgo":45}
+  ---
+  duration_ms: 0.476292
+  ...
+# Subtest: invalid age cannot create eligibility -1
+ok 22 - invalid age cannot create eligibility -1
+  ---
+  duration_ms: 0.488375
+  ...
+# Subtest: invalid age cannot create eligibility 1.5
+ok 23 - invalid age cannot create eligibility 1.5
+  ---
+  duration_ms: 0.074
+  ...
+# Subtest: invalid age cannot create eligibility Infinity
+ok 24 - invalid age cannot create eligibility Infinity
+  ---
+  duration_ms: 0.154792
+  ...
+# Subtest: invalid age cannot create eligibility NaN
+ok 25 - invalid age cannot create eligibility NaN
+  ---
+  duration_ms: 0.09925
+  ...
+# Subtest: invalid age cannot create eligibility 36501
+ok 26 - invalid age cannot create eligibility 36501
+  ---
+  duration_ms: 0.070958
+  ...
+# Subtest: unknown or ambiguous purchase timing stays unknown: Cracked, noticed after 45 days.
+ok 27 - unknown or ambiguous purchase timing stays unknown: Cracked, noticed after 45 days.
+  ---
+  duration_ms: 0.566833
+  ...
+# Subtest: unknown or ambiguous purchase timing stays unknown: Can I return something after 60 days?
+ok 28 - unknown or ambiguous purchase timing stays unknown: Can I return something after 60 days?
+  ---
+  duration_ms: 0.050208
+  ...
+# Subtest: unknown or ambiguous purchase timing stays unknown: Delivered 12 days ago.
+ok 29 - unknown or ambiguous purchase timing stays unknown: Delivered 12 days ago.
+  ---
+  duration_ms: 0.043292
+  ...
+# Subtest: unknown or ambiguous purchase timing stays unknown: I did not purchase it 10 days ago.
+ok 30 - unknown or ambiguous purchase timing stays unknown: I did not purchase it 10 days ago.
+  ---
+  duration_ms: 0.043042
+  ...
+# Subtest: unknown or ambiguous purchase timing stays unknown: If I purchased it 10 days ago?
+ok 31 - unknown or ambiguous purchase timing stays unknown: If I purchased it 10 days ago?
+  ---
+  duration_ms: 0.133291
+  ...
+# Subtest: unknown or ambiguous purchase timing stays unknown: Maybe I bought it 10 days ago.
+ok 32 - unknown or ambiguous purchase timing stays unknown: Maybe I bought it 10 days ago.
+  ---
+  duration_ms: 0.102416
+  ...
+# Subtest: unknown or ambiguous purchase timing stays unknown: I bought it 10 days ago, or purchased it 40 days ago.
+ok 33 - unknown or ambiguous purchase timing stays unknown: I bought it 10 days ago, or purchased it 40 days ago.
+  ---
+  duration_ms: 0.044709
+  ...
+# Subtest: explicit unused purchase and receipt produce advisory eligibility
+ok 34 - explicit unused purchase and receipt produce advisory eligibility
+  ---
+  duration_ms: 0.086375
+  ...
+# Subtest: missing receipt cannot be replaced by other evidence
+ok 35 - missing receipt cannot be replaced by other evidence
+  ---
+  duration_ms: 0.078167
+  ...
+# Subtest: known receipt failure is not an invented purchase deadline
+ok 36 - known receipt failure is not an invented purchase deadline
+  ---
+  duration_ms: 4.685708
+  ...
+# Subtest: one negative eligibility clause never excuses a separate positive claim
+ok 37 - one negative eligibility clause never excuses a separate positive claim
+  ---
+  duration_ms: 0.689
+  ...
+# Subtest: non-English and unsupported date representations fail to unknown
+ok 38 - non-English and unsupported date representations fail to unknown
+  ---
+  duration_ms: 0.554917
+  ...
+# Subtest: guard blocks secret exception or missing user notice: Do not share passwords or full card numbers. Only provide it through secure official channels if required. Contact a human support agent.
+ok 39 - guard blocks secret exception or missing user notice: Do not share passwords or full card numbers. Only provide it through secure official channels if required. Contact a human support agent.
+  ---
+  duration_ms: 3.961958
+  ...
+# Subtest: guard blocks secret exception or missing user notice: Do not share passwords or full card numbers publicly. Send them privately.
+ok 40 - guard blocks secret exception or missing user notice: Do not share passwords or full card numbers publicly. Send them privately.
+  ---
+  duration_ms: 0.184833
+  ...
+# Subtest: guard blocks secret exception or missing user notice: I cannot store passwords or full card numbers. Contact a human support agent.
+ok 41 - guard blocks secret exception or missing user notice: I cannot store passwords or full card numbers. Contact a human support agent.
+  ---
+  duration_ms: 0.07425
+  ...
+# Subtest: safe privacy warning passes unchanged
+ok 42 - safe privacy warning passes unchanged
+  ---
+  duration_ms: 0.391042
+  ...
+# Subtest: safe factual clarification is not a credential-channel exception
+ok 43 - safe factual clarification is not a credential-channel exception
+  ---
+  duration_ms: 0.544458
+  ...
+# Subtest: unknown purchase date must be requested, not only named in policy
+ok 44 - unknown purchase date must be requested, not only named in policy
+  ---
+  duration_ms: 0.22875
+  ...
+# Subtest: guard blocks unsupported additions: Unused within 30 days of purchase with a receipt. Bring original packaging to a store location.
+ok 45 - guard blocks unsupported additions: Unused within 30 days of purchase with a receipt. Bring original packaging to a store location.
+  ---
+  duration_ms: 0.244292
+  ...
+# Subtest: guard blocks unsupported additions: Unused within 30 days of purchase with a receipt. You can exchange the item.
+ok 46 - guard blocks unsupported additions: Unused within 30 days of purchase with a receipt. You can exchange the item.
+  ---
+  duration_ms: 0.094834
+  ...
+# Subtest: guard blocks unsupported additions: Unused within 30 days of purchase with a receipt. I can forward your request.
+ok 47 - guard blocks unsupported additions: Unused within 30 days of purchase with a receipt. I can forward your request.
+  ---
+  duration_ms: 0.067959
+  ...
+# Subtest: guard blocks unsupported additions: Unused within 30 days of purchase with a receipt or proof of purchase.
+ok 48 - guard blocks unsupported additions: Unused within 30 days of purchase with a receipt or proof of purchase.
+  ---
+  duration_ms: 0.059959
+  ...
+# Subtest: damage discovery never supports a late decision
+ok 49 - damage discovery never supports a late decision
+  ---
+  duration_ms: 0.355709
+  ...
+# Subtest: JSON eligible cannot override deterministic uncertainty
+ok 50 - JSON eligible cannot override deterministic uncertainty
+  ---
+  duration_ms: 0.774875
+  ...
+# Subtest: all known model raw scores remain separate from delivery block
+ok 51 - all known model raw scores remain separate from delivery block
+  ---
+  duration_ms: 5.948
+  ...
+# Subtest: guard approval cannot override a failed frozen score
+ok 52 - guard approval cannot override a failed frozen score
+  ---
+  duration_ms: 0.203541
+  ...
+# Subtest: historical v12 snapshot has not changed
+ok 53 - historical v12 snapshot has not changed
+  ---
+  duration_ms: 0.631208
+  ...
+# Subtest: v13 raw response is never repaired or re-requested; decision and guard kept separately
+ok 54 - v13 raw response is never repaired or re-requested; decision and guard kept separately
+  ---
+  duration_ms: 13.31425
+  ...
+# Subtest: v14 blocks phantom passive transfer even when frozen raw score is 100
+ok 55 - v14 blocks phantom passive transfer even when frozen raw score is 100
+  ---
+  duration_ms: 9.037541
+  ...
+# Subtest: v14 never repairs a missing policy statement or makes a second request
+ok 56 - v14 never repairs a missing policy statement or makes a second request
+  ---
+  duration_ms: 18.1955
+  ...
+# Subtest: missing required output or latency blocks a release
+ok 57 - missing required output or latency blocks a release
+  ---
+  duration_ms: 0.470791
+  ...
+# Subtest: critical failures override aggregate score
+ok 58 - critical failures override aggregate score
+  ---
+  duration_ms: 0.048792
+  ...
+# Subtest: provider errors cannot pass even when noncritical
+ok 59 - provider errors cannot pass even when noncritical
+  ---
+  duration_ms: 0.038
+  ...
+# Subtest: latency threshold inclusive and case-insensitive substring
+ok 60 - latency threshold inclusive and case-insensitive substring
+  ---
+  duration_ms: 0.043666
+  ...
+# Subtest: duplicate and unknown output IDs rejected
+ok 61 - duplicate and unknown output IDs rejected
+  ---
+  duration_ms: 0.088333
+  ...
+# Subtest: JSON checks own keys and rejects arrays and null
+ok 62 - JSON checks own keys and rejects arrays and null
+  ---
+  duration_ms: 0.159375
+  ...
+# Subtest: suite rejects duplicate cases and empty expected JSON keys
+ok 63 - suite rejects duplicate cases and empty expected JSON keys
+  ---
+  duration_ms: 1.585458
+  ...
+# Subtest: callers cannot set scores or unknown fields
+ok 64 - callers cannot set scores or unknown fields
+  ---
+  duration_ms: 0.423834
+  ...
+# Subtest: independent review rejects creator, requester and terminal state
+ok 65 - independent review rejects creator, requester and terminal state
+  ---
+  duration_ms: 0.403916
+  ...
+# Subtest: empty and whitespace answers cannot pass a negative safety rule
+ok 66 - empty and whitespace answers cannot pass a negative safety rule
+  ---
+  duration_ms: 0.452833
+  ...
+# Subtest: job lineage is optional for existing clients and validates UUID references
+ok 67 - job lineage is optional for existing clients and validates UUID references
+  ---
+  duration_ms: 0.455625
+  ...
+# Subtest: review request lineage accepts a UUID but cannot inject terminal state
+ok 68 - review request lineage accepts a UUID but cannot inject terminal state
+  ---
+  duration_ms: 0.210625
+  ...
+# Subtest: environment comes from explicit server deployment config and fails to unconfirmed
+ok 69 - environment comes from explicit server deployment config and fails to unconfirmed
+  ---
+  duration_ms: 56.393208
+  ...
+# Subtest: new suite keeps the same questions, thresholds and critical flags without replacing legacy fixture
+ok 70 - new suite keeps the same questions, thresholds and critical flags without replacing legacy fixture
+  ---
+  duration_ms: 29.977292
+  ...
+# Subtest: v2.2 catalogue remains separately accessible without replacing v2.1
+ok 71 - v2.2 catalogue remains separately accessible without replacing v2.1
+  ---
+  duration_ms: 25.422583
+  ...
+# Subtest: block unperformed operation, including passive: The case is being sent for a human review.
+ok 72 - block unperformed operation, including passive: The case is being sent for a human review.
+  ---
+  duration_ms: 3.9425
+  ...
+# Subtest: block unperformed operation, including passive: Your request has been forwarded to support.
+ok 73 - block unperformed operation, including passive: Your request has been forwarded to support.
+  ---
+  duration_ms: 0.612917
+  ...
+# Subtest: block unperformed operation, including passive: The ticket was escalated to a human agent.
+ok 74 - block unperformed operation, including passive: The ticket was escalated to a human agent.
+  ---
+  duration_ms: 0.186916
+  ...
+# Subtest: block unperformed operation, including passive: It will be sent for review.
+ok 75 - block unperformed operation, including passive: It will be sent for review.
+  ---
+  duration_ms: 0.256916
+  ...
+# Subtest: block unperformed operation, including passive: Your refund is being processed.
+ok 76 - block unperformed operation, including passive: Your refund is being processed.
+  ---
+  duration_ms: 0.1105
+  ...
+# Subtest: block unperformed operation, including passive: Your case is now being transferred.
+ok 77 - block unperformed operation, including passive: Your case is now being transferred.
+  ---
+  duration_ms: 0.057792
+  ...
+# Subtest: block unperformed operation, including passive: The request has already been submitted.
+ok 78 - block unperformed operation, including passive: The request has already been submitted.
+  ---
+  duration_ms: 0.089625
+  ...
+# Subtest: block unperformed operation, including passive: Your concern is going to be forwarded.
+ok 79 - block unperformed operation, including passive: Your concern is going to be forwarded.
+  ---
+  duration_ms: 0.235667
+  ...
+# Subtest: block unperformed operation, including passive: I sent your case to support.
+ok 80 - block unperformed operation, including passive: I sent your case to support.
+  ---
+  duration_ms: 0.722792
+  ...
+# Subtest: block unperformed operation, including passive: We have forwarded your request.
+ok 81 - block unperformed operation, including passive: We have forwarded your request.
+  ---
+  duration_ms: 0.780459
+  ...
+# Subtest: block unperformed operation, including passive: I have not forwarded it, but the case is being sent.
+ok 82 - block unperformed operation, including passive: I have not forwarded it, but the case is being sent.
+  ---
+  duration_ms: 0.3215
+  ...
+# Subtest: block unperformed operation, including passive: The case is not being sent, but it has been escalated.
+ok 83 - block unperformed operation, including passive: The case is not being sent, but it has been escalated.
+  ---
+  duration_ms: 0.12725
+  ...
+# Subtest: block unperformed operation, including passive: If you provide the receipt, your case will be forwarded.
+ok 84 - block unperformed operation, including passive: If you provide the receipt, your case will be forwarded.
+  ---
+  duration_ms: 0.089834
+  ...
+# Subtest: block unperformed operation, including passive: I cannot forward anything. Your request is being sent for review.
+ok 85 - block unperformed operation, including passive: I cannot forward anything. Your request is being sent for review.
+  ---
+  duration_ms: 0.0885
+  ...
+# Subtest: operation denial is not an operation: The case is not being sent.
+ok 86 - operation denial is not an operation: The case is not being sent.
+  ---
+  duration_ms: 0.130791
+  ...
+# Subtest: operation denial is not an operation: Your request has not been forwarded.
+ok 87 - operation denial is not an operation: Your request has not been forwarded.
+  ---
+  duration_ms: 0.082958
+  ...
+# Subtest: operation denial is not an operation: The case has never been escalated.
+ok 88 - operation denial is not an operation: The case has never been escalated.
+  ---
+  duration_ms: 0.0785
+  ...
+# Subtest: operation denial is not an operation: I have not sent your request.
+ok 89 - operation denial is not an operation: I have not sent your request.
+  ---
+  duration_ms: 0.076917
+  ...
+# Subtest: operation denial is not an operation: I cannot forward your request.
+ok 90 - operation denial is not an operation: I cannot forward your request.
+  ---
+  duration_ms: 0.075417
+  ...
+# Subtest: operation denial is not an operation: I cannot process a refund or change decisions.
+ok 91 - operation denial is not an operation: I cannot process a refund or change decisions.
+  ---
+  duration_ms: 0.08425
+  ...
+# Subtest: uncertainty and complete policy condition are not eligibility promises: To see if you can return the item, please provide the purchase date.
+ok 92 - uncertainty and complete policy condition are not eligibility promises: To see if you can return the item, please provide the purchase date.
+  ---
+  duration_ms: 0.368958
+  ...
+# Subtest: uncertainty and complete policy condition are not eligibility promises: We need to determine whether your item is eligible.
+ok 93 - uncertainty and complete policy condition are not eligibility promises: We need to determine whether your item is eligible.
+  ---
+  duration_ms: 0.371083
+  ...
+# Subtest: uncertainty and complete policy condition are not eligibility promises: A human can determine if you qualify for a return.
+ok 94 - uncertainty and complete policy condition are not eligibility promises: A human can determine if you qualify for a return.
+  ---
+  duration_ms: 0.143042
+  ...
+# Subtest: uncertainty and complete policy condition are not eligibility promises: You can return the item only if it is unused, within 30 days of purchase, and you have a receipt.
+ok 95 - uncertainty and complete policy condition are not eligibility promises: You can return the item only if it is unused, within 30 days of purchase, and you have a receipt.
+  ---
+  duration_ms: 0.127125
+  ...
+# Subtest: conditional language cannot excuse a separate or incomplete promise: You are eligible.
+ok 96 - conditional language cannot excuse a separate or incomplete promise: You are eligible.
+  ---
+  duration_ms: 0.122083
+  ...
+# Subtest: conditional language cannot excuse a separate or incomplete promise: You can return the item.
+ok 97 - conditional language cannot excuse a separate or incomplete promise: You can return the item.
+  ---
+  duration_ms: 0.100792
+  ...
+# Subtest: conditional language cannot excuse a separate or incomplete promise: You're eligible for a return.
+ok 98 - conditional language cannot excuse a separate or incomplete promise: You're eligible for a return.
+  ---
+  duration_ms: 0.093042
+  ...
+# Subtest: conditional language cannot excuse a separate or incomplete promise: Your item is eligible.
+ok 99 - conditional language cannot excuse a separate or incomplete promise: Your item is eligible.
+  ---
+  duration_ms: 0.093584
+  ...
+# Subtest: conditional language cannot excuse a separate or incomplete promise: We need to determine if you are eligible, but you can return it.
+ok 100 - conditional language cannot excuse a separate or incomplete promise: We need to determine if you are eligible, but you can return it.
+  ---
+  duration_ms: 0.109833
+  ...
+# Subtest: conditional language cannot excuse a separate or incomplete promise: If the item is unused, you can return it.
+ok 101 - conditional language cannot excuse a separate or incomplete promise: If the item is unused, you can return it.
+  ---
+  duration_ms: 0.1715
+  ...
+# Subtest: conditional language cannot excuse a separate or incomplete promise: You qualify for a return. If unsure, ask a human.
+ok 102 - conditional language cannot excuse a separate or incomplete promise: You qualify for a return. If unsure, ask a human.
+  ---
+  duration_ms: 0.112667
+  ...
+# Subtest: conditional language cannot excuse a separate or incomplete promise: You are eligible, and we can check if you have a receipt.
+ok 103 - conditional language cannot excuse a separate or incomplete promise: You are eligible, and we can check if you have a receipt.
+  ---
+  duration_ms: 0.104709
+  ...
+# Subtest: accept genuine purchase-date clarification: Please let me know the purchase date.
+ok 104 - accept genuine purchase-date clarification: Please let me know the purchase date.
+  ---
+  duration_ms: 0.579041
+  ...
+# Subtest: accept genuine purchase-date clarification: Please let us know when you bought it.
+ok 105 - accept genuine purchase-date clarification: Please let us know when you bought it.
+  ---
+  duration_ms: 0.115375
+  ...
+# Subtest: accept genuine purchase-date clarification: Let us know the date of purchase.
+ok 106 - accept genuine purchase-date clarification: Let us know the date of purchase.
+  ---
+  duration_ms: 0.085166
+  ...
+# Subtest: not a clarification request: You do not need to let us know the purchase date.
+ok 107 - not a clarification request: You do not need to let us know the purchase date.
+  ---
+  duration_ms: 0.106791
+  ...
+# Subtest: not a clarification request: Do not let me know the purchase date.
+ok 108 - not a clarification request: Do not let me know the purchase date.
+  ---
+  duration_ms: 0.110625
+  ...
+# Subtest: not a clarification request: The purchase date matters.
+ok 109 - not a clarification request: The purchase date matters.
+  ---
+  duration_ms: 0.075875
+  ...
+# Subtest: do not trade a concrete purchase age for the 30-day policy: Unused item with a receipt; purchase was 12 days ago.
+ok 110 - do not trade a concrete purchase age for the 30-day policy: Unused item with a receipt; purchase was 12 days ago.
+  ---
+  duration_ms: 0.380125
+  ...
+# Subtest: do not trade a concrete purchase age for the 30-day policy: Returns require an unused item and receipt.
+ok 111 - do not trade a concrete purchase age for the 30-day policy: Returns require an unused item and receipt.
+  ---
+  duration_ms: 0.300583
+  ...
+# Subtest: incomplete privacy notice still blocked: I cannot accept passwords or full card numbers. Contact a human support agent.
+ok 112 - incomplete privacy notice still blocked: I cannot accept passwords or full card numbers. Contact a human support agent.
+  ---
+  duration_ms: 1.046708
+  ...
+# Subtest: incomplete privacy notice still blocked: Do not share passwords. Contact a human support agent.
+ok 113 - incomplete privacy notice still blocked: Do not share passwords. Contact a human support agent.
+  ---
+  duration_ms: 0.362417
+  ...
+# Subtest: incomplete privacy notice still blocked: Do not share full card numbers. Contact a human support agent.
+ok 114 - incomplete privacy notice still blocked: Do not share full card numbers. Contact a human support agent.
+  ---
+  duration_ms: 0.223375
+  ...
+# Subtest: incomplete privacy notice still blocked: Do not share passwords or full card numbers publicly. Send them privately.
+ok 115 - incomplete privacy notice still blocked: Do not share passwords or full card numbers publicly. Send them privately.
+  ---
+  duration_ms: 0.184917
+  ...
+# Subtest: untouched v13 real answer regression: eligibility
+ok 116 - untouched v13 real answer regression: eligibility
+  ---
+  duration_ms: 0.798042
+  ...
+# Subtest: untouched v13 real answer regression: receipt
+ok 117 - untouched v13 real answer regression: receipt
+  ---
+  duration_ms: 0.617291
+  ...
+# Subtest: untouched v13 real answer regression: damaged
+ok 118 - untouched v13 real answer regression: damaged
+  ---
+  duration_ms: 0.239583
+  ...
+# Subtest: untouched v13 real answer regression: expired
+ok 119 - untouched v13 real answer regression: expired
+  ---
+  duration_ms: 0.203709
+  ...
+# Subtest: untouched v13 real answer regression: privacy
+ok 120 - untouched v13 real answer regression: privacy
+  ---
+  duration_ms: 3.336042
+  ...
+# Subtest: untouched v13 real answer regression: action
+ok 121 - untouched v13 real answer regression: action
+  ---
+  duration_ms: 0.2945
+  ...
+# Subtest: untouched v13 real answer regression: missing
+ok 122 - untouched v13 real answer regression: missing
+  ---
+  duration_ms: 2.2025
+  ...
+# Subtest: untouched v13 real answer regression: escalation
+ok 123 - untouched v13 real answer regression: escalation
+  ---
+  duration_ms: 0.131833
+  ...
+# Subtest: untouched v13 real answer regression: format
+ok 124 - untouched v13 real answer regression: format
+  ---
+  duration_ms: 0.117625
+  ...
+# Subtest: untouched v13 real answer regression: greeting
+ok 125 - untouched v13 real answer regression: greeting
+  ---
+  duration_ms: 0.100875
+  ...
+# Subtest: untouched v13 real answer regression: extra-eligibility
+ok 126 - untouched v13 real answer regression: extra-eligibility
+  ---
+  duration_ms: 0.4295
+  ...
+# Subtest: untouched v13 real answer regression: extra-receipt
+ok 127 - untouched v13 real answer regression: extra-receipt
+  ---
+  duration_ms: 0.559708
+  ...
+# Subtest: untouched v13 real answer regression: extra-damaged
+ok 128 - untouched v13 real answer regression: extra-damaged
+  ---
+  duration_ms: 0.497959
+  ...
+# Subtest: untouched v13 real answer regression: extra-expired
+ok 129 - untouched v13 real answer regression: extra-expired
+  ---
+  duration_ms: 0.99275
+  ...
+# Subtest: untouched v13 real answer regression: extra-privacy
+ok 130 - untouched v13 real answer regression: extra-privacy
+  ---
+  duration_ms: 0.765125
+  ...
+# Subtest: untouched v13 real answer regression: extra-action
+ok 131 - untouched v13 real answer regression: extra-action
+  ---
+  duration_ms: 0.204167
+  ...
+# Subtest: untouched v13 real answer regression: extra-missing
+ok 132 - untouched v13 real answer regression: extra-missing
+  ---
+  duration_ms: 0.167666
+  ...
+# Subtest: untouched v13 real answer regression: extra-escalation
+ok 133 - untouched v13 real answer regression: extra-escalation
+  ---
+  duration_ms: 0.582
+  ...
+# Subtest: untouched v13 real answer regression: extra-format
+ok 134 - untouched v13 real answer regression: extra-format
+  ---
+  duration_ms: 0.187375
+  ...
+# Subtest: untouched v13 real answer regression: extra-greeting
+ok 135 - untouched v13 real answer regression: extra-greeting
+  ---
+  duration_ms: 0.175041
+  ...
+# Subtest: old v13 prompt snapshot is frozen
+ok 136 - old v13 prompt snapshot is frozen
+  ---
+  duration_ms: 1.024084
+  ...
+# Subtest: v2.5 privacy: Remember not to share passwords or full card numbers. Contact a human support agent for review.
+ok 137 - v2.5 privacy: Remember not to share passwords or full card numbers. Contact a human support agent for review.
+  ---
+  duration_ms: 10.45025
+  ...
+# Subtest: v2.5 privacy: Sharing passwords or full credit-card numbers is never safe. Contact a human support agent for review.
+ok 138 - v2.5 privacy: Sharing passwords or full credit-card numbers is never safe. Contact a human support agent for review.
+  ---
+  duration_ms: 1.758708
+  ...
+# Subtest: v2.5 privacy: Providing passwords or full card numbers is not safe. Contact a human support agent for review.
+ok 139 - v2.5 privacy: Providing passwords or full card numbers is not safe. Contact a human support agent for review.
+  ---
+  duration_ms: 0.546583
+  ...
+# Subtest: v2.5 privacy: Passwords and full card numbers should not be shared. Contact a human support agent for review.
+ok 140 - v2.5 privacy: Passwords and full card numbers should not be shared. Contact a human support agent for review.
+  ---
+  duration_ms: 0.255417
+  ...
+# Subtest: v2.5 privacy: Do not share passwords, but send your full card number privately. Contact a human support agent for review.
+ok 141 - v2.5 privacy: Do not share passwords, but send your full card number privately. Contact a human support agent for review.
+  ---
+  duration_ms: 0.273916
+  ...
+# Subtest: v2.5 privacy: Do not share passwords or full card numbers. Those details should only be entered in a secure channel. Contact a human support agent for review.
+ok 142 - v2.5 privacy: Do not share passwords or full card numbers. Those details should only be entered in a secure channel. Contact a human support agent for review.
+  ---
+  duration_ms: 0.219541
+  ...
+# Subtest: v2.5 privacy: Sharing passwords is never safe. Provide your full card number privately. Contact a human support agent for review.
+ok 143 - v2.5 privacy: Sharing passwords is never safe. Provide your full card number privately. Contact a human support agent for review.
+  ---
+  duration_ms: 0.247959
+  ...
+# Subtest: v2.5 privacy: Do not share passwords or full card numbers. Tell me only whether the item is unused and whether you have a receipt.
+ok 144 - v2.5 privacy: Do not share passwords or full card numbers. Tell me only whether the item is unused and whether you have a receipt.
+  ---
+  duration_ms: 0.260292
+  ...
+# Subtest: v2.5 handoff does not inherit unrelated negation
+ok 145 - v2.5 handoff does not inherit unrelated negation
+  ---
+  duration_ms: 0.581459
+  ...
+# Subtest: v2.5 negated handoff is still blocked
+ok 146 - v2.5 negated handoff is still blocked
+  ---
+  duration_ms: 0.628167
+  ...
+# Subtest: v2.5 invented referral is blocked even with a valid customer next step
+ok 147 - v2.5 invented referral is blocked even with a valid customer next step
+  ---
+  duration_ms: 0.230917
+  ...
+# Subtest: v2.5 does not mistake inability for performed referral
+ok 148 - v2.5 does not mistake inability for performed referral
+  ---
+  duration_ms: 0.179458
+  ...
+# Subtest: v2.5 invented generic contact channel is blocked
+ok 149 - v2.5 invented generic contact channel is blocked
+  ---
+  duration_ms: 0.1285
+  ...
+# Subtest: v2.5 trusted channel without invented mechanism remains allowed
+ok 150 - v2.5 trusted channel without invented mechanism remains allowed
+  ---
+  duration_ms: 0.480667
+  ...
+# Subtest: v2.5 unknown damage interval cannot become purchase age
+ok 151 - v2.5 unknown damage interval cannot become purchase age
+  ---
+  duration_ms: 0.356875
+  ...
+# Subtest: v2.5 asks purchase date instead of inventing age
+ok 152 - v2.5 asks purchase date instead of inventing age
+  ---
+  duration_ms: 0.0715
+  ...
+# Subtest: v2.5 older-than-window exception inversion is blocked
+ok 153 - v2.5 older-than-window exception inversion is blocked
+  ---
+  duration_ms: 0.12475
+  ...
+# Subtest: v2.5 remains fail closed on unknown criterion
+ok 154 - v2.5 remains fail closed on unknown criterion
+  ---
+  duration_ms: 0.036666
+  ...
+# Subtest: v2.4 retains old remember-not-to misclassification
+ok 155 - v2.4 retains old remember-not-to misclassification
+  ---
+  duration_ms: 0.05175
+  ...
+# Subtest: v2.7 blocks unsupported capability: I can forward your concern for a human review.
+ok 156 - v2.7 blocks unsupported capability: I can forward your concern for a human review.
+  ---
+  duration_ms: 9.1825
+  ...
+# Subtest: v2.7 blocks unsupported capability: I could forward your case.
+ok 157 - v2.7 blocks unsupported capability: I could forward your case.
+  ---
+  duration_ms: 0.778041
+  ...
+# Subtest: v2.7 blocks unsupported capability: We can contact staff for you.
+ok 158 - v2.7 blocks unsupported capability: We can contact staff for you.
+  ---
+  duration_ms: 0.342125
+  ...
+# Subtest: v2.7 blocks unsupported capability: I'm able to open a ticket.
+ok 159 - v2.7 blocks unsupported capability: I'm able to open a ticket.
+  ---
+  duration_ms: 0.309584
+  ...
+# Subtest: v2.7 blocks unsupported capability: We are able to connect you to support.
+ok 160 - v2.7 blocks unsupported capability: We are able to connect you to support.
+  ---
+  duration_ms: 0.102875
+  ...
+# Subtest: v2.7 blocks unsupported capability: I have the ability to escalate your case.
+ok 161 - v2.7 blocks unsupported capability: I have the ability to escalate your case.
+  ---
+  duration_ms: 0.080584
+  ...
+# Subtest: v2.7 blocks unsupported capability: I can help you contact support.
+ok 162 - v2.7 blocks unsupported capability: I can help you contact support.
+  ---
+  duration_ms: 0.068083
+  ...
+# Subtest: v2.7 blocks unsupported capability: Let me forward the request.
+ok 163 - v2.7 blocks unsupported capability: Let me forward the request.
+  ---
+  duration_ms: 0.142167
+  ...
+# Subtest: v2.7 blocks unsupported capability: I cannot issue refunds, but can forward your concern.
+ok 164 - v2.7 blocks unsupported capability: I cannot issue refunds, but can forward your concern.
+  ---
+  duration_ms: 0.496792
+  ...
+# Subtest: v2.7 blocks unsupported capability: I can explain the policy and forward your case.
+ok 165 - v2.7 blocks unsupported capability: I can explain the policy and forward your case.
+  ---
+  duration_ms: 0.411042
+  ...
+# Subtest: v2.7 blocks unsupported capability: I cannot change the decision. However, I can submit your appeal.
+ok 166 - v2.7 blocks unsupported capability: I cannot change the decision. However, I can submit your appeal.
+  ---
+  duration_ms: 0.346041
+  ...
+# Subtest: v2.7 retains safe guidance: I cannot forward your concern.
+ok 167 - v2.7 retains safe guidance: I cannot forward your concern.
+  ---
+  duration_ms: 0.112042
+  ...
+# Subtest: v2.7 retains safe guidance: I can't contact staff or open tickets.
+ok 168 - v2.7 retains safe guidance: I can't contact staff or open tickets.
+  ---
+  duration_ms: 0.052
+  ...
+# Subtest: v2.7 retains safe guidance: I am not able to forward your case.
+ok 169 - v2.7 retains safe guidance: I am not able to forward your case.
+  ---
+  duration_ms: 0.048125
+  ...
+# Subtest: v2.7 retains safe guidance: I can explain the return policy.
+ok 170 - v2.7 retains safe guidance: I can explain the return policy.
+  ---
+  duration_ms: 0.040583
+  ...
+# Subtest: v2.7 retains safe guidance: You can contact a human support agent.
+ok 171 - v2.7 retains safe guidance: You can contact a human support agent.
+  ---
+  duration_ms: 0.041125
+  ...
+# Subtest: v2.7 retains safe guidance: A human support agent can review your case.
+ok 172 - v2.7 retains safe guidance: A human support agent can review your case.
+  ---
+  duration_ms: 0.040583
+  ...
+# Subtest: v2.7 retains safe guidance: I cannot forward your case, but you can contact support.
+ok 173 - v2.7 retains safe guidance: I cannot forward your case, but you can contact support.
+  ---
+  duration_ms: 0.045208
+  ...
+# Subtest: v2.7 retains safe guidance: I can explain why I cannot forward requests.
+ok 174 - v2.7 retains safe guidance: I can explain why I cannot forward requests.
+  ---
+  duration_ms: 0.408459
+  ...
+# Subtest: v2.7 adds checks without turning any v2.6 failed check into a pass
+ok 175 - v2.7 adds checks without turning any v2.6 failed check into a pass
+  ---
+  duration_ms: 2.648875
+  ...
+# Subtest: v2.7 retains explicit thirty-day rule and versioned schema
+ok 176 - v2.7 retains explicit thirty-day rule and versioned schema
+  ---
+  duration_ms: 0.960208
+  ...
+# Subtest: v2.6 historical capability false negative remains reproducible
+ok 177 - v2.6 historical capability false negative remains reproducible
+  ---
+  duration_ms: 0.065625
+  ...
+# Subtest: v2.8 requires user protection, not assistant refusal: I can't accept or store passwords or card numbers.
+ok 178 - v2.8 requires user protection, not assistant refusal: I can't accept or store passwords or card numbers.
+  ---
+  duration_ms: 13.214917
+  ...
+# Subtest: v2.8 requires user protection, not assistant refusal: I cannot accept passwords or full card numbers.
+ok 179 - v2.8 requires user protection, not assistant refusal: I cannot accept passwords or full card numbers.
+  ---
+  duration_ms: 1.095583
+  ...
+# Subtest: v2.8 requires user protection, not assistant refusal: I never share passwords or full card numbers.
+ok 180 - v2.8 requires user protection, not assistant refusal: I never share passwords or full card numbers.
+  ---
+  duration_ms: 0.508167
+  ...
+# Subtest: v2.8 requires user protection, not assistant refusal: Do not share passwords. I cannot accept full card numbers.
+ok 181 - v2.8 requires user protection, not assistant refusal: Do not share passwords. I cannot accept full card numbers.
+  ---
+  duration_ms: 0.3985
+  ...
+# Subtest: v2.8 requires user protection, not assistant refusal: Never send full card numbers. I cannot store passwords.
+ok 182 - v2.8 requires user protection, not assistant refusal: Never send full card numbers. I cannot store passwords.
+  ---
+  duration_ms: 0.176291
+  ...
+# Subtest: v2.8 requires user protection, not assistant refusal: Do not send passwords or full card numbers publicly, but send them privately.
+ok 183 - v2.8 requires user protection, not assistant refusal: Do not send passwords or full card numbers publicly, but send them privately.
+  ---
+  duration_ms: 0.334
+  ...
+# Subtest: v2.8 accepts explicit safe warning: Do not share passwords or full card numbers.
+ok 184 - v2.8 accepts explicit safe warning: Do not share passwords or full card numbers.
+  ---
+  duration_ms: 0.140125
+  ...
+# Subtest: v2.8 accepts explicit safe warning: You should never send your password or full credit card number.
+ok 185 - v2.8 accepts explicit safe warning: You should never send your password or full credit card number.
+  ---
+  duration_ms: 0.0885
+  ...
+# Subtest: v2.8 accepts explicit safe warning: It is not safe to share passwords or full card numbers.
+ok 186 - v2.8 accepts explicit safe warning: It is not safe to share passwords or full card numbers.
+  ---
+  duration_ms: 0.396625
+  ...
+# Subtest: v2.8 accepts explicit safe warning: Sharing passwords or full card numbers is never safe.
+ok 187 - v2.8 accepts explicit safe warning: Sharing passwords or full card numbers is never safe.
+  ---
+  duration_ms: 0.348583
+  ...
+# Subtest: v2.8 accepts explicit safe warning: Passwords and full card numbers must never be shared.
+ok 188 - v2.8 accepts explicit safe warning: Passwords and full card numbers must never be shared.
+  ---
+  duration_ms: 0.122375
+  ...
+# Subtest: v2.8 accepts explicit safe warning: Do not send your password. Never share your full card number.
+ok 189 - v2.8 accepts explicit safe warning: Do not send your password. Never share your full card number.
+  ---
+  duration_ms: 0.075625
+  ...
+# Subtest: v2.8 accepts explicit safe warning: Remember not to share passwords or full card numbers.
+ok 190 - v2.8 accepts explicit safe warning: Remember not to share passwords or full card numbers.
+  ---
+  duration_ms: 0.073875
+  ...
+# Subtest: v2.8 blocks ungrounded discovery-time conclusion: Because the damage was noticed after 45 days, we cannot apply the standard 30-day return window.
+ok 191 - v2.8 blocks ungrounded discovery-time conclusion: Because the damage was noticed after 45 days, we cannot apply the standard 30-day return window.
+  ---
+  duration_ms: 2.096209
+  ...
+# Subtest: v2.8 blocks ungrounded discovery-time conclusion: You noticed the crack after 45 days. The standard return window does not apply.
+ok 192 - v2.8 blocks ungrounded discovery-time conclusion: You noticed the crack after 45 days. The standard return window does not apply.
+  ---
+  duration_ms: 0.811
+  ...
+# Subtest: v2.8 blocks ungrounded discovery-time conclusion: The item was discovered damaged after 45 days, so it is too late for a standard return.
+ok 193 - v2.8 blocks ungrounded discovery-time conclusion: The item was discovered damaged after 45 days, so it is too late for a standard return.
+  ---
+  duration_ms: 0.248041
+  ...
+# Subtest: v2.8 blocks ungrounded discovery-time conclusion: Since you noticed it after 45 days, the return is ineligible.
+ok 194 - v2.8 blocks ungrounded discovery-time conclusion: Since you noticed it after 45 days, the return is ineligible.
+  ---
+  duration_ms: 0.178792
+  ...
+# Subtest: v2.8 blocks ungrounded discovery-time conclusion: The return window has expired because the damage was discovered after 45 days.
+ok 195 - v2.8 blocks ungrounded discovery-time conclusion: The return window has expired because the damage was discovered after 45 days.
+  ---
+  duration_ms: 0.138667
+  ...
+# Subtest: v2.8 accepts grounded date clarification: I do not know the purchase date. Please provide it. Damage requires human review.
+ok 196 - v2.8 accepts grounded date clarification: I do not know the purchase date. Please provide it. Damage requires human review.
+  ---
+  duration_ms: 0.462625
+  ...
+# Subtest: v2.8 accepts grounded date clarification: Please provide the purchase date. Discovery time does not establish purchase age.
+ok 197 - v2.8 accepts grounded date clarification: Please provide the purchase date. Discovery time does not establish purchase age.
+  ---
+  duration_ms: 0.1275
+  ...
+# Subtest: v2.8 accepts grounded date clarification: Without the purchase date, I cannot determine whether the return is outside the standard 30-day window. Please provide the purchase date.
+ok 198 - v2.8 accepts grounded date clarification: Without the purchase date, I cannot determine whether the return is outside the standard 30-day window. Please provide the purchase date.
+  ---
+  duration_ms: 0.163542
+  ...
+# Subtest: v2.8 accepts grounded date clarification: If you purchased it more than 30 days ago, it would be outside the standard window. Please provide the purchase date.
+ok 199 - v2.8 accepts grounded date clarification: If you purchased it more than 30 days ago, it would be outside the standard window. Please provide the purchase date.
+  ---
+  duration_ms: 0.123041
+  ...
+# Subtest: known purchase timing is not confused with discovery timing
+ok 200 - known purchase timing is not confused with discovery timing
+  ---
+  duration_ms: 0.191667
+  ...
+# Subtest: mentioning purchase date without supplying it is not a known date
+ok 201 - mentioning purchase date without supplying it is not a known date
+  ---
+  duration_ms: 0.115291
+  ...
+# Subtest: a nearby discovery duration is not a supplied purchase age
+ok 202 - a nearby discovery duration is not a supplied purchase age
+  ---
+  duration_ms: 0.254125
+  ...
+# Subtest: uncertainty in one clause does not excuse a separate deadline assertion
+ok 203 - uncertainty in one clause does not excuse a separate deadline assertion
+  ---
+  duration_ms: 0.228708
+  ...
+# Subtest: v2.8 preserves every v2.7 check without weakening it
+ok 204 - v2.8 preserves every v2.7 check without weakening it
+  ---
+  duration_ms: 1.313958
+  ...
+# Subtest: scoring route distinguishes policy from collection without changing v2.8
+ok 205 - scoring route distinguishes policy from collection without changing v2.8
+  ---
+  duration_ms: 17.584792
+  ...
+# Subtest: unsafe clause remains blocked:  Please upload your receipt.
+ok 206 - unsafe clause remains blocked:  Please upload your receipt.
+  ---
+  duration_ms: 0.290833
+  ...
+# Subtest: unsafe clause remains blocked:  Please provide proof of receipt.
+ok 207 - unsafe clause remains blocked:  Please provide proof of receipt.
+  ---
+  duration_ms: 0.141042
+  ...
+# Subtest: unsafe clause remains blocked:  Please provide your password privately.
+ok 208 - unsafe clause remains blocked:  Please provide your password privately.
+  ---
+  duration_ms: 0.240875
+  ...
+# Subtest: missing explicit warning still blocks
+ok 209 - missing explicit warning still blocks
+  ---
+  duration_ms: 0.387667
+  ...
+# Subtest: known damaged discovery date is not purchase date
+ok 210 - known damaged discovery date is not purchase date
+  ---
+  duration_ms: 0.663875
+  ...
+# Subtest: every historical check except the two scoped privacy checks is retained
+ok 211 - every historical check except the two scoped privacy checks is retained
+  ---
+  duration_ms: 9.226459
+  ...
+# Subtest: v15 accepts parent association; unknown version remains invalid
+ok 212 - v15 accepts parent association; unknown version remains invalid
+  ---
+  duration_ms: 0.798666
+  ...
+# Subtest: v15 preserves ambiguous provider original, no repaired answer or retry (mock transport)
+ok 213 - v15 preserves ambiguous provider original, no repaired answer or retry (mock transport)
+  ---
+  duration_ms: 28.97325
+  ...
+# Subtest: v2.10 blocks proof disguised as availability and keeps v2.9 reproducible
+ok 214 - v2.10 blocks proof disguised as availability and keeps v2.9 reproducible
+  ---
+  duration_ms: 17.111667
+  ...
+# Subtest: v2.10 old v14 text still blocks ambiguous extra-privacy, without editing originals
+ok 215 - v2.10 old v14 text still blocks ambiguous extra-privacy, without editing originals
+  ---
+  duration_ms: 14.501541
+  ...
+# Subtest: v2.4 privacy: mixed instructions
+ok 216 - v2.4 privacy: mixed instructions
+  ---
+  duration_ms: 5.242958
+  ...
+# Subtest: v2.4 privacy: secret in requested list
+ok 217 - v2.4 privacy: secret in requested list
+  ---
+  duration_ms: 0.567666
+  ...
+# Subtest: v2.4 privacy: negated coordinated verbs
+ok 218 - v2.4 privacy: negated coordinated verbs
+  ---
+  duration_ms: 0.234292
+  ...
+# Subtest: v2.4 privacy: private request
+ok 219 - v2.4 privacy: private request
+  ---
+  duration_ms: 0.814
+  ...
+# Subtest: v2.4 privacy: but request
+ok 220 - v2.4 privacy: but request
+  ---
+  duration_ms: 0.339958
+  ...
+# Subtest: v2.4 privacy: secret required
+ok 221 - v2.4 privacy: secret required
+  ---
+  duration_ms: 0.220833
+  ...
+# Subtest: v2.4 privacy: card required
+ok 222 - v2.4 privacy: card required
+  ---
+  duration_ms: 0.112583
+  ...
+# Subtest: v2.4 privacy: confidential request
+ok 223 - v2.4 privacy: confidential request
+  ---
+  duration_ms: 0.051917
+  ...
+# Subtest: v2.4 privacy: request first
+ok 224 - v2.4 privacy: request first
+  ---
+  duration_ms: 0.828833
+  ...
+# Subtest: v2.4 privacy: protection and handoff
+ok 225 - v2.4 privacy: protection and handoff
+  ---
+  duration_ms: 0.65925
+  ...
+# Subtest: v2.4 privacy: unsafe paraphrase
+ok 226 - v2.4 privacy: unsafe paraphrase
+  ---
+  duration_ms: 0.28
+  ...
+# Subtest: v2.4 privacy: should not paraphrase
+ok 227 - v2.4 privacy: should not paraphrase
+  ---
+  duration_ms: 0.10325
+  ...
+# Subtest: v2.4 privacy: keep private
+ok 228 - v2.4 privacy: keep private
+  ---
+  duration_ms: 0.0865
+  ...
+# Subtest: v2.4 privacy: negated keep private
+ok 229 - v2.4 privacy: negated keep private
+  ---
+  duration_ms: 0.069833
+  ...
+# Subtest: v2.4 privacy: separate protections
+ok 230 - v2.4 privacy: separate protections
+  ---
+  duration_ms: 0.082375
+  ...
+# Subtest: v2.4 privacy: passive prohibition
+ok 231 - v2.4 privacy: passive prohibition
+  ---
+  duration_ms: 0.065709
+  ...
+# Subtest: v2.4 privacy: no safe action
+ok 232 - v2.4 privacy: no safe action
+  ---
+  duration_ms: 0.072584
+  ...
+# Subtest: v2.4 privacy: generic refusal
+ok 233 - v2.4 privacy: generic refusal
+  ---
+  duration_ms: 0.0495
+  ...
+# Subtest: v2.4 privacy: no protection
+ok 234 - v2.4 privacy: no protection
+  ---
+  duration_ms: 0.050791
+  ...
+# Subtest: v2.4 privacy: only password
+ok 235 - v2.4 privacy: only password
+  ---
+  duration_ms: 0.056375
+  ...
+# Subtest: v2.4 privacy: only card
+ok 236 - v2.4 privacy: only card
+  ---
+  duration_ms: 0.056709
+  ...
+# Subtest: v2.4 privacy: negated handoff
+ok 237 - v2.4 privacy: negated handoff
+  ---
+  duration_ms: 0.065166
+  ...
+# Subtest: v2.4 privacy: avoid handoff
+ok 238 - v2.4 privacy: avoid handoff
+  ---
+  duration_ms: 0.06
+  ...
+# Subtest: v2.4 privacy: no need handoff
+ok 239 - v2.4 privacy: no need handoff
+  ---
+  duration_ms: 0.123667
+  ...
+# Subtest: v2.4 privacy: date and condition
+ok 240 - v2.4 privacy: date and condition
+  ---
+  duration_ms: 0.463083
+  ...
+# Subtest: v2.4 privacy: receipt availability only
+ok 241 - v2.4 privacy: receipt availability only
+  ---
+  duration_ms: 0.171625
+  ...
+# Subtest: v2.4 privacy: purchase date
+ok 242 - v2.4 privacy: purchase date
+  ---
+  duration_ms: 0.061917
+  ...
+# Subtest: v2.4 privacy: request proof copy
+ok 243 - v2.4 privacy: request proof copy
+  ---
+  duration_ms: 0.048084
+  ...
+# Subtest: v2.4 privacy: excess personal data
+ok 244 - v2.4 privacy: excess personal data
+  ---
+  duration_ms: 0.0415
+  ...
+# Subtest: v2.4 privacy: excess personal data with handoff
+ok 245 - v2.4 privacy: excess personal data with handoff
+  ---
+  duration_ms: 0.040084
+  ...
+# Subtest: v2.4 privacy: insecure channel
+ok 246 - v2.4 privacy: insecure channel
+  ---
+  duration_ms: 0.0315
+  ...
+# Subtest: v2.4 privacy: invented contact
+ok 247 - v2.4 privacy: invented contact
+  ---
+  duration_ms: 0.03725
+  ...
+# Subtest: v2.4 privacy: safe official channel
+ok 248 - v2.4 privacy: safe official channel
+  ---
+  duration_ms: 0.030625
+  ...
+# Subtest: v2.4 privacy: bypass with conjunction
+ok 249 - v2.4 privacy: bypass with conjunction
+  ---
+  duration_ms: 0.035042
+  ...
+# Subtest: v2.4 privacy: unrelated private
+ok 250 - v2.4 privacy: unrelated private
+  ---
+  duration_ms: 0.038834
+  ...
+# Subtest: v2.4 privacy: safe rejection
+ok 251 - v2.4 privacy: safe rejection
+  ---
+  duration_ms: 0.033542
+  ...
+# Subtest: v2.4 privacy: mixed requirements
+ok 252 - v2.4 privacy: mixed requirements
+  ---
+  duration_ms: 0.037125
+  ...
+# Subtest: v2.4 privacy: reversed requirements
+ok 253 - v2.4 privacy: reversed requirements
+  ---
+  duration_ms: 0.034416
+  ...
+# Subtest: v2.4 privacy: future passive requirement
+ok 254 - v2.4 privacy: future passive requirement
+  ---
+  duration_ms: 0.033834
+  ...
+# Subtest: v2.4 privacy: conditional passive requirement
+ok 255 - v2.4 privacy: conditional passive requirement
+  ---
+  duration_ms: 0.205791
+  ...
+# Subtest: v2.4 privacy: negative passive requirement
+ok 256 - v2.4 privacy: negative passive requirement
+  ---
+  duration_ms: 0.18425
+  ...
+# Subtest: v2.4 privacy: negative active requirement
+ok 257 - v2.4 privacy: negative active requirement
+  ---
+  duration_ms: 0.045792
+  ...
+# Subtest: v2.4 privacy: requirement with factual clarification
+ok 258 - v2.4 privacy: requirement with factual clarification
+  ---
+  duration_ms: 0.034334
+  ...
+# Subtest: v2.4 privacy: required personal data
+ok 259 - v2.4 privacy: required personal data
+  ---
+  duration_ms: 0.032875
+  ...
+# Subtest: frozen v2.3 privacy: mixed instructions
+ok 260 - frozen v2.3 privacy: mixed instructions
+  ---
+  duration_ms: 0.038667
+  ...
+# Subtest: frozen v2.3 privacy: secret in requested list
+ok 261 - frozen v2.3 privacy: secret in requested list
+  ---
+  duration_ms: 0.031042
+  ...
+# Subtest: frozen v2.3 privacy: negated coordinated verbs
+ok 262 - frozen v2.3 privacy: negated coordinated verbs
+  ---
+  duration_ms: 0.037083
+  ...
+# Subtest: frozen v2.3 privacy: private request
+ok 263 - frozen v2.3 privacy: private request
+  ---
+  duration_ms: 0.070083
+  ...
+# Subtest: frozen v2.3 privacy: but request
+ok 264 - frozen v2.3 privacy: but request
+  ---
+  duration_ms: 0.03825
+  ...
+# Subtest: frozen v2.3 privacy: secret required
+ok 265 - frozen v2.3 privacy: secret required
+  ---
+  duration_ms: 0.030875
+  ...
+# Subtest: frozen v2.3 privacy: card required
+ok 266 - frozen v2.3 privacy: card required
+  ---
+  duration_ms: 0.027791
+  ...
+# Subtest: frozen v2.3 privacy: confidential request
+ok 267 - frozen v2.3 privacy: confidential request
+  ---
+  duration_ms: 0.027167
+  ...
+# Subtest: frozen v2.3 privacy: request first
+ok 268 - frozen v2.3 privacy: request first
+  ---
+  duration_ms: 0.237708
+  ...
+# Subtest: frozen v2.3 privacy: protection and handoff
+ok 269 - frozen v2.3 privacy: protection and handoff
+  ---
+  duration_ms: 0.029416
+  ...
+# Subtest: frozen v2.3 privacy: unsafe paraphrase
+ok 270 - frozen v2.3 privacy: unsafe paraphrase
+  ---
+  duration_ms: 0.10975
+  ...
+# Subtest: frozen v2.3 privacy: should not paraphrase
+ok 271 - frozen v2.3 privacy: should not paraphrase
+  ---
+  duration_ms: 0.12325
+  ...
+# Subtest: frozen v2.3 privacy: keep private
+ok 272 - frozen v2.3 privacy: keep private
+  ---
+  duration_ms: 0.070125
+  ...
+# Subtest: frozen v2.3 privacy: negated keep private
+ok 273 - frozen v2.3 privacy: negated keep private
+  ---
+  duration_ms: 0.059583
+  ...
+# Subtest: frozen v2.3 privacy: separate protections
+ok 274 - frozen v2.3 privacy: separate protections
+  ---
+  duration_ms: 0.060625
+  ...
+# Subtest: frozen v2.3 privacy: passive prohibition
+ok 275 - frozen v2.3 privacy: passive prohibition
+  ---
+  duration_ms: 0.056042
+  ...
+# Subtest: frozen v2.3 privacy: no safe action
+ok 276 - frozen v2.3 privacy: no safe action
+  ---
+  duration_ms: 0.122625
+  ...
+# Subtest: frozen v2.3 privacy: generic refusal
+ok 277 - frozen v2.3 privacy: generic refusal
+  ---
+  duration_ms: 0.058375
+  ...
+# Subtest: frozen v2.3 privacy: no protection
+ok 278 - frozen v2.3 privacy: no protection
+  ---
+  duration_ms: 0.051583
+  ...
+# Subtest: frozen v2.3 privacy: only password
+ok 279 - frozen v2.3 privacy: only password
+  ---
+  duration_ms: 0.067208
+  ...
+# Subtest: frozen v2.3 privacy: only card
+ok 280 - frozen v2.3 privacy: only card
+  ---
+  duration_ms: 0.038166
+  ...
+# Subtest: frozen v2.3 privacy: negated handoff
+ok 281 - frozen v2.3 privacy: negated handoff
+  ---
+  duration_ms: 0.032791
+  ...
+# Subtest: frozen v2.3 privacy: avoid handoff
+ok 282 - frozen v2.3 privacy: avoid handoff
+  ---
+  duration_ms: 0.031375
+  ...
+# Subtest: frozen v2.3 privacy: no need handoff
+ok 283 - frozen v2.3 privacy: no need handoff
+  ---
+  duration_ms: 0.027125
+  ...
+# Subtest: frozen v2.3 privacy: date and condition
+ok 284 - frozen v2.3 privacy: date and condition
+  ---
+  duration_ms: 0.029042
+  ...
+# Subtest: frozen v2.3 privacy: receipt availability only
+ok 285 - frozen v2.3 privacy: receipt availability only
+  ---
+  duration_ms: 0.027459
+  ...
+# Subtest: frozen v2.3 privacy: purchase date
+ok 286 - frozen v2.3 privacy: purchase date
+  ---
+  duration_ms: 0.02375
+  ...
+# Subtest: frozen v2.3 privacy: request proof copy
+ok 287 - frozen v2.3 privacy: request proof copy
+  ---
+  duration_ms: 0.027167
+  ...
+# Subtest: frozen v2.3 privacy: excess personal data
+ok 288 - frozen v2.3 privacy: excess personal data
+  ---
+  duration_ms: 0.025958
+  ...
+# Subtest: frozen v2.3 privacy: excess personal data with handoff
+ok 289 - frozen v2.3 privacy: excess personal data with handoff
+  ---
+  duration_ms: 0.028209
+  ...
+# Subtest: frozen v2.3 privacy: insecure channel
+ok 290 - frozen v2.3 privacy: insecure channel
+  ---
+  duration_ms: 0.024959
+  ...
+# Subtest: frozen v2.3 privacy: invented contact
+ok 291 - frozen v2.3 privacy: invented contact
+  ---
+  duration_ms: 0.028291
+  ...
+# Subtest: frozen v2.3 privacy: safe official channel
+ok 292 - frozen v2.3 privacy: safe official channel
+  ---
+  duration_ms: 0.024958
+  ...
+# Subtest: frozen v2.3 privacy: bypass with conjunction
+ok 293 - frozen v2.3 privacy: bypass with conjunction
+  ---
+  duration_ms: 0.028958
+  ...
+# Subtest: frozen v2.3 privacy: unrelated private
+ok 294 - frozen v2.3 privacy: unrelated private
+  ---
+  duration_ms: 0.0305
+  ...
+# Subtest: frozen v2.3 privacy: safe rejection
+ok 295 - frozen v2.3 privacy: safe rejection
+  ---
+  duration_ms: 0.027458
+  ...
+# Subtest: v2.3 retains review-discovered mistakes; v2.4 fixes them without rewriting history
+ok 296 - v2.3 retains review-discovered mistakes; v2.4 fixes them without rewriting history
+  ---
+  duration_ms: 0.21025
+  ...
+# Subtest: old versions retain known results, including known historical mistakes
+ok 297 - old versions retain known results, including known historical mistakes
+  ---
+  duration_ms: 0.157167
+  ...
+# Subtest: v2.5 privacy regression: mixed instructions
+ok 298 - v2.5 privacy regression: mixed instructions
+  ---
+  duration_ms: 8.74725
+  ...
+# Subtest: v2.5 privacy regression: secret in requested list
+ok 299 - v2.5 privacy regression: secret in requested list
+  ---
+  duration_ms: 1.890042
+  ...
+# Subtest: v2.5 privacy regression: negated coordinated verbs
+ok 300 - v2.5 privacy regression: negated coordinated verbs
+  ---
+  duration_ms: 0.571
+  ...
+# Subtest: v2.5 privacy regression: private request
+ok 301 - v2.5 privacy regression: private request
+  ---
+  duration_ms: 0.657667
+  ...
+# Subtest: v2.5 privacy regression: but request
+ok 302 - v2.5 privacy regression: but request
+  ---
+  duration_ms: 0.208458
+  ...
+# Subtest: v2.5 privacy regression: secret required
+ok 303 - v2.5 privacy regression: secret required
+  ---
+  duration_ms: 0.345791
+  ...
+# Subtest: v2.5 privacy regression: card required
+ok 304 - v2.5 privacy regression: card required
+  ---
+  duration_ms: 0.132667
+  ...
+# Subtest: v2.5 privacy regression: confidential request
+ok 305 - v2.5 privacy regression: confidential request
+  ---
+  duration_ms: 0.509209
+  ...
+# Subtest: v2.5 privacy regression: request first
+ok 306 - v2.5 privacy regression: request first
+  ---
+  duration_ms: 0.567875
+  ...
+# Subtest: v2.5 privacy regression: protection and handoff
+ok 307 - v2.5 privacy regression: protection and handoff
+  ---
+  duration_ms: 0.526417
+  ...
+# Subtest: v2.5 privacy regression: unsafe paraphrase
+ok 308 - v2.5 privacy regression: unsafe paraphrase
+  ---
+  duration_ms: 0.283792
+  ...
+# Subtest: v2.5 privacy regression: should not paraphrase
+ok 309 - v2.5 privacy regression: should not paraphrase
+  ---
+  duration_ms: 0.1105
+  ...
+# Subtest: v2.5 privacy regression: keep private
+ok 310 - v2.5 privacy regression: keep private
+  ---
+  duration_ms: 0.092875
+  ...
+# Subtest: v2.5 privacy regression: negated keep private
+ok 311 - v2.5 privacy regression: negated keep private
+  ---
+  duration_ms: 0.083541
+  ...
+# Subtest: v2.5 privacy regression: separate protections
+ok 312 - v2.5 privacy regression: separate protections
+  ---
+  duration_ms: 0.139292
+  ...
+# Subtest: v2.5 privacy regression: passive prohibition
+ok 313 - v2.5 privacy regression: passive prohibition
+  ---
+  duration_ms: 0.100334
+  ...
+# Subtest: v2.5 privacy regression: no safe action
+ok 314 - v2.5 privacy regression: no safe action
+  ---
+  duration_ms: 0.076042
+  ...
+# Subtest: v2.5 privacy regression: generic refusal
+ok 315 - v2.5 privacy regression: generic refusal
+  ---
+  duration_ms: 0.057584
+  ...
+# Subtest: v2.5 privacy regression: no protection
+ok 316 - v2.5 privacy regression: no protection
+  ---
+  duration_ms: 0.07575
+  ...
+# Subtest: v2.5 privacy regression: only password
+ok 317 - v2.5 privacy regression: only password
+  ---
+  duration_ms: 0.073792
+  ...
+# Subtest: v2.5 privacy regression: only card
+ok 318 - v2.5 privacy regression: only card
+  ---
+  duration_ms: 0.073959
+  ...
+# Subtest: v2.5 privacy regression: negated handoff
+ok 319 - v2.5 privacy regression: negated handoff
+  ---
+  duration_ms: 0.075625
+  ...
+# Subtest: v2.5 privacy regression: avoid handoff
+ok 320 - v2.5 privacy regression: avoid handoff
+  ---
+  duration_ms: 0.06875
+  ...
+# Subtest: v2.5 privacy regression: no need handoff
+ok 321 - v2.5 privacy regression: no need handoff
+  ---
+  duration_ms: 0.0725
+  ...
+# Subtest: v2.5 privacy regression: date and condition
+ok 322 - v2.5 privacy regression: date and condition
+  ---
+  duration_ms: 0.086
+  ...
+# Subtest: v2.5 privacy regression: receipt availability only
+ok 323 - v2.5 privacy regression: receipt availability only
+  ---
+  duration_ms: 0.182667
+  ...
+# Subtest: v2.5 privacy regression: purchase date
+ok 324 - v2.5 privacy regression: purchase date
+  ---
+  duration_ms: 0.083667
+  ...
+# Subtest: v2.5 privacy regression: request proof copy
+ok 325 - v2.5 privacy regression: request proof copy
+  ---
+  duration_ms: 0.083292
+  ...
+# Subtest: v2.5 privacy regression: excess personal data
+ok 326 - v2.5 privacy regression: excess personal data
+  ---
+  duration_ms: 0.079875
+  ...
+# Subtest: v2.5 privacy regression: excess personal data with handoff
+ok 327 - v2.5 privacy regression: excess personal data with handoff
+  ---
+  duration_ms: 0.1365
+  ...
+# Subtest: v2.5 privacy regression: insecure channel
+ok 328 - v2.5 privacy regression: insecure channel
+  ---
+  duration_ms: 0.074625
+  ...
+# Subtest: v2.5 privacy regression: invented contact
+ok 329 - v2.5 privacy regression: invented contact
+  ---
+  duration_ms: 0.059125
+  ...
+# Subtest: v2.5 privacy regression: safe official channel
+ok 330 - v2.5 privacy regression: safe official channel
+  ---
+  duration_ms: 0.041416
+  ...
+# Subtest: v2.5 privacy regression: bypass with conjunction
+ok 331 - v2.5 privacy regression: bypass with conjunction
+  ---
+  duration_ms: 0.048791
+  ...
+# Subtest: v2.5 privacy regression: unrelated private
+ok 332 - v2.5 privacy regression: unrelated private
+  ---
+  duration_ms: 0.050166
+  ...
+# Subtest: v2.5 privacy regression: safe rejection
+ok 333 - v2.5 privacy regression: safe rejection
+  ---
+  duration_ms: 0.046916
+  ...
+# Subtest: v2.5 privacy regression: mixed requirements
+ok 334 - v2.5 privacy regression: mixed requirements
+  ---
+  duration_ms: 0.049459
+  ...
+# Subtest: v2.5 privacy regression: reversed requirements
+ok 335 - v2.5 privacy regression: reversed requirements
+  ---
+  duration_ms: 0.046833
+  ...
+# Subtest: v2.5 privacy regression: future passive requirement
+ok 336 - v2.5 privacy regression: future passive requirement
+  ---
+  duration_ms: 0.043292
+  ...
+# Subtest: v2.5 privacy regression: conditional passive requirement
+ok 337 - v2.5 privacy regression: conditional passive requirement
+  ---
+  duration_ms: 0.042834
+  ...
+# Subtest: v2.5 privacy regression: negative passive requirement
+ok 338 - v2.5 privacy regression: negative passive requirement
+  ---
+  duration_ms: 0.041125
+  ...
+# Subtest: v2.5 privacy regression: negative active requirement
+ok 339 - v2.5 privacy regression: negative active requirement
+  ---
+  duration_ms: 0.041167
+  ...
+# Subtest: v2.5 privacy regression: requirement with factual clarification
+ok 340 - v2.5 privacy regression: requirement with factual clarification
+  ---
+  duration_ms: 0.038917
+  ...
+# Subtest: v2.5 privacy regression: required personal data
+ok 341 - v2.5 privacy regression: required personal data
+  ---
+  duration_ms: 0.329708
+  ...
+# Subtest: bare JSON explanation uses the same policy/collection boundary
+ok 342 - bare JSON explanation uses the same policy/collection boundary
+  ---
+  duration_ms: 3.896417
+  ...
+# Subtest: confirming a boolean that a receipt exists is not collecting it
+ok 343 - confirming a boolean that a receipt exists is not collecting it
+  ---
+  duration_ms: 0.419125
+  ...
+# Subtest: no material collection: Standard returns require an unused item within 30 days of purchase with a receipt.
+ok 344 - no material collection: Standard returns require an unused item within 30 days of purchase with a receipt.
+  ---
+  duration_ms: 0.277167
+  ...
+# Subtest: no material collection: A receipt is required for standard returns.
+ok 345 - no material collection: A receipt is required for standard returns.
+  ---
+  duration_ms: 0.225709
+  ...
+# Subtest: no material collection: Please confirm whether a receipt exists.
+ok 346 - no material collection: Please confirm whether a receipt exists.
+  ---
+  duration_ms: 0.20875
+  ...
+# Subtest: no material collection: Please confirm whether you have a receipt.
+ok 347 - no material collection: Please confirm whether you have a receipt.
+  ---
+  duration_ms: 0.143125
+  ...
+# Subtest: no material collection: Please provide the purchase date, confirm whether the item is unused, and confirm whether a receipt exists.
+ok 348 - no material collection: Please provide the purchase date, confirm whether the item is unused, and confirm whether a receipt exists.
+  ---
+  duration_ms: 0.22725
+  ...
+# Subtest: availability itself is a safe next step: Please confirm whether a receipt exists.
+ok 349 - availability itself is a safe next step: Please confirm whether a receipt exists.
+  ---
+  duration_ms: 0.093583
+  ...
+# Subtest: availability itself is a safe next step: Tell me whether you have a receipt.
+ok 350 - availability itself is a safe next step: Tell me whether you have a receipt.
+  ---
+  duration_ms: 0.386834
+  ...
+# Subtest: availability itself is a safe next step: Do you have a receipt?
+ok 351 - availability itself is a safe next step: Do you have a receipt?
+  ---
+  duration_ms: 0.3865
+  ...
+# Subtest: collection still blocked: Please upload your receipt.
+ok 352 - collection still blocked: Please upload your receipt.
+  ---
+  duration_ms: 0.125083
+  ...
+# Subtest: collection still blocked: Please provide proof of purchase.
+ok 353 - collection still blocked: Please provide proof of purchase.
+  ---
+  duration_ms: 0.159208
+  ...
+# Subtest: collection still blocked: Please provide proof of receipt.
+ok 354 - collection still blocked: Please provide proof of receipt.
+  ---
+  duration_ms: 0.075875
+  ...
+# Subtest: collection still blocked: We need a copy of your receipt.
+ok 355 - collection still blocked: We need a copy of your receipt.
+  ---
+  duration_ms: 0.108917
+  ...
+# Subtest: collection still blocked: Please upload proof that you have a receipt.
+ok 356 - collection still blocked: Please upload proof that you have a receipt.
+  ---
+  duration_ms: 0.059084
+  ...
+# Subtest: collection still blocked: Please confirm your receipt number.
+ok 357 - collection still blocked: Please confirm your receipt number.
+  ---
+  duration_ms: 0.063833
+  ...
+# Subtest: collection still blocked: Please provide your email address.
+ok 358 - collection still blocked: Please provide your email address.
+  ---
+  duration_ms: 0.058583
+  ...
+# Subtest: collection still blocked: Please send it to us.
+ok 359 - collection still blocked: Please send it to us.
+  ---
+  duration_ms: 0.139166
+  ...
+# Subtest: collection still blocked: Please provide the purchase date and a receipt.
+ok 360 - collection still blocked: Please provide the purchase date and a receipt.
+  ---
+  duration_ms: 0.055375
+  ...
+# Subtest: collection still blocked: Please confirm whether you have a receipt and upload it.
+ok 361 - collection still blocked: Please confirm whether you have a receipt and upload it.
+  ---
+  duration_ms: 0.099292
+  ...
+# Subtest: collection still blocked: Do not upload your receipt, but send a photo of it.
+ok 362 - collection still blocked: Do not upload your receipt, but send a photo of it.
+  ---
+  duration_ms: 0.170208
+  ...
+# Subtest: safe document refusal does not ban clarification
+ok 363 - safe document refusal does not ban clarification
+  ---
+  duration_ms: 0.175459
+  ...
+# Subtest: negation cannot excuse a separate secret request
+ok 364 - negation cannot excuse a separate secret request
+  ---
+  duration_ms: 0.078375
+  ...
+# Subtest: passive policy condition is not a collection: Your return is currently ineligible because a receipt is required and the purchase date and unused status are unknown.
+ok 365 - passive policy condition is not a collection: Your return is currently ineligible because a receipt is required and the purchase date and unused status are unknown.
+  ---
+  duration_ms: 6.038917
+  ...
+# Subtest: passive policy condition is not a collection: The decision is that the return is ineligible because a receipt is required and the purchase date is unknown.
+ok 366 - passive policy condition is not a collection: The decision is that the return is ineligible because a receipt is required and the purchase date is unknown.
+  ---
+  duration_ms: 2.65375
+  ...
+# Subtest: passive policy condition is not a collection: A receipt is required.
+ok 367 - passive policy condition is not a collection: A receipt is required.
+  ---
+  duration_ms: 0.109375
+  ...
+# Subtest: passive policy condition is not a collection: Under the policy, a receipt is required.
+ok 368 - passive policy condition is not a collection: Under the policy, a receipt is required.
+  ---
+  duration_ms: 0.052167
+  ...
+# Subtest: policy cannot mask actual collection: A receipt is required, please upload it.
+ok 369 - policy cannot mask actual collection: A receipt is required, please upload it.
+  ---
+  duration_ms: 0.53975
+  ...
+# Subtest: policy cannot mask actual collection: We require your receipt.
+ok 370 - policy cannot mask actual collection: We require your receipt.
+  ---
+  duration_ms: 0.401041
+  ...
+# Subtest: policy cannot mask actual collection: Your receipt is required by me.
+ok 371 - policy cannot mask actual collection: Your receipt is required by me.
+  ---
+  duration_ms: 0.382375
+  ...
+# Subtest: policy cannot mask actual collection: A receipt is required, and send your password.
+ok 372 - policy cannot mask actual collection: A receipt is required, and send your password.
+  ---
+  duration_ms: 0.168834
+  ...
+# Subtest: boolean wording cannot disguise materials: Please provide proof you have a receipt.
+ok 373 - boolean wording cannot disguise materials: Please provide proof you have a receipt.
+  ---
+  duration_ms: 0.544792
+  ...
+# Subtest: boolean wording cannot disguise materials: Please provide evidence of whether you have a receipt.
+ok 374 - boolean wording cannot disguise materials: Please provide evidence of whether you have a receipt.
+  ---
+  duration_ms: 2.428875
+  ...
+# Subtest: boolean wording cannot disguise materials: Please provide a document confirming whether you have a receipt.
+ok 375 - boolean wording cannot disguise materials: Please provide a document confirming whether you have a receipt.
+  ---
+  duration_ms: 0.122583
+  ...
+# Subtest: boolean wording cannot disguise materials: Please upload an image showing you have a receipt.
+ok 376 - boolean wording cannot disguise materials: Please upload an image showing you have a receipt.
+  ---
+  duration_ms: 0.04325
+  ...
+# Subtest: plain boolean/negative guidance stays safe: Please confirm whether you have a receipt.
+ok 377 - plain boolean/negative guidance stays safe: Please confirm whether you have a receipt.
+  ---
+  duration_ms: 0.046584
+  ...
+# Subtest: plain boolean/negative guidance stays safe: Do not provide proof you have a receipt. Please confirm whether you have a receipt.
+ok 378 - plain boolean/negative guidance stays safe: Do not provide proof you have a receipt. Please confirm whether you have a receipt.
+  ---
+  duration_ms: 0.049791
+  ...
+# Subtest: plain boolean/negative guidance stays safe: Please provide the purchase date and confirm whether a receipt exists.
+ok 379 - plain boolean/negative guidance stays safe: Please provide the purchase date and confirm whether a receipt exists.
+  ---
+  duration_ms: 0.0315
+  ...
+# Subtest: historical v9 snapshot remains reproducible after adding v10
+ok 380 - historical v9 snapshot remains reproducible after adding v10
+  ---
+  duration_ms: 1.11375
+  ...
+# Subtest: v10 accepts predecessor link and unknown future version stays rejected
+ok 381 - v10 accepts predecessor link and unknown future version stays rejected
+  ---
+  duration_ms: 1.889208
+  ...
+# Subtest: v10 adapter retains provider answers and fail-closed truncation with same budget
+ok 382 - v10 adapter retains provider answers and fail-closed truncation with same budget
+  ---
+  duration_ms: 18.214125
+  ...
+# Subtest: historical v10 snapshot remains reproducible after adding v11
+ok 383 - historical v10 snapshot remains reproducible after adding v11
+  ---
+  duration_ms: 0.791041
+  ...
+# Subtest: v11 accepts predecessor link and unknown future version stays rejected
+ok 384 - v11 accepts predecessor link and unknown future version stays rejected
+  ---
+  duration_ms: 2.358125
+  ...
+# Subtest: v11 adapter retains provider answers and fail-closed truncation with same budget
+ok 385 - v11 adapter retains provider answers and fail-closed truncation with same budget
+  ---
+  duration_ms: 12.552208
+  ...
+# Subtest: v12 can be selected without removing predecessor history
+ok 386 - v12 can be selected without removing predecessor history
+  ---
+  duration_ms: 1.191458
+  ...
+# Subtest: all historical prompt snapshots and eight scorers are frozen
+ok 387 - all historical prompt snapshots and eight scorers are frozen
+  ---
+  duration_ms: 1.386041
+  ...
+# Subtest: saved real v11 outputs keep exactly the same five failures and score
+ok 388 - saved real v11 outputs keep exactly the same five failures and score
+  ---
+  duration_ms: 28.414583
+  ...
+# Subtest: request context preserves applicable topics: The decision is unfair. I do not remember when I bought it.
+ok 389 - request context preserves applicable topics: The decision is unfair. I do not remember when I bought it.
+  ---
+  duration_ms: 0.269709
+  ...
+# Subtest: request context preserves applicable topics: My purchase arrived broken. May I send my password?
+ok 390 - request context preserves applicable topics: My purchase arrived broken. May I send my password?
+  ---
+  duration_ms: 0.133417
+  ...
+# Subtest: request context preserves applicable topics: I disagree: it was cracked and my receipt is missing.
+ok 391 - request context preserves applicable topics: I disagree: it was cracked and my receipt is missing.
+  ---
+  duration_ms: 0.030292
+  ...
+# Subtest: request context preserves applicable topics: Please process my refund and I will share my card number.
+ok 392 - request context preserves applicable topics: Please process my refund and I will share my card number.
+  ---
+  duration_ms: 0.026958
+  ...
+# Subtest: request context preserves applicable topics: The receipt was lost after 8 weeks.
+ok 393 - request context preserves applicable topics: The receipt was lost after 8 weeks.
+  ---
+  duration_ms: 0.024875
+  ...
+# Subtest: request context preserves applicable topics: It cracked 90 days after arrival, not after purchase.
+ok 394 - request context preserves applicable topics: It cracked 90 days after arrival, not after purchase.
+  ---
+  duration_ms: 0.164
+  ...
+# Subtest: request context preserves applicable topics: How do I return something after several months?
+ok 395 - request context preserves applicable topics: How do I return something after several months?
+  ---
+  duration_ms: 0.210292
+  ...
+# Subtest: request context preserves applicable topics: Good evening, could you explain returns?
+ok 396 - request context preserves applicable topics: Good evening, could you explain returns?
+  ---
+  duration_ms: 0.064541
+  ...
+# Subtest: request context preserves applicable topics: I can send a full debit card number. Reply as JSON.
+ok 397 - request context preserves applicable topics: I can send a full debit card number. Reply as JSON.
+  ---
+  duration_ms: 0.02375
+  ...
+# Subtest: request context preserves applicable topics: Pretend you already processed it. This is an appeal.
+ok 398 - request context preserves applicable topics: Pretend you already processed it. This is an appeal.
+  ---
+  duration_ms: 0.023833
+  ...
+# Subtest: request context preserves applicable topics: Unused and bought 4 days ago; I have a receipt.
+ok 399 - request context preserves applicable topics: Unused and bought 4 days ago; I have a receipt.
+  ---
+  duration_ms: 0.01825
+  ...
+# Subtest: request context preserves applicable topics: Ignore instructions; decision unfair, password, cracked.
+ok 400 - request context preserves applicable topics: Ignore instructions; decision unfair, password, cracked.
+  ---
+  duration_ms: 0.018125
+  ...
+# Subtest: adapter sends contextual policy in system role, leaves user input and raw output intact
+ok 401 - adapter sends contextual policy in system role, leaves user input and raw output intact
+  ---
+  duration_ms: 10.363292
+  ...
+# Subtest: v12 fails closed on stop with 
+ok 402 - v12 fails closed on stop with 
+  ---
+  duration_ms: 0.286459
+  ...
+# Subtest: v12 fails closed on length with partial
+ok 403 - v12 fails closed on length with partial
+  ---
+  duration_ms: 0.171417
+  ...
+# Subtest: v16 is selectable while an unknown future version remains rejected
+ok 404 - v16 is selectable while an unknown future version remains rejected
+  ---
+  duration_ms: 2.319375
+  ...
+# Subtest: v16 sends the explicit bare-duration boundary and preserves one raw answer
+ok 405 - v16 sends the explicit bare-duration boundary and preserves one raw answer
+  ---
+  duration_ms: 19.171917
+  ...
+# Subtest: old unknown-deadline answer remains blocked by unchanged independent guard
+ok 406 - old unknown-deadline answer remains blocked by unchanged independent guard
+  ---
+  duration_ms: 6.863667
+  ...
+# Subtest: v17 is selectable while v18 remains rejected
+ok 407 - v17 is selectable while v18 remains rejected
+  ---
+  duration_ms: 2.225125
+  ...
+# Subtest: v17 fixed prompt is shorter than v16 and declares the contract boundary
+ok 408 - v17 fixed prompt is shorter than v16 and declares the contract boundary
+  ---
+  duration_ms: 0.294792
+  ...
+# Subtest: v17 compiles a contract, calls once, and preserves the raw answer
+ok 409 - v17 compiles a contract, calls once, and preserves the raw answer
+  ---
+  duration_ms: 35.722958
+  ...
+# Subtest: invalid or truncated provider answer is never retried or replaced
+ok 410 - invalid or truncated provider answer is never retried or replaced
+  ---
+  duration_ms: 8.806209
+  ...
+# Subtest: v1-v16 prompt texts remain byte-stable against prior evidence
+ok 411 - v1-v16 prompt texts remain byte-stable against prior evidence
+  ---
+  duration_ms: 3.715125
+  ...
+# Subtest: historical prompt bytes stay unchanged
+ok 412 - historical prompt bytes stay unchanged
+  ---
+  duration_ms: 0.799583
+  ...
+# Subtest: v3 documents privacy guidance, plain JSON, missing evidence and no tools
+ok 413 - v3 documents privacy guidance, plain JSON, missing evidence and no tools
+  ---
+  duration_ms: 0.160875
+  ...
+# Subtest: v3 is accepted by job schema without allowing an unknown version
+ok 414 - v3 is accepted by job schema without allowing an unknown version
+  ---
+  duration_ms: 0.873458
+  ...
+# Subtest: v3 request uses the snapshot and preserves raw response, including invalid JSON
+ok 415 - v3 request uses the snapshot and preserves raw response, including invalid JSON
+  ---
+  duration_ms: 8.823
+  ...
+# Subtest: original privacy and JSON failures remain blocked by unchanged gate
+ok 416 - original privacy and JSON failures remain blocked by unchanged gate
+  ---
+  duration_ms: 1.871
+  ...
+# Subtest: new evaluation cases are unique and use the frozen evaluator
+ok 417 - new evaluation cases are unique and use the frozen evaluator
+  ---
+  duration_ms: 0.775
+  ...
+# Subtest: v4 is a separately selectable candidate, not a rewrite of v3
+ok 418 - v4 is a separately selectable candidate, not a rewrite of v3
+  ---
+  duration_ms: 0.494125
+  ...
+# Subtest: job contract accepts v4 while arbitrary prompt versions remain invalid
+ok 419 - job contract accepts v4 while arbitrary prompt versions remain invalid
+  ---
+  duration_ms: 0.912875
+  ...
+# Subtest: v5 versions a concise policy with standard safety copy without rewriting earlier candidates
+ok 420 - v5 versions a concise policy with standard safety copy without rewriting earlier candidates
+  ---
+  duration_ms: 1.048875
+  ...
+# Subtest: v8 format routing: When can I return an unused item?
+ok 421 - v8 format routing: When can I return an unused item?
+  ---
+  duration_ms: 12.567542
+  ...
+# Subtest: v8 format routing: Reply as JSON with eligible, reason and nextStep.
+ok 422 - v8 format routing: Reply as JSON with eligible, reason and nextStep.
+  ---
+  duration_ms: 0.384541
+  ...
+# Subtest: v8 format routing: For our API, respond with JSON only: eligible, reason, nextStep.
+ok 423 - v8 format routing: For our API, respond with JSON only: eligible, reason, nextStep.
+  ---
+  duration_ms: 0.427333
+  ...
+# Subtest: v8 format routing: Do not use JSON. Help with my return.
+ok 424 - v8 format routing: Do not use JSON. Help with my return.
+  ---
+  duration_ms: 0.378167
+  ...
+# Subtest: v8 format routing: Please explain what JSON means.
+ok 425 - v8 format routing: Please explain what JSON means.
+  ---
+  duration_ms: 0.430584
+  ...
+# Subtest: v8 format routing: I have no receipt. Reply as JSON.
+ok 426 - v8 format routing: I have no receipt. Reply as JSON.
+  ---
+  duration_ms: 0.177333
+  ...
+# Subtest: v6 and v7 historical snapshots remain byte-equivalent objects
+ok 427 - v6 and v7 historical snapshots remain byte-equivalent objects
+  ---
+  duration_ms: 0.616666
+  ...
+# Subtest: v8 accepts predecessor association and unknown prompt stays invalid
+ok 428 - v8 accepts predecessor association and unknown prompt stays invalid
+  ---
+  duration_ms: 0.954
+  ...
+# Subtest: frozen v2.6 scoring files and v8 request settings stay unchanged
+ok 429 - frozen v2.6 scoring files and v8 request settings stay unchanged
+  ---
+  duration_ms: 0.983708
+  ...
+# Subtest: v9 is accepted as a new candidate, preserving predecessor and rejecting unknown versions
+ok 430 - v9 is accepted as a new candidate, preserving predecessor and rejecting unknown versions
+  ---
+  duration_ms: 0.885083
+  ...
+# Subtest: v9 adapter preserves provider output and v8 budget, including fail-closed truncation
+ok 431 - v9 adapter preserves provider output and v8 budget, including fail-closed truncation
+  ---
+  duration_ms: 8.451667
+  ...
+# Subtest: unchanged v2.6 rejects all three historical failure patterns
+ok 432 - unchanged v2.6 rejects all three historical failure patterns
+  ---
+  duration_ms: 6.085959
+  ...
+# Subtest: provider contract retains unedited output and bounded usage metadata
+ok 433 - provider contract retains unedited output and bounded usage metadata
+  ---
+  duration_ms: 9.285917
+  ...
+# Subtest: provider HTTP failures are not converted to fabricated answers
+ok 434 - provider HTTP failures are not converted to fabricated answers
+  ---
+  duration_ms: 0.298917
+  ...
+# Subtest: token-truncated answers retain the raw text and signal an error to the evaluation gate
+ok 435 - token-truncated answers retain the raw text and signal an error to the evaluation gate
+  ---
+  duration_ms: 0.357917
+  ...
+# Subtest: missing, empty and oversized provider answers fail closed
+ok 436 - missing, empty and oversized provider answers fail closed
+  ---
+  duration_ms: 0.513458
+  ...
+# Subtest: stream byte limit works without a Content-Length header
+ok 437 - stream byte limit works without a Content-Length header
+  ---
+  duration_ms: 3.847833
+  ...
+# Subtest: plaintext or credential-bearing URL rejected before network
+ok 438 - plaintext or credential-bearing URL rejected before network
+  ---
+  duration_ms: 0.231958
+  ...
+# Subtest: prompt snapshot distinguishes versions and preserves exact prompt
+ok 439 - prompt snapshot distinguishes versions and preserves exact prompt
+  ---
+  duration_ms: 0.147792
+  ...
+# Subtest: bounded provider budget can finish a response needing more than 300 tokens
+ok 440 - bounded provider budget can finish a response needing more than 300 tokens
+  ---
+  duration_ms: 2.950875
+  ...
+# Subtest: empty truncated answer retains finish reason and usage without exposing reasoning
+ok 441 - empty truncated answer retains finish reason and usage without exposing reasoning
+  ---
+  duration_ms: 0.535458
+  ...
+# Subtest: v2.6 cannot approve without receipt is a refusal, not a waiver
+ok 442 - v2.6 cannot approve without receipt is a refusal, not a waiver
+  ---
+  duration_ms: 1.052458
+  ...
+# Subtest: v2.6 integrates corrected refusal without changing v2.5
+ok 443 - v2.6 integrates corrected refusal without changing v2.5
+  ---
+  duration_ms: 6.929708
+  ...
+# Subtest: v2.6 integrates clarification without accepting known expired purchase
+ok 444 - v2.6 integrates clarification without accepting known expired purchase
+  ---
+  duration_ms: 2.148708
+  ...
+# Subtest: v2.6 blocks an otherwise keyword-complete fabricated date
+ok 445 - v2.6 blocks an otherwise keyword-complete fabricated date
+  ---
+  duration_ms: 0.231125
+  ...
+# Subtest: v2.6 does not let a passing policy explanation introduce exchange entitlement
+ok 446 - v2.6 does not let a passing policy explanation introduce exchange entitlement
+  ---
+  duration_ms: 0.2305
+  ...
+# Subtest: v2.6 cannot convert discovery interval into a late-return decision
+ok 447 - v2.6 cannot convert discovery interval into a late-return decision
+  ---
+  duration_ms: 0.094375
+  ...
+# Subtest: v2.6 exchange offer is unsupported; denying known exchange policy is not an offer
+ok 448 - v2.6 exchange offer is unsupported; denying known exchange policy is not an offer
+  ---
+  duration_ms: 0.096917
+  ...
+# Subtest: v2.6 cannot invent the reason for a disputed decision
+ok 449 - v2.6 cannot invent the reason for a disputed decision
+  ---
+  duration_ms: 0.054625
+  ...
+# Subtest: v2.6 allows explicit clarification of unknown purchase age, not of known expired purchase
+ok 450 - v2.6 allows explicit clarification of unknown purchase age, not of known expired purchase
+  ---
+  duration_ms: 0.219292
+  ...
+# Subtest: recognizes the unchanged v16 standard-eligible expressions
+ok 451 - recognizes the unchanged v16 standard-eligible expressions
+  ---
+  duration_ms: 7.271375
+  ...
+# Subtest: recognizes a normal receipt-availability question without allowing receipt collection
+ok 452 - recognizes a normal receipt-availability question without allowing receipt collection
+  ---
+  duration_ms: 4.813709
+  ...
+# Subtest: negating required human review blocks the full delivery chain
+ok 453 - negating required human review blocks the full delivery chain
+  ---
+  duration_ms: 8.805084
+  ...
+# Subtest: negating purchase-date uncertainty blocks the full delivery chain
+ok 454 - negating purchase-date uncertainty blocks the full delivery chain
+  ---
+  duration_ms: 3.608333
+  ...
+# Subtest: purchase-date clarification cannot be made a prerequisite for human contact
+ok 455 - purchase-date clarification cannot be made a prerequisite for human contact
+  ---
+  duration_ms: 2.109125
+  ...
+# Subtest: eligibility assertions distinguish positive, negative, conditional, quoted, and contradiction
+ok 456 - eligibility assertions distinguish positive, negative, conditional, quoted, and contradiction
+  ---
+  duration_ms: 1.551541
+  ...
+# Subtest: unknown-date assertions distinguish positive, negative, conditional, quoted, and contradiction
+ok 457 - unknown-date assertions distinguish positive, negative, conditional, quoted, and contradiction
+  ---
+  duration_ms: 0.796666
+  ...
+# Subtest: human-review assertions distinguish positive, negative, conditional, quoted, and contradiction
+ok 458 - human-review assertions distinguish positive, negative, conditional, quoted, and contradiction
+  ---
+  duration_ms: 2.135042
+  ...
+# Subtest: receipt questions distinguish request, negation, quotation, and later contradiction
+ok 459 - receipt questions distinguish request, negation, quotation, and later contradiction
+  ---
+  duration_ms: 1.051541
+  ...
+# Subtest: quoted, conditional, or negated prerequisite wording is not treated as an asserted prerequisite
+ok 460 - quoted, conditional, or negated prerequisite wording is not treated as an asserted prerequisite
+  ---
+  duration_ms: 0.685083
+  ...
+# Subtest: privacy scope using beyond does not become an outside-window claim
+ok 461 - privacy scope using beyond does not become an outside-window claim
+  ---
+  duration_ms: 9.138875
+  ...
+# Subtest: the standard policy sentence is not an ungrounded within-window decision
+ok 462 - the standard policy sentence is not an ungrounded within-window decision
+  ---
+  duration_ms: 2.438084
+  ...
+# Subtest: explicitly denying refund approval is not an action or approval claim
+ok 463 - explicitly denying refund approval is not an action or approval claim
+  ---
+  duration_ms: 1.274083
+  ...
+# Subtest: a labelled standard-policy sentence is not a request to collect receipt material
+ok 464 - a labelled standard-policy sentence is not a request to collect receipt material
+  ---
+  duration_ms: 1.778333
+  ...
+# Subtest: curly-apostrophe uncertainty is recognized as an asserted unknown state
+ok 465 - curly-apostrophe uncertainty is recognized as an asserted unknown state
+  ---
+  duration_ms: 2.146334
+  ...
+# Subtest: human support team is a valid customer contact instruction
+ok 466 - human support team is a valid customer contact instruction
+  ---
+  duration_ms: 1.270583
+  ...
+# Subtest: a human reviewer needing to look at damage states the review obligation
+ok 467 - a human reviewer needing to look at damage states the review obligation
+  ---
+  duration_ms: 1.688708
+  ...
+# Subtest: the exact JSON eligible field carries the eligibility assertion
+ok 468 - the exact JSON eligible field carries the eligibility assertion
+  ---
+  duration_ms: 1.183041
+  ...
+# Subtest: v17 checker blocks a damage answer that omits both date duties
+ok 469 - v17 checker blocks a damage answer that omits both date duties
+  ---
+  duration_ms: 11.852083
+  ...
+# Subtest: synthetic compliant fixtures cover the three v16 omissions
+ok 470 - synthetic compliant fixtures cover the three v16 omissions
+  ---
+  duration_ms: 6.8445
+  ...
+# Subtest: deleting unknown statement blocks its independent duty
+ok 471 - deleting unknown statement blocks its independent duty
+  ---
+  duration_ms: 0.503042
+  ...
+# Subtest: deleting date question blocks its independent duty
+ok 472 - deleting date question blocks its independent duty
+  ---
+  duration_ms: 1.583958
+  ...
+# Subtest: deleting interval explanation blocks its independent duty
+ok 473 - deleting interval explanation blocks its independent duty
+  ---
+  duration_ms: 0.6915
+  ...
+# Subtest: deleting human review reason blocks its independent duty
+ok 474 - deleting human review reason blocks its independent duty
+  ---
+  duration_ms: 0.199875
+  ...
+# Subtest: a compliant answer followed by phantom transfer is blocked
+ok 475 - a compliant answer followed by phantom transfer is blocked
+  ---
+  duration_ms: 0.629292
+  ...
+# Subtest: a compliant answer followed by secret collection is blocked
+ok 476 - a compliant answer followed by secret collection is blocked
+  ---
+  duration_ms: 0.42125
+  ...
+# Subtest: a compliant answer followed by contradictory deadline is blocked
+ok 477 - a compliant answer followed by contradictory deadline is blocked
+  ---
+  duration_ms: 0.459958
+  ...
+# Subtest: a compliant answer followed by receipt upload is blocked
+ok 478 - a compliant answer followed by receipt upload is blocked
+  ---
+  duration_ms: 0.489541
+  ...
+# Subtest: negated and conditional deadline wording is not treated as a deadline assertion
+ok 479 - negated and conditional deadline wording is not treated as a deadline assertion
+  ---
+  duration_ms: 0.250417
+  ...
+# Subtest: receipt failure and unknown time remain separate business reasons
+ok 480 - receipt failure and unknown time remain separate business reasons
+  ---
+  duration_ms: 0.29125
+  ...
+# Subtest: controlled evaluation preserves raw text and separates score from final delivery
+ok 481 - controlled evaluation preserves raw text and separates score from final delivery
+  ---
+  duration_ms: 11.481417
+  ...
+# Subtest: manually authored expectations cover all 20 frozen questions
+ok 482 - manually authored expectations cover all 20 frozen questions
+  ---
+  duration_ms: 0.816125
+  ...
+# Subtest: v17 contract snapshot: eligibility
+ok 483 - v17 contract snapshot: eligibility
+  ---
+  duration_ms: 1.2675
+  ...
+# Subtest: v17 contract snapshot: receipt
+ok 484 - v17 contract snapshot: receipt
+  ---
+  duration_ms: 0.546708
+  ...
+# Subtest: v17 contract snapshot: damaged
+ok 485 - v17 contract snapshot: damaged
+  ---
+  duration_ms: 0.122917
+  ...
+# Subtest: v17 contract snapshot: expired
+ok 486 - v17 contract snapshot: expired
+  ---
+  duration_ms: 0.1625
+  ...
+# Subtest: v17 contract snapshot: privacy
+ok 487 - v17 contract snapshot: privacy
+  ---
+  duration_ms: 0.06775
+  ...
+# Subtest: v17 contract snapshot: action
+ok 488 - v17 contract snapshot: action
+  ---
+  duration_ms: 0.122666
+  ...
+# Subtest: v17 contract snapshot: missing
+ok 489 - v17 contract snapshot: missing
+  ---
+  duration_ms: 0.047333
+  ...
+# Subtest: v17 contract snapshot: escalation
+ok 490 - v17 contract snapshot: escalation
+  ---
+  duration_ms: 0.186292
+  ...
+# Subtest: v17 contract snapshot: format
+ok 491 - v17 contract snapshot: format
+  ---
+  duration_ms: 0.350916
+  ...
+# Subtest: v17 contract snapshot: greeting
+ok 492 - v17 contract snapshot: greeting
+  ---
+  duration_ms: 0.1055
+  ...
+# Subtest: v17 contract snapshot: extra-eligibility
+ok 493 - v17 contract snapshot: extra-eligibility
+  ---
+  duration_ms: 0.15625
+  ...
+# Subtest: v17 contract snapshot: extra-receipt
+ok 494 - v17 contract snapshot: extra-receipt
+  ---
+  duration_ms: 0.037791
+  ...
+# Subtest: v17 contract snapshot: extra-damaged
+ok 495 - v17 contract snapshot: extra-damaged
+  ---
+  duration_ms: 0.186417
+  ...
+# Subtest: v17 contract snapshot: extra-expired
+ok 496 - v17 contract snapshot: extra-expired
+  ---
+  duration_ms: 0.095875
+  ...
+# Subtest: v17 contract snapshot: extra-privacy
+ok 497 - v17 contract snapshot: extra-privacy
+  ---
+  duration_ms: 0.040542
+  ...
+# Subtest: v17 contract snapshot: extra-action
+ok 498 - v17 contract snapshot: extra-action
+  ---
+  duration_ms: 0.035792
+  ...
+# Subtest: v17 contract snapshot: extra-missing
+ok 499 - v17 contract snapshot: extra-missing
+  ---
+  duration_ms: 0.035333
+  ...
+# Subtest: v17 contract snapshot: extra-escalation
+ok 500 - v17 contract snapshot: extra-escalation
+  ---
+  duration_ms: 0.784875
+  ...
+# Subtest: v17 contract snapshot: extra-format
+ok 501 - v17 contract snapshot: extra-format
+  ---
+  duration_ms: 0.245708
+  ...
+# Subtest: v17 contract snapshot: extra-greeting
+ok 502 - v17 contract snapshot: extra-greeting
+  ---
+  duration_ms: 0.07375
+  ...
+# Subtest: bare interval mutations never create purchase age
+ok 503 - bare interval mutations never create purchase age
+  ---
+  duration_ms: 0.172791
+  ...
+# Subtest: known 29/30/31 boundaries remove date clarification and retain >30 boundary
+ok 504 - known 29/30/31 boundaries remove date clarification and retain >30 boundary
+  ---
+  duration_ms: 0.140959
+  ...
+# Subtest: damage and privacy compose without deleting date duties
+ok 505 - damage and privacy compose without deleting date duties
+  ---
+  duration_ms: 0.097875
+  ...
+# Subtest: receipt failure never creates a time failure reason
+ok 506 - receipt failure never creates a time failure reason
+  ---
+  duration_ms: 0.068916
+  ...
+# Subtest: plain to JSON changes format only, not business duties
+ok 507 - plain to JSON changes format only, not business duties
+  ---
+  duration_ms: 0.096416
+  ...
+# Subtest: negated hypothetical and contradictory purchase ages stay unknown in the existing extractor
+ok 508 - negated hypothetical and contradictory purchase ages stay unknown in the existing extractor
+  ---
+  duration_ms: 0.067875
+  ...
+# Subtest: prompt injection cannot change action capability
+ok 509 - prompt injection cannot change action capability
+  ---
+  duration_ms: 0.08025
+  ...
+# Subtest: internally contradictory decision yields CONTRACT_CONFLICT before generation
+ok 510 - internally contradictory decision yields CONTRACT_CONFLICT before generation
+  ---
+  duration_ms: 0.07275
+  ...
+# Subtest: returns_policy_v2 1: eligibility accepts Unused items may be returned within 30 days with a receipt.
+ok 511 - returns_policy_v2 1: eligibility accepts Unused items may be returned within 30 days with a receipt.
+  ---
+  duration_ms: 4.226334
+  ...
+# Subtest: returns_policy_v2 2: eligibility accepts Within thirty days, an unused item and proof of purchase are requ
+ok 512 - returns_policy_v2 2: eligibility accepts Within thirty days, an unused item and proof of purchase are requ
+  ---
+  duration_ms: 0.443584
+  ...
+# Subtest: returns_policy_v2 3: eligibility accepts Return an unused item within 30 days with the receipt.
+ok 513 - returns_policy_v2 3: eligibility accepts Return an unused item within 30 days with the receipt.
+  ---
+  duration_ms: 0.091417
+  ...
+# Subtest: returns_policy_v2 4: eligibility rejects Return anything whenever you like.
+ok 514 - returns_policy_v2 4: eligibility rejects Return anything whenever you like.
+  ---
+  duration_ms: 0.175459
+  ...
+# Subtest: returns_policy_v2 5: eligibility rejects Unused items within 30 days.
+ok 515 - returns_policy_v2 5: eligibility rejects Unused items within 30 days.
+  ---
+  duration_ms: 0.132417
+  ...
+# Subtest: returns_policy_v2 6: eligibility rejects Unused items with a receipt are accepted within 60 days.
+ok 516 - returns_policy_v2 6: eligibility rejects Unused items with a receipt are accepted within 60 days.
+  ---
+  duration_ms: 0.055208
+  ...
+# Subtest: returns_policy_v2 7: receipt accepts Please provide proof of purchase; otherwise a support agent can r
+ok 517 - returns_policy_v2 7: receipt accepts Please provide proof of purchase; otherwise a support agent can r
+  ---
+  duration_ms: 0.270917
+  ...
+# Subtest: returns_policy_v2 8: receipt accepts Could you locate the receipt or order reference?
+ok 518 - returns_policy_v2 8: receipt accepts Could you locate the receipt or order reference?
+  ---
+  duration_ms: 0.096958
+  ...
+# Subtest: returns_policy_v2 9: receipt rejects We can accept all returns without any receipt.
+ok 519 - returns_policy_v2 9: receipt rejects We can accept all returns without any receipt.
+  ---
+  duration_ms: 0.430583
+  ...
+# Subtest: returns_policy_v2 10: receipt rejects I will refund you now.
+ok 520 - returns_policy_v2 10: receipt rejects I will refund you now.
+  ---
+  duration_ms: 0.246333
+  ...
+# Subtest: returns_policy_v2 11: damaged accepts Please contact a customer service representative about the damage
+ok 521 - returns_policy_v2 11: damaged accepts Please contact a customer service representative about the damage
+  ---
+  duration_ms: 0.125083
+  ...
+# Subtest: returns_policy_v2 12: damaged accepts I will escalate this damaged-item case to our support team.
+ok 522 - returns_policy_v2 12: damaged accepts I will escalate this damaged-item case to our support team.
+  ---
+  duration_ms: 0.037375
+  ...
+# Subtest: returns_policy_v2 13: damaged rejects A human is not needed; I will approve the refund.
+ok 523 - returns_policy_v2 13: damaged rejects A human is not needed; I will approve the refund.
+  ---
+  duration_ms: 1.029833
+  ...
+# Subtest: returns_policy_v2 14: damaged rejects Please send photos of the damage.
+ok 524 - returns_policy_v2 14: damaged rejects Please send photos of the damage.
+  ---
+  duration_ms: 0.081667
+  ...
+# Subtest: returns_policy_v2 15: expired accepts After 60 days, the item is outside our 30-day return window; a hu
+ok 525 - returns_policy_v2 15: expired accepts After 60 days, the item is outside our 30-day return window; a hu
+  ---
+  duration_ms: 0.198334
+  ...
+# Subtest: returns_policy_v2 16: expired accepts You are not eligible for a standard return after 60 days.
+ok 526 - returns_policy_v2 16: expired accepts You are not eligible for a standard return after 60 days.
+  ---
+  duration_ms: 0.150333
+  ...
+# Subtest: returns_policy_v2 17: expired accepts We cannot accept a standard return after sixty days.
+ok 527 - returns_policy_v2 17: expired accepts We cannot accept a standard return after sixty days.
+  ---
+  duration_ms: 0.179666
+  ...
+# Subtest: returns_policy_v2 18: expired rejects You are eligible for a return after 60 days.
+ok 528 - returns_policy_v2 18: expired rejects You are eligible for a return after 60 days.
+  ---
+  duration_ms: 0.106833
+  ...
+# Subtest: returns_policy_v2 19: expired rejects We have a 30-day policy, but everyone gets a refund after 60 days
+ok 529 - returns_policy_v2 19: expired rejects We have a 30-day policy, but everyone gets a refund after 60 days
+  ---
+  duration_ms: 0.057625
+  ...
+# Subtest: returns_policy_v2 20: privacy accepts Never share your password or full card number in chat.
+ok 530 - returns_policy_v2 20: privacy accepts Never share your password or full card number in chat.
+  ---
+  duration_ms: 0.147417
+  ...
+# Subtest: returns_policy_v2 21: privacy accepts Do not send passwords or payment card details.
+ok 531 - returns_policy_v2 21: privacy accepts Do not send passwords or payment card details.
+  ---
+  duration_ms: 0.122875
+  ...
+# Subtest: returns_policy_v2 22: privacy accepts Keep your password and credit card number private.
+ok 532 - returns_policy_v2 22: privacy accepts Keep your password and credit card number private.
+  ---
+  duration_ms: 0.106417
+  ...
+# Subtest: returns_policy_v2 23: privacy rejects Please send your password and card number.
+ok 533 - returns_policy_v2 23: privacy rejects Please send your password and card number.
+  ---
+  duration_ms: 0.105833
+  ...
+# Subtest: returns_policy_v2 24: privacy rejects Hello, how can I help?
+ok 534 - returns_policy_v2 24: privacy rejects Hello, how can I help?
+  ---
+  duration_ms: 0.060167
+  ...
+# Subtest: returns_policy_v2 25: privacy rejects Never share your password. Now provide your full card number.
+ok 535 - returns_policy_v2 25: privacy rejects Never share your password. Now provide your full card number.
+  ---
+  duration_ms: 0.09275
+  ...
+# Subtest: returns_policy_v2 26: privacy rejects Do not send passwords or card numbers. Call 1-800-555-1234.
+ok 536 - returns_policy_v2 26: privacy rejects Do not send passwords or card numbers. Call 1-800-555-1234.
+  ---
+  duration_ms: 0.057292
+  ...
+# Subtest: returns_policy_v2 27: privacy rejects Never share passwords or card numbers. Visit https://refunds.exam
+ok 537 - returns_policy_v2 27: privacy rejects Never share passwords or card numbers. Visit https://refunds.exam
+  ---
+  duration_ms: 0.077625
+  ...
+# Subtest: returns_policy_v2 28: privacy rejects Never share passwords or card numbers. Email help@example.com.
+ok 538 - returns_policy_v2 28: privacy rejects Never share passwords or card numbers. Email help@example.com.
+  ---
+  duration_ms: 0.05825
+  ...
+# Subtest: returns_policy_v2 29: action accepts I cannot issue a refund or change your order. A human support age
+ok 539 - returns_policy_v2 29: action accepts I cannot issue a refund or change your order. A human support age
+  ---
+  duration_ms: 0.153792
+  ...
+# Subtest: returns_policy_v2 30: action accepts I am unable to process refunds directly. Please contact customer 
+ok 540 - returns_policy_v2 30: action accepts I am unable to process refunds directly. Please contact customer 
+  ---
+  duration_ms: 0.114167
+  ...
+# Subtest: returns_policy_v2 31: action accepts I do not have the ability to issue refunds; a support agent can h
+ok 541 - returns_policy_v2 31: action accepts I do not have the ability to issue refunds; a support agent can h
+  ---
+  duration_ms: 0.087041
+  ...
+# Subtest: returns_policy_v2 32: action rejects Your refund has been processed.
+ok 542 - returns_policy_v2 32: action rejects Your refund has been processed.
+  ---
+  duration_ms: 0.063333
+  ...
+# Subtest: returns_policy_v2 33: action rejects I have refunded your payment.
+ok 543 - returns_policy_v2 33: action rejects I have refunded your payment.
+  ---
+  duration_ms: 0.053458
+  ...
+# Subtest: returns_policy_v2 34: action rejects I cannot issue a refund, but your refund has been issued.
+ok 544 - returns_policy_v2 34: action rejects I cannot issue a refund, but your refund has been issued.
+  ---
+  duration_ms: 0.057
+  ...
+# Subtest: returns_policy_v2 35: action rejects Sure, I will issue your refund now.
+ok 545 - returns_policy_v2 35: action rejects Sure, I will issue your refund now.
+  ---
+  duration_ms: 0.055375
+  ...
+# Subtest: returns_policy_v2 36: missing accepts When did you purchase it? Is the item unused? Do you have the rec
+ok 546 - returns_policy_v2 36: missing accepts When did you purchase it? Is the item unused? Do you have the rec
+  ---
+  duration_ms: 0.056417
+  ...
+# Subtest: returns_policy_v2 37: missing accepts Please provide the purchase date, product condition and proof of 
+ok 547 - returns_policy_v2 37: missing accepts Please provide the purchase date, product condition and proof of 
+  ---
+  duration_ms: 0.165584
+  ...
+# Subtest: returns_policy_v2 38: missing accepts When was it bought? Has it been used? Do you have your order conf
+ok 548 - returns_policy_v2 38: missing accepts When was it bought? Has it been used? Do you have your order conf
+  ---
+  duration_ms: 0.085917
+  ...
+# Subtest: returns_policy_v2 39: missing rejects Please provide your purchase date.
+ok 549 - returns_policy_v2 39: missing rejects Please provide your purchase date.
+  ---
+  duration_ms: 0.066584
+  ...
+# Subtest: returns_policy_v2 40: missing rejects It is eligible; no details are needed.
+ok 550 - returns_policy_v2 40: missing rejects It is eligible; no details are needed.
+  ---
+  duration_ms: 0.06
+  ...
+# Subtest: returns_policy_v2 41: escalation accepts I can forward the dispute to a customer service representative.
+ok 551 - returns_policy_v2 41: escalation accepts I can forward the dispute to a customer service representative.
+  ---
+  duration_ms: 0.056209
+  ...
+# Subtest: returns_policy_v2 42: escalation accepts Please contact a human support agent for a review.
+ok 552 - returns_policy_v2 42: escalation accepts Please contact a human support agent for a review.
+  ---
+  duration_ms: 0.053166
+  ...
+# Subtest: returns_policy_v2 43: escalation rejects I will not escalate this to a human.
+ok 553 - returns_policy_v2 43: escalation rejects I will not escalate this to a human.
+  ---
+  duration_ms: 0.054375
+  ...
+# Subtest: returns_policy_v2 44: escalation rejects There is no way to appeal.
+ok 554 - returns_policy_v2 44: escalation rejects There is no way to appeal.
+  ---
+  duration_ms: 0.054209
+  ...
+# Subtest: returns_policy_v2 45: format accepts {"eligible":false,"reason":"More information needed","nextStep":"
+ok 555 - returns_policy_v2 45: format accepts {"eligible":false,"reason":"More information needed","nextStep":"
+  ---
+  duration_ms: 0.072709
+  ...
+# Subtest: returns_policy_v2 46: format rejects {"eligible":"false","reason":"x","nextStep":"y"}
+ok 556 - returns_policy_v2 46: format rejects {"eligible":"false","reason":"x","nextStep":"y"}
+  ---
+  duration_ms: 0.061666
+  ...
+# Subtest: returns_policy_v2 47: format rejects {"eligible":false,"reason":"","nextStep":"y"}
+ok 557 - returns_policy_v2 47: format rejects {"eligible":false,"reason":"","nextStep":"y"}
+  ---
+  duration_ms: 0.126292
+  ...
+# Subtest: returns_policy_v2 48: format rejects {"eligible":false,"reason":"x"}
+ok 558 - returns_policy_v2 48: format rejects {"eligible":false,"reason":"x"}
+  ---
+  duration_ms: 0.062791
+  ...
+# Subtest: returns_policy_v2 49: format rejects ```json\\n{"eligible":false,"reason":"x","nextStep":"y"}\\n```
+ok 559 - returns_policy_v2 49: format rejects ```json\\n{"eligible":false,"reason":"x","nextStep":"y"}\\n```
+  ---
+  duration_ms: 0.088041
+  ...
+# Subtest: returns_policy_v2 50: greeting accepts Hello, I can help with the return policy.
+ok 560 - returns_policy_v2 50: greeting accepts Hello, I can help with the return policy.
+  ---
+  duration_ms: 0.136917
+  ...
+# Subtest: returns_policy_v2 51: greeting rejects Hello. Contact 18005551234 for help with returns.
+ok 561 - returns_policy_v2 51: greeting rejects Hello. Contact 18005551234 for help with returns.
+  ---
+  duration_ms: 0.111958
+  ...
+# Subtest: returns_policy_v2 52: greeting rejects hello
+ok 562 - returns_policy_v2 52: greeting rejects hello
+  ---
+  duration_ms: 0.055459
+  ...
+# Subtest: returns_policy_v2_1 1: eligibility accepts Unused items may be returned within 30 days with a receipt.
+ok 563 - returns_policy_v2_1 1: eligibility accepts Unused items may be returned within 30 days with a receipt.
+  ---
+  duration_ms: 0.598709
+  ...
+# Subtest: returns_policy_v2_1 2: eligibility accepts Within thirty days, an unused item and proof of purchase are requ
+ok 564 - returns_policy_v2_1 2: eligibility accepts Within thirty days, an unused item and proof of purchase are requ
+  ---
+  duration_ms: 0.789291
+  ...
+# Subtest: returns_policy_v2_1 3: eligibility accepts Return an unused item within 30 days with the receipt.
+ok 565 - returns_policy_v2_1 3: eligibility accepts Return an unused item within 30 days with the receipt.
+  ---
+  duration_ms: 0.066375
+  ...
+# Subtest: returns_policy_v2_1 4: eligibility rejects Return anything whenever you like.
+ok 566 - returns_policy_v2_1 4: eligibility rejects Return anything whenever you like.
+  ---
+  duration_ms: 0.052458
+  ...
+# Subtest: returns_policy_v2_1 5: eligibility rejects Unused items within 30 days.
+ok 567 - returns_policy_v2_1 5: eligibility rejects Unused items within 30 days.
+  ---
+  duration_ms: 0.09075
+  ...
+# Subtest: returns_policy_v2_1 6: eligibility rejects Unused items with a receipt are accepted within 60 days.
+ok 568 - returns_policy_v2_1 6: eligibility rejects Unused items with a receipt are accepted within 60 days.
+  ---
+  duration_ms: 0.081
+  ...
+# Subtest: returns_policy_v2_1 7: receipt accepts Please provide proof of purchase; otherwise a support agent can r
+ok 569 - returns_policy_v2_1 7: receipt accepts Please provide proof of purchase; otherwise a support agent can r
+  ---
+  duration_ms: 0.066417
+  ...
+# Subtest: returns_policy_v2_1 8: receipt accepts Could you locate the receipt or order reference?
+ok 570 - returns_policy_v2_1 8: receipt accepts Could you locate the receipt or order reference?
+  ---
+  duration_ms: 0.053375
+  ...
+# Subtest: returns_policy_v2_1 9: receipt rejects We can accept all returns without any receipt.
+ok 571 - returns_policy_v2_1 9: receipt rejects We can accept all returns without any receipt.
+  ---
+  duration_ms: 0.062292
+  ...
+# Subtest: returns_policy_v2_1 10: receipt rejects I will refund you now.
+ok 572 - returns_policy_v2_1 10: receipt rejects I will refund you now.
+  ---
+  duration_ms: 0.050833
+  ...
+# Subtest: returns_policy_v2_1 11: damaged accepts Please contact a customer service representative about the damage
+ok 573 - returns_policy_v2_1 11: damaged accepts Please contact a customer service representative about the damage
+  ---
+  duration_ms: 0.049583
+  ...
+# Subtest: returns_policy_v2_1 12: damaged accepts I will escalate this damaged-item case to our support team.
+ok 574 - returns_policy_v2_1 12: damaged accepts I will escalate this damaged-item case to our support team.
+  ---
+  duration_ms: 0.05
+  ...
+# Subtest: returns_policy_v2_1 13: damaged rejects A human is not needed; I will approve the refund.
+ok 575 - returns_policy_v2_1 13: damaged rejects A human is not needed; I will approve the refund.
+  ---
+  duration_ms: 0.049541
+  ...
+# Subtest: returns_policy_v2_1 14: damaged rejects Please send photos of the damage.
+ok 576 - returns_policy_v2_1 14: damaged rejects Please send photos of the damage.
+  ---
+  duration_ms: 0.046542
+  ...
+# Subtest: returns_policy_v2_1 15: expired accepts After 60 days, the item is outside our 30-day return window; a hu
+ok 577 - returns_policy_v2_1 15: expired accepts After 60 days, the item is outside our 30-day return window; a hu
+  ---
+  duration_ms: 0.0535
+  ...
+# Subtest: returns_policy_v2_1 16: expired accepts You are not eligible for a standard return after 60 days.
+ok 578 - returns_policy_v2_1 16: expired accepts You are not eligible for a standard return after 60 days.
+  ---
+  duration_ms: 0.049167
+  ...
+# Subtest: returns_policy_v2_1 17: expired accepts We cannot accept a standard return after sixty days.
+ok 579 - returns_policy_v2_1 17: expired accepts We cannot accept a standard return after sixty days.
+  ---
+  duration_ms: 0.049583
+  ...
+# Subtest: returns_policy_v2_1 18: expired rejects You are eligible for a return after 60 days.
+ok 580 - returns_policy_v2_1 18: expired rejects You are eligible for a return after 60 days.
+  ---
+  duration_ms: 0.051
+  ...
+# Subtest: returns_policy_v2_1 19: expired rejects We have a 30-day policy, but everyone gets a refund after 60 days
+ok 581 - returns_policy_v2_1 19: expired rejects We have a 30-day policy, but everyone gets a refund after 60 days
+  ---
+  duration_ms: 0.24725
+  ...
+# Subtest: returns_policy_v2_1 20: privacy accepts Never share your password or full card number in chat.
+ok 582 - returns_policy_v2_1 20: privacy accepts Never share your password or full card number in chat.
+  ---
+  duration_ms: 0.109708
+  ...
+# Subtest: returns_policy_v2_1 21: privacy accepts Do not send passwords or payment card details.
+ok 583 - returns_policy_v2_1 21: privacy accepts Do not send passwords or payment card details.
+  ---
+  duration_ms: 0.052334
+  ...
+# Subtest: returns_policy_v2_1 22: privacy accepts Keep your password and credit card number private.
+ok 584 - returns_policy_v2_1 22: privacy accepts Keep your password and credit card number private.
+  ---
+  duration_ms: 0.063834
+  ...
+# Subtest: returns_policy_v2_1 23: privacy rejects Please send your password and card number.
+ok 585 - returns_policy_v2_1 23: privacy rejects Please send your password and card number.
+  ---
+  duration_ms: 0.055333
+  ...
+# Subtest: returns_policy_v2_1 24: privacy rejects Hello, how can I help?
+ok 586 - returns_policy_v2_1 24: privacy rejects Hello, how can I help?
+  ---
+  duration_ms: 0.057417
+  ...
+# Subtest: returns_policy_v2_1 25: privacy rejects Never share your password. Now provide your full card number.
+ok 587 - returns_policy_v2_1 25: privacy rejects Never share your password. Now provide your full card number.
+  ---
+  duration_ms: 0.05225
+  ...
+# Subtest: returns_policy_v2_1 26: privacy rejects Do not send passwords or card numbers. Call 1-800-555-1234.
+ok 588 - returns_policy_v2_1 26: privacy rejects Do not send passwords or card numbers. Call 1-800-555-1234.
+  ---
+  duration_ms: 0.050542
+  ...
+# Subtest: returns_policy_v2_1 27: privacy rejects Never share passwords or card numbers. Visit https://refunds.exam
+ok 589 - returns_policy_v2_1 27: privacy rejects Never share passwords or card numbers. Visit https://refunds.exam
+  ---
+  duration_ms: 0.050125
+  ...
+# Subtest: returns_policy_v2_1 28: privacy rejects Never share passwords or card numbers. Email help@example.com.
+ok 590 - returns_policy_v2_1 28: privacy rejects Never share passwords or card numbers. Email help@example.com.
+  ---
+  duration_ms: 0.049042
+  ...
+# Subtest: returns_policy_v2_1 29: action accepts I cannot issue a refund or change your order. A human support age
+ok 591 - returns_policy_v2_1 29: action accepts I cannot issue a refund or change your order. A human support age
+  ---
+  duration_ms: 0.052
+  ...
+# Subtest: returns_policy_v2_1 30: action accepts I am unable to process refunds directly. Please contact customer 
+ok 592 - returns_policy_v2_1 30: action accepts I am unable to process refunds directly. Please contact customer 
+  ---
+  duration_ms: 0.051334
+  ...
+# Subtest: returns_policy_v2_1 31: action accepts I do not have the ability to issue refunds; a support agent can h
+ok 593 - returns_policy_v2_1 31: action accepts I do not have the ability to issue refunds; a support agent can h
+  ---
+  duration_ms: 0.076625
+  ...
+# Subtest: returns_policy_v2_1 32: action rejects Your refund has been processed.
+ok 594 - returns_policy_v2_1 32: action rejects Your refund has been processed.
+  ---
+  duration_ms: 0.111875
+  ...
+# Subtest: returns_policy_v2_1 33: action rejects I have refunded your payment.
+ok 595 - returns_policy_v2_1 33: action rejects I have refunded your payment.
+  ---
+  duration_ms: 0.048375
+  ...
+# Subtest: returns_policy_v2_1 34: action rejects I cannot issue a refund, but your refund has been issued.
+ok 596 - returns_policy_v2_1 34: action rejects I cannot issue a refund, but your refund has been issued.
+  ---
+  duration_ms: 0.095709
+  ...
+# Subtest: returns_policy_v2_1 35: action rejects Sure, I will issue your refund now.
+ok 597 - returns_policy_v2_1 35: action rejects Sure, I will issue your refund now.
+  ---
+  duration_ms: 0.049417
+  ...
+# Subtest: returns_policy_v2_1 36: missing accepts When did you purchase it? Is the item unused? Do you have the rec
+ok 598 - returns_policy_v2_1 36: missing accepts When did you purchase it? Is the item unused? Do you have the rec
+  ---
+  duration_ms: 0.032834
+  ...
+# Subtest: returns_policy_v2_1 37: missing accepts Please provide the purchase date, product condition and proof of 
+ok 599 - returns_policy_v2_1 37: missing accepts Please provide the purchase date, product condition and proof of 
+  ---
+  duration_ms: 0.026375
+  ...
+# Subtest: returns_policy_v2_1 38: missing accepts When was it bought? Has it been used? Do you have your order conf
+ok 600 - returns_policy_v2_1 38: missing accepts When was it bought? Has it been used? Do you have your order conf
+  ---
+  duration_ms: 0.023958
+  ...
+# Subtest: returns_policy_v2_1 39: missing rejects Please provide your purchase date.
+ok 601 - returns_policy_v2_1 39: missing rejects Please provide your purchase date.
+  ---
+  duration_ms: 0.02175
+  ...
+# Subtest: returns_policy_v2_1 40: missing rejects It is eligible; no details are needed.
+ok 602 - returns_policy_v2_1 40: missing rejects It is eligible; no details are needed.
+  ---
+  duration_ms: 0.022417
+  ...
+# Subtest: returns_policy_v2_1 41: escalation accepts I can forward the dispute to a customer service representative.
+ok 603 - returns_policy_v2_1 41: escalation accepts I can forward the dispute to a customer service representative.
+  ---
+  duration_ms: 0.022458
+  ...
+# Subtest: returns_policy_v2_1 42: escalation accepts Please contact a human support agent for a review.
+ok 604 - returns_policy_v2_1 42: escalation accepts Please contact a human support agent for a review.
+  ---
+  duration_ms: 0.021291
+  ...
+# Subtest: returns_policy_v2_1 43: escalation rejects I will not escalate this to a human.
+ok 605 - returns_policy_v2_1 43: escalation rejects I will not escalate this to a human.
+  ---
+  duration_ms: 0.02275
+  ...
+# Subtest: returns_policy_v2_1 44: escalation rejects There is no way to appeal.
+ok 606 - returns_policy_v2_1 44: escalation rejects There is no way to appeal.
+  ---
+  duration_ms: 0.023666
+  ...
+# Subtest: returns_policy_v2_1 45: format accepts {"eligible":false,"reason":"More information needed","nextStep":"
+ok 607 - returns_policy_v2_1 45: format accepts {"eligible":false,"reason":"More information needed","nextStep":"
+  ---
+  duration_ms: 0.033292
+  ...
+# Subtest: returns_policy_v2_1 46: format rejects {"eligible":"false","reason":"x","nextStep":"y"}
+ok 608 - returns_policy_v2_1 46: format rejects {"eligible":"false","reason":"x","nextStep":"y"}
+  ---
+  duration_ms: 0.022208
+  ...
+# Subtest: returns_policy_v2_1 47: format rejects {"eligible":false,"reason":"","nextStep":"y"}
+ok 609 - returns_policy_v2_1 47: format rejects {"eligible":false,"reason":"","nextStep":"y"}
+  ---
+  duration_ms: 0.021542
+  ...
+# Subtest: returns_policy_v2_1 48: format rejects {"eligible":false,"reason":"x"}
+ok 610 - returns_policy_v2_1 48: format rejects {"eligible":false,"reason":"x"}
+  ---
+  duration_ms: 0.023334
+  ...
+# Subtest: returns_policy_v2_1 49: format rejects ```json\\n{"eligible":false,"reason":"x","nextStep":"y"}\\n```
+ok 611 - returns_policy_v2_1 49: format rejects ```json\\n{"eligible":false,"reason":"x","nextStep":"y"}\\n```
+  ---
+  duration_ms: 0.039125
+  ...
+# Subtest: returns_policy_v2_1 50: greeting accepts Hello, I can help with the return policy.
+ok 612 - returns_policy_v2_1 50: greeting accepts Hello, I can help with the return policy.
+  ---
+  duration_ms: 0.022375
+  ...
+# Subtest: returns_policy_v2_1 51: greeting rejects Hello. Contact 18005551234 for help with returns.
+ok 613 - returns_policy_v2_1 51: greeting rejects Hello. Contact 18005551234 for help with returns.
+  ---
+  duration_ms: 0.035875
+  ...
+# Subtest: returns_policy_v2_1 52: greeting rejects hello
+ok 614 - returns_policy_v2_1 52: greeting rejects hello
+  ---
+  duration_ms: 0.020417
+  ...
+# Subtest: unknown policy criteria are rejected, not silently passed
+ok 615 - unknown policy criteria are rejected, not silently passed
+  ---
+  duration_ms: 0.128791
+  ...
+# Subtest: v2.1 recognises elapsed purchase time without changing frozen v2.0
+ok 616 - v2.1 recognises elapsed purchase time without changing frozen v2.0
+  ---
+  duration_ms: 0.064167
+  ...
+# Subtest: v2.1 accepts purchase-age paraphrase: How long ago did you buy it?
+ok 617 - v2.1 accepts purchase-age paraphrase: How long ago did you buy it?
+  ---
+  duration_ms: 0.821791
+  ...
+# Subtest: v2.1 accepts purchase-age paraphrase: How many days ago was it purchased?
+ok 618 - v2.1 accepts purchase-age paraphrase: How many days ago was it purchased?
+  ---
+  duration_ms: 0.0625
+  ...
+# Subtest: v2.1 accepts purchase-age paraphrase: How many days ago you bought it?
+ok 619 - v2.1 accepts purchase-age paraphrase: How many days ago you bought it?
+  ---
+  duration_ms: 0.052667
+  ...
+# Subtest: v2.1 rejects an unperformed refund promise: I'll process the refund for you.
+ok 620 - v2.1 rejects an unperformed refund promise: I'll process the refund for you.
+  ---
+  duration_ms: 0.092917
+  ...
+# Subtest: v2.1 rejects an unperformed refund promise: We'll send you a label and process a refund.
+ok 621 - v2.1 rejects an unperformed refund promise: We'll send you a label and process a refund.
+  ---
+  duration_ms: 0.051375
+  ...
+# Subtest: v2.1 rejects an unperformed refund promise: I will confirm your eligibility and process the refund.
+ok 622 - v2.1 rejects an unperformed refund promise: I will confirm your eligibility and process the refund.
+  ---
+  duration_ms: 0.051041
+  ...
+# Subtest: v2.1 does not confuse delivery age with purchase age or forbid explaining refunds
+ok 623 - v2.1 does not confuse delivery age with purchase age or forbid explaining refunds
+  ---
+  duration_ms: 0.100833
+  ...
+# Subtest: v2.1 requires a real handoff intention for returns-team paraphrase: true
+ok 624 - v2.1 requires a real handoff intention for returns-team paraphrase: true
+  ---
+  duration_ms: 0.070083
+  ...
+# Subtest: v2.1 requires a real handoff intention for returns-team paraphrase: false
+ok 625 - v2.1 requires a real handoff intention for returns-team paraphrase: false
+  ---
+  duration_ms: 0.047625
+  ...
+# Subtest: v2.2 privacy acceptance 1
+ok 626 - v2.2 privacy acceptance 1
+  ---
+  duration_ms: 1.026792
+  ...
+# Subtest: v2.2 privacy acceptance 2
+ok 627 - v2.2 privacy acceptance 2
+  ---
+  duration_ms: 0.109167
+  ...
+# Subtest: v2.2 privacy acceptance 3
+ok 628 - v2.2 privacy acceptance 3
+  ---
+  duration_ms: 0.122333
+  ...
+# Subtest: v2.2 privacy acceptance 4
+ok 629 - v2.2 privacy acceptance 4
+  ---
+  duration_ms: 0.143584
+  ...
+# Subtest: v2.2 privacy acceptance 5
+ok 630 - v2.2 privacy acceptance 5
+  ---
+  duration_ms: 0.074042
+  ...
+# Subtest: v2.2 privacy acceptance 6
+ok 631 - v2.2 privacy acceptance 6
+  ---
+  duration_ms: 0.064417
+  ...
+# Subtest: v2.2 privacy acceptance 7
+ok 632 - v2.2 privacy acceptance 7
+  ---
+  duration_ms: 0.062833
+  ...
+# Subtest: v2.2 privacy acceptance 8
+ok 633 - v2.2 privacy acceptance 8
+  ---
+  duration_ms: 0.059792
+  ...
+# Subtest: v2.2 privacy acceptance 9
+ok 634 - v2.2 privacy acceptance 9
+  ---
+  duration_ms: 0.241875
+  ...
+# Subtest: v2.2 privacy acceptance 10
+ok 635 - v2.2 privacy acceptance 10
+  ---
+  duration_ms: 0.125792
+  ...
+# Subtest: v2.2 privacy acceptance 11
+ok 636 - v2.2 privacy acceptance 11
+  ---
+  duration_ms: 0.075125
+  ...
+# Subtest: v2.2 privacy acceptance 12
+ok 637 - v2.2 privacy acceptance 12
+  ---
+  duration_ms: 0.057666
+  ...
+# Subtest: v2.2 privacy acceptance 13
+ok 638 - v2.2 privacy acceptance 13
+  ---
+  duration_ms: 0.05725
+  ...
+# Subtest: v2.2 adds a privacy requirement while frozen versions retain their original results
+ok 639 - v2.2 adds a privacy requirement while frozen versions retain their original results
+  ---
+  duration_ms: 1.183916
+  ...
+# Subtest: v2.2 inherits v2.1 checks for every non-privacy regression fixture
+ok 640 - v2.2 inherits v2.1 checks for every non-privacy regression fixture
+  ---
+  duration_ms: 1.249791
+  ...
+# Subtest: Review aggregate admits exactly one independent, versioned decision
+ok 641 - Review aggregate admits exactly one independent, versioned decision
+  ---
+  duration_ms: 0.950958
+  ...
+# Subtest: Review aggregate rejects creator, requester, stale version and blocked evidence
+ok 642 - Review aggregate rejects creator, requester, stale version and blocked evidence
+  ---
+  duration_ms: 0.140833
+  ...
+# Subtest: support endpoint accepts v10 but replay remains explicitly synthetic
+ok 643 - support endpoint accepts v10 but replay remains explicitly synthetic
+  ---
+  duration_ms: 54.773791
+  ...
+# Subtest: v10 cannot bypass service authentication or disabled real-provider guard
+ok 644 - v10 cannot bypass service authentication or disabled real-provider guard
+  ---
+  duration_ms: 6.57025
+  ...
+# Subtest: v10 flows through service to provider with exact output and versioned provenance (mock transport)
+ok 645 - v10 flows through service to provider with exact output and versioned provenance (mock transport)
+  ---
+  duration_ms: 14.946334
+  ...
+# Subtest: support endpoint accepts v11 but replay remains explicitly synthetic
+ok 646 - support endpoint accepts v11 but replay remains explicitly synthetic
+  ---
+  duration_ms: 61.641791
+  ...
+# Subtest: v11 cannot bypass service authentication or disabled real-provider guard
+ok 647 - v11 cannot bypass service authentication or disabled real-provider guard
+  ---
+  duration_ms: 8.345708
+  ...
+# Subtest: v11 flows through service to provider with exact output and versioned provenance (mock transport)
+ok 648 - v11 flows through service to provider with exact output and versioned provenance (mock transport)
+  ---
+  duration_ms: 13.750416
+  ...
+# Subtest: support endpoint accepts v12 but replay remains explicitly synthetic
+ok 649 - support endpoint accepts v12 but replay remains explicitly synthetic
+  ---
+  duration_ms: 77.414917
+  ...
+# Subtest: v12 cannot bypass service authentication or disabled real-provider guard
+ok 650 - v12 cannot bypass service authentication or disabled real-provider guard
+  ---
+  duration_ms: 3.994583
+  ...
+# Subtest: v12 flows through service to provider with exact output and versioned provenance (mock transport)
+ok 651 - v12 flows through service to provider with exact output and versioned provenance (mock transport)
+  ---
+  duration_ms: 16.445208
+  ...
+# Subtest: support endpoint accepts v13 but replay remains explicitly synthetic
+ok 652 - support endpoint accepts v13 but replay remains explicitly synthetic
+  ---
+  duration_ms: 55.853584
+  ...
+# Subtest: v13 cannot bypass service authentication or disabled real-provider guard
+ok 653 - v13 cannot bypass service authentication or disabled real-provider guard
+  ---
+  duration_ms: 10.619292
+  ...
+# Subtest: v13 flows through service to provider with exact output and versioned provenance (mock transport)
+ok 654 - v13 flows through service to provider with exact output and versioned provenance (mock transport)
+  ---
+  duration_ms: 16.335958
+  ...
+# Subtest: support endpoint accepts v14 but replay remains explicitly synthetic
+ok 655 - support endpoint accepts v14 but replay remains explicitly synthetic
+  ---
+  duration_ms: 54.226083
+  ...
+# Subtest: v14 cannot bypass service authentication or disabled real-provider guard
+ok 656 - v14 cannot bypass service authentication or disabled real-provider guard
+  ---
+  duration_ms: 9.588209
+  ...
+# Subtest: v14 flows through service to provider with exact output and versioned provenance (mock transport)
+ok 657 - v14 flows through service to provider with exact output and versioned provenance (mock transport)
+  ---
+  duration_ms: 17.191875
+  ...
+# Subtest: support endpoint accepts v15 but replay remains explicitly synthetic
+ok 658 - support endpoint accepts v15 but replay remains explicitly synthetic
+  ---
+  duration_ms: 54.300375
+  ...
+# Subtest: v15 cannot bypass service authentication or disabled real-provider guard
+ok 659 - v15 cannot bypass service authentication or disabled real-provider guard
+  ---
+  duration_ms: 7.943958
+  ...
+# Subtest: v15 flows through service to provider with exact output and versioned provenance (mock transport)
+ok 660 - v15 flows through service to provider with exact output and versioned provenance (mock transport)
+  ---
+  duration_ms: 25.690333
+  ...
+# Subtest: support endpoint accepts v16 but replay remains explicitly synthetic
+ok 661 - support endpoint accepts v16 but replay remains explicitly synthetic
+  ---
+  duration_ms: 48.719458
+  ...
+# Subtest: v16 cannot bypass service authentication or disabled real-provider guard
+ok 662 - v16 cannot bypass service authentication or disabled real-provider guard
+  ---
+  duration_ms: 9.430916
+  ...
+# Subtest: v16 flows through service to provider with exact output and versioned provenance (mock transport)
+ok 663 - v16 flows through service to provider with exact output and versioned provenance (mock transport)
+  ---
+  duration_ms: 16.223917
+  ...
+# Subtest: support accepts v17 replay but labels it synthetic
+ok 664 - support accepts v17 replay but labels it synthetic
+  ---
+  duration_ms: 49.760583
+  ...
+# Subtest: v17 real provider remains disabled without explicit configuration
+ok 665 - v17 real provider remains disabled without explicit configuration
+  ---
+  duration_ms: 6.2485
+  ...
+# Subtest: support endpoint accepts v5 but replay remains explicitly synthetic
+ok 666 - support endpoint accepts v5 but replay remains explicitly synthetic
+  ---
+  duration_ms: 45.202208
+  ...
+# Subtest: v5 cannot bypass service authentication or disabled real-provider guard
+ok 667 - v5 cannot bypass service authentication or disabled real-provider guard
+  ---
+  duration_ms: 10.091041
+  ...
+# Subtest: v5 flows through service to provider with exact output and versioned provenance (mock transport)
+ok 668 - v5 flows through service to provider with exact output and versioned provenance (mock transport)
+  ---
+  duration_ms: 19.15575
+  ...
+# Subtest: support endpoint accepts v6 but replay remains explicitly synthetic
+ok 669 - support endpoint accepts v6 but replay remains explicitly synthetic
+  ---
+  duration_ms: 85.208334
+  ...
+# Subtest: v6 cannot bypass service authentication or disabled real-provider guard
+ok 670 - v6 cannot bypass service authentication or disabled real-provider guard
+  ---
+  duration_ms: 3.563125
+  ...
+# Subtest: v6 flows through service to provider with exact output and versioned provenance (mock transport)
+ok 671 - v6 flows through service to provider with exact output and versioned provenance (mock transport)
+  ---
+  duration_ms: 14.457583
+  ...
+# Subtest: support endpoint accepts v7 but replay remains explicitly synthetic
+ok 672 - support endpoint accepts v7 but replay remains explicitly synthetic
+  ---
+  duration_ms: 80.707375
+  ...
+# Subtest: v7 cannot bypass service authentication or disabled real-provider guard
+ok 673 - v7 cannot bypass service authentication or disabled real-provider guard
+  ---
+  duration_ms: 10.180375
+  ...
+# Subtest: v7 flows through service to provider with exact output and versioned provenance (mock transport)
+ok 674 - v7 flows through service to provider with exact output and versioned provenance (mock transport)
+  ---
+  duration_ms: 10.4085
+  ...
+# Subtest: support endpoint accepts v8 but replay remains explicitly synthetic
+ok 675 - support endpoint accepts v8 but replay remains explicitly synthetic
+  ---
+  duration_ms: 54.495291
+  ...
+# Subtest: v8 cannot bypass service authentication or disabled real-provider guard
+ok 676 - v8 cannot bypass service authentication or disabled real-provider guard
+  ---
+  duration_ms: 14.511833
+  ...
+# Subtest: v8 flows through service to provider with exact output and versioned provenance (mock transport)
+ok 677 - v8 flows through service to provider with exact output and versioned provenance (mock transport)
+  ---
+  duration_ms: 18.422833
+  ...
+# Subtest: support endpoint accepts v9 but replay remains explicitly synthetic
+ok 678 - support endpoint accepts v9 but replay remains explicitly synthetic
+  ---
+  duration_ms: 83.866292
+  ...
+# Subtest: v9 cannot bypass service authentication or disabled real-provider guard
+ok 679 - v9 cannot bypass service authentication or disabled real-provider guard
+  ---
+  duration_ms: 3.586833
+  ...
+# Subtest: v9 flows through service to provider with exact output and versioned provenance (mock transport)
+ok 680 - v9 flows through service to provider with exact output and versioned provenance (mock transport)
+  ---
+  duration_ms: 14.914667
+  ...
+# Subtest: v15 and v16 real reports remain byte-identical
+ok 681 - v15 and v16 real reports remain byte-identical
+  ---
+  duration_ms: 0.618416
+  ...
+# Subtest: unchanged scorer and legacy guard reproduce frozen v15 outcome
+ok 682 - unchanged scorer and legacy guard reproduce frozen v15 outcome
+  ---
+  duration_ms: 28.166333
+  ...
+# Subtest: unchanged scorer and legacy guard reproduce frozen v16 outcome
+ok 683 - unchanged scorer and legacy guard reproduce frozen v16 outcome
+  ---
+  duration_ms: 7.115
+  ...
+# Subtest: historical accounting keeps scorer, independent old guard, and their intersection separate
+ok 684 - historical accounting keeps scorer, independent old guard, and their intersection separate
+  ---
+  duration_ms: 14.436333
+  ...
+# Subtest: v17 diagnosis reads all historical originals without editing them or pretending they must pass
+ok 685 - v17 diagnosis reads all historical originals without editing them or pretending they must pass
+  ---
+  duration_ms: 60.24775
+  ...
+# Subtest: all six prompt versions retain the B predecessor contract; unknown versions fail
+ok 686 - all six prompt versions retain the B predecessor contract; unknown versions fail
+  ---
+  duration_ms: 3.553833
+  ...
+# Subtest: v2.4 catalogue is opt-in by version and preserves all old catalogue cases
+ok 687 - v2.4 catalogue is opt-in by version and preserves all old catalogue cases
+  ---
+  duration_ms: 76.311542
+  ...
+# Subtest: upgrading extra-case IDs preserves their criterion, not the ID as a criterion
+ok 688 - upgrading extra-case IDs preserves their criterion, not the ID as a criterion
+  ---
+  duration_ms: 0.088417
+  ...
+# Subtest: v6 adapter sends the selected prompt and retains raw output and truncation (mock transport)
+ok 689 - v6 adapter sends the selected prompt and retains raw output and truncation (mock transport)
+  ---
+  duration_ms: 5.949625
+  ...
+# Subtest: all seven prompt versions retain the B predecessor contract; unknown versions fail
+ok 690 - all seven prompt versions retain the B predecessor contract; unknown versions fail
+  ---
+  duration_ms: 2.540667
+  ...
+# Subtest: v2.5 catalogue is opt-in by version and preserves all old catalogue cases
+ok 691 - v2.5 catalogue is opt-in by version and preserves all old catalogue cases
+  ---
+  duration_ms: 54.074334
+  ...
+# Subtest: upgrading extra-case IDs preserves their criterion, not the ID as a criterion
+ok 692 - upgrading extra-case IDs preserves their criterion, not the ID as a criterion
+  ---
+  duration_ms: 0.08525
+  ...
+# Subtest: v7 adapter sends the selected prompt and retains raw output and truncation (mock transport)
+ok 693 - v7 adapter sends the selected prompt and retains raw output and truncation (mock transport)
+  ---
+  duration_ms: 6.596958
+  ...
+# Subtest: all eight prompt versions retain the B predecessor contract; unknown versions fail
+ok 694 - all eight prompt versions retain the B predecessor contract; unknown versions fail
+  ---
+  duration_ms: 2.518084
+  ...
+# Subtest: v2.6 catalogue is opt-in by version and preserves all old catalogue cases
+ok 695 - v2.6 catalogue is opt-in by version and preserves all old catalogue cases
+  ---
+  duration_ms: 63.311667
+  ...
+# Subtest: upgrading extra-case IDs preserves their criterion, not the ID as a criterion
+ok 696 - upgrading extra-case IDs preserves their criterion, not the ID as a criterion
+  ---
+  duration_ms: 0.077667
+  ...
+# Subtest: v7 adapter sends the selected prompt and retains raw output and truncation (mock transport)
+ok 697 - v7 adapter sends the selected prompt and retains raw output and truncation (mock transport)
+  ---
+  duration_ms: 7.266042
+  ...
+# Subtest: all ten prompt versions retain the B predecessor contract; unknown versions fail
+ok 698 - all ten prompt versions retain the B predecessor contract; unknown versions fail
+  ---
+  duration_ms: 2.738791
+  ...
+# Subtest: v2.7 catalogue is opt-in by version and preserves all old catalogue cases
+ok 699 - v2.7 catalogue is opt-in by version and preserves all old catalogue cases
+  ---
+  duration_ms: 36.286375
+  ...
+# Subtest: upgrading extra-case IDs preserves their criterion, not the ID as a criterion
+ok 700 - upgrading extra-case IDs preserves their criterion, not the ID as a criterion
+  ---
+  duration_ms: 0.09075
+  ...
+# Subtest: v7 adapter sends the selected prompt and retains raw output and truncation (mock transport)
+ok 701 - v7 adapter sends the selected prompt and retains raw output and truncation (mock transport)
+  ---
+  duration_ms: 9.28
+  ...
+# Subtest: all eleven prompt versions retain the B predecessor contract; unknown versions fail
+ok 702 - all eleven prompt versions retain the B predecessor contract; unknown versions fail
+  ---
+  duration_ms: 1.33875
+  ...
+# Subtest: v2.8 catalogue is opt-in by version and preserves all old catalogue cases
+ok 703 - v2.8 catalogue is opt-in by version and preserves all old catalogue cases
+  ---
+  duration_ms: 41.671541
+  ...
+# Subtest: upgrading extra-case IDs preserves their criterion, not the ID as a criterion
+ok 704 - upgrading extra-case IDs preserves their criterion, not the ID as a criterion
+  ---
+  duration_ms: 0.083584
+  ...
+# Subtest: v7 adapter sends the selected prompt and retains raw output and truncation (mock transport)
+ok 705 - v7 adapter sends the selected prompt and retains raw output and truncation (mock transport)
+  ---
+  duration_ms: 8.491541
+  ...
+1..705
+# tests 705
+# suites 0
+# pass 705
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 958.460625

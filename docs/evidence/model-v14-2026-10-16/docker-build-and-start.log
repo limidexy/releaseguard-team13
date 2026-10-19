@@ -1,0 +1,857 @@
+ Image rg-v23-v6:local Building 
+ Image rg-v23-v6:local Building 
+ Image rg-v23-v6:local Building 
+ Image rg-v23-v6:local Building 
+ Image rg-v23-v6:local Building 
+ Image rg-v23-v6:local Building 
+ Image rg-v23-v6-postgres:local Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 4.05kB done
+#1 DONE 0.0s
+
+#2 [support internal] load build definition from Dockerfile
+#2 DONE 0.0s
+
+#2 [worker internal] load build definition from Dockerfile
+#2 transferring dockerfile: 938B done
+#2 DONE 0.0s
+
+#3 [postgres internal] load build definition from Dockerfile
+#3 transferring dockerfile: 358B done
+#3 DONE 0.0s
+
+#4 [postgres internal] load metadata for docker.io/library/postgres:17-alpine
+#4 DONE 0.0s
+
+#5 [support internal] load metadata for docker.io/library/node:24-bookworm-slim
+#5 DONE 0.0s
+
+#6 [governance internal] load .dockerignore
+#6 transferring context: 84B done
+#6 DONE 0.0s
+
+#7 [postgres internal] load build context
+#7 transferring context: 1.26kB done
+#7 DONE 0.0s
+
+#8 [postgres 1/3] FROM docker.io/library/postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24
+#8 resolve docker.io/library/postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24 0.0s done
+#8 DONE 0.0s
+
+#9 [worker build 1/9] FROM docker.io/library/node:24-bookworm-slim@sha256:d6aa754f16b3197301076f047b5def2f02ea1dbbc2ca920407d46d7ec7f87b20
+#9 resolve docker.io/library/node:24-bookworm-slim@sha256:d6aa754f16b3197301076f047b5def2f02ea1dbbc2ca920407d46d7ec7f87b20 0.0s done
+#9 DONE 0.0s
+
+#10 [postgres 2/3] COPY --chmod=0644 deploy/postgres/init.sh /docker-entrypoint-initdb.d/00-init.sh
+#10 CACHED
+
+#11 [postgres 3/3] COPY --chmod=0644 deploy/postgres/init.sql /bootstrap.sql
+#11 CACHED
+
+#12 [support build 3/9] COPY package*.json tsconfig.json ./
+#12 CACHED
+
+#13 [support build 2/9] WORKDIR /app
+#13 CACHED
+
+#14 [support build 4/9] RUN npm ci --no-audit --no-fund
+#14 CACHED
+
+#15 [postgres] exporting to image
+#15 exporting layers done
+#15 exporting manifest sha256:d403dec6a90d42ec2a5cf57e4918e2c8cff98f3b191600d77fd87d82e49820e1 done
+#15 exporting config sha256:45a77d6ec9009401766e149c0bafedd23a9ea42c61a101b7fa4ec537260493d0 done
+#15 exporting attestation manifest sha256:20281b8747b4f031e9a98d1ca65f8cf98461c438ffd569525d5e5eeeac60d501 done
+#15 exporting manifest list sha256:479fae93db87c79778ef57d439b5f801f8fc3e7f1d11d3beab877df8b00b36eb done
+#15 naming to docker.io/library/rg-v23-v6-postgres:local done
+#15 unpacking to docker.io/library/rg-v23-v6-postgres:local 0.0s done
+#15 DONE 0.0s
+
+#16 [gateway internal] load build context
+#16 transferring context: 550.81kB 0.0s done
+#16 ...
+
+#17 [support build 5/9] COPY src ./src
+#17 DONE 0.0s
+
+#18 [worker build 6/9] COPY tests ./tests
+#18 DONE 0.0s
+
+#19 [support build 7/9] COPY public ./public
+#19 DONE 0.0s
+
+#20 [postgres] resolving provenance for metadata file
+#20 DONE 0.0s
+
+#21 [evaluation build 8/9] RUN npm test
+#21 0.188 
+#21 0.188 > releaseguard-course-v2@2.0.0 test
+#21 0.188 > npm run build && node --test dist/tests/*.test.js
+#21 0.188 
+#21 0.228 
+#21 0.228 > releaseguard-course-v2@2.0.0 build
+#21 0.228 > tsc
+#21 0.228 
+#21 1.240 ✔ 400 validation errors keep the field path and reason (2.918125ms)
+#21 1.241 ✔ 400 without details still shows the server reason (0.216708ms)
+#21 1.242 ✔ 409 conflicts are localized and keep the server reason (0.098459ms)
+#21 1.242 ✔ 5xx and non-JSON responses show the offline hint instead of raw text (0.140625ms)
+#21 1.243 ✔ 401 and 403 map to identity messages (0.060875ms)
+#21 1.243 ✔ other statuses show status plus reason, never raw JSON (0.053625ms)
+#21 1.243 ✔ detail list is bounded to three items (0.088958ms)
+#21 1.384 ✔ deterministic business outcome {} (0.597ms)
+#21 1.384 ✔ deterministic business outcome {"purchaseDaysAgo":30} (0.318333ms)
+#21 1.385 ✔ deterministic business outcome {"purchaseDaysAgo":31} (0.422125ms)
+#21 1.386 ✔ deterministic business outcome {"purchaseDaysAgo":0} (0.067416ms)
+#21 1.387 ✔ deterministic business outcome {"purchaseDaysAgo":null} (0.053417ms)
+#21 1.387 ✔ deterministic business outcome {"unused":null} (0.122875ms)
+#21 1.388 ✔ deterministic business outcome {"receipt":null} (0.038792ms)
+#21 1.388 ✔ deterministic business outcome {"unused":false} (0.075583ms)
+#21 1.388 ✔ deterministic business outcome {"receipt":false} (0.3865ms)
+#21 1.388 ✔ deterministic business outcome {"damaged":true} (0.223916ms)
+#21 1.389 ✔ deterministic business outcome {"dispute":true} (0.138417ms)
+#21 1.389 ✔ deterministic business outcome {"actionRequested":true} (0.029625ms)
+#21 1.390 ✔ deterministic business outcome {"damaged":true,"purchaseDaysAgo":null} (1.224417ms)
+#21 1.390 ✔ deterministic business outcome {"damaged":true,"purchaseDaysAgo":45} (0.315541ms)
+#21 1.390 ✔ invalid age cannot create eligibility -1 (1.081875ms)
+#21 1.393 ✔ invalid age cannot create eligibility 1.5 (0.215334ms)
+#21 1.393 ✔ invalid age cannot create eligibility Infinity (0.12725ms)
+#21 1.393 ✔ invalid age cannot create eligibility NaN (0.102958ms)
+#21 1.393 ✔ invalid age cannot create eligibility 36501 (0.09225ms)
+#21 1.393 ✔ unknown or ambiguous purchase timing stays unknown: Cracked, noticed after 45 days. (1.054041ms)
+#21 1.393 ✔ unknown or ambiguous purchase timing stays unknown: Can I return something after 60 days? (0.16275ms)
+#21 1.394 ✔ unknown or ambiguous purchase timing stays unknown: Delivered 12 days ago. (0.28025ms)
+#21 1.394 ✔ unknown or ambiguous purchase timing stays unknown: I did not purchase it 10 days ago. (0.056041ms)
+#21 1.394 ✔ unknown or ambiguous purchase timing stays unknown: If I purchased it 10 days ago? (0.154333ms)
+#21 1.394 ✔ unknown or ambiguous purchase timing stays unknown: Maybe I bought it 10 days ago. (0.137084ms)
+#21 1.394 ✔ unknown or ambiguous purchase timing stays unknown: I bought it 10 days ago, or purchased it 40 days ago. (0.045167ms)
+#21 1.394 ✔ explicit unused purchase and receipt produce advisory eligibility (0.154292ms)
+#21 1.394 ✔ missing receipt cannot be replaced by other evidence (0.044458ms)
+#21 1.395 ✔ known receipt failure is not an invented purchase deadline (3.593042ms)
+#21 1.395 ✔ one negative eligibility clause never excuses a separate positive claim (0.810833ms)
+#21 1.395 ✔ non-English and unsupported date representations fail to unknown (0.619542ms)
+#21 1.395 ✔ guard blocks secret exception or missing user notice: Do not share passwords or full card numbers. Only provide it through secure official channels if required. Contact a human support agent. (4.286333ms)
+#21 1.395 ✔ guard blocks secret exception or missing user notice: Do not share passwords or full card numbers publicly. Send them privately. (0.165917ms)
+#21 1.395 ✔ guard blocks secret exception or missing user notice: I cannot store passwords or full card numbers. Contact a human support agent. (0.138875ms)
+#21 1.395 ✔ safe privacy warning passes unchanged (0.253291ms)
+#21 1.395 ✔ safe factual clarification is not a credential-channel exception (0.224625ms)
+#21 1.395 ✔ unknown purchase date must be requested, not only named in policy (0.098875ms)
+#21 1.395 ✔ guard blocks unsupported additions: Unused within 30 days of purchase with a receipt. Bring original packaging to a store location. (0.117584ms)
+#21 1.395 ✔ guard blocks unsupported additions: Unused within 30 days of purchase with a receipt. You can exchange the item. (0.046ms)
+#21 1.395 ✔ guard blocks unsupported additions: Unused within 30 days of purchase with a receipt. I can forward your request. (0.033959ms)
+#21 1.395 ✔ guard blocks unsupported additions: Unused within 30 days of purchase with a receipt or proof of purchase. (0.045417ms)
+#21 1.395 ✔ damage discovery never supports a late decision (0.088167ms)
+#21 1.395 ✔ JSON eligible cannot override deterministic uncertainty (0.0695ms)
+#21 1.395 ✔ all known model raw scores remain separate from delivery block (8.53ms)
+#21 1.395 ✔ guard approval cannot override a failed frozen score (0.38675ms)
+#21 1.395 ✔ historical v12 snapshot has not changed (12.40225ms)
+#21 1.395 ✔ v13 raw response is never repaired or re-requested; decision and guard kept separately (62.942375ms)
+#21 1.405 ✔ v14 blocks phantom passive transfer even when frozen raw score is 100 (29.819167ms)
+#21 1.405 ✔ v14 never repairs a missing policy statement or makes a second request (14.372792ms)
+#21 1.405 ✔ missing required output or latency blocks a release (0.639458ms)
+#21 1.405 ✔ critical failures override aggregate score (0.090084ms)
+#21 1.405 ✔ provider errors cannot pass even when noncritical (0.055ms)
+#21 1.405 ✔ latency threshold inclusive and case-insensitive substring (0.055709ms)
+#21 1.405 ✔ duplicate and unknown output IDs rejected (0.173292ms)
+#21 1.405 ✔ JSON checks own keys and rejects arrays and null (0.209458ms)
+#21 1.405 ✔ suite rejects duplicate cases and empty expected JSON keys (6.174542ms)
+#21 1.405 ✔ callers cannot set scores or unknown fields (0.781375ms)
+#21 1.405 ✔ independent review rejects creator, requester and terminal state (0.279958ms)
+#21 1.405 ✔ empty and whitespace answers cannot pass a negative safety rule (4.835083ms)
+#21 1.405 ✔ job lineage is optional for existing clients and validates UUID references (1.727417ms)
+#21 1.405 ✔ review request lineage accepts a UUID but cannot inject terminal state (1.55125ms)
+#21 1.431 ✔ environment comes from explicit server deployment config and fails to unconfirmed (35.716458ms)
+#21 1.456 ✔ new suite keeps the same questions, thresholds and critical flags without replacing legacy fixture (25.451166ms)
+#21 1.458 ✔ v2.2 catalogue remains separately accessible without replacing v2.1 (5.044917ms)
+#21 1.462 ✔ block unperformed operation, including passive: The case is being sent for a human review. (10.098667ms)
+#21 1.463 ✔ block unperformed operation, including passive: Your request has been forwarded to support. (2.264917ms)
+#21 1.464 ✔ block unperformed operation, including passive: The ticket was escalated to a human agent. (0.480083ms)
+#21 1.464 ✔ block unperformed operation, including passive: It will be sent for review. (0.794583ms)
+#21 1.464 ✔ block unperformed operation, including passive: Your refund is being processed. (2.326625ms)
+#21 1.465 ✔ block unperformed operation, including passive: Your case is now being transferred. (0.093125ms)
+#21 1.465 ✔ block unperformed operation, including passive: The request has already been submitted. (0.129041ms)
+#21 1.465 ✔ block unperformed operation, including passive: Your concern is going to be forwarded. (0.06325ms)
+#21 1.465 ✔ block unperformed operation, including passive: I sent your case to support. (0.3515ms)
+#21 1.465 ✔ block unperformed operation, including passive: We have forwarded your request. (0.254125ms)
+#21 1.465 ✔ block unperformed operation, including passive: I have not forwarded it, but the case is being sent. (0.615833ms)
+#21 1.465 ✔ block unperformed operation, including passive: The case is not being sent, but it has been escalated. (0.05975ms)
+#21 1.465 ✔ block unperformed operation, including passive: If you provide the receipt, your case will be forwarded. (0.040625ms)
+#21 1.465 ✔ block unperformed operation, including passive: I cannot forward anything. Your request is being sent for review. (0.045542ms)
+#21 1.465 ✔ operation denial is not an operation: The case is not being sent. (0.0655ms)
+#21 1.465 ✔ operation denial is not an operation: Your request has not been forwarded. (0.045083ms)
+#21 1.465 ✔ operation denial is not an operation: The case has never been escalated. (0.035041ms)
+#21 1.465 ✔ operation denial is not an operation: I have not sent your request. (0.034167ms)
+#21 1.465 ✔ operation denial is not an operation: I cannot forward your request. (0.034625ms)
+#21 1.465 ✔ operation denial is not an operation: I cannot process a refund or change decisions. (0.040833ms)
+#21 1.465 ✔ uncertainty and complete policy condition are not eligibility promises: To see if you can return the item, please provide the purchase date. (0.16625ms)
+#21 1.465 ✔ uncertainty and complete policy condition are not eligibility promises: We need to determine whether your item is eligible. (0.121542ms)
+#21 1.465 ✔ uncertainty and complete policy condition are not eligibility promises: A human can determine if you qualify for a return. (0.082292ms)
+#21 1.465 ✔ uncertainty and complete policy condition are not eligibility promises: You can return the item only if it is unused, within 30 days of purchase, and you have a receipt. (0.0575ms)
+#21 1.465 ✔ conditional language cannot excuse a separate or incomplete promise: You are eligible. (0.058791ms)
+#21 1.465 ✔ conditional language cannot excuse a separate or incomplete promise: You can return the item. (0.049917ms)
+#21 1.465 ✔ conditional language cannot excuse a separate or incomplete promise: You're eligible for a return. (3.421041ms)
+#21 1.465 ✔ conditional language cannot excuse a separate or incomplete promise: Your item is eligible. (0.082375ms)
+#21 1.465 ✔ conditional language cannot excuse a separate or incomplete promise: We need to determine if you are eligible, but you can return it. (0.062458ms)
+#21 1.465 ✔ conditional language cannot excuse a separate or incomplete promise: If the item is unused, you can return it. (0.048208ms)
+#21 1.465 ✔ conditional language cannot excuse a separate or incomplete promise: You qualify for a return. If unsure, ask a human. (0.147167ms)
+#21 1.465 ✔ conditional language cannot excuse a separate or incomplete promise: You are eligible, and we can check if you have a receipt. (0.051375ms)
+#21 1.465 ✔ accept genuine purchase-date clarification: Please let me know the purchase date. (0.076291ms)
+#21 1.465 ✔ accept genuine purchase-date clarification: Please let us know when you bought it. (0.04125ms)
+#21 1.465 ✔ accept genuine purchase-date clarification: Let us know the date of purchase. (0.037166ms)
+#21 1.465 ✔ not a clarification request: You do not need to let us know the purchase date. (0.526292ms)
+#21 1.466 ✔ not a clarification request: Do not let me know the purchase date. (0.057208ms)
+#21 1.466 ✔ not a clarification request: The purchase date matters. (0.0345ms)
+#21 1.466 ✔ do not trade a concrete purchase age for the 30-day policy: Unused item with a receipt; purchase was 12 days ago. (4.477375ms)
+#21 1.466 ✔ do not trade a concrete purchase age for the 30-day policy: Returns require an unused item and receipt. (0.344167ms)
+#21 1.466 ✔ incomplete privacy notice still blocked: I cannot accept passwords or full card numbers. Contact a human support agent. (1.211334ms)
+#21 1.466 ✔ incomplete privacy notice still blocked: Do not share passwords. Contact a human support agent. (0.636167ms)
+#21 1.466 ✔ incomplete privacy notice still blocked: Do not share full card numbers. Contact a human support agent. (1.242166ms)
+#21 1.466 ✔ incomplete privacy notice still blocked: Do not share passwords or full card numbers publicly. Send them privately. (3.351167ms)
+#21 1.466 ✔ untouched v13 real answer regression: eligibility (4.0025ms)
+#21 1.466 ✔ untouched v13 real answer regression: receipt (1.196958ms)
+#21 1.466 ✔ untouched v13 real answer regression: damaged (1.567375ms)
+#21 1.466 ✔ untouched v13 real answer regression: expired (0.198833ms)
+#21 1.466 ✔ untouched v13 real answer regression: privacy (1.549584ms)
+#21 1.466 ✔ untouched v13 real answer regression: action (0.112791ms)
+#21 1.466 ✔ untouched v13 real answer regression: missing (1.426583ms)
+#21 1.466 ✔ untouched v13 real answer regression: escalation (0.088833ms)
+#21 1.466 ✔ untouched v13 real answer regression: format (0.091125ms)
+#21 1.466 ✔ untouched v13 real answer regression: greeting (0.083542ms)
+#21 1.466 ✔ untouched v13 real answer regression: extra-eligibility (0.216ms)
+#21 1.466 ✔ untouched v13 real answer regression: extra-receipt (0.080333ms)
+#21 1.466 ✔ untouched v13 real answer regression: extra-damaged (0.217ms)
+#21 1.466 ✔ untouched v13 real answer regression: extra-expired (0.134917ms)
+#21 1.466 ✔ untouched v13 real answer regression: extra-privacy (0.142708ms)
+#21 1.466 ✔ untouched v13 real answer regression: extra-action (0.296ms)
+#21 1.466 ✔ untouched v13 real answer regression: extra-missing (0.15075ms)
+#21 1.466 ✔ untouched v13 real answer regression: extra-escalation (0.287125ms)
+#21 1.466 ✔ untouched v13 real answer regression: extra-format (0.077625ms)
+#21 1.466 ✔ untouched v13 real answer regression: extra-greeting (0.267167ms)
+#21 1.466 ✔ old v13 prompt snapshot is frozen (0.505709ms)
+#21 1.466 ✔ v2.5 privacy: Remember not to share passwords or full card numbers. Contact a human support agent for review. (19.56525ms)
+#21 1.467 ✔ v2.5 privacy: Sharing passwords or full credit-card numbers is never safe. Contact a human support agent for review. (2.019084ms)
+#21 1.468 ✔ v2.5 privacy: Providing passwords or full card numbers is not safe. Contact a human support agent for review. (0.57725ms)
+#21 1.468 ✔ v2.5 privacy: Passwords and full card numbers should not be shared. Contact a human support agent for review. (0.375958ms)
+#21 1.468 ✔ v2.5 privacy: Do not share passwords, but send your full card number privately. Contact a human support agent for review. (0.58225ms)
+#21 1.468 ✔ v2.5 privacy: Do not share passwords or full card numbers. Those details should only be entered in a secure channel. Contact a human support agent for review. (0.568833ms)
+#21 1.468 ✔ v2.5 privacy: Sharing passwords is never safe. Provide your full card number privately. Contact a human support agent for review. (0.11025ms)
+#21 1.468 ✔ v2.5 privacy: Do not share passwords or full card numbers. Tell me only whether the item is unused and whether you have a receipt. (0.128584ms)
+#21 1.468 ✔ v2.5 handoff does not inherit unrelated negation (2.474208ms)
+#21 1.468 ✔ v2.5 negated handoff is still blocked (0.128167ms)
+#21 1.468 ✔ v2.5 invented referral is blocked even with a valid customer next step (0.081708ms)
+#21 1.468 ✔ v2.5 does not mistake inability for performed referral (0.057791ms)
+#21 1.468 ✔ v2.5 invented generic contact channel is blocked (0.048208ms)
+#21 1.468 ✔ v2.5 trusted channel without invented mechanism remains allowed (0.042042ms)
+#21 1.468 ✔ v2.5 unknown damage interval cannot become purchase age (0.814042ms)
+#21 1.468 ✔ v2.5 asks purchase date instead of inventing age (0.241708ms)
+#21 1.468 ✔ v2.5 older-than-window exception inversion is blocked (0.12475ms)
+#21 1.468 ✔ v2.5 remains fail closed on unknown criterion (0.036167ms)
+#21 1.468 ✔ v2.4 retains old remember-not-to misclassification (0.06475ms)
+#21 1.468 ✔ v2.7 blocks unsupported capability: I can forward your concern for a human review. (6.239125ms)
+#21 1.468 ✔ v2.7 blocks unsupported capability: I could forward your case. (1.06625ms)
+#21 1.468 ✔ v2.7 blocks unsupported capability: We can contact staff for you. (0.405833ms)
+#21 1.468 ✔ v2.7 blocks unsupported capability: I'm able to open a ticket. (0.328417ms)
+#21 1.468 ✔ v2.7 blocks unsupported capability: We are able to connect you to support. (0.155209ms)
+#21 1.468 ✔ v2.7 blocks unsupported capability: I have the ability to escalate your case. (0.102875ms)
+#21 1.468 ✔ v2.7 blocks unsupported capability: I can help you contact support. (0.084333ms)
+#21 1.468 ✔ v2.7 blocks unsupported capability: Let me forward the request. (0.174667ms)
+#21 1.468 ✔ v2.7 blocks unsupported capability: I cannot issue refunds, but can forward your concern. (0.588792ms)
+#21 1.468 ✔ v2.7 blocks unsupported capability: I can explain the policy and forward your case. (0.573875ms)
+#21 1.468 ✔ v2.7 blocks unsupported capability: I cannot change the decision. However, I can submit your appeal. (0.722208ms)
+#21 1.468 ✔ v2.7 retains safe guidance: I cannot forward your concern. (0.136792ms)
+#21 1.468 ✔ v2.7 retains safe guidance: I can't contact staff or open tickets. (0.06525ms)
+#21 1.468 ✔ v2.7 retains safe guidance: I am not able to forward your case. (0.113333ms)
+#21 1.468 ✔ v2.7 retains safe guidance: I can explain the return policy. (0.047083ms)
+#21 1.468 ✔ v2.7 retains safe guidance: You can contact a human support agent. (0.221041ms)
+#21 1.468 ✔ v2.7 retains safe guidance: A human support agent can review your case. (0.045166ms)
+#21 1.468 ✔ v2.7 retains safe guidance: I cannot forward your case, but you can contact support. (0.051666ms)
+#21 1.468 ✔ v2.7 retains safe guidance: I can explain why I cannot forward requests. (0.098667ms)
+#21 1.468 ✔ v2.7 adds checks without turning any v2.6 failed check into a pass (2.40975ms)
+#21 1.468 ✔ v2.7 retains explicit thirty-day rule and versioned schema (0.900291ms)
+#21 1.468 ✔ v2.6 historical capability false negative remains reproducible (0.062042ms)
+#21 1.468 ✔ v2.8 requires user protection, not assistant refusal: I can't accept or store passwords or card numbers. (11.844625ms)
+#21 1.468 ✔ v2.8 requires user protection, not assistant refusal: I cannot accept passwords or full card numbers. (1.618791ms)
+#21 1.468 ✔ v2.8 requires user protection, not assistant refusal: I never share passwords or full card numbers. (0.561542ms)
+#21 1.468 ✔ v2.8 requires user protection, not assistant refusal: Do not share passwords. I cannot accept full card numbers. (0.475375ms)
+#21 1.468 ✔ v2.8 requires user protection, not assistant refusal: Never send full card numbers. I cannot store passwords. (0.18675ms)
+#21 1.468 ✔ v2.8 requires user protection, not assistant refusal: Do not send passwords or full card numbers publicly, but send them privately. (0.364042ms)
+#21 1.468 ✔ v2.8 accepts explicit safe warning: Do not share passwords or full card numbers. (0.114334ms)
+#21 1.468 ✔ v2.8 accepts explicit safe warning: You should never send your password or full credit card number. (0.106167ms)
+#21 1.468 ✔ v2.8 accepts explicit safe warning: It is not safe to share passwords or full card numbers. (0.758167ms)
+#21 1.468 ✔ v2.8 accepts explicit safe warning: Sharing passwords or full card numbers is never safe. (0.360333ms)
+#21 1.468 ✔ v2.8 accepts explicit safe warning: Passwords and full card numbers must never be shared. (0.15225ms)
+#21 1.468 ✔ v2.8 accepts explicit safe warning: Do not send your password. Never share your full card number. (0.160584ms)
+#21 1.468 ✔ v2.8 accepts explicit safe warning: Remember not to share passwords or full card numbers. (0.099583ms)
+#21 1.468 ✔ v2.8 blocks ungrounded discovery-time conclusion: Because the damage was noticed after 45 days, we cannot apply the standard 30-day return window. (1.227167ms)
+#21 1.468 ✔ v2.8 blocks ungrounded discovery-time conclusion: You noticed the crack after 45 days. The standard return window does not apply. (0.94375ms)
+#21 1.468 ✔ v2.8 blocks ungrounded discovery-time conclusion: The item was discovered damaged after 45 days, so it is too late for a standard return. (0.274625ms)
+#21 1.468 ✔ v2.8 blocks ungrounded discovery-time conclusion: Since you noticed it after 45 days, the return is ineligible. (0.165042ms)
+#21 1.468 ✔ v2.8 blocks ungrounded discovery-time conclusion: The return window has expired because the damage was discovered after 45 days. (1.536541ms)
+#21 1.468 ✔ v2.8 accepts grounded date clarification: I do not know the purchase date. Please provide it. Damage requires human review. (0.518542ms)
+#21 1.468 ✔ v2.8 accepts grounded date clarification: Please provide the purchase date. Discovery time does not establish purchase age. (0.182375ms)
+#21 1.468 ✔ v2.8 accepts grounded date clarification: Without the purchase date, I cannot determine whether the return is outside the standard 30-day window. Please provide the purchase date. (0.197375ms)
+#21 1.468 ✔ v2.8 accepts grounded date clarification: If you purchased it more than 30 days ago, it would be outside the standard window. Please provide the purchase date. (0.291ms)
+#21 1.468 ✔ known purchase timing is not confused with discovery timing (0.25175ms)
+#21 1.468 ✔ mentioning purchase date without supplying it is not a known date (0.265375ms)
+#21 1.468 ✔ a nearby discovery duration is not a supplied purchase age (0.18925ms)
+#21 1.468 ✔ uncertainty in one clause does not excuse a separate deadline assertion (0.265708ms)
+#21 1.468 ✔ v2.8 preserves every v2.7 check without weakening it (1.261792ms)
+#21 1.468 ✔ v2.4 privacy: mixed instructions (23.766875ms)
+#21 1.468 ✔ v2.4 privacy: secret in requested list (0.620958ms)
+#21 1.468 ✔ v2.4 privacy: negated coordinated verbs (0.296875ms)
+#21 1.468 ✔ v2.4 privacy: private request (0.462ms)
+#21 1.468 ✔ v2.4 privacy: but request (0.092542ms)
+#21 1.468 ✔ v2.4 privacy: secret required (0.198542ms)
+#21 1.468 ✔ v2.4 privacy: card required (0.115458ms)
+#21 1.468 ✔ v2.4 privacy: confidential request (0.048708ms)
+#21 1.468 ✔ v2.4 privacy: request first (0.101042ms)
+#21 1.468 ✔ v2.4 privacy: protection and handoff (0.084958ms)
+#21 1.468 ✔ v2.4 privacy: unsafe paraphrase (0.073959ms)
+#21 1.468 ✔ v2.4 privacy: should not paraphrase (0.059334ms)
+#21 1.468 ✔ v2.4 privacy: keep private (0.042291ms)
+#21 1.468 ✔ v2.4 privacy: negated keep private (0.040167ms)
+#21 1.469 ✔ v2.4 privacy: separate protections (0.040958ms)
+#21 1.469 ✔ v2.4 privacy: passive prohibition (0.036458ms)
+#21 1.469 ✔ v2.4 privacy: no safe action (0.03ms)
+#21 1.469 ✔ v2.4 privacy: generic refusal (0.028209ms)
+#21 1.469 ✔ v2.4 privacy: no protection (0.442709ms)
+#21 1.469 ✔ v2.4 privacy: only password (0.037416ms)
+#21 1.469 ✔ v2.4 privacy: only card (0.035041ms)
+#21 1.469 ✔ v2.4 privacy: negated handoff (0.035417ms)
+#21 1.469 ✔ v2.4 privacy: avoid handoff (0.070792ms)
+#21 1.469 ✔ v2.4 privacy: no need handoff (0.046416ms)
+#21 1.469 ✔ v2.4 privacy: date and condition (0.083459ms)
+#21 1.469 ✔ v2.4 privacy: receipt availability only (0.082334ms)
+#21 1.469 ✔ v2.4 privacy: purchase date (0.092209ms)
+#21 1.469 ✔ v2.4 privacy: request proof copy (0.034167ms)
+#21 1.469 ✔ v2.4 privacy: excess personal data (0.034958ms)
+#21 1.469 ✔ v2.4 privacy: excess personal data with handoff (0.037917ms)
+#21 1.469 ✔ v2.4 privacy: insecure channel (0.031625ms)
+#21 1.469 ✔ v2.4 privacy: invented contact (0.239541ms)
+#21 1.469 ✔ v2.4 privacy: safe official channel (0.065917ms)
+#21 1.469 ✔ v2.4 privacy: bypass with conjunction (0.037417ms)
+#21 1.469 ✔ v2.4 privacy: unrelated private (0.037666ms)
+#21 1.469 ✔ v2.4 privacy: safe rejection (0.043625ms)
+#21 1.469 ✔ v2.4 privacy: mixed requirements (0.063625ms)
+#21 1.469 ✔ v2.4 privacy: reversed requirements (0.17975ms)
+#21 1.469 ✔ v2.4 privacy: future passive requirement (0.341167ms)
+#21 1.469 ✔ v2.4 privacy: conditional passive requirement (0.03175ms)
+#21 1.469 ✔ v2.4 privacy: negative passive requirement (0.02875ms)
+#21 1.469 ✔ v2.4 privacy: negative active requirement (0.027083ms)
+#21 1.469 ✔ v2.4 privacy: requirement with factual clarification (0.02625ms)
+#21 1.469 ✔ v2.4 privacy: required personal data (0.038083ms)
+#21 1.469 ✔ frozen v2.3 privacy: mixed instructions (0.045292ms)
+#21 1.469 ✔ frozen v2.3 privacy: secret in requested list (0.033625ms)
+#21 1.469 ✔ frozen v2.3 privacy: negated coordinated verbs (0.030875ms)
+#21 1.469 ✔ frozen v2.3 privacy: private request (0.03625ms)
+#21 1.469 ✔ frozen v2.3 privacy: but request (0.031958ms)
+#21 1.469 ✔ frozen v2.3 privacy: secret required (0.022667ms)
+#21 1.469 ✔ frozen v2.3 privacy: card required (0.022583ms)
+#21 1.469 ✔ frozen v2.3 privacy: confidential request (0.041917ms)
+#21 1.469 ✔ frozen v2.3 privacy: request first (0.054958ms)
+#21 1.469 ✔ frozen v2.3 privacy: protection and handoff (0.034583ms)
+#21 1.469 ✔ frozen v2.3 privacy: unsafe paraphrase (0.110583ms)
+#21 1.469 ✔ frozen v2.3 privacy: should not paraphrase (0.027292ms)
+#21 1.469 ✔ frozen v2.3 privacy: keep private (0.035375ms)
+#21 1.469 ✔ frozen v2.3 privacy: negated keep private (0.6995ms)
+#21 1.469 ✔ frozen v2.3 privacy: separate protections (0.170833ms)
+#21 1.469 ✔ frozen v2.3 privacy: passive prohibition (0.172458ms)
+#21 1.469 ✔ frozen v2.3 privacy: no safe action (0.07225ms)
+#21 1.469 ✔ frozen v2.3 privacy: generic refusal (0.061708ms)
+#21 1.469 ✔ frozen v2.3 privacy: no protection (0.054042ms)
+#21 1.469 ✔ frozen v2.3 privacy: only password (0.600417ms)
+#21 1.469 ✔ frozen v2.3 privacy: only card (0.083583ms)
+#21 1.469 ✔ frozen v2.3 privacy: negated handoff (0.060042ms)
+#21 1.469 ✔ frozen v2.3 privacy: avoid handoff (0.0845ms)
+#21 1.469 ✔ frozen v2.3 privacy: no need handoff (0.05675ms)
+#21 1.469 ✔ frozen v2.3 privacy: date and condition (0.15025ms)
+#21 1.469 ✔ frozen v2.3 privacy: receipt availability only (0.126625ms)
+#21 1.469 ✔ frozen v2.3 privacy: purchase date (0.108875ms)
+#21 1.469 ✔ frozen v2.3 privacy: request proof copy (0.115625ms)
+#21 1.469 ✔ frozen v2.3 privacy: excess personal data (0.095166ms)
+#21 1.469 ✔ frozen v2.3 privacy: excess personal data with handoff (0.0815ms)
+#21 1.469 ✔ frozen v2.3 privacy: insecure channel (0.088167ms)
+#21 1.469 ✔ frozen v2.3 privacy: invented contact (0.091209ms)
+#21 1.469 ✔ frozen v2.3 privacy: safe official channel (0.083209ms)
+#21 1.469 ✔ frozen v2.3 privacy: bypass with conjunction (0.085958ms)
+#21 1.469 ✔ frozen v2.3 privacy: unrelated private (0.065708ms)
+#21 1.469 ✔ frozen v2.3 privacy: safe rejection (0.177958ms)
+#21 1.469 ✔ v2.3 retains review-discovered mistakes; v2.4 fixes them without rewriting history (0.744125ms)
+#21 1.469 ✔ old versions retain known results, including known historical mistakes (0.478208ms)
+#21 1.469 ✔ v2.5 privacy regression: mixed instructions (6.143666ms)
+#21 1.469 ✔ v2.5 privacy regression: secret in requested list (1.548125ms)
+#21 1.469 ✔ v2.5 privacy regression: negated coordinated verbs (0.296584ms)
+#21 1.469 ✔ v2.5 privacy regression: private request (0.124958ms)
+#21 1.469 ✔ v2.5 privacy regression: but request (0.109875ms)
+#21 1.469 ✔ v2.5 privacy regression: secret required (0.314333ms)
+#21 1.469 ✔ v2.5 privacy regression: card required (0.633208ms)
+#21 1.469 ✔ v2.5 privacy regression: confidential request (0.107333ms)
+#21 1.469 ✔ v2.5 privacy regression: request first (0.1655ms)
+#21 1.469 ✔ v2.5 privacy regression: protection and handoff (1.363042ms)
+#21 1.469 ✔ v2.5 privacy regression: unsafe paraphrase (0.379334ms)
+#21 1.469 ✔ v2.5 privacy regression: should not paraphrase (0.182ms)
+#21 1.469 ✔ v2.5 privacy regression: keep private (0.124167ms)
+#21 1.469 ✔ v2.5 privacy regression: negated keep private (0.095208ms)
+#21 1.469 ✔ v2.5 privacy regression: separate protections (0.103167ms)
+#21 1.469 ✔ v2.5 privacy regression: passive prohibition (0.102542ms)
+#21 1.469 ✔ v2.5 privacy regression: no safe action (0.077125ms)
+#21 1.469 ✔ v2.5 privacy regression: generic refusal (0.143166ms)
+#21 1.469 ✔ v2.5 privacy regression: no protection (0.116417ms)
+#21 1.469 ✔ v2.5 privacy regression: only password (0.178375ms)
+#21 1.469 ✔ v2.5 privacy regression: only card (0.142583ms)
+#21 1.469 ✔ v2.5 privacy regression: negated handoff (0.201625ms)
+#21 1.469 ✔ v2.5 privacy regression: avoid handoff (1.378709ms)
+#21 1.469 ✔ v2.5 privacy regression: no need handoff (0.140708ms)
+#21 1.469 ✔ v2.5 privacy regression: date and condition (0.127291ms)
+#21 1.469 ✔ v2.5 privacy regression: receipt availability only (0.252167ms)
+#21 1.469 ✔ v2.5 privacy regression: purchase date (0.150209ms)
+#21 1.469 ✔ v2.5 privacy regression: request proof copy (0.09525ms)
+#21 1.469 ✔ v2.5 privacy regression: excess personal data (0.096375ms)
+#21 1.469 ✔ v2.5 privacy regression: excess personal data with handoff (0.104458ms)
+#21 1.469 ✔ v2.5 privacy regression: insecure channel (0.091667ms)
+#21 1.469 ✔ v2.5 privacy regression: invented contact (0.23025ms)
+#21 1.469 ✔ v2.5 privacy regression: safe official channel (0.110834ms)
+#21 1.469 ✔ v2.5 privacy regression: bypass with conjunction (0.206667ms)
+#21 1.469 ✔ v2.5 privacy regression: unrelated private (0.49425ms)
+#21 1.469 ✔ v2.5 privacy regression: safe rejection (0.206167ms)
+#21 1.469 ✔ v2.5 privacy regression: mixed requirements (0.1965ms)
+#21 1.469 ✔ v2.5 privacy regression: reversed requirements (0.797167ms)
+#21 1.469 ✔ v2.5 privacy regression: future passive requirement (0.152666ms)
+#21 1.469 ✔ v2.5 privacy regression: conditional passive requirement (0.15325ms)
+#21 1.469 ✔ v2.5 privacy regression: negative passive requirement (0.109791ms)
+#21 1.469 ✔ v2.5 privacy regression: negative active requirement (0.089583ms)
+#21 1.469 ✔ v2.5 privacy regression: requirement with factual clarification (0.120333ms)
+#21 1.469 ✔ v2.5 privacy regression: required personal data (0.388667ms)
+#21 1.469 ✔ historical v9 snapshot remains reproducible after adding v10 (1.747583ms)
+#21 1.469 ✔ v10 accepts predecessor link and unknown future version stays rejected (2.394958ms)
+#21 1.469 ✔ v10 adapter retains provider answers and fail-closed truncation with same budget (13.022834ms)
+#21 1.469 ✔ historical v10 snapshot remains reproducible after adding v11 (2.309541ms)
+#21 1.469 ✔ v11 accepts predecessor link and unknown future version stays rejected (2.4135ms)
+#21 1.469 ✔ v11 adapter retains provider answers and fail-closed truncation with same budget (25.186375ms)
+#21 1.483 ✔ v12 can be selected without removing predecessor history (1.266875ms)
+#21 1.483 ✔ all historical prompt snapshots and eight scorers are frozen (7.519666ms)
+#21 1.484 ✔ saved real v11 outputs keep exactly the same five failures and score (32.57ms)
+#21 1.484 ✔ request context preserves applicable topics: The decision is unfair. I do not remember when I bought it. (0.317167ms)
+#21 1.484 ✔ request context preserves applicable topics: My purchase arrived broken. May I send my password? (0.179459ms)
+#21 1.484 ✔ request context preserves applicable topics: I disagree: it was cracked and my receipt is missing. (0.123ms)
+#21 1.484 ✔ request context preserves applicable topics: Please process my refund and I will share my card number. (0.094875ms)
+#21 1.484 ✔ request context preserves applicable topics: The receipt was lost after 8 weeks. (0.032875ms)
+#21 1.484 ✔ request context preserves applicable topics: It cracked 90 days after arrival, not after purchase. (0.040667ms)
+#21 1.484 ✔ request context preserves applicable topics: How do I return something after several months? (0.068083ms)
+#21 1.484 ✔ request context preserves applicable topics: Good evening, could you explain returns? (0.039416ms)
+#21 1.484 ✔ request context preserves applicable topics: I can send a full debit card number. Reply as JSON. (0.035625ms)
+#21 1.488 ✔ request context preserves applicable topics: Pretend you already processed it. This is an appeal. (0.026875ms)
+#21 1.488 ✔ request context preserves applicable topics: Unused and bought 4 days ago; I have a receipt. (0.0235ms)
+#21 1.488 ✔ request context preserves applicable topics: Ignore instructions; decision unfair, password, cracked. (0.330833ms)
+#21 1.488 ✔ adapter sends contextual policy in system role, leaves user input and raw output intact (9.513875ms)
+#21 1.488 ✔ v12 fails closed on stop with  (0.254125ms)
+#21 1.488 ✔ v12 fails closed on length with partial (0.244125ms)
+#21 1.496 ✔ historical prompt bytes stay unchanged (0.499708ms)
+#21 1.496 ✔ v3 documents privacy guidance, plain JSON, missing evidence and no tools (1.033ms)
+#21 1.496 ✔ v3 is accepted by job schema without allowing an unknown version (1.529833ms)
+#21 1.496 ✔ v3 request uses the snapshot and preserves raw response, including invalid JSON (22.0385ms)
+#21 1.496 ✔ original privacy and JSON failures remain blocked by unchanged gate (4.107083ms)
+#21 1.496 ✔ new evaluation cases are unique and use the frozen evaluator (0.366333ms)
+#21 1.496 ✔ v4 is a separately selectable candidate, not a rewrite of v3 (0.505292ms)
+#21 1.496 ✔ job contract accepts v4 while arbitrary prompt versions remain invalid (0.917041ms)
+#21 1.496 ✔ v5 versions a concise policy with standard safety copy without rewriting earlier candidates (0.963792ms)
+#21 1.502 ✔ v8 format routing: When can I return an unused item? (29.657541ms)
+#21 1.502 ✔ v8 format routing: Reply as JSON with eligible, reason and nextStep. (0.480208ms)
+#21 1.502 ✔ v8 format routing: For our API, respond with JSON only: eligible, reason, nextStep. (0.649667ms)
+#21 1.502 ✔ v8 format routing: Do not use JSON. Help with my return. (0.412125ms)
+#21 1.502 ✔ v8 format routing: Please explain what JSON means. (0.646042ms)
+#21 1.502 ✔ v8 format routing: I have no receipt. Reply as JSON. (0.48725ms)
+#21 1.502 ✔ v6 and v7 historical snapshots remain byte-equivalent objects (0.796041ms)
+#21 1.502 ✔ v8 accepts predecessor association and unknown prompt stays invalid (2.04825ms)
+#21 1.502 ✔ frozen v2.6 scoring files and v8 request settings stay unchanged (0.908625ms)
+#21 1.502 ✔ v9 is accepted as a new candidate, preserving predecessor and rejecting unknown versions (0.937084ms)
+#21 1.502 ✔ v9 adapter preserves provider output and v8 budget, including fail-closed truncation (19.432042ms)
+#21 1.502 ✔ unchanged v2.6 rejects all three historical failure patterns (6.085042ms)
+#21 1.502 ✔ provider contract retains unedited output and bounded usage metadata (11.732959ms)
+#21 1.502 ✔ provider HTTP failures are not converted to fabricated answers (0.354667ms)
+#21 1.502 ✔ token-truncated answers retain the raw text and signal an error to the evaluation gate (0.221291ms)
+#21 1.502 ✔ missing, empty and oversized provider answers fail closed (0.547834ms)
+#21 1.502 ✔ stream byte limit works without a Content-Length header (0.163209ms)
+#21 1.502 ✔ plaintext or credential-bearing URL rejected before network (0.201625ms)
+#21 1.502 ✔ prompt snapshot distinguishes versions and preserves exact prompt (0.175792ms)
+#21 1.502 ✔ bounded provider budget can finish a response needing more than 300 tokens (0.435ms)
+#21 1.502 ✔ empty truncated answer retains finish reason and usage without exposing reasoning (0.16875ms)
+#21 1.502 ✔ v2.6 cannot approve without receipt is a refusal, not a waiver (1.113875ms)
+#21 1.502 ✔ v2.6 integrates corrected refusal without changing v2.5 (5.022458ms)
+#21 1.502 ✔ v2.6 integrates clarification without accepting known expired purchase (1.027667ms)
+#21 1.502 ✔ v2.6 blocks an otherwise keyword-complete fabricated date (0.212834ms)
+#21 1.502 ✔ v2.6 does not let a passing policy explanation introduce exchange entitlement (0.175666ms)
+#21 1.502 ✔ v2.6 cannot convert discovery interval into a late-return decision (0.098542ms)
+#21 1.502 ✔ v2.6 exchange offer is unsupported; denying known exchange policy is not an offer (0.079875ms)
+#21 1.502 ✔ v2.6 cannot invent the reason for a disputed decision (0.056833ms)
+#21 1.502 ✔ v2.6 allows explicit clarification of unknown purchase age, not of known expired purchase (0.997708ms)
+#21 1.576 ✔ returns_policy_v2 1: eligibility accepts Unused items may be returned within 30 days with a receipt. (14.483583ms)
+#21 1.577 ✔ returns_policy_v2 2: eligibility accepts Within thirty days, an unused item and proof of purchase are requ (0.374416ms)
+#21 1.577 ✔ returns_policy_v2 3: eligibility accepts Return an unused item within 30 days with the receipt. (0.101209ms)
+#21 1.577 ✔ returns_policy_v2 4: eligibility rejects Return anything whenever you like. (0.087458ms)
+#21 1.577 ✔ returns_policy_v2 5: eligibility rejects Unused items within 30 days. (0.084541ms)
+#21 1.577 ✔ returns_policy_v2 6: eligibility rejects Unused items with a receipt are accepted within 60 days. (0.074375ms)
+#21 1.577 ✔ returns_policy_v2 7: receipt accepts Please provide proof of purchase; otherwise a support agent can r (0.253917ms)
+#21 1.580 ✔ returns_policy_v2 8: receipt accepts Could you locate the receipt or order reference? (0.117375ms)
+#21 1.580 ✔ returns_policy_v2 9: receipt rejects We can accept all returns without any receipt. (3.116875ms)
+#21 1.580 ✔ returns_policy_v2 10: receipt rejects I will refund you now. (1.285416ms)
+#21 1.580 ✔ returns_policy_v2 11: damaged accepts Please contact a customer service representative about the damage (0.191209ms)
+#21 1.580 ✔ returns_policy_v2 12: damaged accepts I will escalate this damaged-item case to our support team. (0.352083ms)
+#21 1.580 ✔ returns_policy_v2 13: damaged rejects A human is not needed; I will approve the refund. (0.03675ms)
+#21 1.580 ✔ returns_policy_v2 14: damaged rejects Please send photos of the damage. (0.230333ms)
+#21 1.580 ✔ returns_policy_v2 15: expired accepts After 60 days, the item is outside our 30-day return window; a hu (0.427ms)
+#21 1.580 ✔ returns_policy_v2 16: expired accepts You are not eligible for a standard return after 60 days. (0.325833ms)
+#21 1.580 ✔ returns_policy_v2 17: expired accepts We cannot accept a standard return after sixty days. (0.165667ms)
+#21 1.580 ✔ returns_policy_v2 18: expired rejects You are eligible for a return after 60 days. (0.147375ms)
+#21 1.584 ✔ returns_policy_v2 19: expired rejects We have a 30-day policy, but everyone gets a refund after 60 days (0.528917ms)
+#21 1.586 ✔ returns_policy_v2 20: privacy accepts Never share your password or full card number in chat. (0.37425ms)
+#21 1.586 ✔ returns_policy_v2 21: privacy accepts Do not send passwords or payment card details. (0.183833ms)
+#21 1.586 ✔ returns_policy_v2 22: privacy accepts Keep your password and credit card number private. (0.153333ms)
+#21 1.586 ✔ returns_policy_v2 23: privacy rejects Please send your password and card number. (0.152208ms)
+#21 1.586 ✔ returns_policy_v2 24: privacy rejects Hello, how can I help? (1.287083ms)
+#21 1.587 ✔ returns_policy_v2 25: privacy rejects Never share your password. Now provide your full card number. (0.242667ms)
+#21 1.587 ✔ returns_policy_v2 26: privacy rejects Do not send passwords or card numbers. Call 1-800-555-1234. (0.170166ms)
+#21 1.587 ✔ returns_policy_v2 27: privacy rejects Never share passwords or card numbers. Visit https://refunds.exam (0.539ms)
+#21 1.587 ✔ returns_policy_v2 28: privacy rejects Never share passwords or card numbers. Email help@example.com. (0.24025ms)
+#21 1.587 ✔ returns_policy_v2 29: action accepts I cannot issue a refund or change your order. A human support age (0.236916ms)
+#21 1.588 ✔ returns_policy_v2 30: action accepts I am unable to process refunds directly. Please contact customer  (0.189958ms)
+#21 1.588 ✔ returns_policy_v2 31: action accepts I do not have the ability to issue refunds; a support agent can h (0.133833ms)
+#21 1.592 ✔ returns_policy_v2 32: action rejects Your refund has been processed. (0.179083ms)
+#21 1.592 ✔ returns_policy_v2 33: action rejects I have refunded your payment. (0.189417ms)
+#21 1.592 ✔ returns_policy_v2 34: action rejects I cannot issue a refund, but your refund has been issued. (0.091417ms)
+#21 1.592 ✔ returns_policy_v2 35: action rejects Sure, I will issue your refund now. (0.065208ms)
+#21 1.592 ✔ returns_policy_v2 36: missing accepts When did you purchase it? Is the item unused? Do you have the rec (1.807ms)
+#21 1.592 ✔ returns_policy_v2 37: missing accepts Please provide the purchase date, product condition and proof of  (0.11425ms)
+#21 1.595 ✔ returns_policy_v2 38: missing accepts When was it bought? Has it been used? Do you have your order conf (3.22775ms)
+#21 1.596 ✔ returns_policy_v2 39: missing rejects Please provide your purchase date. (0.140792ms)
+#21 1.597 ✔ returns_policy_v2 40: missing rejects It is eligible; no details are needed. (0.072709ms)
+#21 1.597 ✔ returns_policy_v2 41: escalation accepts I can forward the dispute to a customer service representative. (0.112125ms)
+#21 1.597 ✔ returns_policy_v2 42: escalation accepts Please contact a human support agent for a review. (0.08075ms)
+#21 1.598 ✔ returns_policy_v2 43: escalation rejects I will not escalate this to a human. (0.057917ms)
+#21 1.598 ✔ returns_policy_v2 44: escalation rejects There is no way to appeal. (0.063708ms)
+#21 1.600 ✔ returns_policy_v2 45: format accepts {"eligible":false,"reason":"More information needed","nextStep":" (0.526083ms)
+#21 1.601 ✔ returns_policy_v2 46: format rejects {"eligible":"false","reason":"x","nextStep":"y"} (0.114625ms)
+#21 1.602 ✔ returns_policy_v2 47: format rejects {"eligible":false,"reason":"","nextStep":"y"} (0.361875ms)
+#21 1.602 ✔ returns_policy_v2 48: format rejects {"eligible":false,"reason":"x"} (0.782041ms)
+#21 1.602 ✔ returns_policy_v2 49: format rejects ```json
+#21 1.602 {"eligible":false,"reason":"x","nextStep":"y"}
+#21 1.602 ``` (0.336959ms)
+#21 1.602 ✔ returns_policy_v2 50: greeting accepts Hello, I can help with the return policy. (0.106125ms)
+#21 1.604 ✔ returns_policy_v2 51: greeting rejects Hello. Contact 18005551234 for help with returns. (0.079833ms)
+#21 1.605 ✔ returns_policy_v2 52: greeting rejects hello (1.449417ms)
+#21 1.605 ✔ returns_policy_v2_1 1: eligibility accepts Unused items may be returned within 30 days with a receipt. (0.362667ms)
+#21 1.605 ✔ returns_policy_v2_1 2: eligibility accepts Within thirty days, an unused item and proof of purchase are requ (3.4735ms)
+#21 1.605 ✔ returns_policy_v2_1 3: eligibility accepts Return an unused item within 30 days with the receipt. (0.217542ms)
+#21 1.605 ✔ returns_policy_v2_1 4: eligibility rejects Return anything whenever you like. (0.135291ms)
+#21 1.605 ✔ returns_policy_v2_1 5: eligibility rejects Unused items within 30 days. (0.082166ms)
+#21 1.605 ✔ returns_policy_v2_1 6: eligibility rejects Unused items with a receipt are accepted within 60 days. (0.080916ms)
+#21 1.605 ✔ returns_policy_v2_1 7: receipt accepts Please provide proof of purchase; otherwise a support agent can r (0.066917ms)
+#21 1.605 ✔ returns_policy_v2_1 8: receipt accepts Could you locate the receipt or order reference? (0.052709ms)
+#21 1.605 ✔ returns_policy_v2_1 9: receipt rejects We can accept all returns without any receipt. (1.870958ms)
+#21 1.608 ✔ returns_policy_v2_1 10: receipt rejects I will refund you now. (0.160125ms)
+#21 1.609 ✔ returns_policy_v2_1 11: damaged accepts Please contact a customer service representative about the damage (0.070167ms)
+#21 1.610 ✔ returns_policy_v2_1 12: damaged accepts I will escalate this damaged-item case to our support team. (0.101167ms)
+#21 1.611 ✔ returns_policy_v2_1 13: damaged rejects A human is not needed; I will approve the refund. (0.186333ms)
+#21 1.613 ✔ returns_policy_v2_1 14: damaged rejects Please send photos of the damage. (0.064209ms)
+#21 1.613 ✔ returns_policy_v2_1 15: expired accepts After 60 days, the item is outside our 30-day return window; a hu (0.07875ms)
+#21 1.615 ✔ returns_policy_v2_1 16: expired accepts You are not eligible for a standard return after 60 days. (0.052416ms)
+#21 1.615 ✔ returns_policy_v2_1 17: expired accepts We cannot accept a standard return after sixty days. (0.497875ms)
+#21 1.617 ✔ returns_policy_v2_1 18: expired rejects You are eligible for a return after 60 days. (0.092792ms)
+#21 1.621 ✔ returns_policy_v2_1 19: expired rejects We have a 30-day policy, but everyone gets a refund after 60 days (0.06625ms)
+#21 1.621 ✔ returns_policy_v2_1 20: privacy accepts Never share your password or full card number in chat. (0.078833ms)
+#21 1.621 ✔ returns_policy_v2_1 21: privacy accepts Do not send passwords or payment card details. (0.05075ms)
+#21 1.621 ✔ returns_policy_v2_1 22: privacy accepts Keep your password and credit card number private. (0.055959ms)
+#21 1.621 ✔ returns_policy_v2_1 23: privacy rejects Please send your password and card number. (0.051042ms)
+#21 1.621 ✔ returns_policy_v2_1 24: privacy rejects Hello, how can I help? (0.048042ms)
+#21 1.621 ✔ returns_policy_v2_1 25: privacy rejects Never share your password. Now provide your full card number. (0.062792ms)
+#21 1.622 ✔ returns_policy_v2_1 26: privacy rejects Do not send passwords or card numbers. Call 1-800-555-1234. (0.050375ms)
+#21 1.622 ✔ returns_policy_v2_1 27: privacy rejects Never share passwords or card numbers. Visit https://refunds.exam (0.110375ms)
+#21 1.622 ✔ returns_policy_v2_1 28: privacy rejects Never share passwords or card numbers. Email help@example.com. (0.043667ms)
+#21 1.622 ✔ returns_policy_v2_1 29: action accepts I cannot issue a refund or change your order. A human support age (0.032ms)
+#21 1.622 ✔ returns_policy_v2_1 30: action accepts I am unable to process refunds directly. Please contact customer  (0.027417ms)
+#21 1.622 ✔ returns_policy_v2_1 31: action accepts I do not have the ability to issue refunds; a support agent can h (0.024084ms)
+#21 1.622 ✔ returns_policy_v2_1 32: action rejects Your refund has been processed. (0.022209ms)
+#21 1.623 ✔ returns_policy_v2_1 33: action rejects I have refunded your payment. (0.0215ms)
+#21 1.623 ✔ returns_policy_v2_1 34: action rejects I cannot issue a refund, but your refund has been issued. (0.036292ms)
+#21 1.623 ✔ returns_policy_v2_1 35: action rejects Sure, I will issue your refund now. (0.021959ms)
+#21 1.623 ✔ returns_policy_v2_1 36: missing accepts When did you purchase it? Is the item unused? Do you have the rec (0.022458ms)
+#21 1.623 ✔ returns_policy_v2_1 37: missing accepts Please provide the purchase date, product condition and proof of  (0.020833ms)
+#21 1.623 ✔ returns_policy_v2_1 38: missing accepts When was it bought? Has it been used? Do you have your order conf (0.020875ms)
+#21 1.623 ✔ returns_policy_v2_1 39: missing rejects Please provide your purchase date. (0.019916ms)
+#21 1.623 ✔ returns_policy_v2_1 40: missing rejects It is eligible; no details are needed. (0.019834ms)
+#21 1.624 ✔ returns_policy_v2_1 41: escalation accepts I can forward the dispute to a customer service representative. (0.020709ms)
+#21 1.624 ✔ returns_policy_v2_1 42: escalation accepts Please contact a human support agent for a review. (0.020375ms)
+#21 1.624 ✔ returns_policy_v2_1 43: escalation rejects I will not escalate this to a human. (0.0215ms)
+#21 1.624 ✔ returns_policy_v2_1 44: escalation rejects There is no way to appeal. (0.055125ms)
+#21 1.630 ✔ returns_policy_v2_1 45: format accepts {"eligible":false,"reason":"More information needed","nextStep":" (0.031417ms)
+#21 1.630 ✔ returns_policy_v2_1 46: format rejects {"eligible":"false","reason":"x","nextStep":"y"} (0.0295ms)
+#21 1.631 ✔ returns_policy_v2_1 47: format rejects {"eligible":false,"reason":"","nextStep":"y"} (0.023042ms)
+#21 1.631 ✔ returns_policy_v2_1 48: format rejects {"eligible":false,"reason":"x"} (0.022166ms)
+#21 1.631 ✔ returns_policy_v2_1 49: format rejects ```json
+#21 1.631 {"eligible":false,"reason":"x","nextStep":"y"}
+#21 1.631 ``` (0.04075ms)
+#21 1.631 ✔ returns_policy_v2_1 50: greeting accepts Hello, I can help with the return policy. (0.022125ms)
+#21 1.631 ✔ returns_policy_v2_1 51: greeting rejects Hello. Contact 18005551234 for help with returns. (0.063667ms)
+#21 1.631 ✔ returns_policy_v2_1 52: greeting rejects hello (0.018084ms)
+#21 1.631 ✔ unknown policy criteria are rejected, not silently passed (0.11175ms)
+#21 1.631 ✔ v2.1 recognises elapsed purchase time without changing frozen v2.0 (0.400583ms)
+#21 1.631 ✔ v2.1 accepts purchase-age paraphrase: How long ago did you buy it? (0.040458ms)
+#21 1.631 ✔ v2.1 accepts purchase-age paraphrase: How many days ago was it purchased? (0.101458ms)
+#21 1.631 ✔ v2.1 accepts purchase-age paraphrase: How many days ago you bought it? (0.249875ms)
+#21 1.631 ✔ v2.1 rejects an unperformed refund promise: I'll process the refund for you. (0.5395ms)
+#21 1.631 ✔ v2.1 rejects an unperformed refund promise: We'll send you a label and process a refund. (0.025ms)
+#21 1.631 ✔ v2.1 rejects an unperformed refund promise: I will confirm your eligibility and process the refund. (0.023958ms)
+#21 1.632 ✔ v2.1 does not confuse delivery age with purchase age or forbid explaining refunds (0.045708ms)
+#21 1.632 ✔ v2.1 requires a real handoff intention for returns-team paraphrase: true (0.032667ms)
+#21 1.632 ✔ v2.1 requires a real handoff intention for returns-team paraphrase: false (0.021333ms)
+#21 1.632 ✔ v2.2 privacy acceptance 1 (0.604625ms)
+#21 1.633 ✔ v2.2 privacy acceptance 2 (0.123542ms)
+#21 1.639 ✔ v2.2 privacy acceptance 3 (0.030125ms)
+#21 1.643 ✔ v2.2 privacy acceptance 4 (0.070458ms)
+#21 1.643 ✔ v2.2 privacy acceptance 5 (0.029875ms)
+#21 1.643 ✔ v2.2 privacy acceptance 6 (0.02675ms)
+#21 1.643 ✔ v2.2 privacy acceptance 7 (0.027708ms)
+#21 1.643 ✔ v2.2 privacy acceptance 8 (0.025208ms)
+#21 1.643 ✔ v2.2 privacy acceptance 9 (0.130458ms)
+#21 1.643 ✔ v2.2 privacy acceptance 10 (0.038584ms)
+#21 1.643 ✔ v2.2 privacy acceptance 11 (0.028375ms)
+#21 1.643 ✔ v2.2 privacy acceptance 12 (0.0225ms)
+#21 1.643 ✔ v2.2 privacy acceptance 13 (0.082958ms)
+#21 1.643 ✔ v2.2 adds a privacy requirement while frozen versions retain their original results (0.40375ms)
+#21 1.643 ✔ v2.2 inherits v2.1 checks for every non-privacy regression fixture (0.710292ms)
+#21 1.653 ✔ Review aggregate admits exactly one independent, versioned decision (1.58375ms)
+#21 1.653 ✔ Review aggregate rejects creator, requester, stale version and blocked evidence (0.228375ms)
+#21 1.672 ✔ support endpoint accepts v10 but replay remains explicitly synthetic (71.493ms)
+#21 1.679 ✔ v10 cannot bypass service authentication or disabled real-provider guard (3.738792ms)
+#21 1.699 ✔ v10 flows through service to provider with exact output and versioned provenance (mock transport) (25.0765ms)
+#21 1.774 ✔ support endpoint accepts v11 but replay remains explicitly synthetic (64.060292ms)
+#21 1.788 ✔ v11 cannot bypass service authentication or disabled real-provider guard (14.117459ms)
+#21 1.805 ✔ v11 flows through service to provider with exact output and versioned provenance (mock transport) (19.230875ms)
+#21 1.814 ✔ support endpoint accepts v12 but replay remains explicitly synthetic (55.480167ms)
+#21 1.814 ✔ v12 cannot bypass service authentication or disabled real-provider guard (8.868667ms)
+#21 1.814 ✔ v12 flows through service to provider with exact output and versioned provenance (mock transport) (21.870625ms)
+#21 1.814 ✔ support endpoint accepts v13 but replay remains explicitly synthetic (66.45925ms)
+#21 1.814 ✔ v13 cannot bypass service authentication or disabled real-provider guard (10.895916ms)
+#21 1.814 ✔ v13 flows through service to provider with exact output and versioned provenance (mock transport) (38.519667ms)
+#21 1.859 ✔ support endpoint accepts v14 but replay remains explicitly synthetic (81.805125ms)
+#21 1.867 ✔ v14 cannot bypass service authentication or disabled real-provider guard (9.416875ms)
+#21 1.893 ✔ v14 flows through service to provider with exact output and versioned provenance (mock transport) (29.592084ms)
+#21 1.911 ✔ support endpoint accepts v5 but replay remains explicitly synthetic (81.250917ms)
+#21 1.911 ✔ v5 cannot bypass service authentication or disabled real-provider guard (3.340416ms)
+#21 1.911 ✔ v5 flows through service to provider with exact output and versioned provenance (mock transport) (16.465166ms)
+#21 1.911 ✔ support endpoint accepts v6 but replay remains explicitly synthetic (53.190459ms)
+#21 1.911 ✔ v6 cannot bypass service authentication or disabled real-provider guard (12.989292ms)
+#21 1.911 ✔ v6 flows through service to provider with exact output and versioned provenance (mock transport) (32.400626ms)
+#21 1.911 ✔ support endpoint accepts v7 but replay remains explicitly synthetic (63.984667ms)
+#21 1.911 ✔ v7 cannot bypass service authentication or disabled real-provider guard (3.675083ms)
+#21 1.911 ✔ v7 flows through service to provider with exact output and versioned provenance (mock transport) (36.06975ms)
+#21 1.911 ✔ support endpoint accepts v8 but replay remains explicitly synthetic (52.616166ms)
+#21 1.911 ✔ v8 cannot bypass service authentication or disabled real-provider guard (7.198834ms)
+#21 1.911 ✔ v8 flows through service to provider with exact output and versioned provenance (mock transport) (19.180291ms)
+#21 1.914 ✔ support endpoint accepts v9 but replay remains explicitly synthetic (37.669834ms)
+#21 1.924 ✔ v9 cannot bypass service authentication or disabled real-provider guard (5.791833ms)
+#21 1.935 ✔ v9 flows through service to provider with exact output and versioned provenance (mock transport) (15.417541ms)
+#21 1.945 ✔ all six prompt versions retain the B predecessor contract; unknown versions fail (3.950083ms)
+#21 1.945 ✔ v2.4 catalogue is opt-in by version and preserves all old catalogue cases (66.018625ms)
+#21 1.945 ✔ upgrading extra-case IDs preserves their criterion, not the ID as a criterion (0.61325ms)
+#21 1.945 ✔ v6 adapter sends the selected prompt and retains raw output and truncation (mock transport) (8.337125ms)
+#21 1.960 ✔ all seven prompt versions retain the B predecessor contract; unknown versions fail (1.541916ms)
+#21 1.960 ✔ v2.5 catalogue is opt-in by version and preserves all old catalogue cases (53.68075ms)
+#21 1.960 ✔ upgrading extra-case IDs preserves their criterion, not the ID as a criterion (0.124ms)
+#21 1.960 ✔ v7 adapter sends the selected prompt and retains raw output and truncation (mock transport) (10.189375ms)
+#21 1.969 ✔ all eight prompt versions retain the B predecessor contract; unknown versions fail (3.367541ms)
+#21 1.969 ✔ v2.6 catalogue is opt-in by version and preserves all old catalogue cases (53.511792ms)
+#21 1.970 ✔ upgrading extra-case IDs preserves their criterion, not the ID as a criterion (0.1415ms)
+#21 1.971 ✔ v7 adapter sends the selected prompt and retains raw output and truncation (mock transport) (8.748209ms)
+#21 1.995 ✔ all ten prompt versions retain the B predecessor contract; unknown versions fail (1.161958ms)
+#21 1.995 ✔ v2.7 catalogue is opt-in by version and preserves all old catalogue cases (52.728375ms)
+#21 1.996 ✔ upgrading extra-case IDs preserves their criterion, not the ID as a criterion (0.121166ms)
+#21 1.996 ✔ v7 adapter sends the selected prompt and retains raw output and truncation (mock transport) (9.74475ms)
+#21 1.999 ✔ all eleven prompt versions retain the B predecessor contract; unknown versions fail (3.71975ms)
+#21 1.999 ✔ v2.8 catalogue is opt-in by version and preserves all old catalogue cases (32.029959ms)
+#21 1.999 ✔ upgrading extra-case IDs preserves their criterion, not the ID as a criterion (0.127375ms)
+#21 1.999 ✔ v7 adapter sends the selected prompt and retains raw output and truncation (mock transport) (9.389334ms)
+#21 1.999 ℹ tests 575
+#21 1.999 ℹ suites 0
+#21 1.999 ℹ pass 575
+#21 1.999 ℹ fail 0
+#21 1.999 ℹ cancelled 0
+#21 1.999 ℹ skipped 0
+#21 1.999 ℹ todo 0
+#21 1.999 ℹ duration_ms 798.476417
+#21 2.004 npm notice
+#21 2.004 npm notice New major version of npm available! 11.19.0 -> 12.2.0
+#21 2.004 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+#21 2.004 npm notice To update run: npm install -g npm@12.2.0
+#21 2.004 npm notice
+#21 DONE 2.0s
+
+#22 [worker build 9/9] RUN npm prune --omit=dev
+#22 0.973 
+#22 0.973 removed 5 packages, and audited 65 packages in 820ms
+#22 0.973 
+#22 0.973 21 packages are looking for funding
+#22 0.973   run `npm fund` for details
+#22 0.974 
+#22 0.974 found 0 vulnerabilities
+#22 DONE 1.0s
+
+#23 [governance stage-1 3/7] WORKDIR /app
+#23 CACHED
+
+#24 [governance stage-1 2/7] RUN apt-get update     && apt-get install -y --no-install-recommends --only-upgrade perl-base     && apt-get clean     && rm -rf /usr/local/lib/node_modules/npm     && rm -f /usr/local/bin/npm /usr/local/bin/npx
+#24 CACHED
+
+#25 [governance stage-1 4/7] COPY --from=build --chown=node:node /app/node_modules ./node_modules
+#25 CACHED
+
+#26 [governance stage-1 5/7] COPY --from=build --chown=node:node /app/dist ./dist
+#26 DONE 0.0s
+
+#23 [registry stage-1 3/7] WORKDIR /app
+#23 CACHED
+
+#24 [registry stage-1 2/7] RUN apt-get update     && apt-get install -y --no-install-recommends --only-upgrade perl-base     && apt-get clean     && rm -rf /usr/local/lib/node_modules/npm     && rm -f /usr/local/bin/npm /usr/local/bin/npx
+#24 CACHED
+
+#25 [registry stage-1 4/7] COPY --from=build --chown=node:node /app/node_modules ./node_modules
+#25 CACHED
+
+#27 [governance stage-1 6/7] COPY --chown=node:node package.json ./
+#27 DONE 0.0s
+
+#28 [registry stage-1 7/7] COPY --chown=node:node public ./public
+#28 DONE 0.0s
+
+#29 [governance] exporting to image
+#29 exporting layers 0.1s done
+#29 exporting manifest sha256:975f8798438749c5008c4930ce007117e7b8c35606fd88ccc1b33b79180b6bfe
+#29 exporting manifest sha256:975f8798438749c5008c4930ce007117e7b8c35606fd88ccc1b33b79180b6bfe 0.0s done
+#29 exporting config sha256:a181a1c4eea8cd5f00288a3a87ca4f2b2782c6412882034cf07d23a83437f1df 0.0s done
+#29 exporting attestation manifest sha256:c20daeabce836819efaaf34aae4ca1c756a91cff3f60babafe020095bc8317d8 0.0s done
+#29 exporting manifest list sha256:ab6bf3a9954619f760158b31f797726d6e3b7cd19620ff857b1cd5b79fec2d94 0.0s done
+#29 naming to docker.io/library/rg-v23-v6:local done
+#29 unpacking to docker.io/library/rg-v23-v6:local
+#29 unpacking to docker.io/library/rg-v23-v6:local 0.0s done
+#29 DONE 0.3s
+
+#30 [evaluation] exporting to image
+#30 exporting layers 0.1s done
+#30 exporting manifest sha256:3e31272d588470d461c5ccedec3f3f0de6ad93e6b6c47de5989122900782ddbd 0.0s done
+#30 exporting config sha256:8789ce24558525da08ea69012164fb93f8bea46ab00ba63d2d5b91a823b64bf2 0.0s done
+#30 exporting attestation manifest sha256:45607782d295b2f8dfca433c854184869cafaffb389687a651552069dc0c6555 0.0s done
+#30 exporting manifest list sha256:be5110bda4d95fe7f208259b3d84d318560b155fa8cfa51f8c95cec20ae9273a 0.0s done
+#30 naming to docker.io/library/rg-v23-v6:local done
+#30 unpacking to docker.io/library/rg-v23-v6:local 0.1s done
+#30 DONE 0.3s
+
+#31 [registry] exporting to image
+#31 exporting layers 0.1s done
+#31 exporting manifest sha256:f34cbd878b4400ba427d4a3c2cc8059a903afbf0722677488666b6cb38bf83dc 0.0s done
+#31 exporting config sha256:45e0be93969a09b06520eba2ebd8ba6d512a7e87620cfac6e9f1da91f5421459 0.0s done
+#31 exporting attestation manifest sha256:77627df8fced6a6e111335ab8db5038d6925564143b9515ee70f68098134507a 0.0s done
+#31 exporting manifest list sha256:2f12ec219b5bd4ed9ad188e447978789ca76c7016a699b5de2876524f7721984 0.0s done
+#31 naming to docker.io/library/rg-v23-v6:local done
+#31 unpacking to docker.io/library/rg-v23-v6:local 0.1s done
+#31 DONE 0.3s
+
+#32 [worker] exporting to image
+#32 exporting layers 0.1s done
+#32 exporting manifest sha256:53d8700df89381a2363040a23c4838df4b385eae1a359869bee03f3ac50d7880 0.0s done
+#32 exporting config sha256:b84f3ed6fd8ce1fc3566236857fcca2a465cc76d575cedca85d07887ef5d747f 0.1s done
+#32 exporting attestation manifest sha256:d668829d0c33bfea5ae6cec5fdcc91d6f67827f28fdd830cda7873e22ed00604 0.0s done
+#32 exporting manifest list sha256:691980a289b41e8bd9a28181ea429214d4a68418d92cae17609ab05a716a8b63 0.0s done
+#32 naming to docker.io/library/rg-v23-v6:local done
+#32 unpacking to docker.io/library/rg-v23-v6:local 0.1s done
+#32 DONE 0.3s
+
+#33 [gateway] exporting to image
+#33 exporting layers 0.1s done
+#33 exporting manifest sha256:2c63eca2f630187c629304fc9b3712d40e4611f3b5f5af60b4e8acc2ba547f60 0.0s done
+#33 exporting config sha256:f30ddd06ac1c747fa75342b31749a8a93be4b9bb841880b7999ce566b20be5a3 0.0s done
+#33 exporting attestation manifest sha256:5145c4ee1d1da0b0f100d930fc3a2b7cd8dafbc3a3a2e7137643fc81adefcf1b 0.0s done
+#33 exporting manifest list sha256:6caf86f71891e92bc2fafcb305ec3a14911f37d9880cc51d5324365c7a8496fb 0.0s done
+#33 naming to docker.io/library/rg-v23-v6:local done
+#33 unpacking to docker.io/library/rg-v23-v6:local 0.1s done
+#33 DONE 0.3s
+
+#34 [support] exporting to image
+#34 exporting layers 0.1s done
+#34 exporting manifest sha256:5f95b7f5614411e56f0b0da8bdfeabaa84717810a248df2c02153ef2fbeece78 0.0s done
+#34 exporting config sha256:df35d5297ceb2da2516209000bc21a1439bf8dd8a755443d926ed9d9264e9dba 0.1s done
+#34 exporting attestation manifest sha256:84775516291ed77d896d25656b0689e59641cc083e994a30d2b5aab1e1e6c543 0.0s done
+#34 exporting manifest list sha256:93e015984e18a9cf01e7c95bc79b96339ede8a1ebabe0506b97f17c2335ca594 0.0s done
+#34 naming to docker.io/library/rg-v23-v6:local done
+#34 unpacking to docker.io/library/rg-v23-v6:local 0.1s done
+#34 DONE 0.3s
+
+#35 [evaluation] resolving provenance for metadata file
+#35 DONE 0.0s
+
+#36 [governance] resolving provenance for metadata file
+#36 DONE 0.0s
+
+#37 [registry] resolving provenance for metadata file
+#37 DONE 0.1s
+
+#38 [gateway] resolving provenance for metadata file
+#38 DONE 0.0s
+
+#39 [worker] resolving provenance for metadata file
+#39 DONE 0.0s
+
+#40 [support] resolving provenance for metadata file
+#40 DONE 0.0s
+
+#16 [gateway internal] load build context
+ Image rg-v23-v6:local Built 
+ Image rg-v23-v6:local Built 
+ Image rg-v23-v6:local Built 
+ Image rg-v23-v6-postgres:local Built 
+ Image rg-v23-v6:local Built 
+ Image rg-v23-v6:local Built 
+ Image rg-v23-v6:local Built 
+ Container rg-v23-v6-20261015-support-1 Recreate 
+ Container rg-v23-v6-20261015-postgres-1 Recreate 
+ Container rg-v23-v6-20261015-support-1 Recreated 
+ Container rg-v23-v6-20261015-postgres-1 Recreated 
+ Container rg-v23-v6-20261015-registry-1 Recreate 
+ Container rg-v23-v6-20261015-registry-1 Recreated 
+ Container rg-v23-v6-20261015-evaluation-1 Recreate 
+ Container rg-v23-v6-20261015-evaluation-1 Recreated 
+ Container rg-v23-v6-20261015-worker-1 Recreate 
+ Container rg-v23-v6-20261015-governance-1 Recreate 
+ Container rg-v23-v6-20261015-governance-1 Recreated 
+ Container rg-v23-v6-20261015-gateway-1 Recreate 
+ Container rg-v23-v6-20261015-worker-1 Recreated 
+ Container rg-v23-v6-20261015-gateway-1 Recreated 
+ Container rg-v23-v6-20261015-rabbitmq-1 Starting 
+ Container rg-v23-v6-20261015-postgres-1 Starting 
+ Container rg-v23-v6-20261015-support-1 Starting 
+ Container rg-v23-v6-20261015-rabbitmq-1 Started 
+ Container rg-v23-v6-20261015-postgres-1 Started 
+ Container rg-v23-v6-20261015-postgres-1 Waiting 
+ Container rg-v23-v6-20261015-support-1 Started 
+ Container rg-v23-v6-20261015-postgres-1 Healthy 
+ Container rg-v23-v6-20261015-registry-1 Starting 
+ Container rg-v23-v6-20261015-registry-1 Started 
+ Container rg-v23-v6-20261015-registry-1 Waiting 
+ Container rg-v23-v6-20261015-rabbitmq-1 Waiting 
+ Container rg-v23-v6-20261015-rabbitmq-1 Healthy 
+ Container rg-v23-v6-20261015-registry-1 Healthy 
+ Container rg-v23-v6-20261015-evaluation-1 Starting 
+ Container rg-v23-v6-20261015-evaluation-1 Started 
+ Container rg-v23-v6-20261015-evaluation-1 Waiting 
+ Container rg-v23-v6-20261015-support-1 Waiting 
+ Container rg-v23-v6-20261015-evaluation-1 Waiting 
+ Container rg-v23-v6-20261015-support-1 Healthy 
+ Container rg-v23-v6-20261015-evaluation-1 Healthy 
+ Container rg-v23-v6-20261015-governance-1 Starting 
+ Container rg-v23-v6-20261015-evaluation-1 Healthy 
+ Container rg-v23-v6-20261015-worker-1 Starting 
+ Container rg-v23-v6-20261015-governance-1 Started 
+ Container rg-v23-v6-20261015-governance-1 Waiting 
+ Container rg-v23-v6-20261015-worker-1 Started 
+ Container rg-v23-v6-20261015-governance-1 Healthy 
+ Container rg-v23-v6-20261015-gateway-1 Starting 
+ Container rg-v23-v6-20261015-gateway-1 Started 

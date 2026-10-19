@@ -1,0 +1,22 @@
+{
+  "version": "semantic-review-wire-v3-real-plan",
+  "experimentId": "releaseguard-semantic-wire-v3-real-20261019",
+  "provider": "groq",
+  "providerEndpoint": "https://api.groq.com/openai/v1/chat/completions",
+  "modelId": "openai/gpt-oss-120b",
+  "temperature": 0,
+  "reasoningEffort": "low",
+  "maxOutputTokens": 2400,
+  "requestTimeoutMs": 60000,
+  "plannedSamples": 3,
+  "maximumRequests": 3,
+  "automaticRetries": 0,
+  "providerSwitches": 0,
+  "customerGenerationRequests": 0,
+  "paidCallsAllowed": false,
+  "deploymentAllowed": false,
+  "publicationAllowed": false,
+  "gitPushAllowed": false,
+  "stopOnProtocolFailure": true,
+  "continueOnSemanticMismatch": true
+}

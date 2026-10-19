@@ -1,0 +1,10 @@
+{
+  "version": "semantic-pilot-v1-experiment-lock",
+  "experimentId": "releaseguard-semantic-pilot-v1-20261018",
+  "startedAt": "2026-10-18T11:21:21.061Z",
+  "maximumRequests": 20,
+  "automaticRetries": 0,
+  "customerGenerationRequests": 0,
+  "manifestSha256": "0aa582ba9ee6fd86b44686fe8d19d0db0bb789066f961be64e99c1a2953d56c3",
+  "fixturesSha256": "e3c312b4f120cdaa64db21f9ef2c26eeba222e94b81cc4597c5a488dadedda65"
+}

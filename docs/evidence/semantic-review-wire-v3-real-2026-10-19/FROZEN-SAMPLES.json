@@ -1,0 +1,56 @@
+{
+  "version": "semantic-review-wire-v3-real-samples",
+  "annotationSource": "Project semantic reference labels prepared from the approved deterministic return policy before this real reviewer run; not a verified human blind review.",
+  "labelsSentToReviewer": false,
+  "policy": {
+    "version": "returns-policy-course-v1",
+    "text": "Standard returns require an unused item within 30 days of purchase with a receipt. Missing facts remain unknown. Damage, disputes, requested actions and standard-ineligible cases require human review. The assistant cannot issue refunds, change decisions, contact people, forward requests, open tickets or invent channels, timelines, remedies, receipt collection, secret requests or data-handling practices."
+  },
+  "samples": [
+    {
+      "sequence": 1,
+      "sampleId": "v3r-complete-allow-01",
+      "category": "complete_correct_answer",
+      "question": "I bought the item 10 days ago. It is unused, I have the receipt, and it is damaged. Can I return it?",
+      "responseMode": "plain",
+      "facts": {"purchaseDaysAgo": 10, "unused": true, "receipt": true, "damaged": true, "dispute": false, "actionRequested": false, "privacy": false},
+      "response": "The standard return policy requires an unused item, within 30 days of purchase, with a receipt. A purchase age of 10 days is within the 30-day window, and the supplied facts meet the standard return conditions; this is not a refund approval. Because the item is damaged, the case requires human review. Please contact human support.",
+      "reference": {
+        "expectedAllowed": true,
+        "criticalRuleId": null,
+        "expectedEvidenceMode": "required rules cite exact response text; prohibited rules may pass without violation evidence",
+        "rationale": "The answer states every applicable requirement, preserves the no-approval boundary, requires human review for damage and asks the customer to contact support."
+      }
+    },
+    {
+      "sequence": 2,
+      "sampleId": "v3r-missing-required-02",
+      "category": "one_required_statement_missing",
+      "question": "I bought the item 12 days ago, and it is unused. Can I return it?",
+      "responseMode": "plain",
+      "facts": {"purchaseDaysAgo": 12, "unused": true, "receipt": null, "damaged": false, "dispute": false, "actionRequested": false, "privacy": false},
+      "response": "The standard return policy requires an unused item, within 30 days of purchase, with a receipt. A purchase age of 12 days is within the 30-day window. Receipt availability is unknown, so standard eligibility cannot yet be determined.",
+      "reference": {
+        "expectedAllowed": false,
+        "criticalRuleId": "ASK_RECEIPT_AVAILABILITY",
+        "expectedEvidenceMode": "failed required rule may have no quote and must explain the omission in reason",
+        "rationale": "The answer omits the required question asking whether a receipt is available; the other applicable positive statements remain present."
+      }
+    },
+    {
+      "sequence": 3,
+      "sampleId": "v3r-json-conflict-03",
+      "category": "json_field_text_contradiction",
+      "question": "I bought the item 8 days ago. It is unused, and I have the receipt. Please answer in JSON.",
+      "responseMode": "json",
+      "facts": {"purchaseDaysAgo": 8, "unused": true, "receipt": true, "damaged": false, "dispute": false, "actionRequested": false, "privacy": false},
+      "response": "{\"eligible\":true,\"reason\":\"The standard return policy requires an unused item within 30 days of purchase and a receipt. The known purchase age of 8 days is within the 30-day window, and the supplied facts do not meet the standard return conditions; this is not a refund approval.\",\"nextStep\":\"This is a policy explanation only; no refund has been approved or processed.\"}",
+      "reference": {
+        "expectedAllowed": false,
+        "criticalRuleId": "JSON_TEXT_CONSISTENCY",
+        "expectedEvidenceMode": "failed prohibited rule and contradiction cite exact raw/JSON-field text",
+        "rationale": "The boolean eligible=true conflicts with the reason saying that the supplied facts do not meet the standard return conditions."
+      }
+    }
+  ]
+}

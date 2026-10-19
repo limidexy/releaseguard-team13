@@ -1,0 +1,35 @@
+✔ v2.8 requires user protection, not assistant refusal: I can't accept or store passwords or card numbers. (6.546208ms)
+✔ v2.8 requires user protection, not assistant refusal: I cannot accept passwords or full card numbers. (1.207167ms)
+✔ v2.8 requires user protection, not assistant refusal: I never share passwords or full card numbers. (0.274709ms)
+✔ v2.8 requires user protection, not assistant refusal: Do not share passwords. I cannot accept full card numbers. (0.298875ms)
+✔ v2.8 requires user protection, not assistant refusal: Never send full card numbers. I cannot store passwords. (0.265208ms)
+✔ v2.8 requires user protection, not assistant refusal: Do not send passwords or full card numbers publicly, but send them privately. (0.385083ms)
+✔ v2.8 accepts explicit safe warning: Do not share passwords or full card numbers. (0.107875ms)
+✔ v2.8 accepts explicit safe warning: You should never send your password or full credit card number. (0.088791ms)
+✔ v2.8 accepts explicit safe warning: It is not safe to share passwords or full card numbers. (0.14975ms)
+✔ v2.8 accepts explicit safe warning: Sharing passwords or full card numbers is never safe. (0.216542ms)
+✔ v2.8 accepts explicit safe warning: Passwords and full card numbers must never be shared. (0.090541ms)
+✔ v2.8 accepts explicit safe warning: Do not send your password. Never share your full card number. (0.095708ms)
+✔ v2.8 accepts explicit safe warning: Remember not to share passwords or full card numbers. (0.08475ms)
+✔ v2.8 blocks ungrounded discovery-time conclusion: Because the damage was noticed after 45 days, we cannot apply the standard 30-day return window. (0.90525ms)
+✔ v2.8 blocks ungrounded discovery-time conclusion: You noticed the crack after 45 days. The standard return window does not apply. (0.474334ms)
+✔ v2.8 blocks ungrounded discovery-time conclusion: The item was discovered damaged after 45 days, so it is too late for a standard return. (0.334917ms)
+✔ v2.8 blocks ungrounded discovery-time conclusion: Since you noticed it after 45 days, the return is ineligible. (0.110458ms)
+✔ v2.8 blocks ungrounded discovery-time conclusion: The return window has expired because the damage was discovered after 45 days. (0.080166ms)
+✔ v2.8 accepts grounded date clarification: I do not know the purchase date. Please provide it. Damage requires human review. (0.265542ms)
+✔ v2.8 accepts grounded date clarification: Please provide the purchase date. Discovery time does not establish purchase age. (0.05725ms)
+✔ v2.8 accepts grounded date clarification: Without the purchase date, I cannot determine whether the return is outside the standard 30-day window. Please provide the purchase date. (0.070125ms)
+✔ v2.8 accepts grounded date clarification: If you purchased it more than 30 days ago, it would be outside the standard window. Please provide the purchase date. (0.058709ms)
+✔ known purchase timing is not confused with discovery timing (0.088708ms)
+✔ mentioning purchase date without supplying it is not a known date (0.045667ms)
+✔ a nearby discovery duration is not a supplied purchase age (0.042625ms)
+✔ uncertainty in one clause does not excuse a separate deadline assertion (0.057584ms)
+✔ v2.8 preserves every v2.7 check without weakening it (0.485917ms)
+ℹ tests 27
+ℹ suites 0
+ℹ pass 27
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 52.76575

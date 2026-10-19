@@ -1,0 +1,9 @@
+{
+  "experimentId": "releaseguard-semantic-pilot-v1-20261018",
+  "completedAt": "2026-10-18T11:22:37.511Z",
+  "status": "SEMANTIC_PILOT_INCOMPLETE",
+  "actualRequests": 3,
+  "secondRoundAuthorized": false,
+  "finalResultSha256": "29d0deb90ffaf5c5ed3ecd92c9201f98aaf0da555d2698d1eacfa66bd38b490d",
+  "finalReadoutSha256": "6f3972cd550797bf9feb2f6e42190f96388f50cd05dc74b43594d6f43e2810bd"
+}

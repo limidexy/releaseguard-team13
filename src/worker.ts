@@ -5,6 +5,9 @@ import { evaluationSchema } from './evaluation.js';
 import { evaluate, outputSchema, type Output } from './domain.js';
 import { broker, queueName } from './queue.js';
 import { z } from 'zod';
+import { evaluateControlledV13 } from './controlled-evaluation-v13.js';
+import { evaluateControlledV14 } from './controlled-evaluation-v14.js';
+import {evaluateControlledV17} from './controlled-evaluation-v17.js';
 export async function worker(app: FastifyInstance) {
   await evaluationSchema(); const workerId = os.hostname(), leaseMs = Number(process.env.LEASE_MS ?? 60000);
   const { channel } = await broker(); await channel.prefetch(1);
@@ -34,8 +37,9 @@ export async function worker(app: FastifyInstance) {
         const raw = JSON.parse(Buffer.concat(chunks).toString()); outputs = z.array(outputSchema).max(60).parse(raw.outputs); provenance = raw.provenance;
         if (!provenance || (provenance as any).source !== job.input.source) throw new Error('Runner source mismatch');
       }
-      const result = evaluate(job.snapshot.suite.data.cases, job.snapshot.suite.data.policy, outputs);
-      await pool.query("UPDATE jobs SET status='succeeded',result=$3,execution=$4,finished_at=now(),lease_until=NULL WHERE id=$1 AND lease_id=$2 AND status='running'", [jobId, lease, result, { workerId, durationMs: performance.now() - start, provenance }]);
+      const controlled = job.input.promptVersion === 'v17' ? evaluateControlledV17(job.snapshot.suite.data.cases, job.snapshot.suite.data.policy, outputs) : (job.input.promptVersion === 'v14' || job.input.promptVersion === 'v15' || job.input.promptVersion === 'v16') ? evaluateControlledV14(job.snapshot.suite.data.cases, job.snapshot.suite.data.policy, outputs) : job.input.promptVersion === 'v13' ? evaluateControlledV13(job.snapshot.suite.data.cases, job.snapshot.suite.data.policy, outputs) : undefined;
+      const result = controlled?.result ?? evaluate(job.snapshot.suite.data.cases, job.snapshot.suite.data.policy, outputs);
+      await pool.query("UPDATE jobs SET status='succeeded',result=$3,execution=$4,finished_at=now(),lease_until=NULL WHERE id=$1 AND lease_id=$2 AND status='running'", [jobId, lease, result, { workerId, durationMs: performance.now() - start, provenance, ...(controlled ? { rawModelEvaluation: controlled.rawModelEvaluation, explanationValidation: controlled.records } : {}) }]);
       app.log.info({ jobId, workerId, gate: result.gate }, 'evaluation completed'); channel.ack(msg);
     } catch (e) {
       app.log.error({ error: String(e) }, 'worker attempt failed');

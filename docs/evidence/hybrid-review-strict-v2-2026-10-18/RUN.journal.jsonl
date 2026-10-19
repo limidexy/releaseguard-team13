@@ -1,0 +1,2 @@
+{"event":"semantic-review-attempt-completed","sequence":1,"fixtureId":"v2-damaged-allowed-review-because","status":"completed","protocolPassed":true,"semanticMatches":true,"at":"2026-10-18T01:53:56.541Z"}
+{"event":"semantic-review-attempt-completed","sequence":2,"fixtureId":"v2-damaged-deny-review","status":"invalid_result","protocolPassed":false,"semanticMatches":false,"at":"2026-10-18T01:54:29.792Z"}

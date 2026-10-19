@@ -1,0 +1,31 @@
+{
+  "version": "semantic-review-wire-v3-candidate-freeze",
+  "frozenAt": "2026-10-18T22:41:45+08:00",
+  "gitHead": "20d258d891935b2d5bee3375ebf81b2872adf76f",
+  "networkRequests": 0,
+  "realModelScoreCreated": false,
+  "fullRepositoryTestsRun": false,
+  "targetedTests": {"passed": 24, "failed": 0},
+  "historicalState": {
+    "pilotStatus": "SEMANTIC_PILOT_INCOMPLETE",
+    "reviewerQualification": "calibration_pending",
+    "shadowOnly": true
+  },
+  "candidateFiles": [
+    {"path": "src/semantic-review-wire-v3.ts", "sha256": "a66cd592fed23cbf76033d0ab4a47a4610af509a7e2a16f81af62bbac9817b2f"},
+    {"path": "src/groq-semantic-review-transport-v2.ts", "sha256": "339905c9e034122f0424a6ba3bd10c2fc50a1c953fc7603e7b18a80b000d89ea"},
+    {"path": "tests/semantic-review-wire-v3.test.ts", "sha256": "de53219928688315f65b2ca9d0ca85ba9d78646f3586d9f2f95b83e3096b2f49"},
+    {"path": "tests/groq-semantic-review-transport-v2.test.ts", "sha256": "2b6f817cf18c0663be9f106b207eeb372803e1bfaeb68a76d2537d823bfac69e"},
+    {"path": "scripts/diagnose-semantic-review-wire-v3.mjs", "sha256": "3134ee2e3e966d718826274790535a4652f70b44dc716d4d11ac1f5a8a5f4b59"},
+    {"path": "docs/evidence/semantic-review-wire-v3-candidate-2026-10-18/COMPATIBILITY-DIAGNOSIS.json", "sha256": "bf63820cca3664375cf4ca1c359395b99c8cbca2c34509a28736b4a5c521ba10"}
+  ],
+  "protectedFilesVerifiedUnchanged": [
+    {"path": "src/semantic-review-wire-v2.ts", "sha256": "9c9c65464c2f4b996d3155daefd5677a255488b2a93c0da837f97614d45c2d28"},
+    {"path": "src/groq-semantic-review-transport-v1.ts", "sha256": "f5b4a0f15e881c7cda8f3245a9ad07a0666738adb6acfd50f7665d7e4fc0c64b"},
+    {"path": "src/semantic-review-sources-v1.ts", "sha256": "9a9c33a23274c3efbe3e4896464816d9389bfc75e2d9719be1fb7a4d3b3ed13c"},
+    {"path": "docs/evidence/hybrid-review-strict-v2-2026-10-18/FREEZE-MANIFEST.json", "sha256": "2b6192d4dbb1b120bafbfee8db1db0e4cfbace418feb9fb1a5a23a60e65f946c"},
+    {"path": "docs/evidence/hybrid-semantic-pilot-v1-2026-10-18/FINAL-RESULT.json", "sha256": "29d0deb90ffaf5c5ed3ecd92c9201f98aaf0da555d2698d1eacfa66bd38b490d"},
+    {"path": "docs/evidence/hybrid-semantic-pilot-v1-2026-10-18/EXPERIMENT.complete.json", "sha256": "998aa84b3ec124188403c46423d810cca4f03cb7d974411f897b0a33fadb6d94"}
+  ],
+  "notes": "Candidate is additive. It does not replace sealed v2 evidence, change historical scores, or enter the formal worker path."
+}

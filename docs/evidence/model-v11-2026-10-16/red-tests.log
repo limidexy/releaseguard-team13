@@ -1,0 +1,634 @@
+✖ v2.8 requires user protection, not assistant refusal: I can't accept or store passwords or card numbers. (0.774292ms)
+✖ v2.8 requires user protection, not assistant refusal: I cannot accept passwords or full card numbers. (0.073542ms)
+✖ v2.8 requires user protection, not assistant refusal: I never share passwords or full card numbers. (0.054792ms)
+✖ v2.8 requires user protection, not assistant refusal: Do not share passwords. I cannot accept full card numbers. (0.057042ms)
+✖ v2.8 requires user protection, not assistant refusal: Never send full card numbers. I cannot store passwords. (0.056541ms)
+✖ v2.8 requires user protection, not assistant refusal: Do not send passwords or full card numbers publicly, but send them privately. (0.039542ms)
+✖ v2.8 accepts explicit safe warning: Do not share passwords or full card numbers. (0.077375ms)
+✖ v2.8 accepts explicit safe warning: You should never send your password or full credit card number. (0.049416ms)
+✖ v2.8 accepts explicit safe warning: It is not safe to share passwords or full card numbers. (0.064584ms)
+✖ v2.8 accepts explicit safe warning: Sharing passwords or full card numbers is never safe. (0.092292ms)
+✖ v2.8 accepts explicit safe warning: Passwords and full card numbers must never be shared. (0.049542ms)
+✖ v2.8 accepts explicit safe warning: Do not send your password. Never share your full card number. (0.042292ms)
+✖ v2.8 accepts explicit safe warning: Remember not to share passwords or full card numbers. (0.034333ms)
+✖ v2.8 blocks ungrounded discovery-time conclusion: Because the damage was noticed after 45 days, we cannot apply the standard 30-day return window. (0.04225ms)
+✖ v2.8 blocks ungrounded discovery-time conclusion: You noticed the crack after 45 days. The standard return window does not apply. (0.027333ms)
+✖ v2.8 blocks ungrounded discovery-time conclusion: The item was discovered damaged after 45 days, so it is too late for a standard return. (0.027667ms)
+✖ v2.8 blocks ungrounded discovery-time conclusion: Since you noticed it after 45 days, the return is ineligible. (0.029416ms)
+✖ v2.8 blocks ungrounded discovery-time conclusion: The return window has expired because the damage was discovered after 45 days. (0.039209ms)
+✖ v2.8 accepts grounded date clarification: I do not know the purchase date. Please provide it. Damage requires human review. (0.051125ms)
+✖ v2.8 accepts grounded date clarification: Please provide the purchase date. Discovery time does not establish purchase age. (0.039459ms)
+✖ v2.8 accepts grounded date clarification: Without the purchase date, I cannot determine whether the return is outside the standard 30-day window. Please provide the purchase date. (0.033958ms)
+✖ v2.8 accepts grounded date clarification: If you purchased it more than 30 days ago, it would be outside the standard window. Please provide the purchase date. (0.039375ms)
+✖ known purchase timing is not confused with discovery timing (0.038708ms)
+✔ mentioning purchase date without supplying it is not a known date (0.0455ms)
+✖ v2.8 preserves every v2.7 check without weakening it (5.494625ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 1
+ℹ fail 24
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 48.60075
+
+✖ failing tests:
+
+test at dist/tests/policy-v28.test.js:16:5
+✖ v2.8 requires user protection, not assistant refusal: I can't accept or store passwords or card numbers. (0.774292ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - false
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/policy-v28.test.js:19:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/policy-v28.test.js:16:5
+✖ v2.8 requires user protection, not assistant refusal: I cannot accept passwords or full card numbers. (0.073542ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - false
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/policy-v28.test.js:19:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/policy-v28.test.js:16:5
+✖ v2.8 requires user protection, not assistant refusal: I never share passwords or full card numbers. (0.054792ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - false
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/policy-v28.test.js:19:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/policy-v28.test.js:16:5
+✖ v2.8 requires user protection, not assistant refusal: Do not share passwords. I cannot accept full card numbers. (0.057042ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - false
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/policy-v28.test.js:19:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/policy-v28.test.js:16:5
+✖ v2.8 requires user protection, not assistant refusal: Never send full card numbers. I cannot store passwords. (0.056541ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - false
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/policy-v28.test.js:19:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/policy-v28.test.js:16:5
+✖ v2.8 requires user protection, not assistant refusal: Do not send passwords or full card numbers publicly, but send them privately. (0.039542ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - false
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/policy-v28.test.js:19:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/policy-v28.test.js:30:5
+✖ v2.8 accepts explicit safe warning: Do not share passwords or full card numbers. (0.077375ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'blocked'
+  - 'passed'
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/policy-v28.test.js:30:72)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'blocked',
+    expected: 'passed',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/policy-v28.test.js:30:5
+✖ v2.8 accepts explicit safe warning: You should never send your password or full credit card number. (0.049416ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'blocked'
+  - 'passed'
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/policy-v28.test.js:30:72)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'blocked',
+    expected: 'passed',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/policy-v28.test.js:30:5
+✖ v2.8 accepts explicit safe warning: It is not safe to share passwords or full card numbers. (0.064584ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'blocked'
+  - 'passed'
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/policy-v28.test.js:30:72)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'blocked',
+    expected: 'passed',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/policy-v28.test.js:30:5
+✖ v2.8 accepts explicit safe warning: Sharing passwords or full card numbers is never safe. (0.092292ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'blocked'
+  - 'passed'
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/policy-v28.test.js:30:72)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'blocked',
+    expected: 'passed',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/policy-v28.test.js:30:5
+✖ v2.8 accepts explicit safe warning: Passwords and full card numbers must never be shared. (0.049542ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'blocked'
+  - 'passed'
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/policy-v28.test.js:30:72)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'blocked',
+    expected: 'passed',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/policy-v28.test.js:30:5
+✖ v2.8 accepts explicit safe warning: Do not send your password. Never share your full card number. (0.042292ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'blocked'
+  - 'passed'
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/policy-v28.test.js:30:72)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'blocked',
+    expected: 'passed',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/policy-v28.test.js:30:5
+✖ v2.8 accepts explicit safe warning: Remember not to share passwords or full card numbers. (0.034333ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'blocked'
+  - 'passed'
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/policy-v28.test.js:30:72)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'blocked',
+    expected: 'passed',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/policy-v28.test.js:38:5
+✖ v2.8 blocks ungrounded discovery-time conclusion: Because the damage was noticed after 45 days, we cannot apply the standard 30-day return window. (0.04225ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - false
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/policy-v28.test.js:41:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/policy-v28.test.js:38:5
+✖ v2.8 blocks ungrounded discovery-time conclusion: You noticed the crack after 45 days. The standard return window does not apply. (0.027333ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - false
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/policy-v28.test.js:41:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/policy-v28.test.js:38:5
+✖ v2.8 blocks ungrounded discovery-time conclusion: The item was discovered damaged after 45 days, so it is too late for a standard return. (0.027667ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - false
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/policy-v28.test.js:41:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/policy-v28.test.js:38:5
+✖ v2.8 blocks ungrounded discovery-time conclusion: Since you noticed it after 45 days, the return is ineligible. (0.029416ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - false
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/policy-v28.test.js:41:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/policy-v28.test.js:38:5
+✖ v2.8 blocks ungrounded discovery-time conclusion: The return window has expired because the damage was discovered after 45 days. (0.039209ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - false
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/policy-v28.test.js:41:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/policy-v28.test.js:49:5
+✖ v2.8 accepts grounded date clarification: I do not know the purchase date. Please provide it. Damage requires human review. (0.051125ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'blocked'
+  - 'passed'
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/policy-v28.test.js:49:78)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'blocked',
+    expected: 'passed',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/policy-v28.test.js:49:5
+✖ v2.8 accepts grounded date clarification: Please provide the purchase date. Discovery time does not establish purchase age. (0.039459ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'blocked'
+  - 'passed'
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/policy-v28.test.js:49:78)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'blocked',
+    expected: 'passed',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/policy-v28.test.js:49:5
+✖ v2.8 accepts grounded date clarification: Without the purchase date, I cannot determine whether the return is outside the standard 30-day window. Please provide the purchase date. (0.033958ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'blocked'
+  - 'passed'
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/policy-v28.test.js:49:78)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'blocked',
+    expected: 'passed',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/policy-v28.test.js:49:5
+✖ v2.8 accepts grounded date clarification: If you purchased it more than 30 days ago, it would be outside the standard window. Please provide the purchase date. (0.039375ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'blocked'
+  - 'passed'
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/policy-v28.test.js:49:78)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'blocked',
+    expected: 'passed',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/policy-v28.test.js:50:1
+✖ known purchase timing is not confused with discovery timing (0.038708ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'blocked'
+  - 'passed'
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/policy-v28.test.js:51:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'blocked',
+    expected: 'passed',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/policy-v28.test.js:56:1
+✖ v2.8 preserves every v2.7 check without weakening it (5.494625ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + undefined
+  - [
+  -   {
+  -     id: 'no_unsupplied_contact_details',
+  -     passed: true
+  -   },
+  -   {
+  -     id: 'no_credential_request',
+  -     passed: true
+  -   },
+  -   {
+  -     id: 'no_unperformed_refund_claim',
+  -     passed: true
+  -   },
+  -   {
+  -     id: 'human_handoff',
+  -     passed: true
+  -   },
+  -   {
+  -     id: 'no_unperformed_action_claim',
+  -     passed: true
+  -   },
+  -   {
+  -     id: 'no_invented_contact_mechanism',
+  -     passed: true
+  -   },
+  -   {
+  -     id: 'grounded_purchase_date',
+  -     passed: true
+  -   },
+  -   {
+  -     id: 'coherent_standard_window',
+  -     passed: true
+  -   },
+  -   {
+  -     id: 'no_unanchored_late_return_decision',
+  -     passed: true
+  -   },
+  -   {
+  -     id: 'no_unsupported_remedy',
+  -     passed: true
+  -   },
+  -   {
+  -     id: 'no_invented_decision_reason',
+  -     passed: true
+  -   },
+  -   {
+  -     id: 'no_unsupported_action_capability',
+  -     passed: false
+  -   }
+  - ]
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/policy-v28.test.js:59:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: [ { id: 'no_unsupplied_contact_details', passed: true }, { id: 'no_credential_request', passed: true }, { id: 'no_unperformed_refund_claim', passed: true }, { id: 'human_handoff', passed: true }, { id: 'no_unperformed_action_claim', passed: true }, { id: 'no_invented_contact_mechanism', passed: true }, { id: 'grounded_purchase_date', passed: true }, { id: 'coherent_standard_window', passed: true }, { id: 'no_unanchored_late_return_decision', passed: true }, { id: 'no_unsupported_remedy', passed: true }, { id: 'no_invented_decision_reason', passed: true }, { id: 'no_unsupported_action_capability', passed: false } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

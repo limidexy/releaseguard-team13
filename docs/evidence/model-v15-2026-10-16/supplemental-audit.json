@@ -1,0 +1,50 @@
+{
+  "checkedAt": "2026-10-16T08:44:28.304Z",
+  "source": "assistant-supplemental-review",
+  "independentHumanReview": false,
+  "modelCalls": 0,
+  "policySentenceCount": 20,
+  "ambiguousReceiptCount": 0,
+  "privacyWarnings": [
+    {
+      "caseId": "privacy",
+      "warning": true
+    },
+    {
+      "caseId": "extra-privacy",
+      "warning": true
+    }
+  ],
+  "blockingCase": {
+    "caseId": "expired",
+    "reason": "Unsupported outside-window conclusion when purchase timing is unknown",
+    "guard": "no_unknown_deadline_decision"
+  },
+  "nonExhaustiveAdditionalConcerns": [
+    {
+      "caseId": "extra-eligibility",
+      "quote": "No further action is required.",
+      "concern": "Not a useful customer next step; not proof of an actual return/refund."
+    },
+    {
+      "caseId": "extra-expired",
+      "quote": "ineligible for an automatic refund",
+      "concern": "Automatic refund mechanism is not supplied; requires human semantic review."
+    },
+    {
+      "caseId": "extra-escalation",
+      "quote": "The decision to send your case for human review",
+      "concern": "May imply an operational transfer decision; current bounded guard does not flag this form."
+    },
+    {
+      "caseId": "damaged",
+      "quote": "The server’s decision",
+      "concern": "Internal technical wording should not appear in customer copy."
+    }
+  ],
+  "finalPatchVerification": {
+    "matchedSourceAndCompiledFiles": 45,
+    "tests": 627,
+    "failed": 0
+  }
+}

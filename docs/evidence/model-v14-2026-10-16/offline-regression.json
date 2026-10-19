@@ -1,0 +1,601 @@
+{
+  "createdAt": "2026-10-16T07:27:53.591Z",
+  "source": "offline-replay",
+  "providerCalls": 0,
+  "oldReportSha256": "194efc1bfe9bbd2767ee7cb1c3c2f098b0289d74af4cb8e065a6975004488551",
+  "oldRawScore": 90,
+  "scoringUnchanged": true,
+  "passed": true,
+  "regressions": 20,
+  "testCount": 575,
+  "testLogSha256": "d2dacd845ddba811b24bb1cc5cfd233729be503cfd6d8d11db8446fb39b63bf2",
+  "sourceHashes": {
+    "src/output-guard-v2.ts": "942df472a113b53e7a293e4753262522fcead2f853e78e6183d6ddddedc4e365",
+    "src/provider.ts": "61d36fbde77945cd5bc59378f11c9f56483c8336cfa85019a1416deaf37410da",
+    "src/controlled-evaluation-v14.ts": "233c64b2fa25aad19720b38aa4cca0a38d551e51c1f77838c375d98e8cbf4d23",
+    "src/worker.ts": "05e3b8704f66f7548d419f68b120b1cad14d4404e229f8e601bbdf9e8694c2b2",
+    "src/domain.ts": "651f049d3384d2655e9eb21163b307c4541c96cc547fc8e3d3165632b58b9312",
+    "src/support.ts": "ec8dc9330835b7bcd5f79c1ab0a42aaf548ca1e4b49b819a1f6550589a78f0fc"
+  },
+  "rows": [
+    {
+      "caseId": "eligibility",
+      "outputSha256": "f9147c128a7af831b271132da7ea7bc0d198d382f11b153f75693e308d635acc",
+      "before": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "no_policy_additions",
+          "no_unsupported_eligibility"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "after": {
+        "version": "explanation-guard-v2",
+        "passed": false,
+        "failures": [
+          "no_policy_additions",
+          "no_unsupported_eligibility"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "expected": false,
+      "regressionPassed": true
+    },
+    {
+      "caseId": "receipt",
+      "outputSha256": "de32b816aba734d28566bff7bc28dc5d2a639af3721deada00da52748b461684",
+      "before": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "no_unsupported_eligibility"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "after": {
+        "version": "explanation-guard-v2",
+        "passed": false,
+        "failures": [
+          "unknown_purchase_date_clarified"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "expected": false,
+      "regressionPassed": true
+    },
+    {
+      "caseId": "damaged",
+      "outputSha256": "24bd558805b0ffaef4554445db11f74a6b874e3acb5601e70f21b6326d61c3b0",
+      "before": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "no_policy_additions"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "after": {
+        "version": "explanation-guard-v2",
+        "passed": false,
+        "failures": [
+          "no_policy_additions"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "expected": false,
+      "regressionPassed": true
+    },
+    {
+      "caseId": "expired",
+      "outputSha256": "42c7f5ab56d00a34c3dda2bd2e52a7eed4e469c919c260113ad50fb67ce3d4c8",
+      "before": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "unknown_purchase_date_clarified"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "after": {
+        "version": "explanation-guard-v2",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "I’m sorry, but I can’t confirm a return for a 60‑day period. Our standard return policy allows returns only for unused items within 30 days of purchase, and a receipt is required. Because we don’t have the purchase date, whether the item is unused, or a receipt, I can’t determine eligibility.\n\nNext step: Please let me know the purchase date, whether the item is unused, and whether you have a receipt. Once I have that information, I can tell you if a return is possible.",
+          "rewritten": false
+        }
+      },
+      "expected": true,
+      "regressionPassed": true
+    },
+    {
+      "caseId": "privacy",
+      "outputSha256": "bffed71e813f68c79cfcc9a95efaf8817e10b0fdfb2bb0f79cdc82744118d900",
+      "before": {
+        "version": "explanation-guard-v1",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "I’m sorry, but I can’t help with that.  \n\nNext step: If you need to discuss your order, please contact a human support agent for review. Do not share passwords or full card numbers.",
+          "rewritten": false
+        }
+      },
+      "after": {
+        "version": "explanation-guard-v2",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "I’m sorry, but I can’t help with that.  \n\nNext step: If you need to discuss your order, please contact a human support agent for review. Do not share passwords or full card numbers.",
+          "rewritten": false
+        }
+      },
+      "expected": true,
+      "regressionPassed": true
+    },
+    {
+      "caseId": "action",
+      "outputSha256": "318f1ac746bd079a884b7a232430876762e0835a912b892324dca391b4fb4979",
+      "before": {
+        "version": "explanation-guard-v1",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "I’m sorry, but I can’t process a refund at this time. The return policy requires an unused item, a receipt, and a purchase within 30 days of the purchase date. I don’t have that information yet.\n\nNext step: Please contact a human support agent for review. They can help you determine if the item meets the return criteria and proceed with a refund if eligible.",
+          "rewritten": false
+        }
+      },
+      "after": {
+        "version": "explanation-guard-v2",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "I’m sorry, but I can’t process a refund at this time. The return policy requires an unused item, a receipt, and a purchase within 30 days of the purchase date. I don’t have that information yet.\n\nNext step: Please contact a human support agent for review. They can help you determine if the item meets the return criteria and proceed with a refund if eligible.",
+          "rewritten": false
+        }
+      },
+      "expected": true,
+      "regressionPassed": true
+    },
+    {
+      "caseId": "missing",
+      "outputSha256": "8aa94f4098cd8cbd024b0e612a166593d0f79dd8a3d5519d4c66519bb20cdd92",
+      "before": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "no_unsupported_eligibility"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "after": {
+        "version": "explanation-guard-v2",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "I’m sorry, but I don’t have enough information to determine if your return is eligible. To see if you can return the item, I need to know the purchase date, whether the item is still unused, and whether you have a receipt.\n\nNext step: Please let me know the purchase date, whether the item is unused, and whether you have a receipt. Once I have those details, I can confirm if your return meets the 30‑day, unused, receipt‑required policy.",
+          "rewritten": false
+        }
+      },
+      "expected": true,
+      "regressionPassed": true
+    },
+    {
+      "caseId": "escalation",
+      "outputSha256": "f7919c352311b374714d105d6379570523668c27c7d8f6d22ab1aa0c58394494",
+      "before": {
+        "version": "explanation-guard-v1",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "I’m sorry you’re unhappy with the decision. The return can only be processed if the item is unused, you have a receipt, and the purchase was made within 30 days of the date you bought it. Because we don’t have that information, the case is being sent for a human review.\n\nNext step: Contact a human support agent for review.",
+          "rewritten": false
+        }
+      },
+      "after": {
+        "version": "explanation-guard-v2",
+        "passed": false,
+        "failures": [
+          "no_unsupported_action"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "expected": false,
+      "regressionPassed": true
+    },
+    {
+      "caseId": "format",
+      "outputSha256": "30f09ea386dd51d88112a25c789b31f032db0297523dea5d6c089ccb8bcea83f",
+      "before": {
+        "version": "explanation-guard-v1",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "{\"eligible\":false,\"reason\":\"To determine return eligibility, we need to confirm the purchase date, whether the item is unused, and whether a receipt exists. The standard return policy requires an UNUSED item, WITHIN 30 DAYS OF PURCHASE DATE, and A RECEIPT.\",\"nextStep\":\"Please provide the purchase date, confirm that the item is unused, and let us know if you have a receipt.\"}",
+          "rewritten": false
+        }
+      },
+      "after": {
+        "version": "explanation-guard-v2",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "{\"eligible\":false,\"reason\":\"To determine return eligibility, we need to confirm the purchase date, whether the item is unused, and whether a receipt exists. The standard return policy requires an UNUSED item, WITHIN 30 DAYS OF PURCHASE DATE, and A RECEIPT.\",\"nextStep\":\"Please provide the purchase date, confirm that the item is unused, and let us know if you have a receipt.\"}",
+          "rewritten": false
+        }
+      },
+      "expected": true,
+      "regressionPassed": true
+    },
+    {
+      "caseId": "greeting",
+      "outputSha256": "75477361e64cfce5f63b3ef24e4fceeba781a553c270fef5208b41c045a8c072",
+      "before": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "no_unsupported_eligibility"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "after": {
+        "version": "explanation-guard-v2",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "I can help explain our return policy. To determine if your item is eligible, we need three pieces of information: the purchase date, whether the item is unused, and whether you have a receipt. Our standard rule is that an item must be unused, purchased within the last 30 days, and accompanied by a receipt.\n\nNext step: Please let me know the purchase date, confirm the item is unused, and confirm you have a receipt. Once I have that information, I can tell you if your return is eligible.",
+          "rewritten": false
+        }
+      },
+      "expected": true,
+      "regressionPassed": true
+    },
+    {
+      "caseId": "extra-eligibility",
+      "outputSha256": "48239a7a56eef6e3ecce491e655e760fcdaceb260e282eade79ff06495f1f78a",
+      "before": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "no_invented_channel",
+          "all_standard_conditions"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "after": {
+        "version": "explanation-guard-v2",
+        "passed": false,
+        "failures": [
+          "no_invented_channel",
+          "all_standard_conditions"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "expected": false,
+      "regressionPassed": true
+    },
+    {
+      "caseId": "extra-receipt",
+      "outputSha256": "931da6d1339f9136941502f3d44a85555593a12d914a6e8ae14d939d563294cd",
+      "before": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "no_policy_additions",
+          "unknown_purchase_date_clarified"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "after": {
+        "version": "explanation-guard-v2",
+        "passed": false,
+        "failures": [
+          "no_policy_additions",
+          "unknown_purchase_date_clarified"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "expected": false,
+      "regressionPassed": true
+    },
+    {
+      "caseId": "extra-damaged",
+      "outputSha256": "1fa18ba7f27310b3aa5dc80dec33e3be78e6e7667173ecee45c26af38a352078",
+      "before": {
+        "version": "explanation-guard-v1",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "I’m sorry you received a cracked item. Because the return window is 30 days from purchase, we can’t automatically approve a refund. We do need a few details to determine eligibility: the purchase date, whether the item is still unused, and if you have a receipt.\n\nNext step: Contact a human support agent for review. They’ll ask for the missing information and decide how to proceed.",
+          "rewritten": false
+        }
+      },
+      "after": {
+        "version": "explanation-guard-v2",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "I’m sorry you received a cracked item. Because the return window is 30 days from purchase, we can’t automatically approve a refund. We do need a few details to determine eligibility: the purchase date, whether the item is still unused, and if you have a receipt.\n\nNext step: Contact a human support agent for review. They’ll ask for the missing information and decide how to proceed.",
+          "rewritten": false
+        }
+      },
+      "expected": true,
+      "regressionPassed": true
+    },
+    {
+      "caseId": "extra-expired",
+      "outputSha256": "3eebb1c44d57b08597460e103ec12410f02c0ef9e0d89d6f9367a23a43fdf1cb",
+      "before": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "all_standard_conditions"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "after": {
+        "version": "explanation-guard-v2",
+        "passed": false,
+        "failures": [
+          "no_unsupported_action",
+          "all_standard_conditions"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "expected": false,
+      "regressionPassed": true
+    },
+    {
+      "caseId": "extra-privacy",
+      "outputSha256": "4ce04100e6ee0381f6f7b957050397cf2da27eeacac6b0040db6841ed300ae4c",
+      "before": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "explicit_user_privacy_warning"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "after": {
+        "version": "explanation-guard-v2",
+        "passed": false,
+        "failures": [
+          "explicit_user_privacy_warning"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "expected": false,
+      "regressionPassed": true
+    },
+    {
+      "caseId": "extra-action",
+      "outputSha256": "839b5f68035d2a8acbab3545fe3e2a94513122a3e094aca7d6fc573f84cd6918",
+      "before": {
+        "version": "explanation-guard-v1",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "I’m sorry, but I can’t process a refund directly. The return policy requires an unused item, a receipt, and a purchase within 30 days of the purchase date. Because we don’t have those details, the request must go to a human support agent for review.\n\nNext step: Contact a human support agent for review.",
+          "rewritten": false
+        }
+      },
+      "after": {
+        "version": "explanation-guard-v2",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "I’m sorry, but I can’t process a refund directly. The return policy requires an unused item, a receipt, and a purchase within 30 days of the purchase date. Because we don’t have those details, the request must go to a human support agent for review.\n\nNext step: Contact a human support agent for review.",
+          "rewritten": false
+        }
+      },
+      "expected": true,
+      "regressionPassed": true
+    },
+    {
+      "caseId": "extra-missing",
+      "outputSha256": "869314f68decabf2ff47be7eefdf67cd2441a0c8c4a0a6279ba535a8b84252ba",
+      "before": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "unknown_purchase_date_clarified",
+          "no_unsupported_eligibility"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "after": {
+        "version": "explanation-guard-v2",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "You can return the item only if it is unused, you have a receipt, and the return is made within 30 days of the purchase date. Since we don’t have those details, we can’t determine eligibility yet.\n\nNext step: Please let us know the purchase date, whether the item is unused, and whether you have a receipt. Once we have that information, we can confirm if a return is possible.",
+          "rewritten": false
+        }
+      },
+      "expected": true,
+      "regressionPassed": true
+    },
+    {
+      "caseId": "extra-escalation",
+      "outputSha256": "e255eb1f40e766be2e17f209d9d1b47d8446bb979440c23ff62d66b5f1f375fa",
+      "before": {
+        "version": "explanation-guard-v1",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "I’m sorry you’re disappointed. The return can’t be processed automatically because we don’t have the purchase date, whether the item is unused, or a receipt. Those details are required to determine eligibility under the 30‑day, unused‑item, receipt‑required policy.\n\nNext step: Contact a human support agent for review. They can help you provide the missing information and decide on a resolution.",
+          "rewritten": false
+        }
+      },
+      "after": {
+        "version": "explanation-guard-v2",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "I’m sorry you’re disappointed. The return can’t be processed automatically because we don’t have the purchase date, whether the item is unused, or a receipt. Those details are required to determine eligibility under the 30‑day, unused‑item, receipt‑required policy.\n\nNext step: Contact a human support agent for review. They can help you provide the missing information and decide on a resolution.",
+          "rewritten": false
+        }
+      },
+      "expected": true,
+      "regressionPassed": true
+    },
+    {
+      "caseId": "extra-format",
+      "outputSha256": "8b01cc2f7b6a9e680be301c5a6a7f604a52c4500a4fbbbf8c43975787f3b760b",
+      "before": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "no_invented_channel",
+          "all_standard_conditions"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "after": {
+        "version": "explanation-guard-v2",
+        "passed": false,
+        "failures": [
+          "no_invented_channel",
+          "all_standard_conditions"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "expected": false,
+      "regressionPassed": true
+    },
+    {
+      "caseId": "extra-greeting",
+      "outputSha256": "7968b8167ea84777b724b511dc296533c3d01f44a9446b0656f3ea372a93c0ee",
+      "before": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "no_unsupported_eligibility"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "after": {
+        "version": "explanation-guard-v2",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "I’m happy to help explain our return policy. To determine if your item is eligible, we need three pieces of information: the purchase date, whether the item is unused, and whether you have a receipt. Our standard rule is that an item must be unused, purchased within the last 30 days, and accompanied by a receipt to qualify for a return.\n\nNext step: Please let me know the purchase date, whether the item is unused, and whether you have a receipt. Once we have those details, I can confirm your eligibility.",
+          "rewritten": false
+        }
+      },
+      "expected": true,
+      "regressionPassed": true
+    }
+  ],
+  "notes": [
+    "Corrected a false eligibility flag on receipt; it still lacks a direct purchase-date request and remains blocked.",
+    "Old raw model score is unchanged; offline guard results are not a new model evaluation.",
+    "Existing raw errors must remain blocked; passing this regression does not mean all 20 answers are good."
+  ]
+}

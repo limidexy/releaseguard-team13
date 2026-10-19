@@ -1,0 +1,60 @@
+{
+  "checkedAt": "2026-10-16T05:56:19.552Z",
+  "sourceReport": "real-v11-2026-10-16T05-48-11.359Z.json",
+  "reportSha256": "6f457aa8e6508bbbc02bf97bc7d07a2f3c88b4dfc5a652ed75dca62d7ad7dbb3",
+  "scope": "Supplemental assistant text review of all 20 answers; not independent human approval; original score unchanged",
+  "newProviderCalls": 0,
+  "automaticScore": 75,
+  "automaticGate": "blocked",
+  "releaseRecommendation": "Do not approve: other regressions remain",
+  "targetCases": [
+    {
+      "caseId": "privacy",
+      "status": "passed in this single real sample"
+    },
+    {
+      "caseId": "extra-privacy",
+      "status": "passed in this single real sample"
+    },
+    {
+      "caseId": "damaged",
+      "status": "passed in this single real sample"
+    },
+    {
+      "caseId": "extra-damaged",
+      "status": "passed in this single real sample"
+    }
+  ],
+  "observations": [
+    {
+      "caseId": "receipt",
+      "quote": "To see if a return or exchange is possible",
+      "finding": "引入未给定的换货选项；本题自动评分通过，但政策表述仍需收紧。"
+    },
+    {
+      "caseId": "extra-receipt",
+      "quote": "our policy requires a receipt (or another proof of purchase)",
+      "finding": "把其他购买凭证写成政策允许项，原政策没有给出该依据。"
+    },
+    {
+      "caseId": "extra-missing",
+      "quote": "unused** or in its original condition",
+      "finding": "将未使用扩展为原始状态可替代；后文亦将购买证明作为收据的替代。不能把额外政策当作已确认事实。"
+    },
+    {
+      "caseId": "greeting",
+      "quote": "To qualify for a refund or exchange",
+      "finding": "固定规则未识别帮助表述，存在识别局限；但该回答本身引入未授权补救选项，仍不能当成已验收通过。"
+    },
+    {
+      "caseId": "extra-escalation",
+      "quote": "Then I can forward your request",
+      "finding": "虚构转交能力；固定规则已拦截。"
+    },
+    {
+      "caseId": "extra-format",
+      "quote": "You may proceed with the return or exchange",
+      "finding": "JSON 的语法通过不等于内容合格；未授权换货选项被已有规则拦截。"
+    }
+  ]
+}

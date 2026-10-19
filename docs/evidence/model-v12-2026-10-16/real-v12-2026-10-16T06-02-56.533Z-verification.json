@@ -1,0 +1,35 @@
+{
+  "checkedAt": "2026-10-16T06:09:40.044Z",
+  "reportSha256": "03761aa70d396801dd77e8072d3b57f9126916804b3339290e26e58f55a8c4e5",
+  "checks": [
+    {
+      "name": "same 20 original questions, criteria, critical flags and threshold",
+      "passed": true
+    },
+    {
+      "name": "frozen prompt, source snapshots and compiled scorer remain unchanged",
+      "passed": true
+    },
+    {
+      "name": "20 unique complete real-provider responses, no retry or truncation",
+      "passed": true
+    },
+    {
+      "name": "raw journal matches report exactly",
+      "passed": true
+    },
+    {
+      "name": "scores reproduce from frozen rules and unmodified answers",
+      "passed": true
+    },
+    {
+      "name": "historical real reports are unchanged",
+      "passed": true
+    }
+  ],
+  "passed": 6,
+  "failed": 0,
+  "score": 90,
+  "gate": "blocked",
+  "scope": "Evidence integrity and deterministic scoring, not independent human review or cloud/CI acceptance"
+}

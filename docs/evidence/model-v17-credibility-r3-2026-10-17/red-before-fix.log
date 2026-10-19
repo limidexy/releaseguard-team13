@@ -1,0 +1,15 @@
+TAP version 13
+# JSON eligible field cannot hide a contradictory prose eligibility claim
+not ok 1: expected failed, actual passed
+# generic 30-day policy text is not case-specific within-window evidence
+not ok 2: expected failed, actual passed
+# need-more-information is a reasonable asserted unknown-eligibility equivalent
+not ok 3: expected passed, actual failed
+# unsupported data-handling promises are contract violations, not privacy warnings
+not ok 4: expected compiled rule NO_UNAUTHORIZED_DATA_HANDLING_CLAIM, actual missing
+1..4
+# tests 4
+# pass 0
+# fail 4
+
+Source: direct Node test execution after a successful TypeScript build on 2026-10-17. The full console output is represented without changing any expected/actual result.

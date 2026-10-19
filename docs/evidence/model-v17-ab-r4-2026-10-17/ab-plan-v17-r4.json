@@ -1,0 +1,121 @@
+{
+  "revision": "v17-generation-view-r4-ab1",
+  "experimentId": "releaseguard-v17-r4-ab-20261017",
+  "status": "AUTHORIZED_FROZEN_NOT_STARTED",
+  "purpose": "One authorized fixed-20-case A/B comparison on the verified Groq Free plan; all controls are held constant except model.",
+  "providerOrigin": "https://api.groq.com",
+  "providerEndpoint": "https://api.groq.com/openai/v1/chat/completions",
+  "sourceQuestionPlan": "docs/evidence/model-v17-real-r1-2026-10-17/plan.json",
+  "sourceQuestionPlanSha256": "c4eaeccf0e95e11ac1c1780c031e1bd8eca95d5f17c47fe23a4a3d8bf59fea6a",
+  "questionOrder": [
+    "eligibility",
+    "receipt",
+    "damaged",
+    "expired",
+    "privacy",
+    "action",
+    "missing",
+    "escalation",
+    "format",
+    "greeting",
+    "extra-eligibility",
+    "extra-receipt",
+    "extra-damaged",
+    "extra-expired",
+    "extra-privacy",
+    "extra-action",
+    "extra-missing",
+    "extra-escalation",
+    "extra-format",
+    "extra-greeting"
+  ],
+  "arms": [
+    {
+      "arm": "A",
+      "model": "openai/gpt-oss-20b",
+      "calls": 20
+    },
+    {
+      "arm": "B",
+      "model": "openai/gpt-oss-120b",
+      "calls": 20
+    }
+  ],
+  "totalBudgetedCalls": 40,
+  "automaticRetries": 0,
+  "selection": "No per-case selection, replacement, correction, best-of filtering, or post-generation repair.",
+  "executionOrder": "For each frozen case in order, record and send A at most once, then record and send B at most once. A recorded attempt is never resent, including after timeout, crash, or unknown outcome.",
+  "configuration": {
+    "temperature": 0.2,
+    "reasoningEffort": "low",
+    "maxOutputTokens": 3072,
+    "requestTimeoutMs": 20000,
+    "minimumStartIntervalMs": 20000
+  },
+  "evaluation": {
+    "evaluatorVersion": "returns-policy-v2.10",
+    "minScore": 95,
+    "criticalOrProviderErrorBlocks": true,
+    "oldGuard": "explanation-guard-v2",
+    "contractGuard": "response-contract-guard-v17-r3",
+    "finalResult": "Exact per-case intersection of provider completeness, raw v2.10 pass, old guard, new contract compliance, business consistency, customer text safety, and contract final delivery.",
+    "rawAnswersPreserved": true
+  },
+  "generation": {
+    "promptRevision": "generation-view-v17-r3-required-clarifications-r4",
+    "fullContractRetainedForAudit": true,
+    "fullContractSentToModel": false,
+    "referenceAnswerSentToModel": false,
+    "postGenerationRepair": false,
+    "requiredClarificationsReplacePermittedClarifications": true,
+    "bareIntervalOriginNeutral": true
+  },
+  "freezeManifestSha256": "03df7a22c568ae908e749285f97878efd75ff3005f76dc993336835981da8fe8",
+  "freePlanVerificationSha256": "db175b544dcbfff75fa8b5926d45bc104311a4b28c62b9e69ed8d3871deece0b",
+  "frozenDerivedHashes": {
+    "compiledCaseContractAndViewSet": "6f00b261f4a574fa07d7408a659e81a45b87491fbedc153e797a48d78ea52f24",
+    "generationPrompt": "dbcd830089e7fa4b25e3ea5b9e0e67cdd0397317972989b4e94d705c9e02e099",
+    "responseModes": "4681455ef2e6c4e690f8dae0ecedeb61276acead3c9018cc141c0e135e6cc24a"
+  },
+  "offlineAcceptance": {
+    "nodeVersion": "v24.19.0",
+    "tests": {
+      "passed": 728,
+      "failed": 0,
+      "total": 728
+    },
+    "targetedGenerationViewRegressions": {
+      "passed": 2,
+      "failed": 0,
+      "total": 2
+    },
+    "providerInferenceCalls": 0
+  },
+  "authorization": {
+    "userAuthorizedOneExperiment": true,
+    "maximumInferenceRequests": 40,
+    "secondExperimentAuthorized": false,
+    "paidUpgradeAllowed": false,
+    "paidCallsAllowed": false,
+    "providerSwitchAllowed": false,
+    "deploymentAllowed": false,
+    "publicationAllowed": false,
+    "gitPushAllowed": false
+  },
+  "persistentExecutionProtection": {
+    "experimentLock": "experiment-v17-r4.lock.json",
+    "attemptLedger": "experiment-v17-r4.attempts.jsonl",
+    "outcomeLedger": "experiment-v17-r4.outcomes.jsonl",
+    "attemptRecordedAndSyncedBeforeSend": true,
+    "attemptedRequestNeverResent": true
+  },
+  "provenance": {
+    "semanticReferenceAnnotations": "Project evaluation annotations, not a verified independent human-review record.",
+    "correction": "docs/evidence/model-v17-ab-r4-2026-10-17/provenance-correction-r4.md"
+  },
+  "limitations": [
+    "These 20 cases are development regressions, not a hidden test set.",
+    "Free-plan UI evidence and displayed limits do not guarantee provider availability for every request.",
+    "A successful result applies only to this frozen configuration and fixed 20-case set; it does not establish hidden-set stability or production readiness."
+  ]
+}

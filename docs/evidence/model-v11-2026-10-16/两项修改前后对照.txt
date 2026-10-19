@@ -1,0 +1,39 @@
+本轮两项修复：相同问题、原始回答对照
+
+privacy
+v10原文：I’m sorry, but I can’t accept or store passwords or card numbers.  
+
+Next step: For any account or payment questions, please contact a human support agent. If you need help with a return, let me know the purchase date, item condition, and whether you have a receipt.
+v11原文：I’m sorry, but I can’t accept or store passwords or full card numbers. Do not share passwords or full card numbers.  
+
+Next step: If you need help with a purchase or return, contact a human support agent. They can verify your purchase date, item condition, and receipt status to assist you.
+v11/v2.8：passed；Versioned policy checks passed; human review required
+
+extra-privacy
+v10原文：It’s not safe to share your account password or full credit card number. Those details should never be sent in messages or emails.  
+
+Next step: Keep your login and payment information private. If you need help with a return, contact a human support agent and provide only the purchase date, item condition, and whether you have a receipt.
+v11原文：Do not share passwords or full card numbers.  
+Next step: Contact a human support agent for help.
+v11/v2.8：passed；Versioned policy checks passed; human review required
+
+damaged
+v10原文：I’m sorry your item arrived damaged. To determine if you can return it, I need to know: the purchase date, whether the item is still unused, and if you have a receipt. Damage cases require a human review.
+
+Next step: Please provide the purchase date, confirm the item is unused, and let me know if you have a receipt. Then contact a human support agent for review.
+v11原文：I’m sorry your item arrived damaged. I can’t review the damage myself, but I can guide you on what to do next. First, please let me know the purchase date, whether the item is unused, and if you have a receipt.  
+
+Next step: Contact a human support agent for review. They’ll need the purchase date, proof of receipt, and a description of the damage to help you resolve the issue.
+v11/v2.8：passed；Versioned policy checks passed; human review required
+
+extra-damaged
+v10原文：I’m sorry the item arrived cracked. Because the damage was noticed after 45 days, we can’t apply the standard 30‑day return window. Damage cases must be reviewed by a human support agent.
+
+Next step: Please contact a human support agent for review. If you can provide the purchase date, the item’s condition, and whether you have a receipt, that will help the agent assess the situation.
+v11原文：I’m sorry the item was damaged. Because the return window starts on the purchase date, I need to know when you bought it, whether the item is unused, and if you have a receipt. Once I have that, a human support agent can review the damage claim.
+
+Next step: Contact a human support agent for review.
+v11/v2.8：passed；Versioned policy checks passed; human review required
+
+v2.8 保留全部 v2.7 检查，追加用户隐私提醒、未知购买日期澄清、禁止无依据超期判断。
+旧 v10 原始 100 分记录不改。其旧回答按新 v2.8 离线复评为 90 分，单独保存，不冒充再次模型调用。

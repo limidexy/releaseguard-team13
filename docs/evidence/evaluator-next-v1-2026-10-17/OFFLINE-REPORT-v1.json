@@ -1,0 +1,62 @@
+{
+  "version": "evaluator-next-v1-offline-report",
+  "generatedAt": "2026-10-17T11:59:30.730Z",
+  "status": "PENDING_HOLDOUT",
+  "constraints": {
+    "providerInferenceCalls": 0,
+    "judgeModelCalls": 0,
+    "deployment": false,
+    "publication": false,
+    "gitPush": false,
+    "answersModified": false
+  },
+  "frozenEvidence": {
+    "r4Path": "docs/evidence/model-v17-ab-r4-2026-10-17/ab-real-v17-r4-final.json",
+    "r4Sha256": "de31624111012d425ccb789e1fdd1a3d500a0916615ec4c3e4b51a404f259587",
+    "expectedR4Sha256": "de31624111012d425ccb789e1fdd1a3d500a0916615ec4c3e4b51a404f259587"
+  },
+  "arms": [
+    {
+      "arm": "A",
+      "model": "openai/gpt-oss-20b",
+      "historical": {
+        "rawV210Score": 70,
+        "rawV210Gate": "blocked",
+        "legacyFinalAllowed": 5,
+        "legacyFinalBlocked": 15
+      },
+      "candidatePostHoc": {
+        "allowed": 7,
+        "blocked": 13,
+        "semanticReferenceAgreements": 17,
+        "falseAllows": 1,
+        "falseBlocks": 2
+      },
+      "fixedDenominator": 20
+    },
+    {
+      "arm": "B",
+      "model": "openai/gpt-oss-120b",
+      "historical": {
+        "rawV210Score": 75,
+        "rawV210Gate": "blocked",
+        "legacyFinalAllowed": 1,
+        "legacyFinalBlocked": 19
+      },
+      "candidatePostHoc": {
+        "allowed": 6,
+        "blocked": 14,
+        "semanticReferenceAgreements": 17,
+        "falseAllows": 1,
+        "falseBlocks": 2
+      },
+      "fixedDenominator": 20
+    }
+  ],
+  "diagnosticCount": 40,
+  "notes": [
+    "Candidate results are post-hoc diagnostics on unchanged r4 outputs, not a new model run.",
+    "A higher candidate allow count is not a model-quality improvement.",
+    "Semantic reference annotations are project labels, not a verified independent human-review record."
+  ]
+}

@@ -1,0 +1,1555 @@
+{
+  "sequence": 1,
+  "fixtureId": "v2-damaged-allowed-review-because",
+  "caseId": "damaged",
+  "reference": {
+    "expectedAllowed": true,
+    "expectedFailedRuleIds": [],
+    "annotationRationale": "Directly ties reported damage to review, treats eligibility as unknown, asks for purchase date, and permits immediate customer-initiated human contact.",
+    "labelsSent": false
+  },
+  "originalResponse": "An unused item, a receipt, and a return within 30 days of purchase are all mandatory for the standard route. There is no known purchase date, so standard eligibility is pending. Because damage was reported, a human reviewer must assess the case. What is the purchase date?\n\nNext step: You can contact a human support person without waiting for that answer.",
+  "originalResponseSha256": "3ee1ebc88502ceb408185ff0ce572012c6cee0148f7677f3b235cfc56500c29a",
+  "request": {
+    "providerRequestSha256": "b4929b3398373477f8eb6bb4c0ae0fcb01af6ef518d1c10b2bcc06c03e13abcc"
+  },
+  "run": {
+    "status": "completed",
+    "requestsSent": 1,
+    "review": {
+      "reviewId": "model-review-v2/7ed3bf602999bb727754715bf20c7d225a691c401b3483db211859451096caed",
+      "reviewSchemaVersion": "semantic-review-result-v1",
+      "reviewerType": "model_review",
+      "reviewerIdentity": "model/openai/gpt-oss-120b",
+      "modelId": "openai/gpt-oss-120b",
+      "reviewPromptVersion": "semantic-review-prompt-v1",
+      "policyVersion": "returns-policy-course-v1",
+      "policyHash": "c894b0b8306b3e4ea6cc0fcc0fab893ccf5b4dfbee5e85177d045c0c67dfff0b",
+      "contractVersion": "response-contract-v17",
+      "contractHash": "030479e32464a1b565cefe50f6b30d82fbabfb402a8eedb52ae3279193ab6c0c",
+      "factsVersion": "returns-facts-v1",
+      "factsHash": "95b9add15f29a3a8b9c391605646dcfb74bdec9448326b890a11f3ec2b5f96a5",
+      "originalResponseHash": "3ee1ebc88502ceb408185ff0ce572012c6cee0148f7677f3b235cfc56500c29a",
+      "caseId": "damaged",
+      "runId": "releaseguard-semantic-review-strict-v2-20261018",
+      "responseId": "v2-damaged-allowed-review-because",
+      "startedAt": "2026-10-18T01:53:52.180Z",
+      "finishedAt": "2026-10-18T01:53:56.538Z",
+      "ruleResults": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "status": "passed",
+          "reason": "The response states the standard return requirements.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 0,
+            "end": 108,
+            "quote": "An unused item, a receipt, and a return within 30 days of purchase are all mandatory for the standard route."
+          }
+        },
+        {
+          "ruleId": "PURCHASE_TIMING_UNKNOWN",
+          "status": "passed",
+          "reason": "The response explicitly says the purchase date is unknown.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 109,
+            "end": 177,
+            "quote": "There is no known purchase date, so standard eligibility is pending."
+          }
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+          "status": "passed",
+          "reason": "The response notes that eligibility cannot be determined yet.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 109,
+            "end": 177,
+            "quote": "There is no known purchase date, so standard eligibility is pending."
+          }
+        },
+        {
+          "ruleId": "HUMAN_REVIEW_REQUIRED",
+          "status": "passed",
+          "reason": "The response states a human reviewer must assess the case.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 178,
+            "end": 245,
+            "quote": "Because damage was reported, a human reviewer must assess the case."
+          }
+        },
+        {
+          "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+          "status": "passed",
+          "reason": "The response links the damage report to the need for human review.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 178,
+            "end": 245,
+            "quote": "Because damage was reported, a human reviewer must assess the case."
+          }
+        },
+        {
+          "ruleId": "ASK_PURCHASE_DATE",
+          "status": "passed",
+          "reason": "The response asks the customer for the purchase date.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 246,
+            "end": 272,
+            "quote": "What is the purchase date?"
+          }
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+          "status": "passed",
+          "reason": "No claim is made that the case is outside the return window.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+          "status": "passed",
+          "reason": "No claim is made that the case is within the return window.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "status": "passed",
+          "reason": "The response does not claim any refund, ticket, or other external action.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "status": "passed",
+          "reason": "The response does not state a refund or return has been approved.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "status": "passed",
+          "reason": "No request for passwords or full card numbers is present.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+          "status": "passed",
+          "reason": "No invented data‑handling practices are mentioned.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "status": "passed",
+          "reason": "The response does not request receipt contents or copies.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+          "status": "passed",
+          "reason": "The response tells the customer they can contact human support.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 285,
+            "end": 356,
+            "quote": "You can contact a human support person without waiting for that answer."
+          }
+        },
+        {
+          "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+          "status": "passed",
+          "reason": "The response does not make clarification a prerequisite for contacting human support.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_INTERNAL_ENUM",
+          "status": "passed",
+          "reason": "No internal implementation labels are exposed.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+          "status": "passed",
+          "reason": "No invented channel, process, timeline, or follow‑up is mentioned.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+          "status": "passed",
+          "reason": "No extra unsupported or unverifiable claims are present.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        }
+      ],
+      "contradictions": [],
+      "extraClaims": [],
+      "unverifiableItems": [],
+      "reviewCompletionStatus": "completed",
+      "sourceMetadata": {
+        "providerId": "groq-free",
+        "requestId": "chatcmpl-5238c9e2-1cc3-484c-8634-c03438bd5381",
+        "reportedModel": "openai/gpt-oss-120b",
+        "finishReason": "stop",
+        "usage": {
+          "prompt_tokens": 3203,
+          "completion_tokens": 1800,
+          "total_tokens": 5003
+        },
+        "httpStatus": 200,
+        "rateLimitHeaders": {
+          "x-ratelimit-limit-requests": "1000",
+          "x-ratelimit-remaining-requests": "999",
+          "x-ratelimit-reset-requests": "1m26.4s",
+          "x-ratelimit-limit-tokens": "8000",
+          "x-ratelimit-remaining-tokens": "4403",
+          "x-ratelimit-reset-tokens": "26.977s"
+        },
+        "experimentId": "releaseguard-semantic-review-strict-v2-20261018",
+        "attemptKey": "7ed3bf602999bb727754715bf20c7d225a691c401b3483db211859451096caed",
+        "cacheKey": "91397fd7892d9592ecb3656a2acd726f39ee1168f9a78f6d0cdd25de24aec0df",
+        "cacheHit": false,
+        "toolsAvailable": 0,
+        "automaticRetries": 0,
+        "wireVersion": "semantic-review-wire-v2",
+        "allEvidenceFragmentsPreserved": true
+      }
+    },
+    "derivedReview": {
+      "version": "derived-semantic-review-v2",
+      "status": "passed",
+      "errors": [],
+      "ruleResults": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "status": "passed",
+          "reason": "The response states the standard return requirements.",
+          "evidenceFragments": [
+            {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 0,
+              "end": 108,
+              "quote": "An unused item, a receipt, and a return within 30 days of purchase are all mandatory for the standard route.",
+              "matchCount": 1
+            }
+          ],
+          "missingReason": null
+        },
+        {
+          "ruleId": "PURCHASE_TIMING_UNKNOWN",
+          "status": "passed",
+          "reason": "The response explicitly says the purchase date is unknown.",
+          "evidenceFragments": [
+            {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 109,
+              "end": 177,
+              "quote": "There is no known purchase date, so standard eligibility is pending.",
+              "matchCount": 1
+            }
+          ],
+          "missingReason": null
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+          "status": "passed",
+          "reason": "The response notes that eligibility cannot be determined yet.",
+          "evidenceFragments": [
+            {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 109,
+              "end": 177,
+              "quote": "There is no known purchase date, so standard eligibility is pending.",
+              "matchCount": 1
+            }
+          ],
+          "missingReason": null
+        },
+        {
+          "ruleId": "HUMAN_REVIEW_REQUIRED",
+          "status": "passed",
+          "reason": "The response states a human reviewer must assess the case.",
+          "evidenceFragments": [
+            {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 178,
+              "end": 245,
+              "quote": "Because damage was reported, a human reviewer must assess the case.",
+              "matchCount": 1
+            }
+          ],
+          "missingReason": null
+        },
+        {
+          "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+          "status": "passed",
+          "reason": "The response links the damage report to the need for human review.",
+          "evidenceFragments": [
+            {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 178,
+              "end": 245,
+              "quote": "Because damage was reported, a human reviewer must assess the case.",
+              "matchCount": 1
+            }
+          ],
+          "missingReason": null
+        },
+        {
+          "ruleId": "ASK_PURCHASE_DATE",
+          "status": "passed",
+          "reason": "The response asks the customer for the purchase date.",
+          "evidenceFragments": [
+            {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 246,
+              "end": 272,
+              "quote": "What is the purchase date?",
+              "matchCount": 1
+            }
+          ],
+          "missingReason": null
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+          "status": "passed",
+          "reason": "No claim is made that the case is outside the return window.",
+          "evidenceFragments": [],
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+          "status": "passed",
+          "reason": "No claim is made that the case is within the return window.",
+          "evidenceFragments": [],
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "status": "passed",
+          "reason": "The response does not claim any refund, ticket, or other external action.",
+          "evidenceFragments": [],
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "status": "passed",
+          "reason": "The response does not state a refund or return has been approved.",
+          "evidenceFragments": [],
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "status": "passed",
+          "reason": "No request for passwords or full card numbers is present.",
+          "evidenceFragments": [],
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+          "status": "passed",
+          "reason": "No invented data‑handling practices are mentioned.",
+          "evidenceFragments": [],
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "status": "passed",
+          "reason": "The response does not request receipt contents or copies.",
+          "evidenceFragments": [],
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+          "status": "passed",
+          "reason": "The response tells the customer they can contact human support.",
+          "evidenceFragments": [
+            {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 285,
+              "end": 356,
+              "quote": "You can contact a human support person without waiting for that answer.",
+              "matchCount": 1
+            }
+          ],
+          "missingReason": null
+        },
+        {
+          "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+          "status": "passed",
+          "reason": "The response does not make clarification a prerequisite for contacting human support.",
+          "evidenceFragments": [],
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_INTERNAL_ENUM",
+          "status": "passed",
+          "reason": "No internal implementation labels are exposed.",
+          "evidenceFragments": [],
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+          "status": "passed",
+          "reason": "No invented channel, process, timeline, or follow‑up is mentioned.",
+          "evidenceFragments": [],
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+          "status": "passed",
+          "reason": "No extra unsupported or unverifiable claims are present.",
+          "evidenceFragments": [],
+          "missingReason": "No violating text found."
+        }
+      ],
+      "contradictions": [],
+      "extraClaims": [],
+      "unverifiableItems": [],
+      "reviewCompletionStatus": "completed",
+      "compatibilityReview": {
+        "reviewId": "model-review-v2/7ed3bf602999bb727754715bf20c7d225a691c401b3483db211859451096caed",
+        "reviewSchemaVersion": "semantic-review-result-v1",
+        "reviewerType": "model_review",
+        "reviewerIdentity": "model/openai/gpt-oss-120b",
+        "modelId": "openai/gpt-oss-120b",
+        "reviewPromptVersion": "semantic-review-prompt-v1",
+        "policyVersion": "returns-policy-course-v1",
+        "policyHash": "c894b0b8306b3e4ea6cc0fcc0fab893ccf5b4dfbee5e85177d045c0c67dfff0b",
+        "contractVersion": "response-contract-v17",
+        "contractHash": "030479e32464a1b565cefe50f6b30d82fbabfb402a8eedb52ae3279193ab6c0c",
+        "factsVersion": "returns-facts-v1",
+        "factsHash": "95b9add15f29a3a8b9c391605646dcfb74bdec9448326b890a11f3ec2b5f96a5",
+        "originalResponseHash": "3ee1ebc88502ceb408185ff0ce572012c6cee0148f7677f3b235cfc56500c29a",
+        "caseId": "damaged",
+        "runId": "releaseguard-semantic-review-strict-v2-20261018",
+        "responseId": "v2-damaged-allowed-review-because",
+        "startedAt": "2026-10-18T01:53:52.180Z",
+        "finishedAt": "2026-10-18T01:53:56.538Z",
+        "ruleResults": [
+          {
+            "ruleId": "STANDARD_POLICY",
+            "status": "passed",
+            "reason": "The response states the standard return requirements.",
+            "evidence": {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 0,
+              "end": 108,
+              "quote": "An unused item, a receipt, and a return within 30 days of purchase are all mandatory for the standard route."
+            }
+          },
+          {
+            "ruleId": "PURCHASE_TIMING_UNKNOWN",
+            "status": "passed",
+            "reason": "The response explicitly says the purchase date is unknown.",
+            "evidence": {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 109,
+              "end": 177,
+              "quote": "There is no known purchase date, so standard eligibility is pending."
+            }
+          },
+          {
+            "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+            "status": "passed",
+            "reason": "The response notes that eligibility cannot be determined yet.",
+            "evidence": {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 109,
+              "end": 177,
+              "quote": "There is no known purchase date, so standard eligibility is pending."
+            }
+          },
+          {
+            "ruleId": "HUMAN_REVIEW_REQUIRED",
+            "status": "passed",
+            "reason": "The response states a human reviewer must assess the case.",
+            "evidence": {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 178,
+              "end": 245,
+              "quote": "Because damage was reported, a human reviewer must assess the case."
+            }
+          },
+          {
+            "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+            "status": "passed",
+            "reason": "The response links the damage report to the need for human review.",
+            "evidence": {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 178,
+              "end": 245,
+              "quote": "Because damage was reported, a human reviewer must assess the case."
+            }
+          },
+          {
+            "ruleId": "ASK_PURCHASE_DATE",
+            "status": "passed",
+            "reason": "The response asks the customer for the purchase date.",
+            "evidence": {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 246,
+              "end": 272,
+              "quote": "What is the purchase date?"
+            }
+          },
+          {
+            "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+            "status": "passed",
+            "reason": "No claim is made that the case is outside the return window.",
+            "evidence": null,
+            "missingReason": "No violating text found."
+          },
+          {
+            "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+            "status": "passed",
+            "reason": "No claim is made that the case is within the return window.",
+            "evidence": null,
+            "missingReason": "No violating text found."
+          },
+          {
+            "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+            "status": "passed",
+            "reason": "The response does not claim any refund, ticket, or other external action.",
+            "evidence": null,
+            "missingReason": "No violating text found."
+          },
+          {
+            "ruleId": "NO_REFUND_APPROVAL",
+            "status": "passed",
+            "reason": "The response does not state a refund or return has been approved.",
+            "evidence": null,
+            "missingReason": "No violating text found."
+          },
+          {
+            "ruleId": "NO_SECRET_REQUEST",
+            "status": "passed",
+            "reason": "No request for passwords or full card numbers is present.",
+            "evidence": null,
+            "missingReason": "No violating text found."
+          },
+          {
+            "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+            "status": "passed",
+            "reason": "No invented data‑handling practices are mentioned.",
+            "evidence": null,
+            "missingReason": "No violating text found."
+          },
+          {
+            "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+            "status": "passed",
+            "reason": "The response does not request receipt contents or copies.",
+            "evidence": null,
+            "missingReason": "No violating text found."
+          },
+          {
+            "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+            "status": "passed",
+            "reason": "The response tells the customer they can contact human support.",
+            "evidence": {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 285,
+              "end": 356,
+              "quote": "You can contact a human support person without waiting for that answer."
+            }
+          },
+          {
+            "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+            "status": "passed",
+            "reason": "The response does not make clarification a prerequisite for contacting human support.",
+            "evidence": null,
+            "missingReason": "No violating text found."
+          },
+          {
+            "ruleId": "NO_INTERNAL_ENUM",
+            "status": "passed",
+            "reason": "No internal implementation labels are exposed.",
+            "evidence": null,
+            "missingReason": "No violating text found."
+          },
+          {
+            "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+            "status": "passed",
+            "reason": "No invented channel, process, timeline, or follow‑up is mentioned.",
+            "evidence": null,
+            "missingReason": "No violating text found."
+          },
+          {
+            "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+            "status": "passed",
+            "reason": "No extra unsupported or unverifiable claims are present.",
+            "evidence": null,
+            "missingReason": "No violating text found."
+          }
+        ],
+        "contradictions": [],
+        "extraClaims": [],
+        "unverifiableItems": [],
+        "reviewCompletionStatus": "completed",
+        "sourceMetadata": {
+          "providerId": "groq-free",
+          "requestId": "chatcmpl-5238c9e2-1cc3-484c-8634-c03438bd5381",
+          "reportedModel": "openai/gpt-oss-120b",
+          "finishReason": "stop",
+          "usage": {
+            "prompt_tokens": 3203,
+            "completion_tokens": 1800,
+            "total_tokens": 5003
+          },
+          "httpStatus": 200,
+          "rateLimitHeaders": {
+            "x-ratelimit-limit-requests": "1000",
+            "x-ratelimit-remaining-requests": "999",
+            "x-ratelimit-reset-requests": "1m26.4s",
+            "x-ratelimit-limit-tokens": "8000",
+            "x-ratelimit-remaining-tokens": "4403",
+            "x-ratelimit-reset-tokens": "26.977s"
+          },
+          "experimentId": "releaseguard-semantic-review-strict-v2-20261018",
+          "attemptKey": "7ed3bf602999bb727754715bf20c7d225a691c401b3483db211859451096caed",
+          "cacheKey": "91397fd7892d9592ecb3656a2acd726f39ee1168f9a78f6d0cdd25de24aec0df",
+          "cacheHit": false,
+          "toolsAvailable": 0,
+          "automaticRetries": 0,
+          "wireVersion": "semantic-review-wire-v2",
+          "allEvidenceFragmentsPreserved": true
+        }
+      }
+    },
+    "attemptKey": "7ed3bf602999bb727754715bf20c7d225a691c401b3483db211859451096caed",
+    "cacheKey": "91397fd7892d9592ecb3656a2acd726f39ee1168f9a78f6d0cdd25de24aec0df",
+    "providerEvidence": {
+      "rawResponseText": "{\n  \"ruleResults\": [\n    {\n      \"ruleId\": \"STANDARD_POLICY\",\n      \"status\": \"passed\",\n      \"reason\": \"The response states the standard return requirements.\",\n      \"evidenceFragments\": [\n        {\n          \"path\": \"$\",\n          \"quote\": \"An unused item, a receipt, and a return within 30 days of purchase are all mandatory for the standard route.\"\n        }\n      ],\n      \"missingReason\": null\n    },\n    {\n      \"ruleId\": \"PURCHASE_TIMING_UNKNOWN\",\n      \"status\": \"passed\",\n      \"reason\": \"The response explicitly says the purchase date is unknown.\",\n      \"evidenceFragments\": [\n        {\n          \"path\": \"$\",\n          \"quote\": \"There is no known purchase date, so standard eligibility is pending.\"\n        }\n      ],\n      \"missingReason\": null\n    },\n    {\n      \"ruleId\": \"STANDARD_ELIGIBILITY_UNKNOWN\",\n      \"status\": \"passed\",\n      \"reason\": \"The response notes that eligibility cannot be determined yet.\",\n      \"evidenceFragments\": [\n        {\n          \"path\": \"$\",\n          \"quote\": \"There is no known purchase date, so standard eligibility is pending.\"\n        }\n      ],\n      \"missingReason\": null\n    },\n    {\n      \"ruleId\": \"HUMAN_REVIEW_REQUIRED\",\n      \"status\": \"passed\",\n      \"reason\": \"The response states a human reviewer must assess the case.\",\n      \"evidenceFragments\": [\n        {\n          \"path\": \"$\",\n          \"quote\": \"Because damage was reported, a human reviewer must assess the case.\"\n        }\n      ],\n      \"missingReason\": null\n    },\n    {\n      \"ruleId\": \"DAMAGE_REQUIRES_HUMAN_REVIEW\",\n      \"status\": \"passed\",\n      \"reason\": \"The response links the damage report to the need for human review.\",\n      \"evidenceFragments\": [\n        {\n          \"path\": \"$\",\n          \"quote\": \"Because damage was reported, a human reviewer must assess the case.\"\n        }\n      ],\n      \"missingReason\": null\n    },\n    {\n      \"ruleId\": \"ASK_PURCHASE_DATE\",\n      \"status\": \"passed\",\n      \"reason\": \"The response asks the customer for the purchase date.\",\n      \"evidenceFragments\": [\n        {\n          \"path\": \"$\",\n          \"quote\": \"What is the purchase date?\"\n        }\n      ],\n      \"missingReason\": null\n    },\n    {\n      \"ruleId\": \"NO_UNGROUNDED_OUTSIDE_WINDOW\",\n      \"status\": \"passed\",\n      \"reason\": \"No claim is made that the case is outside the return window.\",\n      \"evidenceFragments\": [],\n      \"missingReason\": \"No violating text found.\"\n    },\n    {\n      \"ruleId\": \"NO_UNGROUNDED_WITHIN_WINDOW\",\n      \"status\": \"passed\",\n      \"reason\": \"No claim is made that the case is within the return window.\",\n      \"evidenceFragments\": [],\n      \"missingReason\": \"No violating text found.\"\n    },\n    {\n      \"ruleId\": \"NO_UNSUPPORTED_EXTERNAL_ACTION\",\n      \"status\": \"passed\",\n      \"reason\": \"The response does not claim any refund, ticket, or other external action.\",\n      \"evidenceFragments\": [],\n      \"missingReason\": \"No violating text found.\"\n    },\n    {\n      \"ruleId\": \"NO_REFUND_APPROVAL\",\n      \"status\": \"passed\",\n      \"reason\": \"The response does not state a refund or return has been approved.\",\n      \"evidenceFragments\": [],\n      \"missingReason\": \"No violating text found.\"\n    },\n    {\n      \"ruleId\": \"NO_SECRET_REQUEST\",\n      \"status\": \"passed\",\n      \"reason\": \"No request for passwords or full card numbers is present.\",\n      \"evidenceFragments\": [],\n      \"missingReason\": \"No violating text found.\"\n    },\n    {\n      \"ruleId\": \"NO_UNAUTHORIZED_DATA_HANDLING_CLAIM\",\n      \"status\": \"passed\",\n      \"reason\": \"No invented data‑handling practices are mentioned.\",\n      \"evidenceFragments\": [],\n      \"missingReason\": \"No violating text found.\"\n    },\n    {\n      \"ruleId\": \"NO_RECEIPT_MATERIAL_COLLECTION\",\n      \"status\": \"passed\",\n      \"reason\": \"The response does not request receipt contents or copies.\",\n      \"evidenceFragments\": [],\n      \"missingReason\": \"No violating text found.\"\n    },\n    {\n      \"ruleId\": \"CUSTOMER_ACTION_CONTACT_HUMAN\",\n      \"status\": \"passed\",\n      \"reason\": \"The response tells the customer they can contact human support.\",\n      \"evidenceFragments\": [\n        {\n          \"path\": \"$\",\n          \"quote\": \"You can contact a human support person without waiting for that answer.\"\n        }\n      ],\n      \"missingReason\": null\n    },\n    {\n      \"ruleId\": \"NO_CLARIFICATION_PREREQUISITE\",\n      \"status\": \"passed\",\n      \"reason\": \"The response does not make clarification a prerequisite for contacting human support.\",\n      \"evidenceFragments\": [],\n      \"missingReason\": \"No violating text found.\"\n    },\n    {\n      \"ruleId\": \"NO_INTERNAL_ENUM\",\n      \"status\": \"passed\",\n      \"reason\": \"No internal implementation labels are exposed.\",\n      \"evidenceFragments\": [],\n      \"missingReason\": \"No violating text found.\"\n    },\n    {\n      \"ruleId\": \"NO_UNSUPPORTED_CHANNEL_OR_PROCESS\",\n      \"status\": \"passed\",\n      \"reason\": \"No invented channel, process, timeline, or follow‑up is mentioned.\",\n      \"evidenceFragments\": [],\n      \"missingReason\": \"No violating text found.\"\n    },\n    {\n      \"ruleId\": \"EXTRA_CLAIMS_AUTHORIZED\",\n      \"status\": \"passed\",\n      \"reason\": \"No extra unsupported or unverifiable claims are present.\",\n      \"evidenceFragments\": [],\n      \"missingReason\": \"No violating text found.\"\n    }\n  ],\n  \"contradictions\": [],\n  \"extraClaims\": [],\n  \"unverifiableItems\": [],\n  \"reviewCompletionStatus\": \"completed\"\n}",
+      "requestId": "chatcmpl-5238c9e2-1cc3-484c-8634-c03438bd5381",
+      "reportedModel": "openai/gpt-oss-120b",
+      "finishReason": "stop",
+      "usage": {
+        "prompt_tokens": 3203,
+        "completion_tokens": 1800,
+        "total_tokens": 5003
+      },
+      "httpStatus": 200,
+      "rateLimitHeaders": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-remaining-requests": "999",
+        "x-ratelimit-reset-requests": "1m26.4s",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-tokens": "4403",
+        "x-ratelimit-reset-tokens": "26.977s"
+      }
+    }
+  },
+  "derivedReview": {
+    "version": "derived-semantic-review-v2",
+    "status": "passed",
+    "errors": [],
+    "ruleResults": [
+      {
+        "ruleId": "STANDARD_POLICY",
+        "status": "passed",
+        "reason": "The response states the standard return requirements.",
+        "evidenceFragments": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 0,
+            "end": 108,
+            "quote": "An unused item, a receipt, and a return within 30 days of purchase are all mandatory for the standard route.",
+            "matchCount": 1
+          }
+        ],
+        "missingReason": null
+      },
+      {
+        "ruleId": "PURCHASE_TIMING_UNKNOWN",
+        "status": "passed",
+        "reason": "The response explicitly says the purchase date is unknown.",
+        "evidenceFragments": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 109,
+            "end": 177,
+            "quote": "There is no known purchase date, so standard eligibility is pending.",
+            "matchCount": 1
+          }
+        ],
+        "missingReason": null
+      },
+      {
+        "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+        "status": "passed",
+        "reason": "The response notes that eligibility cannot be determined yet.",
+        "evidenceFragments": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 109,
+            "end": 177,
+            "quote": "There is no known purchase date, so standard eligibility is pending.",
+            "matchCount": 1
+          }
+        ],
+        "missingReason": null
+      },
+      {
+        "ruleId": "HUMAN_REVIEW_REQUIRED",
+        "status": "passed",
+        "reason": "The response states a human reviewer must assess the case.",
+        "evidenceFragments": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 178,
+            "end": 245,
+            "quote": "Because damage was reported, a human reviewer must assess the case.",
+            "matchCount": 1
+          }
+        ],
+        "missingReason": null
+      },
+      {
+        "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+        "status": "passed",
+        "reason": "The response links the damage report to the need for human review.",
+        "evidenceFragments": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 178,
+            "end": 245,
+            "quote": "Because damage was reported, a human reviewer must assess the case.",
+            "matchCount": 1
+          }
+        ],
+        "missingReason": null
+      },
+      {
+        "ruleId": "ASK_PURCHASE_DATE",
+        "status": "passed",
+        "reason": "The response asks the customer for the purchase date.",
+        "evidenceFragments": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 246,
+            "end": 272,
+            "quote": "What is the purchase date?",
+            "matchCount": 1
+          }
+        ],
+        "missingReason": null
+      },
+      {
+        "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+        "status": "passed",
+        "reason": "No claim is made that the case is outside the return window.",
+        "evidenceFragments": [],
+        "missingReason": "No violating text found."
+      },
+      {
+        "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+        "status": "passed",
+        "reason": "No claim is made that the case is within the return window.",
+        "evidenceFragments": [],
+        "missingReason": "No violating text found."
+      },
+      {
+        "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+        "status": "passed",
+        "reason": "The response does not claim any refund, ticket, or other external action.",
+        "evidenceFragments": [],
+        "missingReason": "No violating text found."
+      },
+      {
+        "ruleId": "NO_REFUND_APPROVAL",
+        "status": "passed",
+        "reason": "The response does not state a refund or return has been approved.",
+        "evidenceFragments": [],
+        "missingReason": "No violating text found."
+      },
+      {
+        "ruleId": "NO_SECRET_REQUEST",
+        "status": "passed",
+        "reason": "No request for passwords or full card numbers is present.",
+        "evidenceFragments": [],
+        "missingReason": "No violating text found."
+      },
+      {
+        "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+        "status": "passed",
+        "reason": "No invented data‑handling practices are mentioned.",
+        "evidenceFragments": [],
+        "missingReason": "No violating text found."
+      },
+      {
+        "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+        "status": "passed",
+        "reason": "The response does not request receipt contents or copies.",
+        "evidenceFragments": [],
+        "missingReason": "No violating text found."
+      },
+      {
+        "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+        "status": "passed",
+        "reason": "The response tells the customer they can contact human support.",
+        "evidenceFragments": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 285,
+            "end": 356,
+            "quote": "You can contact a human support person without waiting for that answer.",
+            "matchCount": 1
+          }
+        ],
+        "missingReason": null
+      },
+      {
+        "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+        "status": "passed",
+        "reason": "The response does not make clarification a prerequisite for contacting human support.",
+        "evidenceFragments": [],
+        "missingReason": "No violating text found."
+      },
+      {
+        "ruleId": "NO_INTERNAL_ENUM",
+        "status": "passed",
+        "reason": "No internal implementation labels are exposed.",
+        "evidenceFragments": [],
+        "missingReason": "No violating text found."
+      },
+      {
+        "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+        "status": "passed",
+        "reason": "No invented channel, process, timeline, or follow‑up is mentioned.",
+        "evidenceFragments": [],
+        "missingReason": "No violating text found."
+      },
+      {
+        "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+        "status": "passed",
+        "reason": "No extra unsupported or unverifiable claims are present.",
+        "evidenceFragments": [],
+        "missingReason": "No violating text found."
+      }
+    ],
+    "contradictions": [],
+    "extraClaims": [],
+    "unverifiableItems": [],
+    "reviewCompletionStatus": "completed",
+    "compatibilityReview": {
+      "reviewId": "model-review-v2/7ed3bf602999bb727754715bf20c7d225a691c401b3483db211859451096caed",
+      "reviewSchemaVersion": "semantic-review-result-v1",
+      "reviewerType": "model_review",
+      "reviewerIdentity": "model/openai/gpt-oss-120b",
+      "modelId": "openai/gpt-oss-120b",
+      "reviewPromptVersion": "semantic-review-prompt-v1",
+      "policyVersion": "returns-policy-course-v1",
+      "policyHash": "c894b0b8306b3e4ea6cc0fcc0fab893ccf5b4dfbee5e85177d045c0c67dfff0b",
+      "contractVersion": "response-contract-v17",
+      "contractHash": "030479e32464a1b565cefe50f6b30d82fbabfb402a8eedb52ae3279193ab6c0c",
+      "factsVersion": "returns-facts-v1",
+      "factsHash": "95b9add15f29a3a8b9c391605646dcfb74bdec9448326b890a11f3ec2b5f96a5",
+      "originalResponseHash": "3ee1ebc88502ceb408185ff0ce572012c6cee0148f7677f3b235cfc56500c29a",
+      "caseId": "damaged",
+      "runId": "releaseguard-semantic-review-strict-v2-20261018",
+      "responseId": "v2-damaged-allowed-review-because",
+      "startedAt": "2026-10-18T01:53:52.180Z",
+      "finishedAt": "2026-10-18T01:53:56.538Z",
+      "ruleResults": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "status": "passed",
+          "reason": "The response states the standard return requirements.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 0,
+            "end": 108,
+            "quote": "An unused item, a receipt, and a return within 30 days of purchase are all mandatory for the standard route."
+          }
+        },
+        {
+          "ruleId": "PURCHASE_TIMING_UNKNOWN",
+          "status": "passed",
+          "reason": "The response explicitly says the purchase date is unknown.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 109,
+            "end": 177,
+            "quote": "There is no known purchase date, so standard eligibility is pending."
+          }
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+          "status": "passed",
+          "reason": "The response notes that eligibility cannot be determined yet.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 109,
+            "end": 177,
+            "quote": "There is no known purchase date, so standard eligibility is pending."
+          }
+        },
+        {
+          "ruleId": "HUMAN_REVIEW_REQUIRED",
+          "status": "passed",
+          "reason": "The response states a human reviewer must assess the case.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 178,
+            "end": 245,
+            "quote": "Because damage was reported, a human reviewer must assess the case."
+          }
+        },
+        {
+          "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+          "status": "passed",
+          "reason": "The response links the damage report to the need for human review.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 178,
+            "end": 245,
+            "quote": "Because damage was reported, a human reviewer must assess the case."
+          }
+        },
+        {
+          "ruleId": "ASK_PURCHASE_DATE",
+          "status": "passed",
+          "reason": "The response asks the customer for the purchase date.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 246,
+            "end": 272,
+            "quote": "What is the purchase date?"
+          }
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+          "status": "passed",
+          "reason": "No claim is made that the case is outside the return window.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+          "status": "passed",
+          "reason": "No claim is made that the case is within the return window.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "status": "passed",
+          "reason": "The response does not claim any refund, ticket, or other external action.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "status": "passed",
+          "reason": "The response does not state a refund or return has been approved.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "status": "passed",
+          "reason": "No request for passwords or full card numbers is present.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+          "status": "passed",
+          "reason": "No invented data‑handling practices are mentioned.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "status": "passed",
+          "reason": "The response does not request receipt contents or copies.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+          "status": "passed",
+          "reason": "The response tells the customer they can contact human support.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 285,
+            "end": 356,
+            "quote": "You can contact a human support person without waiting for that answer."
+          }
+        },
+        {
+          "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+          "status": "passed",
+          "reason": "The response does not make clarification a prerequisite for contacting human support.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_INTERNAL_ENUM",
+          "status": "passed",
+          "reason": "No internal implementation labels are exposed.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+          "status": "passed",
+          "reason": "No invented channel, process, timeline, or follow‑up is mentioned.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+          "status": "passed",
+          "reason": "No extra unsupported or unverifiable claims are present.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        }
+      ],
+      "contradictions": [],
+      "extraClaims": [],
+      "unverifiableItems": [],
+      "reviewCompletionStatus": "completed",
+      "sourceMetadata": {
+        "providerId": "groq-free",
+        "requestId": "chatcmpl-5238c9e2-1cc3-484c-8634-c03438bd5381",
+        "reportedModel": "openai/gpt-oss-120b",
+        "finishReason": "stop",
+        "usage": {
+          "prompt_tokens": 3203,
+          "completion_tokens": 1800,
+          "total_tokens": 5003
+        },
+        "httpStatus": 200,
+        "rateLimitHeaders": {
+          "x-ratelimit-limit-requests": "1000",
+          "x-ratelimit-remaining-requests": "999",
+          "x-ratelimit-reset-requests": "1m26.4s",
+          "x-ratelimit-limit-tokens": "8000",
+          "x-ratelimit-remaining-tokens": "4403",
+          "x-ratelimit-reset-tokens": "26.977s"
+        },
+        "experimentId": "releaseguard-semantic-review-strict-v2-20261018",
+        "attemptKey": "7ed3bf602999bb727754715bf20c7d225a691c401b3483db211859451096caed",
+        "cacheKey": "91397fd7892d9592ecb3656a2acd726f39ee1168f9a78f6d0cdd25de24aec0df",
+        "cacheHit": false,
+        "toolsAvailable": 0,
+        "automaticRetries": 0,
+        "wireVersion": "semantic-review-wire-v2",
+        "allEvidenceFragmentsPreserved": true
+      }
+    }
+  },
+  "validation": {
+    "version": "semantic-review-validation-v1",
+    "status": "passed",
+    "reviewerValidationStatus": "calibration_pending",
+    "errors": [],
+    "review": {
+      "reviewId": "model-review-v2/7ed3bf602999bb727754715bf20c7d225a691c401b3483db211859451096caed",
+      "reviewSchemaVersion": "semantic-review-result-v1",
+      "reviewerType": "model_review",
+      "reviewerIdentity": "model/openai/gpt-oss-120b",
+      "modelId": "openai/gpt-oss-120b",
+      "reviewPromptVersion": "semantic-review-prompt-v1",
+      "policyVersion": "returns-policy-course-v1",
+      "policyHash": "c894b0b8306b3e4ea6cc0fcc0fab893ccf5b4dfbee5e85177d045c0c67dfff0b",
+      "contractVersion": "response-contract-v17",
+      "contractHash": "030479e32464a1b565cefe50f6b30d82fbabfb402a8eedb52ae3279193ab6c0c",
+      "factsVersion": "returns-facts-v1",
+      "factsHash": "95b9add15f29a3a8b9c391605646dcfb74bdec9448326b890a11f3ec2b5f96a5",
+      "originalResponseHash": "3ee1ebc88502ceb408185ff0ce572012c6cee0148f7677f3b235cfc56500c29a",
+      "caseId": "damaged",
+      "runId": "releaseguard-semantic-review-strict-v2-20261018",
+      "responseId": "v2-damaged-allowed-review-because",
+      "startedAt": "2026-10-18T01:53:52.180Z",
+      "finishedAt": "2026-10-18T01:53:56.538Z",
+      "ruleResults": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "status": "passed",
+          "reason": "The response states the standard return requirements.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 0,
+            "end": 108,
+            "quote": "An unused item, a receipt, and a return within 30 days of purchase are all mandatory for the standard route."
+          }
+        },
+        {
+          "ruleId": "PURCHASE_TIMING_UNKNOWN",
+          "status": "passed",
+          "reason": "The response explicitly says the purchase date is unknown.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 109,
+            "end": 177,
+            "quote": "There is no known purchase date, so standard eligibility is pending."
+          }
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+          "status": "passed",
+          "reason": "The response notes that eligibility cannot be determined yet.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 109,
+            "end": 177,
+            "quote": "There is no known purchase date, so standard eligibility is pending."
+          }
+        },
+        {
+          "ruleId": "HUMAN_REVIEW_REQUIRED",
+          "status": "passed",
+          "reason": "The response states a human reviewer must assess the case.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 178,
+            "end": 245,
+            "quote": "Because damage was reported, a human reviewer must assess the case."
+          }
+        },
+        {
+          "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+          "status": "passed",
+          "reason": "The response links the damage report to the need for human review.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 178,
+            "end": 245,
+            "quote": "Because damage was reported, a human reviewer must assess the case."
+          }
+        },
+        {
+          "ruleId": "ASK_PURCHASE_DATE",
+          "status": "passed",
+          "reason": "The response asks the customer for the purchase date.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 246,
+            "end": 272,
+            "quote": "What is the purchase date?"
+          }
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+          "status": "passed",
+          "reason": "No claim is made that the case is outside the return window.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+          "status": "passed",
+          "reason": "No claim is made that the case is within the return window.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "status": "passed",
+          "reason": "The response does not claim any refund, ticket, or other external action.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "status": "passed",
+          "reason": "The response does not state a refund or return has been approved.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "status": "passed",
+          "reason": "No request for passwords or full card numbers is present.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+          "status": "passed",
+          "reason": "No invented data‑handling practices are mentioned.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "status": "passed",
+          "reason": "The response does not request receipt contents or copies.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+          "status": "passed",
+          "reason": "The response tells the customer they can contact human support.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 285,
+            "end": 356,
+            "quote": "You can contact a human support person without waiting for that answer."
+          }
+        },
+        {
+          "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+          "status": "passed",
+          "reason": "The response does not make clarification a prerequisite for contacting human support.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_INTERNAL_ENUM",
+          "status": "passed",
+          "reason": "No internal implementation labels are exposed.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+          "status": "passed",
+          "reason": "No invented channel, process, timeline, or follow‑up is mentioned.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        },
+        {
+          "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+          "status": "passed",
+          "reason": "No extra unsupported or unverifiable claims are present.",
+          "evidence": null,
+          "missingReason": "No violating text found."
+        }
+      ],
+      "contradictions": [],
+      "extraClaims": [],
+      "unverifiableItems": [],
+      "reviewCompletionStatus": "completed",
+      "sourceMetadata": {
+        "providerId": "groq-free",
+        "requestId": "chatcmpl-5238c9e2-1cc3-484c-8634-c03438bd5381",
+        "reportedModel": "openai/gpt-oss-120b",
+        "finishReason": "stop",
+        "usage": {
+          "prompt_tokens": 3203,
+          "completion_tokens": 1800,
+          "total_tokens": 5003
+        },
+        "httpStatus": 200,
+        "rateLimitHeaders": {
+          "x-ratelimit-limit-requests": "1000",
+          "x-ratelimit-remaining-requests": "999",
+          "x-ratelimit-reset-requests": "1m26.4s",
+          "x-ratelimit-limit-tokens": "8000",
+          "x-ratelimit-remaining-tokens": "4403",
+          "x-ratelimit-reset-tokens": "26.977s"
+        },
+        "experimentId": "releaseguard-semantic-review-strict-v2-20261018",
+        "attemptKey": "7ed3bf602999bb727754715bf20c7d225a691c401b3483db211859451096caed",
+        "cacheKey": "91397fd7892d9592ecb3656a2acd726f39ee1168f9a78f6d0cdd25de24aec0df",
+        "cacheHit": false,
+        "toolsAvailable": 0,
+        "automaticRetries": 0,
+        "wireVersion": "semantic-review-wire-v2",
+        "allEvidenceFragmentsPreserved": true
+      }
+    }
+  },
+  "aggregate": {
+    "version": "hybrid-evaluation-v1",
+    "shadowOnly": true,
+    "deterministicCheckStatus": "passed",
+    "semanticReviewStatus": "passed",
+    "semanticRuleResults": [
+      {
+        "ruleId": "STANDARD_POLICY",
+        "status": "passed",
+        "reason": "The response states the standard return requirements.",
+        "evidence": {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 0,
+          "end": 108,
+          "quote": "An unused item, a receipt, and a return within 30 days of purchase are all mandatory for the standard route."
+        }
+      },
+      {
+        "ruleId": "PURCHASE_TIMING_UNKNOWN",
+        "status": "passed",
+        "reason": "The response explicitly says the purchase date is unknown.",
+        "evidence": {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 109,
+          "end": 177,
+          "quote": "There is no known purchase date, so standard eligibility is pending."
+        }
+      },
+      {
+        "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+        "status": "passed",
+        "reason": "The response notes that eligibility cannot be determined yet.",
+        "evidence": {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 109,
+          "end": 177,
+          "quote": "There is no known purchase date, so standard eligibility is pending."
+        }
+      },
+      {
+        "ruleId": "HUMAN_REVIEW_REQUIRED",
+        "status": "passed",
+        "reason": "The response states a human reviewer must assess the case.",
+        "evidence": {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 178,
+          "end": 245,
+          "quote": "Because damage was reported, a human reviewer must assess the case."
+        }
+      },
+      {
+        "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+        "status": "passed",
+        "reason": "The response links the damage report to the need for human review.",
+        "evidence": {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 178,
+          "end": 245,
+          "quote": "Because damage was reported, a human reviewer must assess the case."
+        }
+      },
+      {
+        "ruleId": "ASK_PURCHASE_DATE",
+        "status": "passed",
+        "reason": "The response asks the customer for the purchase date.",
+        "evidence": {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 246,
+          "end": 272,
+          "quote": "What is the purchase date?"
+        }
+      },
+      {
+        "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+        "status": "passed",
+        "reason": "No claim is made that the case is outside the return window.",
+        "evidence": null,
+        "missingReason": "No violating text found."
+      },
+      {
+        "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+        "status": "passed",
+        "reason": "No claim is made that the case is within the return window.",
+        "evidence": null,
+        "missingReason": "No violating text found."
+      },
+      {
+        "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+        "status": "passed",
+        "reason": "The response does not claim any refund, ticket, or other external action.",
+        "evidence": null,
+        "missingReason": "No violating text found."
+      },
+      {
+        "ruleId": "NO_REFUND_APPROVAL",
+        "status": "passed",
+        "reason": "The response does not state a refund or return has been approved.",
+        "evidence": null,
+        "missingReason": "No violating text found."
+      },
+      {
+        "ruleId": "NO_SECRET_REQUEST",
+        "status": "passed",
+        "reason": "No request for passwords or full card numbers is present.",
+        "evidence": null,
+        "missingReason": "No violating text found."
+      },
+      {
+        "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+        "status": "passed",
+        "reason": "No invented data‑handling practices are mentioned.",
+        "evidence": null,
+        "missingReason": "No violating text found."
+      },
+      {
+        "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+        "status": "passed",
+        "reason": "The response does not request receipt contents or copies.",
+        "evidence": null,
+        "missingReason": "No violating text found."
+      },
+      {
+        "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+        "status": "passed",
+        "reason": "The response tells the customer they can contact human support.",
+        "evidence": {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 285,
+          "end": 356,
+          "quote": "You can contact a human support person without waiting for that answer."
+        }
+      },
+      {
+        "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+        "status": "passed",
+        "reason": "The response does not make clarification a prerequisite for contacting human support.",
+        "evidence": null,
+        "missingReason": "No violating text found."
+      },
+      {
+        "ruleId": "NO_INTERNAL_ENUM",
+        "status": "passed",
+        "reason": "No internal implementation labels are exposed.",
+        "evidence": null,
+        "missingReason": "No violating text found."
+      },
+      {
+        "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+        "status": "passed",
+        "reason": "No invented channel, process, timeline, or follow‑up is mentioned.",
+        "evidence": null,
+        "missingReason": "No violating text found."
+      },
+      {
+        "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+        "status": "passed",
+        "reason": "No extra unsupported or unverifiable claims are present.",
+        "evidence": null,
+        "missingReason": "No violating text found."
+      }
+    ],
+    "candidatePolicyCompliance": "passed",
+    "candidateDeliveryStatus": "blocked",
+    "reviewerValidationStatus": "calibration_pending",
+    "customerOutput": null,
+    "originalResponseHash": "3ee1ebc88502ceb408185ff0ce572012c6cee0148f7677f3b235cfc56500c29a",
+    "rewritten": false,
+    "reasons": [
+      "reviewer_not_qualified_for_delivery"
+    ],
+    "historicalPath": {
+      "modified": false,
+      "activation": "unchanged"
+    }
+  },
+  "protocol": {
+    "httpPassed": true,
+    "rawProviderSaved": true,
+    "rawReviewTextSaved": true,
+    "finishReasonPassed": true,
+    "reportedModelPassed": true,
+    "schemaPassed": true,
+    "evidenceLocationPassed": true,
+    "passed": true
+  },
+  "semantic": {
+    "matches": true,
+    "predictedAllowed": true,
+    "details": "All applicable rule judgments passed without unresolved observations."
+  },
+  "completedAt": "2026-10-18T01:53:56.541Z"
+}

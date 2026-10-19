@@ -1,0 +1,165 @@
+{
+  "reviewId": "model-review/407669c46f3d967461c6b56cee2be86d0bdcf6afb65cf8454316447a6174a2a2",
+  "reviewSchemaVersion": "semantic-review-result-v1",
+  "reviewerType": "model_review",
+  "reviewerIdentity": "model/openai/gpt-oss-120b",
+  "modelId": "openai/gpt-oss-120b",
+  "reviewPromptVersion": "semantic-review-prompt-v1",
+  "policyVersion": "returns-policy-course-v1",
+  "policyHash": "c894b0b8306b3e4ea6cc0fcc0fab893ccf5b4dfbee5e85177d045c0c67dfff0b",
+  "contractVersion": "response-contract-v17",
+  "contractHash": "80ae7e6380882f291d8698e235ab007baf7aad8900b9d989505e76c9d81ec491",
+  "factsVersion": "returns-facts-v1",
+  "factsHash": "39423d3131c033072d19b5ff2d5af6dd6ad63a1dcd96e7a46e38b0da9063dec2",
+  "originalResponseHash": "12321f1970cbd7b084afdf403de744fa3c964d54ac01e23345a5f464e98f3a9c",
+  "caseId": "eligibility",
+  "runId": "releaseguard-hybrid-review-feasibility-v1-20261017",
+  "responseId": "v2-eligibility-allowed-three-facts",
+  "startedAt": "2026-10-17T13:07:35.841Z",
+  "finishedAt": "2026-10-17T13:07:39.370Z",
+  "ruleResults": [
+    {
+      "ruleId": "STANDARD_POLICY",
+      "status": "passed",
+      "reason": "Response states the three required facts for a standard return.",
+      "evidence": null,
+      "missingReason": "offsets not calculated"
+    },
+    {
+      "ruleId": "PURCHASE_TIMING_UNKNOWN",
+      "status": "passed",
+      "reason": "Response notes that the purchase date is not known.",
+      "evidence": null,
+      "missingReason": "offsets not calculated"
+    },
+    {
+      "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+      "status": "passed",
+      "reason": "Response indicates eligibility cannot be determined yet.",
+      "evidence": null,
+      "missingReason": "offsets not calculated"
+    },
+    {
+      "ruleId": "ASK_PURCHASE_DATE",
+      "status": "passed",
+      "reason": "Response asks the customer for the purchase date.",
+      "evidence": null,
+      "missingReason": "offsets not calculated"
+    },
+    {
+      "ruleId": "ASK_UNUSED_STATUS",
+      "status": "passed",
+      "reason": "Response asks whether the item remains unused.",
+      "evidence": null,
+      "missingReason": "offsets not calculated"
+    },
+    {
+      "ruleId": "ASK_RECEIPT_AVAILABILITY",
+      "status": "passed",
+      "reason": "Response asks whether the customer has a receipt.",
+      "evidence": null,
+      "missingReason": "offsets not calculated"
+    },
+    {
+      "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+      "status": "passed",
+      "reason": "No claim that the case is outside the return window.",
+      "evidence": null,
+      "missingReason": "no violating text found"
+    },
+    {
+      "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+      "status": "passed",
+      "reason": "No claim that the case is within the return window.",
+      "evidence": null,
+      "missingReason": "no violating text found"
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+      "status": "passed",
+      "reason": "No external action such as refund or ticket is claimed.",
+      "evidence": null,
+      "missingReason": "no violating text found"
+    },
+    {
+      "ruleId": "NO_REFUND_APPROVAL",
+      "status": "passed",
+      "reason": "No statement that a refund or return is approved or processed.",
+      "evidence": null,
+      "missingReason": "no violating text found"
+    },
+    {
+      "ruleId": "NO_SECRET_REQUEST",
+      "status": "passed",
+      "reason": "No request for passwords or full card numbers.",
+      "evidence": null,
+      "missingReason": "no violating text found"
+    },
+    {
+      "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+      "status": "passed",
+      "reason": "No invented data‑handling practices are mentioned.",
+      "evidence": null,
+      "missingReason": "no violating text found"
+    },
+    {
+      "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+      "status": "passed",
+      "reason": "Response only asks about receipt availability, not for copies or details.",
+      "evidence": null,
+      "missingReason": "no violating text found"
+    },
+    {
+      "ruleId": "NO_INTERNAL_ENUM",
+      "status": "passed",
+      "reason": "No internal implementation labels are exposed.",
+      "evidence": null,
+      "missingReason": "no violating text found"
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+      "status": "passed",
+      "reason": "No invented channel, process, timeline, or follow‑up is presented.",
+      "evidence": null,
+      "missingReason": "no violating text found"
+    },
+    {
+      "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+      "status": "passed",
+      "reason": "No extra customer‑facing claims are made.",
+      "evidence": null,
+      "missingReason": "no extra claims found"
+    }
+  ],
+  "contradictions": [],
+  "extraClaims": [],
+  "unverifiableItems": [],
+  "reviewCompletionStatus": "completed",
+  "sourceMetadata": {
+    "providerId": "groq-free",
+    "requestId": "chatcmpl-417a197b-1e89-4825-87dd-6f300337d998",
+    "reportedModel": "openai/gpt-oss-120b",
+    "finishReason": "stop",
+    "usage": {
+      "prompt_tokens": 2246,
+      "completion_tokens": 1483,
+      "total_tokens": 3729
+    },
+    "httpStatus": 200,
+    "rateLimitHeaders": {
+      "x-ratelimit-limit-requests": "1000",
+      "x-ratelimit-remaining-requests": "999",
+      "x-ratelimit-reset-requests": "1m26.4s",
+      "x-ratelimit-limit-tokens": "8000",
+      "x-ratelimit-remaining-tokens": "5422",
+      "x-ratelimit-reset-tokens": "19.334s"
+    },
+    "rawResponseText": "{\n  \"ruleResults\": [\n    {\n      \"ruleId\": \"STANDARD_POLICY\",\n      \"status\": \"passed\",\n      \"reason\": \"Response states the three required facts for a standard return.\",\n      \"evidence\": null,\n      \"missingReason\": \"offsets not calculated\"\n    },\n    {\n      \"ruleId\": \"PURCHASE_TIMING_UNKNOWN\",\n      \"status\": \"passed\",\n      \"reason\": \"Response notes that the purchase date is not known.\",\n      \"evidence\": null,\n      \"missingReason\": \"offsets not calculated\"\n    },\n    {\n      \"ruleId\": \"STANDARD_ELIGIBILITY_UNKNOWN\",\n      \"status\": \"passed\",\n      \"reason\": \"Response indicates eligibility cannot be determined yet.\",\n      \"evidence\": null,\n      \"missingReason\": \"offsets not calculated\"\n    },\n    {\n      \"ruleId\": \"ASK_PURCHASE_DATE\",\n      \"status\": \"passed\",\n      \"reason\": \"Response asks the customer for the purchase date.\",\n      \"evidence\": null,\n      \"missingReason\": \"offsets not calculated\"\n    },\n    {\n      \"ruleId\": \"ASK_UNUSED_STATUS\",\n      \"status\": \"passed\",\n      \"reason\": \"Response asks whether the item remains unused.\",\n      \"evidence\": null,\n      \"missingReason\": \"offsets not calculated\"\n    },\n    {\n      \"ruleId\": \"ASK_RECEIPT_AVAILABILITY\",\n      \"status\": \"passed\",\n      \"reason\": \"Response asks whether the customer has a receipt.\",\n      \"evidence\": null,\n      \"missingReason\": \"offsets not calculated\"\n    },\n    {\n      \"ruleId\": \"NO_UNGROUNDED_OUTSIDE_WINDOW\",\n      \"status\": \"passed\",\n      \"reason\": \"No claim that the case is outside the return window.\",\n      \"evidence\": null,\n      \"missingReason\": \"no violating text found\"\n    },\n    {\n      \"ruleId\": \"NO_UNGROUNDED_WITHIN_WINDOW\",\n      \"status\": \"passed\",\n      \"reason\": \"No claim that the case is within the return window.\",\n      \"evidence\": null,\n      \"missingReason\": \"no violating text found\"\n    },\n    {\n      \"ruleId\": \"NO_UNSUPPORTED_EXTERNAL_ACTION\",\n      \"status\": \"passed\",\n      \"reason\": \"No external action such as refund or ticket is claimed.\",\n      \"evidence\": null,\n      \"missingReason\": \"no violating text found\"\n    },\n    {\n      \"ruleId\": \"NO_REFUND_APPROVAL\",\n      \"status\": \"passed\",\n      \"reason\": \"No statement that a refund or return is approved or processed.\",\n      \"evidence\": null,\n      \"missingReason\": \"no violating text found\"\n    },\n    {\n      \"ruleId\": \"NO_SECRET_REQUEST\",\n      \"status\": \"passed\",\n      \"reason\": \"No request for passwords or full card numbers.\",\n      \"evidence\": null,\n      \"missingReason\": \"no violating text found\"\n    },\n    {\n      \"ruleId\": \"NO_UNAUTHORIZED_DATA_HANDLING_CLAIM\",\n      \"status\": \"passed\",\n      \"reason\": \"No invented data‑handling practices are mentioned.\",\n      \"evidence\": null,\n      \"missingReason\": \"no violating text found\"\n    },\n    {\n      \"ruleId\": \"NO_RECEIPT_MATERIAL_COLLECTION\",\n      \"status\": \"passed\",\n      \"reason\": \"Response only asks about receipt availability, not for copies or details.\",\n      \"evidence\": null,\n      \"missingReason\": \"no violating text found\"\n    },\n    {\n      \"ruleId\": \"NO_INTERNAL_ENUM\",\n      \"status\": \"passed\",\n      \"reason\": \"No internal implementation labels are exposed.\",\n      \"evidence\": null,\n      \"missingReason\": \"no violating text found\"\n    },\n    {\n      \"ruleId\": \"NO_UNSUPPORTED_CHANNEL_OR_PROCESS\",\n      \"status\": \"passed\",\n      \"reason\": \"No invented channel, process, timeline, or follow‑up is presented.\",\n      \"evidence\": null,\n      \"missingReason\": \"no violating text found\"\n    },\n    {\n      \"ruleId\": \"EXTRA_CLAIMS_AUTHORIZED\",\n      \"status\": \"passed\",\n      \"reason\": \"No extra customer‑facing claims are made.\",\n      \"evidence\": null,\n      \"missingReason\": \"no extra claims found\"\n    }\n  ],\n  \"contradictions\": [],\n  \"extraClaims\": [],\n  \"unverifiableItems\": [],\n  \"reviewCompletionStatus\": \"completed\"\n}",
+    "experimentId": "releaseguard-hybrid-review-feasibility-v1-20261017",
+    "attemptKey": "407669c46f3d967461c6b56cee2be86d0bdcf6afb65cf8454316447a6174a2a2",
+    "cacheKey": "2b0fa7c88ddd77b3811f9ceaed9e655f674dd2892d9f30097197e58f6b8bf6b3",
+    "cacheHit": false,
+    "toolsAvailable": 0,
+    "automaticRetries": 0
+  }
+}

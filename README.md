@@ -1,5 +1,11 @@
 # ReleaseGuard — SE34FT Team 13
 
+## 19 October 2026: C-side repair and presentation handoff
+
+Start with [whole-project progress and presentation](docs/13-Progress-and-Presentation-20261019.md), [repair timeline and scope](docs/14-Repair-Timeline-and-Boundaries-20261019.md), and [demo runbook](docs/15-Presentation-Demo-Runbook-20261019.md). This feature-branch snapshot preserves B's baseline and the accumulated evaluation repairs; it is not merged into main or deployed.
+
+Reviewer v3 passed a three-sample real protocol experiment and a **separate** seventeen-sample cross-scenario development experiment. It remains shadow-only and calibration-pending. Historical 70/75 customer-model scores are unchanged. Fresh local verification is **776/777**, with the rejected regex evaluator's retained holdout still failing (`npm test` exits 1); auxiliary tests are 7/7. Do not describe this branch as an all-green release candidate. Later dated handoff records above take precedence over the older operational summaries below.
+
 **Current working copy: 11 October 2026.** This repository continues the preserved 7/8 October baseline in a separate directory and Docker project. Start with [DDD decisions](docs/07-DDD-Design.md) and [five-member delivery workflow](docs/08-Team-Workflow.md). Prior dated documents below are historical; they are not fresh verification or the approved Word proposal. The lecturer has approved the revised proposal; implementation/cloud acceptance remains separate.
 
 **Public review edition.** The owner requested public access for teammates and the lecturer. Use [the current working branch](https://github.com/limidexy/releaseguard-team13/tree/feat/local-course-evidence), not the older `main` snapshot. [Draft PR #1](https://github.com/limidexy/releaseguard-team13/pull/1) is still awaiting genuine team review. Public read access does not grant push, deployment or model access. See [the real-model re-test and current delivery record](docs/12-Real-Retest-20261011.md) for the latest measured results, exact tested source, CI/CD links and shutdown evidence. Historical failures remain intact.

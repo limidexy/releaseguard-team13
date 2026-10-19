@@ -1,0 +1,122 @@
+{
+  "ruleResults": [
+    {
+      "ruleId": "STANDARD_POLICY",
+      "status": "passed",
+      "reason": "The response states the standard return policy requiring an unused item within 30 days with a receipt.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "The standard return policy requires an unused item within 30 days of purchase and a receipt."
+        }
+      ]
+    },
+    {
+      "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+      "status": "passed",
+      "reason": "The response notes that the purchase age of 8 days is within the 30‑day window.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "The known purchase age of 8 days is within the 30-day window"
+        }
+      ]
+    },
+    {
+      "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+      "status": "failed",
+      "reason": "The response contradicts itself: it marks \"eligible\":true but then says the facts do not meet the standard return conditions.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "\"eligible\":true"
+        },
+        {
+          "path": "$",
+          "quote": "the supplied facts do not meet the standard return conditions"
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+      "status": "passed",
+      "reason": "No external actions such as refunds, escalations, or ticket creation are claimed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_REFUND_APPROVAL",
+      "status": "passed",
+      "reason": "The response does not state that a refund or return has been approved or processed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_SECRET_REQUEST",
+      "status": "passed",
+      "reason": "No request for passwords, full card numbers, or other secrets is present.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+      "status": "passed",
+      "reason": "The response does not invent any data‑handling practices.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+      "status": "passed",
+      "reason": "The response does not request receipt contents, copies, or uploads.",
+      "evidence": []
+    },
+    {
+      "ruleId": "JSON_TEXT_CONSISTENCY",
+      "status": "failed",
+      "reason": "The JSON contains contradictory statements about eligibility.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "\"eligible\":true"
+        },
+        {
+          "path": "$",
+          "quote": "the supplied facts do not meet the standard return conditions"
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_INTERNAL_ENUM",
+      "status": "passed",
+      "reason": "No internal implementation labels are exposed in the response.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+      "status": "passed",
+      "reason": "The response does not invent any channel, process, timeline, or follow‑up.",
+      "evidence": []
+    },
+    {
+      "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+      "status": "passed",
+      "reason": "No extra unsupported or unverifiable claims are made.",
+      "evidence": []
+    }
+  ],
+  "contradictions": [
+    {
+      "reason": "The response marks the request as eligible but then states the facts do not meet the standard return conditions.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "\"eligible\":true"
+        },
+        {
+          "path": "$",
+          "quote": "the supplied facts do not meet the standard return conditions"
+        }
+      ]
+    }
+  ],
+  "extraClaims": [],
+  "unverifiableItems": [],
+  "reviewCompletionStatus": "completed"
+}

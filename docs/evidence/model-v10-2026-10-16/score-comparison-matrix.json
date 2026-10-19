@@ -1,0 +1,29 @@
+{
+  "kind": "same-answer cross-version evaluation; offline only",
+  "newProviderCalls": 0,
+  "runs": [
+    {
+      "prompt": "v8",
+      "v26": 85,
+      "v27": 85,
+      "sourceReport": "docs/evidence/model-v8-2026-10-16/real-v8-2026-10-16T03-12-52.872Z.json"
+    },
+    {
+      "prompt": "v9",
+      "v26": 95,
+      "v27": 90,
+      "sourceReport": "docs/evidence/model-v9-2026-10-16/real-v9-2026-10-16T04-12-25.436Z.json"
+    },
+    {
+      "prompt": "v10",
+      "v26": 100,
+      "v27": 100,
+      "sourceReport": "docs/evidence/model-v10-2026-10-16/real-v10-2026-10-16T04-41-29.509Z.json"
+    }
+  ],
+  "limitations": [
+    "Same development questions, not an unseen benchmark.",
+    "One sample per case; no repeatability guarantee.",
+    "Automatic pass does not override supplemental review or human approval."
+  ]
+}

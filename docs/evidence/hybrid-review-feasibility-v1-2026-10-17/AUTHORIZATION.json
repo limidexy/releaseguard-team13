@@ -1,0 +1,18 @@
+{
+  "authorizationId": "user-authorized-hybrid-review-feasibility-v1-20261017",
+  "experimentId": "releaseguard-hybrid-review-feasibility-v1-20261017",
+  "recordedAt": "2026-10-17T13:03:09Z",
+  "source": "explicit user message in the current ReleaseGuard task",
+  "approved": true,
+  "provider": "Groq",
+  "allowedModelId": "openai/gpt-oss-120b",
+  "maximumSemanticReviewRequests": 20,
+  "customerGenerationRequests": 0,
+  "dataScope": "frozen fictional return samples, frozen policy, deterministic facts, decision and response contract required for semantic review",
+  "allowPaidCalls": false,
+  "allowAutomaticRetry": false,
+  "allowProviderSwitch": false,
+  "allowDeployment": false,
+  "allowPublication": false,
+  "allowGitPush": false
+}

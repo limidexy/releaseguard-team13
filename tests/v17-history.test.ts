@@ -1,0 +1,26 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {evaluate} from '../src/domain.js';
+import {evaluateControlledV14} from '../src/controlled-evaluation-v14.js';
+import {evaluateControlledV17} from '../src/controlled-evaluation-v17.js';
+import {checkExplanationV2} from '../src/output-guard-v2.js';
+import {decisionForQuestionV1} from '../src/returns-decision-v1.js';
+import {responseModeV8} from '../src/provider.js';
+const sha=(b:Buffer)=>createHash('sha256').update(b).digest('hex');
+const load=(version:15|16,file:string)=>{const plan=JSON.parse(readFileSync(`docs/evidence/model-v${version}-2026-10-16/plan.json`,'utf8')),raw=readFileSync(`docs/evidence/model-v${version}-2026-10-16/${file}`),report=JSON.parse(raw.toString());return {plan,raw,report,cases:plan.suites.flatMap((s:any)=>s.cases)};};
+const v15=load(15,'real-v15-2026-10-16T08-31-07.250Z.json'),v16=load(16,'real-v16-2026-10-16T08-50-53.534Z.json');
+test('v15 and v16 real reports remain byte-identical',()=>{assert.equal(sha(v15.raw),'01c9392af186ea9bea8a126127f0b82d347ac94c5546dc0387c6995a553666f8');assert.equal(sha(v16.raw),'dfeee69328467283debc9153e54cf6955757a81e070466b71c1a97b7c0357cb1');});
+test('unchanged scorer and legacy guard reproduce frozen v15 outcome',()=>{const score=evaluate(v15.cases,v15.plan.policy,v15.report.calls),controlled=evaluateControlledV14(v15.cases,v15.plan.policy,v15.report.calls);assert.deepEqual(score,v15.report.overall);assert.deepEqual(controlled,v15.report.controlled);assert.equal(score.score,90);assert.equal(controlled.result.deliveryValidation.allowed,17);assert.equal(controlled.result.gate,'blocked');});
+test('unchanged scorer and legacy guard reproduce frozen v16 outcome',()=>{const score=evaluate(v16.cases,v16.plan.policy,v16.report.calls),controlled=evaluateControlledV14(v16.cases,v16.plan.policy,v16.report.calls);assert.deepEqual(score,v16.report.overall);assert.equal(score.score,90);assert.equal(controlled.result.deliveryValidation.allowed,17);assert.equal(controlled.result.gate,'blocked');});
+const accounting=(cases:any[],policy:any,calls:any[])=>{const score=evaluate(cases,policy,calls),guard=cases.map(c=>({caseId:c.id,passed:checkExplanationV2(calls.find(o=>o.caseId===c.id)?.output,decisionForQuestionV1(c.prompt),responseModeV8(c.prompt),calls.find(o=>o.caseId===c.id)?.error).passed}));const scoringPassed=new Set(score.results.filter(r=>r.status==='passed').map(r=>r.caseId)),guardPassed=new Set(guard.filter(r=>r.passed).map(r=>r.caseId));return {score:score.score,gate:score.gate,scoringPassed:scoringPassed.size,independentLegacyGuard:{allowed:guardPassed.size,blocked:cases.length-guardPassed.size},combined:{allowed:cases.filter(c=>scoringPassed.has(c.id)&&guardPassed.has(c.id)).length,blocked:cases.filter(c=>!scoringPassed.has(c.id)||!guardPassed.has(c.id)).length}};};
+test('historical accounting keeps scorer, independent old guard, and their intersection separate',()=>{
+ const v15Original=accounting(v15.cases,v15.plan.policy,v15.report.calls);
+ const v15V210=accounting(v15.cases.map((c:any)=>({...c,rule:'returns_policy_v2_10'})),v15.plan.policy,v15.report.calls);
+ const v16Original=accounting(v16.cases,v16.plan.policy,v16.report.calls);
+ assert.deepEqual(v15Original,{score:90,gate:'blocked',scoringPassed:18,independentLegacyGuard:{allowed:19,blocked:1},combined:{allowed:17,blocked:3}});
+ assert.deepEqual(v15V210,{score:100,gate:'passed',scoringPassed:20,independentLegacyGuard:{allowed:19,blocked:1},combined:{allowed:19,blocked:1}});
+ assert.deepEqual(v16Original,{score:90,gate:'blocked',scoringPassed:18,independentLegacyGuard:{allowed:17,blocked:3},combined:{allowed:17,blocked:3}});
+});
+test('v17 diagnosis reads all historical originals without editing them or pretending they must pass',()=>{for(const old of [v15,v16]){const before=old.report.calls.map((c:any)=>c.output);const diagnosed=evaluateControlledV17(v16.cases,v16.plan.policy,old.report.calls);assert.equal(diagnosed.records.length,20);assert.deepEqual(old.report.calls.map((c:any)=>c.output),before);for(const row of diagnosed.records){const original=old.report.calls.find((c:any)=>c.caseId===row.caseId)?.output;assert.equal(row.delivery.customerOutput,row.delivery.status==='allowed'?original:null);assert.equal(row.delivery.rewritten,false);}}});

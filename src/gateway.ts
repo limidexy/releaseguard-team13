@@ -1,7 +1,11 @@
+import { returnsSuiteV30 } from './returns-policy-v30.js';
+import { returnsSuiteV29 } from './returns-policy-v29.js';
+import { returnsSuiteV28 } from './returns-policy-v28.js';
+import { returnsSuiteV27 } from './returns-policy-v27.js';
 import type { FastifyInstance } from 'fastify';
 import { readFile } from 'node:fs/promises';
 import { HttpError } from './common.js';
-import { revisedReturnsSuite, returnsSuiteV22 } from './returns-policy.js';
+import { revisedReturnsSuite, returnsSuiteV22, returnsSuiteV23, returnsSuiteV24, returnsSuiteV25, returnsSuiteV26 } from './returns-policy.js';
 export async function gateway(app: FastifyInstance) {
   app.get('/', async (_req, reply) => reply.type('text/html').send(await readFile('public/index.html', 'utf8')));
   app.get('/app.js', async (_req, reply) => reply.type('application/javascript').send(await readFile('public/app.js', 'utf8')));
@@ -15,6 +19,47 @@ export async function gateway(app: FastifyInstance) {
   app.get('/returns-fixtures-v2-2.json', async () => {
     const legacy = JSON.parse(await readFile('public/demo-fixtures.json', 'utf8'));
     const suite = returnsSuiteV22(legacy.suite);
+    return { application: legacy.application, cases: suite.cases, suite };
+  });
+  app.get('/returns-fixtures-v2-3.json', async () => {
+    const legacy = JSON.parse(await readFile('public/demo-fixtures.json', 'utf8'));
+    const suite = returnsSuiteV23(revisedReturnsSuite(legacy.suite));
+    return { application: legacy.application, cases: suite.cases, suite };
+  });
+
+  app.get('/returns-fixtures-v2-4.json', async () => {
+    const legacy = JSON.parse(await readFile('public/demo-fixtures.json', 'utf8'));
+    const suite = returnsSuiteV24(revisedReturnsSuite(legacy.suite));
+    return { application: legacy.application, cases: suite.cases, suite };
+  });
+  app.get('/returns-fixtures-v2-5.json', async () => {
+    const legacy = JSON.parse(await readFile('public/demo-fixtures.json', 'utf8'));
+    const suite = returnsSuiteV25(revisedReturnsSuite(legacy.suite));
+    return { application: legacy.application, cases: suite.cases, suite };
+  });
+  app.get('/returns-fixtures-v2-6.json', async () => {
+    const legacy = JSON.parse(await readFile('public/demo-fixtures.json', 'utf8'));
+    const suite = returnsSuiteV26(revisedReturnsSuite(legacy.suite));
+    return { application: legacy.application, cases: suite.cases, suite };
+  });
+  app.get('/returns-fixtures-v2-7.json', async () => {
+    const legacy = JSON.parse(await readFile('public/demo-fixtures.json', 'utf8'));
+    const suite = returnsSuiteV27(revisedReturnsSuite(legacy.suite));
+    return { application: legacy.application, cases: suite.cases, suite };
+  });
+  app.get('/returns-fixtures-v2-10.json', async () => {
+    const legacy = JSON.parse(await readFile('public/demo-fixtures.json', 'utf8'));
+    const suite = returnsSuiteV30(revisedReturnsSuite(legacy.suite));
+    return { application: legacy.application, cases: suite.cases, suite };
+  });
+  app.get('/returns-fixtures-v2-9.json', async () => {
+    const legacy = JSON.parse(await readFile('public/demo-fixtures.json', 'utf8'));
+    const suite = returnsSuiteV29(revisedReturnsSuite(legacy.suite));
+    return { application: legacy.application, cases: suite.cases, suite };
+  });
+  app.get('/returns-fixtures-v2-8.json', async () => {
+    const legacy = JSON.parse(await readFile('public/demo-fixtures.json', 'utf8'));
+    const suite = returnsSuiteV28(revisedReturnsSuite(legacy.suite));
     return { application: legacy.application, cases: suite.cases, suite };
   });
   app.get('/environment.json', async (_req, reply) => {

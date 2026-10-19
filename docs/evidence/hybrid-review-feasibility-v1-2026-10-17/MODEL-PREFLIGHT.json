@@ -1,0 +1,9 @@
+{
+  "version": "groq-reviewer-preflight-v1",
+  "checkedAt": "2026-10-17T13:07:35.828Z",
+  "endpoint": "https://api.groq.com/openai/v1/models",
+  "httpStatus": 200,
+  "modelId": "openai/gpt-oss-120b",
+  "available": true,
+  "freePlanEvidenceSha256": "320afec94aea252045c27a0ef694c030ca55c8b62dbc5cec289209cce25b5885"
+}

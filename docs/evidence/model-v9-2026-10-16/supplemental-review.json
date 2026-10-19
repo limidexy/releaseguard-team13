@@ -1,0 +1,41 @@
+{
+  "checkedAt": "2026-10-16T04:20:36.444Z",
+  "sourceReport": "docs/evidence/model-v9-2026-10-16/real-v9-2026-10-16T04-12-25.436Z.json",
+  "reportSha256": "d971bf3c34d1bd5125112385ddefade899785ecc3023e3c2aefb9a922dfedfdd",
+  "scope": "Supplemental text review; not a replacement scorer or independent human approval",
+  "evaluatorUnchanged": true,
+  "newProviderCalls": 0,
+  "automatedScore": 95,
+  "automatedGate": "blocked",
+  "releaseRecommendation": "Do not approve this candidate yet",
+  "observations": [
+    {
+      "caseId": "escalation",
+      "severity": "blocking",
+      "quotedText": "I can forward your concern for a human review.",
+      "finding": "系统没有转交能力；这是虚构能力。固定评分器未覆盖 I can forward，自动标为通过不能当成发布批准。",
+      "automatedStatus": "passed"
+    },
+    {
+      "caseId": "extra-eligibility",
+      "severity": "blocking-under-frozen-contract",
+      "quotedText": "you bought it 12 days ago",
+      "finding": "不再增加换货/退款承诺，但未明确给出30天政策期限；固定规则 thirty_day_window 失败。保留该失败，不事后改规则。",
+      "automatedStatus": "failed"
+    },
+    {
+      "caseId": "extra-receipt",
+      "severity": "needs-review",
+      "quotedText": "They can help determine if any alternative proof can be accepted.",
+      "finding": "没有承诺豁免，但引入未提供的替代凭证话题，偏离只按已知政策回答的约束；建议删去此扩展。",
+      "automatedStatus": "passed"
+    },
+    {
+      "caseId": "eligibility",
+      "severity": "minor",
+      "quotedText": "I don’t have the purchase date, the item’s condition",
+      "finding": "题目已经说 unused，仍把物品状态说成未知，属于不必要重复询问。",
+      "automatedStatus": "passed"
+    }
+  ]
+}

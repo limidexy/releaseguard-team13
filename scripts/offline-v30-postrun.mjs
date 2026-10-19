@@ -1,0 +1,24 @@
+import assert from 'node:assert/strict';
+import {readFileSync,writeFileSync,copyFileSync,constants} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {evaluate} from '../dist/src/domain.js';
+import {evaluateControlledV14} from '../dist/src/controlled-evaluation-v14.js';
+const dir='docs/evidence/model-v15-2026-10-16',file=dir+'/real-v15-2026-10-16T08-31-07.250Z.json';
+const sha=b=>createHash('sha256').update(b).digest('hex'),raw=readFileSync(file),r=JSON.parse(raw),p=JSON.parse(readFileSync(dir+'/plan.json'));
+assert.equal(sha(raw),'01c9392af186ea9bea8a126127f0b82d347ac94c5546dc0387c6995a553666f8');
+const cases=p.suites.flatMap(s=>s.cases),current=cases.map(c=>({...c,rule:'returns_policy_v2_10'}));
+assert.deepEqual(evaluate(cases,p.policy,r.calls),r.overall);
+const controlled=evaluateControlledV14(current,p.policy,r.calls),score=controlled.rawModelEvaluation;
+assert.equal(score.score,100);assert.equal(controlled.result.gate,'blocked');assert.equal(controlled.result.deliveryValidation.blocked,1);
+assert.deepEqual(controlled.records.filter(x=>x.delivery.status==='blocked').map(x=>x.caseId),['expired']);
+assert.ok(controlled.records.find(x=>x.caseId==='expired').validation.failures.includes('no_unknown_deadline_decision'));
+for(const row of controlled.records){assert.equal(row.delivery.rewritten,false);assert.equal(row.delivery.customerOutput,row.delivery.status==='allowed'?r.calls.find(x=>x.caseId===row.caseId).output:null);}
+const old=JSON.parse(readFileSync('docs/evidence/model-v14-2026-10-16/real-v14-2026-10-16T07-28-43.967Z.json'));
+const oldRescore=evaluate(current,p.policy,old.calls);assert.equal(oldRescore.score,95);assert.equal(oldRescore.gate,'blocked');
+const sourcePaths=['src/privacy-v30.ts','src/returns-policy-v30.ts','src/domain.ts','src/gateway.ts','dist/src/privacy-v30.js','dist/src/returns-policy-v30.js','dist/src/domain.js','dist/src/gateway.js'];
+const sources=Object.fromEntries(sourcePaths.map(f=>[f,sha(readFileSync(f))]));
+const result={createdAt:new Date().toISOString(),source:'offline-rescore-of-real-raw',providerCalls:0,originalRealCalls:20,reportSha256:sha(raw),originalFrozenEvaluator:'returns-policy-v2.9',originalFrozenScore:90,newEvaluator:'returns-policy-v2.10',oldV14Rescore:oldRescore,rawRescore:score,controlled,sources,notes:['Scoring v2.10 was introduced AFTER the 20 real calls; this is an offline re-evaluation, not a new real run.','Existing v2.8/v2.9 results and original model outputs remain unchanged.','Fixed policy passive-sentence false positives; blocks proof/evidence disguised as receipt availability.','Independent guard remains unchanged: expired answer concludes outside the window despite unknown purchase timing and still blocks.']};
+writeFileSync(dir+'/postrun-v30-rescore.json',JSON.stringify(result,null,2)+'\n',{flag:'wx'});
+for(const f of sourcePaths)copyFileSync(f,dir+'/'+f.replaceAll('/','__')+'.txt',constants.COPYFILE_EXCL);
+for(const [from,name] of [['/tmp/rg-v15-final-tests.log','final-v30-tests.log'],['/tmp/rg-v15-v30-red-final.log','red-v30-boundary.log']])copyFileSync(from,dir+'/'+name,constants.COPYFILE_EXCL);
+console.log(JSON.stringify({source:result.source,providerCalls:0,oldScore:90,newRescore:score.score,delivery:controlled.result.deliveryValidation,gate:controlled.result.gate}));

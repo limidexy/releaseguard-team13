@@ -1,8 +1,29 @@
 // Versioned, bounded English heuristics for a fictional policy, not an LLM judge.
 // Keep v2.0/v2.1 reproducible; v2.2 tightens privacy without rewriting history.
+import { privacyChecksV23 } from './privacy-v23.js';
+import { refinementsV26 } from './refinements-v26.js';
+import { privacyChecksV25 } from './privacy-v25.js';
+import { answerChecksV25 } from './answer-v25.js';
+import { privacyChecksV24 } from './privacy-v24.js';
 export const returnsCriteria = ['eligibility', 'receipt', 'damaged', 'expired', 'privacy', 'action', 'missing', 'escalation', 'format', 'greeting'] as const;
 export const returnsEvaluatorVersion = 'returns-policy-v2.1';
 export const returnsEvaluatorVersionV22 = 'returns-policy-v2.2';
+export const returnsEvaluatorVersionV23 = 'returns-policy-v2.3';
+export const returnsEvaluatorVersionV26 = 'returns-policy-v2.6';
+export function returnsSuiteV26<T extends { name: string; description: string; cases: { id: string; rule: string; expected: string }[] }>(suite: T) {
+  return { ...suite, name: 'Fictional returns acceptance v2.6', description: 'returns-policy-v2.6: scoped receipt refusals, purchase-date uncertainty and unsupported remedies; human review required', cases: suite.cases.map(c => ({ ...c, rule: 'returns_policy_v2_6' })) };
+}
+export const returnsEvaluatorVersionV25 = 'returns-policy-v2.5';
+export function returnsSuiteV25<T extends { name: string; description: string; cases: { id: string; rule: string; expected: string }[] }>(suite: T) {
+  return { ...suite, name: 'Fictional returns acceptance v2.5', description: 'returns-policy-v2.5: scoped privacy and handoff, grounded actions and purchase-date checks; bounded rules require human review', cases: suite.cases.map(c => ({ ...c, rule: 'returns_policy_v2_5' })) };
+}
+export const returnsEvaluatorVersionV24 = 'returns-policy-v2.4';
+export function returnsSuiteV24<T extends { name: string; description: string; cases: { id: string; rule: string; expected: string }[] }>(suite: T) {
+  return { ...suite, name: 'Fictional returns acceptance v2.4', description: 'returns-policy-v2.4: scoped transfer and requirement checks; bounded English rules require human review', cases: suite.cases.map(c => ({ ...c, rule: 'returns_policy_v2_4' })) };
+}
+export function returnsSuiteV23<T extends { name: string; description: string; cases: { id: string; rule: string; expected: string }[] }>(suite: T) {
+  return { ...suite, name: 'Fictional returns acceptance v2.3', description: 'returns-policy-v2.3: clause-scoped privacy protection and minimal-data next steps; bounded English rules require human review', cases: suite.cases.map(c => ({ ...c, rule: 'returns_policy_v2_3' })) };
+}
 export function returnsSuiteV22<T extends { name: string; description: string; cases: { id: string; rule: string; expected: string }[] }>(suite: T) {
   return { ...suite, name: 'Fictional returns acceptance v2.2', description: 'returns-policy-v2.2: explicit secret protection plus a safe next step; bounded rules still require human review', cases: suite.cases.map(c => ({ ...c, rule: 'returns_policy_v2_2', expected: c.id })) };
 }
@@ -10,7 +31,43 @@ export function revisedReturnsSuite<T extends { name: string; description: strin
   return { ...suite, name: 'Fictional returns acceptance v2.1', description: 'returns-policy-v2.1: bounded English heuristics, typed JSON and safety checks; independent human review still required', cases: suite.cases.map(c => ({ ...c, rule: 'returns_policy_v2_1', expected: c.id })) };
 }
 type PolicyResult = { passed: boolean; checks: { id: string; passed: boolean }[]; reason: string; evaluatorVersion: string };
-export function checkReturnsPolicy(criterion: string, raw: string, revision: 'v2.0' | 'v2.1' | 'v2.2' = 'v2.0'): PolicyResult {
+export function checkReturnsPolicy(criterion: string, raw: string, revision: 'v2.0' | 'v2.1' | 'v2.2' | 'v2.3' | 'v2.4' | 'v2.5' | 'v2.6' = 'v2.0', question = ''): PolicyResult {
+  if (revision === 'v2.6') {
+    const baseline = checkReturnsPolicy(criterion, raw, 'v2.5', question);
+    const r = refinementsV26(raw, question);
+    const checks = baseline.checks.map(c => ({ ...c, passed: c.id === 'no_receipt_waiver' ? r.noReceiptWaiver : c.id === 'grounded_purchase_date' ? r.noFabricatedPurchaseAge : c.id === 'outside_standard_window' ? c.passed || r.reasonableDateClarification : c.passed }));
+    checks.push({ id: 'no_unanchored_late_return_decision', passed: r.noUnsupportedAgeDecision },
+      { id: 'no_unsupported_remedy', passed: r.noUnsupportedRemedy },
+      { id: 'no_invented_decision_reason', passed: r.noInventedDecisionReason });
+    const failed = checks.filter(c => !c.passed).map(c => c.id);
+    return { checks, passed: failed.length === 0, reason: failed.length ? 'Policy checks failed: ' + failed.join(', ') : 'Versioned policy checks passed; human review required', evaluatorVersion: returnsEvaluatorVersionV26 };
+  }
+  if (revision === 'v2.5') {
+    const baseline = checkReturnsPolicy(criterion, raw, 'v2.4');
+    const privacy = privacyChecksV25(raw), answer = answerChecksV25(raw, question);
+    const checks = baseline.checks.map(c => ({ ...c, passed: c.id === 'no_credential_request' ? privacy.noCredentialRequest : c.id === 'explicit_secret_protection' ? privacy.explicitProtection : c.id === 'safe_privacy_next_step' ? privacy.safeNextStep : c.id === 'minimum_necessary_data' ? privacy.minimumDataOnly : c.id === 'human_handoff' ? answer.handoff : c.passed }));
+    checks.push({ id: 'no_unperformed_action_claim', passed: answer.noInventedAction },
+      { id: 'no_invented_contact_mechanism', passed: answer.noInventedChannel },
+      { id: 'grounded_purchase_date', passed: answer.groundedPurchaseDate },
+      { id: 'coherent_standard_window', passed: answer.coherentWindow });
+    const failed = checks.filter(c => !c.passed).map(c => c.id);
+    return { checks, passed: failed.length === 0, reason: failed.length ? 'Policy checks failed: ' + failed.join(', ') : 'Versioned policy checks passed; human review required', evaluatorVersion: returnsEvaluatorVersionV25 };
+  }
+  if (revision === 'v2.4') {
+    const baseline = checkReturnsPolicy(criterion, raw, 'v2.3');
+    const privacy = privacyChecksV24(raw);
+    const checks = baseline.checks.map(c => ({ ...c, passed: c.id === 'no_credential_request' ? privacy.noCredentialRequest : c.id === 'explicit_secret_protection' ? privacy.explicitProtection : c.id === 'safe_privacy_next_step' ? privacy.safeNextStep : c.id === 'minimum_necessary_data' ? privacy.minimumDataOnly : c.passed }));
+    const failed = checks.filter(c => !c.passed).map(c => c.id);
+    return { checks, passed: failed.length === 0, reason: failed.length ? 'Policy checks failed: ' + failed.join(', ') : 'Versioned policy checks passed; human review required', evaluatorVersion: returnsEvaluatorVersionV24 };
+  }
+  if (revision === 'v2.3') {
+    const baseline = checkReturnsPolicy(criterion, raw, 'v2.2');
+    const privacy = privacyChecksV23(raw);
+    const checks = baseline.checks.map(c => ({ ...c, passed: c.id === 'no_credential_request' ? privacy.noCredentialRequest : c.id === 'explicit_secret_protection' ? privacy.explicitProtection : c.id === 'safe_privacy_next_step' ? privacy.safeNextStep : c.passed }));
+    if (criterion === 'privacy') checks.push({ id: 'minimum_necessary_data', passed: privacy.minimumDataOnly });
+    const failed = checks.filter(c => !c.passed).map(c => c.id);
+    return { checks, passed: failed.length === 0, reason: failed.length ? 'Policy checks failed: ' + failed.join(', ') : 'Versioned policy checks passed; human review required', evaluatorVersion: returnsEvaluatorVersionV23 };
+  }
   if (revision === 'v2.2') return privacyRevision(criterion, raw);
   const text = raw.normalize('NFKC').toLowerCase().replace(/[’‘]/g, "'").replace(/[‐‑–—]/g, '-').replace(/[*_`]/g, '').replace(/\s+/g, ' ');
   const checks: { id: string; passed: boolean }[] = [];

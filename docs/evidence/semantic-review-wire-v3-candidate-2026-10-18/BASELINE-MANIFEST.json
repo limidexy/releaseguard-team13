@@ -1,0 +1,19 @@
+{
+  "version": "semantic-review-wire-v3-candidate-baseline",
+  "createdAt": "2026-10-18T20:00:00+08:00",
+  "gitHead": "20d258d891935b2d5bee3375ebf81b2872adf76f",
+  "workingTreeHadTrackedAndUntrackedChanges": true,
+  "workingTreePorcelainEntryCount": 2021,
+  "workingTreePorcelainSha256": "a416e37211b5d1e215fdd576f2049eb4c3169a4d29af2174862497ec92c0f5fc",
+  "existingSourceScriptTestEvidenceAggregateSha256": "c327c55df3406d34bae65d71019f7ede0f40fafb56919a264a1462c768f23865",
+  "sealedPilotDirectoryAggregateSha256": "4eaf85082eb2da8a1e09d416cea4f6093a9c85f969e7e71b1cf1715ca03427d1",
+  "protectedFiles": [
+    {"path": "src/semantic-review-wire-v2.ts", "sha256": "9c9c65464c2f4b996d3155daefd5677a255488b2a93c0da837f97614d45c2d28"},
+    {"path": "src/groq-semantic-review-transport-v1.ts", "sha256": "f5b4a0f15e881c7cda8f3245a9ad07a0666738adb6acfd50f7665d7e4fc0c64b"},
+    {"path": "src/semantic-review-sources-v1.ts", "sha256": "9a9c33a23274c3efbe3e4896464816d9389bfc75e2d9719be1fb7a4d3b3ed13c"},
+    {"path": "docs/evidence/hybrid-review-strict-v2-2026-10-18/FREEZE-MANIFEST.json", "sha256": "2b6192d4dbb1b120bafbfee8db1db0e4cfbace418feb9fb1a5a23a60e65f946c"},
+    {"path": "docs/evidence/hybrid-semantic-pilot-v1-2026-10-18/FINAL-RESULT.json", "sha256": "29d0deb90ffaf5c5ed3ecd92c9201f98aaf0da555d2698d1eacfa66bd38b490d"},
+    {"path": "docs/evidence/hybrid-semantic-pilot-v1-2026-10-18/EXPERIMENT.complete.json", "sha256": "998aa84b3ec124188403c46423d810cca4f03cb7d974411f897b0a33fadb6d94"}
+  ],
+  "protectionStatement": "This candidate is additive. Git HEAD alone does not represent the protected workspace. No reset, clean, checkout, overwrite or deletion is authorized."
+}

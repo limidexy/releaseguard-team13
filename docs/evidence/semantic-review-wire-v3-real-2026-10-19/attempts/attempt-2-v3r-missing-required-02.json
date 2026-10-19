@@ -1,0 +1,9 @@
+{
+  "version": "semantic-review-wire-v3-real-attempt",
+  "experimentId": "releaseguard-semantic-wire-v3-real-20261019",
+  "sequence": 2,
+  "sampleId": "v3r-missing-required-02",
+  "recordedAt": "2026-10-19T02:19:32.575Z",
+  "inputSha256": "8154fe84a345192d83f6c0576df9c1a4bd55b4d95e26f4d2b5865336260d874f",
+  "providerRequestSha256": "adee8a91aee9028596ac472effae35f43b8cbe67d295db576e16a75933d10d0d"
+}

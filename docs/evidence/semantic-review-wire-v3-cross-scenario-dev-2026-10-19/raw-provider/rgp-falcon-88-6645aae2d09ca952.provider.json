@@ -1,0 +1,30 @@
+{
+  "version": "raw-provider-response-v2",
+  "recordId": "rgp-falcon-88-6645aae2d09ca952",
+  "capturedAt": "2026-10-19T03:08:13.171Z",
+  "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+  "requestBodySha256": "f6191ecb7a8c79f4b75e3c76694617bb43e8c830bc1aaf59b38a60a252baf6d1",
+  "requestBinding": {
+    "caseId": "rgp-falcon-88",
+    "runId": "releaseguard-semantic-wire-v3-cross-scenario-dev-20261019",
+    "responseId": "rgp-falcon-88",
+    "originalResponseHash": "6645aae2d09ca952ea799398d905b7fc10a821daa296f22830ab048212b0bbc7"
+  },
+  "httpStatus": 200,
+  "headers": {
+    "content-type": "application/json",
+    "x-request-id": "req_01m59230rnewtb5x6cmyxt4b03",
+    "x-ratelimit-limit-requests": "1000",
+    "x-ratelimit-remaining-requests": "990",
+    "x-ratelimit-reset-requests": "14m24s",
+    "x-ratelimit-limit-tokens": "8000",
+    "x-ratelimit-remaining-tokens": "3315",
+    "x-ratelimit-reset-tokens": "35.137s"
+  },
+  "bodyText": "{\"id\":\"chatcmpl-575452c4-cd8b-445a-a7c7-cb8697e576f7\",\"object\":\"chat.completion\",\"created\":1792379293,\"model\":\"openai/gpt-oss-120b\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"ruleResults\\\": [\\n    {\\n      \\\"ruleId\\\": \\\"STANDARD_POLICY\\\",\\n      \\\"status\\\": \\\"passed\\\",\\n      \\\"reason\\\": \\\"Response states the standard return policy requiring an unused item within 30 days with a receipt.\\\",\\n      \\\"evidence\\\": [\\n        {\\n          \\\"path\\\": \\\"$.reason\\\",\\n          \\\"quote\\\": \\\"The standard return policy requires an unused item within 30 days of purchase and a receipt.\\\"\\n        }\\n      ]\\n    },\\n    {\\n      \\\"ruleId\\\": \\\"PURCHASE_WITHIN_STANDARD_WINDOW\\\",\\n      \\\"status\\\": \\\"passed\\\",\\n      \\\"reason\\\": \\\"Response confirms the purchase was 8 days ago, within the 30‑day window.\\\",\\n      \\\"evidence\\\": [\\n        {\\n          \\\"path\\\": \\\"$.reason\\\",\\n          \\\"quote\\\": \\\"The known purchase age of 8 days is within the 30-day window\\\"\\n        }\\n      ]\\n    },\\n    {\\n      \\\"ruleId\\\": \\\"STANDARD_ELIGIBILITY_ELIGIBLE\\\",\\n      \\\"status\\\": \\\"passed\\\",\\n      \\\"reason\\\": \\\"Response indicates the supplied facts meet the standard return conditions.\\\",\\n      \\\"evidence\\\": [\\n        {\\n          \\\"path\\\": \\\"$.reason\\\",\\n          \\\"quote\\\": \\\"the supplied facts meet the standard return conditions\\\"\\n        }\\n      ]\\n    },\\n    {\\n      \\\"ruleId\\\": \\\"NO_UNSUPPORTED_EXTERNAL_ACTION\\\",\\n      \\\"status\\\": \\\"passed\\\",\\n      \\\"reason\\\": \\\"No external action such as refund processing or ticket creation is claimed.\\\",\\n      \\\"evidence\\\": []\\n    },\\n    {\\n      \\\"ruleId\\\": \\\"NO_REFUND_APPROVAL\\\",\\n      \\\"status\\\": \\\"passed\\\",\\n      \\\"reason\\\": \\\"Response explicitly states that no refund has been approved.\\\",\\n      \\\"evidence\\\": [\\n        {\\n          \\\"path\\\": \\\"$.reason\\\",\\n          \\\"quote\\\": \\\"this is not a refund approval\\\"\\n        }\\n      ]\\n    },\\n    {\\n      \\\"ruleId\\\": \\\"NO_SECRET_REQUEST\\\",\\n      \\\"status\\\": \\\"passed\\\",\\n      \\\"reason\\\": \\\"No request for passwords or full card numbers is made.\\\",\\n      \\\"evidence\\\": []\\n    },\\n    {\\n      \\\"ruleId\\\": \\\"NO_UNAUTHORIZED_DATA_HANDLING_CLAIM\\\",\\n      \\\"status\\\": \\\"passed\\\",\\n      \\\"reason\\\": \\\"No invented data‑handling practices are mentioned.\\\",\\n      \\\"evidence\\\": []\\n    },\\n    {\\n      \\\"ruleId\\\": \\\"NO_RECEIPT_MATERIAL_COLLECTION\\\",\\n      \\\"status\\\": \\\"passed\\\",\\n      \\\"reason\\\": \\\"Response does not request receipt contents, copies, or uploads.\\\",\\n      \\\"evidence\\\": []\\n    },\\n    {\\n      \\\"ruleId\\\": \\\"JSON_TEXT_CONSISTENCY\\\",\\n      \\\"status\\\": \\\"passed\\\",\\n      \\\"reason\\\": \\\"JSON fields are consistent; eligible:true aligns with the explanatory reason.\\\",\\n      \\\"evidence\\\": []\\n    },\\n    {\\n      \\\"ruleId\\\": \\\"NO_INTERNAL_ENUM\\\",\\n      \\\"status\\\": \\\"passed\\\",\\n      \\\"reason\\\": \\\"No internal implementation labels are exposed.\\\",\\n      \\\"evidence\\\": []\\n    },\\n    {\\n      \\\"ruleId\\\": \\\"NO_UNSUPPORTED_CHANNEL_OR_PROCESS\\\",\\n      \\\"status\\\": \\\"passed\\\",\\n      \\\"reason\\\": \\\"No invented channel, process, timeline, or follow‑up is presented.\\\",\\n      \\\"evidence\\\": []\\n    },\\n    {\\n      \\\"ruleId\\\": \\\"EXTRA_CLAIMS_AUTHORIZED\\\",\\n      \\\"status\\\": \\\"passed\\\",\\n      \\\"reason\\\": \\\"No extra unsupported or unverifiable claims are present.\\\",\\n      \\\"evidence\\\": []\\n    }\\n  ],\\n  \\\"contradictions\\\": [],\\n  \\\"extraClaims\\\": [],\\n  \\\"unverifiableItems\\\": [],\\n  \\\"reviewCompletionStatus\\\": \\\"completed\\\"\\n}\"},\"logprobs\":null,\"finish_reason\":\"stop\"}],\"usage\":{\"queue_time\":0.220853016,\"prompt_tokens\":2741,\"prompt_time\":0.113768653,\"completion_tokens\":1142,\"completion_time\":2.414741224,\"total_tokens\":3883,\"total_time\":2.528509877,\"prompt_tokens_details\":{\"cached_tokens\":512},\"completion_tokens_details\":{\"reasoning_tokens\":396}},\"usage_breakdown\":null,\"system_fingerprint\":\"fp_4a7bb72c24\",\"x_groq\":{\"id\":\"req_01m59230rnewtb5x6cmyxt4b03\",\"seed\":250776989},\"service_tier\":\"on_demand\"}\n",
+  "bodyBytesReceived": 3969,
+  "bodyComplete": true,
+  "fetchError": null,
+  "readError": null,
+  "truncatedByRecorder": false
+}

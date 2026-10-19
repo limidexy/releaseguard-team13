@@ -1,0 +1,17 @@
+{
+  "version": "semantic-pilot-v1-user-authorization",
+  "experimentId": "releaseguard-semantic-pilot-v1-20261018",
+  "recordedAt": "2026-10-18T19:15:00+08:00",
+  "approved": true,
+  "allowedProvider": "Groq",
+  "allowedModelId": "openai/gpt-oss-120b",
+  "maximumSemanticReviewRequests": 20,
+  "customerGenerationRequests": 0,
+  "automaticRetries": 0,
+  "providerSwitches": 0,
+  "paidCallsAllowed": false,
+  "deploymentAllowed": false,
+  "publishingAllowed": false,
+  "gitPushAllowed": false,
+  "secondRoundAuthorized": false
+}

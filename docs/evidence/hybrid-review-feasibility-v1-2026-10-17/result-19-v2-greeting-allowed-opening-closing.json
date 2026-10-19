@@ -1,0 +1,131 @@
+{
+  "sequence": 19,
+  "fixtureId": "v2-greeting-allowed-opening-closing",
+  "caseId": "greeting",
+  "question": "Hello. Can you help with a return?",
+  "originalResponse": "Thanks for checking. The standard route requires the item to be unused, the purchase to be within 30 days, and a receipt to exist. No purchase date is available, so standard eligibility is still an open question.\n\nNext step: When was the item bought? Has it remained unused? Is a receipt available?",
+  "reference": {
+    "sourceType": "project_reference_annotation",
+    "expectedAllowed": true,
+    "expectedRuleFamilies": [],
+    "rationale": "Adds only a neutral courtesy and uses three independent questions after a complete policy explanation."
+  },
+  "request": {
+    "reviewInputSha256": "afcde635ac24c87aaaa0279681607c823dd888bf8612189306dae931f35ed5e4",
+    "providerRequestSha256": "399ffe2c30f66f3e3f1b70a02780c11597beda57a299c5e6071c090a730930cc",
+    "labelsSent": false
+  },
+  "run": {
+    "status": "invalid_result",
+    "requestsSent": 1,
+    "cacheHit": false,
+    "review": null,
+    "error": "Review response schema invalid",
+    "attemptKey": "5435880d47b7b8bd7fbc30bbba786a98052c87e07da9fe1b6d7da247698294a7",
+    "cacheKey": "fa1939b4187eee226c9e16cb9dd44e4f573aede51b20d238ec3b70c771c53057"
+  },
+  "deterministic": {
+    "version": "deterministic-checks-v1",
+    "status": "passed",
+    "checks": [
+      {
+        "checkId": "IDENTIFIERS_BOUND",
+        "status": "passed",
+        "reason": "Case, run and response identifiers must match."
+      },
+      {
+        "checkId": "RESPONSE_MODE_BOUND",
+        "status": "passed",
+        "reason": "Review input response mode must match the frozen envelope."
+      },
+      {
+        "checkId": "ORIGINAL_RESPONSE_PRESENT",
+        "status": "passed",
+        "reason": "A non-empty original response is required."
+      },
+      {
+        "checkId": "RESPONSE_COMPLETE",
+        "status": "passed",
+        "reason": "Provider completion must be complete and error-free."
+      },
+      {
+        "checkId": "ORIGINAL_RESPONSE_HASH",
+        "status": "passed",
+        "reason": "Review input must contain the byte-identical original response and hash."
+      },
+      {
+        "checkId": "POLICY_BINDING",
+        "status": "passed",
+        "reason": "Policy version, text and hash must match."
+      },
+      {
+        "checkId": "FACTS_BINDING",
+        "status": "passed",
+        "reason": "Facts version, source and hash must match."
+      },
+      {
+        "checkId": "DECISION_BINDING",
+        "status": "passed",
+        "reason": "Deterministic decision version and hash must match."
+      },
+      {
+        "checkId": "CONTRACT_BINDING",
+        "status": "passed",
+        "reason": "Contract version and hash must match."
+      },
+      {
+        "checkId": "CONTRACT_READY",
+        "status": "passed",
+        "reason": "A conflicting response contract cannot be reviewed for delivery."
+      },
+      {
+        "checkId": "RULE_SET_BOUND",
+        "status": "passed",
+        "reason": "Applicable semantic rules must match the frozen contract-derived set."
+      },
+      {
+        "checkId": "OUTPUT_FORMAT_PLAIN",
+        "status": "passed",
+        "reason": "Plain mode must not contain a top-level JSON object."
+      }
+    ]
+  },
+  "validation": {
+    "version": "semantic-review-validation-v1",
+    "status": "failed",
+    "reviewerValidationStatus": "source_unverified",
+    "errors": [
+      "invalid_result: Review response schema invalid"
+    ],
+    "review": null
+  },
+  "aggregate": {
+    "version": "hybrid-evaluation-v1",
+    "shadowOnly": true,
+    "deterministicCheckStatus": "passed",
+    "semanticReviewStatus": "missing",
+    "semanticRuleResults": [],
+    "candidatePolicyCompliance": "blocked",
+    "candidateDeliveryStatus": "blocked",
+    "reviewerValidationStatus": "source_unverified",
+    "customerOutput": null,
+    "originalResponseHash": "b9a8cf458c50660c8e93beefdc3daa4a0057827bcde6447a07b6242354c7ea33",
+    "rewritten": false,
+    "reasons": [
+      "semantic_review_invalid",
+      "reviewer_not_qualified_for_delivery"
+    ],
+    "historicalPath": {
+      "modified": false,
+      "activation": "unchanged"
+    }
+  },
+  "diagnostic": {
+    "predictedAllowed": false,
+    "classification": "false_block",
+    "failedRuleIds": [],
+    "unverifiableRuleIds": [],
+    "reasonMatches": []
+  },
+  "completedAt": "2026-10-17T13:16:40.351Z"
+}
