@@ -60,12 +60,12 @@ Timing follows the screenshot supplied on 19 October: 40 minutes plus 5 minutes 
 | Introduction + project management | 4 | A |
 | Architecture + design | 5 | B |
 | Testing | 3 | E + C |
-| CI/CD demo | 11 | D |
+| CI/CD demo | 12 | D |
 | System demo | 14 | A / B / C / E |
-| Close + interruption/switching buffer | 3 | A / C |
+| Close + interruption/switching buffer | 2 | A / C |
 | Q&A | 5 additional | All |
 
-The slide deck has English content and Chinese rehearsal notes. Speaking ownership is a proposal for team confirmation. Two backup recordings are still required; this handoff did not create live demo videos.
+The slide deck has English content and Chinese rehearsal notes. Speaking ownership is a proposal for team confirmation. The presentation follow-up includes short actual-browser backup clips and a 19-check local replay rehearsal. Full-length narrated team recordings and the five-person timed rehearsal remain outstanding. See `docs/presentation/20261019/` for the current pack and precise source labels.
 
 ## Evidence navigation
 

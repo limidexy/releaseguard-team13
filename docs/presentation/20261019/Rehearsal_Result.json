@@ -1,0 +1,131 @@
+{
+  "checkedAt": "2026-10-19T06:54:31.939Z",
+  "source": "Actual HTTP replay through existing local baseline containers",
+  "base": "http://localhost:5193",
+  "runtimeImageId": "sha256:75f247d78f1c275e4c073e34dae4b4e952bb5b75c15b4d61bae87a302853fe51",
+  "sourceMatchesCurrentCandidate": false,
+  "identityType": "local signed test identities, not independent human UAT",
+  "workspace": "presentation-rehearsal-1792392871535",
+  "modelCalls": 0,
+  "reviewerCalls": 0,
+  "deployments": 0,
+  "checks": [
+    {
+      "name": "application registration",
+      "pass": true,
+      "actual": 201,
+      "expected": 201
+    },
+    {
+      "name": "immutable suite creation",
+      "pass": true,
+      "actual": 201,
+      "expected": 201
+    },
+    {
+      "name": "passing admitted",
+      "pass": true,
+      "actual": 202,
+      "expected": 202
+    },
+    {
+      "name": "idempotent same job",
+      "pass": true,
+      "actual": "82641a72-1e8f-4488-baa1-4a4b51d1a433",
+      "expected": "82641a72-1e8f-4488-baa1-4a4b51d1a433"
+    },
+    {
+      "name": "passing completed",
+      "pass": true,
+      "actual": "succeeded",
+      "expected": "succeeded"
+    },
+    {
+      "name": "passing provenance",
+      "pass": true,
+      "actual": "replay",
+      "expected": "replay"
+    },
+    {
+      "name": "normal gate",
+      "pass": true,
+      "actual": "passed",
+      "expected": "passed"
+    },
+    {
+      "name": "failing admitted",
+      "pass": true,
+      "actual": 202,
+      "expected": 202
+    },
+    {
+      "name": "failing completed",
+      "pass": true,
+      "actual": "succeeded",
+      "expected": "succeeded"
+    },
+    {
+      "name": "failing provenance",
+      "pass": true,
+      "actual": "replay",
+      "expected": "replay"
+    },
+    {
+      "name": "critical failure gate",
+      "pass": true,
+      "actual": "blocked",
+      "expected": "blocked"
+    },
+    {
+      "name": "blocked review request",
+      "pass": true,
+      "actual": 409,
+      "expected": 409
+    },
+    {
+      "name": "passing review request",
+      "pass": true,
+      "actual": 201,
+      "expected": 201
+    },
+    {
+      "name": "owner self-review blocked",
+      "pass": true,
+      "actual": 409,
+      "expected": 409
+    },
+    {
+      "name": "stale version blocked",
+      "pass": true,
+      "actual": 409,
+      "expected": 409
+    },
+    {
+      "name": "different test identity decision",
+      "pass": true,
+      "actual": 200,
+      "expected": 200
+    },
+    {
+      "name": "terminal cannot reopen",
+      "pass": true,
+      "actual": 409,
+      "expected": 409
+    },
+    {
+      "name": "evidence export",
+      "pass": true,
+      "actual": 200,
+      "expected": 200
+    },
+    {
+      "name": "two audit events",
+      "pass": true,
+      "actual": 2,
+      "expected": 2
+    }
+  ],
+  "passingJobId": "82641a72-1e8f-4488-baa1-4a4b51d1a433",
+  "failingJobId": "17eb9561-031e-4259-aeb1-eb49760a05a5",
+  "releaseId": "fdde916c-a47a-4fd7-8348-9c5ecca3b657"
+}

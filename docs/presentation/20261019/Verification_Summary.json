@@ -1,0 +1,51 @@
+{
+  "preparedDate": "2026-10-19",
+  "codeCommit": "917ce1c8ac430cab3b26064da6147504a73c6b25",
+  "node": "v24.19.0",
+  "freshLockedInstall": true,
+  "typeScriptBuild": "passed",
+  "fullRegression": {
+    "tests": 777,
+    "passed": 776,
+    "failed": 1,
+    "exitCode": 1,
+    "retainedFailure": "tests/evaluator-next-v1-holdout-v2.test.ts"
+  },
+  "v3Targeted": {
+    "tests": 12,
+    "passed": 12,
+    "failed": 0
+  },
+  "auxiliary": {
+    "tests": 7,
+    "passed": 7,
+    "failed": 0
+  },
+  "localTechnicalRehearsal": {
+    "httpAssertions": 19,
+    "passed": 19,
+    "browserPageErrors": 0,
+    "currentSourceDeployed": false
+  },
+  "artifacts": {
+    "pptxSlides": 24,
+    "mainSlides": 18,
+    "hiddenBackupSlides": 6,
+    "slidesWithNotes": 24,
+    "speakerDocumentPages": 13,
+    "allSlidesAndDocumentPagesVisuallyInspected": true,
+    "nativePowerPointApplicationExecutionVerified": false,
+    "mainMinutes": 40,
+    "additionalQAMinutes": 5,
+    "fivePersonTimedRehearsalCompleted": false
+  },
+  "reviewer": {
+    "shadowOnly": true,
+    "status": "calibration_pending"
+  },
+  "newCustomerGenerationCalls": 0,
+  "newSemanticReviewCalls": 0,
+  "deployments": 0,
+  "productionAuthorization": false,
+  "sourceNote": "Derived summary of actual local logs and artifact inspection; not a new model score."
+}

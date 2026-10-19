@@ -1,0 +1,565 @@
+[
+  {
+    "title": "ReleaseGuard",
+    "minutes": 0.5,
+    "owner": "A · TANG YUCHEN",
+    "body": [
+      "Evaluation evidence and independent release review",
+      "SE34FT Team 13 · Architecting Scalable Systems",
+      "19 October 2026 evidence snapshot"
+    ],
+    "talk": "Good morning. We are Team 13. ReleaseGuard helps an application team examine the evidence for a candidate change before a different person makes a release decision. Our example consumer is a fictional returns assistant. We will show the complete platform workflow, explain the service boundaries, and replay the model experiments that exposed the limits of our early evaluation approach. The platform and the experimental semantic reviewer have different readiness states. We will keep those states visible throughout the presentation.",
+    "zh": "先说明平台用途。客服只是消费应用，评审 v3 仍为影子实验。",
+    "cue": "Start timer. Show branch name only in notes.",
+    "kind": "cover"
+  },
+  {
+    "title": "Problem and project scope",
+    "minutes": 1,
+    "owner": "A · TANG YUCHEN",
+    "body": [
+      "A fluent answer can still contradict policy",
+      "Teams need immutable tests, original outputs and a review trail",
+      "Consumer: fictional returns assistant. Users: contributors and reviewers",
+      "Scope ends at a recorded review decision"
+    ],
+    "talk": "A prompt change can produce a convincing answer while omitting a required question, inventing a refund action or contradicting its own JSON. A single aggregate score makes those differences difficult to investigate. We therefore record the candidate, the exact suite version and each original output together. Contributors can submit an evaluation and request review. A different reviewer can approve or reject the captured evidence. GitHub manages our code and CI. ReleaseGuard adds an application evaluation and review workflow, so we do not present it as a replacement for GitHub. We did not train a new model or connect real customer records. All return-policy cases in this presentation are fictional.",
+    "zh": "解释业务问题与目标用户，不说已经替企业处理客户。",
+    "cue": "Introduce B after project conduct.",
+    "kind": "text"
+  },
+  {
+    "title": "Delivery status and project conduct",
+    "minutes": 1.5,
+    "owner": "A · TANG YUCHEN",
+    "body": [],
+    "talk": "Our two planned sprints are 8 to 13 October and 14 to 20 October. The first target was a complete evaluation and review flow. The second target was validation, recovery and evidence for acceptance. Dated records show cloud and pipeline experiments on 11 October, UAT and API work on 14 and 15 October, and model and reviewer experiments through 19 October. These are observed milestones, not a claim that every planned task finished on its due date. Actual hours and a team retrospective meeting have not been recorded. Our fresh clean checkout builds, but the full test command retains one failed acceptance test for a rejected evaluator candidate. We keep that failure visible. The remaining acceptance work includes genuine peer review, final multi-person UAT and a timed team rehearsal.",
+    "zh": "两轮是原计划；实际小时、正式回顾会议均未记录。准确说 776/777，不说全绿。",
+    "cue": "",
+    "kind": "table",
+    "headers": [
+      "Area",
+      "Current evidence",
+      "Remaining boundary"
+    ],
+    "rows": [
+      [
+        "Core workflow",
+        "Implemented; dated API tests",
+        "Final team UAT"
+      ],
+      [
+        "Current checkout",
+        "Build; 776/777 tests",
+        "Retained old holdout failure"
+      ],
+      [
+        "Reviewer v3",
+        "3-sample and 17-sample runs",
+        "Shadow only; calibration pending"
+      ],
+      [
+        "Team process",
+        "Responsibilities and dated PRs",
+        "Actual effort and peer review"
+      ]
+    ]
+  },
+  {
+    "title": "Team responsibilities and definition of done",
+    "minutes": 1,
+    "owner": "A · TANG YUCHEN",
+    "body": [],
+    "talk": "The five responsibility areas remain unchanged. Tang Yuchen leads requirements, UI and UAT. Zhu Pengxu owns API and data invariants. Lin Xinda owns the consumer adapter and evaluation experiments. Liao Can owns deployment and the pipeline. Liao Binfeng owns quality testing. These are responsibilities, not measured hours or proof of individual authorship. The cumulative preparation work used AI assistance, while member-specific records need their actual authors to confirm them. Our definition of done requires a reproducible result, preserved evidence, enforced permissions and review. The semantic reviewer meets its limited development checks, but does not yet meet production calibration. Zhu Pengxu will now explain why we chose these service boundaries.",
+    "zh": "分工表代表责任；共同基线和工具辅助产出不能算成某组员独立贡献。",
+    "cue": "",
+    "kind": "table",
+    "headers": [
+      "Member",
+      "Responsibility",
+      "Presentation role"
+    ],
+    "rows": [
+      [
+        "A · TANG YUCHEN",
+        "Requirements, UI, UAT",
+        "Opening and system workflow"
+      ],
+      [
+        "B · ZHU PENGXU",
+        "APIs, data, review invariants",
+        "Architecture and review demo"
+      ],
+      [
+        "C · LIN XINDA",
+        "Consumer and evaluation",
+        "Model evidence and v3"
+      ],
+      [
+        "D · LIAO CAN",
+        "Cloud, CI/CD, recovery",
+        "Pipeline demo"
+      ],
+      [
+        "E · LIAO BINFENG",
+        "Security and performance",
+        "Testing and quality limits"
+      ]
+    ]
+  },
+  {
+    "title": "Service boundaries",
+    "minutes": 1.5,
+    "owner": "B · ZHU PENGXU",
+    "body": [
+      "Three business contexts own separate databases",
+      "Workers scale within the Evaluation context",
+      "The support adapter is an independent consumer",
+      "One repository and shared image still couple releases"
+    ],
+    "talk": "We applied domain-driven design to consistency and ownership boundaries. Test Assets owns applications and immutable suite versions. Evaluation owns jobs, the transactional outbox, leases and results. Review and Evidence owns release requests and audit records. A worker is an executor inside Evaluation, rather than a fourth business context. The gateway routes public requests and applies boundary controls. The support adapter isolates provider details from the platform. Each business service has its own database and login, although the local stack shares one PostgreSQL instance. Services run as separate processes. A common image and monorepo simplify this course implementation but leave release coupling. This is the implemented logical design. We do not describe every box as an independently autonomous product.",
+    "zh": "DDD 的边界依据是业务一致性与数据所有权，不是一人一个服务。",
+    "cue": "",
+    "kind": "architecture"
+  },
+  {
+    "title": "A representative evaluation request",
+    "minutes": 1.5,
+    "owner": "B · ZHU PENGXU",
+    "body": [
+      "202 admission with a workspace idempotency key",
+      "Job and outbox commit in one transaction",
+      "Broker notification, lease claim and bounded execution",
+      "Result commit checks the active lease",
+      "Passing evidence can enter independent review"
+    ],
+    "talk": "Consider a contributor submitting a prompt candidate. Evaluation first checks the workspace idempotency key and obtains an immutable asset snapshot. It commits the job and its outbox entry in the same database transaction. The publisher sends a persistent notification and waits for a broker confirmation. Duplicate notifications can still occur, so the worker conditionally claims the job and records a lease. The final database update requires the same active lease. This prevents a stale worker from overwriting a later result. Replay and imported work have bounded recovery attempts. Real-provider jobs permit one execution attempt and require explicit resubmission after recovery failure. We claim at-least-once notification and guarded state transitions, not exactly-once external execution. Review copies the passing evidence so a later decision does not depend on live upstream data.",
+    "zh": "讲解事务 outbox、幂等、租约，不说外部模型 exactly-once。",
+    "cue": "",
+    "kind": "flow"
+  },
+  {
+    "title": "Persistence and implemented patterns",
+    "minutes": 1,
+    "owner": "B · ZHU PENGXU",
+    "body": [],
+    "talk": "The database design follows the same boundaries. Test Assets relates suite versions through a parent identifier. Evaluation relates outbox entries to jobs and stores the immutable input snapshot with each job. Review stores its own evidence copy and audit sequence. Cross-context relationships use API snapshots and identifiers rather than foreign keys across databases. The transactional outbox addresses database-to-broker reliability. Optimistic review versions and row locking protect the terminal decision. The provider adapter is an anti-corruption layer for bounded output and errors. These are patterns we can point to in the source. We do not add names such as Saga or CQRS merely to fill a presentation requirement.",
+    "zh": "模式只讲代码中存在的：outbox、版本检查、adapter。",
+    "cue": "",
+    "kind": "table",
+    "headers": [
+      "Owner database",
+      "Entities",
+      "Important relationship"
+    ],
+    "rows": [
+      [
+        "rg_registry",
+        "applications, suites",
+        "suites.parent_id → suites.id"
+      ],
+      [
+        "rg_evaluation",
+        "jobs, outbox, admission_limits",
+        "outbox.job_id → jobs.id"
+      ],
+      [
+        "rg_governance",
+        "releases, audit",
+        "previous release and entity audit"
+      ]
+    ]
+  },
+  {
+    "title": "Runtime and quality attributes",
+    "minutes": 1,
+    "owner": "B · ZHU PENGXU",
+    "body": [
+      "Local Compose: gateway, three contexts, worker, support, PostgreSQL, RabbitMQ",
+      "Historical cloud: GKE Singapore, HTTPS, OIDC, TLS and KEDA",
+      "Traceability: snapshots and versioned evidence",
+      "Limits: shared stateful infrastructure and no current cloud revalidation"
+    ],
+    "talk": "The local runtime uses Docker Compose. The historical cloud trial used Google Kubernetes Engine in Singapore, with HTTPS, OIDC and TLS for internal stateful connections. Dated experiments include API security, image rollback, logical restore and queue-driven worker scaling. The scaling evidence includes failures before a controlled pause scenario reached three ready workers and later returned to one. That result demonstrates scaler behaviour under that stimulus. It does not establish sustained provider throughput, high availability or linear speedup. We have not restarted cloud resources for this presentation preparation. For the live system segment, we use the existing local baseline and display its image identity. The v3 evidence is replayed separately from that runtime.",
+    "zh": "历史云结果不能变成本轮部署证据；本地运行版本与源码要分开。",
+    "cue": "Hand to E for test taxonomy.",
+    "kind": "text"
+  },
+  {
+    "title": "Verification strategy and current results",
+    "minutes": 1.5,
+    "owner": "E · LIAO BINFENG",
+    "body": [],
+    "talk": "We classify evidence by what it can establish. Unit and contract tests check deterministic program behaviour. Integration scripts use real local services and databases. Security tests exercise authentication, tenant scope and review invariants. Performance runs use labelled replay and describe only the tested environment. Real model generation and real model review are separate experiments. In a fresh clean checkout, the TypeScript build succeeds. The full command has 777 tests: 776 pass and one rejected evaluator acceptance test fails. The targeted v3 protocol and transport tests pass 12 out of 12. We retain the old holdout failure and do not remove it to make CI green. Synthetic fixtures demonstrate expected program behaviour, but they are not model-generated answers or independent human UAT.",
+    "zh": "代码测试、合成数据、历史回放、真实生成、真实评审分别计数。",
+    "cue": "",
+    "kind": "table",
+    "headers": [
+      "Evidence type",
+      "Observed result",
+      "Meaning"
+    ],
+    "rows": [
+      [
+        "Clean checkout regression",
+        "776 / 777",
+        "One old holdout retained"
+      ],
+      [
+        "v3 protocol + transport",
+        "12 / 12",
+        "Program behaviour, mocked transport"
+      ],
+      [
+        "Real v3 protocol",
+        "3 / 3",
+        "Three fixed types"
+      ],
+      [
+        "Real v3 development",
+        "17 / 17",
+        "Separate frozen development set"
+      ]
+    ]
+  },
+  {
+    "title": "Repair process and measured limits",
+    "minutes": 1.5,
+    "owner": "C · LIN XINDA",
+    "body": [
+      "Phrase matching produced false blocks and missed new violations",
+      "Deterministic control and semantic review now have distinct jobs",
+      "Strict schema plus exact quotes replaced model-written coordinates",
+      "v3 removes redundant missingReason from the model wire"
+    ],
+    "talk": "Our early rules could accept one phrase and miss a contradictory sentence, or reject a valid paraphrase. We added explicit contracts, but the next handwritten evaluator still failed its independent holdout. The Hybrid design therefore separates deterministic checks from semantic judgment. The first real reviewer experiment also exposed transport failures. JSON mode did not guarantee our schema, and asking the model to calculate character offsets increased errors. Strict schema and programmatic quote location improved this. A later pilot stopped because evidence and missingReason conflicted. Version 3 keeps status, reason and exact evidence quotes in the model output, while the program derives coordinates and provenance. The two v3 runs then passed their stated development criteria. Original customer-generation scores remain 70 and 75. Reviewer success has not changed those scores.",
+    "zh": "修复链突出根因与实证；三个样本和十七个样本分别报告。",
+    "cue": "Hand to D. Open CI bookmarks before timer reaches 12:00.",
+    "kind": "text"
+  },
+  {
+    "title": "CI and tested artifact workflow",
+    "minutes": 2,
+    "owner": "D · LIAO CAN",
+    "body": [
+      "Locked dependency install and Node.js 24",
+      "Tests, container contracts, npm audit and Trivy",
+      "Tested image configuration identity and source commit",
+      "Manual CD checks successful CI for the exact source"
+    ],
+    "talk": "This workflow starts with a clean install from the lockfile. It runs tests before building the service containers and then checks integration, contracts and fault behaviour with replay data. The dependency advisory gate uses npm audit, and the image gate uses Trivy for high and critical findings. A successful run saves a tested image and its source identity. The separate manual deployment workflow checks that the supplied CI succeeded for the same source, downloads that tested artifact and compares its image identity. The trial used workload identity federation for short-lived cloud credentials. Manual dispatch does not prove independent human approval. The new preparation branch does not automatically run CI on push because the workflow push filter selects main. We will show this condition explicitly, then open the completed historical CI and its matching deployment rather than imply that a new deployment occurred.",
+    "zh": "当前分支无新CI。演示历史同 SHA CI/CD，不能拿不同版本拼一条流水线。",
+    "cue": "CI demo starts. Time budget includes slides 11–13.",
+    "kind": "flow"
+  },
+  {
+    "title": "CI evidence walkthrough",
+    "minutes": 7,
+    "owner": "D · LIAO CAN",
+    "body": [
+      "Current branch: inspect commit and changed files",
+      "Current clean checkout: retained holdout failure",
+      "Historical baseline CI: 38709382103 at 20d258d",
+      "Matched historical CI 38148253863 and CD 38148479735 at 362e8dd"
+    ],
+    "talk": "First, here is our preparation branch and the exact commit being reviewed. The changes include the cumulative source and evidence plus the presentation pack. No merge into main has occurred. Next, here is the clean-checkout log. The build succeeds, but the rejected evaluator acceptance test remains red. A release workflow should stop on that result. Now we switch to a completed historical CI run. We inspect the source commit, test steps, scans and artifact identity. For the deployment relationship we use the matched CI and CD pair for source 362e8dd. We do not connect a deployment to a different source just because both links show success. These pages are historical hosted records. No workflow, model request or cloud resource is being started during this walkthrough. If the network is unavailable, our saved screenshots and local evidence viewer show the same dated records.",
+    "zh": "本段约7分钟主要操作与看日志，不连续念稿。每个页面停下来讲清 source 和结论。",
+    "cue": "Open branch, clean log, CI, then matched CD. Backup: CICD_Backup.webm.",
+    "kind": "demo"
+  },
+  {
+    "title": "Pipeline failures and recovery evidence",
+    "minutes": 3,
+    "owner": "D · LIAO CAN",
+    "body": [
+      "Fixture omission once broke a container build",
+      "A cold-start health check blocked promotion",
+      "Tested-image rollback and logical database restore have dated evidence",
+      "Current branch remains a review candidate"
+    ],
+    "talk": "The failed runs are useful evidence. One build failed because the public fixture files were absent from the container build stage. A later source change included them and produced a successful run. Another deployment stopped when its health precondition did not hold. We kept that failure rather than bypassing the check. The historical trial also exercised image rollback and a separate logical database restore. Restoring tables into a temporary database on the same instance is a narrower result than disaster recovery. Today we are publishing reviewable source and presentation evidence. The current branch has no newly observed hosted success, and we have not deployed it. I will now hand back to Tang Yuchen to demonstrate the application workflow with replay data.",
+    "zh": "回滚、DB恢复各自是什么证据要讲清。可压缩至1分钟。",
+    "cue": "End CI segment at 24:00. Switch to local console.",
+    "kind": "text"
+  },
+  {
+    "title": "Demo 1  Evaluation and a blocked candidate",
+    "minutes": 5,
+    "owner": "A · TANG YUCHEN",
+    "body": [
+      "Live local operation with labelled replay fixtures",
+      "Register an application and immutable suite",
+      "Submit passing and failing candidates",
+      "Inspect original output and the blocked review action"
+    ],
+    "talk": "This is the existing local course runtime. The page identifies replay data, and no provider is being called. We register an application and a fixed suite, then submit a passing replay candidate. The API accepts work asynchronously, and the worker records its result. Succeeded means execution completed. The gate result is a separate decision. We now submit the failing fixture. The job still completes, but a critical rule fails and the review request is rejected. The score cannot override that hard condition. Notice that the original answer remains visible in the evidence view. We can inspect the suite snapshot and candidate reference that produced it. Our local rehearsal also checks this workflow through HTTP and records the status codes. These fixtures help demonstrate orchestration. They do not prove the customer model can produce a correct answer.",
+    "zh": "先看source=replay，再看执行成功与gate阻断区别。不要点real。",
+    "cue": "Use runbook S1–S6. Backup: System_Demo_Backup.webm.",
+    "kind": "demo"
+  },
+  {
+    "title": "Demo 2  Review and evidence traceability",
+    "minutes": 4,
+    "owner": "B · ZHU PENGXU",
+    "body": [
+      "Review request captures a passing evidence snapshot",
+      "Self-review and stale decisions fail",
+      "A different local test identity records one terminal decision",
+      "Export preserves job, suite, original outputs and audit"
+    ],
+    "talk": "A passing evaluation can request review, but it cannot approve itself. We switch to a different signed local test identity, inspect the captured evidence and record a decision. These are test identities controlled by this demonstration. We do not count them as independent student approval. A stale version receives a conflict response, and an approved or rejected review cannot be reopened. Re-evaluation creates a new job and review with predecessor links, preserving the previous record. The evidence export contains the input snapshot, outputs and audit. A candidate commit reference is caller supplied, so it is not a cryptographic attestation that the candidate truly came from that commit. ReleaseGuard records a decision and does not directly deploy the application.",
+    "zh": "独立测试身份不等于独立真人审核；审批记录不等于部署。",
+    "cue": "Use runbook S7–S10. Hand to C without leaving the evidence view.",
+    "kind": "demo"
+  },
+  {
+    "title": "Demo 3  Historical real model evidence",
+    "minutes": 3,
+    "owner": "C · LIN XINDA",
+    "body": [],
+    "talk": "We now switch from live replay to historical real-provider evidence. The frozen customer-generation A/B run used the same twenty questions and preserved each original response. The original v2.10 scores were 70 for 20B and 75 for 120B. The full old delivery intersection allowed five and one respectively, showing why a larger model or aggregate score alone did not solve the problem. Those figures describe that frozen generation run. The later semantic reviewer uses 120B for evaluation, rather than replacing the customer generator. The reviewer protocol experiment contains three samples. The separate development run contains seventeen previously unexecuted pilot samples. We can open one correct judgment and one violation, compare the raw review text to its derived evidence coordinates, and verify the quotes against the original answer. We have not repaired the model answer after generation.",
+    "zh": "切换时明确说“历史真实运行回放”。原客服分数70/75与v3评审结果不能混算。",
+    "cue": "Open historical viewer. Pause on original response and source label.",
+    "kind": "table",
+    "headers": [
+      "Experiment",
+      "Fixed denominator",
+      "Result and scope"
+    ],
+    "rows": [
+      [
+        "Customer generation A/B",
+        "20 per model",
+        "Original scores 70 / 75"
+      ],
+      [
+        "v3 real protocol",
+        "3 samples",
+        "3 protocol-valid, 3 matches"
+      ],
+      [
+        "v3 development",
+        "17 samples",
+        "9/9 compliant, 8/8 violations"
+      ],
+      [
+        "Formal reviewer status",
+        "Qualification",
+        "calibration_pending; shadowOnly"
+      ]
+    ]
+  },
+  {
+    "title": "Demo 4  Quality evidence and limits",
+    "minutes": 2,
+    "owner": "E · LIAO BINFENG",
+    "body": [
+      "Dated replay scaling and fault evidence",
+      "Historical API permission and restore checks",
+      "17-sample validation has a fixed development denominator",
+      "No current cloud throughput or production accuracy claim"
+    ],
+    "talk": "Our quality evidence has a date, source and tested stimulus. The cloud replay experiments show multiple workers processing tasks, and one controlled failure scenario shows queue-based scaling. We do not convert those replay figures into model tokens per second. The semantic development set contains nine compliant and eight violating answers. All seventeen protocol results were valid and matched the frozen project labels, including the expected critical issue for each violation. The labels came from project reference annotation, not verified human blind review. This supports the stated development result and no wider accuracy estimate. The reviewer remains in shadow mode. A future qualification decision would require separate evidence and authorization, which this presentation does not claim.",
+    "zh": "性能分母、模型分母分别讲。开发集通过不等于任意自然语言可靠。",
+    "cue": "System segment ends at 38:00. Switch to closing slide.",
+    "kind": "text"
+  },
+  {
+    "title": "Current outcome and remaining work",
+    "minutes": 2,
+    "owner": "A + C",
+    "body": [
+      "Core evaluation and review workflow is implemented",
+      "v3 passed two separate bounded real validations",
+      "Known old holdout failure remains visible",
+      "Team review, measured effort and production calibration remain open"
+    ],
+    "talk": "The main outcome is an inspectable workflow: a candidate has an immutable suite, original outputs, a gate result and a review trail. The repair process also taught us that a schema-valid review and a semantically correct review are separate questions. Version 3 reduced the protocol burden and passed two bounded real validations. We still retain the old evaluator failure, the original customer scores and the unavailable historical review text. The immediate team work is to confirm contributions, finish genuine review and UAT, and rehearse the handoffs and backups. We are not presenting this snapshot as production authorization. Thank you. We are ready for questions.",
+    "zh": "收尾包含2分钟缓冲；回答不超出证据。",
+    "cue": "Reserve 5 additional minutes for Q&A. Jump to backup slides when needed.",
+    "kind": "text"
+  },
+  {
+    "title": "Backup  Database detail",
+    "minutes": 0,
+    "owner": "B",
+    "body": [],
+    "talk": "The registry database stores application and suite JSON documents with workspace scoping. Suites have parent identifiers. Evaluation stores job input, snapshot, result, execution metadata, leases and attempts. The outbox refers to the local job. Governance stores captured evidence and versioned terminal review decisions. Its audit records link through entity identifiers, and previous-release links preserve re-evaluation lineage. There are no cross-database foreign keys.",
+    "zh": "数据库细节仅老师问时展开。",
+    "cue": "",
+    "kind": "table",
+    "headers": [
+      "Table",
+      "Selected fields",
+      "Invariant"
+    ],
+    "rows": [
+      [
+        "applications / suites",
+        "workspace, data, parent_id",
+        "Scoped assets; immutable suite IDs"
+      ],
+      [
+        "jobs",
+        "input, snapshot, result, lease_id",
+        "Idempotent admission; guarded commit"
+      ],
+      [
+        "outbox",
+        "job_id, sent_at",
+        "Atomic job + notification intent"
+      ],
+      [
+        "releases / audit",
+        "version, evidence, entity_id",
+        "One terminal decision; retained trail"
+      ]
+    ]
+  },
+  {
+    "title": "Backup  Evidence types",
+    "minutes": 0,
+    "owner": "C + E",
+    "body": [],
+    "talk": "Synthetic fixture results are program tests. Replay jobs run static fictional outputs through the actual platform. Imported results are caller supplied. Real customer generation and real semantic review both require provider execution, but they are different sources. Historical real replay means we are viewing saved output from a dated real call, without making a new call. No category is relabelled to improve a score.",
+    "zh": "防止fixture、replay、real三者混算。",
+    "cue": "",
+    "kind": "table",
+    "headers": [
+      "Type",
+      "New provider call",
+      "What it establishes"
+    ],
+    "rows": [
+      [
+        "Unit fixture",
+        "No",
+        "Program behaviour"
+      ],
+      [
+        "Replay / imported",
+        "No",
+        "Platform flow or supplied evidence"
+      ],
+      [
+        "Historical real playback",
+        "No today",
+        "Dated provider output"
+      ],
+      [
+        "Real generation / review",
+        "Yes in sealed experiment",
+        "Bounded model observation"
+      ]
+    ]
+  },
+  {
+    "title": "Backup  Separate v3 denominators",
+    "minutes": 0,
+    "owner": "C",
+    "body": [],
+    "talk": "The three-sample run has its own authorization, attempt ledger and completion seal. The seventeen-sample run uses the old pilot positions four through twenty but has a new experiment identity. The old pilot remains incomplete. All seventeen new results are protocol valid, with nine compliant allows and eight critical-issue detections. We keep these as two separate development reports. Both use frozen project labels rather than verified human blind review.",
+    "zh": "不能拼为同一20/20，不重写旧pilot。",
+    "cue": "",
+    "kind": "table",
+    "headers": [
+      "Run",
+      "Executed",
+      "Protocol",
+      "Semantic reference"
+    ],
+    "rows": [
+      [
+        "Old v2 pilot",
+        "3 / 20",
+        "2 valid; stopped",
+        "Old state unchanged"
+      ],
+      [
+        "v3 protocol",
+        "3 / 3",
+        "3 / 3",
+        "3 / 3 matches"
+      ],
+      [
+        "v3 development",
+        "17 / 17",
+        "17 / 17",
+        "9 / 9 allow; 8 / 8 detect"
+      ]
+    ]
+  },
+  {
+    "title": "Backup  Release conditions",
+    "minutes": 0,
+    "owner": "B + C",
+    "body": [
+      "Score at least 95",
+      "Zero critical failures and execution errors",
+      "Complete evidence and applicable output checks",
+      "Independent review for a release record",
+      "Semantic reviewer remains calibration_pending"
+    ],
+    "talk": "A numeric score is one condition. The gate also requires no critical failures or execution errors. Controlled output checks may independently block delivery. Human review is a later lifecycle step. The new reviewer has not been wired into formal customer release, so a shadow allow cannot override these conditions.",
+    "zh": "95分不是唯一条件；不要把min数量当交集。",
+    "cue": "",
+    "kind": "text"
+  },
+  {
+    "title": "Backup  Schedule alternatives",
+    "minutes": 0,
+    "owner": "A",
+    "body": [],
+    "talk": "Our requested main plan is forty minutes plus five minutes of questions. The retrieved course PDF instead includes questions in a forty-minute slot and lists Team 13 on 26 October at 9:45. If that older PDF governs the session, use the compressed schedule here. The team must confirm the newer notice rather than assume the slot has changed.",
+    "zh": "40+5按用户提供邮件转录；原PDF40含Q&A需要团队确认。",
+    "cue": "",
+    "kind": "table",
+    "headers": [
+      "Segment",
+      "Main plan",
+      "Compressed plan"
+    ],
+    "rows": [
+      [
+        "Intro and conduct",
+        "4 min",
+        "4 min"
+      ],
+      [
+        "Architecture / testing",
+        "8 min",
+        "8 min"
+      ],
+      [
+        "CI/CD / system demo",
+        "26 min",
+        "21 min"
+      ],
+      [
+        "Close and buffer",
+        "2 min",
+        "2 min"
+      ],
+      [
+        "Q&A",
+        "5 additional",
+        "5 included"
+      ]
+    ]
+  },
+  {
+    "title": "Backup  Sources and acknowledgement",
+    "minutes": 0,
+    "owner": "All",
+    "body": [
+      "Repository code, workflows and dated evidence are the source of claims",
+      "Project reference labels are not verified human blind review",
+      "Shared implementation and presentation preparation used AI assistance",
+      "Actual member effort and approvals require member records"
+    ],
+    "talk": "Implementation, experiments and presentation preparation used Codex assistance. The team is responsible for checking the content and declaring tool use in the submission. Named responsibilities do not attribute all shared code to a member. Source paths and exact hashes are available in the handoff pack rather than on the main slides.",
+    "zh": "集中保留工具使用说明。提交时按课程要求声明。",
+    "cue": "",
+    "kind": "text"
+  }
+]

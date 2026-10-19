@@ -2,6 +2,8 @@
 
 ## 19 October 2026: C-side repair and presentation handoff
 
+The editable course deck, bilingual rehearsal script, whole-project status, demo runbook, Q&A and selected evidence are in [the presentation pack](docs/presentation/20261019/). It uses a 40-minute main plan plus 5-minute Q&A, with a compressed alternative for the older course PDF. Recorded short backup clips are delivered separately with the local preparation package.
+
 Start with [whole-project progress and presentation](docs/13-Progress-and-Presentation-20261019.md), [repair timeline and scope](docs/14-Repair-Timeline-and-Boundaries-20261019.md), and [demo runbook](docs/15-Presentation-Demo-Runbook-20261019.md). This feature-branch snapshot preserves B's baseline and the accumulated evaluation repairs; it is not merged into main or deployed.
 
 Reviewer v3 passed a three-sample real protocol experiment and a **separate** seventeen-sample cross-scenario development experiment. It remains shadow-only and calibration-pending. Historical 70/75 customer-model scores are unchanged. Fresh local verification is **776/777**, with the rejected regex evaluator's retained holdout still failing (`npm test` exits 1); auxiliary tests are 7/7. Do not describe this branch as an all-green release candidate. Later dated handoff records above take precedence over the older operational summaries below.
