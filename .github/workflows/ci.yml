@@ -26,7 +26,9 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - run: npm test
       - run: node --test tests/*.test.mjs
-      - run: node scripts/setup-local.mjs
+      - name: Prepare local verification environment
+        id: local_setup
+        run: node scripts/setup-local.mjs
       - run: docker compose build gateway postgres
       - run: docker compose up -d --no-build --wait
       - run: node scripts/verify.mjs --restart
@@ -69,5 +71,5 @@ jobs:
             !evidence/private/**
           retention-days: 7
       - name: Stop containers
-        if: always()
+        if: always() && steps.local_setup.outcome == 'success'
         run: docker compose stop
