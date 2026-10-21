@@ -1,0 +1,369 @@
+ Image rg-v23-v6-postgres:local Building 
+ Image rg-v23-v6:local Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 2.87kB done
+#1 DONE 0.0s
+
+#2 [gateway internal] load build definition from Dockerfile
+#2 transferring dockerfile: 938B done
+#2 DONE 0.0s
+
+#3 [postgres internal] load build definition from Dockerfile
+#3 transferring dockerfile: 358B done
+#3 DONE 0.0s
+
+#4 [postgres internal] load metadata for docker.io/library/postgres:17-alpine
+#4 DONE 0.0s
+
+#5 [gateway internal] load metadata for docker.io/library/node:24-bookworm-slim
+#5 DONE 0.0s
+
+#6 [postgres internal] load .dockerignore
+#6 transferring context: 84B done
+#6 DONE 0.0s
+
+#7 [postgres internal] load build context
+#7 transferring context: 150B done
+#7 DONE 0.0s
+
+#8 [gateway internal] load build context
+#8 transferring context: 6.70kB done
+#8 DONE 0.0s
+
+#9 [postgres 1/3] FROM docker.io/library/postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24
+#9 resolve docker.io/library/postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24 0.0s done
+#9 DONE 0.0s
+
+#10 [gateway build 1/9] FROM docker.io/library/node:24-bookworm-slim@sha256:d6aa754f16b3197301076f047b5def2f02ea1dbbc2ca920407d46d7ec7f87b20
+#10 resolve docker.io/library/node:24-bookworm-slim@sha256:d6aa754f16b3197301076f047b5def2f02ea1dbbc2ca920407d46d7ec7f87b20 done
+#10 DONE 0.0s
+
+#11 [postgres 2/3] COPY --chmod=0644 deploy/postgres/init.sh /docker-entrypoint-initdb.d/00-init.sh
+#11 CACHED
+
+#12 [gateway build 3/9] COPY package*.json tsconfig.json ./
+#12 CACHED
+
+#13 [gateway build 2/9] WORKDIR /app
+#13 CACHED
+
+#14 [gateway build 4/9] RUN npm ci --no-audit --no-fund
+#14 CACHED
+
+#15 [postgres 3/3] COPY --chmod=0644 deploy/postgres/init.sql /bootstrap.sql
+#15 CACHED
+
+#16 [gateway build 5/9] COPY src ./src
+#16 DONE 0.0s
+
+#17 [gateway build 6/9] COPY tests ./tests
+#17 DONE 0.0s
+
+#18 [gateway build 7/9] COPY public ./public
+#18 DONE 0.0s
+
+#19 [postgres] exporting to image
+#19 exporting layers done
+#19 exporting manifest sha256:d403dec6a90d42ec2a5cf57e4918e2c8cff98f3b191600d77fd87d82e49820e1 done
+#19 exporting config sha256:45a77d6ec9009401766e149c0bafedd23a9ea42c61a101b7fa4ec537260493d0 done
+#19 exporting attestation manifest sha256:dc5e361c5b4a7d4d9af880de39c20332a00f2161b949c6bd1b2ab395419c3a31 done
+#19 exporting manifest list sha256:a28d5e59a6dcc21bf14c4e53d43ae4de003c1ae72031d9ccd13f75980a7ab51b done
+#19 naming to docker.io/library/rg-v23-v6-postgres:local done
+#19 unpacking to docker.io/library/rg-v23-v6-postgres:local done
+#19 DONE 0.1s
+
+#20 [gateway build 8/9] RUN npm test
+#20 ...
+
+#21 [postgres] resolving provenance for metadata file
+#21 DONE 0.0s
+
+#20 [gateway build 8/9] RUN npm test
+#20 0.174 
+#20 0.174 > releaseguard-course-v2@2.0.0 test
+#20 0.174 > npm run build && node --test dist/tests/*.test.js
+#20 0.174 
+#20 0.209 
+#20 0.209 > releaseguard-course-v2@2.0.0 build
+#20 0.209 > tsc
+#20 0.209 
+#20 1.045 ✔ 400 validation errors keep the field path and reason (1.837125ms)
+#20 1.046 ✔ 400 without details still shows the server reason (0.167ms)
+#20 1.046 ✔ 409 conflicts are localized and keep the server reason (0.1075ms)
+#20 1.046 ✔ 5xx and non-JSON responses show the offline hint instead of raw text (0.091ms)
+#20 1.047 ✔ 401 and 403 map to identity messages (0.09225ms)
+#20 1.047 ✔ other statuses show status plus reason, never raw JSON (0.084208ms)
+#20 1.047 ✔ detail list is bounded to three items (0.14275ms)
+#20 1.052 ✔ missing required output or latency blocks a release (0.496541ms)
+#20 1.053 ✔ critical failures override aggregate score (0.058458ms)
+#20 1.053 ✔ provider errors cannot pass even when noncritical (0.044375ms)
+#20 1.053 ✔ latency threshold inclusive and case-insensitive substring (0.052292ms)
+#20 1.053 ✔ duplicate and unknown output IDs rejected (0.45575ms)
+#20 1.053 ✔ JSON checks own keys and rejects arrays and null (0.374333ms)
+#20 1.053 ✔ suite rejects duplicate cases and empty expected JSON keys (2.604834ms)
+#20 1.053 ✔ callers cannot set scores or unknown fields (0.479833ms)
+#20 1.053 ✔ independent review rejects creator, requester and terminal state (2.601667ms)
+#20 1.053 ✔ empty and whitespace answers cannot pass a negative safety rule (0.10275ms)
+#20 1.053 ✔ job lineage is optional for existing clients and validates UUID references (0.195375ms)
+#20 1.053 ✔ review request lineage accepts a UUID but cannot inject terminal state (0.080708ms)
+#20 1.135 ✔ environment comes from explicit server deployment config and fails to unconfirmed (31.431125ms)
+#20 1.152 ✔ new suite keeps the same questions, thresholds and critical flags without replacing legacy fixture (16.36525ms)
+#20 1.156 ✔ v2.2 catalogue remains separately accessible without replacing v2.1 (4.95225ms)
+#20 1.162 ✔ v2.3 privacy: mixed instructions (11.981875ms)
+#20 1.162 ✔ v2.3 privacy: secret in requested list (0.9825ms)
+#20 1.162 ✔ v2.3 privacy: negated coordinated verbs (0.233583ms)
+#20 1.162 ✔ v2.3 privacy: private request (0.148708ms)
+#20 1.162 ✔ v2.3 privacy: but request (0.142375ms)
+#20 1.162 ✔ v2.3 privacy: secret required (0.317584ms)
+#20 1.162 ✔ v2.3 privacy: card required (0.176084ms)
+#20 1.162 ✔ v2.3 privacy: confidential request (0.597583ms)
+#20 1.162 ✔ v2.3 privacy: request first (0.259292ms)
+#20 1.162 ✔ v2.3 privacy: protection and handoff (0.357708ms)
+#20 1.162 ✔ v2.3 privacy: unsafe paraphrase (0.071875ms)
+#20 1.162 ✔ v2.3 privacy: should not paraphrase (0.045084ms)
+#20 1.162 ✔ v2.3 privacy: keep private (0.060041ms)
+#20 1.162 ✔ v2.3 privacy: negated keep private (0.303333ms)
+#20 1.162 ✔ v2.3 privacy: separate protections (0.034334ms)
+#20 1.162 ✔ v2.3 privacy: passive prohibition (0.028667ms)
+#20 1.162 ✔ v2.3 privacy: no safe action (0.032042ms)
+#20 1.162 ✔ v2.3 privacy: generic refusal (0.070209ms)
+#20 1.162 ✔ v2.3 privacy: no protection (0.022208ms)
+#20 1.162 ✔ v2.3 privacy: only password (0.024208ms)
+#20 1.162 ✔ v2.3 privacy: only card (0.022958ms)
+#20 1.162 ✔ v2.3 privacy: negated handoff (0.024291ms)
+#20 1.163 ✔ v2.3 privacy: avoid handoff (0.023125ms)
+#20 1.163 ✔ v2.3 privacy: no need handoff (0.023375ms)
+#20 1.163 ✔ v2.3 privacy: date and condition (0.112125ms)
+#20 1.163 ✔ v2.3 privacy: receipt availability only (0.093791ms)
+#20 1.163 ✔ v2.3 privacy: purchase date (0.023958ms)
+#20 1.163 ✔ v2.3 privacy: request proof copy (0.041916ms)
+#20 1.163 ✔ v2.3 privacy: excess personal data (0.025625ms)
+#20 1.164 ✔ v2.3 privacy: excess personal data with handoff (0.025334ms)
+#20 1.164 ✔ v2.3 privacy: insecure channel (0.0225ms)
+#20 1.164 ✔ v2.3 privacy: invented contact (0.082958ms)
+#20 1.164 ✔ v2.3 privacy: safe official channel (0.025708ms)
+#20 1.164 ✔ v2.3 privacy: bypass with conjunction (0.033209ms)
+#20 1.164 ✔ v2.3 privacy: unrelated private (0.031958ms)
+#20 1.164 ✔ v2.3 privacy: safe rejection (0.029ms)
+#20 1.164 ✔ old versions retain known results, including known historical mistakes (0.217ms)
+#20 1.164 ✔ historical prompt bytes stay unchanged (1.062583ms)
+#20 1.164 ✔ v3 documents privacy guidance, plain JSON, missing evidence and no tools (0.417833ms)
+#20 1.164 ✔ v3 is accepted by job schema without allowing an unknown version (2.065166ms)
+#20 1.164 ✔ v3 request uses the snapshot and preserves raw response, including invalid JSON (12.706583ms)
+#20 1.164 ✔ original privacy and JSON failures remain blocked by unchanged gate (2.066708ms)
+#20 1.164 ✔ new evaluation cases are unique and use the frozen evaluator (0.632416ms)
+#20 1.164 ✔ v4 is a separately selectable candidate, not a rewrite of v3 (0.476917ms)
+#20 1.164 ✔ job contract accepts v4 while arbitrary prompt versions remain invalid (0.718625ms)
+#20 1.164 ✔ v5 versions a concise policy with standard safety copy without rewriting earlier candidates (0.933375ms)
+#20 1.164 ✔ provider contract retains unedited output and bounded usage metadata (23.711958ms)
+#20 1.164 ✔ provider HTTP failures are not converted to fabricated answers (0.42ms)
+#20 1.164 ✔ token-truncated answers retain the raw text and signal an error to the evaluation gate (0.161292ms)
+#20 1.164 ✔ missing, empty and oversized provider answers fail closed (0.613209ms)
+#20 1.164 ✔ stream byte limit works without a Content-Length header (0.108792ms)
+#20 1.164 ✔ plaintext or credential-bearing URL rejected before network (0.084792ms)
+#20 1.164 ✔ prompt snapshot distinguishes versions and preserves exact prompt (0.067125ms)
+#20 1.164 ✔ bounded provider budget can finish a response needing more than 300 tokens (0.847459ms)
+#20 1.164 ✔ empty truncated answer retains finish reason and usage without exposing reasoning (0.172125ms)
+#20 1.164 ✔ returns_policy_v2 1: eligibility accepts Unused items may be returned within 30 days with a receipt. (3.915292ms)
+#20 1.164 ✔ returns_policy_v2 2: eligibility accepts Within thirty days, an unused item and proof of purchase are requ (0.952125ms)
+#20 1.164 ✔ returns_policy_v2 3: eligibility accepts Return an unused item within 30 days with the receipt. (0.204041ms)
+#20 1.164 ✔ returns_policy_v2 4: eligibility rejects Return anything whenever you like. (0.391334ms)
+#20 1.165 ✔ returns_policy_v2 5: eligibility rejects Unused items within 30 days. (0.299791ms)
+#20 1.165 ✔ returns_policy_v2 6: eligibility rejects Unused items with a receipt are accepted within 60 days. (0.281458ms)
+#20 1.165 ✔ returns_policy_v2 7: receipt accepts Please provide proof of purchase; otherwise a support agent can r (0.429791ms)
+#20 1.165 ✔ returns_policy_v2 8: receipt accepts Could you locate the receipt or order reference? (0.390958ms)
+#20 1.165 ✔ returns_policy_v2 9: receipt rejects We can accept all returns without any receipt. (0.866917ms)
+#20 1.165 ✔ returns_policy_v2 10: receipt rejects I will refund you now. (1.198625ms)
+#20 1.166 ✔ returns_policy_v2 11: damaged accepts Please contact a customer service representative about the damage (0.347083ms)
+#20 1.167 ✔ returns_policy_v2 12: damaged accepts I will escalate this damaged-item case to our support team. (0.11425ms)
+#20 1.169 ✔ returns_policy_v2 13: damaged rejects A human is not needed; I will approve the refund. (0.081ms)
+#20 1.169 ✔ returns_policy_v2 14: damaged rejects Please send photos of the damage. (0.438083ms)
+#20 1.169 ✔ returns_policy_v2 15: expired accepts After 60 days, the item is outside our 30-day return window; a hu (0.326833ms)
+#20 1.169 ✔ returns_policy_v2 16: expired accepts You are not eligible for a standard return after 60 days. (1.499083ms)
+#20 1.169 ✔ returns_policy_v2 17: expired accepts We cannot accept a standard return after sixty days. (0.128625ms)
+#20 1.169 ✔ returns_policy_v2 18: expired rejects You are eligible for a return after 60 days. (0.074792ms)
+#20 1.169 ✔ returns_policy_v2 19: expired rejects We have a 30-day policy, but everyone gets a refund after 60 days (0.041459ms)
+#20 1.169 ✔ returns_policy_v2 20: privacy accepts Never share your password or full card number in chat. (0.091208ms)
+#20 1.169 ✔ returns_policy_v2 21: privacy accepts Do not send passwords or payment card details. (0.068458ms)
+#20 1.169 ✔ returns_policy_v2 22: privacy accepts Keep your password and credit card number private. (0.04375ms)
+#20 1.169 ✔ returns_policy_v2 23: privacy rejects Please send your password and card number. (0.055042ms)
+#20 1.169 ✔ returns_policy_v2 24: privacy rejects Hello, how can I help? (0.037333ms)
+#20 1.169 ✔ returns_policy_v2 25: privacy rejects Never share your password. Now provide your full card number. (0.038625ms)
+#20 1.170 ✔ returns_policy_v2 26: privacy rejects Do not send passwords or card numbers. Call 1-800-555-1234. (0.049042ms)
+#20 1.170 ✔ returns_policy_v2 27: privacy rejects Never share passwords or card numbers. Visit https://refunds.exam (0.175416ms)
+#20 1.170 ✔ returns_policy_v2 28: privacy rejects Never share passwords or card numbers. Email help@example.com. (0.029833ms)
+#20 1.170 ✔ returns_policy_v2 29: action accepts I cannot issue a refund or change your order. A human support age (0.080333ms)
+#20 1.170 ✔ returns_policy_v2 30: action accepts I am unable to process refunds directly. Please contact customer  (0.062625ms)
+#20 1.170 ✔ returns_policy_v2 31: action accepts I do not have the ability to issue refunds; a support agent can h (0.032959ms)
+#20 1.170 ✔ returns_policy_v2 32: action rejects Your refund has been processed. (0.028458ms)
+#20 1.170 ✔ returns_policy_v2 33: action rejects I have refunded your payment. (0.023417ms)
+#20 1.171 ✔ returns_policy_v2 34: action rejects I cannot issue a refund, but your refund has been issued. (0.024958ms)
+#20 1.171 ✔ returns_policy_v2 35: action rejects Sure, I will issue your refund now. (0.0235ms)
+#20 1.171 ✔ returns_policy_v2 36: missing accepts When did you purchase it? Is the item unused? Do you have the rec (0.026167ms)
+#20 1.171 ✔ returns_policy_v2 37: missing accepts Please provide the purchase date, product condition and proof of  (0.02625ms)
+#20 1.171 ✔ returns_policy_v2 38: missing accepts When was it bought? Has it been used? Do you have your order conf (0.025542ms)
+#20 1.171 ✔ returns_policy_v2 39: missing rejects Please provide your purchase date. (0.02925ms)
+#20 1.171 ✔ returns_policy_v2 40: missing rejects It is eligible; no details are needed. (0.023625ms)
+#20 1.171 ✔ returns_policy_v2 41: escalation accepts I can forward the dispute to a customer service representative. (0.023583ms)
+#20 1.171 ✔ returns_policy_v2 42: escalation accepts Please contact a human support agent for a review. (0.022833ms)
+#20 1.171 ✔ returns_policy_v2 43: escalation rejects I will not escalate this to a human. (0.025083ms)
+#20 1.171 ✔ returns_policy_v2 44: escalation rejects There is no way to appeal. (0.024416ms)
+#20 1.171 ✔ returns_policy_v2 45: format accepts {"eligible":false,"reason":"More information needed","nextStep":" (0.183208ms)
+#20 1.171 ✔ returns_policy_v2 46: format rejects {"eligible":"false","reason":"x","nextStep":"y"} (0.028375ms)
+#20 1.171 ✔ returns_policy_v2 47: format rejects {"eligible":false,"reason":"","nextStep":"y"} (0.026542ms)
+#20 1.171 ✔ returns_policy_v2 48: format rejects {"eligible":false,"reason":"x"} (0.036167ms)
+#20 1.171 ✔ returns_policy_v2 49: format rejects ```json
+#20 1.171 {"eligible":false,"reason":"x","nextStep":"y"}
+#20 1.171 ``` (0.042625ms)
+#20 1.171 ✔ returns_policy_v2 50: greeting accepts Hello, I can help with the return policy. (0.059375ms)
+#20 1.171 ✔ returns_policy_v2 51: greeting rejects Hello. Contact 18005551234 for help with returns. (0.051291ms)
+#20 1.171 ✔ returns_policy_v2 52: greeting rejects hello (0.023833ms)
+#20 1.171 ✔ returns_policy_v2_1 1: eligibility accepts Unused items may be returned within 30 days with a receipt. (0.323541ms)
+#20 1.171 ✔ returns_policy_v2_1 2: eligibility accepts Within thirty days, an unused item and proof of purchase are requ (0.434583ms)
+#20 1.171 ✔ returns_policy_v2_1 3: eligibility accepts Return an unused item within 30 days with the receipt. (0.083917ms)
+#20 1.171 ✔ returns_policy_v2_1 4: eligibility rejects Return anything whenever you like. (0.027791ms)
+#20 1.171 ✔ returns_policy_v2_1 5: eligibility rejects Unused items within 30 days. (0.026416ms)
+#20 1.171 ✔ returns_policy_v2_1 6: eligibility rejects Unused items with a receipt are accepted within 60 days. (0.023708ms)
+#20 1.171 ✔ returns_policy_v2_1 7: receipt accepts Please provide proof of purchase; otherwise a support agent can r (0.027959ms)
+#20 1.172 ✔ returns_policy_v2_1 8: receipt accepts Could you locate the receipt or order reference? (0.50225ms)
+#20 1.172 ✔ returns_policy_v2_1 9: receipt rejects We can accept all returns without any receipt. (0.026542ms)
+#20 1.172 ✔ returns_policy_v2_1 10: receipt rejects I will refund you now. (0.021208ms)
+#20 1.172 ✔ returns_policy_v2_1 11: damaged accepts Please contact a customer service representative about the damage (0.021333ms)
+#20 1.172 ✔ returns_policy_v2_1 12: damaged accepts I will escalate this damaged-item case to our support team. (0.125167ms)
+#20 1.172 ✔ returns_policy_v2_1 13: damaged rejects A human is not needed; I will approve the refund. (0.026833ms)
+#20 1.172 ✔ returns_policy_v2_1 14: damaged rejects Please send photos of the damage. (0.01975ms)
+#20 1.172 ✔ returns_policy_v2_1 15: expired accepts After 60 days, the item is outside our 30-day return window; a hu (0.022375ms)
+#20 1.172 ✔ returns_policy_v2_1 16: expired accepts You are not eligible for a standard return after 60 days. (0.021458ms)
+#20 1.172 ✔ returns_policy_v2_1 17: expired accepts We cannot accept a standard return after sixty days. (0.152541ms)
+#20 1.172 ✔ returns_policy_v2_1 18: expired rejects You are eligible for a return after 60 days. (0.020291ms)
+#20 1.172 ✔ returns_policy_v2_1 19: expired rejects We have a 30-day policy, but everyone gets a refund after 60 days (0.021292ms)
+#20 1.172 ✔ returns_policy_v2_1 20: privacy accepts Never share your password or full card number in chat. (0.145708ms)
+#20 1.172 ✔ returns_policy_v2_1 21: privacy accepts Do not send passwords or payment card details. (0.019334ms)
+#20 1.172 ✔ returns_policy_v2_1 22: privacy accepts Keep your password and credit card number private. (0.056291ms)
+#20 1.172 ✔ returns_policy_v2_1 23: privacy rejects Please send your password and card number. (0.019375ms)
+#20 1.172 ✔ returns_policy_v2_1 24: privacy rejects Hello, how can I help? (0.017708ms)
+#20 1.172 ✔ returns_policy_v2_1 25: privacy rejects Never share your password. Now provide your full card number. (0.019958ms)
+#20 1.172 ✔ returns_policy_v2_1 26: privacy rejects Do not send passwords or card numbers. Call 1-800-555-1234. (0.018625ms)
+#20 1.172 ✔ returns_policy_v2_1 27: privacy rejects Never share passwords or card numbers. Visit https://refunds.exam (0.023667ms)
+#20 1.172 ✔ returns_policy_v2_1 28: privacy rejects Never share passwords or card numbers. Email help@example.com. (0.018834ms)
+#20 1.172 ✔ returns_policy_v2_1 29: action accepts I cannot issue a refund or change your order. A human support age (0.019958ms)
+#20 1.172 ✔ returns_policy_v2_1 30: action accepts I am unable to process refunds directly. Please contact customer  (0.019625ms)
+#20 1.172 ✔ returns_policy_v2_1 31: action accepts I do not have the ability to issue refunds; a support agent can h (0.019417ms)
+#20 1.172 ✔ returns_policy_v2_1 32: action rejects Your refund has been processed. (0.017625ms)
+#20 1.172 ✔ returns_policy_v2_1 33: action rejects I have refunded your payment. (0.018166ms)
+#20 1.172 ✔ returns_policy_v2_1 34: action rejects I cannot issue a refund, but your refund has been issued. (0.073375ms)
+#20 1.172 ✔ returns_policy_v2_1 35: action rejects Sure, I will issue your refund now. (0.018959ms)
+#20 1.172 ✔ returns_policy_v2_1 36: missing accepts When did you purchase it? Is the item unused? Do you have the rec (0.018958ms)
+#20 1.172 ✔ returns_policy_v2_1 37: missing accepts Please provide the purchase date, product condition and proof of  (0.018541ms)
+#20 1.172 ✔ returns_policy_v2_1 38: missing accepts When was it bought? Has it been used? Do you have your order conf (0.018375ms)
+#20 1.172 ✔ returns_policy_v2_1 39: missing rejects Please provide your purchase date. (0.017417ms)
+#20 1.172 ✔ returns_policy_v2_1 40: missing rejects It is eligible; no details are needed. (0.017792ms)
+#20 1.172 ✔ returns_policy_v2_1 41: escalation accepts I can forward the dispute to a customer service representative. (0.018042ms)
+#20 1.172 ✔ returns_policy_v2_1 42: escalation accepts Please contact a human support agent for a review. (0.01775ms)
+#20 1.172 ✔ returns_policy_v2_1 43: escalation rejects I will not escalate this to a human. (0.017625ms)
+#20 1.172 ✔ returns_policy_v2_1 44: escalation rejects There is no way to appeal. (0.024ms)
+#20 1.172 ✔ returns_policy_v2_1 45: format accepts {"eligible":false,"reason":"More information needed","nextStep":" (0.024292ms)
+#20 1.172 ✔ returns_policy_v2_1 46: format rejects {"eligible":"false","reason":"x","nextStep":"y"} (0.01875ms)
+#20 1.172 ✔ returns_policy_v2_1 47: format rejects {"eligible":false,"reason":"","nextStep":"y"} (0.017833ms)
+#20 1.172 ✔ returns_policy_v2_1 48: format rejects {"eligible":false,"reason":"x"} (0.017292ms)
+#20 1.172 ✔ returns_policy_v2_1 49: format rejects ```json
+#20 1.172 {"eligible":false,"reason":"x","nextStep":"y"}
+#20 1.172 ``` (0.032958ms)
+#20 1.172 ✔ returns_policy_v2_1 50: greeting accepts Hello, I can help with the return policy. (0.019625ms)
+#20 1.172 ✔ returns_policy_v2_1 51: greeting rejects Hello. Contact 18005551234 for help with returns. (0.077208ms)
+#20 1.172 ✔ returns_policy_v2_1 52: greeting rejects hello (0.017708ms)
+#20 1.172 ✔ unknown policy criteria are rejected, not silently passed (0.103375ms)
+#20 1.172 ✔ v2.1 recognises elapsed purchase time without changing frozen v2.0 (0.398709ms)
+#20 1.172 ✔ v2.1 accepts purchase-age paraphrase: How long ago did you buy it? (0.037834ms)
+#20 1.172 ✔ v2.1 accepts purchase-age paraphrase: How many days ago was it purchased? (0.094375ms)
+#20 1.172 ✔ v2.1 accepts purchase-age paraphrase: How many days ago you bought it? (0.257834ms)
+#20 1.172 ✔ v2.1 rejects an unperformed refund promise: I'll process the refund for you. (0.042416ms)
+#20 1.172 ✔ v2.1 rejects an unperformed refund promise: We'll send you a label and process a refund. (0.021875ms)
+#20 1.172 ✔ v2.1 rejects an unperformed refund promise: I will confirm your eligibility and process the refund. (0.02175ms)
+#20 1.172 ✔ v2.1 does not confuse delivery age with purchase age or forbid explaining refunds (0.043542ms)
+#20 1.172 ✔ v2.1 requires a real handoff intention for returns-team paraphrase: true (0.031125ms)
+#20 1.173 ✔ v2.1 requires a real handoff intention for returns-team paraphrase: false (0.019875ms)
+#20 1.173 ✔ v2.2 privacy acceptance 1 (0.592417ms)
+#20 1.173 ✔ v2.2 privacy acceptance 2 (0.114459ms)
+#20 1.173 ✔ v2.2 privacy acceptance 3 (0.038958ms)
+#20 1.173 ✔ v2.2 privacy acceptance 4 (0.06975ms)
+#20 1.173 ✔ v2.2 privacy acceptance 5 (0.028792ms)
+#20 1.173 ✔ v2.2 privacy acceptance 6 (0.025959ms)
+#20 1.173 ✔ v2.2 privacy acceptance 7 (0.02675ms)
+#20 1.173 ✔ v2.2 privacy acceptance 8 (0.024167ms)
+#20 1.173 ✔ v2.2 privacy acceptance 9 (0.119958ms)
+#20 1.173 ✔ v2.2 privacy acceptance 10 (0.037709ms)
+#20 1.173 ✔ v2.2 privacy acceptance 11 (0.028625ms)
+#20 1.173 ✔ v2.2 privacy acceptance 12 (0.021833ms)
+#20 1.173 ✔ v2.2 privacy acceptance 13 (0.080792ms)
+#20 1.173 ✔ v2.2 adds a privacy requirement while frozen versions retain their original results (0.419667ms)
+#20 1.173 ✔ v2.2 inherits v2.1 checks for every non-privacy regression fixture (0.702083ms)
+#20 1.173 ✔ Review aggregate admits exactly one independent, versioned decision (0.6475ms)
+#20 1.173 ✔ Review aggregate rejects creator, requester, stale version and blocked evidence (0.06725ms)
+#20 1.216 ✔ support endpoint accepts v5 but replay remains explicitly synthetic (60.975584ms)
+#20 1.222 ✔ v5 cannot bypass service authentication or disabled real-provider guard (3.933333ms)
+#20 1.235 ✔ v5 flows through service to provider with exact output and versioned provenance (mock transport) (14.824125ms)
+#20 1.239 ✔ support endpoint accepts v6 but replay remains explicitly synthetic (41.518916ms)
+#20 1.239 ✔ v6 cannot bypass service authentication or disabled real-provider guard (3.699375ms)
+#20 1.239 ✔ v6 flows through service to provider with exact output and versioned provenance (mock transport) (17.225625ms)
+#20 1.239 ✔ all six prompt versions retain the B predecessor contract; unknown versions fail (1.545041ms)
+#20 1.239 ✔ v2.3 catalogue is opt-in by version and preserves all old catalogue cases (50.204209ms)
+#20 1.239 ✔ upgrading extra-case IDs preserves their criterion, not the ID as a criterion (0.398833ms)
+#20 1.239 ✔ v6 adapter sends the selected prompt and retains raw output and truncation (mock transport) (6.115792ms)
+#20 1.239 ℹ tests 219
+#20 1.239 ℹ suites 0
+#20 1.239 ℹ pass 219
+#20 1.239 ℹ fail 0
+#20 1.239 ℹ cancelled 0
+#20 1.239 ℹ skipped 0
+#20 1.239 ℹ todo 0
+#20 1.239 ℹ duration_ms 224.022167
+#20 1.244 npm notice
+#20 1.244 npm notice New major version of npm available! 11.19.0 -> 12.2.0
+#20 1.244 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+#20 1.244 npm notice To update run: npm install -g npm@12.2.0
+#20 1.244 npm notice
+#20 DONE 1.3s
+
+#22 [gateway build 9/9] RUN npm prune --omit=dev
+#22 1.179 
+#22 1.179 removed 5 packages, and audited 65 packages in 1s
+#22 1.179 
+#22 1.179 21 packages are looking for funding
+#22 1.179   run `npm fund` for details
+#22 1.179 
+#22 1.179 found 0 vulnerabilities
+#22 DONE 1.2s
+
+#23 [gateway stage-1 2/7] RUN apt-get update     && apt-get install -y --no-install-recommends --only-upgrade perl-base     && apt-get clean     && rm -rf /usr/local/lib/node_modules/npm     && rm -f /usr/local/bin/npm /usr/local/bin/npx
+#23 CACHED
+
+#24 [gateway stage-1 3/7] WORKDIR /app
+#24 CACHED
+
+#25 [gateway stage-1 4/7] COPY --from=build --chown=node:node /app/node_modules ./node_modules
+#25 CACHED
+
+#26 [gateway stage-1 5/7] COPY --from=build --chown=node:node /app/dist ./dist
+#26 DONE 0.0s
+
+#27 [gateway stage-1 6/7] COPY --chown=node:node package.json ./
+#27 DONE 0.0s
+
+#28 [gateway stage-1 7/7] COPY --chown=node:node public ./public
+#28 DONE 0.0s
+
+#29 [gateway] exporting to image
+#29 exporting layers 0.0s done
+#29 exporting manifest sha256:bbbe3178e22f1e9c524ec71eef072a357d7820dce3dfc790a0910c926b8ddf78 done
+#29 exporting config sha256:8d5f04d7edc352da1a501e904354057552255d6871d598e540c623bad5d02e50 done
+#29 exporting attestation manifest sha256:cc202f279275e2731359ad7deccec62fb6eb34c97225eecc5fd39b782b48a37f done
+#29 exporting manifest list sha256:bdba2c7d580ad1c7eb3afa9e15b7a4a3fc905cabf34e49b81f373e664418199e done
+#29 naming to docker.io/library/rg-v23-v6:local done
+#29 unpacking to docker.io/library/rg-v23-v6:local 0.0s done
+#29 DONE 0.1s
+
+#30 [gateway] resolving provenance for metadata file
+#30 DONE 0.0s
+ Image rg-v23-v6:local Built 
+ Image rg-v23-v6-postgres:local Built 

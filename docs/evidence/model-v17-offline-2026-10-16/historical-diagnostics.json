@@ -1,0 +1,732 @@
+{
+  "source": "offline-historical-replay",
+  "history": [
+    {
+      "version": "v15",
+      "reportPath": "docs/evidence/model-v15-2026-10-16/real-v15-2026-10-16T08-31-07.250Z.json",
+      "reportSha256": "01c9392af186ea9bea8a126127f0b82d347ac94c5546dc0387c6995a553666f8",
+      "frozenReplay": {
+        "score": 90,
+        "gate": "blocked",
+        "legacyDelivery": {
+          "version": "explanation-guard-v2",
+          "allowed": 17,
+          "blocked": 3
+        }
+      },
+      "v17Diagnostic": {
+        "contractCompilationStatus": {
+          "status": "ready",
+          "ready": 20,
+          "conflicts": []
+        },
+        "responseContractCompliance": {
+          "status": "blocked",
+          "passed": 0,
+          "blocked": 20,
+          "cases": [
+            {
+              "caseId": "eligibility",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_RECEIPT_AVAILABILITY"
+              ]
+            },
+            {
+              "caseId": "receipt",
+              "ruleIds": [
+                "HUMAN_REVIEW_REQUIRED"
+              ]
+            },
+            {
+              "caseId": "damaged",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "DAMAGE_REQUIRES_HUMAN_REVIEW"
+              ]
+            },
+            {
+              "caseId": "expired",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_RECEIPT_AVAILABILITY"
+              ]
+            },
+            {
+              "caseId": "privacy",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_RECEIPT_AVAILABILITY"
+              ]
+            },
+            {
+              "caseId": "action",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "HUMAN_REVIEW_REQUIRED"
+              ]
+            },
+            {
+              "caseId": "missing",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "escalation",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "HUMAN_REVIEW_REQUIRED",
+                "CAPABILITY_LIMITATION",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "format",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "greeting",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "extra-eligibility",
+              "ruleIds": [
+                "STANDARD_ELIGIBILITY_ELIGIBLE"
+              ]
+            },
+            {
+              "caseId": "extra-receipt",
+              "ruleIds": [
+                "HUMAN_REVIEW_REQUIRED"
+              ]
+            },
+            {
+              "caseId": "extra-damaged",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "HUMAN_REVIEW_REQUIRED",
+                "DAMAGE_REQUIRES_HUMAN_REVIEW"
+              ]
+            },
+            {
+              "caseId": "extra-expired",
+              "ruleIds": [
+                "PURCHASE_OUTSIDE_STANDARD_WINDOW",
+                "HUMAN_REVIEW_REQUIRED"
+              ]
+            },
+            {
+              "caseId": "extra-privacy",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "extra-action",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "HUMAN_REVIEW_REQUIRED"
+              ]
+            },
+            {
+              "caseId": "extra-missing",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_RECEIPT_AVAILABILITY"
+              ]
+            },
+            {
+              "caseId": "extra-escalation",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "CAPABILITY_LIMITATION",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "extra-format",
+              "ruleIds": [
+                "STANDARD_ELIGIBILITY_ELIGIBLE"
+              ]
+            },
+            {
+              "caseId": "extra-greeting",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            }
+          ]
+        },
+        "businessConsistency": {
+          "status": "blocked",
+          "passed": 0,
+          "blocked": 20,
+          "cases": [
+            {
+              "caseId": "eligibility",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_RECEIPT_AVAILABILITY"
+              ]
+            },
+            {
+              "caseId": "receipt",
+              "ruleIds": [
+                "HUMAN_REVIEW_REQUIRED"
+              ]
+            },
+            {
+              "caseId": "damaged",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "DAMAGE_REQUIRES_HUMAN_REVIEW"
+              ]
+            },
+            {
+              "caseId": "expired",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_RECEIPT_AVAILABILITY"
+              ]
+            },
+            {
+              "caseId": "privacy",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_RECEIPT_AVAILABILITY"
+              ]
+            },
+            {
+              "caseId": "action",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "HUMAN_REVIEW_REQUIRED"
+              ]
+            },
+            {
+              "caseId": "missing",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "escalation",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "HUMAN_REVIEW_REQUIRED",
+                "CAPABILITY_LIMITATION",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "format",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "greeting",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "extra-eligibility",
+              "ruleIds": [
+                "STANDARD_ELIGIBILITY_ELIGIBLE"
+              ]
+            },
+            {
+              "caseId": "extra-receipt",
+              "ruleIds": [
+                "HUMAN_REVIEW_REQUIRED"
+              ]
+            },
+            {
+              "caseId": "extra-damaged",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "HUMAN_REVIEW_REQUIRED",
+                "DAMAGE_REQUIRES_HUMAN_REVIEW"
+              ]
+            },
+            {
+              "caseId": "extra-expired",
+              "ruleIds": [
+                "PURCHASE_OUTSIDE_STANDARD_WINDOW",
+                "HUMAN_REVIEW_REQUIRED"
+              ]
+            },
+            {
+              "caseId": "extra-privacy",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "extra-action",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "HUMAN_REVIEW_REQUIRED"
+              ]
+            },
+            {
+              "caseId": "extra-missing",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_RECEIPT_AVAILABILITY"
+              ]
+            },
+            {
+              "caseId": "extra-escalation",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "CAPABILITY_LIMITATION",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "extra-format",
+              "ruleIds": [
+                "STANDARD_ELIGIBILITY_ELIGIBLE"
+              ]
+            },
+            {
+              "caseId": "extra-greeting",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            }
+          ]
+        },
+        "customerTextSafety": {
+          "status": "blocked",
+          "passed": 19,
+          "blocked": 1,
+          "cases": [
+            {
+              "caseId": "expired",
+              "ruleIds": [
+                "NO_UNGROUNDED_OUTSIDE_WINDOW"
+              ]
+            }
+          ]
+        },
+        "finalDeliveryStatus": "blocked",
+        "deliveryValidation": {
+          "versions": [
+            "explanation-guard-v2",
+            "response-contract-guard-v17"
+          ],
+          "allowed": 0,
+          "blocked": 20
+        },
+        "legacyBlockedCases": [
+          "expired"
+        ]
+      }
+    },
+    {
+      "version": "v16",
+      "reportPath": "docs/evidence/model-v16-2026-10-16/real-v16-2026-10-16T08-50-53.534Z.json",
+      "reportSha256": "dfeee69328467283debc9153e54cf6955757a81e070466b71c1a97b7c0357cb1",
+      "frozenReplay": {
+        "score": 90,
+        "gate": "blocked",
+        "legacyDelivery": {
+          "version": "explanation-guard-v2",
+          "allowed": 17,
+          "blocked": 3
+        }
+      },
+      "v17Diagnostic": {
+        "contractCompilationStatus": {
+          "status": "ready",
+          "ready": 20,
+          "conflicts": []
+        },
+        "responseContractCompliance": {
+          "status": "blocked",
+          "passed": 0,
+          "blocked": 20,
+          "cases": [
+            {
+              "caseId": "eligibility",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_RECEIPT_AVAILABILITY"
+              ]
+            },
+            {
+              "caseId": "receipt",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "RECEIPT_CONDITION_UNMET",
+                "HUMAN_REVIEW_REQUIRED"
+              ]
+            },
+            {
+              "caseId": "damaged",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "DAMAGE_REQUIRES_HUMAN_REVIEW",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "expired",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_RECEIPT_AVAILABILITY"
+              ]
+            },
+            {
+              "caseId": "privacy",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "action",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "missing",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_RECEIPT_AVAILABILITY"
+              ]
+            },
+            {
+              "caseId": "escalation",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "CAPABILITY_LIMITATION"
+              ]
+            },
+            {
+              "caseId": "format",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "greeting",
+              "ruleIds": [
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_RECEIPT_AVAILABILITY"
+              ]
+            },
+            {
+              "caseId": "extra-eligibility",
+              "ruleIds": [
+                "STANDARD_ELIGIBILITY_ELIGIBLE"
+              ]
+            },
+            {
+              "caseId": "extra-receipt",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "HUMAN_REVIEW_REQUIRED",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "extra-damaged",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "DAMAGE_REQUIRES_HUMAN_REVIEW",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "extra-expired",
+              "ruleIds": [
+                "PURCHASE_OUTSIDE_STANDARD_WINDOW"
+              ]
+            },
+            {
+              "caseId": "extra-privacy",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "extra-action",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "extra-missing",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_RECEIPT_AVAILABILITY"
+              ]
+            },
+            {
+              "caseId": "extra-escalation",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "extra-format",
+              "ruleIds": [
+                "STANDARD_ELIGIBILITY_ELIGIBLE"
+              ]
+            },
+            {
+              "caseId": "extra-greeting",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_RECEIPT_AVAILABILITY"
+              ]
+            }
+          ]
+        },
+        "businessConsistency": {
+          "status": "blocked",
+          "passed": 0,
+          "blocked": 20,
+          "cases": [
+            {
+              "caseId": "eligibility",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_RECEIPT_AVAILABILITY"
+              ]
+            },
+            {
+              "caseId": "receipt",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "RECEIPT_CONDITION_UNMET",
+                "HUMAN_REVIEW_REQUIRED"
+              ]
+            },
+            {
+              "caseId": "damaged",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "DAMAGE_REQUIRES_HUMAN_REVIEW",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "expired",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_RECEIPT_AVAILABILITY"
+              ]
+            },
+            {
+              "caseId": "privacy",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "action",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "missing",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_RECEIPT_AVAILABILITY"
+              ]
+            },
+            {
+              "caseId": "escalation",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "CAPABILITY_LIMITATION"
+              ]
+            },
+            {
+              "caseId": "format",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "greeting",
+              "ruleIds": [
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_RECEIPT_AVAILABILITY"
+              ]
+            },
+            {
+              "caseId": "extra-eligibility",
+              "ruleIds": [
+                "STANDARD_ELIGIBILITY_ELIGIBLE"
+              ]
+            },
+            {
+              "caseId": "extra-receipt",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "HUMAN_REVIEW_REQUIRED",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "extra-damaged",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "DAMAGE_REQUIRES_HUMAN_REVIEW",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "extra-expired",
+              "ruleIds": [
+                "PURCHASE_OUTSIDE_STANDARD_WINDOW"
+              ]
+            },
+            {
+              "caseId": "extra-privacy",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN"
+              ]
+            },
+            {
+              "caseId": "extra-action",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "extra-missing",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_RECEIPT_AVAILABILITY"
+              ]
+            },
+            {
+              "caseId": "extra-escalation",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_PURCHASE_DATE"
+              ]
+            },
+            {
+              "caseId": "extra-format",
+              "ruleIds": [
+                "STANDARD_ELIGIBILITY_ELIGIBLE"
+              ]
+            },
+            {
+              "caseId": "extra-greeting",
+              "ruleIds": [
+                "PURCHASE_TIMING_UNKNOWN",
+                "STANDARD_ELIGIBILITY_UNKNOWN",
+                "ASK_RECEIPT_AVAILABILITY"
+              ]
+            }
+          ]
+        },
+        "customerTextSafety": {
+          "status": "passed",
+          "passed": 20,
+          "blocked": 0,
+          "cases": []
+        },
+        "finalDeliveryStatus": "blocked",
+        "deliveryValidation": {
+          "versions": [
+            "explanation-guard-v2",
+            "response-contract-guard-v17"
+          ],
+          "allowed": 0,
+          "blocked": 20
+        },
+        "legacyBlockedCases": [
+          "damaged",
+          "extra-receipt",
+          "extra-damaged"
+        ]
+      }
+    }
+  ]
+}

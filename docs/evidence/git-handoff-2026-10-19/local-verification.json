@@ -1,0 +1,35 @@
+{
+  "testExitCode": 1,
+  "summary": [
+    "ℹ tests 777",
+    "ℹ suites 0",
+    "ℹ pass 776",
+    "ℹ fail 1",
+    "ℹ cancelled 0",
+    "ℹ skipped 0",
+    "ℹ todo 0",
+    "ℹ duration_ms 1391.7035"
+  ],
+  "failedTests": [
+    "✖ candidate r3 matches the independently authored v2 holdout without tuning (40.345292ms)",
+    "✖ candidate r3 matches the independently authored v2 holdout without tuning (40.345292ms)"
+  ],
+  "scan": {
+    "scanned": 1201,
+    "hits": []
+  },
+  "note": "Publication audit only; unchanged deprecated evaluator holdout failure remains visible. No model calls or deployment.",
+  "buildPassed": true,
+  "tests": 777,
+  "passed": 776,
+  "failed": 1,
+  "failedTestFile": "tests/evaluator-next-v1-holdout-v2.test.ts",
+  "testLogSha256": "a5cef0c9930cd0c64115bc3821c02b1d8e7f9ec0fca5efdd0d52de00264761ab",
+  "modelCalls": 0,
+  "deploymentActions": 0,
+  "auxiliaryTests": {
+    "passed": 7,
+    "failed": 0,
+    "command": "node --test tests/*.test.mjs"
+  }
+}

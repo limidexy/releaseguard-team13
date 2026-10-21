@@ -1,0 +1,27 @@
+{
+  "observedAt": "2026-10-21T04:23:03Z",
+  "apiCheckedAt": "2026-10-21T04:27:14.688Z",
+  "method": "Fresh authenticated Chrome Current Plan + model-limits/key-project inspection; local masked-suffix match; authenticated read-only models GET",
+  "organizationLabel": "Personal",
+  "projectLabel": "Default Project",
+  "plan": "Free",
+  "displayedPrice": "$0",
+  "currentPlanControlDisabled": true,
+  "credentialMatchesObservedProject": true,
+  "credentialFullValueRecorded": false,
+  "paymentOrUpgradeActionTaken": false,
+  "modelId": "openai/gpt-oss-120b",
+  "limits": {
+    "requestsPerMinute": 30,
+    "requestsPerDay": 1000,
+    "tokensPerMinute": 8000,
+    "tokensPerDay": 200000
+  },
+  "recentKeyUsage24hObserved": 0,
+  "modelsEndpoint": {
+    "httpStatus": 200,
+    "targetModelAvailable": true,
+    "inferenceRequests": 0
+  },
+  "evidenceFile": "FREE-PLAN-OBSERVATIONS.txt"
+}

@@ -1,0 +1,994 @@
+{
+  "createdAt": "2026-10-16T06:39:50.629Z",
+  "evaluatorVersion": "returns-policy-v2.8",
+  "sameQuestionsAndThresholds": true,
+  "previousRawScore": 90,
+  "rawModelScore": 90,
+  "rawModelGate": "blocked",
+  "combinedGate": "blocked",
+  "delivery": {
+    "version": "explanation-guard-v1",
+    "allowed": 7,
+    "blocked": 13
+  },
+  "calls": 20,
+  "tokens": 15841,
+  "fixed": [
+    "expired",
+    "extra-damaged"
+  ],
+  "regressions": [
+    "extra-eligibility",
+    "extra-privacy"
+  ],
+  "rawFailures": [
+    {
+      "caseId": "extra-eligibility",
+      "reason": "Policy checks failed: thirty_day_window"
+    },
+    {
+      "caseId": "extra-privacy",
+      "reason": "Policy checks failed: no_credential_request, safe_privacy_next_step, explicit_user_secret_warning"
+    }
+  ],
+  "comparison": [
+    {
+      "caseId": "eligibility",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required",
+      "guard": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "no_policy_additions",
+          "no_unsupported_eligibility"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "delivery": "blocked",
+      "decision": {
+        "version": "returns-decision-v1",
+        "facts": {
+          "purchaseDaysAgo": null,
+          "unused": null,
+          "receipt": null,
+          "damaged": false,
+          "dispute": false,
+          "actionRequested": false,
+          "privacy": false
+        },
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "disposition": "clarify",
+        "jsonEligible": false,
+        "requiresHumanReview": false,
+        "missing": [
+          "purchase date",
+          "whether the item is unused",
+          "whether a receipt exists"
+        ],
+        "allowedActions": [
+          "explain policy",
+          "ask missing non-sensitive facts",
+          "customer contacts human support"
+        ],
+        "externalActionCapability": false,
+        "refundApproved": false
+      }
+    },
+    {
+      "caseId": "receipt",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required",
+      "guard": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "no_unsupported_eligibility"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "delivery": "blocked",
+      "decision": {
+        "version": "returns-decision-v1",
+        "facts": {
+          "purchaseDaysAgo": null,
+          "unused": null,
+          "receipt": false,
+          "damaged": false,
+          "dispute": false,
+          "actionRequested": false,
+          "privacy": false
+        },
+        "standardEligibility": "ineligible",
+        "outsideStandardWindow": false,
+        "disposition": "human_review",
+        "jsonEligible": false,
+        "requiresHumanReview": true,
+        "missing": [
+          "purchase date",
+          "whether the item is unused"
+        ],
+        "allowedActions": [
+          "explain policy",
+          "ask missing non-sensitive facts",
+          "customer contacts human support"
+        ],
+        "externalActionCapability": false,
+        "refundApproved": false
+      }
+    },
+    {
+      "caseId": "damaged",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required",
+      "guard": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "no_policy_additions"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "delivery": "blocked",
+      "decision": {
+        "version": "returns-decision-v1",
+        "facts": {
+          "purchaseDaysAgo": null,
+          "unused": null,
+          "receipt": null,
+          "damaged": true,
+          "dispute": false,
+          "actionRequested": false,
+          "privacy": false
+        },
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "disposition": "human_review",
+        "jsonEligible": false,
+        "requiresHumanReview": true,
+        "missing": [
+          "purchase date",
+          "whether the item is unused",
+          "whether a receipt exists"
+        ],
+        "allowedActions": [
+          "explain policy",
+          "ask missing non-sensitive facts",
+          "customer contacts human support"
+        ],
+        "externalActionCapability": false,
+        "refundApproved": false
+      }
+    },
+    {
+      "caseId": "expired",
+      "before": "failed",
+      "after": "passed",
+      "previousReason": "Policy checks failed: no_unanchored_late_return_decision",
+      "currentReason": "Versioned policy checks passed; human review required",
+      "guard": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "unknown_purchase_date_clarified"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "delivery": "blocked",
+      "decision": {
+        "version": "returns-decision-v1",
+        "facts": {
+          "purchaseDaysAgo": null,
+          "unused": null,
+          "receipt": null,
+          "damaged": false,
+          "dispute": false,
+          "actionRequested": false,
+          "privacy": false
+        },
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "disposition": "clarify",
+        "jsonEligible": false,
+        "requiresHumanReview": false,
+        "missing": [
+          "purchase date",
+          "whether the item is unused",
+          "whether a receipt exists"
+        ],
+        "allowedActions": [
+          "explain policy",
+          "ask missing non-sensitive facts",
+          "customer contacts human support"
+        ],
+        "externalActionCapability": false,
+        "refundApproved": false
+      }
+    },
+    {
+      "caseId": "privacy",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required",
+      "guard": {
+        "version": "explanation-guard-v1",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "I’m sorry, but I can’t help with that.  \n\nNext step: If you need to discuss your order, please contact a human support agent for review. Do not share passwords or full card numbers.",
+          "rewritten": false
+        }
+      },
+      "delivery": "allowed",
+      "decision": {
+        "version": "returns-decision-v1",
+        "facts": {
+          "purchaseDaysAgo": null,
+          "unused": null,
+          "receipt": null,
+          "damaged": false,
+          "dispute": false,
+          "actionRequested": false,
+          "privacy": true
+        },
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "disposition": "clarify",
+        "jsonEligible": false,
+        "requiresHumanReview": false,
+        "missing": [
+          "purchase date",
+          "whether the item is unused",
+          "whether a receipt exists"
+        ],
+        "allowedActions": [
+          "explain policy",
+          "ask missing non-sensitive facts",
+          "customer contacts human support"
+        ],
+        "externalActionCapability": false,
+        "refundApproved": false
+      }
+    },
+    {
+      "caseId": "action",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required",
+      "guard": {
+        "version": "explanation-guard-v1",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "I’m sorry, but I can’t process a refund at this time. The return policy requires an unused item, a receipt, and a purchase within 30 days of the purchase date. I don’t have that information yet.\n\nNext step: Please contact a human support agent for review. They can help you determine if the item meets the return criteria and proceed with a refund if eligible.",
+          "rewritten": false
+        }
+      },
+      "delivery": "allowed",
+      "decision": {
+        "version": "returns-decision-v1",
+        "facts": {
+          "purchaseDaysAgo": null,
+          "unused": null,
+          "receipt": null,
+          "damaged": false,
+          "dispute": false,
+          "actionRequested": true,
+          "privacy": false
+        },
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "disposition": "human_review",
+        "jsonEligible": false,
+        "requiresHumanReview": true,
+        "missing": [
+          "purchase date",
+          "whether the item is unused",
+          "whether a receipt exists"
+        ],
+        "allowedActions": [
+          "explain policy",
+          "ask missing non-sensitive facts",
+          "customer contacts human support"
+        ],
+        "externalActionCapability": false,
+        "refundApproved": false
+      }
+    },
+    {
+      "caseId": "missing",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required",
+      "guard": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "no_unsupported_eligibility"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "delivery": "blocked",
+      "decision": {
+        "version": "returns-decision-v1",
+        "facts": {
+          "purchaseDaysAgo": null,
+          "unused": null,
+          "receipt": null,
+          "damaged": false,
+          "dispute": false,
+          "actionRequested": false,
+          "privacy": false
+        },
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "disposition": "clarify",
+        "jsonEligible": false,
+        "requiresHumanReview": false,
+        "missing": [
+          "purchase date",
+          "whether the item is unused",
+          "whether a receipt exists"
+        ],
+        "allowedActions": [
+          "explain policy",
+          "ask missing non-sensitive facts",
+          "customer contacts human support"
+        ],
+        "externalActionCapability": false,
+        "refundApproved": false
+      }
+    },
+    {
+      "caseId": "escalation",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required",
+      "guard": {
+        "version": "explanation-guard-v1",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "I’m sorry you’re unhappy with the decision. The return can only be processed if the item is unused, you have a receipt, and the purchase was made within 30 days of the date you bought it. Because we don’t have that information, the case is being sent for a human review.\n\nNext step: Contact a human support agent for review.",
+          "rewritten": false
+        }
+      },
+      "delivery": "allowed",
+      "decision": {
+        "version": "returns-decision-v1",
+        "facts": {
+          "purchaseDaysAgo": null,
+          "unused": null,
+          "receipt": null,
+          "damaged": false,
+          "dispute": true,
+          "actionRequested": false,
+          "privacy": false
+        },
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "disposition": "human_review",
+        "jsonEligible": false,
+        "requiresHumanReview": true,
+        "missing": [
+          "purchase date",
+          "whether the item is unused",
+          "whether a receipt exists"
+        ],
+        "allowedActions": [
+          "explain policy",
+          "ask missing non-sensitive facts",
+          "customer contacts human support"
+        ],
+        "externalActionCapability": false,
+        "refundApproved": false
+      }
+    },
+    {
+      "caseId": "format",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required",
+      "guard": {
+        "version": "explanation-guard-v1",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "{\"eligible\":false,\"reason\":\"To determine return eligibility, we need to confirm the purchase date, whether the item is unused, and whether a receipt exists. The standard return policy requires an UNUSED item, WITHIN 30 DAYS OF PURCHASE DATE, and A RECEIPT.\",\"nextStep\":\"Please provide the purchase date, confirm that the item is unused, and let us know if you have a receipt.\"}",
+          "rewritten": false
+        }
+      },
+      "delivery": "allowed",
+      "decision": {
+        "version": "returns-decision-v1",
+        "facts": {
+          "purchaseDaysAgo": null,
+          "unused": null,
+          "receipt": null,
+          "damaged": false,
+          "dispute": false,
+          "actionRequested": false,
+          "privacy": false
+        },
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "disposition": "clarify",
+        "jsonEligible": false,
+        "requiresHumanReview": false,
+        "missing": [
+          "purchase date",
+          "whether the item is unused",
+          "whether a receipt exists"
+        ],
+        "allowedActions": [
+          "explain policy",
+          "ask missing non-sensitive facts",
+          "customer contacts human support"
+        ],
+        "externalActionCapability": false,
+        "refundApproved": false
+      }
+    },
+    {
+      "caseId": "greeting",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required",
+      "guard": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "no_unsupported_eligibility"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "delivery": "blocked",
+      "decision": {
+        "version": "returns-decision-v1",
+        "facts": {
+          "purchaseDaysAgo": null,
+          "unused": null,
+          "receipt": null,
+          "damaged": false,
+          "dispute": false,
+          "actionRequested": false,
+          "privacy": false
+        },
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "disposition": "clarify",
+        "jsonEligible": false,
+        "requiresHumanReview": false,
+        "missing": [
+          "purchase date",
+          "whether the item is unused",
+          "whether a receipt exists"
+        ],
+        "allowedActions": [
+          "explain policy",
+          "ask missing non-sensitive facts",
+          "customer contacts human support"
+        ],
+        "externalActionCapability": false,
+        "refundApproved": false
+      }
+    },
+    {
+      "caseId": "extra-eligibility",
+      "before": "passed",
+      "after": "failed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Policy checks failed: thirty_day_window",
+      "guard": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "no_invented_channel",
+          "all_standard_conditions"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "delivery": "blocked",
+      "decision": {
+        "version": "returns-decision-v1",
+        "facts": {
+          "purchaseDaysAgo": 12,
+          "unused": true,
+          "receipt": true,
+          "damaged": false,
+          "dispute": false,
+          "actionRequested": false,
+          "privacy": false
+        },
+        "standardEligibility": "eligible",
+        "outsideStandardWindow": false,
+        "disposition": "standard_eligible",
+        "jsonEligible": true,
+        "requiresHumanReview": false,
+        "missing": [],
+        "allowedActions": [
+          "explain policy",
+          "ask missing non-sensitive facts",
+          "customer contacts human support"
+        ],
+        "externalActionCapability": false,
+        "refundApproved": false
+      }
+    },
+    {
+      "caseId": "extra-receipt",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required",
+      "guard": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "no_policy_additions",
+          "unknown_purchase_date_clarified"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "delivery": "blocked",
+      "decision": {
+        "version": "returns-decision-v1",
+        "facts": {
+          "purchaseDaysAgo": null,
+          "unused": null,
+          "receipt": false,
+          "damaged": false,
+          "dispute": false,
+          "actionRequested": false,
+          "privacy": false
+        },
+        "standardEligibility": "ineligible",
+        "outsideStandardWindow": false,
+        "disposition": "human_review",
+        "jsonEligible": false,
+        "requiresHumanReview": true,
+        "missing": [
+          "purchase date",
+          "whether the item is unused"
+        ],
+        "allowedActions": [
+          "explain policy",
+          "ask missing non-sensitive facts",
+          "customer contacts human support"
+        ],
+        "externalActionCapability": false,
+        "refundApproved": false
+      }
+    },
+    {
+      "caseId": "extra-damaged",
+      "before": "failed",
+      "after": "passed",
+      "previousReason": "Policy checks failed: no_unanchored_late_return_decision, no_ungrounded_damage_deadline",
+      "currentReason": "Versioned policy checks passed; human review required",
+      "guard": {
+        "version": "explanation-guard-v1",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "I’m sorry you received a cracked item. Because the return window is 30 days from purchase, we can’t automatically approve a refund. We do need a few details to determine eligibility: the purchase date, whether the item is still unused, and if you have a receipt.\n\nNext step: Contact a human support agent for review. They’ll ask for the missing information and decide how to proceed.",
+          "rewritten": false
+        }
+      },
+      "delivery": "allowed",
+      "decision": {
+        "version": "returns-decision-v1",
+        "facts": {
+          "purchaseDaysAgo": null,
+          "unused": null,
+          "receipt": null,
+          "damaged": true,
+          "dispute": false,
+          "actionRequested": false,
+          "privacy": false
+        },
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "disposition": "human_review",
+        "jsonEligible": false,
+        "requiresHumanReview": true,
+        "missing": [
+          "purchase date",
+          "whether the item is unused",
+          "whether a receipt exists"
+        ],
+        "allowedActions": [
+          "explain policy",
+          "ask missing non-sensitive facts",
+          "customer contacts human support"
+        ],
+        "externalActionCapability": false,
+        "refundApproved": false
+      }
+    },
+    {
+      "caseId": "extra-expired",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required",
+      "guard": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "all_standard_conditions"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "delivery": "blocked",
+      "decision": {
+        "version": "returns-decision-v1",
+        "facts": {
+          "purchaseDaysAgo": 31,
+          "unused": true,
+          "receipt": true,
+          "damaged": false,
+          "dispute": false,
+          "actionRequested": false,
+          "privacy": false
+        },
+        "standardEligibility": "ineligible",
+        "outsideStandardWindow": true,
+        "disposition": "human_review",
+        "jsonEligible": false,
+        "requiresHumanReview": true,
+        "missing": [],
+        "allowedActions": [
+          "explain policy",
+          "ask missing non-sensitive facts",
+          "customer contacts human support"
+        ],
+        "externalActionCapability": false,
+        "refundApproved": false
+      }
+    },
+    {
+      "caseId": "extra-privacy",
+      "before": "passed",
+      "after": "failed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Policy checks failed: no_credential_request, safe_privacy_next_step, explicit_user_secret_warning",
+      "guard": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "explicit_user_privacy_warning"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "delivery": "blocked",
+      "decision": {
+        "version": "returns-decision-v1",
+        "facts": {
+          "purchaseDaysAgo": null,
+          "unused": null,
+          "receipt": null,
+          "damaged": false,
+          "dispute": false,
+          "actionRequested": false,
+          "privacy": true
+        },
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "disposition": "clarify",
+        "jsonEligible": false,
+        "requiresHumanReview": false,
+        "missing": [
+          "purchase date",
+          "whether the item is unused",
+          "whether a receipt exists"
+        ],
+        "allowedActions": [
+          "explain policy",
+          "ask missing non-sensitive facts",
+          "customer contacts human support"
+        ],
+        "externalActionCapability": false,
+        "refundApproved": false
+      }
+    },
+    {
+      "caseId": "extra-action",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required",
+      "guard": {
+        "version": "explanation-guard-v1",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "I’m sorry, but I can’t process a refund directly. The return policy requires an unused item, a receipt, and a purchase within 30 days of the purchase date. Because we don’t have those details, the request must go to a human support agent for review.\n\nNext step: Contact a human support agent for review.",
+          "rewritten": false
+        }
+      },
+      "delivery": "allowed",
+      "decision": {
+        "version": "returns-decision-v1",
+        "facts": {
+          "purchaseDaysAgo": null,
+          "unused": null,
+          "receipt": null,
+          "damaged": false,
+          "dispute": false,
+          "actionRequested": true,
+          "privacy": false
+        },
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "disposition": "human_review",
+        "jsonEligible": false,
+        "requiresHumanReview": true,
+        "missing": [
+          "purchase date",
+          "whether the item is unused",
+          "whether a receipt exists"
+        ],
+        "allowedActions": [
+          "explain policy",
+          "ask missing non-sensitive facts",
+          "customer contacts human support"
+        ],
+        "externalActionCapability": false,
+        "refundApproved": false
+      }
+    },
+    {
+      "caseId": "extra-missing",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required",
+      "guard": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "unknown_purchase_date_clarified",
+          "no_unsupported_eligibility"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "delivery": "blocked",
+      "decision": {
+        "version": "returns-decision-v1",
+        "facts": {
+          "purchaseDaysAgo": null,
+          "unused": null,
+          "receipt": null,
+          "damaged": false,
+          "dispute": false,
+          "actionRequested": false,
+          "privacy": false
+        },
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "disposition": "clarify",
+        "jsonEligible": false,
+        "requiresHumanReview": false,
+        "missing": [
+          "purchase date",
+          "whether the item is unused",
+          "whether a receipt exists"
+        ],
+        "allowedActions": [
+          "explain policy",
+          "ask missing non-sensitive facts",
+          "customer contacts human support"
+        ],
+        "externalActionCapability": false,
+        "refundApproved": false
+      }
+    },
+    {
+      "caseId": "extra-escalation",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required",
+      "guard": {
+        "version": "explanation-guard-v1",
+        "passed": true,
+        "failures": [],
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "I’m sorry you’re disappointed. The return can’t be processed automatically because we don’t have the purchase date, whether the item is unused, or a receipt. Those details are required to determine eligibility under the 30‑day, unused‑item, receipt‑required policy.\n\nNext step: Contact a human support agent for review. They can help you provide the missing information and decide on a resolution.",
+          "rewritten": false
+        }
+      },
+      "delivery": "allowed",
+      "decision": {
+        "version": "returns-decision-v1",
+        "facts": {
+          "purchaseDaysAgo": null,
+          "unused": null,
+          "receipt": null,
+          "damaged": false,
+          "dispute": true,
+          "actionRequested": false,
+          "privacy": false
+        },
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "disposition": "human_review",
+        "jsonEligible": false,
+        "requiresHumanReview": true,
+        "missing": [
+          "purchase date",
+          "whether the item is unused",
+          "whether a receipt exists"
+        ],
+        "allowedActions": [
+          "explain policy",
+          "ask missing non-sensitive facts",
+          "customer contacts human support"
+        ],
+        "externalActionCapability": false,
+        "refundApproved": false
+      }
+    },
+    {
+      "caseId": "extra-format",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required",
+      "guard": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "no_invented_channel",
+          "all_standard_conditions"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "delivery": "blocked",
+      "decision": {
+        "version": "returns-decision-v1",
+        "facts": {
+          "purchaseDaysAgo": 10,
+          "unused": true,
+          "receipt": true,
+          "damaged": false,
+          "dispute": false,
+          "actionRequested": false,
+          "privacy": false
+        },
+        "standardEligibility": "eligible",
+        "outsideStandardWindow": false,
+        "disposition": "standard_eligible",
+        "jsonEligible": true,
+        "requiresHumanReview": false,
+        "missing": [],
+        "allowedActions": [
+          "explain policy",
+          "ask missing non-sensitive facts",
+          "customer contacts human support"
+        ],
+        "externalActionCapability": false,
+        "refundApproved": false
+      }
+    },
+    {
+      "caseId": "extra-greeting",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required",
+      "guard": {
+        "version": "explanation-guard-v1",
+        "passed": false,
+        "failures": [
+          "no_unsupported_eligibility"
+        ],
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        }
+      },
+      "delivery": "blocked",
+      "decision": {
+        "version": "returns-decision-v1",
+        "facts": {
+          "purchaseDaysAgo": null,
+          "unused": null,
+          "receipt": null,
+          "damaged": false,
+          "dispute": false,
+          "actionRequested": false,
+          "privacy": false
+        },
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "disposition": "clarify",
+        "jsonEligible": false,
+        "requiresHumanReview": false,
+        "missing": [
+          "purchase date",
+          "whether the item is unused",
+          "whether a receipt exists"
+        ],
+        "allowedActions": [
+          "explain policy",
+          "ask missing non-sensitive facts",
+          "customer contacts human support"
+        ],
+        "externalActionCapability": false,
+        "refundApproved": false
+      }
+    }
+  ],
+  "scope": "Raw real-model score unchanged. Guard blocks, never repairs. Same development cases, not unseen benchmark. Automated validation is not independent human approval."
+}

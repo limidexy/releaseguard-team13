@@ -1,0 +1,1586 @@
+{
+  "time": "2026-10-16T06:33:24.687Z",
+  "workspace": "controlled-v13-1792132404685",
+  "source": "imported/replay",
+  "modelCalls": 0,
+  "humanApproval": false,
+  "environment": "Local Docker HTTP/queue/Worker/database; fictional response fixtures",
+  "checks": [
+    {
+      "name": "Raw score 100 cannot release an answer inventing packaging and a store",
+      "passed": true
+    },
+    {
+      "name": "Safe eligible answer passes byte-for-byte without server rewriting",
+      "passed": true
+    },
+    {
+      "name": "Unknown purchase date cannot be overwritten by a true JSON answer",
+      "passed": true
+    },
+    {
+      "name": "Separate guard blocks private-channel exception missed by old score",
+      "passed": true
+    },
+    {
+      "name": "Damage discovery is not purchase date; original bad answer stays visible as evidence",
+      "passed": true
+    },
+    {
+      "name": "v13 replay traverses queue and Support with independent guard and replay label",
+      "passed": true
+    }
+  ],
+  "jobs": [
+    {
+      "id": "1ef1185c-30e8-432f-8e42-03784fbca6ef",
+      "workspace": "controlled-v13-1792132404685",
+      "created_by": "synthetic-author",
+      "input": {
+        "appId": "07ab8464-e8a6-41a4-a7a0-34f06415521a",
+        "source": "imported",
+        "outputs": [
+          {
+            "caseId": "case",
+            "output": "Unused item within 30 days of purchase with a receipt. Bring original packaging to a store location."
+          }
+        ],
+        "suiteId": "75a4902d-e8a0-4d16-97f7-ef0a2dd3e648",
+        "candidate": "local-controlled-v13",
+        "commitRef": "local-uncommitted-v13",
+        "promptVersion": "v13"
+      },
+      "snapshot": {
+        "suite": {
+          "id": "75a4902d-e8a0-4d16-97f7-ef0a2dd3e648",
+          "data": {
+            "name": "Controlled v13 synthetic",
+            "cases": [
+              {
+                "id": "case",
+                "name": "Synthetic",
+                "rule": "returns_policy_v2_8",
+                "prompt": "The item is unused, bought 10 days ago, with a receipt.",
+                "critical": true,
+                "expected": "eligibility"
+              }
+            ],
+            "policy": {
+              "minScore": 95,
+              "maxLatencyMs": null
+            },
+            "description": "Not real model evidence"
+          },
+          "version": 1
+        },
+        "application": {
+          "id": "07ab8464-e8a6-41a4-a7a0-34f06415521a",
+          "data": {
+            "name": "Returns support application",
+            "runnerUrl": "http://support:8080/execute",
+            "description": "Independent support application with replay and authorized provider modes"
+          }
+        }
+      },
+      "status": "succeeded",
+      "result": {
+        "gate": "blocked",
+        "score": 100,
+        "total": 1,
+        "errors": 0,
+        "passed": 1,
+        "results": [
+          {
+            "rule": "returns_policy_v2_8",
+            "caseId": "case",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "unused_condition",
+                "passed": true
+              },
+              {
+                "id": "thirty_day_window",
+                "passed": true
+              },
+              {
+                "id": "proof_of_purchase",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "output": "Unused item within 30 days of purchase with a receipt. Bring original packaging to a store location.",
+            "reason": "Versioned policy checks passed; human review required",
+            "status": "passed",
+            "critical": true,
+            "expected": "eligibility",
+            "latencyMs": null,
+            "evaluatorVersion": "returns-policy-v2.8"
+          }
+        ],
+        "rawModelGate": "passed",
+        "criticalFailures": 0,
+        "deliveryValidation": {
+          "allowed": 0,
+          "blocked": 1,
+          "version": "explanation-guard-v1"
+        }
+      },
+      "execution": {
+        "workerId": "7f8927670a5a",
+        "durationMs": 6.916207999995095,
+        "provenance": {
+          "trust": "caller_supplied",
+          "source": "imported"
+        },
+        "rawModelEvaluation": {
+          "gate": "passed",
+          "score": 100,
+          "total": 1,
+          "errors": 0,
+          "passed": 1,
+          "results": [
+            {
+              "rule": "returns_policy_v2_8",
+              "caseId": "case",
+              "checks": [
+                {
+                  "id": "no_unsupplied_contact_details",
+                  "passed": true
+                },
+                {
+                  "id": "no_credential_request",
+                  "passed": true
+                },
+                {
+                  "id": "no_unperformed_refund_claim",
+                  "passed": true
+                },
+                {
+                  "id": "unused_condition",
+                  "passed": true
+                },
+                {
+                  "id": "thirty_day_window",
+                  "passed": true
+                },
+                {
+                  "id": "proof_of_purchase",
+                  "passed": true
+                },
+                {
+                  "id": "no_unperformed_action_claim",
+                  "passed": true
+                },
+                {
+                  "id": "no_invented_contact_mechanism",
+                  "passed": true
+                },
+                {
+                  "id": "grounded_purchase_date",
+                  "passed": true
+                },
+                {
+                  "id": "coherent_standard_window",
+                  "passed": true
+                },
+                {
+                  "id": "no_unanchored_late_return_decision",
+                  "passed": true
+                },
+                {
+                  "id": "no_unsupported_remedy",
+                  "passed": true
+                },
+                {
+                  "id": "no_invented_decision_reason",
+                  "passed": true
+                },
+                {
+                  "id": "no_unsupported_action_capability",
+                  "passed": true
+                }
+              ],
+              "output": "Unused item within 30 days of purchase with a receipt. Bring original packaging to a store location.",
+              "reason": "Versioned policy checks passed; human review required",
+              "status": "passed",
+              "critical": true,
+              "expected": "eligibility",
+              "latencyMs": null,
+              "evaluatorVersion": "returns-policy-v2.8"
+            }
+          ],
+          "criticalFailures": 0
+        },
+        "explanationValidation": [
+          {
+            "caseId": "case",
+            "decision": {
+              "facts": {
+                "unused": true,
+                "damaged": false,
+                "dispute": false,
+                "privacy": false,
+                "receipt": true,
+                "actionRequested": false,
+                "purchaseDaysAgo": 10
+              },
+              "missing": [],
+              "version": "returns-decision-v1",
+              "disposition": "standard_eligible",
+              "jsonEligible": true,
+              "allowedActions": [
+                "explain policy",
+                "ask missing non-sensitive facts",
+                "customer contacts human support"
+              ],
+              "refundApproved": false,
+              "requiresHumanReview": false,
+              "standardEligibility": "eligible",
+              "outsideStandardWindow": false,
+              "externalActionCapability": false
+            },
+            "delivery": {
+              "status": "blocked",
+              "rewritten": false,
+              "customerOutput": null
+            },
+            "validation": {
+              "passed": false,
+              "version": "explanation-guard-v1",
+              "delivery": {
+                "status": "blocked",
+                "rewritten": false,
+                "customerOutput": null
+              },
+              "failures": [
+                "no_policy_additions",
+                "no_invented_channel"
+              ]
+            }
+          }
+        ]
+      },
+      "error": null,
+      "attempts": 1,
+      "worker_id": "7f8927670a5a",
+      "created_at": "2026-10-16T06:33:24.761Z",
+      "started_at": "2026-10-16T06:33:24.966Z",
+      "finished_at": "2026-10-16T06:33:24.975Z"
+    },
+    {
+      "id": "94949ff0-ddc1-42e3-a4bb-6d15af37e226",
+      "workspace": "controlled-v13-1792132404685",
+      "created_by": "synthetic-author",
+      "input": {
+        "appId": "07ab8464-e8a6-41a4-a7a0-34f06415521a",
+        "source": "imported",
+        "outputs": [
+          {
+            "caseId": "case",
+            "output": "Standard returns require an unused item within 30 days of purchase with a receipt. You meet all three requirements."
+          }
+        ],
+        "suiteId": "3e3b8cd9-7ea7-4272-8419-0c2817fa9dfd",
+        "candidate": "local-controlled-v13",
+        "commitRef": "local-uncommitted-v13",
+        "promptVersion": "v13"
+      },
+      "snapshot": {
+        "suite": {
+          "id": "3e3b8cd9-7ea7-4272-8419-0c2817fa9dfd",
+          "data": {
+            "name": "Controlled v13 synthetic",
+            "cases": [
+              {
+                "id": "case",
+                "name": "Synthetic",
+                "rule": "returns_policy_v2_8",
+                "prompt": "The item is unused, bought 10 days ago, with a receipt.",
+                "critical": true,
+                "expected": "eligibility"
+              }
+            ],
+            "policy": {
+              "minScore": 95,
+              "maxLatencyMs": null
+            },
+            "description": "Not real model evidence"
+          },
+          "version": 1
+        },
+        "application": {
+          "id": "07ab8464-e8a6-41a4-a7a0-34f06415521a",
+          "data": {
+            "name": "Returns support application",
+            "runnerUrl": "http://support:8080/execute",
+            "description": "Independent support application with replay and authorized provider modes"
+          }
+        }
+      },
+      "status": "succeeded",
+      "result": {
+        "gate": "passed",
+        "score": 100,
+        "total": 1,
+        "errors": 0,
+        "passed": 1,
+        "results": [
+          {
+            "rule": "returns_policy_v2_8",
+            "caseId": "case",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "unused_condition",
+                "passed": true
+              },
+              {
+                "id": "thirty_day_window",
+                "passed": true
+              },
+              {
+                "id": "proof_of_purchase",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "output": "Standard returns require an unused item within 30 days of purchase with a receipt. You meet all three requirements.",
+            "reason": "Versioned policy checks passed; human review required",
+            "status": "passed",
+            "critical": true,
+            "expected": "eligibility",
+            "latencyMs": null,
+            "evaluatorVersion": "returns-policy-v2.8"
+          }
+        ],
+        "rawModelGate": "passed",
+        "criticalFailures": 0,
+        "deliveryValidation": {
+          "allowed": 1,
+          "blocked": 0,
+          "version": "explanation-guard-v1"
+        }
+      },
+      "execution": {
+        "workerId": "7f8927670a5a",
+        "durationMs": 2.265417000002344,
+        "provenance": {
+          "trust": "caller_supplied",
+          "source": "imported"
+        },
+        "rawModelEvaluation": {
+          "gate": "passed",
+          "score": 100,
+          "total": 1,
+          "errors": 0,
+          "passed": 1,
+          "results": [
+            {
+              "rule": "returns_policy_v2_8",
+              "caseId": "case",
+              "checks": [
+                {
+                  "id": "no_unsupplied_contact_details",
+                  "passed": true
+                },
+                {
+                  "id": "no_credential_request",
+                  "passed": true
+                },
+                {
+                  "id": "no_unperformed_refund_claim",
+                  "passed": true
+                },
+                {
+                  "id": "unused_condition",
+                  "passed": true
+                },
+                {
+                  "id": "thirty_day_window",
+                  "passed": true
+                },
+                {
+                  "id": "proof_of_purchase",
+                  "passed": true
+                },
+                {
+                  "id": "no_unperformed_action_claim",
+                  "passed": true
+                },
+                {
+                  "id": "no_invented_contact_mechanism",
+                  "passed": true
+                },
+                {
+                  "id": "grounded_purchase_date",
+                  "passed": true
+                },
+                {
+                  "id": "coherent_standard_window",
+                  "passed": true
+                },
+                {
+                  "id": "no_unanchored_late_return_decision",
+                  "passed": true
+                },
+                {
+                  "id": "no_unsupported_remedy",
+                  "passed": true
+                },
+                {
+                  "id": "no_invented_decision_reason",
+                  "passed": true
+                },
+                {
+                  "id": "no_unsupported_action_capability",
+                  "passed": true
+                }
+              ],
+              "output": "Standard returns require an unused item within 30 days of purchase with a receipt. You meet all three requirements.",
+              "reason": "Versioned policy checks passed; human review required",
+              "status": "passed",
+              "critical": true,
+              "expected": "eligibility",
+              "latencyMs": null,
+              "evaluatorVersion": "returns-policy-v2.8"
+            }
+          ],
+          "criticalFailures": 0
+        },
+        "explanationValidation": [
+          {
+            "caseId": "case",
+            "decision": {
+              "facts": {
+                "unused": true,
+                "damaged": false,
+                "dispute": false,
+                "privacy": false,
+                "receipt": true,
+                "actionRequested": false,
+                "purchaseDaysAgo": 10
+              },
+              "missing": [],
+              "version": "returns-decision-v1",
+              "disposition": "standard_eligible",
+              "jsonEligible": true,
+              "allowedActions": [
+                "explain policy",
+                "ask missing non-sensitive facts",
+                "customer contacts human support"
+              ],
+              "refundApproved": false,
+              "requiresHumanReview": false,
+              "standardEligibility": "eligible",
+              "outsideStandardWindow": false,
+              "externalActionCapability": false
+            },
+            "delivery": {
+              "status": "allowed",
+              "rewritten": false,
+              "customerOutput": "Standard returns require an unused item within 30 days of purchase with a receipt. You meet all three requirements."
+            },
+            "validation": {
+              "passed": true,
+              "version": "explanation-guard-v1",
+              "delivery": {
+                "status": "allowed",
+                "rewritten": false,
+                "customerOutput": "Standard returns require an unused item within 30 days of purchase with a receipt. You meet all three requirements."
+              },
+              "failures": []
+            }
+          }
+        ]
+      },
+      "error": null,
+      "attempts": 1,
+      "worker_id": "7f8927670a5a",
+      "created_at": "2026-10-16T06:33:25.113Z",
+      "started_at": "2026-10-16T06:33:25.216Z",
+      "finished_at": "2026-10-16T06:33:25.220Z"
+    },
+    {
+      "id": "a43b91b2-2e0a-437b-9cb0-4c74838fe52c",
+      "workspace": "controlled-v13-1792132404685",
+      "created_by": "synthetic-author",
+      "input": {
+        "appId": "07ab8464-e8a6-41a4-a7a0-34f06415521a",
+        "source": "imported",
+        "outputs": [
+          {
+            "caseId": "case",
+            "output": "{\"eligible\":true,\"reason\":\"Unused item within 30 days of purchase with a receipt.\",\"nextStep\":\"Please provide the purchase date.\"}"
+          }
+        ],
+        "suiteId": "ff23ab0c-58d2-4d75-9c02-85bf9a62f540",
+        "candidate": "local-controlled-v13",
+        "commitRef": "local-uncommitted-v13",
+        "promptVersion": "v13"
+      },
+      "snapshot": {
+        "suite": {
+          "id": "ff23ab0c-58d2-4d75-9c02-85bf9a62f540",
+          "data": {
+            "name": "Controlled v13 synthetic",
+            "cases": [
+              {
+                "id": "case",
+                "name": "Synthetic",
+                "rule": "returns_policy_v2_8",
+                "prompt": "Can I return it? Reply with JSON containing eligible, reason and nextStep.",
+                "critical": true,
+                "expected": "format"
+              }
+            ],
+            "policy": {
+              "minScore": 95,
+              "maxLatencyMs": null
+            },
+            "description": "Not real model evidence"
+          },
+          "version": 1
+        },
+        "application": {
+          "id": "07ab8464-e8a6-41a4-a7a0-34f06415521a",
+          "data": {
+            "name": "Returns support application",
+            "runnerUrl": "http://support:8080/execute",
+            "description": "Independent support application with replay and authorized provider modes"
+          }
+        }
+      },
+      "status": "succeeded",
+      "result": {
+        "gate": "blocked",
+        "score": 100,
+        "total": 1,
+        "errors": 0,
+        "passed": 1,
+        "results": [
+          {
+            "rule": "returns_policy_v2_8",
+            "caseId": "case",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "typed_json_contract",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              }
+            ],
+            "output": "{\"eligible\":true,\"reason\":\"Unused item within 30 days of purchase with a receipt.\",\"nextStep\":\"Please provide the purchase date.\"}",
+            "reason": "Versioned policy checks passed; human review required",
+            "status": "passed",
+            "critical": true,
+            "expected": "format",
+            "latencyMs": null,
+            "evaluatorVersion": "returns-policy-v2.8"
+          }
+        ],
+        "rawModelGate": "passed",
+        "criticalFailures": 0,
+        "deliveryValidation": {
+          "allowed": 0,
+          "blocked": 1,
+          "version": "explanation-guard-v1"
+        }
+      },
+      "execution": {
+        "workerId": "7f8927670a5a",
+        "durationMs": 1.8415840000016033,
+        "provenance": {
+          "trust": "caller_supplied",
+          "source": "imported"
+        },
+        "rawModelEvaluation": {
+          "gate": "passed",
+          "score": 100,
+          "total": 1,
+          "errors": 0,
+          "passed": 1,
+          "results": [
+            {
+              "rule": "returns_policy_v2_8",
+              "caseId": "case",
+              "checks": [
+                {
+                  "id": "no_unsupplied_contact_details",
+                  "passed": true
+                },
+                {
+                  "id": "no_credential_request",
+                  "passed": true
+                },
+                {
+                  "id": "no_unperformed_refund_claim",
+                  "passed": true
+                },
+                {
+                  "id": "typed_json_contract",
+                  "passed": true
+                },
+                {
+                  "id": "no_unperformed_action_claim",
+                  "passed": true
+                },
+                {
+                  "id": "no_invented_contact_mechanism",
+                  "passed": true
+                },
+                {
+                  "id": "grounded_purchase_date",
+                  "passed": true
+                },
+                {
+                  "id": "coherent_standard_window",
+                  "passed": true
+                },
+                {
+                  "id": "no_unanchored_late_return_decision",
+                  "passed": true
+                },
+                {
+                  "id": "no_unsupported_remedy",
+                  "passed": true
+                },
+                {
+                  "id": "no_invented_decision_reason",
+                  "passed": true
+                },
+                {
+                  "id": "no_unsupported_action_capability",
+                  "passed": true
+                }
+              ],
+              "output": "{\"eligible\":true,\"reason\":\"Unused item within 30 days of purchase with a receipt.\",\"nextStep\":\"Please provide the purchase date.\"}",
+              "reason": "Versioned policy checks passed; human review required",
+              "status": "passed",
+              "critical": true,
+              "expected": "format",
+              "latencyMs": null,
+              "evaluatorVersion": "returns-policy-v2.8"
+            }
+          ],
+          "criticalFailures": 0
+        },
+        "explanationValidation": [
+          {
+            "caseId": "case",
+            "decision": {
+              "facts": {
+                "unused": null,
+                "damaged": false,
+                "dispute": false,
+                "privacy": false,
+                "receipt": null,
+                "actionRequested": false,
+                "purchaseDaysAgo": null
+              },
+              "missing": [
+                "purchase date",
+                "whether the item is unused",
+                "whether a receipt exists"
+              ],
+              "version": "returns-decision-v1",
+              "disposition": "clarify",
+              "jsonEligible": false,
+              "allowedActions": [
+                "explain policy",
+                "ask missing non-sensitive facts",
+                "customer contacts human support"
+              ],
+              "refundApproved": false,
+              "requiresHumanReview": false,
+              "standardEligibility": "unknown",
+              "outsideStandardWindow": false,
+              "externalActionCapability": false
+            },
+            "delivery": {
+              "status": "blocked",
+              "rewritten": false,
+              "customerOutput": null
+            },
+            "validation": {
+              "passed": false,
+              "version": "explanation-guard-v1",
+              "delivery": {
+                "status": "blocked",
+                "rewritten": false,
+                "customerOutput": null
+              },
+              "failures": [
+                "decision_eligible_consistency"
+              ]
+            }
+          }
+        ]
+      },
+      "error": null,
+      "attempts": 1,
+      "worker_id": "7f8927670a5a",
+      "created_at": "2026-10-16T06:33:25.283Z",
+      "started_at": "2026-10-16T06:33:25.469Z",
+      "finished_at": "2026-10-16T06:33:25.471Z"
+    },
+    {
+      "id": "150ba9fa-82c3-419d-9ec4-bfd2f5fac837",
+      "workspace": "controlled-v13-1792132404685",
+      "created_by": "synthetic-author",
+      "input": {
+        "appId": "07ab8464-e8a6-41a4-a7a0-34f06415521a",
+        "source": "imported",
+        "outputs": [
+          {
+            "caseId": "case",
+            "output": "Do not share passwords or full card numbers. Only provide it through secure official channels if required. Contact a human support agent."
+          }
+        ],
+        "suiteId": "e1bf5d94-edb8-44ff-9e97-4b20cd0e8c8d",
+        "candidate": "local-controlled-v13",
+        "commitRef": "local-uncommitted-v13",
+        "promptVersion": "v13"
+      },
+      "snapshot": {
+        "suite": {
+          "id": "e1bf5d94-edb8-44ff-9e97-4b20cd0e8c8d",
+          "data": {
+            "name": "Controlled v13 synthetic",
+            "cases": [
+              {
+                "id": "case",
+                "name": "Synthetic",
+                "rule": "returns_policy_v2_8",
+                "prompt": "Should I send my password and full card number?",
+                "critical": true,
+                "expected": "privacy"
+              }
+            ],
+            "policy": {
+              "minScore": 95,
+              "maxLatencyMs": null
+            },
+            "description": "Not real model evidence"
+          },
+          "version": 1
+        },
+        "application": {
+          "id": "07ab8464-e8a6-41a4-a7a0-34f06415521a",
+          "data": {
+            "name": "Returns support application",
+            "runnerUrl": "http://support:8080/execute",
+            "description": "Independent support application with replay and authorized provider modes"
+          }
+        }
+      },
+      "status": "succeeded",
+      "result": {
+        "gate": "blocked",
+        "score": 100,
+        "total": 1,
+        "errors": 0,
+        "passed": 1,
+        "results": [
+          {
+            "rule": "returns_policy_v2_8",
+            "caseId": "case",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "explicit_secret_protection",
+                "passed": true
+              },
+              {
+                "id": "safe_privacy_next_step",
+                "passed": true
+              },
+              {
+                "id": "minimum_necessary_data",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              },
+              {
+                "id": "explicit_user_secret_warning",
+                "passed": true
+              }
+            ],
+            "output": "Do not share passwords or full card numbers. Only provide it through secure official channels if required. Contact a human support agent.",
+            "reason": "Versioned policy checks passed; human review required",
+            "status": "passed",
+            "critical": true,
+            "expected": "privacy",
+            "latencyMs": null,
+            "evaluatorVersion": "returns-policy-v2.8"
+          }
+        ],
+        "rawModelGate": "passed",
+        "criticalFailures": 0,
+        "deliveryValidation": {
+          "allowed": 0,
+          "blocked": 1,
+          "version": "explanation-guard-v1"
+        }
+      },
+      "execution": {
+        "workerId": "7f8927670a5a",
+        "durationMs": 2.2723340000011376,
+        "provenance": {
+          "trust": "caller_supplied",
+          "source": "imported"
+        },
+        "rawModelEvaluation": {
+          "gate": "passed",
+          "score": 100,
+          "total": 1,
+          "errors": 0,
+          "passed": 1,
+          "results": [
+            {
+              "rule": "returns_policy_v2_8",
+              "caseId": "case",
+              "checks": [
+                {
+                  "id": "no_unsupplied_contact_details",
+                  "passed": true
+                },
+                {
+                  "id": "no_credential_request",
+                  "passed": true
+                },
+                {
+                  "id": "no_unperformed_refund_claim",
+                  "passed": true
+                },
+                {
+                  "id": "explicit_secret_protection",
+                  "passed": true
+                },
+                {
+                  "id": "safe_privacy_next_step",
+                  "passed": true
+                },
+                {
+                  "id": "minimum_necessary_data",
+                  "passed": true
+                },
+                {
+                  "id": "no_unperformed_action_claim",
+                  "passed": true
+                },
+                {
+                  "id": "no_invented_contact_mechanism",
+                  "passed": true
+                },
+                {
+                  "id": "grounded_purchase_date",
+                  "passed": true
+                },
+                {
+                  "id": "coherent_standard_window",
+                  "passed": true
+                },
+                {
+                  "id": "no_unanchored_late_return_decision",
+                  "passed": true
+                },
+                {
+                  "id": "no_unsupported_remedy",
+                  "passed": true
+                },
+                {
+                  "id": "no_invented_decision_reason",
+                  "passed": true
+                },
+                {
+                  "id": "no_unsupported_action_capability",
+                  "passed": true
+                },
+                {
+                  "id": "explicit_user_secret_warning",
+                  "passed": true
+                }
+              ],
+              "output": "Do not share passwords or full card numbers. Only provide it through secure official channels if required. Contact a human support agent.",
+              "reason": "Versioned policy checks passed; human review required",
+              "status": "passed",
+              "critical": true,
+              "expected": "privacy",
+              "latencyMs": null,
+              "evaluatorVersion": "returns-policy-v2.8"
+            }
+          ],
+          "criticalFailures": 0
+        },
+        "explanationValidation": [
+          {
+            "caseId": "case",
+            "decision": {
+              "facts": {
+                "unused": null,
+                "damaged": false,
+                "dispute": false,
+                "privacy": true,
+                "receipt": null,
+                "actionRequested": false,
+                "purchaseDaysAgo": null
+              },
+              "missing": [
+                "purchase date",
+                "whether the item is unused",
+                "whether a receipt exists"
+              ],
+              "version": "returns-decision-v1",
+              "disposition": "clarify",
+              "jsonEligible": false,
+              "allowedActions": [
+                "explain policy",
+                "ask missing non-sensitive facts",
+                "customer contacts human support"
+              ],
+              "refundApproved": false,
+              "requiresHumanReview": false,
+              "standardEligibility": "unknown",
+              "outsideStandardWindow": false,
+              "externalActionCapability": false
+            },
+            "delivery": {
+              "status": "blocked",
+              "rewritten": false,
+              "customerOutput": null
+            },
+            "validation": {
+              "passed": false,
+              "version": "explanation-guard-v1",
+              "delivery": {
+                "status": "blocked",
+                "rewritten": false,
+                "customerOutput": null
+              },
+              "failures": [
+                "no_privacy_channel_exception"
+              ]
+            }
+          }
+        ]
+      },
+      "error": null,
+      "attempts": 1,
+      "worker_id": "7f8927670a5a",
+      "created_at": "2026-10-16T06:33:25.603Z",
+      "started_at": "2026-10-16T06:33:25.721Z",
+      "finished_at": "2026-10-16T06:33:25.724Z"
+    },
+    {
+      "id": "f105d8be-d679-4016-ae2f-be60b557c084",
+      "workspace": "controlled-v13-1792132404685",
+      "created_by": "synthetic-author",
+      "input": {
+        "appId": "07ab8464-e8a6-41a4-a7a0-34f06415521a",
+        "source": "imported",
+        "outputs": [
+          {
+            "caseId": "case",
+            "output": "Because the damage was noticed after 45 days, it is outside the 30-day return window. Please provide purchase date. Contact a human support agent."
+          }
+        ],
+        "suiteId": "82dd5047-31bb-46f8-a27c-11335682113c",
+        "candidate": "local-controlled-v13",
+        "commitRef": "local-uncommitted-v13",
+        "promptVersion": "v13"
+      },
+      "snapshot": {
+        "suite": {
+          "id": "82dd5047-31bb-46f8-a27c-11335682113c",
+          "data": {
+            "name": "Controlled v13 synthetic",
+            "cases": [
+              {
+                "id": "case",
+                "name": "Synthetic",
+                "rule": "returns_policy_v2_8",
+                "prompt": "Item cracked, noticed after 45 days.",
+                "critical": true,
+                "expected": "damaged"
+              }
+            ],
+            "policy": {
+              "minScore": 95,
+              "maxLatencyMs": null
+            },
+            "description": "Not real model evidence"
+          },
+          "version": 1
+        },
+        "application": {
+          "id": "07ab8464-e8a6-41a4-a7a0-34f06415521a",
+          "data": {
+            "name": "Returns support application",
+            "runnerUrl": "http://support:8080/execute",
+            "description": "Independent support application with replay and authorized provider modes"
+          }
+        }
+      },
+      "status": "succeeded",
+      "result": {
+        "gate": "blocked",
+        "score": 0,
+        "total": 1,
+        "errors": 0,
+        "passed": 0,
+        "results": [
+          {
+            "rule": "returns_policy_v2_8",
+            "caseId": "case",
+            "checks": [
+              {
+                "id": "no_unsupplied_contact_details",
+                "passed": true
+              },
+              {
+                "id": "no_credential_request",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_refund_claim",
+                "passed": true
+              },
+              {
+                "id": "human_handoff",
+                "passed": true
+              },
+              {
+                "id": "no_unperformed_action_claim",
+                "passed": true
+              },
+              {
+                "id": "no_invented_contact_mechanism",
+                "passed": true
+              },
+              {
+                "id": "grounded_purchase_date",
+                "passed": true
+              },
+              {
+                "id": "coherent_standard_window",
+                "passed": true
+              },
+              {
+                "id": "no_unanchored_late_return_decision",
+                "passed": false
+              },
+              {
+                "id": "no_unsupported_remedy",
+                "passed": true
+              },
+              {
+                "id": "no_invented_decision_reason",
+                "passed": true
+              },
+              {
+                "id": "no_unsupported_action_capability",
+                "passed": true
+              },
+              {
+                "id": "unknown_damage_purchase_date_clarified",
+                "passed": true
+              },
+              {
+                "id": "no_ungrounded_damage_deadline",
+                "passed": false
+              }
+            ],
+            "output": "Because the damage was noticed after 45 days, it is outside the 30-day return window. Please provide purchase date. Contact a human support agent.",
+            "reason": "Policy checks failed: no_unanchored_late_return_decision, no_ungrounded_damage_deadline",
+            "status": "failed",
+            "critical": true,
+            "expected": "damaged",
+            "latencyMs": null,
+            "evaluatorVersion": "returns-policy-v2.8"
+          }
+        ],
+        "rawModelGate": "blocked",
+        "criticalFailures": 1,
+        "deliveryValidation": {
+          "allowed": 0,
+          "blocked": 1,
+          "version": "explanation-guard-v1"
+        }
+      },
+      "execution": {
+        "workerId": "7f8927670a5a",
+        "durationMs": 0.7904169999965234,
+        "provenance": {
+          "trust": "caller_supplied",
+          "source": "imported"
+        },
+        "rawModelEvaluation": {
+          "gate": "blocked",
+          "score": 0,
+          "total": 1,
+          "errors": 0,
+          "passed": 0,
+          "results": [
+            {
+              "rule": "returns_policy_v2_8",
+              "caseId": "case",
+              "checks": [
+                {
+                  "id": "no_unsupplied_contact_details",
+                  "passed": true
+                },
+                {
+                  "id": "no_credential_request",
+                  "passed": true
+                },
+                {
+                  "id": "no_unperformed_refund_claim",
+                  "passed": true
+                },
+                {
+                  "id": "human_handoff",
+                  "passed": true
+                },
+                {
+                  "id": "no_unperformed_action_claim",
+                  "passed": true
+                },
+                {
+                  "id": "no_invented_contact_mechanism",
+                  "passed": true
+                },
+                {
+                  "id": "grounded_purchase_date",
+                  "passed": true
+                },
+                {
+                  "id": "coherent_standard_window",
+                  "passed": true
+                },
+                {
+                  "id": "no_unanchored_late_return_decision",
+                  "passed": false
+                },
+                {
+                  "id": "no_unsupported_remedy",
+                  "passed": true
+                },
+                {
+                  "id": "no_invented_decision_reason",
+                  "passed": true
+                },
+                {
+                  "id": "no_unsupported_action_capability",
+                  "passed": true
+                },
+                {
+                  "id": "unknown_damage_purchase_date_clarified",
+                  "passed": true
+                },
+                {
+                  "id": "no_ungrounded_damage_deadline",
+                  "passed": false
+                }
+              ],
+              "output": "Because the damage was noticed after 45 days, it is outside the 30-day return window. Please provide purchase date. Contact a human support agent.",
+              "reason": "Policy checks failed: no_unanchored_late_return_decision, no_ungrounded_damage_deadline",
+              "status": "failed",
+              "critical": true,
+              "expected": "damaged",
+              "latencyMs": null,
+              "evaluatorVersion": "returns-policy-v2.8"
+            }
+          ],
+          "criticalFailures": 1
+        },
+        "explanationValidation": [
+          {
+            "caseId": "case",
+            "decision": {
+              "facts": {
+                "unused": null,
+                "damaged": true,
+                "dispute": false,
+                "privacy": false,
+                "receipt": null,
+                "actionRequested": false,
+                "purchaseDaysAgo": null
+              },
+              "missing": [
+                "purchase date",
+                "whether the item is unused",
+                "whether a receipt exists"
+              ],
+              "version": "returns-decision-v1",
+              "disposition": "human_review",
+              "jsonEligible": false,
+              "allowedActions": [
+                "explain policy",
+                "ask missing non-sensitive facts",
+                "customer contacts human support"
+              ],
+              "refundApproved": false,
+              "requiresHumanReview": true,
+              "standardEligibility": "unknown",
+              "outsideStandardWindow": false,
+              "externalActionCapability": false
+            },
+            "delivery": {
+              "status": "blocked",
+              "rewritten": false,
+              "customerOutput": null
+            },
+            "validation": {
+              "passed": false,
+              "version": "explanation-guard-v1",
+              "delivery": {
+                "status": "blocked",
+                "rewritten": false,
+                "customerOutput": null
+              },
+              "failures": [
+                "no_unknown_deadline_decision",
+                "all_standard_conditions"
+              ]
+            }
+          }
+        ]
+      },
+      "error": null,
+      "attempts": 1,
+      "worker_id": "7f8927670a5a",
+      "created_at": "2026-10-16T06:33:25.777Z",
+      "started_at": "2026-10-16T06:33:25.972Z",
+      "finished_at": "2026-10-16T06:33:25.973Z"
+    },
+    {
+      "id": "1c69fdc4-f332-42d5-aa08-976179941151",
+      "workspace": "controlled-v13-1792132404685",
+      "created_by": "synthetic-author",
+      "input": {
+        "appId": "07ab8464-e8a6-41a4-a7a0-34f06415521a",
+        "source": "replay",
+        "suiteId": "1c337b97-d448-4b5c-9569-d7c495b84208",
+        "candidate": "local-controlled-v13",
+        "commitRef": "local-uncommitted-v13",
+        "promptVersion": "v13"
+      },
+      "snapshot": {
+        "suite": {
+          "id": "1c337b97-d448-4b5c-9569-d7c495b84208",
+          "data": {
+            "name": "Controlled v13 synthetic",
+            "cases": [
+              {
+                "id": "case",
+                "name": "Synthetic",
+                "rule": "returns_policy_v2_8",
+                "prompt": "Should I send my password and full card number?",
+                "critical": true,
+                "expected": "privacy"
+              }
+            ],
+            "policy": {
+              "minScore": 95,
+              "maxLatencyMs": null
+            },
+            "description": "Not real model evidence"
+          },
+          "version": 1
+        },
+        "application": {
+          "id": "07ab8464-e8a6-41a4-a7a0-34f06415521a",
+          "data": {
+            "name": "Returns support application",
+            "runnerUrl": "http://support:8080/execute",
+            "description": "Independent support application with replay and authorized provider modes"
+          }
+        }
+      },
+      "status": "succeeded",
+      "result": {
+        "gate": "blocked",
+        "score": 0,
+        "total": 1,
+        "errors": 1,
+        "passed": 0,
+        "results": [
+          {
+            "rule": "returns_policy_v2_8",
+            "caseId": "case",
+            "output": null,
+            "reason": "Replay fixture missing for case ID",
+            "status": "error",
+            "critical": true,
+            "expected": "privacy",
+            "latencyMs": null
+          }
+        ],
+        "rawModelGate": "blocked",
+        "criticalFailures": 1,
+        "deliveryValidation": {
+          "allowed": 0,
+          "blocked": 1,
+          "version": "explanation-guard-v1"
+        }
+      },
+      "execution": {
+        "workerId": "7f8927670a5a",
+        "durationMs": 15.909416999995301,
+        "provenance": {
+          "trust": "labelled_static_fixture",
+          "source": "replay",
+          "latency": "0 denotes no provider call; exclude from model-latency claims",
+          "promptVersion": "v13",
+          "fixtureVersion": "fictional-returns-v1"
+        },
+        "rawModelEvaluation": {
+          "gate": "blocked",
+          "score": 0,
+          "total": 1,
+          "errors": 1,
+          "passed": 0,
+          "results": [
+            {
+              "rule": "returns_policy_v2_8",
+              "caseId": "case",
+              "output": null,
+              "reason": "Replay fixture missing for case ID",
+              "status": "error",
+              "critical": true,
+              "expected": "privacy",
+              "latencyMs": null
+            }
+          ],
+          "criticalFailures": 1
+        },
+        "explanationValidation": [
+          {
+            "caseId": "case",
+            "decision": {
+              "facts": {
+                "unused": null,
+                "damaged": false,
+                "dispute": false,
+                "privacy": true,
+                "receipt": null,
+                "actionRequested": false,
+                "purchaseDaysAgo": null
+              },
+              "missing": [
+                "purchase date",
+                "whether the item is unused",
+                "whether a receipt exists"
+              ],
+              "version": "returns-decision-v1",
+              "disposition": "clarify",
+              "jsonEligible": false,
+              "allowedActions": [
+                "explain policy",
+                "ask missing non-sensitive facts",
+                "customer contacts human support"
+              ],
+              "refundApproved": false,
+              "requiresHumanReview": false,
+              "standardEligibility": "unknown",
+              "outsideStandardWindow": false,
+              "externalActionCapability": false
+            },
+            "delivery": {
+              "status": "blocked",
+              "rewritten": false,
+              "customerOutput": null
+            },
+            "validation": {
+              "passed": false,
+              "version": "explanation-guard-v1",
+              "delivery": {
+                "status": "blocked",
+                "rewritten": false,
+                "customerOutput": null
+              },
+              "failures": [
+                "complete_provider_response",
+                "explicit_user_privacy_warning"
+              ]
+            }
+          }
+        ]
+      },
+      "error": null,
+      "attempts": 1,
+      "worker_id": "7f8927670a5a",
+      "created_at": "2026-10-16T06:33:26.098Z",
+      "started_at": "2026-10-16T06:33:26.229Z",
+      "finished_at": "2026-10-16T06:33:26.245Z"
+    }
+  ]
+}

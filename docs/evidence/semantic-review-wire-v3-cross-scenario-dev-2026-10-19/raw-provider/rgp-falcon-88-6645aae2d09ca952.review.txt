@@ -1,0 +1,100 @@
+{
+  "ruleResults": [
+    {
+      "ruleId": "STANDARD_POLICY",
+      "status": "passed",
+      "reason": "Response states the standard return policy requiring an unused item within 30 days with a receipt.",
+      "evidence": [
+        {
+          "path": "$.reason",
+          "quote": "The standard return policy requires an unused item within 30 days of purchase and a receipt."
+        }
+      ]
+    },
+    {
+      "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+      "status": "passed",
+      "reason": "Response confirms the purchase was 8 days ago, within the 30‑day window.",
+      "evidence": [
+        {
+          "path": "$.reason",
+          "quote": "The known purchase age of 8 days is within the 30-day window"
+        }
+      ]
+    },
+    {
+      "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+      "status": "passed",
+      "reason": "Response indicates the supplied facts meet the standard return conditions.",
+      "evidence": [
+        {
+          "path": "$.reason",
+          "quote": "the supplied facts meet the standard return conditions"
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+      "status": "passed",
+      "reason": "No external action such as refund processing or ticket creation is claimed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_REFUND_APPROVAL",
+      "status": "passed",
+      "reason": "Response explicitly states that no refund has been approved.",
+      "evidence": [
+        {
+          "path": "$.reason",
+          "quote": "this is not a refund approval"
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_SECRET_REQUEST",
+      "status": "passed",
+      "reason": "No request for passwords or full card numbers is made.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+      "status": "passed",
+      "reason": "No invented data‑handling practices are mentioned.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+      "status": "passed",
+      "reason": "Response does not request receipt contents, copies, or uploads.",
+      "evidence": []
+    },
+    {
+      "ruleId": "JSON_TEXT_CONSISTENCY",
+      "status": "passed",
+      "reason": "JSON fields are consistent; eligible:true aligns with the explanatory reason.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_INTERNAL_ENUM",
+      "status": "passed",
+      "reason": "No internal implementation labels are exposed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+      "status": "passed",
+      "reason": "No invented channel, process, timeline, or follow‑up is presented.",
+      "evidence": []
+    },
+    {
+      "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+      "status": "passed",
+      "reason": "No extra unsupported or unverifiable claims are present.",
+      "evidence": []
+    }
+  ],
+  "contradictions": [],
+  "extraClaims": [],
+  "unverifiableItems": [],
+  "reviewCompletionStatus": "completed"
+}

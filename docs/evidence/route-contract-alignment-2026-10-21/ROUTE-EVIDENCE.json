@@ -1,0 +1,56 @@
+{
+  "at": "2026-10-21T04:13:35.978Z",
+  "files": [
+    {
+      "path": "src/worker.ts",
+      "sha256": "9754e344f759b3914021cd61a172e7094eaaa75c6744aaabd48f8e5f2186c381"
+    },
+    {
+      "path": "src/controlled-evaluation-v17.ts",
+      "sha256": "40c1b48ac85248e96b2c906e1267a1782d597f867021740ebd0656efe302531b"
+    },
+    {
+      "path": "src/evaluator-next-v1.ts",
+      "sha256": "d724a987593d168651816e3335249b79a1a857b4d8427ae24478e247e37c8a1c"
+    },
+    {
+      "path": "src/evaluator-next-v2.ts",
+      "sha256": "25f105c8d1d5c698e1bd26ad9e1e40e0a4191430d72562110f6f83eb207a5bde"
+    },
+    {
+      "path": "src/hybrid-evaluation-v1.ts",
+      "sha256": "b9f71e6049890273f94be77d1e6bf5694cf4e024e0aa87ce90957b08690e2c11"
+    },
+    {
+      "path": "src/semantic-review-wire-v3.ts",
+      "sha256": "a66cd592fed23cbf76033d0ab4a47a4610af509a7e2a16f81af62bbac9817b2f"
+    },
+    {
+      "path": "src/groq-semantic-review-transport-v2.ts",
+      "sha256": "339905c9e034122f0424a6ba3bd10c2fc50a1c953fc7603e7b18a80b000d89ea"
+    },
+    {
+      "path": "src/semantic-review-sources-v1.ts",
+      "sha256": "9a9c33a23274c3efbe3e4896464816d9389bfc75e2d9719be1fb7a4d3b3ed13c"
+    },
+    {
+      "path": "scripts/run-semantic-review-wire-v3-cross-scenario-dev.mjs",
+      "sha256": "a5f83621064ae988839207c5ab00f1ea275548117205cfd4f925beb6e4532a66"
+    },
+    {
+      "path": "src/answer-evaluation-binding-v1.ts",
+      "sha256": "3ec9607513c67d2b35facd1f048cc29025505b9ac2a116826db716516e46d212"
+    },
+    {
+      "path": "tests/answer-evaluation-binding-v1.test.ts",
+      "sha256": "f0364239a7792197115b85c8339ba445211198fc2e285541a144993d9c8fe10a"
+    }
+  ],
+  "formal": "worker -> evaluateControlledV17 -> raw v2.10 + legacy explanation guard + contract guard",
+  "handwritten": "evaluator-next-v1 r3 / evaluator-next-v2 r5 -> scripts and tests only; diagnostic control, no Hybrid fallback",
+  "hybrid": "existing wire v3 runner -> buildSemanticReviewInputV1 -> runDeterministicChecksV1 -> strict schema transport -> deriveSemanticReviewV3 -> validateSemanticReviewV1 -> aggregateHybridEvaluationV1",
+  "newBinding": "Offline packaging helper. Does not activate or retrofit any sealed runner. Future sample preparation uses it before existing Hybrid review.",
+  "shadowOnly": true,
+  "reviewer": "calibration_pending",
+  "noDeliveryActivation": true
+}

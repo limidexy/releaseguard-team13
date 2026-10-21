@@ -1,0 +1,10 @@
+The first verification file, real-v16-2026-10-16T08-50-53.534Z-verification.json,
+records an invalid verifier invocation: it was given the v15 run plan instead of
+the original frozen v3 benchmark plan. Its two failures are therefore invocation
+errors, not failures of the v16 report.
+
+The corrected invocation used the original benchmark plan and produced:
+real-v16-2026-10-16T08-50-53.534Z-verification-1792141145237.json
+
+Corrected result: 8 checks passed, 0 failed. Both files are retained so the
+verification history is not rewritten.

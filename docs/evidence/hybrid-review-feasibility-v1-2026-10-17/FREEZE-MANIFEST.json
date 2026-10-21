@@ -1,0 +1,19 @@
+{
+  "version": "hybrid-review-feasibility-freeze-v1",
+  "frozenAt": "2026-10-17T13:03:09Z",
+  "experimentId": "releaseguard-hybrid-review-feasibility-v1-20261017",
+  "files": [
+    {"path":"src/hybrid-evaluation-v1.ts","sha256":"b9f71e6049890273f94be77d1e6bf5694cf4e024e0aa87ce90957b08690e2c11"},
+    {"path":"src/semantic-review-sources-v1.ts","sha256":"a011329a56b1569bbff4f27ca83b77a2a55676633c7597a988366a18f6ac5d29"},
+    {"path":"src/groq-semantic-review-transport-v1.ts","sha256":"70b146dcb57b50f99a06a59a0b1e0ae80335a3feb42930a1512df9a215c5d3fc"},
+    {"path":"scripts/run-hybrid-review-feasibility-v1.mjs","sha256":"1b901213c353b51d4334776f8fd8303cad6d8261e7c1ca4e55d6105c797c99ed"},
+    {"path":"tests/groq-semantic-review-transport-v1.test.ts","sha256":"e7875ce4b354bb0c5380b639e49f29737ab524c831da0d0f740ada9dae6d0350"},
+    {"path":"tests/hybrid-evaluation-v1.test.ts","sha256":"b19726b4fe09dee7f3b87c4629ec1bbc683701557bf24dd17a0240bc929d22d4"},
+    {"path":"tests/evaluator-next-v1-holdout-v2-fixtures.json","sha256":"9488bb0b955f3fc4036a74009a863cd3f2881ec8d44269310cb8110b5de017bf"},
+    {"path":"docs/evidence/model-v17-real-r1-2026-10-17/plan.json","sha256":"c4eaeccf0e95e11ac1c1780c031e1bd8eca95d5f17c47fe23a4a3d8bf59fea6a"},
+    {"path":"docs/evidence/hybrid-review-feasibility-v1-2026-10-17/AUTHORIZATION.json","sha256":"c6d676abb82d535a0dccf2c3df7edb75b4e217d8c63e7bcfba19228cea78e413"},
+    {"path":"docs/evidence/hybrid-review-feasibility-v1-2026-10-17/FREE-PLAN-CHECK.json","sha256":"320afec94aea252045c27a0ef694c030ca55c8b62dbc5cec289209cce25b5885"},
+    {"path":"docs/evidence/hybrid-review-feasibility-v1-2026-10-17/FROZEN-SAMPLE-SELECTION.json","sha256":"dc7004bcc10ed90a07f31f4020a6fbb53df6d6148d887af3c81921788107d836"},
+    {"path":"docs/evidence/hybrid-review-feasibility-v1-2026-10-17/EXPERIMENT-PLAN.json","sha256":"b9ccb7daf1ad8ed15ee75636ded688a560c1a72555a8c55db523801b0e84377e"}
+  ]
+}

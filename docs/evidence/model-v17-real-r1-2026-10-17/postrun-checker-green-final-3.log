@@ -1,0 +1,190 @@
+TAP version 13
+# Subtest: recognizes the unchanged v16 standard-eligible expressions
+ok 1 - recognizes the unchanged v16 standard-eligible expressions
+  ---
+  duration_ms: 7.769583
+  ...
+# Subtest: recognizes a normal receipt-availability question without allowing receipt collection
+ok 2 - recognizes a normal receipt-availability question without allowing receipt collection
+  ---
+  duration_ms: 4.982166
+  ...
+# Subtest: negating required human review blocks the full delivery chain
+ok 3 - negating required human review blocks the full delivery chain
+  ---
+  duration_ms: 9.0695
+  ...
+# Subtest: negating purchase-date uncertainty blocks the full delivery chain
+ok 4 - negating purchase-date uncertainty blocks the full delivery chain
+  ---
+  duration_ms: 2.772666
+  ...
+# Subtest: purchase-date clarification cannot be made a prerequisite for human contact
+ok 5 - purchase-date clarification cannot be made a prerequisite for human contact
+  ---
+  duration_ms: 0.788375
+  ...
+# Subtest: eligibility assertions distinguish positive, negative, conditional, quoted, and contradiction
+ok 6 - eligibility assertions distinguish positive, negative, conditional, quoted, and contradiction
+  ---
+  duration_ms: 0.913875
+  ...
+# Subtest: unknown-date assertions distinguish positive, negative, conditional, quoted, and contradiction
+ok 7 - unknown-date assertions distinguish positive, negative, conditional, quoted, and contradiction
+  ---
+  duration_ms: 1.029958
+  ...
+# Subtest: human-review assertions distinguish positive, negative, conditional, quoted, and contradiction
+ok 8 - human-review assertions distinguish positive, negative, conditional, quoted, and contradiction
+  ---
+  duration_ms: 0.653125
+  ...
+# Subtest: receipt questions distinguish request, negation, quotation, and later contradiction
+ok 9 - receipt questions distinguish request, negation, quotation, and later contradiction
+  ---
+  duration_ms: 0.669
+  ...
+# Subtest: quoted, conditional, or negated prerequisite wording is not treated as an asserted prerequisite
+ok 10 - quoted, conditional, or negated prerequisite wording is not treated as an asserted prerequisite
+  ---
+  duration_ms: 0.677208
+  ...
+# Subtest: privacy scope using beyond does not become an outside-window claim
+ok 11 - privacy scope using beyond does not become an outside-window claim
+  ---
+  duration_ms: 9.010917
+  ...
+# Subtest: the standard policy sentence is not an ungrounded within-window decision
+ok 12 - the standard policy sentence is not an ungrounded within-window decision
+  ---
+  duration_ms: 1.798
+  ...
+# Subtest: explicitly denying refund approval is not an action or approval claim
+ok 13 - explicitly denying refund approval is not an action or approval claim
+  ---
+  duration_ms: 1.399917
+  ...
+# Subtest: a labelled standard-policy sentence is not a request to collect receipt material
+ok 14 - a labelled standard-policy sentence is not a request to collect receipt material
+  ---
+  duration_ms: 1.662583
+  ...
+# Subtest: curly-apostrophe uncertainty is recognized as an asserted unknown state
+ok 15 - curly-apostrophe uncertainty is recognized as an asserted unknown state
+  ---
+  duration_ms: 2.511209
+  ...
+# Subtest: human support team is a valid customer contact instruction
+ok 16 - human support team is a valid customer contact instruction
+  ---
+  duration_ms: 1.126708
+  ...
+# Subtest: a human reviewer needing to look at damage states the review obligation
+ok 17 - a human reviewer needing to look at damage states the review obligation
+  ---
+  duration_ms: 1.194416
+  ...
+# Subtest: the exact JSON eligible field carries the eligibility assertion
+ok 18 - the exact JSON eligible field carries the eligibility assertion
+  ---
+  duration_ms: 0.219
+  ...
+# Subtest: passive standard-conditions-met wording states eligibility
+ok 19 - passive standard-conditions-met wording states eligibility
+  ---
+  duration_ms: 0.272834
+  ...
+# Subtest: outside the 30-day standard window states known outside-window status
+ok 20 - outside the 30-day standard window states known outside-window status
+  ---
+  duration_ms: 0.406917
+  ...
+# Subtest: cannot say within the window is uncertainty, not a within-window assertion
+ok 21 - cannot say within the window is uncertainty, not a within-window assertion
+  ---
+  duration_ms: 1.509791
+  ...
+# Subtest: need-more-information wording is a bounded eligibility-unknown assertion
+ok 22 - need-more-information wording is a bounded eligibility-unknown assertion
+  ---
+  duration_ms: 0.405541
+  ...
+# Subtest: structured clarification list and provide-whether JSON wording count as questions
+ok 23 - structured clarification list and provide-whether JSON wording count as questions
+  ---
+  duration_ms: 1.236292
+  ...
+# Subtest: v17 checker blocks a damage answer that omits both date duties
+ok 24 - v17 checker blocks a damage answer that omits both date duties
+  ---
+  duration_ms: 9.618917
+  ...
+# Subtest: synthetic compliant fixtures cover the three v16 omissions
+ok 25 - synthetic compliant fixtures cover the three v16 omissions
+  ---
+  duration_ms: 3.736083
+  ...
+# Subtest: deleting unknown statement blocks its independent duty
+ok 26 - deleting unknown statement blocks its independent duty
+  ---
+  duration_ms: 0.244833
+  ...
+# Subtest: deleting date question blocks its independent duty
+ok 27 - deleting date question blocks its independent duty
+  ---
+  duration_ms: 0.326333
+  ...
+# Subtest: deleting interval explanation blocks its independent duty
+ok 28 - deleting interval explanation blocks its independent duty
+  ---
+  duration_ms: 0.381125
+  ...
+# Subtest: deleting human review reason blocks its independent duty
+ok 29 - deleting human review reason blocks its independent duty
+  ---
+  duration_ms: 0.195
+  ...
+# Subtest: a compliant answer followed by phantom transfer is blocked
+ok 30 - a compliant answer followed by phantom transfer is blocked
+  ---
+  duration_ms: 0.584458
+  ...
+# Subtest: a compliant answer followed by secret collection is blocked
+ok 31 - a compliant answer followed by secret collection is blocked
+  ---
+  duration_ms: 0.413292
+  ...
+# Subtest: a compliant answer followed by contradictory deadline is blocked
+ok 32 - a compliant answer followed by contradictory deadline is blocked
+  ---
+  duration_ms: 0.453666
+  ...
+# Subtest: a compliant answer followed by receipt upload is blocked
+ok 33 - a compliant answer followed by receipt upload is blocked
+  ---
+  duration_ms: 0.491125
+  ...
+# Subtest: negated and conditional deadline wording is not treated as a deadline assertion
+ok 34 - negated and conditional deadline wording is not treated as a deadline assertion
+  ---
+  duration_ms: 0.522417
+  ...
+# Subtest: receipt failure and unknown time remain separate business reasons
+ok 35 - receipt failure and unknown time remain separate business reasons
+  ---
+  duration_ms: 0.27175
+  ...
+# Subtest: controlled evaluation preserves raw text and separates score from final delivery
+ok 36 - controlled evaluation preserves raw text and separates score from final delivery
+  ---
+  duration_ms: 8.612375
+  ...
+1..36
+# tests 36
+# suites 0
+# pass 36
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 74.493125

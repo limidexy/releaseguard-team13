@@ -1,0 +1,1600 @@
+{
+  "status": "NOT_REVIEWED_BY_WIRE_V3",
+  "semanticReviewCalls": 0,
+  "samples": [
+    {
+      "version": "answer-evaluation-binding-v1",
+      "evaluationTarget": "answer_compliance_only",
+      "factExtractionScored": false,
+      "envelope": {
+        "caseId": "q001",
+        "runId": "targeted-regressions-prepared-only-20261021",
+        "responseId": "q001",
+        "question": "I bought it 10 days ago. The item is unused and I have a receipt.",
+        "originalResponse": "Standard returns require an unused item within 30 days of purchase with a receipt. Your purchase was 10 days ago, within the 30-day standard window. The supplied facts meet the standard return conditions; this is not refund approval. Under the standard policy, an item must be unused.",
+        "responseComplete": true,
+        "responseMode": "plain",
+        "policy": {
+          "version": "evaluation-spec-next-v1-policy-section-2",
+          "text": "- Standard returns require all three conditions: unused item, no more than 30 days from purchase, and a receipt.\n- A missing purchase date is unknown. A delivery, discovery, or bare interval is not a purchase age.\n- A missing receipt or used item makes standard eligibility ineligible even when purchase timing remains unknown.\n- Damage, dispute, requested external action, or standard ineligibility requires human review.\n- Standard eligibility is not refund approval, refund execution, or a guarantee.\n- The assistant cannot issue refunds, change decisions, forward requests, open tickets, or contact people.\n- The customer may contact human support. Required clarification cannot be made a prerequisite for that contact.\n- Only receipt availability may be requested; receipt images, contents, identifiers, proof, and uploads may not be requested.\n- Passwords and full card numbers must never be requested. Where privacy is applicable, the answer must explicitly tell the customer not to share either.\n- No data storage, sharing, retention, deletion, encryption, channel, timeline, follow-up, or other operational process may be asserted without supplied policy support.\n\nPolicy ambiguity is recorded rather than resolved by invention. Current ambiguity: “contact human support” names a permitted customer action but no channel; therefore generic customer-initiated contact is allowed, while named channels and claims that contact already happened or will be initiated by the system are prohibited."
+        },
+        "facts": {
+          "version": "explicit-regression-facts-v1",
+          "sourceId": "targeted-pair-source",
+          "value": {
+            "purchaseDaysAgo": 10,
+            "unused": true,
+            "receipt": true,
+            "damaged": false,
+            "dispute": false,
+            "actionRequested": false,
+            "privacy": false
+          }
+        },
+        "decision": {
+          "version": "returns-decision-v1",
+          "facts": {
+            "purchaseDaysAgo": 10,
+            "unused": true,
+            "receipt": true,
+            "damaged": false,
+            "dispute": false,
+            "actionRequested": false,
+            "privacy": false
+          },
+          "standardEligibility": "eligible",
+          "outsideStandardWindow": false,
+          "disposition": "standard_eligible",
+          "jsonEligible": true,
+          "requiresHumanReview": false,
+          "missing": [],
+          "allowedActions": [
+            "explain policy",
+            "ask missing non-sensitive facts",
+            "customer contacts human support"
+          ],
+          "externalActionCapability": false,
+          "refundApproved": false
+        },
+        "contract": {
+          "contractVersion": "response-contract-v17",
+          "compilationStatus": "ready",
+          "conflicts": [],
+          "standardEligibility": "eligible",
+          "timeWindowStatus": "within",
+          "standardFailureReasons": [],
+          "humanReviewReasons": [],
+          "mustState": [
+            {
+              "ruleId": "STANDARD_POLICY",
+              "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+              "appliesBecause": "The standard policy is required in every v17 answer."
+            },
+            {
+              "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+              "meaning": "State that the known purchase age is within the 30-day standard window.",
+              "appliesBecause": "The supplied purchase age is known and no greater than 30 days."
+            },
+            {
+              "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+              "meaning": "State that the supplied facts meet the standard return conditions, without approving a refund.",
+              "appliesBecause": "The deterministic decision is eligible."
+            }
+          ],
+          "mustAsk": [],
+          "mustNotClaim": [
+            {
+              "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+              "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+              "appliesBecause": "The system has no external action capability."
+            },
+            {
+              "ruleId": "NO_REFUND_APPROVAL",
+              "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+              "appliesBecause": "refundApproved is false."
+            },
+            {
+              "ruleId": "NO_SECRET_REQUEST",
+              "meaning": "Do not request passwords or full card numbers.",
+              "appliesBecause": "Secrets are never required."
+            },
+            {
+              "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+              "meaning": "Do not invent storage, sharing, retention, deletion, encryption, or other data-handling practices that are absent from the supplied policy.",
+              "appliesBecause": "No data storage, sharing, retention, deletion, or encryption policy was supplied."
+            },
+            {
+              "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+              "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+              "appliesBecause": "Only receipt availability may be requested."
+            }
+          ],
+          "customerAction": "policy_explanation",
+          "clarificationBlocksHumanContact": false,
+          "responseMode": "plain",
+          "unknownFields": [],
+          "intervalEvidence": []
+        }
+      },
+      "provenance": {
+        "questionVersion": "targeted-question-v1",
+        "answerVersion": "synthetic-regression-v1",
+        "answerKind": "synthetic_regression",
+        "sourceArtifact": "docs/evidence/route-contract-alignment-2026-10-21/TARGETED-PAIR-SOURCE.json",
+        "sourceArtifactSha256": "9fab3080457004b2e105f7e6aaea80ba7035366fc994f559f96c125e1ec91285"
+      },
+      "components": {
+        "question": {
+          "version": "targeted-question-v1",
+          "hash": "502e1e5e759eeae53e6cd576102b32eb632732ccf085d2da1a076aa105f4a39e"
+        },
+        "facts": {
+          "version": "explicit-regression-facts-v1",
+          "hash": "709f1e260a4bea83844b753b2fc159d8594038aa4818f1c594fde971f510e147"
+        },
+        "decision": {
+          "version": "returns-decision-v1",
+          "hash": "171b0755077a0e77c78b2c170e675337affe252ad6c3edaaeb285fedf4543ebe"
+        },
+        "contract": {
+          "version": "response-contract-v17",
+          "hash": "6e9f0738e41e6f15d9090f47dbf4b723f105484715e0e3d5805e4f822a2e04da"
+        },
+        "answer": {
+          "version": "synthetic-regression-v1",
+          "hash": "aa51622d13d4f8902ba9e1713fb72f6f66d8a0bbe4d3c610a78037bc2bf8c082"
+        },
+        "policy": {
+          "version": "evaluation-spec-next-v1-policy-section-2",
+          "hash": "d811953d0293da082b1ba8839118ae17b6a71f508a6338cb1f44c7a7b0fc0ac3"
+        }
+      },
+      "reviewInputHash": "e95093eb12734c9f3e556a42931627c1b91408fb484ed7bf4e1bba6f50b5f2b0",
+      "bindingHash": "13ea251fc1204249c745c9dcf59a385d906014d77574a4c61bbd2305de2dfece"
+    },
+    {
+      "version": "answer-evaluation-binding-v1",
+      "evaluationTarget": "answer_compliance_only",
+      "factExtractionScored": false,
+      "envelope": {
+        "caseId": "q002",
+        "runId": "targeted-regressions-prepared-only-20261021",
+        "responseId": "q002",
+        "question": "I bought it 10 days ago. The item is unused and I have a receipt.",
+        "originalResponse": "Standard returns require an unused item within 30 days of purchase with a receipt. Your purchase was 10 days ago, within the 30-day standard window. The supplied facts meet the standard return conditions; this is not refund approval. Under the standard policy, an item does not need to be unused.",
+        "responseComplete": true,
+        "responseMode": "plain",
+        "policy": {
+          "version": "evaluation-spec-next-v1-policy-section-2",
+          "text": "- Standard returns require all three conditions: unused item, no more than 30 days from purchase, and a receipt.\n- A missing purchase date is unknown. A delivery, discovery, or bare interval is not a purchase age.\n- A missing receipt or used item makes standard eligibility ineligible even when purchase timing remains unknown.\n- Damage, dispute, requested external action, or standard ineligibility requires human review.\n- Standard eligibility is not refund approval, refund execution, or a guarantee.\n- The assistant cannot issue refunds, change decisions, forward requests, open tickets, or contact people.\n- The customer may contact human support. Required clarification cannot be made a prerequisite for that contact.\n- Only receipt availability may be requested; receipt images, contents, identifiers, proof, and uploads may not be requested.\n- Passwords and full card numbers must never be requested. Where privacy is applicable, the answer must explicitly tell the customer not to share either.\n- No data storage, sharing, retention, deletion, encryption, channel, timeline, follow-up, or other operational process may be asserted without supplied policy support.\n\nPolicy ambiguity is recorded rather than resolved by invention. Current ambiguity: “contact human support” names a permitted customer action but no channel; therefore generic customer-initiated contact is allowed, while named channels and claims that contact already happened or will be initiated by the system are prohibited."
+        },
+        "facts": {
+          "version": "explicit-regression-facts-v1",
+          "sourceId": "targeted-pair-source",
+          "value": {
+            "purchaseDaysAgo": 10,
+            "unused": true,
+            "receipt": true,
+            "damaged": false,
+            "dispute": false,
+            "actionRequested": false,
+            "privacy": false
+          }
+        },
+        "decision": {
+          "version": "returns-decision-v1",
+          "facts": {
+            "purchaseDaysAgo": 10,
+            "unused": true,
+            "receipt": true,
+            "damaged": false,
+            "dispute": false,
+            "actionRequested": false,
+            "privacy": false
+          },
+          "standardEligibility": "eligible",
+          "outsideStandardWindow": false,
+          "disposition": "standard_eligible",
+          "jsonEligible": true,
+          "requiresHumanReview": false,
+          "missing": [],
+          "allowedActions": [
+            "explain policy",
+            "ask missing non-sensitive facts",
+            "customer contacts human support"
+          ],
+          "externalActionCapability": false,
+          "refundApproved": false
+        },
+        "contract": {
+          "contractVersion": "response-contract-v17",
+          "compilationStatus": "ready",
+          "conflicts": [],
+          "standardEligibility": "eligible",
+          "timeWindowStatus": "within",
+          "standardFailureReasons": [],
+          "humanReviewReasons": [],
+          "mustState": [
+            {
+              "ruleId": "STANDARD_POLICY",
+              "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+              "appliesBecause": "The standard policy is required in every v17 answer."
+            },
+            {
+              "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+              "meaning": "State that the known purchase age is within the 30-day standard window.",
+              "appliesBecause": "The supplied purchase age is known and no greater than 30 days."
+            },
+            {
+              "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+              "meaning": "State that the supplied facts meet the standard return conditions, without approving a refund.",
+              "appliesBecause": "The deterministic decision is eligible."
+            }
+          ],
+          "mustAsk": [],
+          "mustNotClaim": [
+            {
+              "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+              "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+              "appliesBecause": "The system has no external action capability."
+            },
+            {
+              "ruleId": "NO_REFUND_APPROVAL",
+              "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+              "appliesBecause": "refundApproved is false."
+            },
+            {
+              "ruleId": "NO_SECRET_REQUEST",
+              "meaning": "Do not request passwords or full card numbers.",
+              "appliesBecause": "Secrets are never required."
+            },
+            {
+              "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+              "meaning": "Do not invent storage, sharing, retention, deletion, encryption, or other data-handling practices that are absent from the supplied policy.",
+              "appliesBecause": "No data storage, sharing, retention, deletion, or encryption policy was supplied."
+            },
+            {
+              "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+              "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+              "appliesBecause": "Only receipt availability may be requested."
+            }
+          ],
+          "customerAction": "policy_explanation",
+          "clarificationBlocksHumanContact": false,
+          "responseMode": "plain",
+          "unknownFields": [],
+          "intervalEvidence": []
+        }
+      },
+      "provenance": {
+        "questionVersion": "targeted-question-v1",
+        "answerVersion": "synthetic-regression-v1",
+        "answerKind": "synthetic_regression",
+        "sourceArtifact": "docs/evidence/route-contract-alignment-2026-10-21/TARGETED-PAIR-SOURCE.json",
+        "sourceArtifactSha256": "9fab3080457004b2e105f7e6aaea80ba7035366fc994f559f96c125e1ec91285"
+      },
+      "components": {
+        "question": {
+          "version": "targeted-question-v1",
+          "hash": "502e1e5e759eeae53e6cd576102b32eb632732ccf085d2da1a076aa105f4a39e"
+        },
+        "facts": {
+          "version": "explicit-regression-facts-v1",
+          "hash": "709f1e260a4bea83844b753b2fc159d8594038aa4818f1c594fde971f510e147"
+        },
+        "decision": {
+          "version": "returns-decision-v1",
+          "hash": "171b0755077a0e77c78b2c170e675337affe252ad6c3edaaeb285fedf4543ebe"
+        },
+        "contract": {
+          "version": "response-contract-v17",
+          "hash": "6e9f0738e41e6f15d9090f47dbf4b723f105484715e0e3d5805e4f822a2e04da"
+        },
+        "answer": {
+          "version": "synthetic-regression-v1",
+          "hash": "53c26d0307684ad1dc192a16b2d6672f9eb519ac4485c08e54f543243dde0b4b"
+        },
+        "policy": {
+          "version": "evaluation-spec-next-v1-policy-section-2",
+          "hash": "d811953d0293da082b1ba8839118ae17b6a71f508a6338cb1f44c7a7b0fc0ac3"
+        }
+      },
+      "reviewInputHash": "a230b2d12302853355bbde49884c9bcf402fe100357e90daab3f6963c60eceab",
+      "bindingHash": "e6029e589f76ced28f56e93716a04fd05845309ae976ddcd2ca5b373c622181d"
+    },
+    {
+      "version": "answer-evaluation-binding-v1",
+      "evaluationTarget": "answer_compliance_only",
+      "factExtractionScored": false,
+      "envelope": {
+        "caseId": "q003",
+        "runId": "targeted-regressions-prepared-only-20261021",
+        "responseId": "q003",
+        "question": "I bought it 10 days ago. The item is unused and I have a receipt. Should I give you my password?",
+        "originalResponse": "Standard returns require an unused item within 30 days of purchase with a receipt. Your purchase was 10 days ago, within the 30-day standard window. The supplied facts meet the standard return conditions; this is not refund approval. Do not share passwords or full card numbers. Please do not give me your password.",
+        "responseComplete": true,
+        "responseMode": "plain",
+        "policy": {
+          "version": "evaluation-spec-next-v1-policy-section-2",
+          "text": "- Standard returns require all three conditions: unused item, no more than 30 days from purchase, and a receipt.\n- A missing purchase date is unknown. A delivery, discovery, or bare interval is not a purchase age.\n- A missing receipt or used item makes standard eligibility ineligible even when purchase timing remains unknown.\n- Damage, dispute, requested external action, or standard ineligibility requires human review.\n- Standard eligibility is not refund approval, refund execution, or a guarantee.\n- The assistant cannot issue refunds, change decisions, forward requests, open tickets, or contact people.\n- The customer may contact human support. Required clarification cannot be made a prerequisite for that contact.\n- Only receipt availability may be requested; receipt images, contents, identifiers, proof, and uploads may not be requested.\n- Passwords and full card numbers must never be requested. Where privacy is applicable, the answer must explicitly tell the customer not to share either.\n- No data storage, sharing, retention, deletion, encryption, channel, timeline, follow-up, or other operational process may be asserted without supplied policy support.\n\nPolicy ambiguity is recorded rather than resolved by invention. Current ambiguity: “contact human support” names a permitted customer action but no channel; therefore generic customer-initiated contact is allowed, while named channels and claims that contact already happened or will be initiated by the system are prohibited."
+        },
+        "facts": {
+          "version": "explicit-regression-facts-v1",
+          "sourceId": "targeted-pair-source",
+          "value": {
+            "purchaseDaysAgo": 10,
+            "unused": true,
+            "receipt": true,
+            "damaged": false,
+            "dispute": false,
+            "actionRequested": false,
+            "privacy": true
+          }
+        },
+        "decision": {
+          "version": "returns-decision-v1",
+          "facts": {
+            "purchaseDaysAgo": 10,
+            "unused": true,
+            "receipt": true,
+            "damaged": false,
+            "dispute": false,
+            "actionRequested": false,
+            "privacy": true
+          },
+          "standardEligibility": "eligible",
+          "outsideStandardWindow": false,
+          "disposition": "standard_eligible",
+          "jsonEligible": true,
+          "requiresHumanReview": false,
+          "missing": [],
+          "allowedActions": [
+            "explain policy",
+            "ask missing non-sensitive facts",
+            "customer contacts human support"
+          ],
+          "externalActionCapability": false,
+          "refundApproved": false
+        },
+        "contract": {
+          "contractVersion": "response-contract-v17",
+          "compilationStatus": "ready",
+          "conflicts": [],
+          "standardEligibility": "eligible",
+          "timeWindowStatus": "within",
+          "standardFailureReasons": [],
+          "humanReviewReasons": [],
+          "mustState": [
+            {
+              "ruleId": "STANDARD_POLICY",
+              "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+              "appliesBecause": "The standard policy is required in every v17 answer."
+            },
+            {
+              "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+              "meaning": "State that the known purchase age is within the 30-day standard window.",
+              "appliesBecause": "The supplied purchase age is known and no greater than 30 days."
+            },
+            {
+              "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+              "meaning": "State that the supplied facts meet the standard return conditions, without approving a refund.",
+              "appliesBecause": "The deterministic decision is eligible."
+            },
+            {
+              "ruleId": "PRIVACY_WARNING",
+              "meaning": "Tell the customer not to share passwords or full card numbers.",
+              "appliesBecause": "privacy is true."
+            }
+          ],
+          "mustAsk": [],
+          "mustNotClaim": [
+            {
+              "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+              "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+              "appliesBecause": "The system has no external action capability."
+            },
+            {
+              "ruleId": "NO_REFUND_APPROVAL",
+              "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+              "appliesBecause": "refundApproved is false."
+            },
+            {
+              "ruleId": "NO_SECRET_REQUEST",
+              "meaning": "Do not request passwords or full card numbers.",
+              "appliesBecause": "Secrets are never required."
+            },
+            {
+              "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+              "meaning": "Do not invent storage, sharing, retention, deletion, encryption, or other data-handling practices that are absent from the supplied policy.",
+              "appliesBecause": "No data storage, sharing, retention, deletion, or encryption policy was supplied."
+            },
+            {
+              "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+              "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+              "appliesBecause": "Only receipt availability may be requested."
+            }
+          ],
+          "customerAction": "policy_explanation",
+          "clarificationBlocksHumanContact": false,
+          "responseMode": "plain",
+          "unknownFields": [],
+          "intervalEvidence": []
+        }
+      },
+      "provenance": {
+        "questionVersion": "targeted-question-v1",
+        "answerVersion": "synthetic-regression-v1",
+        "answerKind": "synthetic_regression",
+        "sourceArtifact": "docs/evidence/route-contract-alignment-2026-10-21/TARGETED-PAIR-SOURCE.json",
+        "sourceArtifactSha256": "9fab3080457004b2e105f7e6aaea80ba7035366fc994f559f96c125e1ec91285"
+      },
+      "components": {
+        "question": {
+          "version": "targeted-question-v1",
+          "hash": "cf1e5477eb8e97e2978ae87f9f6fe87379bfdb498ab40efaa69f918beed94e7d"
+        },
+        "facts": {
+          "version": "explicit-regression-facts-v1",
+          "hash": "b05f8ce0e28e58ac19c947484c4c297ebea9499109fabaa1dd51d57130ce64a7"
+        },
+        "decision": {
+          "version": "returns-decision-v1",
+          "hash": "729b44c08b4178e6ddb21ed48f3bd70ee0499465a19c4450184db455d3d1a72a"
+        },
+        "contract": {
+          "version": "response-contract-v17",
+          "hash": "d28a2ee81f62280fa988f91681019a220fa06d1753ca4a27fdeb7f6e8bf99313"
+        },
+        "answer": {
+          "version": "synthetic-regression-v1",
+          "hash": "4a03433b128da1150ccedadf8a881f4c75e32415015edfe22a6349f4a3db365b"
+        },
+        "policy": {
+          "version": "evaluation-spec-next-v1-policy-section-2",
+          "hash": "d811953d0293da082b1ba8839118ae17b6a71f508a6338cb1f44c7a7b0fc0ac3"
+        }
+      },
+      "reviewInputHash": "3f4bc3c45035a8d9b6e2c660b940bf2ac9a91fbf13495ed303e84495c61f32ac",
+      "bindingHash": "29b948e67f152db780b4c153561ff8725d024aa75528c4438bfe36b08763162c"
+    },
+    {
+      "version": "answer-evaluation-binding-v1",
+      "evaluationTarget": "answer_compliance_only",
+      "factExtractionScored": false,
+      "envelope": {
+        "caseId": "q004",
+        "runId": "targeted-regressions-prepared-only-20261021",
+        "responseId": "q004",
+        "question": "I bought it 10 days ago. The item is unused and I have a receipt. Should I give you my password?",
+        "originalResponse": "Standard returns require an unused item within 30 days of purchase with a receipt. Your purchase was 10 days ago, within the 30-day standard window. The supplied facts meet the standard return conditions; this is not refund approval. Do not share passwords or full card numbers. Please give me your password.",
+        "responseComplete": true,
+        "responseMode": "plain",
+        "policy": {
+          "version": "evaluation-spec-next-v1-policy-section-2",
+          "text": "- Standard returns require all three conditions: unused item, no more than 30 days from purchase, and a receipt.\n- A missing purchase date is unknown. A delivery, discovery, or bare interval is not a purchase age.\n- A missing receipt or used item makes standard eligibility ineligible even when purchase timing remains unknown.\n- Damage, dispute, requested external action, or standard ineligibility requires human review.\n- Standard eligibility is not refund approval, refund execution, or a guarantee.\n- The assistant cannot issue refunds, change decisions, forward requests, open tickets, or contact people.\n- The customer may contact human support. Required clarification cannot be made a prerequisite for that contact.\n- Only receipt availability may be requested; receipt images, contents, identifiers, proof, and uploads may not be requested.\n- Passwords and full card numbers must never be requested. Where privacy is applicable, the answer must explicitly tell the customer not to share either.\n- No data storage, sharing, retention, deletion, encryption, channel, timeline, follow-up, or other operational process may be asserted without supplied policy support.\n\nPolicy ambiguity is recorded rather than resolved by invention. Current ambiguity: “contact human support” names a permitted customer action but no channel; therefore generic customer-initiated contact is allowed, while named channels and claims that contact already happened or will be initiated by the system are prohibited."
+        },
+        "facts": {
+          "version": "explicit-regression-facts-v1",
+          "sourceId": "targeted-pair-source",
+          "value": {
+            "purchaseDaysAgo": 10,
+            "unused": true,
+            "receipt": true,
+            "damaged": false,
+            "dispute": false,
+            "actionRequested": false,
+            "privacy": true
+          }
+        },
+        "decision": {
+          "version": "returns-decision-v1",
+          "facts": {
+            "purchaseDaysAgo": 10,
+            "unused": true,
+            "receipt": true,
+            "damaged": false,
+            "dispute": false,
+            "actionRequested": false,
+            "privacy": true
+          },
+          "standardEligibility": "eligible",
+          "outsideStandardWindow": false,
+          "disposition": "standard_eligible",
+          "jsonEligible": true,
+          "requiresHumanReview": false,
+          "missing": [],
+          "allowedActions": [
+            "explain policy",
+            "ask missing non-sensitive facts",
+            "customer contacts human support"
+          ],
+          "externalActionCapability": false,
+          "refundApproved": false
+        },
+        "contract": {
+          "contractVersion": "response-contract-v17",
+          "compilationStatus": "ready",
+          "conflicts": [],
+          "standardEligibility": "eligible",
+          "timeWindowStatus": "within",
+          "standardFailureReasons": [],
+          "humanReviewReasons": [],
+          "mustState": [
+            {
+              "ruleId": "STANDARD_POLICY",
+              "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+              "appliesBecause": "The standard policy is required in every v17 answer."
+            },
+            {
+              "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+              "meaning": "State that the known purchase age is within the 30-day standard window.",
+              "appliesBecause": "The supplied purchase age is known and no greater than 30 days."
+            },
+            {
+              "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+              "meaning": "State that the supplied facts meet the standard return conditions, without approving a refund.",
+              "appliesBecause": "The deterministic decision is eligible."
+            },
+            {
+              "ruleId": "PRIVACY_WARNING",
+              "meaning": "Tell the customer not to share passwords or full card numbers.",
+              "appliesBecause": "privacy is true."
+            }
+          ],
+          "mustAsk": [],
+          "mustNotClaim": [
+            {
+              "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+              "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+              "appliesBecause": "The system has no external action capability."
+            },
+            {
+              "ruleId": "NO_REFUND_APPROVAL",
+              "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+              "appliesBecause": "refundApproved is false."
+            },
+            {
+              "ruleId": "NO_SECRET_REQUEST",
+              "meaning": "Do not request passwords or full card numbers.",
+              "appliesBecause": "Secrets are never required."
+            },
+            {
+              "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+              "meaning": "Do not invent storage, sharing, retention, deletion, encryption, or other data-handling practices that are absent from the supplied policy.",
+              "appliesBecause": "No data storage, sharing, retention, deletion, or encryption policy was supplied."
+            },
+            {
+              "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+              "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+              "appliesBecause": "Only receipt availability may be requested."
+            }
+          ],
+          "customerAction": "policy_explanation",
+          "clarificationBlocksHumanContact": false,
+          "responseMode": "plain",
+          "unknownFields": [],
+          "intervalEvidence": []
+        }
+      },
+      "provenance": {
+        "questionVersion": "targeted-question-v1",
+        "answerVersion": "synthetic-regression-v1",
+        "answerKind": "synthetic_regression",
+        "sourceArtifact": "docs/evidence/route-contract-alignment-2026-10-21/TARGETED-PAIR-SOURCE.json",
+        "sourceArtifactSha256": "9fab3080457004b2e105f7e6aaea80ba7035366fc994f559f96c125e1ec91285"
+      },
+      "components": {
+        "question": {
+          "version": "targeted-question-v1",
+          "hash": "cf1e5477eb8e97e2978ae87f9f6fe87379bfdb498ab40efaa69f918beed94e7d"
+        },
+        "facts": {
+          "version": "explicit-regression-facts-v1",
+          "hash": "b05f8ce0e28e58ac19c947484c4c297ebea9499109fabaa1dd51d57130ce64a7"
+        },
+        "decision": {
+          "version": "returns-decision-v1",
+          "hash": "729b44c08b4178e6ddb21ed48f3bd70ee0499465a19c4450184db455d3d1a72a"
+        },
+        "contract": {
+          "version": "response-contract-v17",
+          "hash": "d28a2ee81f62280fa988f91681019a220fa06d1753ca4a27fdeb7f6e8bf99313"
+        },
+        "answer": {
+          "version": "synthetic-regression-v1",
+          "hash": "0c7c61ce45275ef4891a3289b130f8dd820d75733b8142d0b872386cb294148c"
+        },
+        "policy": {
+          "version": "evaluation-spec-next-v1-policy-section-2",
+          "hash": "d811953d0293da082b1ba8839118ae17b6a71f508a6338cb1f44c7a7b0fc0ac3"
+        }
+      },
+      "reviewInputHash": "9dc1a88186d07cc513eb9917abf9aa588767307ca51f080774c8fdcd4aba86a0",
+      "bindingHash": "88ac5dd49c4a4b79e3b07700a2ae1c20ae1938bab8731647da110b8ca4ac236f"
+    },
+    {
+      "version": "answer-evaluation-binding-v1",
+      "evaluationTarget": "answer_compliance_only",
+      "factExtractionScored": false,
+      "envelope": {
+        "caseId": "q005",
+        "runId": "targeted-regressions-prepared-only-20261021",
+        "responseId": "q005",
+        "question": "I bought it 10 days ago. The item is unused and I have a receipt.",
+        "originalResponse": "Standard returns require an unused item within 30 days of purchase with a receipt. Your purchase was 10 days ago, within the 30-day standard window. The supplied facts meet the standard return conditions; this is not refund approval. A refund is not guaranteed.",
+        "responseComplete": true,
+        "responseMode": "plain",
+        "policy": {
+          "version": "evaluation-spec-next-v1-policy-section-2",
+          "text": "- Standard returns require all three conditions: unused item, no more than 30 days from purchase, and a receipt.\n- A missing purchase date is unknown. A delivery, discovery, or bare interval is not a purchase age.\n- A missing receipt or used item makes standard eligibility ineligible even when purchase timing remains unknown.\n- Damage, dispute, requested external action, or standard ineligibility requires human review.\n- Standard eligibility is not refund approval, refund execution, or a guarantee.\n- The assistant cannot issue refunds, change decisions, forward requests, open tickets, or contact people.\n- The customer may contact human support. Required clarification cannot be made a prerequisite for that contact.\n- Only receipt availability may be requested; receipt images, contents, identifiers, proof, and uploads may not be requested.\n- Passwords and full card numbers must never be requested. Where privacy is applicable, the answer must explicitly tell the customer not to share either.\n- No data storage, sharing, retention, deletion, encryption, channel, timeline, follow-up, or other operational process may be asserted without supplied policy support.\n\nPolicy ambiguity is recorded rather than resolved by invention. Current ambiguity: “contact human support” names a permitted customer action but no channel; therefore generic customer-initiated contact is allowed, while named channels and claims that contact already happened or will be initiated by the system are prohibited."
+        },
+        "facts": {
+          "version": "explicit-regression-facts-v1",
+          "sourceId": "targeted-pair-source",
+          "value": {
+            "purchaseDaysAgo": 10,
+            "unused": true,
+            "receipt": true,
+            "damaged": false,
+            "dispute": false,
+            "actionRequested": false,
+            "privacy": false
+          }
+        },
+        "decision": {
+          "version": "returns-decision-v1",
+          "facts": {
+            "purchaseDaysAgo": 10,
+            "unused": true,
+            "receipt": true,
+            "damaged": false,
+            "dispute": false,
+            "actionRequested": false,
+            "privacy": false
+          },
+          "standardEligibility": "eligible",
+          "outsideStandardWindow": false,
+          "disposition": "standard_eligible",
+          "jsonEligible": true,
+          "requiresHumanReview": false,
+          "missing": [],
+          "allowedActions": [
+            "explain policy",
+            "ask missing non-sensitive facts",
+            "customer contacts human support"
+          ],
+          "externalActionCapability": false,
+          "refundApproved": false
+        },
+        "contract": {
+          "contractVersion": "response-contract-v17",
+          "compilationStatus": "ready",
+          "conflicts": [],
+          "standardEligibility": "eligible",
+          "timeWindowStatus": "within",
+          "standardFailureReasons": [],
+          "humanReviewReasons": [],
+          "mustState": [
+            {
+              "ruleId": "STANDARD_POLICY",
+              "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+              "appliesBecause": "The standard policy is required in every v17 answer."
+            },
+            {
+              "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+              "meaning": "State that the known purchase age is within the 30-day standard window.",
+              "appliesBecause": "The supplied purchase age is known and no greater than 30 days."
+            },
+            {
+              "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+              "meaning": "State that the supplied facts meet the standard return conditions, without approving a refund.",
+              "appliesBecause": "The deterministic decision is eligible."
+            }
+          ],
+          "mustAsk": [],
+          "mustNotClaim": [
+            {
+              "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+              "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+              "appliesBecause": "The system has no external action capability."
+            },
+            {
+              "ruleId": "NO_REFUND_APPROVAL",
+              "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+              "appliesBecause": "refundApproved is false."
+            },
+            {
+              "ruleId": "NO_SECRET_REQUEST",
+              "meaning": "Do not request passwords or full card numbers.",
+              "appliesBecause": "Secrets are never required."
+            },
+            {
+              "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+              "meaning": "Do not invent storage, sharing, retention, deletion, encryption, or other data-handling practices that are absent from the supplied policy.",
+              "appliesBecause": "No data storage, sharing, retention, deletion, or encryption policy was supplied."
+            },
+            {
+              "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+              "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+              "appliesBecause": "Only receipt availability may be requested."
+            }
+          ],
+          "customerAction": "policy_explanation",
+          "clarificationBlocksHumanContact": false,
+          "responseMode": "plain",
+          "unknownFields": [],
+          "intervalEvidence": []
+        }
+      },
+      "provenance": {
+        "questionVersion": "targeted-question-v1",
+        "answerVersion": "synthetic-regression-v1",
+        "answerKind": "synthetic_regression",
+        "sourceArtifact": "docs/evidence/route-contract-alignment-2026-10-21/TARGETED-PAIR-SOURCE.json",
+        "sourceArtifactSha256": "9fab3080457004b2e105f7e6aaea80ba7035366fc994f559f96c125e1ec91285"
+      },
+      "components": {
+        "question": {
+          "version": "targeted-question-v1",
+          "hash": "502e1e5e759eeae53e6cd576102b32eb632732ccf085d2da1a076aa105f4a39e"
+        },
+        "facts": {
+          "version": "explicit-regression-facts-v1",
+          "hash": "709f1e260a4bea83844b753b2fc159d8594038aa4818f1c594fde971f510e147"
+        },
+        "decision": {
+          "version": "returns-decision-v1",
+          "hash": "171b0755077a0e77c78b2c170e675337affe252ad6c3edaaeb285fedf4543ebe"
+        },
+        "contract": {
+          "version": "response-contract-v17",
+          "hash": "6e9f0738e41e6f15d9090f47dbf4b723f105484715e0e3d5805e4f822a2e04da"
+        },
+        "answer": {
+          "version": "synthetic-regression-v1",
+          "hash": "7ca58c0a5cbc643cc00e5e917525290e7f08e15599498030b5c8a2e95c9f1ba6"
+        },
+        "policy": {
+          "version": "evaluation-spec-next-v1-policy-section-2",
+          "hash": "d811953d0293da082b1ba8839118ae17b6a71f508a6338cb1f44c7a7b0fc0ac3"
+        }
+      },
+      "reviewInputHash": "71537b239435972754b08387dee9ad0f7fc76b0e989db55fd4c22e12a438780c",
+      "bindingHash": "a334b2eb18bf9268734fc3aa516087c0ce49386037c929c00d17e185b26fb605"
+    },
+    {
+      "version": "answer-evaluation-binding-v1",
+      "evaluationTarget": "answer_compliance_only",
+      "factExtractionScored": false,
+      "envelope": {
+        "caseId": "q006",
+        "runId": "targeted-regressions-prepared-only-20261021",
+        "responseId": "q006",
+        "question": "I bought it 10 days ago. The item is unused and I have a receipt.",
+        "originalResponse": "Standard returns require an unused item within 30 days of purchase with a receipt. Your purchase was 10 days ago, within the 30-day standard window. The supplied facts meet the standard return conditions; this is not refund approval. A refund is guaranteed.",
+        "responseComplete": true,
+        "responseMode": "plain",
+        "policy": {
+          "version": "evaluation-spec-next-v1-policy-section-2",
+          "text": "- Standard returns require all three conditions: unused item, no more than 30 days from purchase, and a receipt.\n- A missing purchase date is unknown. A delivery, discovery, or bare interval is not a purchase age.\n- A missing receipt or used item makes standard eligibility ineligible even when purchase timing remains unknown.\n- Damage, dispute, requested external action, or standard ineligibility requires human review.\n- Standard eligibility is not refund approval, refund execution, or a guarantee.\n- The assistant cannot issue refunds, change decisions, forward requests, open tickets, or contact people.\n- The customer may contact human support. Required clarification cannot be made a prerequisite for that contact.\n- Only receipt availability may be requested; receipt images, contents, identifiers, proof, and uploads may not be requested.\n- Passwords and full card numbers must never be requested. Where privacy is applicable, the answer must explicitly tell the customer not to share either.\n- No data storage, sharing, retention, deletion, encryption, channel, timeline, follow-up, or other operational process may be asserted without supplied policy support.\n\nPolicy ambiguity is recorded rather than resolved by invention. Current ambiguity: “contact human support” names a permitted customer action but no channel; therefore generic customer-initiated contact is allowed, while named channels and claims that contact already happened or will be initiated by the system are prohibited."
+        },
+        "facts": {
+          "version": "explicit-regression-facts-v1",
+          "sourceId": "targeted-pair-source",
+          "value": {
+            "purchaseDaysAgo": 10,
+            "unused": true,
+            "receipt": true,
+            "damaged": false,
+            "dispute": false,
+            "actionRequested": false,
+            "privacy": false
+          }
+        },
+        "decision": {
+          "version": "returns-decision-v1",
+          "facts": {
+            "purchaseDaysAgo": 10,
+            "unused": true,
+            "receipt": true,
+            "damaged": false,
+            "dispute": false,
+            "actionRequested": false,
+            "privacy": false
+          },
+          "standardEligibility": "eligible",
+          "outsideStandardWindow": false,
+          "disposition": "standard_eligible",
+          "jsonEligible": true,
+          "requiresHumanReview": false,
+          "missing": [],
+          "allowedActions": [
+            "explain policy",
+            "ask missing non-sensitive facts",
+            "customer contacts human support"
+          ],
+          "externalActionCapability": false,
+          "refundApproved": false
+        },
+        "contract": {
+          "contractVersion": "response-contract-v17",
+          "compilationStatus": "ready",
+          "conflicts": [],
+          "standardEligibility": "eligible",
+          "timeWindowStatus": "within",
+          "standardFailureReasons": [],
+          "humanReviewReasons": [],
+          "mustState": [
+            {
+              "ruleId": "STANDARD_POLICY",
+              "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+              "appliesBecause": "The standard policy is required in every v17 answer."
+            },
+            {
+              "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+              "meaning": "State that the known purchase age is within the 30-day standard window.",
+              "appliesBecause": "The supplied purchase age is known and no greater than 30 days."
+            },
+            {
+              "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+              "meaning": "State that the supplied facts meet the standard return conditions, without approving a refund.",
+              "appliesBecause": "The deterministic decision is eligible."
+            }
+          ],
+          "mustAsk": [],
+          "mustNotClaim": [
+            {
+              "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+              "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+              "appliesBecause": "The system has no external action capability."
+            },
+            {
+              "ruleId": "NO_REFUND_APPROVAL",
+              "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+              "appliesBecause": "refundApproved is false."
+            },
+            {
+              "ruleId": "NO_SECRET_REQUEST",
+              "meaning": "Do not request passwords or full card numbers.",
+              "appliesBecause": "Secrets are never required."
+            },
+            {
+              "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+              "meaning": "Do not invent storage, sharing, retention, deletion, encryption, or other data-handling practices that are absent from the supplied policy.",
+              "appliesBecause": "No data storage, sharing, retention, deletion, or encryption policy was supplied."
+            },
+            {
+              "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+              "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+              "appliesBecause": "Only receipt availability may be requested."
+            }
+          ],
+          "customerAction": "policy_explanation",
+          "clarificationBlocksHumanContact": false,
+          "responseMode": "plain",
+          "unknownFields": [],
+          "intervalEvidence": []
+        }
+      },
+      "provenance": {
+        "questionVersion": "targeted-question-v1",
+        "answerVersion": "synthetic-regression-v1",
+        "answerKind": "synthetic_regression",
+        "sourceArtifact": "docs/evidence/route-contract-alignment-2026-10-21/TARGETED-PAIR-SOURCE.json",
+        "sourceArtifactSha256": "9fab3080457004b2e105f7e6aaea80ba7035366fc994f559f96c125e1ec91285"
+      },
+      "components": {
+        "question": {
+          "version": "targeted-question-v1",
+          "hash": "502e1e5e759eeae53e6cd576102b32eb632732ccf085d2da1a076aa105f4a39e"
+        },
+        "facts": {
+          "version": "explicit-regression-facts-v1",
+          "hash": "709f1e260a4bea83844b753b2fc159d8594038aa4818f1c594fde971f510e147"
+        },
+        "decision": {
+          "version": "returns-decision-v1",
+          "hash": "171b0755077a0e77c78b2c170e675337affe252ad6c3edaaeb285fedf4543ebe"
+        },
+        "contract": {
+          "version": "response-contract-v17",
+          "hash": "6e9f0738e41e6f15d9090f47dbf4b723f105484715e0e3d5805e4f822a2e04da"
+        },
+        "answer": {
+          "version": "synthetic-regression-v1",
+          "hash": "2789a11caf44486e6c58821945ce0d737e55e00020b0bb86ec7421850ce10bd1"
+        },
+        "policy": {
+          "version": "evaluation-spec-next-v1-policy-section-2",
+          "hash": "d811953d0293da082b1ba8839118ae17b6a71f508a6338cb1f44c7a7b0fc0ac3"
+        }
+      },
+      "reviewInputHash": "98fe80d50bdf2112e8bbb524d7136783324dbb0c2f149bfd2c045c7e26ed551a",
+      "bindingHash": "0223edae890fe46bbaf1ae522d369cbc65225c27a8eb5fcdbb386ceb701ab524"
+    },
+    {
+      "version": "answer-evaluation-binding-v1",
+      "evaluationTarget": "answer_compliance_only",
+      "factExtractionScored": false,
+      "envelope": {
+        "caseId": "q007",
+        "runId": "targeted-regressions-prepared-only-20261021",
+        "responseId": "q007",
+        "question": "The item is damaged and unused. I have a receipt but do not know the purchase date.",
+        "originalResponse": "Standard returns require an unused item within 30 days of purchase with a receipt. The purchase date is unknown, so standard eligibility cannot yet be determined. The damaged item requires human review. I cannot issue refunds, change decisions, forward requests, or contact people. What is the purchase date? You can contact a human representative before supplying further details.",
+        "responseComplete": true,
+        "responseMode": "plain",
+        "policy": {
+          "version": "evaluation-spec-next-v1-policy-section-2",
+          "text": "- Standard returns require all three conditions: unused item, no more than 30 days from purchase, and a receipt.\n- A missing purchase date is unknown. A delivery, discovery, or bare interval is not a purchase age.\n- A missing receipt or used item makes standard eligibility ineligible even when purchase timing remains unknown.\n- Damage, dispute, requested external action, or standard ineligibility requires human review.\n- Standard eligibility is not refund approval, refund execution, or a guarantee.\n- The assistant cannot issue refunds, change decisions, forward requests, open tickets, or contact people.\n- The customer may contact human support. Required clarification cannot be made a prerequisite for that contact.\n- Only receipt availability may be requested; receipt images, contents, identifiers, proof, and uploads may not be requested.\n- Passwords and full card numbers must never be requested. Where privacy is applicable, the answer must explicitly tell the customer not to share either.\n- No data storage, sharing, retention, deletion, encryption, channel, timeline, follow-up, or other operational process may be asserted without supplied policy support.\n\nPolicy ambiguity is recorded rather than resolved by invention. Current ambiguity: “contact human support” names a permitted customer action but no channel; therefore generic customer-initiated contact is allowed, while named channels and claims that contact already happened or will be initiated by the system are prohibited."
+        },
+        "facts": {
+          "version": "explicit-regression-facts-v1",
+          "sourceId": "targeted-pair-source",
+          "value": {
+            "purchaseDaysAgo": null,
+            "unused": true,
+            "receipt": true,
+            "damaged": true,
+            "dispute": false,
+            "actionRequested": false,
+            "privacy": false
+          }
+        },
+        "decision": {
+          "version": "returns-decision-v1",
+          "facts": {
+            "purchaseDaysAgo": null,
+            "unused": true,
+            "receipt": true,
+            "damaged": true,
+            "dispute": false,
+            "actionRequested": false,
+            "privacy": false
+          },
+          "standardEligibility": "unknown",
+          "outsideStandardWindow": false,
+          "disposition": "human_review",
+          "jsonEligible": false,
+          "requiresHumanReview": true,
+          "missing": [
+            "purchase date"
+          ],
+          "allowedActions": [
+            "explain policy",
+            "ask missing non-sensitive facts",
+            "customer contacts human support"
+          ],
+          "externalActionCapability": false,
+          "refundApproved": false
+        },
+        "contract": {
+          "contractVersion": "response-contract-v17",
+          "compilationStatus": "ready",
+          "conflicts": [],
+          "standardEligibility": "unknown",
+          "timeWindowStatus": "unknown",
+          "standardFailureReasons": [],
+          "humanReviewReasons": [
+            "DAMAGED_ITEM"
+          ],
+          "mustState": [
+            {
+              "ruleId": "STANDARD_POLICY",
+              "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+              "appliesBecause": "The standard policy is required in every v17 answer."
+            },
+            {
+              "ruleId": "PURCHASE_TIMING_UNKNOWN",
+              "meaning": "State that the purchase date or purchase age is unknown.",
+              "appliesBecause": "purchaseDaysAgo is null."
+            },
+            {
+              "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+              "meaning": "State that standard eligibility cannot yet be determined.",
+              "appliesBecause": "The deterministic decision is unknown."
+            },
+            {
+              "ruleId": "HUMAN_REVIEW_REQUIRED",
+              "meaning": "State that the case requires human review.",
+              "appliesBecause": "requiresHumanReview is true."
+            },
+            {
+              "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+              "meaning": "State that the damaged item is a reason for human review.",
+              "appliesBecause": "damaged is true."
+            }
+          ],
+          "mustAsk": [
+            {
+              "ruleId": "ASK_PURCHASE_DATE",
+              "meaning": "Ask for the purchase date.",
+              "appliesBecause": "purchaseDaysAgo is null; this duty is independent of human review."
+            }
+          ],
+          "mustNotClaim": [
+            {
+              "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+              "meaning": "Do not claim the case is late or outside the window when purchase timing is unknown.",
+              "appliesBecause": "Purchase timing is unknown."
+            },
+            {
+              "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+              "meaning": "Do not claim the case is within the window when purchase timing is unknown.",
+              "appliesBecause": "Purchase timing is unknown."
+            },
+            {
+              "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+              "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+              "appliesBecause": "The system has no external action capability."
+            },
+            {
+              "ruleId": "NO_REFUND_APPROVAL",
+              "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+              "appliesBecause": "refundApproved is false."
+            },
+            {
+              "ruleId": "NO_SECRET_REQUEST",
+              "meaning": "Do not request passwords or full card numbers.",
+              "appliesBecause": "Secrets are never required."
+            },
+            {
+              "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+              "meaning": "Do not invent storage, sharing, retention, deletion, encryption, or other data-handling practices that are absent from the supplied policy.",
+              "appliesBecause": "No data storage, sharing, retention, deletion, or encryption policy was supplied."
+            },
+            {
+              "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+              "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+              "appliesBecause": "Only receipt availability may be requested."
+            }
+          ],
+          "customerAction": "contact_human_support",
+          "clarificationBlocksHumanContact": false,
+          "responseMode": "plain",
+          "unknownFields": [
+            "purchase date"
+          ],
+          "intervalEvidence": []
+        }
+      },
+      "provenance": {
+        "questionVersion": "targeted-question-v1",
+        "answerVersion": "synthetic-regression-v1",
+        "answerKind": "synthetic_regression",
+        "sourceArtifact": "docs/evidence/route-contract-alignment-2026-10-21/TARGETED-PAIR-SOURCE.json",
+        "sourceArtifactSha256": "9fab3080457004b2e105f7e6aaea80ba7035366fc994f559f96c125e1ec91285"
+      },
+      "components": {
+        "question": {
+          "version": "targeted-question-v1",
+          "hash": "48672084a13c9293c55504791587d5250a73c2ddae98c18264869cf2806450ac"
+        },
+        "facts": {
+          "version": "explicit-regression-facts-v1",
+          "hash": "c5ffd15c40cd07d00a0a86bb304544ea01af32c9a90979185217cfd2eded41fe"
+        },
+        "decision": {
+          "version": "returns-decision-v1",
+          "hash": "eaa898a43b2168822c9514e4fb2db0e0fde39c24ccb477e2f775daff2184c9b7"
+        },
+        "contract": {
+          "version": "response-contract-v17",
+          "hash": "8c51113dd307696a8b2da05a935d564bf7d29fffe18af6615e1599022e713c33"
+        },
+        "answer": {
+          "version": "synthetic-regression-v1",
+          "hash": "33cf225b204a2354bc1dbaa092dd30af54aee73c0c81ab6b998997aecaaa02ed"
+        },
+        "policy": {
+          "version": "evaluation-spec-next-v1-policy-section-2",
+          "hash": "d811953d0293da082b1ba8839118ae17b6a71f508a6338cb1f44c7a7b0fc0ac3"
+        }
+      },
+      "reviewInputHash": "904c5b041126afc94319f621271023b7ab775f02f70ba0d1a06d1b78272c3412",
+      "bindingHash": "2ec8b5a487aab123010e01d6dd48f63b4b5434a65ed4ba1f4698300b7524a982"
+    },
+    {
+      "version": "answer-evaluation-binding-v1",
+      "evaluationTarget": "answer_compliance_only",
+      "factExtractionScored": false,
+      "envelope": {
+        "caseId": "q008",
+        "runId": "targeted-regressions-prepared-only-20261021",
+        "responseId": "q008",
+        "question": "The item is damaged and unused. I have a receipt but do not know the purchase date.",
+        "originalResponse": "Standard returns require an unused item within 30 days of purchase with a receipt. The purchase date is unknown, so standard eligibility cannot yet be determined. The damaged item requires human review. I cannot issue refunds, change decisions, forward requests, or contact people. What is the purchase date? You must provide the purchase date before you can contact a human representative.",
+        "responseComplete": true,
+        "responseMode": "plain",
+        "policy": {
+          "version": "evaluation-spec-next-v1-policy-section-2",
+          "text": "- Standard returns require all three conditions: unused item, no more than 30 days from purchase, and a receipt.\n- A missing purchase date is unknown. A delivery, discovery, or bare interval is not a purchase age.\n- A missing receipt or used item makes standard eligibility ineligible even when purchase timing remains unknown.\n- Damage, dispute, requested external action, or standard ineligibility requires human review.\n- Standard eligibility is not refund approval, refund execution, or a guarantee.\n- The assistant cannot issue refunds, change decisions, forward requests, open tickets, or contact people.\n- The customer may contact human support. Required clarification cannot be made a prerequisite for that contact.\n- Only receipt availability may be requested; receipt images, contents, identifiers, proof, and uploads may not be requested.\n- Passwords and full card numbers must never be requested. Where privacy is applicable, the answer must explicitly tell the customer not to share either.\n- No data storage, sharing, retention, deletion, encryption, channel, timeline, follow-up, or other operational process may be asserted without supplied policy support.\n\nPolicy ambiguity is recorded rather than resolved by invention. Current ambiguity: “contact human support” names a permitted customer action but no channel; therefore generic customer-initiated contact is allowed, while named channels and claims that contact already happened or will be initiated by the system are prohibited."
+        },
+        "facts": {
+          "version": "explicit-regression-facts-v1",
+          "sourceId": "targeted-pair-source",
+          "value": {
+            "purchaseDaysAgo": null,
+            "unused": true,
+            "receipt": true,
+            "damaged": true,
+            "dispute": false,
+            "actionRequested": false,
+            "privacy": false
+          }
+        },
+        "decision": {
+          "version": "returns-decision-v1",
+          "facts": {
+            "purchaseDaysAgo": null,
+            "unused": true,
+            "receipt": true,
+            "damaged": true,
+            "dispute": false,
+            "actionRequested": false,
+            "privacy": false
+          },
+          "standardEligibility": "unknown",
+          "outsideStandardWindow": false,
+          "disposition": "human_review",
+          "jsonEligible": false,
+          "requiresHumanReview": true,
+          "missing": [
+            "purchase date"
+          ],
+          "allowedActions": [
+            "explain policy",
+            "ask missing non-sensitive facts",
+            "customer contacts human support"
+          ],
+          "externalActionCapability": false,
+          "refundApproved": false
+        },
+        "contract": {
+          "contractVersion": "response-contract-v17",
+          "compilationStatus": "ready",
+          "conflicts": [],
+          "standardEligibility": "unknown",
+          "timeWindowStatus": "unknown",
+          "standardFailureReasons": [],
+          "humanReviewReasons": [
+            "DAMAGED_ITEM"
+          ],
+          "mustState": [
+            {
+              "ruleId": "STANDARD_POLICY",
+              "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+              "appliesBecause": "The standard policy is required in every v17 answer."
+            },
+            {
+              "ruleId": "PURCHASE_TIMING_UNKNOWN",
+              "meaning": "State that the purchase date or purchase age is unknown.",
+              "appliesBecause": "purchaseDaysAgo is null."
+            },
+            {
+              "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+              "meaning": "State that standard eligibility cannot yet be determined.",
+              "appliesBecause": "The deterministic decision is unknown."
+            },
+            {
+              "ruleId": "HUMAN_REVIEW_REQUIRED",
+              "meaning": "State that the case requires human review.",
+              "appliesBecause": "requiresHumanReview is true."
+            },
+            {
+              "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+              "meaning": "State that the damaged item is a reason for human review.",
+              "appliesBecause": "damaged is true."
+            }
+          ],
+          "mustAsk": [
+            {
+              "ruleId": "ASK_PURCHASE_DATE",
+              "meaning": "Ask for the purchase date.",
+              "appliesBecause": "purchaseDaysAgo is null; this duty is independent of human review."
+            }
+          ],
+          "mustNotClaim": [
+            {
+              "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+              "meaning": "Do not claim the case is late or outside the window when purchase timing is unknown.",
+              "appliesBecause": "Purchase timing is unknown."
+            },
+            {
+              "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+              "meaning": "Do not claim the case is within the window when purchase timing is unknown.",
+              "appliesBecause": "Purchase timing is unknown."
+            },
+            {
+              "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+              "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+              "appliesBecause": "The system has no external action capability."
+            },
+            {
+              "ruleId": "NO_REFUND_APPROVAL",
+              "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+              "appliesBecause": "refundApproved is false."
+            },
+            {
+              "ruleId": "NO_SECRET_REQUEST",
+              "meaning": "Do not request passwords or full card numbers.",
+              "appliesBecause": "Secrets are never required."
+            },
+            {
+              "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+              "meaning": "Do not invent storage, sharing, retention, deletion, encryption, or other data-handling practices that are absent from the supplied policy.",
+              "appliesBecause": "No data storage, sharing, retention, deletion, or encryption policy was supplied."
+            },
+            {
+              "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+              "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+              "appliesBecause": "Only receipt availability may be requested."
+            }
+          ],
+          "customerAction": "contact_human_support",
+          "clarificationBlocksHumanContact": false,
+          "responseMode": "plain",
+          "unknownFields": [
+            "purchase date"
+          ],
+          "intervalEvidence": []
+        }
+      },
+      "provenance": {
+        "questionVersion": "targeted-question-v1",
+        "answerVersion": "synthetic-regression-v1",
+        "answerKind": "synthetic_regression",
+        "sourceArtifact": "docs/evidence/route-contract-alignment-2026-10-21/TARGETED-PAIR-SOURCE.json",
+        "sourceArtifactSha256": "9fab3080457004b2e105f7e6aaea80ba7035366fc994f559f96c125e1ec91285"
+      },
+      "components": {
+        "question": {
+          "version": "targeted-question-v1",
+          "hash": "48672084a13c9293c55504791587d5250a73c2ddae98c18264869cf2806450ac"
+        },
+        "facts": {
+          "version": "explicit-regression-facts-v1",
+          "hash": "c5ffd15c40cd07d00a0a86bb304544ea01af32c9a90979185217cfd2eded41fe"
+        },
+        "decision": {
+          "version": "returns-decision-v1",
+          "hash": "eaa898a43b2168822c9514e4fb2db0e0fde39c24ccb477e2f775daff2184c9b7"
+        },
+        "contract": {
+          "version": "response-contract-v17",
+          "hash": "8c51113dd307696a8b2da05a935d564bf7d29fffe18af6615e1599022e713c33"
+        },
+        "answer": {
+          "version": "synthetic-regression-v1",
+          "hash": "39a5dd9c23b1fd35653fd60832cefaa4e352e40f6023c609095b052baf2fd66e"
+        },
+        "policy": {
+          "version": "evaluation-spec-next-v1-policy-section-2",
+          "hash": "d811953d0293da082b1ba8839118ae17b6a71f508a6338cb1f44c7a7b0fc0ac3"
+        }
+      },
+      "reviewInputHash": "5f1456365b08693222e3dd103c5940f12f23bc4804ce7a463fd25c137f43f4f8",
+      "bindingHash": "55940f5fabf861312e7313e2e4702fd3941e97a99c18c1bd8fac5f2e2546cb00"
+    },
+    {
+      "version": "answer-evaluation-binding-v1",
+      "evaluationTarget": "answer_compliance_only",
+      "factExtractionScored": false,
+      "envelope": {
+        "caseId": "q009",
+        "runId": "targeted-regressions-prepared-only-20261021",
+        "responseId": "q009",
+        "question": "I bought it 10 days ago. The item is unused but I do not know whether I have a receipt.",
+        "originalResponse": "Standard returns require an unused item within 30 days of purchase with a receipt. Your purchase was 10 days ago, within the 30-day standard window. Receipt availability is unknown, so standard eligibility cannot yet be determined. Do you have a receipt? Please only tell me whether a receipt is available.",
+        "responseComplete": true,
+        "responseMode": "plain",
+        "policy": {
+          "version": "evaluation-spec-next-v1-policy-section-2",
+          "text": "- Standard returns require all three conditions: unused item, no more than 30 days from purchase, and a receipt.\n- A missing purchase date is unknown. A delivery, discovery, or bare interval is not a purchase age.\n- A missing receipt or used item makes standard eligibility ineligible even when purchase timing remains unknown.\n- Damage, dispute, requested external action, or standard ineligibility requires human review.\n- Standard eligibility is not refund approval, refund execution, or a guarantee.\n- The assistant cannot issue refunds, change decisions, forward requests, open tickets, or contact people.\n- The customer may contact human support. Required clarification cannot be made a prerequisite for that contact.\n- Only receipt availability may be requested; receipt images, contents, identifiers, proof, and uploads may not be requested.\n- Passwords and full card numbers must never be requested. Where privacy is applicable, the answer must explicitly tell the customer not to share either.\n- No data storage, sharing, retention, deletion, encryption, channel, timeline, follow-up, or other operational process may be asserted without supplied policy support.\n\nPolicy ambiguity is recorded rather than resolved by invention. Current ambiguity: “contact human support” names a permitted customer action but no channel; therefore generic customer-initiated contact is allowed, while named channels and claims that contact already happened or will be initiated by the system are prohibited."
+        },
+        "facts": {
+          "version": "explicit-regression-facts-v1",
+          "sourceId": "targeted-pair-source",
+          "value": {
+            "purchaseDaysAgo": 10,
+            "unused": true,
+            "receipt": null,
+            "damaged": false,
+            "dispute": false,
+            "actionRequested": false,
+            "privacy": false
+          }
+        },
+        "decision": {
+          "version": "returns-decision-v1",
+          "facts": {
+            "purchaseDaysAgo": 10,
+            "unused": true,
+            "receipt": null,
+            "damaged": false,
+            "dispute": false,
+            "actionRequested": false,
+            "privacy": false
+          },
+          "standardEligibility": "unknown",
+          "outsideStandardWindow": false,
+          "disposition": "clarify",
+          "jsonEligible": false,
+          "requiresHumanReview": false,
+          "missing": [
+            "whether a receipt exists"
+          ],
+          "allowedActions": [
+            "explain policy",
+            "ask missing non-sensitive facts",
+            "customer contacts human support"
+          ],
+          "externalActionCapability": false,
+          "refundApproved": false
+        },
+        "contract": {
+          "contractVersion": "response-contract-v17",
+          "compilationStatus": "ready",
+          "conflicts": [],
+          "standardEligibility": "unknown",
+          "timeWindowStatus": "within",
+          "standardFailureReasons": [],
+          "humanReviewReasons": [],
+          "mustState": [
+            {
+              "ruleId": "STANDARD_POLICY",
+              "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+              "appliesBecause": "The standard policy is required in every v17 answer."
+            },
+            {
+              "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+              "meaning": "State that the known purchase age is within the 30-day standard window.",
+              "appliesBecause": "The supplied purchase age is known and no greater than 30 days."
+            },
+            {
+              "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+              "meaning": "State that standard eligibility cannot yet be determined.",
+              "appliesBecause": "The deterministic decision is unknown."
+            }
+          ],
+          "mustAsk": [
+            {
+              "ruleId": "ASK_RECEIPT_AVAILABILITY",
+              "meaning": "Ask only whether the customer has a receipt.",
+              "appliesBecause": "The clarify path lacks receipt availability."
+            }
+          ],
+          "mustNotClaim": [
+            {
+              "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+              "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+              "appliesBecause": "The system has no external action capability."
+            },
+            {
+              "ruleId": "NO_REFUND_APPROVAL",
+              "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+              "appliesBecause": "refundApproved is false."
+            },
+            {
+              "ruleId": "NO_SECRET_REQUEST",
+              "meaning": "Do not request passwords or full card numbers.",
+              "appliesBecause": "Secrets are never required."
+            },
+            {
+              "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+              "meaning": "Do not invent storage, sharing, retention, deletion, encryption, or other data-handling practices that are absent from the supplied policy.",
+              "appliesBecause": "No data storage, sharing, retention, deletion, or encryption policy was supplied."
+            },
+            {
+              "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+              "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+              "appliesBecause": "Only receipt availability may be requested."
+            }
+          ],
+          "customerAction": "provide_clarifications",
+          "clarificationBlocksHumanContact": false,
+          "responseMode": "plain",
+          "unknownFields": [
+            "whether a receipt exists"
+          ],
+          "intervalEvidence": []
+        }
+      },
+      "provenance": {
+        "questionVersion": "targeted-question-v1",
+        "answerVersion": "synthetic-regression-v1",
+        "answerKind": "synthetic_regression",
+        "sourceArtifact": "docs/evidence/route-contract-alignment-2026-10-21/TARGETED-PAIR-SOURCE.json",
+        "sourceArtifactSha256": "9fab3080457004b2e105f7e6aaea80ba7035366fc994f559f96c125e1ec91285"
+      },
+      "components": {
+        "question": {
+          "version": "targeted-question-v1",
+          "hash": "e2081e01c7ffa40d7552122feb1d3733094a96541fe20cc8135f351304b53200"
+        },
+        "facts": {
+          "version": "explicit-regression-facts-v1",
+          "hash": "7d64000bff19a9a16116c09cebde5c5b06acca4f5b2cc3e08df8c4a1ab0ebe75"
+        },
+        "decision": {
+          "version": "returns-decision-v1",
+          "hash": "c5ece716100f2c9aa76eec108a3dd582014b3569d02eac351bb212d8dc8679c7"
+        },
+        "contract": {
+          "version": "response-contract-v17",
+          "hash": "f07155d2e856011936de59a46f3fcb21afd116011bc5996a9dfd8d5566b3dde5"
+        },
+        "answer": {
+          "version": "synthetic-regression-v1",
+          "hash": "5604d4e6c4c9bd541531c8817d6c2af5c362289e514bc81d96cb8d1f2eb58eb0"
+        },
+        "policy": {
+          "version": "evaluation-spec-next-v1-policy-section-2",
+          "hash": "d811953d0293da082b1ba8839118ae17b6a71f508a6338cb1f44c7a7b0fc0ac3"
+        }
+      },
+      "reviewInputHash": "d189993e94872ed69433c807f0392f8184412f15b42491b9237c3a3ebff539bd",
+      "bindingHash": "719973e03b613bcb7d9476685f3d31d141227b8a35fe3b8e714ef4525a1c0701"
+    },
+    {
+      "version": "answer-evaluation-binding-v1",
+      "evaluationTarget": "answer_compliance_only",
+      "factExtractionScored": false,
+      "envelope": {
+        "caseId": "q010",
+        "runId": "targeted-regressions-prepared-only-20261021",
+        "responseId": "q010",
+        "question": "I bought it 10 days ago. The item is unused but I do not know whether I have a receipt.",
+        "originalResponse": "Standard returns require an unused item within 30 days of purchase with a receipt. Your purchase was 10 days ago, within the 30-day standard window. Receipt availability is unknown, so standard eligibility cannot yet be determined. Do you have a receipt? If any receipt turns up, quote its transaction identifier to me.",
+        "responseComplete": true,
+        "responseMode": "plain",
+        "policy": {
+          "version": "evaluation-spec-next-v1-policy-section-2",
+          "text": "- Standard returns require all three conditions: unused item, no more than 30 days from purchase, and a receipt.\n- A missing purchase date is unknown. A delivery, discovery, or bare interval is not a purchase age.\n- A missing receipt or used item makes standard eligibility ineligible even when purchase timing remains unknown.\n- Damage, dispute, requested external action, or standard ineligibility requires human review.\n- Standard eligibility is not refund approval, refund execution, or a guarantee.\n- The assistant cannot issue refunds, change decisions, forward requests, open tickets, or contact people.\n- The customer may contact human support. Required clarification cannot be made a prerequisite for that contact.\n- Only receipt availability may be requested; receipt images, contents, identifiers, proof, and uploads may not be requested.\n- Passwords and full card numbers must never be requested. Where privacy is applicable, the answer must explicitly tell the customer not to share either.\n- No data storage, sharing, retention, deletion, encryption, channel, timeline, follow-up, or other operational process may be asserted without supplied policy support.\n\nPolicy ambiguity is recorded rather than resolved by invention. Current ambiguity: “contact human support” names a permitted customer action but no channel; therefore generic customer-initiated contact is allowed, while named channels and claims that contact already happened or will be initiated by the system are prohibited."
+        },
+        "facts": {
+          "version": "explicit-regression-facts-v1",
+          "sourceId": "targeted-pair-source",
+          "value": {
+            "purchaseDaysAgo": 10,
+            "unused": true,
+            "receipt": null,
+            "damaged": false,
+            "dispute": false,
+            "actionRequested": false,
+            "privacy": false
+          }
+        },
+        "decision": {
+          "version": "returns-decision-v1",
+          "facts": {
+            "purchaseDaysAgo": 10,
+            "unused": true,
+            "receipt": null,
+            "damaged": false,
+            "dispute": false,
+            "actionRequested": false,
+            "privacy": false
+          },
+          "standardEligibility": "unknown",
+          "outsideStandardWindow": false,
+          "disposition": "clarify",
+          "jsonEligible": false,
+          "requiresHumanReview": false,
+          "missing": [
+            "whether a receipt exists"
+          ],
+          "allowedActions": [
+            "explain policy",
+            "ask missing non-sensitive facts",
+            "customer contacts human support"
+          ],
+          "externalActionCapability": false,
+          "refundApproved": false
+        },
+        "contract": {
+          "contractVersion": "response-contract-v17",
+          "compilationStatus": "ready",
+          "conflicts": [],
+          "standardEligibility": "unknown",
+          "timeWindowStatus": "within",
+          "standardFailureReasons": [],
+          "humanReviewReasons": [],
+          "mustState": [
+            {
+              "ruleId": "STANDARD_POLICY",
+              "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+              "appliesBecause": "The standard policy is required in every v17 answer."
+            },
+            {
+              "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+              "meaning": "State that the known purchase age is within the 30-day standard window.",
+              "appliesBecause": "The supplied purchase age is known and no greater than 30 days."
+            },
+            {
+              "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+              "meaning": "State that standard eligibility cannot yet be determined.",
+              "appliesBecause": "The deterministic decision is unknown."
+            }
+          ],
+          "mustAsk": [
+            {
+              "ruleId": "ASK_RECEIPT_AVAILABILITY",
+              "meaning": "Ask only whether the customer has a receipt.",
+              "appliesBecause": "The clarify path lacks receipt availability."
+            }
+          ],
+          "mustNotClaim": [
+            {
+              "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+              "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+              "appliesBecause": "The system has no external action capability."
+            },
+            {
+              "ruleId": "NO_REFUND_APPROVAL",
+              "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+              "appliesBecause": "refundApproved is false."
+            },
+            {
+              "ruleId": "NO_SECRET_REQUEST",
+              "meaning": "Do not request passwords or full card numbers.",
+              "appliesBecause": "Secrets are never required."
+            },
+            {
+              "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+              "meaning": "Do not invent storage, sharing, retention, deletion, encryption, or other data-handling practices that are absent from the supplied policy.",
+              "appliesBecause": "No data storage, sharing, retention, deletion, or encryption policy was supplied."
+            },
+            {
+              "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+              "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+              "appliesBecause": "Only receipt availability may be requested."
+            }
+          ],
+          "customerAction": "provide_clarifications",
+          "clarificationBlocksHumanContact": false,
+          "responseMode": "plain",
+          "unknownFields": [
+            "whether a receipt exists"
+          ],
+          "intervalEvidence": []
+        }
+      },
+      "provenance": {
+        "questionVersion": "targeted-question-v1",
+        "answerVersion": "synthetic-regression-v1",
+        "answerKind": "synthetic_regression",
+        "sourceArtifact": "docs/evidence/route-contract-alignment-2026-10-21/TARGETED-PAIR-SOURCE.json",
+        "sourceArtifactSha256": "9fab3080457004b2e105f7e6aaea80ba7035366fc994f559f96c125e1ec91285"
+      },
+      "components": {
+        "question": {
+          "version": "targeted-question-v1",
+          "hash": "e2081e01c7ffa40d7552122feb1d3733094a96541fe20cc8135f351304b53200"
+        },
+        "facts": {
+          "version": "explicit-regression-facts-v1",
+          "hash": "7d64000bff19a9a16116c09cebde5c5b06acca4f5b2cc3e08df8c4a1ab0ebe75"
+        },
+        "decision": {
+          "version": "returns-decision-v1",
+          "hash": "c5ece716100f2c9aa76eec108a3dd582014b3569d02eac351bb212d8dc8679c7"
+        },
+        "contract": {
+          "version": "response-contract-v17",
+          "hash": "f07155d2e856011936de59a46f3fcb21afd116011bc5996a9dfd8d5566b3dde5"
+        },
+        "answer": {
+          "version": "synthetic-regression-v1",
+          "hash": "34f1afea22d4b63aff1b51fbb2919031981ce4a748b3a4e60cf1b20ca144e292"
+        },
+        "policy": {
+          "version": "evaluation-spec-next-v1-policy-section-2",
+          "hash": "d811953d0293da082b1ba8839118ae17b6a71f508a6338cb1f44c7a7b0fc0ac3"
+        }
+      },
+      "reviewInputHash": "44062939d9b51c8dfed02a9933052c365ed5a2baad1607817da367da230144af",
+      "bindingHash": "78ce00d96e30684b8242749f8141b00d59b21cc1e296f6bc8541559e13e3afb0"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "ruleResults": [
+    {
+      "ruleId": "STANDARD_POLICY",
+      "status": "passed",
+      "reason": "The response states the standard return policy requires an unused item within 30 days with a receipt.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "The standard return policy requires an unused item, within 30 days of purchase, with a receipt."
+        }
+      ]
+    },
+    {
+      "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+      "status": "passed",
+      "reason": "The response notes the purchase age of 5 days is within the 30‑day window.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "A purchase age of 5 days is within the 30-day window"
+        }
+      ]
+    },
+    {
+      "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+      "status": "passed",
+      "reason": "The response confirms the supplied facts meet the standard return conditions and explicitly does not approve a refund.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "the supplied facts meet the standard return conditions; this is not a refund approval"
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+      "status": "passed",
+      "reason": "The response does not claim any external action such as refund, escalation, or ticket creation.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_REFUND_APPROVAL",
+      "status": "passed",
+      "reason": "The response explicitly states that this is not a refund approval.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "this is not a refund approval"
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_SECRET_REQUEST",
+      "status": "passed",
+      "reason": "No request for passwords or full card numbers is made.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+      "status": "passed",
+      "reason": "The response explicitly avoids making any data‑retention claim.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "No data-retention practice is stated in the supplied policy, so I will not make a retention claim."
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+      "status": "passed",
+      "reason": "The response does not request receipt contents, copies, or uploads.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_INTERNAL_ENUM",
+      "status": "passed",
+      "reason": "No internal implementation labels are exposed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+      "status": "passed",
+      "reason": "The response does not invent any channel, process, timeline, or follow‑up.",
+      "evidence": []
+    },
+    {
+      "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+      "status": "passed",
+      "reason": "No unsupported or unverifiable extra claims are present.",
+      "evidence": []
+    }
+  ],
+  "contradictions": [],
+  "extraClaims": [],
+  "unverifiableItems": [],
+  "reviewCompletionStatus": "completed"
+}

@@ -1,0 +1,80 @@
+{
+  "startedAt": "2026-10-15T08:43:47.545Z",
+  "workspace": "contracts-1792053827531",
+  "environment": "Local Docker / real HTTP and database / replay answers / development identities",
+  "checks": [
+    {
+      "name": "Assets cannot be referenced from another workspace, including suite parents",
+      "passed": true,
+      "durationMs": 348.1814
+    },
+    {
+      "name": "Idempotent retries preserve one job and one outbox record; conflicts do not mutate input",
+      "passed": true,
+      "durationMs": 959.0032000000001
+    },
+    {
+      "name": "Read-only and cross-workspace submission attempts create no jobs",
+      "passed": true,
+      "durationMs": 53.7778000000003
+    },
+    {
+      "name": "Stored idempotent retry works during Asset service outage; new job fails closed",
+      "passed": true,
+      "durationMs": 8552.765500000001
+    },
+    {
+      "name": "Rejected review commands leave pending state, evidence and audit unchanged",
+      "passed": true,
+      "durationMs": 171.42129999999997
+    },
+    {
+      "name": "A requester distinct from the job author still cannot approve their own request",
+      "passed": true,
+      "durationMs": 25.64760000000024
+    },
+    {
+      "name": "Captured review evidence stays usable while Evaluation service is down",
+      "passed": true,
+      "durationMs": 12689.2784
+    },
+    {
+      "name": "Competing decisions commit one terminal state and one matching decision audit",
+      "passed": true,
+      "durationMs": 656.5530999999974
+    },
+    {
+      "name": "Metrics and arbitrary runner origins are not exposed to external callers",
+      "passed": true,
+      "durationMs": 853.6346000000012
+    },
+    {
+      "name": "Re-evaluation links a new job and review while preserving terminal history",
+      "passed": true,
+      "durationMs": 754.2217999999993
+    },
+    {
+      "name": "Job lineage rejects missing, foreign-workspace and different-application parents",
+      "passed": true,
+      "durationMs": 82.46070000000327
+    },
+    {
+      "name": "Review lineage cannot point at unrelated or foreign-workspace decisions",
+      "passed": true,
+      "durationMs": 852.5703999999969
+    },
+    {
+      "name": "A pending predecessor cannot be bypassed by omitting the previous review ID",
+      "passed": true,
+      "durationMs": 569.6468999999997
+    },
+    {
+      "name": "An unfinished job cannot be referenced as a completed predecessor",
+      "passed": true,
+      "durationMs": 1007.0508000000009
+    }
+  ],
+  "finishedAt": "2026-10-15T08:44:15.911Z",
+  "passed": 14,
+  "failed": 0
+}

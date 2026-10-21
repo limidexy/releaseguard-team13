@@ -1,0 +1,43 @@
+{
+  "at": "2026-10-11T13:27:16.485Z",
+  "project": "project-dcf9bb6a-7310-4602-aea",
+  "cluster": "rg-trial",
+  "zone": "asia-southeast1-a",
+  "status": "RUNNING",
+  "currentNodeCount": 0,
+  "nodePools": [
+    {
+      "name": "default-pool",
+      "machineType": "e2-standard-2",
+      "diskSizeGb": 30,
+      "autoscaling": null
+    }
+  ],
+  "instances": [],
+  "computeStopped": true,
+  "dataVolumes": [
+    {
+      "name": "edge-data",
+      "status": "Bound",
+      "capacity": {
+        "storage": "1Gi"
+      }
+    },
+    {
+      "name": "postgres-data",
+      "status": "Bound",
+      "capacity": {
+        "storage": "5Gi"
+      }
+    },
+    {
+      "name": "rabbit-data",
+      "status": "Bound",
+      "capacity": {
+        "storage": "2Gi"
+      }
+    }
+  ],
+  "paidUpgradeAuthorized": false,
+  "warning": "Zero compute nodes does not stop storage, static IP, load balancer, registry or other retained-resource credit consumption. Billing data can lag."
+}

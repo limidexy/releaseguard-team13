@@ -1,0 +1,18 @@
+{
+  "version": "semantic-review-wire-v3-cross-scenario-dev-authorization",
+  "experimentId": "releaseguard-semantic-wire-v3-cross-scenario-dev-20261019",
+  "approved": true,
+  "recordedAt": "2026-10-19T10:59:02+08:00",
+  "allowedProvider": "groq",
+  "allowedModelId": "openai/gpt-oss-120b",
+  "maximumSemanticReviewRequests": 17,
+  "customerGenerationRequests": 0,
+  "automaticRetries": 0,
+  "providerSwitches": 0,
+  "paidCallsAllowed": false,
+  "deploymentAllowed": false,
+  "publicationAllowed": false,
+  "gitPushAllowed": false,
+  "oldExperimentsRemainSealed": true,
+  "secondRunAuthorized": false
+}

@@ -1,0 +1,60 @@
+{
+  "checkedAt": "2026-10-16T06:11:06.307Z",
+  "sourceReport": "real-v12-2026-10-16T06-02-56.533Z.json",
+  "reportSha256": "03761aa70d396801dd77e8072d3b57f9126916804b3339290e26e58f55a8c4e5",
+  "scope": "Supplemental assistant review of all 20 raw answers; not independent human approval or an altered automatic score",
+  "automaticScore": 90,
+  "automaticGate": "blocked",
+  "newProviderCalls": 0,
+  "releaseRecommendation": "Reject candidate for release; stable repair not achieved",
+  "observations": [
+    {
+      "caseId": "expired",
+      "severity": "blocking",
+      "quote": "Since 60 days have passed, the item is outside the standard return window",
+      "finding": "问题未明确购买时间，回答把未锚定的60天直接当成购买超期；原v2.8已拦截。漏写窗口虽改善，但该题仍不合格。"
+    },
+    {
+      "caseId": "extra-damaged",
+      "severity": "blocking",
+      "quote": "Because the damage was discovered after 45 days, it falls outside the standard 30‑day return window.",
+      "finding": "发现损坏时间再次被当成购买超期依据，v2.8正确阻断，是相对v11的退化。"
+    },
+    {
+      "caseId": "extra-privacy",
+      "severity": "blocking",
+      "quote": "only provide it through secure, official channels if ever required.",
+      "finding": "不得提供密码或完整卡号，不应为安全渠道留例外。该句用it指代敏感信息，当前规则漏检，自动通过不代表隐私验收合格。"
+    },
+    {
+      "caseId": "extra-eligibility",
+      "severity": "blocking",
+      "quote": "Bring the item, its original packaging, and the receipt to a store location",
+      "finding": "擅自增加原包装和门店办理要求；给定政策没有这些事实，当前规则漏检。"
+    },
+    {
+      "caseId": "damaged",
+      "severity": "needs-review",
+      "quote": "proof that the item is unused",
+      "finding": "将询问未使用状态扩展为证明义务；未提供此要求。"
+    },
+    {
+      "caseId": "extra-missing",
+      "severity": "needs-review",
+      "quote": "original receipt or proof of purchase",
+      "finding": "仍把其他购买证明作为收据替代，未给定接受政策。"
+    },
+    {
+      "caseId": "receipt",
+      "severity": "needs-review",
+      "quote": "what documentation, if any, can be accepted",
+      "finding": "没有明确承诺替代证明被接受，但仍引向未给定的凭证选项；需收紧，不能视为已解决所有政策扩展问题。"
+    }
+  ],
+  "limitations": [
+    "Only one sample per question; not a stability estimate.",
+    "Same development questions, not held-out evaluation.",
+    "Local code tests verify routing/provenance/gate behavior, not model compliance.",
+    "No paid upgrade, no more than 20 provider calls, no remote push or deployment."
+  ]
+}

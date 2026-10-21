@@ -1,0 +1,159 @@
+{
+  "ruleResults": [
+    {
+      "ruleId": "STANDARD_POLICY",
+      "status": "passed",
+      "reason": "The response states the standard return policy requiring an unused item within 30 days with a receipt.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "The standard return policy requires an unused item, within 30 days of purchase, with a receipt."
+        }
+      ]
+    },
+    {
+      "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+      "status": "passed",
+      "reason": "The response notes the purchase age of 10 days is within the 30‑day window.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "A purchase age of 10 days is within the 30-day window"
+        }
+      ]
+    },
+    {
+      "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+      "status": "passed",
+      "reason": "The response confirms the facts meet standard return conditions and explicitly says this is not a refund approval.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "the supplied facts meet the standard return conditions; this is not a refund approval"
+        }
+      ]
+    },
+    {
+      "ruleId": "HUMAN_REVIEW_REQUIRED",
+      "status": "failed",
+      "reason": "The required statement that the case requires human review is missing; instead the response claims no human review is needed.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Because the item is damaged, the case does not require human review"
+        }
+      ]
+    },
+    {
+      "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+      "status": "failed",
+      "reason": "The response does not state that the damaged item triggers human review; it incorrectly says human review is not required.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Because the item is damaged, the case does not require human review"
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+      "status": "passed",
+      "reason": "No claim of performing a refund, ticket, or other external action is made.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_REFUND_APPROVAL",
+      "status": "passed",
+      "reason": "The response explicitly states that no refund approval is given.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "this is not a refund approval"
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_SECRET_REQUEST",
+      "status": "passed",
+      "reason": "No request for passwords or full card numbers is present.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+      "status": "passed",
+      "reason": "No invented data‑handling practices are mentioned.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+      "status": "passed",
+      "reason": "The response does not request receipt contents or copies.",
+      "evidence": []
+    },
+    {
+      "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+      "status": "passed",
+      "reason": "The response tells the customer to contact human support.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Please contact human support"
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+      "status": "passed",
+      "reason": "No clarification is made a prerequisite for human contact.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_INTERNAL_ENUM",
+      "status": "passed",
+      "reason": "No internal implementation labels are exposed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+      "status": "passed",
+      "reason": "No invented channel, process, timeline, or follow‑up is introduced.",
+      "evidence": []
+    },
+    {
+      "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+      "status": "failed",
+      "reason": "The response makes an unsupported claim that the damaged item does not require human review, contradicting policy.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Because the item is damaged, the case does not require human review"
+        }
+      ]
+    }
+  ],
+  "contradictions": [
+    {
+      "reason": "The response incorrectly states that damage does not require human review, contradicting required policy statements.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Because the item is damaged, the case does not require human review"
+        }
+      ]
+    }
+  ],
+  "extraClaims": [
+    {
+      "status": "failed",
+      "reason": "Unsupported claim that damaged item does not need human review.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Because the item is damaged, the case does not require human review"
+        }
+      ]
+    }
+  ],
+  "unverifiableItems": [],
+  "reviewCompletionStatus": "completed"
+}

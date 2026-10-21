@@ -1,0 +1,155 @@
+✖ no material collection: Standard returns require an unused item within 30 days of purchase with a receipt. (2.750084ms)
+✖ no material collection: A receipt is required for standard returns. (0.309333ms)
+✔ no material collection: Please confirm whether a receipt exists. (0.077709ms)
+✔ no material collection: Please confirm whether you have a receipt. (0.047417ms)
+✖ no material collection: Please provide the purchase date, confirm whether the item is unused, and confirm whether a receipt exists. (0.070541ms)
+✖ availability itself is a safe next step: Please confirm whether a receipt exists. (0.056959ms)
+✔ availability itself is a safe next step: Tell me whether you have a receipt. (0.112583ms)
+✖ availability itself is a safe next step: Do you have a receipt? (0.19975ms)
+✔ collection still blocked: Please upload your receipt. (0.103417ms)
+✔ collection still blocked: Please provide proof of purchase. (0.085459ms)
+✔ collection still blocked: Please provide proof of receipt. (0.045583ms)
+✔ collection still blocked: We need a copy of your receipt. (0.036917ms)
+✔ collection still blocked: Please upload proof that you have a receipt. (0.03025ms)
+✔ collection still blocked: Please confirm your receipt number. (0.033042ms)
+✔ collection still blocked: Please provide your email address. (0.430708ms)
+✔ collection still blocked: Please send it to us. (0.050666ms)
+✔ collection still blocked: Please provide the purchase date and a receipt. (0.223958ms)
+✔ collection still blocked: Please confirm whether you have a receipt and upload it. (0.048458ms)
+✔ collection still blocked: Do not upload your receipt, but send a photo of it. (0.04375ms)
+✖ safe document refusal does not ban clarification (0.084333ms)
+✔ negation cannot excuse a separate secret request (0.027958ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 15
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 44.753417
+
+✖ failing tests:
+
+test at dist/tests/privacy-v29.test.js:8:5
+✖ no material collection: Standard returns require an unused item within 30 days of purchase with a receipt. (2.750084ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/privacy-v29.test.js:10:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/privacy-v29.test.js:8:5
+✖ no material collection: A receipt is required for standard returns. (0.309333ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/privacy-v29.test.js:10:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/privacy-v29.test.js:8:5
+✖ no material collection: Please provide the purchase date, confirm whether the item is unused, and confirm whether a receipt exists. (0.070541ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/privacy-v29.test.js:10:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/privacy-v29.test.js:15:5
+✖ availability itself is a safe next step: Please confirm whether a receipt exists. (0.056959ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/privacy-v29.test.js:15:79)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/privacy-v29.test.js:15:5
+✖ availability itself is a safe next step: Do you have a receipt? (0.19975ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/privacy-v29.test.js:15:79)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/privacy-v29.test.js:25:1
+✖ safe document refusal does not ban clarification (0.084333ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/privacy-v29.test.js:25:71)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

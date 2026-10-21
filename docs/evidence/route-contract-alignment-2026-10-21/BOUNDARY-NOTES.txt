@@ -1,0 +1,8 @@
+绑定范围与来源说明
+
+1. 新增绑定工具为后续标注者和评审器提供同一份 question/facts/decision/contract/answer 上下文。它是离线准备工具，不是新的评审框架，也没有改接正式 Worker 或封口实验入口。
+2. 对旧 80 条生成绑定视图不等于它们的原标注已经按此上下文重新确认。旧作者未依据这些实际编译对象完成本次重标；三条明确争议仍保留。REFERENCE-LABELS-80-SEPARATE.json 关联的是原冻结标签，不是新校准标签。
+3. TARGETED-PAIRS-LABELS-SEPARATE.json 的正反含义由本轮主代理依据批准政策及明确 facts/contract 编写。属于 AI 参考命题，不是独立真人标注，也不构成 v3 语义验证。
+4. 本轮只构建项目并执行两个指定测试文件，未运行全仓库测试、未重新运行手写候选的 80 条评分。测试输出证明绑定和协议边界，不证明这些新回答得到正确语义判断。
+5. 构建命令：Node 24.19.0 / TypeScript tsc --pretty false --noEmitOnError，实际退出码 0。新编译产物用于本轮指定离线测试；未发布或替换正式运行版本。
+6. 当前能力边界：没有有效语义评审不能借手写 v2 放行；未校准模型仍阻断候选交付。即便将来某注册资格被设为 qualified，候选聚合结果也不等于正式 Worker 已接入。当前保持 shadowOnly=true、calibration_pending。

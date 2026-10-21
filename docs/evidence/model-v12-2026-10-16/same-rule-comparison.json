@@ -1,0 +1,178 @@
+{
+  "createdAt": "2026-10-16T06:09:40.089Z",
+  "evaluatorVersion": "returns-policy-v2.8",
+  "sameQuestionsAndThresholds": true,
+  "previousScore": 75,
+  "score": 90,
+  "gate": "blocked",
+  "calls": 20,
+  "tokens": 14378,
+  "fixed": [
+    "escalation",
+    "greeting",
+    "extra-escalation",
+    "extra-format"
+  ],
+  "regressions": [
+    "extra-damaged"
+  ],
+  "failures": [
+    {
+      "caseId": "expired",
+      "before": "failed",
+      "after": "failed",
+      "previousReason": "Policy checks failed: outside_standard_window",
+      "currentReason": "Policy checks failed: no_unanchored_late_return_decision"
+    },
+    {
+      "caseId": "extra-damaged",
+      "before": "passed",
+      "after": "failed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Policy checks failed: no_unanchored_late_return_decision, no_ungrounded_damage_deadline"
+    }
+  ],
+  "comparison": [
+    {
+      "caseId": "eligibility",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required"
+    },
+    {
+      "caseId": "receipt",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required"
+    },
+    {
+      "caseId": "damaged",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required"
+    },
+    {
+      "caseId": "expired",
+      "before": "failed",
+      "after": "failed",
+      "previousReason": "Policy checks failed: outside_standard_window",
+      "currentReason": "Policy checks failed: no_unanchored_late_return_decision"
+    },
+    {
+      "caseId": "privacy",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required"
+    },
+    {
+      "caseId": "action",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required"
+    },
+    {
+      "caseId": "missing",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required"
+    },
+    {
+      "caseId": "escalation",
+      "before": "failed",
+      "after": "passed",
+      "previousReason": "Policy checks failed: human_handoff",
+      "currentReason": "Versioned policy checks passed; human review required"
+    },
+    {
+      "caseId": "format",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required"
+    },
+    {
+      "caseId": "greeting",
+      "before": "failed",
+      "after": "passed",
+      "previousReason": "Policy checks failed: returns_assistance",
+      "currentReason": "Versioned policy checks passed; human review required"
+    },
+    {
+      "caseId": "extra-eligibility",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required"
+    },
+    {
+      "caseId": "extra-receipt",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required"
+    },
+    {
+      "caseId": "extra-damaged",
+      "before": "passed",
+      "after": "failed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Policy checks failed: no_unanchored_late_return_decision, no_ungrounded_damage_deadline"
+    },
+    {
+      "caseId": "extra-expired",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required"
+    },
+    {
+      "caseId": "extra-privacy",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required"
+    },
+    {
+      "caseId": "extra-action",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required"
+    },
+    {
+      "caseId": "extra-missing",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required"
+    },
+    {
+      "caseId": "extra-escalation",
+      "before": "failed",
+      "after": "passed",
+      "previousReason": "Policy checks failed: human_handoff, no_unsupported_action_capability",
+      "currentReason": "Versioned policy checks passed; human review required"
+    },
+    {
+      "caseId": "extra-format",
+      "before": "failed",
+      "after": "passed",
+      "previousReason": "Policy checks failed: no_unsupported_remedy",
+      "currentReason": "Versioned policy checks passed; human review required"
+    },
+    {
+      "caseId": "extra-greeting",
+      "before": "passed",
+      "after": "passed",
+      "previousReason": "Versioned policy checks passed; human review required",
+      "currentReason": "Versioned policy checks passed; human review required"
+    }
+  ],
+  "scope": "Frozen heuristic scoring of raw real-model responses; not independent human acceptance. Same development questions, not a held-out benchmark."
+}

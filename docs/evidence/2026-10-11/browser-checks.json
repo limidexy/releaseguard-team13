@@ -1,0 +1,36 @@
+{
+  "time": "2026-10-11T06:37:38.157Z",
+  "base": "http://localhost:5193",
+  "sourceCommit": "c0013a9a8ff4f30883092646455847a086d8844a",
+  "environment": "Actual browser + local containers; replay answers and generated test identities; not human UAT",
+  "checks": [
+    {
+      "name": "Registered application and ten-case suite through UI",
+      "passed": true
+    },
+    {
+      "name": "Submitted passing replay and observed 100/100 with zero critical failures",
+      "passed": true
+    },
+    {
+      "name": "Switched Chinese and English while preserving evidence",
+      "passed": true
+    },
+    {
+      "name": "Contributor approval rejected; request remained pending",
+      "passed": true
+    },
+    {
+      "name": "Independent reviewer test identity approved; version became 2 and controls disabled",
+      "passed": true
+    },
+    {
+      "name": "Downloaded evidence contains ReleaseRequested and ReleaseApproved",
+      "passed": true
+    },
+    {
+      "name": "Critical failure observed at 90/100, one critical failure; review disabled",
+      "passed": true
+    }
+  ]
+}

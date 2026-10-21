@@ -1,0 +1,7 @@
+{
+  "experimentId": "releaseguard-semantic-review-strict-v2-20261018",
+  "completedAt": "2026-10-18T01:54:29.793Z",
+  "actualRequests": 2,
+  "secondRunAuthorized": false,
+  "finalResultSha256": "05ac180f6711caad0aa02a32b3722cefb5ebc3db711bd61bd3323947295780b9"
+}

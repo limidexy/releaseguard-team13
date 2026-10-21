@@ -1,0 +1,242 @@
+ Image rg-v23-v6:local Building 
+ Image rg-v23-v6:local Building 
+ Image rg-v23-v6:local Building 
+ Image rg-v23-v6:local Building 
+ Image rg-v23-v6-postgres:local Building 
+ Image rg-v23-v6:local Building 
+ Image rg-v23-v6:local Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 4.05kB done
+#1 DONE 0.0s
+
+#2 [postgres internal] load build definition from Dockerfile
+#2 transferring dockerfile: 358B done
+#2 DONE 0.0s
+
+#3 [registry internal] load build definition from Dockerfile
+#3 transferring dockerfile: 938B done
+#3 DONE 0.0s
+
+#4 [registry internal] load metadata for docker.io/library/node:24-bookworm-slim
+#4 DONE 0.0s
+
+#5 [postgres internal] load metadata for docker.io/library/postgres:17-alpine
+#5 DONE 0.0s
+
+#6 [worker internal] load .dockerignore
+#6 transferring context: 84B done
+#6 DONE 0.0s
+
+#7 [postgres internal] load build context
+#7 transferring context: 1.26kB done
+#7 DONE 0.0s
+
+#8 [evaluation build 1/9] FROM docker.io/library/node:24-bookworm-slim@sha256:d6aa754f16b3197301076f047b5def2f02ea1dbbc2ca920407d46d7ec7f87b20
+#8 resolve docker.io/library/node:24-bookworm-slim@sha256:d6aa754f16b3197301076f047b5def2f02ea1dbbc2ca920407d46d7ec7f87b20 0.0s done
+#8 DONE 0.0s
+
+#9 [postgres 1/3] FROM docker.io/library/postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24
+#9 resolve docker.io/library/postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24 0.0s done
+#9 DONE 0.0s
+
+#10 [postgres 2/3] COPY --chmod=0644 deploy/postgres/init.sh /docker-entrypoint-initdb.d/00-init.sh
+#10 CACHED
+
+#11 [postgres 3/3] COPY --chmod=0644 deploy/postgres/init.sql /bootstrap.sql
+#11 CACHED
+
+#12 [gateway internal] load build context
+#12 transferring context: 605.44kB 0.1s done
+#12 DONE 0.1s
+
+#13 [gateway build 8/9] RUN npm test
+#13 CACHED
+
+#14 [gateway stage-1 2/7] RUN apt-get update     && apt-get install -y --no-install-recommends --only-upgrade perl-base     && apt-get clean     && rm -rf /usr/local/lib/node_modules/npm     && rm -f /usr/local/bin/npm /usr/local/bin/npx
+#14 CACHED
+
+#15 [gateway stage-1 3/7] WORKDIR /app
+#15 CACHED
+
+#16 [gateway build 2/9] WORKDIR /app
+#16 CACHED
+
+#17 [gateway build 3/9] COPY package*.json tsconfig.json ./
+#17 CACHED
+
+#18 [gateway build 6/9] COPY tests ./tests
+#18 CACHED
+
+#19 [gateway build 5/9] COPY src ./src
+#19 CACHED
+
+#20 [gateway stage-1 5/7] COPY --from=build --chown=node:node /app/dist ./dist
+#20 CACHED
+
+#21 [gateway stage-1 6/7] COPY --chown=node:node package.json ./
+#21 CACHED
+
+#22 [gateway build 4/9] RUN npm ci --no-audit --no-fund
+#22 CACHED
+
+#23 [gateway build 7/9] COPY public ./public
+#23 CACHED
+
+#24 [gateway stage-1 4/7] COPY --from=build --chown=node:node /app/node_modules ./node_modules
+#24 CACHED
+
+#25 [gateway build 9/9] RUN npm prune --omit=dev
+#25 CACHED
+
+#26 [evaluation stage-1 7/7] COPY --chown=node:node public ./public
+#26 CACHED
+
+#27 [postgres] exporting to image
+#27 exporting layers done
+#27 exporting manifest sha256:d403dec6a90d42ec2a5cf57e4918e2c8cff98f3b191600d77fd87d82e49820e1 done
+#27 exporting config sha256:45a77d6ec9009401766e149c0bafedd23a9ea42c61a101b7fa4ec537260493d0 done
+#27 exporting attestation manifest sha256:87ef42f86653308129437d256e734431cbb12fe56b55969b0923c6686591cc0a done
+#27 exporting manifest list sha256:0c17c4811f1bd8ee61914e4c97e3f5a68ec35900ebbac2eeb69652a00a66289e done
+#27 naming to docker.io/library/rg-v23-v6-postgres:local done
+#27 unpacking to docker.io/library/rg-v23-v6-postgres:local done
+#27 DONE 0.1s
+
+#28 [registry] exporting to image
+#28 exporting layers done
+#28 exporting manifest sha256:e9291e4ff037b6b8b60e5ca1d8dec90c3680d109943f0a064f60a724db06b581 done
+#28 exporting config sha256:a7b0993b40aa02a5f41cb3a9fda5b94822576ec8ba9775f7d37109b46e31444e done
+#28 exporting attestation manifest sha256:a86295603060e2e90e0fcd31ec052c8c520e5b355c423a729685c7ad8f85820d 0.0s done
+#28 exporting manifest list sha256:91860e0fb9078858e32df17b83a5389b75a8972cdca1a45df430d8913c6318ad
+#28 exporting manifest list sha256:91860e0fb9078858e32df17b83a5389b75a8972cdca1a45df430d8913c6318ad 0.0s done
+#28 naming to docker.io/library/rg-v23-v6:local 0.0s done
+#28 unpacking to docker.io/library/rg-v23-v6:local 0.0s done
+#28 DONE 0.2s
+
+#29 [evaluation] exporting to image
+#29 exporting layers done
+#29 exporting manifest sha256:4a13cefe22cc153b04e9604094497c14bc81c5631b66e1369f3a950c8f296d3a done
+#29 exporting config sha256:1ce4f648669ec6feb35ad0e990392ed2603b4ba9b119109210ef8ccba497260d 0.0s done
+#29 exporting attestation manifest sha256:025e7e1fc8abf124c8317e0fc8980db945d546580861108ec25d7be38800e753 0.0s done
+#29 exporting manifest list sha256:4209b5e367744c1c92716e396c549bd25cc4e7a70a30e3a1f1b937e7fcd733aa 0.0s done
+#29 naming to docker.io/library/rg-v23-v6:local 0.0s done
+#29 unpacking to docker.io/library/rg-v23-v6:local 0.0s done
+#29 DONE 0.2s
+
+#30 [governance] exporting to image
+#30 exporting layers done
+#30 exporting manifest sha256:9c7ffcd858d692979739b1ce01738622e76e5cf74d4b6acd92291c6af452a0e1 done
+#30 exporting config sha256:a9f3645cf7c397cc06112f63d3d1ae9ec4c56abf7944cd377f555cfb9f51113b 0.0s done
+#30 exporting attestation manifest sha256:146c90a444d02f2a5e3830388c78ad766cfbd4d2daea88cb7688a2a75de11afc 0.0s done
+#30 exporting manifest list sha256:ec1b3cef6f4b0482ee988c313b8a10b965c429e84d3ec6e5de81e61b2a01f60a 0.0s done
+#30 naming to docker.io/library/rg-v23-v6:local done
+#30 unpacking to docker.io/library/rg-v23-v6:local 0.0s done
+#30 DONE 0.2s
+
+#31 [support] exporting to image
+#31 exporting layers done
+#31 exporting manifest sha256:4753de342cc8c9b9fe40797bdef72961dce803f7ffe75f9e9c9ef5f3c53ac137 0.0s done
+#31 exporting config sha256:fe395d48e037535e39486d28da00cfcbf104fc2c7fee4fc915969e606270ad32 0.0s done
+#31 exporting attestation manifest sha256:23a2044a517d478babc78832f203229f69d10e8551167481b2ae09bdc7a49a80 0.0s done
+#31 exporting manifest list sha256:e75887f3bc5e8c4c4a4ba9720d3bc02b9e7c47f2223a9806592b6eeef4ba9e39 0.0s done
+#31 naming to docker.io/library/rg-v23-v6:local done
+#31 unpacking to docker.io/library/rg-v23-v6:local 0.0s done
+#31 DONE 0.2s
+
+#32 [worker] exporting to image
+#32 exporting layers done
+#32 exporting manifest sha256:861f2345ce93d794a1aedfbc80b77a43e3dc1cb719d136d6f26a3730341d9a75 0.0s done
+#32 exporting config sha256:8be70e67e45d7c050e4b794d737d509720df819234b4ece89d6882d18e948cb6 0.0s done
+#32 exporting attestation manifest sha256:27ab075d5d908b8fb6bb011e5b695095630de4dd038399c06059c6cea2bac478 0.0s done
+#32 exporting manifest list sha256:bf644678048177271cb4507e2618d95d9f92b75116149e94d719c96f5f781126 0.0s done
+#32 naming to docker.io/library/rg-v23-v6:local done
+#32 unpacking to docker.io/library/rg-v23-v6:local 0.0s done
+#32 DONE 0.2s
+
+#33 [gateway] exporting to image
+#33 exporting layers done
+#33 exporting manifest sha256:3769a3b51aaafb5d65ccb152bcd43a5e35806edc96c4b02efa8cc72b262199ff 0.0s done
+#33 exporting config sha256:27eda1bbbb5f39e4a12b624e10d56e4954ea01ba7fab409623e9a94e549604a3 0.0s done
+#33 exporting attestation manifest sha256:3109fa1983fb3294635000418370fce293b98d1589365c2f3c498bf868516531 0.0s done
+#33 exporting manifest list sha256:aa1f20eac3fa164fc7c9c9c36bc8a00f001bea1b2901314efd9164549597aa55 0.0s done
+#33 naming to docker.io/library/rg-v23-v6:local done
+#33 unpacking to docker.io/library/rg-v23-v6:local done
+#33 DONE 0.2s
+
+#34 [postgres] resolving provenance for metadata file
+#34 DONE 0.1s
+
+#35 [worker] resolving provenance for metadata file
+#35 DONE 0.1s
+
+#36 [registry] resolving provenance for metadata file
+#36 DONE 0.1s
+
+#37 [support] resolving provenance for metadata file
+#37 DONE 0.1s
+
+#38 [gateway] resolving provenance for metadata file
+#38 DONE 0.0s
+
+#39 [evaluation] resolving provenance for metadata file
+#39 DONE 0.0s
+
+#40 [governance] resolving provenance for metadata file
+#40 DONE 0.0s
+ Image rg-v23-v6:local Built 
+ Image rg-v23-v6:local Built 
+ Image rg-v23-v6:local Built 
+ Image rg-v23-v6:local Built 
+ Image rg-v23-v6:local Built 
+ Image rg-v23-v6-postgres:local Built 
+ Image rg-v23-v6:local Built 
+ Container rg-v23-v6-20261015-rabbitmq-1 Running 
+ Container rg-v23-v6-20261015-postgres-1 Recreate 
+ Container rg-v23-v6-20261015-support-1 Recreate 
+ Container rg-v23-v6-20261015-support-1 Recreated 
+ Container rg-v23-v6-20261015-postgres-1 Recreated 
+ Container rg-v23-v6-20261015-registry-1 Recreate 
+ Container rg-v23-v6-20261015-registry-1 Recreated 
+ Container rg-v23-v6-20261015-evaluation-1 Recreate 
+ Container rg-v23-v6-20261015-evaluation-1 Recreated 
+ Container rg-v23-v6-20261015-governance-1 Recreate 
+ Container rg-v23-v6-20261015-worker-1 Recreate 
+ Container rg-v23-v6-20261015-worker-1 Recreated 
+ Container rg-v23-v6-20261015-governance-1 Recreated 
+ Container rg-v23-v6-20261015-gateway-1 Recreate 
+ Container rg-v23-v6-20261015-gateway-1 Recreated 
+ Container rg-v23-v6-20261015-postgres-1 Starting 
+ Container rg-v23-v6-20261015-support-1 Starting 
+ Container rg-v23-v6-20261015-support-1 Started 
+ Container rg-v23-v6-20261015-postgres-1 Started 
+ Container rg-v23-v6-20261015-postgres-1 Waiting 
+ Container rg-v23-v6-20261015-postgres-1 Healthy 
+ Container rg-v23-v6-20261015-registry-1 Starting 
+ Container rg-v23-v6-20261015-registry-1 Started 
+ Container rg-v23-v6-20261015-rabbitmq-1 Waiting 
+ Container rg-v23-v6-20261015-registry-1 Waiting 
+ Container rg-v23-v6-20261015-rabbitmq-1 Healthy 
+ Container rg-v23-v6-20261015-registry-1 Healthy 
+ Container rg-v23-v6-20261015-evaluation-1 Starting 
+ Container rg-v23-v6-20261015-evaluation-1 Started 
+ Container rg-v23-v6-20261015-support-1 Waiting 
+ Container rg-v23-v6-20261015-evaluation-1 Waiting 
+ Container rg-v23-v6-20261015-evaluation-1 Waiting 
+ Container rg-v23-v6-20261015-support-1 Healthy 
+ Container rg-v23-v6-20261015-evaluation-1 Healthy 
+ Container rg-v23-v6-20261015-evaluation-1 Healthy 
+ Container rg-v23-v6-20261015-worker-1 Starting 
+ Container rg-v23-v6-20261015-governance-1 Starting 
+ Container rg-v23-v6-20261015-governance-1 Started 
+ Container rg-v23-v6-20261015-governance-1 Waiting 
+ Container rg-v23-v6-20261015-worker-1 Started 
+ Container rg-v23-v6-20261015-governance-1 Healthy 
+ Container rg-v23-v6-20261015-gateway-1 Starting 
+ Container rg-v23-v6-20261015-gateway-1 Started 
+{"Command":"\"docker-entrypoint.s…\"","CreatedAt":"2026-10-16 16:56:48 +0800 +08","ExitCode":0,"Health":"healthy","ID":"66815208d9f1","Image":"rg-v23-v6:local","Labels":"com.docker.compose.depends_on=rabbitmq:service_healthy:false,registry:service_healthy:false,com.docker.compose.project=rg-v23-v6-20261015,com.docker.compose.service=evaluation,com.docker.compose.image=sha256:91860e0fb9078858e32df17b83a5389b75a8972cdca1a45df430d8913c6318ad,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/compose.yaml,/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/compose.v23-local.yaml,com.docker.compose.project.working_dir=/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard,com.docker.compose.replace=evaluation-1,com.docker.compose.version=5.3.1,desktop.docker.io/ports.scheme=v2,com.docker.compose.config-hash=fdf8ca6d97efd244c363c872eb903519d5361046687f332fe8502c9d07d39663,com.docker.compose.container-number=1","LocalVolumes":"0","Mounts":"","Name":"rg-v23-v6-20261015-evaluation-1","Names":"rg-v23-v6-20261015-evaluation-1","Networks":"rg-v23-v6-20261015_default","Ports":"8080/tcp","Project":"rg-v23-v6-20261015","Publishers":[{"URL":"","TargetPort":8080,"PublishedPort":0,"Protocol":"tcp"}],"RunningFor":"24 seconds ago","Service":"evaluation","Size":"0B","State":"running","Status":"Up 11 seconds (healthy)"}
+{"Command":"\"docker-entrypoint.s…\"","CreatedAt":"2026-10-16 16:56:49 +0800 +08","ExitCode":0,"Health":"starting","ID":"15de758a21cb","Image":"rg-v23-v6:local","Labels":"com.docker.compose.project.config_files=/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/compose.yaml,/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/compose.v23-local.yaml,com.docker.compose.project.working_dir=/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard,com.docker.compose.replace=gateway-1,com.docker.compose.service=gateway,com.docker.compose.version=5.3.1,com.docker.compose.config-hash=6eb3c14af45b6667e4fd35e9f7d3c9f18c37d343d9787fd05cc04f494b8b29a6,com.docker.compose.depends_on=governance:service_healthy:false,com.docker.compose.oneoff=False,desktop.docker.io/ports.scheme=v2,desktop.docker.io/ports/8080/tcp=127.0.0.1:5393,com.docker.compose.container-number=1,com.docker.compose.image=sha256:91860e0fb9078858e32df17b83a5389b75a8972cdca1a45df430d8913c6318ad,com.docker.compose.project=rg-v23-v6-20261015","LocalVolumes":"0","Mounts":"","Name":"rg-v23-v6-20261015-gateway-1","Names":"rg-v23-v6-20261015-gateway-1","Networks":"rg-v23-v6-20261015_default","Ports":"127.0.0.1:5393-\u003e8080/tcp","Project":"rg-v23-v6-20261015","Publishers":[{"URL":"127.0.0.1","TargetPort":8080,"PublishedPort":5393,"Protocol":"tcp"}],"RunningFor":"23 seconds ago","Service":"gateway","Size":"0B","State":"running","Status":"Up Less than a second (health: starting)"}
+{"Command":"\"docker-entrypoint.s…\"","CreatedAt":"2026-10-16 16:56:49 +0800 +08","ExitCode":0,"Health":"healthy","ID":"622fee059bc5","Image":"rg-v23-v6:local","Labels":"com.docker.compose.project.config_files=/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/compose.yaml,/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/compose.v23-local.yaml,desktop.docker.io/ports.scheme=v2,com.docker.compose.oneoff=False,com.docker.compose.project.working_dir=/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard,com.docker.compose.replace=governance-1,com.docker.compose.service=governance,com.docker.compose.version=5.3.1,com.docker.compose.config-hash=cdd5c12555d0bc1d02f8204a306a21569d9f60f996d91a5c5fbe866a3dd2a49f,com.docker.compose.container-number=1,com.docker.compose.depends_on=evaluation:service_healthy:false,com.docker.compose.image=sha256:91860e0fb9078858e32df17b83a5389b75a8972cdca1a45df430d8913c6318ad,com.docker.compose.project=rg-v23-v6-20261015","LocalVolumes":"0","Mounts":"","Name":"rg-v23-v6-20261015-governance-1","Names":"rg-v23-v6-20261015-governance-1","Networks":"rg-v23-v6-20261015_default","Ports":"8080/tcp","Project":"rg-v23-v6-20261015","Publishers":[{"URL":"","TargetPort":8080,"PublishedPort":0,"Protocol":"tcp"}],"RunningFor":"23 seconds ago","Service":"governance","Size":"0B","State":"running","Status":"Up 5 seconds (healthy)"}
+{"Command":"\"docker-entrypoint.s…\"","CreatedAt":"2026-10-16 16:56:48 +0800 +08","ExitCode":0,"Health":"healthy","ID":"14ee08c855c9","Image":"rg-v23-v6-postgres:local","Labels":"com.docker.compose.project=rg-v23-v6-20261015,com.docker.compose.project.config_files=/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/compose.yaml,/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/compose.v23-local.yaml,com.docker.compose.project.working_dir=/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard,com.docker.compose.service=postgres,com.docker.compose.version=5.3.1,com.docker.compose.config-hash=48e6d94babae1e80ef69b0c014dce14fa59fad244bd3becb5bbe2c6f51ea5ffc,com.docker.compose.container-number=1,com.docker.compose.replace=postgres-1,desktop.docker.io/ports.scheme=v2,com.docker.compose.depends_on=,com.docker.compose.image=sha256:0c17c4811f1bd8ee61914e4c97e3f5a68ec35900ebbac2eeb69652a00a66289e,com.docker.compose.oneoff=False","LocalVolumes":"1","Mounts":"rg-v23-v6-2026…","Name":"rg-v23-v6-20261015-postgres-1","Names":"rg-v23-v6-20261015-postgres-1","Networks":"rg-v23-v6-20261015_default","Ports":"5432/tcp","Project":"rg-v23-v6-20261015","Publishers":[{"URL":"","TargetPort":5432,"PublishedPort":0,"Protocol":"tcp"}],"RunningFor":"24 seconds ago","Service":"postgres","Size":"0B","State":"running","Status":"Up 22 seconds (healthy)"}
+{"Command":"\"docker-entrypoint.s…\"","CreatedAt":"2026-10-15 20:10:05 +0800 +08","ExitCode":0,"Health":"healthy","ID":"76eac7ade84e","Image":"rabbitmq:4-management-alpine","Labels":"com.docker.compose.project=rg-v23-v6-20261015,com.docker.compose.project.working_dir=/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard,com.docker.compose.depends_on=,com.docker.compose.image=sha256:3ef7f7e89fed709a78f79b8b5f4e30e1312a1d4089da752e23595566d9d61a95,com.docker.compose.project.config_files=/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/compose.yaml,/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/compose.v23-local.yaml,com.docker.compose.service=rabbitmq,com.docker.compose.version=5.3.1,desktop.docker.io/ports.scheme=v2,com.docker.compose.config-hash=153ab4ffaf5295d7031d2618bc8b557321522883db3141fd0c7dd368d3936896,com.docker.compose.container-number=1,com.docker.compose.oneoff=False","LocalVolumes":"1","Mounts":"rg-v23-v6-2026…","Name":"rg-v23-v6-20261015-rabbitmq-1","Names":"rg-v23-v6-20261015-rabbitmq-1","Networks":"rg-v23-v6-20261015_default","Ports":"4369/tcp, 5671-5672/tcp, 15671-15672/tcp, 15691-15692/tcp, 25672/tcp","Project":"rg-v23-v6-20261015","Publishers":[{"URL":"","TargetPort":4369,"PublishedPort":0,"Protocol":"tcp"},{"URL":"","TargetPort":5671,"PublishedPort":0,"Protocol":"tcp"},{"URL":"","TargetPort":5672,"PublishedPort":0,"Protocol":"tcp"},{"URL":"","TargetPort":15671,"PublishedPort":0,"Protocol":"tcp"},{"URL":"","TargetPort":15672,"PublishedPort":0,"Protocol":"tcp"},{"URL":"","TargetPort":15691,"PublishedPort":0,"Protocol":"tcp"},{"URL":"","TargetPort":15692,"PublishedPort":0,"Protocol":"tcp"},{"URL":"","TargetPort":25672,"PublishedPort":0,"Protocol":"tcp"}],"RunningFor":"21 hours ago","Service":"rabbitmq","Size":"0B","State":"running","Status":"Up About a minute (healthy)"}
+{"Command":"\"docker-entrypoint.s…\"","CreatedAt":"2026-10-16 16:56:48 +0800 +08","ExitCode":0,"Health":"healthy","ID":"bbf77d7a5129","Image":"rg-v23-v6:local","Labels":"com.docker.compose.version=5.3.1,desktop.docker.io/ports.scheme=v2,com.docker.compose.image=sha256:91860e0fb9078858e32df17b83a5389b75a8972cdca1a45df430d8913c6318ad,com.docker.compose.project=rg-v23-v6-20261015,com.docker.compose.project.working_dir=/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard,com.docker.compose.replace=registry-1,com.docker.compose.config-hash=acd26bb888a3039dd0615c44acc8ca706aebc717198c029f9119491c01ec6a6a,com.docker.compose.container-number=1,com.docker.compose.depends_on=postgres:service_healthy:false,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/compose.yaml,/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/compose.v23-local.yaml,com.docker.compose.service=registry","LocalVolumes":"0","Mounts":"","Name":"rg-v23-v6-20261015-registry-1","Names":"rg-v23-v6-20261015-registry-1","Networks":"rg-v23-v6-20261015_default","Ports":"8080/tcp","Project":"rg-v23-v6-20261015","Publishers":[{"URL":"","TargetPort":8080,"PublishedPort":0,"Protocol":"tcp"}],"RunningFor":"24 seconds ago","Service":"registry","Size":"0B","State":"running","Status":"Up 16 seconds (healthy)"}
+{"Command":"\"docker-entrypoint.s…\"","CreatedAt":"2026-10-16 16:56:48 +0800 +08","ExitCode":0,"Health":"healthy","ID":"2fef61734f23","Image":"rg-v23-v6:local","Labels":"com.docker.compose.project=rg-v23-v6-20261015,com.docker.compose.project.config_files=/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/compose.yaml,/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/compose.v23-local.yaml,com.docker.compose.service=support,com.docker.compose.config-hash=e1057e8bb88d9c00cdb124ac6e28c7f502fca0013d851de092ea405d7444dd88,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.oneoff=False,com.docker.compose.project.working_dir=/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard,com.docker.compose.replace=support-1,com.docker.compose.version=5.3.1,desktop.docker.io/ports.scheme=v2,com.docker.compose.image=sha256:91860e0fb9078858e32df17b83a5389b75a8972cdca1a45df430d8913c6318ad","LocalVolumes":"0","Mounts":"","Name":"rg-v23-v6-20261015-support-1","Names":"rg-v23-v6-20261015-support-1","Networks":"rg-v23-v6-20261015_default","Ports":"8080/tcp","Project":"rg-v23-v6-20261015","Publishers":[{"URL":"","TargetPort":8080,"PublishedPort":0,"Protocol":"tcp"}],"RunningFor":"24 seconds ago","Service":"support","Size":"0B","State":"running","Status":"Up 22 seconds (healthy)"}
+{"Command":"\"docker-entrypoint.s…\"","CreatedAt":"2026-10-16 16:56:49 +0800 +08","ExitCode":0,"Health":"healthy","ID":"1cde884ff453","Image":"rg-v23-v6:local","Labels":"com.docker.compose.config-hash=a60b44b6d0085fe1cdd859101eb9711b30e1ebf83d4ad120bac92fe63bc96c19,com.docker.compose.container-number=1,com.docker.compose.image=sha256:91860e0fb9078858e32df17b83a5389b75a8972cdca1a45df430d8913c6318ad,com.docker.compose.oneoff=False,com.docker.compose.project.working_dir=/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard,com.docker.compose.replace=worker-1,com.docker.compose.version=5.3.1,com.docker.compose.depends_on=support:service_healthy:false,evaluation:service_healthy:false,com.docker.compose.project=rg-v23-v6-20261015,com.docker.compose.project.config_files=/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/compose.yaml,/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/compose.v23-local.yaml,com.docker.compose.service=worker,desktop.docker.io/ports.scheme=v2","LocalVolumes":"0","Mounts":"","Name":"rg-v23-v6-20261015-worker-1","Names":"rg-v23-v6-20261015-worker-1","Networks":"rg-v23-v6-20261015_default","Ports":"8080/tcp","Project":"rg-v23-v6-20261015","Publishers":[{"URL":"","TargetPort":8080,"PublishedPort":0,"Protocol":"tcp"}],"RunningFor":"23 seconds ago","Service":"worker","Size":"0B","State":"running","Status":"Up 5 seconds (healthy)"}

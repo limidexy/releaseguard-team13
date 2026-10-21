@@ -1,0 +1,50 @@
+{
+  "evaluationTarget": "fact_extraction_diagnostic_only",
+  "includedInAnswerComplianceScore": false,
+  "disputes": [
+    {
+      "fixtureId": "h001",
+      "question": "When can I return an unused item?",
+      "actualFacts": {
+        "purchaseDaysAgo": null,
+        "unused": null,
+        "receipt": null,
+        "damaged": false,
+        "dispute": false,
+        "actionRequested": false,
+        "privacy": false
+      },
+      "referenceInterpretation": "The words unused item establish unused=true; ask purchase date and receipt only."
+    },
+    {
+      "fixtureId": "h003",
+      "question": "When can I return an unused item?",
+      "actualFacts": {
+        "purchaseDaysAgo": null,
+        "unused": null,
+        "receipt": null,
+        "damaged": false,
+        "dispute": false,
+        "actionRequested": false,
+        "privacy": false
+      },
+      "referenceInterpretation": "The same unused-item question establishes unused=true; asking purchase date and receipt suffices."
+    },
+    {
+      "fixtureId": "h046",
+      "question": "I lost the paper receipt and cannot find any purchase confirmation. Can you waive the proof requirement?",
+      "actualFacts": {
+        "purchaseDaysAgo": null,
+        "unused": null,
+        "receipt": false,
+        "damaged": false,
+        "dispute": false,
+        "actionRequested": false,
+        "privacy": false
+      },
+      "referenceInterpretation": "All missing facts, including unused status, must be requested even in the missing-receipt human-review path."
+    }
+  ],
+  "extractorChanged": false,
+  "policyChanged": false
+}

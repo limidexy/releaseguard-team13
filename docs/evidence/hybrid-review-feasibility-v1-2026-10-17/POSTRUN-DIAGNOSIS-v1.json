@@ -1,0 +1,66 @@
+{
+  "version": "hybrid-review-feasibility-postrun-diagnosis-v1",
+  "experimentId": "releaseguard-hybrid-review-feasibility-v1-20261017",
+  "status": "REAL_REVIEW_FEASIBILITY_FAILED",
+  "fixedDenominator": 20,
+  "actualRequests": {
+    "semanticReview": 20,
+    "customerGeneration": 0,
+    "automaticRetries": 0,
+    "providerSwitches": 0
+  },
+  "referenceSet": {
+    "correct": 10,
+    "violating": 10,
+    "source": "project_reference_annotation",
+    "hiddenSet": false
+  },
+  "providerAndProtocolOutcomes": {
+    "httpCompletedAndPayloadSchemaParsed": 3,
+    "payloadSchemaInvalid": 16,
+    "providerHttp429": 1,
+    "finalReviewValidationPassed": 0,
+    "finalReviewValidationFailed": 20
+  },
+  "strictFailClosedDeliveryView": {
+    "correctAllowed": 0,
+    "correctIncorrectlyBlocked": 10,
+    "violationsAllowed": 0,
+    "violationsBlockedFailClosed": 10,
+    "warning": "The ten violation blocks cannot be credited as semantic true blocks because no review passed the frozen validation protocol."
+  },
+  "semanticAccuracyView": {
+    "evaluableCorrectSamples": 0,
+    "evaluableViolatingSamples": 0,
+    "confirmedTrueAllow": 0,
+    "confirmedTrueBlock": 0,
+    "confirmedFalseAllow": 0,
+    "confirmedFalseBlock": 0,
+    "accuracy": null,
+    "reasonAgreement": "0/16",
+    "explanation": "No result passed schema, evidence and provenance validation, so semantic accuracy is not measurable from this run."
+  },
+  "observedFailureFamilies": {
+    "invalidPayloadEvents": 16,
+    "invalidEvidenceSourceOrPathIssues": 119,
+    "observationStringInsteadOfObjectIssues": 2,
+    "wrongObservationShapeIssues": 18,
+    "parsedReviewsMissingRequiredEvidence": 3,
+    "apparentSemanticMisjudgmentsInParsedReviews": 1,
+    "providerRateLimitErrors": 1
+  },
+  "evidenceCapture": {
+    "exactRawReviewTextRetained": 3,
+    "exactRawReviewTextUnavailable": 16,
+    "noReviewTextBecauseProvider429": 1,
+    "defect": "The frozen runner discarded raw provider content and request metadata when the payload schema was invalid. This was corrected after the run for future evidence, but the 16 historical raw texts cannot be reconstructed from local evidence."
+  },
+  "integrity": {
+    "formalDeliveryActivated": false,
+    "historicalScoresChanged": false,
+    "deployment": false,
+    "publication": false,
+    "gitPush": false,
+    "secondRunAuthorized": false
+  }
+}

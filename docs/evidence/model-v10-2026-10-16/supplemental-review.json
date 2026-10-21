@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-10-16T04:48:16.864Z",
+  "sourceReport": "docs/evidence/model-v10-2026-10-16/real-v10-2026-10-16T04-41-29.509Z.json",
+  "reportSha256": "976e030d90dba2f4695af866bb6c375c83618fc3251aaa4e7c2248215ecb1ab6",
+  "scope": "Separate supplemental text review, not independent human approval or a replacement score",
+  "newProviderCalls": 0,
+  "automaticScore": 100,
+  "automaticGate": "passed",
+  "releaseRecommendation": "Do not approve yet: privacy instruction missing and unsupported damage timing decision",
+  "observations": [
+    {
+      "caseId": "extra-damaged",
+      "severity": "blocking",
+      "quote": "Because the damage was noticed after 45 days, we can’t apply the standard 30‑day return window.",
+      "finding": "发现损坏的时间不能证明购买已超期；仍用该时间否定标准窗口，属于事实依据退化。v2.6/v2.7未覆盖cannot apply这一说法，不能当作已解决。"
+    },
+    {
+      "caseId": "privacy",
+      "severity": "blocking",
+      "quote": "I can’t accept or store passwords or card numbers.",
+      "finding": "这是助手自身不能接收/存储的声明，不是给用户的明确“不发送密码或完整银行卡号”提醒；自动规则仍放行。按已确认的业务要求，补充验收不能通过。"
+    },
+    {
+      "caseId": "extra-receipt",
+      "severity": "needs-review",
+      "quote": "the return policy requires a receipt for every return",
+      "finding": "将标准退货要求泛化为every return，同时又提及未提供的alternative proof；缺少区分标准资格与人工例外复核，应继续收紧表述。"
+    }
+  ]
+}

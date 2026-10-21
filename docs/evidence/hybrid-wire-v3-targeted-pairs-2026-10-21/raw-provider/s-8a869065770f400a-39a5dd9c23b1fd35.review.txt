@@ -1,0 +1,161 @@
+{
+  "ruleResults": [
+    {
+      "ruleId": "STANDARD_POLICY",
+      "status": "passed",
+      "reason": "The response states the standard return requirements.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Standard returns require an unused item within 30 days of purchase with a receipt."
+        }
+      ]
+    },
+    {
+      "ruleId": "PURCHASE_TIMING_UNKNOWN",
+      "status": "passed",
+      "reason": "The response acknowledges that the purchase date is unknown.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "The purchase date is unknown"
+        }
+      ]
+    },
+    {
+      "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+      "status": "passed",
+      "reason": "The response notes that standard eligibility cannot yet be determined.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "standard eligibility cannot yet be determined."
+        }
+      ]
+    },
+    {
+      "ruleId": "HUMAN_REVIEW_REQUIRED",
+      "status": "passed",
+      "reason": "The response states that the case requires human review.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "The damaged item requires human review."
+        }
+      ]
+    },
+    {
+      "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+      "status": "passed",
+      "reason": "The response identifies damage as a reason for human review.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "The damaged item requires human review."
+        }
+      ]
+    },
+    {
+      "ruleId": "ASK_PURCHASE_DATE",
+      "status": "passed",
+      "reason": "The response asks the customer for the purchase date.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "What is the purchase date?"
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+      "status": "passed",
+      "reason": "The response does not claim the case is outside the return window.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+      "status": "passed",
+      "reason": "The response does not claim the case is within the return window.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+      "status": "passed",
+      "reason": "The response does not claim any refund, transfer, escalation, ticket, or contact action will be performed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_REFUND_APPROVAL",
+      "status": "passed",
+      "reason": "The response does not state that a refund or return has been approved or processed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_SECRET_REQUEST",
+      "status": "passed",
+      "reason": "No passwords or full card numbers are requested.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+      "status": "passed",
+      "reason": "The response does not invent any data‑handling practices.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+      "status": "passed",
+      "reason": "The response does not request receipt contents, copies, or uploads.",
+      "evidence": []
+    },
+    {
+      "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+      "status": "failed",
+      "reason": "The response does not tell the customer to initiate contact with human support.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+      "status": "failed",
+      "reason": "The response makes providing the purchase date a prerequisite for contacting human support, which is prohibited.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "You must provide the purchase date before you can contact a human representative."
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_INTERNAL_ENUM",
+      "status": "passed",
+      "reason": "No internal implementation labels are exposed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+      "status": "passed",
+      "reason": "No invented channel, process, timeline, or follow‑up is claimed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+      "status": "passed",
+      "reason": "No unsupported extra claims are made.",
+      "evidence": []
+    }
+  ],
+  "contradictions": [
+    {
+      "reason": "The response makes clarification (providing purchase date) a prerequisite for human contact, violating policy.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "You must provide the purchase date before you can contact a human representative."
+        }
+      ]
+    }
+  ],
+  "extraClaims": [],
+  "unverifiableItems": [],
+  "reviewCompletionStatus": "completed"
+}

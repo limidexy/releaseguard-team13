@@ -1,0 +1,25 @@
+Observed via authenticated Chrome accessibility inspection, 2026-10-21 04:21–04:23 UTC.
+
+https://console.groq.com/settings/billing/plans
+Organization selector: Personal
+Project selector: Default Project
+Free
+Great for anyone to get started with our APIs $0
+button (disabled) Current Plan
+Developer tier upgrades are temporarily unavailable due to high demand.
+
+https://console.groq.com/settings/limits
+Organization Limits
+MODEL | REQUESTS PER MINUTE | REQUESTS PER DAY | TOKENS PER MINUTE | TOKENS PER DAY
+openai/gpt-oss-120b | 30 | 1K | 8K | 200K
+
+https://console.groq.com/keys
+Manage your project API keys.
+Current project: Default Project; current organization: Personal.
+Existing key name: releaseguard-team13
+Created: 2026/10/11; last used: 2026/10/19; expires: 2026/11/10
+Usage (24HRS): 0 API Calls
+UI shows only a masked key. The local credential suffix is compared in process;
+the full credential is never printed or saved to this experiment.
+
+No creation, upgrade, payment, permission change or other account mutation performed.

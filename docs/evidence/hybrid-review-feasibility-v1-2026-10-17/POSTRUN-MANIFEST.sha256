@@ -1,0 +1,13 @@
+54b2e1e28839c7b914f106282fa0834d20238219fbcba142e30617823ad9cdf7  docs/evidence/hybrid-review-feasibility-v1-2026-10-17/FREEZE-MANIFEST.json
+7ba0ea67c43b788c43eb4d662769a70eacba8da02117413a2352423dd42ba431  docs/evidence/hybrid-review-feasibility-v1-2026-10-17/MODEL-PREFLIGHT.json
+5dd04a63d1e2bcbefe5259c2a5d804113672062e97e11cb276e61e5af3ab4787  docs/evidence/hybrid-review-feasibility-v1-2026-10-17/EXPERIMENT.lock.json
+427e37b200b57af3d69f1b7747c54638dfba1b9f2a753e23b4ea92645156134e  docs/evidence/hybrid-review-feasibility-v1-2026-10-17/review-store/attempts.jsonl
+61cdd0aa791125b75a4a5d49fcecc89224da47f44955c14cdbe5048803d9ee64  docs/evidence/hybrid-review-feasibility-v1-2026-10-17/review-store/outcomes.jsonl
+ea569255ca14d979b19d7b24fd75b0fb22df08bec3c1479dbdcdc951d030c8df  docs/evidence/hybrid-review-feasibility-v1-2026-10-17/RUN.journal.jsonl
+dde8899c3fb31947f504c97a6890bd7f82a124604e0c20f3c98e8567a854216f  docs/evidence/hybrid-review-feasibility-v1-2026-10-17/FINAL-RESULT.json
+76a13f893338af68048e64f913f058a6990da6beaa326650a1ea4edfc5182809  docs/evidence/hybrid-review-feasibility-v1-2026-10-17/FINAL-RESULT.md
+c6c47451cc1f709a4d8fd4ea30db608ac9dd215ffe78118069b3db63734724bb  docs/evidence/hybrid-review-feasibility-v1-2026-10-17/EXPERIMENT.complete.json
+b198dd658cad9b778225c5d5ca5fb7ecb12430235bf7dc8f1a4e4bb36c4ff7ff  docs/evidence/hybrid-review-feasibility-v1-2026-10-17/POSTRUN-DIAGNOSIS-v1.json
+62ffba367054277e38b600cc04a02ad8262df61ee1fbe632c2f8a76ef928345d  docs/evidence/hybrid-review-feasibility-v1-2026-10-17/POSTRUN-DIAGNOSIS-v1.md
+cb80414ceb0a9e8839480781a76ecd63c37deabaeb547e813906af10e97e6a90  src/semantic-review-sources-v1.ts
+5b731d69a9140965b8f35071cf737537cee1097e1b29f56040fc205be94472a2  tests/hybrid-evaluation-v1.test.ts

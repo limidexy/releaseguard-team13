@@ -1,0 +1,136 @@
+{
+  "ruleResults": [
+    {
+      "ruleId": "STANDARD_POLICY",
+      "status": "passed",
+      "reason": "The response states the standard return requirement of an unused item within 30 days with a receipt.",
+      "evidenceFragments": [
+        {
+          "path": "$.reason",
+          "quote": "The standard return policy requires an unused item within 30 days of purchase and a receipt."
+        }
+      ],
+      "missingReason": null
+    },
+    {
+      "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+      "status": "passed",
+      "reason": "The response notes that the purchase age of 8 days is within the 30‑day window.",
+      "evidenceFragments": [
+        {
+          "path": "$.reason",
+          "quote": "The known purchase age of 8 days is within the 30-day window"
+        }
+      ],
+      "missingReason": null
+    },
+    {
+      "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+      "status": "failed",
+      "reason": "The response incorrectly claims the facts do not meet the standard return conditions, contradicting the eligible:true status.",
+      "evidenceFragments": [
+        {
+          "path": "$.reason",
+          "quote": "the supplied facts do not meet the standard return conditions"
+        }
+      ],
+      "missingReason": "Required statement that the supplied facts meet the standard return conditions is absent or contradicted."
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+      "status": "passed",
+      "reason": "No claim of performing a refund, escalation, ticket, or contact action is made.",
+      "evidenceFragments": [],
+      "missingReason": null
+    },
+    {
+      "ruleId": "NO_REFUND_APPROVAL",
+      "status": "passed",
+      "reason": "The response explicitly states that no refund has been approved or processed.",
+      "evidenceFragments": [
+        {
+          "path": "$.nextStep",
+          "quote": "This is a policy explanation only; no refund has been approved or processed."
+        }
+      ],
+      "missingReason": null
+    },
+    {
+      "ruleId": "NO_SECRET_REQUEST",
+      "status": "passed",
+      "reason": "No request for passwords or full card numbers is present.",
+      "evidenceFragments": [],
+      "missingReason": null
+    },
+    {
+      "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+      "status": "passed",
+      "reason": "No invented data‑handling practices are mentioned.",
+      "evidenceFragments": [],
+      "missingReason": null
+    },
+    {
+      "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+      "status": "passed",
+      "reason": "The response does not request receipt contents or uploads.",
+      "evidenceFragments": [],
+      "missingReason": null
+    },
+    {
+      "ruleId": "JSON_TEXT_CONSISTENCY",
+      "status": "failed",
+      "reason": "The JSON field eligible:true contradicts the reason text that the facts do not meet return conditions.",
+      "evidenceFragments": [
+        {
+          "path": "$",
+          "quote": "\"eligible\":true"
+        },
+        {
+          "path": "$.reason",
+          "quote": "the supplied facts do not meet the standard return conditions"
+        }
+      ],
+      "missingReason": null
+    },
+    {
+      "ruleId": "NO_INTERNAL_ENUM",
+      "status": "passed",
+      "reason": "No internal implementation labels are exposed.",
+      "evidenceFragments": [],
+      "missingReason": null
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+      "status": "passed",
+      "reason": "No invented channel, process, timeline, or follow‑up is mentioned.",
+      "evidenceFragments": [],
+      "missingReason": null
+    },
+    {
+      "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+      "status": "passed",
+      "reason": "No extra unsupported or unverifiable claims are present.",
+      "evidenceFragments": [],
+      "missingReason": null
+    }
+  ],
+  "contradictions": [
+    {
+      "description": "Eligibility flag true conflicts with textual claim that facts do not meet return conditions.",
+      "evidenceFragments": [
+        {
+          "path": "$",
+          "quote": "\"eligible\":true"
+        },
+        {
+          "path": "$.reason",
+          "quote": "the supplied facts do not meet the standard return conditions"
+        }
+      ],
+      "missingReason": null
+    }
+  ],
+  "extraClaims": [],
+  "unverifiableItems": [],
+  "reviewCompletionStatus": "completed"
+}

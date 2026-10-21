@@ -1,0 +1,39 @@
+ReleaseGuard 演示步骤与讲述边界
+
+时间：所提供课程PDF总计40分钟含Q&A。正文目标35分钟、Q&A5分钟。隐藏备份页只在追问时打开。
+建议正文：1–3页3分钟；4–5页2分钟；6–9页6分钟；10–13页6分钟；14–19页7分钟；20–22页9分钟；转场/总结2分钟。
+
+演示前（不调用模型、不启动云节点）
+- 打开PPT与本目录HTML，确认两者可以离线打开；先选择十条定向实验并定位执行序号10。
+- 准备原19 Oct的证据回放页面和docs/presentation/20261019/backups截图，及21 Oct trace/log截图。
+- GitHub在线时打开PR#5和本轮精确commit。网络不可用时显示已保存Git交接结果。绝不将历史CI截图说成新CI通过。
+- 不运行run-targeted-review-v3.mjs、freeze-targeted-review-v3.mjs、provider生成、批准或云部署命令。实验封口保护不是演示时再次发送请求的授权。
+
+Demo A/B：平台记录，约4分钟
+1. 在19 Oct保存的证据回放或截图中显示suite ID、不可变版本、job和原始输出。
+2. 对照通过与阻断案例；区分execution succeeded、rule eligible、human approved。
+3. 显示当时self-review 409与不同测试身份的审批。说明这是技术验证身份，不是组员真人审核记录。
+4. 展示证据导出关联：job、suite、output和audit。不会创建新数据或现场审批。
+
+Demo C：本轮历史真实评审回放，约2分钟，可在16页或Q&A插入
+1. HTML标题必须可见“历史真实运行回放”。选3条协议实验，再选17条开发实验，说明这是两个独立实验。
+2. 选21 Oct十条定向实验，查看原客户问题和虚构参考回答，再查看真实评审原文、协议结果、逐规则判定和来源文件。
+3. 正例：选择执行8，展示“不要给密码”没有被误拦；反例：执行6确实索取密码，目标NO_SECRET_REQUEST失败。
+4. 执行10：同一原文中正确政策后追加“无需未使用”。展示STANDARD_POLICY=passed，再展示EXTRA_CLAIMS_AUTHORIZED=failed及矛盾引用。保持TARGETED_VALIDATION_FAILED。
+5. 选r2标签，界面只显示定义、程序检查和15条AI参考说明。明确“零真实请求，尚未真实语义验证”，不出现模拟模型通过分数。
+
+Demo D/E：基础设施历史证据，约3分钟
+- 使用保存的GKE扩容曲线、replica时间线及同commit的历史CI/CD记录，展示质量属性与失败恢复过程，不启动集群。
+- 显示21 Oct本地Jaeger和Grafana截图，说明是本地合成/replay实验，不是Groq故障或当前云端观测。
+- Git新commit、CI、merge与deployment是四件事。说明本轮只交接，不合并不部署。
+
+结束语
+“The platform preserves the evidence needed to explain a release decision. The reviewer remains experimental. We keep its failed result visible, and we do not treat the offline r2 definition as real semantic validation.”
+中文：平台有证据链；评审器未获正式资格；保留失败；r2只完成定义改进。
+
+故障备选
+HTML打不开：直接打开FINAL-RESULT.json、result-10.json和对应raw-provider/*.review.txt；同时显示PPT隐藏28–30页。不要重新请求模型来救场。
+网络断开：用本地截图与保存日志，不声称GitHub刚刷新或CI刚通过。
+讲述超时：跳过隐藏页、仅用执行10解释限制，不压缩版本/历史回放标签。
+
+待组员实际完成：五人计时排练、实际工时、独立交叉review、最终UAT、最新教师通知确认。本包不冒充这些记录。

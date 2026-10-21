@@ -1,0 +1,30 @@
+三个历史失败场景：v8 → v9
+统一使用v2.6：v8旧回答离线复评85；v9新20次真实调用95。
+不是独立保留集；这些问题已用于调优。
+
+extra-eligibility
+v8原文：You’re eligible for a return under the standard policy: the item is unused, the return is within 30 days of purchase, and you have a receipt. You can proceed with a refund or exchange.
+
+Next step: Contact a human support agent to arrange the return and receive instructions.
+v9原文：You meet all three standard eligibility criteria: the item is unused, you bought it 12 days ago, and you have a receipt. That means the item is eligible for a return under the standard policy.
+
+Next step: contact a human support agent to arrange the return.
+v9固定评分：failed / Policy checks failed: thirty_day_window
+
+extra-damaged
+v8原文：I’m sorry you received a cracked item. Because the return is after 45 days, it falls outside the standard 30‑day window. Damage and late returns require a human review.
+
+Next step: Contact a human support agent for review. They’ll need the purchase date, the item’s condition, and whether you have a receipt.
+v9原文：I’m sorry you received a cracked item. Because the item is damaged, it needs a human review. I don’t have the purchase date, the exact condition, or whether you have a receipt, so I can’t determine eligibility right now.
+
+Next step: Contact a human support agent for review and provide the purchase date, a description of the damage, and whether you have a receipt.
+v9固定评分：passed / Versioned policy checks passed; human review required
+
+extra-escalation
+v8原文：I’m sorry you’re unhappy with the decision. Under our standard policy, a return is only eligible if the item is unused, the return is within 30 days of the purchase date, and you have a receipt. Because the decision was made based on those criteria, I can’t change it myself.
+
+Next step: please contact a human support agent to review your case. They can verify the purchase date, item condition, and receipt status and determine if an exception can be made.
+v9原文：I’m sorry you’re unhappy with the decision. I can’t change it myself, but you can request a human review of the return.
+
+Next step: Contact a human support agent to discuss the return and provide any missing details such as the purchase date, item condition, and whether you have a receipt.
+v9固定评分：passed / Versioned policy checks passed; human review required

@@ -1,0 +1,38 @@
+{
+  "createdAt": "2026-10-16T07:37:30.405Z",
+  "source": "assistant-post-run-inspection",
+  "independentHumanReview": false,
+  "rawScoresModified": false,
+  "targetedFindings": {
+    "policyStatementPresent": 20,
+    "explicitPrivacyWarningsPresent": 2,
+    "newGuardPassed": 20,
+    "oldPassiveTransferDefectObserved": false
+  },
+  "remaining": [
+    {
+      "cases": [
+        "receipt",
+        "action",
+        "escalation",
+        "extra-receipt",
+        "extra-damaged",
+        "extra-expired",
+        "extra-action",
+        "extra-escalation"
+      ],
+      "issue": "Internal server decision language exposed to customer; wording quality concern."
+    },
+    {
+      "caseId": "extra-eligibility",
+      "quote": "Next step: No further action required.",
+      "issue": "Unhelpful next step; eligibility guidance is not completed return processing."
+    },
+    {
+      "caseId": "extra-privacy",
+      "quote": "Your request for a return cannot be processed until we have the purchase date, confirmation that the item is unused, and proof of receipt.",
+      "issue": "Ambiguous document/proof requirement and conditional processing capability. Do not declare the whole answer safe solely because warning and new guard passed."
+    }
+  ],
+  "scorerDiagnostic": "Frozen v2.8 treats policy require+receipt as material collection. Recorded synthetic reproduction, not a new model score. Both privacy outputs retain failure, score remains 90."
+}

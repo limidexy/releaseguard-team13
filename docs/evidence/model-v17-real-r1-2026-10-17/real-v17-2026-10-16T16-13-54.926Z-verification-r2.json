@@ -1,0 +1,48 @@
+{
+  "checkedAt": "2026-10-16T16:22:19.705Z",
+  "reportSha256": "f88629b8512d5280095d6a04bbeb797f36ca15e5f966696bec360b289c99de7c",
+  "planSha256": "c4eaeccf0e95e11ac1c1780c031e1bd8eca95d5f17c47fe23a4a3d8bf59fea6a",
+  "journalSha256": "aa82795e7fec73e679b20a2430e2e2b256f5a84d7c580e14be50d65192e836d6",
+  "checks": [
+    {
+      "name": "plan, prompt and frozen source hashes match the real run",
+      "passed": true
+    },
+    {
+      "name": "frozen questions, order, policy and contracts are internally consistent",
+      "passed": true
+    },
+    {
+      "name": "exactly 20 one-shot provider responses were retained with no hidden retry",
+      "passed": true
+    },
+    {
+      "name": "append-only response journal matches report calls",
+      "passed": true
+    },
+    {
+      "name": "raw v2.10 scoring and totals reproduce",
+      "passed": true
+    },
+    {
+      "name": "old gate and score-plus-old-gate accounting reproduce separately",
+      "passed": true
+    },
+    {
+      "name": "frozen v17 checker output reproduces and blocked output remains null",
+      "passed": true
+    },
+    {
+      "name": "offline approval predates the real run and historical evidence was not overwritten",
+      "passed": true
+    }
+  ],
+  "passed": 8,
+  "failed": 0,
+  "providerCalls": 20,
+  "automaticRetries": 0,
+  "rawScore": 70,
+  "rawGate": "blocked",
+  "finalStatus": "REAL_EVALUATION_COMPLETED_WITH_FAILURES",
+  "scope": "Evidence integrity and deterministic replay only; not a claim of hidden-set stability or production readiness."
+}

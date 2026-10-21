@@ -1,0 +1,3 @@
+{"event":"semantic-pilot-attempt-completed","sequence":1,"sampleId":"rgp-cobalt-71","status":"completed","protocolPassed":true,"referenceMatched":true,"at":"2026-10-18T11:21:26.690Z"}
+{"event":"semantic-pilot-attempt-completed","sequence":2,"sampleId":"rgp-tundra-59","status":"completed","protocolPassed":true,"referenceMatched":true,"at":"2026-10-18T11:21:59.684Z"}
+{"event":"semantic-pilot-attempt-completed","sequence":3,"sampleId":"rgp-maple-02","status":"invalid_result","protocolPassed":false,"referenceMatched":false,"at":"2026-10-18T11:22:37.510Z"}

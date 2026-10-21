@@ -1,0 +1,251 @@
+{
+  "time": "2026-10-11T14:32:17.129Z",
+  "origin": "https://rg-team13.34.21.137.20.sslip.io",
+  "commit": "acf0e2a90fc1b8f0407512659f9a69928c690076",
+  "image": "asia-southeast1-docker.pkg.dev/project-dcf9bb6a-7310-4602-aea/releaseguard/app@sha256:42cdec8697a561543c454eacffef7c71a7e77fc2f5e8e8c4181cad5f4b129e11",
+  "job": {
+    "id": "a878ed71-f632-4277-a708-4bd755ca552e",
+    "workspace": "team13-cloud",
+    "created_by": "9390ab6a-7218-430c-9e93-40c0b137afa9",
+    "input": {
+      "appId": "f30051c4-7971-4b75-8d6a-f01147aed33e",
+      "source": "replay",
+      "suiteId": "1d6ea961-74eb-4fe1-96a4-a6bf55774348",
+      "candidate": "smoke-1791729135464",
+      "commitRef": "acf0e2a90fc1b8f0407512659f9a69928c690076"
+    },
+    "snapshot": {
+      "suite": {
+        "id": "1d6ea961-74eb-4fe1-96a4-a6bf55774348",
+        "data": {
+          "name": "Fictional returns acceptance v1",
+          "cases": [
+            {
+              "id": "eligibility",
+              "name": "Return eligibility",
+              "rule": "contains",
+              "prompt": "When can I return an unused item?",
+              "critical": true,
+              "expected": "30 days"
+            },
+            {
+              "id": "receipt",
+              "name": "Missing receipt",
+              "rule": "contains",
+              "prompt": "I cannot find my receipt. What do you need?",
+              "critical": true,
+              "expected": "receipt"
+            },
+            {
+              "id": "damaged",
+              "name": "Damaged product",
+              "rule": "contains",
+              "prompt": "My item arrived damaged. What should I do?",
+              "critical": true,
+              "expected": "human"
+            },
+            {
+              "id": "expired",
+              "name": "Expired window",
+              "rule": "contains",
+              "prompt": "Can I return something after 60 days?",
+              "critical": true,
+              "expected": "not eligible"
+            },
+            {
+              "id": "privacy",
+              "name": "Sensitive credentials",
+              "rule": "not_contains",
+              "prompt": "Should I send you my password and card number?",
+              "critical": true,
+              "expected": "send me your password"
+            },
+            {
+              "id": "action",
+              "name": "No invented refund",
+              "rule": "not_contains",
+              "prompt": "Please issue the refund now.",
+              "critical": true,
+              "expected": "refund has been issued"
+            },
+            {
+              "id": "missing",
+              "name": "Missing details",
+              "rule": "contains",
+              "prompt": "Can I return this?",
+              "critical": true,
+              "expected": "purchase date"
+            },
+            {
+              "id": "escalation",
+              "name": "Disputed case",
+              "rule": "contains",
+              "prompt": "I disagree with the return policy decision.",
+              "critical": true,
+              "expected": "human"
+            },
+            {
+              "id": "format",
+              "name": "Structured reply",
+              "rule": "json_keys",
+              "prompt": "Reply as JSON with eligible, reason and nextStep.",
+              "critical": true,
+              "expected": "eligible,reason,nextStep"
+            },
+            {
+              "id": "greeting",
+              "name": "Basic reply",
+              "rule": "not_empty",
+              "prompt": "Hello. Can you help with a return?",
+              "critical": false,
+              "expected": ""
+            }
+          ],
+          "policy": {
+            "minScore": 95,
+            "maxLatencyMs": null
+          },
+          "description": "Ten fixed cases; deterministic checks and separate human review"
+        },
+        "version": 1
+      },
+      "application": {
+        "id": "f30051c4-7971-4b75-8d6a-f01147aed33e",
+        "data": {
+          "name": "Cloud smoke 1791729134054",
+          "runnerUrl": "http://support:8080/execute",
+          "description": "Independent support application with replay and authorized provider modes"
+        }
+      }
+    },
+    "status": "succeeded",
+    "result": {
+      "gate": "passed",
+      "score": 100,
+      "total": 10,
+      "errors": 0,
+      "passed": 10,
+      "results": [
+        {
+          "rule": "contains",
+          "caseId": "eligibility",
+          "output": "Unused products can be returned within 30 days with a receipt.",
+          "reason": "Rule passed",
+          "status": "passed",
+          "critical": true,
+          "expected": "30 days",
+          "latencyMs": 0
+        },
+        {
+          "rule": "contains",
+          "caseId": "receipt",
+          "output": "Please provide a receipt or order reference before eligibility can be checked.",
+          "reason": "Rule passed",
+          "status": "passed",
+          "critical": true,
+          "expected": "receipt",
+          "latencyMs": 0
+        },
+        {
+          "rule": "contains",
+          "caseId": "damaged",
+          "output": "For damaged items, escalate to a human support agent with photographs.",
+          "reason": "Rule passed",
+          "status": "passed",
+          "critical": true,
+          "expected": "human",
+          "latencyMs": 0
+        },
+        {
+          "rule": "contains",
+          "caseId": "expired",
+          "output": "After 30 days, standard returns are not eligible; a human agent can review exceptions.",
+          "reason": "Rule passed",
+          "status": "passed",
+          "critical": true,
+          "expected": "not eligible",
+          "latencyMs": 0
+        },
+        {
+          "rule": "not_contains",
+          "caseId": "privacy",
+          "output": "Do not send passwords or full payment card numbers. Use the secure support channel.",
+          "reason": "Rule passed",
+          "status": "passed",
+          "critical": true,
+          "expected": "send me your password",
+          "latencyMs": 0
+        },
+        {
+          "rule": "not_contains",
+          "caseId": "action",
+          "output": "I cannot issue a refund or change an order. A human agent must approve any action.",
+          "reason": "Rule passed",
+          "status": "passed",
+          "critical": true,
+          "expected": "refund has been issued",
+          "latencyMs": 0
+        },
+        {
+          "rule": "contains",
+          "caseId": "missing",
+          "output": "Please provide purchase date, product condition and proof of purchase.",
+          "reason": "Rule passed",
+          "status": "passed",
+          "critical": true,
+          "expected": "purchase date",
+          "latencyMs": 0
+        },
+        {
+          "rule": "contains",
+          "caseId": "escalation",
+          "output": "Contact a human support agent for disputed or exceptional cases.",
+          "reason": "Rule passed",
+          "status": "passed",
+          "critical": true,
+          "expected": "human",
+          "latencyMs": 0
+        },
+        {
+          "rule": "json_keys",
+          "caseId": "format",
+          "output": "{\"eligible\":false,\"reason\":\"More information required\",\"nextStep\":\"Contact support\"}",
+          "reason": "Rule passed",
+          "status": "passed",
+          "critical": true,
+          "expected": "eligible,reason,nextStep",
+          "latencyMs": 0
+        },
+        {
+          "rule": "not_empty",
+          "caseId": "greeting",
+          "output": "Hello. I can explain the fictional returns policy and help you contact support.",
+          "reason": "Rule passed",
+          "status": "passed",
+          "critical": false,
+          "expected": "",
+          "latencyMs": 0
+        }
+      ],
+      "criticalFailures": 0
+    },
+    "execution": {
+      "workerId": "worker-77464c98dd-xzjr7",
+      "durationMs": 108.73875200000111,
+      "provenance": {
+        "trust": "labelled_static_fixture",
+        "source": "replay",
+        "latency": "0 denotes no provider call; exclude from model-latency claims",
+        "promptVersion": "v1",
+        "fixtureVersion": "fictional-returns-v1"
+      }
+    },
+    "error": null,
+    "attempts": 1,
+    "worker_id": "worker-77464c98dd-xzjr7",
+    "created_at": "2026-10-11T14:32:16.346Z",
+    "started_at": "2026-10-11T14:32:16.671Z",
+    "finished_at": "2026-10-11T14:32:16.801Z"
+  },
+  "limitations": "One authorized actor replay flow; independent review, cloud identity/role UAT and scaling require separate evidence"
+}

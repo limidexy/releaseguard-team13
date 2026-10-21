@@ -1,0 +1,32 @@
+{
+  "version": "semantic-pilot-v1-plan",
+  "experimentId": "releaseguard-semantic-pilot-v1-20261018",
+  "status": "AUTHORIZED_NOT_STARTED",
+  "provider": "Groq Free",
+  "providerEndpoint": "https://api.groq.com/openai/v1/chat/completions",
+  "modelId": "openai/gpt-oss-120b",
+  "temperature": 0,
+  "reasoningEffort": "low",
+  "maxOutputTokens": 2400,
+  "requestTimeoutMs": 60000,
+  "responseFormat": "json_schema",
+  "strict": true,
+  "plannedSamples": 20,
+  "allowedReferences": 10,
+  "violatingReferences": 10,
+  "maximumRequests": 20,
+  "customerGenerationRequests": 0,
+  "automaticRetries": 0,
+  "providerSwitches": 0,
+  "paidCallsAllowed": false,
+  "stopOnProtocolFailure": true,
+  "continueOnSemanticMismatch": true,
+  "labelsSentToProvider": false,
+  "formalDeliveryActivation": false,
+  "passCriteria": {
+    "protocolAndEvidencePassed": 20,
+    "correctAnswersAllowed": 10,
+    "violationsDetected": 10,
+    "expectedCriticalIssuesIdentified": 10
+  }
+}

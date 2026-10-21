@@ -1,0 +1,1642 @@
+{
+  "sourcePath": "docs/evidence/evaluator-next-v2-independent-2026-10-21/records.json",
+  "sourceSha256": "80b6be2dd83c7c0b4322f986c72cfe1b5d02c08ad2e6389da4ab1f4c4c2f6071",
+  "comparisons": [
+    {
+      "fixtureId": "h001",
+      "question": "When can I return an unused item?",
+      "answer": "A standard return requires an unused item, purchase within the last 30 days, and a receipt. Your item is unused, but its purchase date is unknown. Standard eligibility cannot yet be determined. What date did you purchase it, and do you have a receipt?",
+      "facts": {
+        "purchaseDaysAgo": null,
+        "unused": null,
+        "receipt": null,
+        "damaged": false,
+        "dispute": false,
+        "actionRequested": false,
+        "privacy": false
+      },
+      "decision": {
+        "version": "returns-decision-v1",
+        "facts": {
+          "purchaseDaysAgo": null,
+          "unused": null,
+          "receipt": null,
+          "damaged": false,
+          "dispute": false,
+          "actionRequested": false,
+          "privacy": false
+        },
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "disposition": "clarify",
+        "jsonEligible": false,
+        "requiresHumanReview": false,
+        "missing": [
+          "purchase date",
+          "whether the item is unused",
+          "whether a receipt exists"
+        ],
+        "allowedActions": [
+          "explain policy",
+          "ask missing non-sensitive facts",
+          "customer contacts human support"
+        ],
+        "externalActionCapability": false,
+        "refundApproved": false
+      },
+      "contract": {
+        "contractVersion": "response-contract-v17",
+        "compilationStatus": "ready",
+        "conflicts": [],
+        "standardEligibility": "unknown",
+        "timeWindowStatus": "unknown",
+        "standardFailureReasons": [],
+        "humanReviewReasons": [],
+        "mustState": [
+          {
+            "ruleId": "STANDARD_POLICY",
+            "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+            "appliesBecause": "The standard policy is required in every v17 answer."
+          },
+          {
+            "ruleId": "PURCHASE_TIMING_UNKNOWN",
+            "meaning": "State that the purchase date or purchase age is unknown.",
+            "appliesBecause": "purchaseDaysAgo is null."
+          },
+          {
+            "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+            "meaning": "State that standard eligibility cannot yet be determined.",
+            "appliesBecause": "The deterministic decision is unknown."
+          }
+        ],
+        "mustAsk": [
+          {
+            "ruleId": "ASK_PURCHASE_DATE",
+            "meaning": "Ask for the purchase date.",
+            "appliesBecause": "purchaseDaysAgo is null; this duty is independent of human review."
+          },
+          {
+            "ruleId": "ASK_UNUSED_STATUS",
+            "meaning": "Ask whether the item is unused.",
+            "appliesBecause": "The clarify path lacks item-condition information."
+          },
+          {
+            "ruleId": "ASK_RECEIPT_AVAILABILITY",
+            "meaning": "Ask only whether the customer has a receipt.",
+            "appliesBecause": "The clarify path lacks receipt availability."
+          }
+        ],
+        "mustNotClaim": [
+          {
+            "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+            "meaning": "Do not claim the case is late or outside the window when purchase timing is unknown.",
+            "appliesBecause": "Purchase timing is unknown."
+          },
+          {
+            "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+            "meaning": "Do not claim the case is within the window when purchase timing is unknown.",
+            "appliesBecause": "Purchase timing is unknown."
+          },
+          {
+            "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+            "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+            "appliesBecause": "The system has no external action capability."
+          },
+          {
+            "ruleId": "NO_REFUND_APPROVAL",
+            "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+            "appliesBecause": "refundApproved is false."
+          },
+          {
+            "ruleId": "NO_SECRET_REQUEST",
+            "meaning": "Do not request passwords or full card numbers.",
+            "appliesBecause": "Secrets are never required."
+          },
+          {
+            "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+            "meaning": "Do not invent storage, sharing, retention, deletion, encryption, or other data-handling practices that are absent from the supplied policy.",
+            "appliesBecause": "No data storage, sharing, retention, deletion, or encryption policy was supplied."
+          },
+          {
+            "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+            "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+            "appliesBecause": "Only receipt availability may be requested."
+          }
+        ],
+        "customerAction": "provide_clarifications",
+        "clarificationBlocksHumanContact": false,
+        "responseMode": "plain",
+        "unknownFields": [
+          "purchase date",
+          "whether the item is unused",
+          "whether a receipt exists"
+        ],
+        "intervalEvidence": []
+      },
+      "frozenReference": {
+        "expectedAllowed": true,
+        "expectedRuleFamilies": [],
+        "reason": "Independent policy reference: preserves the known unused status and asks both remaining questions without granting a refund.",
+        "source": "independently AI-authored after candidate freeze, only approved specification/questions; not human review or cryptographic isolation"
+      },
+      "frozenCheckerResult": {
+        "version": "evaluator-next-v2",
+        "specVersion": "evaluation-spec-next-v1",
+        "status": "blocked",
+        "finalDeliveryStatus": "blocked",
+        "checks": [
+          {
+            "ruleId": "FORMAT_PLAIN",
+            "status": "passed",
+            "critical": true,
+            "category": "format",
+            "reason": "Required shape parsed.",
+            "evidence": []
+          },
+          {
+            "ruleId": "BUSINESS_ELIGIBILITY_CONSISTENCY",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Text must not contradict the deterministic standard-eligibility result.",
+            "evidence": []
+          },
+          {
+            "ruleId": "BUSINESS_WINDOW_CONSISTENCY",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Case-window claims must agree with known purchase timing.",
+            "evidence": []
+          },
+          {
+            "ruleId": "FACT_PURCHASE_AGE_CONSISTENCY",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Explicit purchase-age facts must not be invented or changed.",
+            "evidence": []
+          },
+          {
+            "ruleId": "STANDARD_POLICY",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Located required proposition.",
+            "evidence": [
+              {
+                "source": "plain",
+                "path": "$",
+                "start": 0,
+                "end": 91,
+                "text": "A standard return requires an unused item, purchase within the last 30 days, and a receipt.",
+                "coordinateSystem": "original-character-offset"
+              }
+            ]
+          },
+          {
+            "ruleId": "PURCHASE_TIMING_UNKNOWN",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Located required proposition.",
+            "evidence": [
+              {
+                "source": "plain",
+                "path": "$",
+                "start": 116,
+                "end": 146,
+                "text": " its purchase date is unknown.",
+                "coordinateSystem": "original-character-offset"
+              }
+            ]
+          },
+          {
+            "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Located required proposition.",
+            "evidence": [
+              {
+                "source": "plain",
+                "path": "$",
+                "start": 147,
+                "end": 193,
+                "text": "Standard eligibility cannot yet be determined.",
+                "coordinateSystem": "original-character-offset"
+              }
+            ]
+          },
+          {
+            "ruleId": "ASK_PURCHASE_DATE",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Located required proposition.",
+            "evidence": [
+              {
+                "source": "plain",
+                "path": "$",
+                "start": 194,
+                "end": 251,
+                "text": "What date did you purchase it, and do you have a receipt?",
+                "coordinateSystem": "original-character-offset"
+              }
+            ]
+          },
+          {
+            "ruleId": "ASK_UNUSED_STATUS",
+            "status": "failed",
+            "critical": true,
+            "category": "required",
+            "reason": "Required proposition has no supported evidence.",
+            "evidence": []
+          },
+          {
+            "ruleId": "ASK_RECEIPT_AVAILABILITY",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Located required proposition.",
+            "evidence": [
+              {
+                "source": "plain",
+                "path": "$",
+                "start": 194,
+                "end": 251,
+                "text": "What date did you purchase it, and do you have a receipt?",
+                "coordinateSystem": "original-character-offset"
+              }
+            ]
+          },
+          {
+            "ruleId": "NO_UNGROUNDED_WINDOW",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_UNGROUNDED_WINDOW",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_REFUND_APPROVAL_OR_EXECUTION",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_SECRET_REQUEST",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_INTERNAL_ENUM",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "EXTRA_PROPOSITIONS_CLASSIFIED",
+            "status": "passed",
+            "critical": true,
+            "category": "extra",
+            "reason": "No explicitly detected out-of-scope critical expression.",
+            "evidence": []
+          }
+        ],
+        "counts": {
+          "passed": 19,
+          "failed": 1,
+          "unverifiable": 0
+        },
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        },
+        "limitations": [
+          "Offline, bounded-English candidate; not a general semantic proof.",
+          "Old holdouts used here are development data, not independent validation.",
+          "No production activation or model score change."
+        ],
+        "parsed": {
+          "original": "A standard return requires an unused item, purchase within the last 30 days, and a receipt. Your item is unused, but its purchase date is unknown. Standard eligibility cannot yet be determined. What date did you purchase it, and do you have a receipt?",
+          "mode": "plain",
+          "formatOk": true,
+          "formatFailures": [],
+          "jsonEligible": null,
+          "segments": [
+            {
+              "source": "plain",
+              "path": "$",
+              "start": 0,
+              "end": 91,
+              "text": "A standard return requires an unused item, purchase within the last 30 days, and a receipt.",
+              "coordinateSystem": "original-character-offset"
+            },
+            {
+              "source": "plain",
+              "path": "$",
+              "start": 92,
+              "end": 113,
+              "text": "Your item is unused, ",
+              "coordinateSystem": "original-character-offset"
+            },
+            {
+              "source": "plain",
+              "path": "$",
+              "start": 116,
+              "end": 146,
+              "text": " its purchase date is unknown.",
+              "coordinateSystem": "original-character-offset"
+            },
+            {
+              "source": "plain",
+              "path": "$",
+              "start": 147,
+              "end": 193,
+              "text": "Standard eligibility cannot yet be determined.",
+              "coordinateSystem": "original-character-offset"
+            },
+            {
+              "source": "plain",
+              "path": "$",
+              "start": 194,
+              "end": 251,
+              "text": "What date did you purchase it, and do you have a receipt?",
+              "coordinateSystem": "original-character-offset"
+            }
+          ],
+          "propositions": [
+            {
+              "kind": "standard_policy",
+              "object": "Joint standard policy: unused, purchase age <=30 days, receipt",
+              "subject": "standard return policy",
+              "polarity": "positive",
+              "modality": "asserted",
+              "conditional": false,
+              "quoted": false,
+              "evidence": {
+                "source": "plain",
+                "path": "$",
+                "start": 0,
+                "end": 91,
+                "text": "A standard return requires an unused item, purchase within the last 30 days, and a receipt.",
+                "coordinateSystem": "original-character-offset"
+              }
+            },
+            {
+              "kind": "timing_unknown",
+              "object": "Purchase date/age uncertainty",
+              "subject": "case",
+              "polarity": "positive",
+              "modality": "asserted",
+              "conditional": false,
+              "quoted": false,
+              "evidence": {
+                "source": "plain",
+                "path": "$",
+                "start": 116,
+                "end": 146,
+                "text": " its purchase date is unknown.",
+                "coordinateSystem": "original-character-offset"
+              }
+            },
+            {
+              "kind": "eligibility_unknown",
+              "object": "Standard outcome explicitly unresolved",
+              "subject": "case",
+              "polarity": "positive",
+              "modality": "asserted",
+              "conditional": false,
+              "quoted": false,
+              "evidence": {
+                "source": "plain",
+                "path": "$",
+                "start": 147,
+                "end": 193,
+                "text": "Standard eligibility cannot yet be determined.",
+                "coordinateSystem": "original-character-offset"
+              }
+            },
+            {
+              "kind": "ask_purchase_date",
+              "object": "Request for purchase date",
+              "subject": "case",
+              "polarity": "positive",
+              "modality": "question",
+              "conditional": false,
+              "quoted": false,
+              "evidence": {
+                "source": "plain",
+                "path": "$",
+                "start": 194,
+                "end": 251,
+                "text": "What date did you purchase it, and do you have a receipt?",
+                "coordinateSystem": "original-character-offset"
+              }
+            },
+            {
+              "kind": "ask_receipt_availability",
+              "object": "Question about receipt availability",
+              "subject": "case",
+              "polarity": "positive",
+              "modality": "question",
+              "conditional": false,
+              "quoted": false,
+              "evidence": {
+                "source": "plain",
+                "path": "$",
+                "start": 194,
+                "end": 251,
+                "text": "What date did you purchase it, and do you have a receipt?",
+                "coordinateSystem": "original-character-offset"
+              }
+            }
+          ],
+          "unverifiableEvidence": [],
+          "purchaseAgeAssertions": []
+        }
+      },
+      "bindingHash": "371ceb69132916f824615aeec52ad663ff301d98fb3751922808425f256531dc",
+      "referenceInterpretation": "The words unused item establish unused=true; ask purchase date and receipt only.",
+      "actualDifference": "Actual facts.unused is null. The contract includes ASK_UNUSED_STATUS; the reference answer asserts unused and does not ask it.",
+      "category": "fact-extraction/reference-interpretation disagreement",
+      "resolution": "Comparison only. No label, historical result, extractor or business policy changed."
+    },
+    {
+      "fixtureId": "h003",
+      "question": "When can I return an unused item?",
+      "answer": "All three standard requirements must be met: the item must be unused, the purchase must be no more than 30 days old, and you must have a receipt. You describe an unused item. We do not know when you bought it, so we cannot determine standard return eligibility yet. Please tell me the purchase date and whether a receipt is available.",
+      "facts": {
+        "purchaseDaysAgo": null,
+        "unused": null,
+        "receipt": null,
+        "damaged": false,
+        "dispute": false,
+        "actionRequested": false,
+        "privacy": false
+      },
+      "decision": {
+        "version": "returns-decision-v1",
+        "facts": {
+          "purchaseDaysAgo": null,
+          "unused": null,
+          "receipt": null,
+          "damaged": false,
+          "dispute": false,
+          "actionRequested": false,
+          "privacy": false
+        },
+        "standardEligibility": "unknown",
+        "outsideStandardWindow": false,
+        "disposition": "clarify",
+        "jsonEligible": false,
+        "requiresHumanReview": false,
+        "missing": [
+          "purchase date",
+          "whether the item is unused",
+          "whether a receipt exists"
+        ],
+        "allowedActions": [
+          "explain policy",
+          "ask missing non-sensitive facts",
+          "customer contacts human support"
+        ],
+        "externalActionCapability": false,
+        "refundApproved": false
+      },
+      "contract": {
+        "contractVersion": "response-contract-v17",
+        "compilationStatus": "ready",
+        "conflicts": [],
+        "standardEligibility": "unknown",
+        "timeWindowStatus": "unknown",
+        "standardFailureReasons": [],
+        "humanReviewReasons": [],
+        "mustState": [
+          {
+            "ruleId": "STANDARD_POLICY",
+            "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+            "appliesBecause": "The standard policy is required in every v17 answer."
+          },
+          {
+            "ruleId": "PURCHASE_TIMING_UNKNOWN",
+            "meaning": "State that the purchase date or purchase age is unknown.",
+            "appliesBecause": "purchaseDaysAgo is null."
+          },
+          {
+            "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+            "meaning": "State that standard eligibility cannot yet be determined.",
+            "appliesBecause": "The deterministic decision is unknown."
+          }
+        ],
+        "mustAsk": [
+          {
+            "ruleId": "ASK_PURCHASE_DATE",
+            "meaning": "Ask for the purchase date.",
+            "appliesBecause": "purchaseDaysAgo is null; this duty is independent of human review."
+          },
+          {
+            "ruleId": "ASK_UNUSED_STATUS",
+            "meaning": "Ask whether the item is unused.",
+            "appliesBecause": "The clarify path lacks item-condition information."
+          },
+          {
+            "ruleId": "ASK_RECEIPT_AVAILABILITY",
+            "meaning": "Ask only whether the customer has a receipt.",
+            "appliesBecause": "The clarify path lacks receipt availability."
+          }
+        ],
+        "mustNotClaim": [
+          {
+            "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+            "meaning": "Do not claim the case is late or outside the window when purchase timing is unknown.",
+            "appliesBecause": "Purchase timing is unknown."
+          },
+          {
+            "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+            "meaning": "Do not claim the case is within the window when purchase timing is unknown.",
+            "appliesBecause": "Purchase timing is unknown."
+          },
+          {
+            "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+            "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+            "appliesBecause": "The system has no external action capability."
+          },
+          {
+            "ruleId": "NO_REFUND_APPROVAL",
+            "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+            "appliesBecause": "refundApproved is false."
+          },
+          {
+            "ruleId": "NO_SECRET_REQUEST",
+            "meaning": "Do not request passwords or full card numbers.",
+            "appliesBecause": "Secrets are never required."
+          },
+          {
+            "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+            "meaning": "Do not invent storage, sharing, retention, deletion, encryption, or other data-handling practices that are absent from the supplied policy.",
+            "appliesBecause": "No data storage, sharing, retention, deletion, or encryption policy was supplied."
+          },
+          {
+            "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+            "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+            "appliesBecause": "Only receipt availability may be requested."
+          }
+        ],
+        "customerAction": "provide_clarifications",
+        "clarificationBlocksHumanContact": false,
+        "responseMode": "plain",
+        "unknownFields": [
+          "purchase date",
+          "whether the item is unused",
+          "whether a receipt exists"
+        ],
+        "intervalEvidence": []
+      },
+      "frozenReference": {
+        "expectedAllowed": true,
+        "expectedRuleFamilies": [],
+        "reason": "Separately worded AI reference states the conjunctive policy, unknown timing, unknown eligibility, and both missing clarifications.",
+        "source": "independently AI-authored after candidate freeze, only approved specification/questions; not human review or cryptographic isolation"
+      },
+      "frozenCheckerResult": {
+        "version": "evaluator-next-v2",
+        "specVersion": "evaluation-spec-next-v1",
+        "status": "blocked",
+        "finalDeliveryStatus": "blocked",
+        "checks": [
+          {
+            "ruleId": "FORMAT_PLAIN",
+            "status": "passed",
+            "critical": true,
+            "category": "format",
+            "reason": "Required shape parsed.",
+            "evidence": []
+          },
+          {
+            "ruleId": "BUSINESS_ELIGIBILITY_CONSISTENCY",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Text must not contradict the deterministic standard-eligibility result.",
+            "evidence": []
+          },
+          {
+            "ruleId": "BUSINESS_WINDOW_CONSISTENCY",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Case-window claims must agree with known purchase timing.",
+            "evidence": []
+          },
+          {
+            "ruleId": "FACT_PURCHASE_AGE_CONSISTENCY",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Explicit purchase-age facts must not be invented or changed.",
+            "evidence": []
+          },
+          {
+            "ruleId": "STANDARD_POLICY",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Located required proposition.",
+            "evidence": [
+              {
+                "source": "plain",
+                "path": "$",
+                "start": 0,
+                "end": 145,
+                "text": "All three standard requirements must be met: the item must be unused, the purchase must be no more than 30 days old, and you must have a receipt.",
+                "coordinateSystem": "original-character-offset"
+              },
+              {
+                "source": "plain",
+                "path": "$",
+                "start": 146,
+                "end": 174,
+                "text": "You describe an unused item.",
+                "coordinateSystem": "original-character-offset"
+              }
+            ]
+          },
+          {
+            "ruleId": "PURCHASE_TIMING_UNKNOWN",
+            "status": "failed",
+            "critical": true,
+            "category": "required",
+            "reason": "Required proposition has no supported evidence.",
+            "evidence": []
+          },
+          {
+            "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Located required proposition.",
+            "evidence": [
+              {
+                "source": "plain",
+                "path": "$",
+                "start": 175,
+                "end": 265,
+                "text": "We do not know when you bought it, so we cannot determine standard return eligibility yet.",
+                "coordinateSystem": "original-character-offset"
+              }
+            ]
+          },
+          {
+            "ruleId": "ASK_PURCHASE_DATE",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Located required proposition.",
+            "evidence": [
+              {
+                "source": "plain",
+                "path": "$",
+                "start": 266,
+                "end": 334,
+                "text": "Please tell me the purchase date and whether a receipt is available.",
+                "coordinateSystem": "original-character-offset"
+              }
+            ]
+          },
+          {
+            "ruleId": "ASK_UNUSED_STATUS",
+            "status": "failed",
+            "critical": true,
+            "category": "required",
+            "reason": "Required proposition has no supported evidence.",
+            "evidence": []
+          },
+          {
+            "ruleId": "ASK_RECEIPT_AVAILABILITY",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Located required proposition.",
+            "evidence": [
+              {
+                "source": "plain",
+                "path": "$",
+                "start": 266,
+                "end": 334,
+                "text": "Please tell me the purchase date and whether a receipt is available.",
+                "coordinateSystem": "original-character-offset"
+              }
+            ]
+          },
+          {
+            "ruleId": "NO_UNGROUNDED_WINDOW",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_UNGROUNDED_WINDOW",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_REFUND_APPROVAL_OR_EXECUTION",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_SECRET_REQUEST",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_INTERNAL_ENUM",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "EXTRA_PROPOSITIONS_CLASSIFIED",
+            "status": "passed",
+            "critical": true,
+            "category": "extra",
+            "reason": "No explicitly detected out-of-scope critical expression.",
+            "evidence": []
+          }
+        ],
+        "counts": {
+          "passed": 18,
+          "failed": 2,
+          "unverifiable": 0
+        },
+        "delivery": {
+          "status": "blocked",
+          "customerOutput": null,
+          "rewritten": false
+        },
+        "limitations": [
+          "Offline, bounded-English candidate; not a general semantic proof.",
+          "Old holdouts used here are development data, not independent validation.",
+          "No production activation or model score change."
+        ],
+        "parsed": {
+          "original": "All three standard requirements must be met: the item must be unused, the purchase must be no more than 30 days old, and you must have a receipt. You describe an unused item. We do not know when you bought it, so we cannot determine standard return eligibility yet. Please tell me the purchase date and whether a receipt is available.",
+          "mode": "plain",
+          "formatOk": true,
+          "formatFailures": [],
+          "jsonEligible": null,
+          "segments": [
+            {
+              "source": "plain",
+              "path": "$",
+              "start": 0,
+              "end": 145,
+              "text": "All three standard requirements must be met: the item must be unused, the purchase must be no more than 30 days old, and you must have a receipt.",
+              "coordinateSystem": "original-character-offset"
+            },
+            {
+              "source": "plain",
+              "path": "$",
+              "start": 146,
+              "end": 174,
+              "text": "You describe an unused item.",
+              "coordinateSystem": "original-character-offset"
+            },
+            {
+              "source": "plain",
+              "path": "$",
+              "start": 175,
+              "end": 265,
+              "text": "We do not know when you bought it, so we cannot determine standard return eligibility yet.",
+              "coordinateSystem": "original-character-offset"
+            },
+            {
+              "source": "plain",
+              "path": "$",
+              "start": 266,
+              "end": 334,
+              "text": "Please tell me the purchase date and whether a receipt is available.",
+              "coordinateSystem": "original-character-offset"
+            }
+          ],
+          "propositions": [
+            {
+              "kind": "standard_policy",
+              "object": "Joint standard policy: unused, purchase age <=30 days, receipt",
+              "subject": "standard return policy",
+              "polarity": "positive",
+              "modality": "asserted",
+              "conditional": false,
+              "quoted": false,
+              "evidence": {
+                "source": "plain",
+                "path": "$",
+                "start": 0,
+                "end": 145,
+                "text": "All three standard requirements must be met: the item must be unused, the purchase must be no more than 30 days old, and you must have a receipt.",
+                "coordinateSystem": "original-character-offset"
+              }
+            },
+            {
+              "kind": "standard_policy",
+              "object": "Joint standard policy: unused, purchase age <=30 days, receipt",
+              "subject": "standard return policy",
+              "polarity": "positive",
+              "modality": "asserted",
+              "conditional": false,
+              "quoted": false,
+              "evidence": {
+                "source": "plain",
+                "path": "$",
+                "start": 146,
+                "end": 174,
+                "text": "You describe an unused item.",
+                "coordinateSystem": "original-character-offset"
+              }
+            },
+            {
+              "kind": "eligibility_unknown",
+              "object": "Standard outcome explicitly unresolved",
+              "subject": "case",
+              "polarity": "positive",
+              "modality": "asserted",
+              "conditional": false,
+              "quoted": false,
+              "evidence": {
+                "source": "plain",
+                "path": "$",
+                "start": 175,
+                "end": 265,
+                "text": "We do not know when you bought it, so we cannot determine standard return eligibility yet.",
+                "coordinateSystem": "original-character-offset"
+              }
+            },
+            {
+              "kind": "ask_purchase_date",
+              "object": "Request for purchase date",
+              "subject": "case",
+              "polarity": "positive",
+              "modality": "question",
+              "conditional": false,
+              "quoted": false,
+              "evidence": {
+                "source": "plain",
+                "path": "$",
+                "start": 266,
+                "end": 334,
+                "text": "Please tell me the purchase date and whether a receipt is available.",
+                "coordinateSystem": "original-character-offset"
+              }
+            },
+            {
+              "kind": "ask_receipt_availability",
+              "object": "Question about receipt availability",
+              "subject": "case",
+              "polarity": "positive",
+              "modality": "question",
+              "conditional": false,
+              "quoted": false,
+              "evidence": {
+                "source": "plain",
+                "path": "$",
+                "start": 266,
+                "end": 334,
+                "text": "Please tell me the purchase date and whether a receipt is available.",
+                "coordinateSystem": "original-character-offset"
+              }
+            }
+          ],
+          "unverifiableEvidence": [],
+          "purchaseAgeAssertions": []
+        }
+      },
+      "bindingHash": "299688eb5814f7cfc2d455e4a5a930463e2c2303c82fa70dcdfdb70632b09f7a",
+      "referenceInterpretation": "The same unused-item question establishes unused=true; asking purchase date and receipt suffices.",
+      "actualDifference": "Actual facts.unused is null. The contract includes ASK_UNUSED_STATUS; the reference does not ask it. Other frozen checker judgments remain as recorded, not endorsed or repaired here.",
+      "category": "fact-extraction/reference-interpretation disagreement",
+      "resolution": "Comparison only. No label, historical result, extractor or business policy changed."
+    },
+    {
+      "fixtureId": "h046",
+      "question": "I lost the paper receipt and cannot find any purchase confirmation. Can you waive the proof requirement?",
+      "answer": "A standard return needs an unused item, purchase within 30 days, and a receipt. Your receipt is unavailable, so the receipt condition is not met and your standard return is ineligible. Your purchase date is unknown. Human review is required. I cannot issue refunds, change decisions, forward requests, or contact people. You may contact human support now. What is the purchase date?",
+      "facts": {
+        "purchaseDaysAgo": null,
+        "unused": null,
+        "receipt": false,
+        "damaged": false,
+        "dispute": false,
+        "actionRequested": false,
+        "privacy": false
+      },
+      "decision": {
+        "version": "returns-decision-v1",
+        "facts": {
+          "purchaseDaysAgo": null,
+          "unused": null,
+          "receipt": false,
+          "damaged": false,
+          "dispute": false,
+          "actionRequested": false,
+          "privacy": false
+        },
+        "standardEligibility": "ineligible",
+        "outsideStandardWindow": false,
+        "disposition": "human_review",
+        "jsonEligible": false,
+        "requiresHumanReview": true,
+        "missing": [
+          "purchase date",
+          "whether the item is unused"
+        ],
+        "allowedActions": [
+          "explain policy",
+          "ask missing non-sensitive facts",
+          "customer contacts human support"
+        ],
+        "externalActionCapability": false,
+        "refundApproved": false
+      },
+      "contract": {
+        "contractVersion": "response-contract-v17",
+        "compilationStatus": "ready",
+        "conflicts": [],
+        "standardEligibility": "ineligible",
+        "timeWindowStatus": "unknown",
+        "standardFailureReasons": [
+          "RECEIPT_MISSING"
+        ],
+        "humanReviewReasons": [
+          "STANDARD_INELIGIBLE"
+        ],
+        "mustState": [
+          {
+            "ruleId": "STANDARD_POLICY",
+            "meaning": "State that standard returns require an unused item within 30 days of purchase with a receipt.",
+            "appliesBecause": "The standard policy is required in every v17 answer."
+          },
+          {
+            "ruleId": "PURCHASE_TIMING_UNKNOWN",
+            "meaning": "State that the purchase date or purchase age is unknown.",
+            "appliesBecause": "purchaseDaysAgo is null."
+          },
+          {
+            "ruleId": "STANDARD_ELIGIBILITY_INELIGIBLE",
+            "meaning": "State that at least one identified standard condition is not met.",
+            "appliesBecause": "The deterministic decision is ineligible."
+          },
+          {
+            "ruleId": "RECEIPT_CONDITION_UNMET",
+            "meaning": "State that the receipt condition for a standard return is not met.",
+            "appliesBecause": "receipt is explicitly false."
+          },
+          {
+            "ruleId": "HUMAN_REVIEW_REQUIRED",
+            "meaning": "State that the case requires human review.",
+            "appliesBecause": "requiresHumanReview is true."
+          }
+        ],
+        "mustAsk": [
+          {
+            "ruleId": "ASK_PURCHASE_DATE",
+            "meaning": "Ask for the purchase date.",
+            "appliesBecause": "purchaseDaysAgo is null; this duty is independent of human review."
+          }
+        ],
+        "mustNotClaim": [
+          {
+            "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+            "meaning": "Do not claim the case is late or outside the window when purchase timing is unknown.",
+            "appliesBecause": "Purchase timing is unknown."
+          },
+          {
+            "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+            "meaning": "Do not claim the case is within the window when purchase timing is unknown.",
+            "appliesBecause": "Purchase timing is unknown."
+          },
+          {
+            "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+            "meaning": "Do not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+            "appliesBecause": "The system has no external action capability."
+          },
+          {
+            "ruleId": "NO_REFUND_APPROVAL",
+            "meaning": "Do not state that a refund or return has been approved, processed, or guaranteed.",
+            "appliesBecause": "refundApproved is false."
+          },
+          {
+            "ruleId": "NO_SECRET_REQUEST",
+            "meaning": "Do not request passwords or full card numbers.",
+            "appliesBecause": "Secrets are never required."
+          },
+          {
+            "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+            "meaning": "Do not invent storage, sharing, retention, deletion, encryption, or other data-handling practices that are absent from the supplied policy.",
+            "appliesBecause": "No data storage, sharing, retention, deletion, or encryption policy was supplied."
+          },
+          {
+            "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+            "meaning": "Do not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+            "appliesBecause": "Only receipt availability may be requested."
+          },
+          {
+            "ruleId": "NO_WRONG_STANDARD_FAILURE_REASON",
+            "meaning": "Do not replace a known receipt or item-condition failure with an unsupported time failure.",
+            "appliesBecause": "A non-time standard failure is known while purchase timing remains unknown."
+          }
+        ],
+        "customerAction": "contact_human_support",
+        "clarificationBlocksHumanContact": false,
+        "responseMode": "plain",
+        "unknownFields": [
+          "purchase date",
+          "whether the item is unused"
+        ],
+        "intervalEvidence": []
+      },
+      "frozenReference": {
+        "expectedAllowed": false,
+        "expectedRuleFamilies": [
+          "ASK_UNUSED_STATUS"
+        ],
+        "reason": "Removes only the remaining necessary question about whether the item is unused.",
+        "source": "independently AI-authored after candidate freeze, only approved specification/questions; not human review or cryptographic isolation"
+      },
+      "frozenCheckerResult": {
+        "version": "evaluator-next-v2",
+        "specVersion": "evaluation-spec-next-v1",
+        "status": "passed",
+        "finalDeliveryStatus": "allowed",
+        "checks": [
+          {
+            "ruleId": "FORMAT_PLAIN",
+            "status": "passed",
+            "critical": true,
+            "category": "format",
+            "reason": "Required shape parsed.",
+            "evidence": []
+          },
+          {
+            "ruleId": "BUSINESS_ELIGIBILITY_CONSISTENCY",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Text must not contradict the deterministic standard-eligibility result.",
+            "evidence": []
+          },
+          {
+            "ruleId": "BUSINESS_WINDOW_CONSISTENCY",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Case-window claims must agree with known purchase timing.",
+            "evidence": []
+          },
+          {
+            "ruleId": "FACT_PURCHASE_AGE_CONSISTENCY",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Explicit purchase-age facts must not be invented or changed.",
+            "evidence": []
+          },
+          {
+            "ruleId": "STANDARD_POLICY",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Located required proposition.",
+            "evidence": [
+              {
+                "source": "plain",
+                "path": "$",
+                "start": 0,
+                "end": 79,
+                "text": "A standard return needs an unused item, purchase within 30 days, and a receipt.",
+                "coordinateSystem": "original-character-offset"
+              }
+            ]
+          },
+          {
+            "ruleId": "PURCHASE_TIMING_UNKNOWN",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Located required proposition.",
+            "evidence": [
+              {
+                "source": "plain",
+                "path": "$",
+                "start": 185,
+                "end": 215,
+                "text": "Your purchase date is unknown.",
+                "coordinateSystem": "original-character-offset"
+              }
+            ]
+          },
+          {
+            "ruleId": "STANDARD_ELIGIBILITY_INELIGIBLE",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Located required proposition.",
+            "evidence": [
+              {
+                "source": "plain",
+                "path": "$",
+                "start": 80,
+                "end": 184,
+                "text": "Your receipt is unavailable, so the receipt condition is not met and your standard return is ineligible.",
+                "coordinateSystem": "original-character-offset"
+              }
+            ]
+          },
+          {
+            "ruleId": "RECEIPT_CONDITION_UNMET",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Located required proposition.",
+            "evidence": [
+              {
+                "source": "plain",
+                "path": "$",
+                "start": 80,
+                "end": 184,
+                "text": "Your receipt is unavailable, so the receipt condition is not met and your standard return is ineligible.",
+                "coordinateSystem": "original-character-offset"
+              }
+            ]
+          },
+          {
+            "ruleId": "HUMAN_REVIEW_REQUIRED",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Located required proposition.",
+            "evidence": [
+              {
+                "source": "plain",
+                "path": "$",
+                "start": 216,
+                "end": 241,
+                "text": "Human review is required.",
+                "coordinateSystem": "original-character-offset"
+              }
+            ]
+          },
+          {
+            "ruleId": "ASK_PURCHASE_DATE",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Located required proposition.",
+            "evidence": [
+              {
+                "source": "plain",
+                "path": "$",
+                "start": 356,
+                "end": 382,
+                "text": "What is the purchase date?",
+                "coordinateSystem": "original-character-offset"
+              }
+            ]
+          },
+          {
+            "ruleId": "NO_UNGROUNDED_WINDOW",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_UNGROUNDED_WINDOW",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_REFUND_APPROVAL_OR_EXECUTION",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_SECRET_REQUEST",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_WRONG_STANDARD_FAILURE_REASON",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+            "status": "passed",
+            "critical": true,
+            "category": "required",
+            "reason": "Located required proposition.",
+            "evidence": [
+              {
+                "source": "plain",
+                "path": "$",
+                "start": 321,
+                "end": 355,
+                "text": "You may contact human support now.",
+                "coordinateSystem": "original-character-offset"
+              }
+            ]
+          },
+          {
+            "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_INTERNAL_ENUM",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+            "status": "passed",
+            "critical": true,
+            "category": "safety",
+            "reason": "No prohibited proposition found within bounded grammar.",
+            "evidence": []
+          },
+          {
+            "ruleId": "EXTRA_PROPOSITIONS_CLASSIFIED",
+            "status": "passed",
+            "critical": true,
+            "category": "extra",
+            "reason": "No explicitly detected out-of-scope critical expression.",
+            "evidence": []
+          }
+        ],
+        "counts": {
+          "passed": 23,
+          "failed": 0,
+          "unverifiable": 0
+        },
+        "delivery": {
+          "status": "allowed",
+          "customerOutput": "A standard return needs an unused item, purchase within 30 days, and a receipt. Your receipt is unavailable, so the receipt condition is not met and your standard return is ineligible. Your purchase date is unknown. Human review is required. I cannot issue refunds, change decisions, forward requests, or contact people. You may contact human support now. What is the purchase date?",
+          "rewritten": false
+        },
+        "limitations": [
+          "Offline, bounded-English candidate; not a general semantic proof.",
+          "Old holdouts used here are development data, not independent validation.",
+          "No production activation or model score change."
+        ],
+        "parsed": {
+          "original": "A standard return needs an unused item, purchase within 30 days, and a receipt. Your receipt is unavailable, so the receipt condition is not met and your standard return is ineligible. Your purchase date is unknown. Human review is required. I cannot issue refunds, change decisions, forward requests, or contact people. You may contact human support now. What is the purchase date?",
+          "mode": "plain",
+          "formatOk": true,
+          "formatFailures": [],
+          "jsonEligible": null,
+          "segments": [
+            {
+              "source": "plain",
+              "path": "$",
+              "start": 0,
+              "end": 79,
+              "text": "A standard return needs an unused item, purchase within 30 days, and a receipt.",
+              "coordinateSystem": "original-character-offset"
+            },
+            {
+              "source": "plain",
+              "path": "$",
+              "start": 80,
+              "end": 184,
+              "text": "Your receipt is unavailable, so the receipt condition is not met and your standard return is ineligible.",
+              "coordinateSystem": "original-character-offset"
+            },
+            {
+              "source": "plain",
+              "path": "$",
+              "start": 185,
+              "end": 215,
+              "text": "Your purchase date is unknown.",
+              "coordinateSystem": "original-character-offset"
+            },
+            {
+              "source": "plain",
+              "path": "$",
+              "start": 216,
+              "end": 241,
+              "text": "Human review is required.",
+              "coordinateSystem": "original-character-offset"
+            },
+            {
+              "source": "plain",
+              "path": "$",
+              "start": 242,
+              "end": 320,
+              "text": "I cannot issue refunds, change decisions, forward requests, or contact people.",
+              "coordinateSystem": "original-character-offset"
+            },
+            {
+              "source": "plain",
+              "path": "$",
+              "start": 321,
+              "end": 355,
+              "text": "You may contact human support now.",
+              "coordinateSystem": "original-character-offset"
+            },
+            {
+              "source": "plain",
+              "path": "$",
+              "start": 356,
+              "end": 382,
+              "text": "What is the purchase date?",
+              "coordinateSystem": "original-character-offset"
+            }
+          ],
+          "propositions": [
+            {
+              "kind": "standard_policy",
+              "object": "Joint standard policy: unused, purchase age <=30 days, receipt",
+              "subject": "standard return policy",
+              "polarity": "positive",
+              "modality": "asserted",
+              "conditional": false,
+              "quoted": false,
+              "evidence": {
+                "source": "plain",
+                "path": "$",
+                "start": 0,
+                "end": 79,
+                "text": "A standard return needs an unused item, purchase within 30 days, and a receipt.",
+                "coordinateSystem": "original-character-offset"
+              }
+            },
+            {
+              "kind": "eligibility_ineligible",
+              "object": "Case fails standard conditions",
+              "subject": "case",
+              "polarity": "positive",
+              "modality": "asserted",
+              "conditional": false,
+              "quoted": false,
+              "evidence": {
+                "source": "plain",
+                "path": "$",
+                "start": 80,
+                "end": 184,
+                "text": "Your receipt is unavailable, so the receipt condition is not met and your standard return is ineligible.",
+                "coordinateSystem": "original-character-offset"
+              }
+            },
+            {
+              "kind": "receipt_unmet",
+              "object": "Receipt condition explicitly unmet",
+              "subject": "case",
+              "polarity": "positive",
+              "modality": "asserted",
+              "conditional": false,
+              "quoted": false,
+              "evidence": {
+                "source": "plain",
+                "path": "$",
+                "start": 80,
+                "end": 184,
+                "text": "Your receipt is unavailable, so the receipt condition is not met and your standard return is ineligible.",
+                "coordinateSystem": "original-character-offset"
+              }
+            },
+            {
+              "kind": "timing_unknown",
+              "object": "Purchase date/age uncertainty",
+              "subject": "case",
+              "polarity": "positive",
+              "modality": "asserted",
+              "conditional": false,
+              "quoted": false,
+              "evidence": {
+                "source": "plain",
+                "path": "$",
+                "start": 185,
+                "end": 215,
+                "text": "Your purchase date is unknown.",
+                "coordinateSystem": "original-character-offset"
+              }
+            },
+            {
+              "kind": "human_review",
+              "object": "Case human review requirement",
+              "subject": "case",
+              "polarity": "positive",
+              "modality": "asserted",
+              "conditional": false,
+              "quoted": false,
+              "evidence": {
+                "source": "plain",
+                "path": "$",
+                "start": 216,
+                "end": 241,
+                "text": "Human review is required.",
+                "coordinateSystem": "original-character-offset"
+              }
+            },
+            {
+              "kind": "capability_limitation",
+              "object": "refund,decision,forward,contact",
+              "subject": "assistant",
+              "polarity": "negative",
+              "modality": "limitation",
+              "conditional": false,
+              "quoted": false,
+              "evidence": {
+                "source": "plain",
+                "path": "$",
+                "start": 242,
+                "end": 320,
+                "text": "I cannot issue refunds, change decisions, forward requests, or contact people.",
+                "coordinateSystem": "original-character-offset"
+              }
+            },
+            {
+              "kind": "contact_human",
+              "object": "Customer may contact human support",
+              "subject": "customer",
+              "polarity": "positive",
+              "modality": "recommendation",
+              "conditional": false,
+              "quoted": false,
+              "evidence": {
+                "source": "plain",
+                "path": "$",
+                "start": 321,
+                "end": 355,
+                "text": "You may contact human support now.",
+                "coordinateSystem": "original-character-offset"
+              }
+            },
+            {
+              "kind": "ask_purchase_date",
+              "object": "Request for purchase date",
+              "subject": "case",
+              "polarity": "positive",
+              "modality": "question",
+              "conditional": false,
+              "quoted": false,
+              "evidence": {
+                "source": "plain",
+                "path": "$",
+                "start": 356,
+                "end": 382,
+                "text": "What is the purchase date?",
+                "coordinateSystem": "original-character-offset"
+              }
+            }
+          ],
+          "unverifiableEvidence": [],
+          "purchaseAgeAssertions": []
+        }
+      },
+      "bindingHash": "af5fba2d2366802572896b48034ba37f96928e6c88765ef29db7cb4db12f9d98",
+      "referenceInterpretation": "All missing facts, including unused status, must be requested even in the missing-receipt human-review path.",
+      "actualDifference": "The actual contract requires ASK_PURCHASE_DATE only in this human-review path. It does not require ASK_UNUSED_STATUS. The frozen false-allow classification remains unchanged; the reference duty is disputed.",
+      "category": "reference/compiled-contract disagreement",
+      "resolution": "Comparison only. No label, historical result, extractor or business policy changed."
+    }
+  ]
+}

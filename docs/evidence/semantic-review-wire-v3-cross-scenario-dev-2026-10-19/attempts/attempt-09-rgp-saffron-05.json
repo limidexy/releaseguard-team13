@@ -1,0 +1,10 @@
+{
+  "version": "semantic-review-wire-v3-cross-scenario-dev-attempt",
+  "experimentId": "releaseguard-semantic-wire-v3-cross-scenario-dev-20261019",
+  "experimentSequence": 9,
+  "originalPilotSequence": 12,
+  "sampleId": "rgp-saffron-05",
+  "recordedAt": "2026-10-19T03:07:25.148Z",
+  "inputSha256": "c0469c08ff0d229a9953c50a04b7b6b755db3cd71eab1aea5e6b0bedf59c019e",
+  "providerRequestSha256": "6ba5176a18c7dfc665d40c052cf4c6ed8f8abadc3973216fea59a76c3ba59dee"
+}

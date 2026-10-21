@@ -1,0 +1,25 @@
+{
+  "version": "hybrid-semantic-pilot-v1-ledger-preflight",
+  "observedAt": "2026-10-19T10:59:02+08:00",
+  "sourceExperimentId": "releaseguard-semantic-pilot-v1-20261018",
+  "sourceFixtureSha256": "e3c312b4f120cdaa64db21f9ef2c26eeba222e94b81cc4597c5a488dadedda65",
+  "attemptLedgerSha256": "646d4c4d9578ae726d3548be7012b73f331d498a01160f389bb5521a5be0b328",
+  "oldFinalSha256": "29d0deb90ffaf5c5ed3ecd92c9201f98aaf0da555d2698d1eacfa66bd38b490d",
+  "oldCompletionSha256": "998aa84b3ec124188403c46423d810cca4f03cb7d974411f897b0a33fadb6d94",
+  "attemptCount": 3,
+  "executedSequences": [1, 2, 3],
+  "executedSampleIds": ["rgp-cobalt-71", "rgp-tundra-59", "rgp-maple-02"],
+  "requestFiles": [
+    "request-01-rgp-cobalt-71.json",
+    "request-02-rgp-tundra-59.json",
+    "request-03-rgp-maple-02.json"
+  ],
+  "resultFiles": [
+    "result-01-rgp-cobalt-71.json",
+    "result-02-rgp-tundra-59.json",
+    "result-03-rgp-maple-02.json"
+  ],
+  "selectedUnexecutedSequences": {"from": 4, "to": 20, "count": 17},
+  "selectedAllowed": 9,
+  "selectedViolations": 8
+}

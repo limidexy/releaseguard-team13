@@ -1,0 +1,16 @@
+local.file_match "releaseguard" {
+  path_targets = [{"__path__" = "/var/rg-logs/*.jsonl", "job" = "releaseguard-local"}]
+  sync_period = "1s"
+}
+loki.source.file "releaseguard" {
+  targets = local.file_match.releaseguard.targets
+  forward_to = [loki.process.releaseguard.receiver]
+}
+loki.process "releaseguard" {
+  stage.json { expressions = {service = "service"} }
+  stage.labels { values = {service = ""} }
+  forward_to = [loki.write.local.receiver]
+}
+loki.write "local" {
+  endpoint { url = "http://loki:3100/loki/api/v1/push" }
+}

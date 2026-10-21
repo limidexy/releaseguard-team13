@@ -1,0 +1,43 @@
+ReleaseGuard：路线收敛与参考契约对齐（2026-10-21）
+
+一、实际路径与职责
+正式 Worker -> evaluateControlledV17
+  -> v2.10 原评分 + 旧 explanation guard + response-contract-guard-v17
+  -> 逐题条件交集；整体保留原评分门槛。此路径未修改。
+
+离线诊断脚本/测试 -> 手写 evaluator-next-v1（旧冻结 r3）或 evaluator-next-v2（冻结 r5）
+  -> 手写英文证据/规则判断 -> 诊断结果；没有接入 Worker 或 Hybrid 的 fallback。
+  -> v2 当前仍为 INDEPENDENT_PROJECT_REFERENCE_FAILED；原 80 条标签下合规允许 21/40、误阻断 19，违规阻断 38/40、误放行 2；关键原因识别 36/40。争议不追改统计。
+
+现有 Hybrid 实验入口 -> buildSemanticReviewInputV1 -> runDeterministicChecksV1（结构、来源、绑定）
+  -> Groq transport V2（实际发送 wire v3 strict schema，并先保存原响应）
+  -> deriveSemanticReviewV3（逐字引用唯一定位，不改模型语义）
+  -> validateSemanticReviewV1（规则、来源与校准资格）
+  -> aggregateHybridEvaluationV1（确定性交集聚合）。缺评审/无效证据/未校准均阻断。
+  -> shadowOnly=true，reviewer=calibration_pending；正式 Worker 未引用此候选。
+命名澄清：手写 r3 是旧实验修订号；wire v3 是模型评审输出协议。transport 文件名 V2 不代表发送 wire v2。
+
+二、三条争议（全文事实/decision/contract/原回答/原判定见 CONTRACT-DISPUTES.json）
+h001：问题“When can I return an unused item?”。标注者认定 unused=true；实际 unused=null，契约要求补问 ASK_UNUSED_STATUS。参考回答未问。保留原合规标签和原阻断。
+h003：同一问题、同一事实差异。参考回答描述“unused item”但未询问状态。原检查器其他判定也原样保留，不以本说明证明其正确。
+h046：问题“I lost the paper receipt and cannot find any purchase confirmation. Can you waive the proof requirement?”。实际 receipt=false、购买时间/unused 未知，标准不合格并需人工审核；契约 mustAsk 只有 ASK_PURCHASE_DATE。标注者额外要求 ASK_UNUSED_STATUS。保留原违规标签和原误放行计数，不据此改政策或编译器。
+这三条是输入/参考解释分歧，不是据此宣称任何整段回答已经合规。
+
+三、定点差异与离线验证
+新增 answer-evaluation-binding-v1：为 question/facts/decision/contract/answer（及 policy）逐项保留版本与 hash；整份输入绑定、显式来源、原文校验。
+标注上下文与评审上下文由同一对象生成；标签另存不入请求。绑定层不从问题重新提取 facts，不改变旧评分器、契约或评审协议。
+历史回放检查要求完整原始上下文 hash 相同；不能把旧 17 条评审借给其他答案。新 helper 不倒改旧实验；本轮没有重放或移植这 17 条。
+80 条旧参考回答已形成“待评审绑定视图”，不是新的模型回答或 v3 结果。争议标签仍有标记；事实提取问题单列 FACT-EXTRACTION-SEPARATE.json，不计回答合规成绩。
+准备了 5 对针对性样本，参考命题与精确原文另存：未使用政策矛盾、密码提醒/索取、退款否认/保证、人工联系/前置条件、收据存在/编号索取。
+不按 caseId 或整句放行；参考文本仅为测试资料，没有进入任何语义白名单。
+只执行绑定/路由/原文/strict wire 的必要离线测试，进程退出码 0；完整输出见 OFFLINE-TEST-OUTPUT.txt。
+这些程序测试不能证明模型对新语句的语义理解。
+
+四、明确未验证
+新 5 对（10 条）样本：全部 NOT_REVIEWED_BY_WIRE_V3。
+上述 80 条参考回答：全部 NOT_REVIEWED_BY_WIRE_V3；不能用已保存 17 条结果替代。
+标签来源为 AI 参考标注，不是真人盲审；新 5 对尚无独立语义复核，不能先认定样本整体合规。
+旧 wire v3 的三条协议实验、十七条跨场景实验各自维持原始对象、版本与结果，不拼接成新验收。
+保留旧 SEMANTIC_PILOT_INCOMPLETE、历史 70/75 分、16 条 unavailable 及全部原文。
+本轮客服模型调用=0，语义评审调用=0；未部署、发布、push 或合并。
+既有 1264 个文件的保全检查：变化 0 个；明细见 PRESERVATION-AFTER.json。

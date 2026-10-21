@@ -1,0 +1,43 @@
+{
+  "at": "2026-10-11T14:30:39.002Z",
+  "repository": "limidexy/releaseguard-team13",
+  "commit": "acf0e2a90fc1b8f0407512659f9a69928c690076",
+  "scanned": {
+    "gitBlobs": 181,
+    "logs": 13,
+    "artifacts": 13
+  },
+  "credentialFindings": 0,
+  "reviewedMatches": 17,
+  "explanations": [
+    "humanId is a test-account subject UUID, not a credential. Audit records intentionally preserve actor identity.",
+    "Image markers were confined to jose key-parser code, npm documentation placeholders, and published GnuTLS cryptographic self-test material."
+  ],
+  "upstreamSelfTest": {
+    "sourceUrl": "https://raw.githubusercontent.com/gnutls/gnutls/3.7.9/lib/crypto-selftests-pk.c",
+    "keys": [
+      {
+        "sha256": "bf552d2ff30b20f0b0ee2bcc357a5ab68dbe899ae09a0071b097bee2d2434332",
+        "matchesPublishedSelfTest": true
+      },
+      {
+        "sha256": "cadf1e62661d5d21a7fce2c80b3319022ee366137e4b302a7ea78b7f17d6f599",
+        "matchesPublishedSelfTest": true
+      },
+      {
+        "sha256": "6d03bbf47115fad00d6f990593a6465ca693d0f6d797721cfc94b0190349b50d",
+        "matchesPublishedSelfTest": true
+      },
+      {
+        "sha256": "24a2416c5abbb67327599619c25906553b849d79cbc413e2a061f12de6718838",
+        "matchesPublishedSelfTest": true
+      },
+      {
+        "sha256": "f287c70b1db074fe73f73bfb1f09a8b0231e0d951d5bfd30a742bcb9de9195ab",
+        "matchesPublishedSelfTest": true
+      }
+    ]
+  },
+  "limits": "Pattern and known-current-secret scan; not a guarantee against unknown historical secrets. Image archives scanned after gzip decompression, including uncompressed nested layer tar content. Logs and all nonexpired artifacts present at audit time checked.",
+  "visibilityChangeAuthorizedBy": "Repository owner explicitly requested public access for teammates and lecturer; credentials and cloud authorization remain separate."
+}

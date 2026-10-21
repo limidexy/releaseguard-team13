@@ -3,8 +3,10 @@ import pg, { type PoolClient } from 'pg';
 import { createHash, randomUUID } from 'node:crypto';
 import { createRemoteJWKSet, jwtVerify, SignJWT } from 'jose';
 import { z } from 'zod';
+import {initializeTelemetry,attachRequestTracing,traceFields,tracedFetch} from './observability.js';
 
 export const role = process.env.SERVICE_ROLE ?? 'gateway';
+initializeTelemetry(role);
 export const uuid = () => randomUUID();
 export const digest = (v: unknown) => createHash('sha256').update(canonical(v)).digest('hex');
 export function canonical(v: unknown): string {
@@ -58,12 +60,17 @@ export async function internal(req: FastifyRequest, permitted: string[]) {
 export async function serviceFetch(target: string, path: string, workspace: string) {
   const url = process.env[target.toUpperCase() + '_URL'];
   if (!url) throw new HttpError(503, 'Service endpoint unavailable');
-  const res = await fetch(url + path + '?workspace=' + encodeURIComponent(workspace), { headers: await internalHeader(target), signal: AbortSignal.timeout(5000) });
+  const res = await tracedFetch(target,url + path + '?workspace=' + encodeURIComponent(workspace), { headers: await internalHeader(target), signal: AbortSignal.timeout(5000) });
   if (!res.ok) throw new HttpError(res.status === 404 ? 404 : 503, 'Upstream service unavailable or record not found');
   return res.json() as Promise<any>;
 }
 export function server(): FastifyInstance {
-  const app = Fastify({ logger: { level: 'info', redact: ['req.headers.authorization', 'req.headers.cookie'] }, bodyLimit: 500000, requestTimeout: 30000 });
+  const app = Fastify({ disableRequestLogging:true, logger: { level: 'info',
+    base:{service:role},mixin:()=>traceFields(),
+    redact: ['req.headers.authorization', 'req.headers.cookie','authorization','cookie','password','apiKey','token','body'],
+    serializers:{req:req=>({method:req.method}),err:()=>({type:'operation_error',message:'redacted',stack:''})}
+  }, bodyLimit: 500000, requestTimeout: 30000 });
+  attachRequestTracing(app,role);
   const requests = new Map<string, number>();
   app.addHook('onResponse', async (req, reply) => { const key = `${req.method}:${req.routeOptions.url ?? 'unmatched'}:${reply.statusCode}`; requests.set(key, (requests.get(key) ?? 0) + 1); });
   app.addHook('onSend', async (_req, reply) => { reply.header('Cache-Control', 'no-store').header('X-Content-Type-Options', 'nosniff'); });
@@ -71,7 +78,7 @@ export function server(): FastifyInstance {
     if (error instanceof z.ZodError) return reply.code(400).send({ error: 'validation_error', details: error.issues.map(i => ({ path: i.path, message: i.message })) });
     if (error.code === '23505') return reply.code(409).send({ error: 'conflicting_record' });
     const status = error.statusCode ?? 503;
-    if (status >= 500) app.log.error({ message: error.message, code: error.code }, 'request failed');
+    if (status >= 500) app.log.error({ event:'request_failed',status }, 'request failed');
     return reply.code(status).send({ error: status >= 500 ? 'service_unavailable' : error.message });
   });
   app.get('/health/live', async () => ({ status: 'alive', service: role }));

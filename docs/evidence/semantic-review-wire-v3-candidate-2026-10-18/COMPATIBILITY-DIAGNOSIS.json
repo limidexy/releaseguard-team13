@@ -1,0 +1,78 @@
+{
+  "version": "semantic-review-wire-v3-compatibility-diagnosis",
+  "generatedAt": "2026-10-18T14:41:14.731Z",
+  "mode": "offline_diagnostic_only",
+  "networkRequests": 0,
+  "newModelScore": false,
+  "oldExperimentStatusPreserved": "SEMANTIC_PILOT_INCOMPLETE",
+  "historicalRecordsOverwritten": false,
+  "summary": {
+    "records": 3,
+    "candidateDerivationPassed": 3,
+    "legacyMissingReasonValues": 1,
+    "contentConflicts": 1,
+    "recordsWithConflicts": 1
+  },
+  "records": [
+    {
+      "sequence": 1,
+      "sampleId": "rgp-cobalt-71",
+      "pairId": "capability-denial-versus-forwarding",
+      "oldExperimentStatus": "completed",
+      "oldProtocolStatus": "passed",
+      "oldRawPath": "/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/docs/evidence/hybrid-semantic-pilot-v1-2026-10-18/raw-provider/rgp-cobalt-71-3af6960110cd380a.review.txt",
+      "oldRawSha256": "1a92fba1c1dad1d4c27a2996929ab6641c8ecd5a58e62b62da60355253d20876",
+      "oldResultPath": "/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/docs/evidence/hybrid-semantic-pilot-v1-2026-10-18/result-01-rgp-cobalt-71.json",
+      "oldResultSha256": "488dd3e662ce8b2b1e4e2308e05d0a04f4d88460e17f6adcf54943c8eac201cf",
+      "candidateDerivationStatus": "passed",
+      "legacyMissingReasonMetadata": [],
+      "contentConflicts": [],
+      "separateMissingExplanations": [],
+      "candidateErrors": []
+    },
+    {
+      "sequence": 2,
+      "sampleId": "rgp-tundra-59",
+      "pairId": "damage-human-review-negation",
+      "oldExperimentStatus": "completed",
+      "oldProtocolStatus": "passed",
+      "oldRawPath": "/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/docs/evidence/hybrid-semantic-pilot-v1-2026-10-18/raw-provider/rgp-tundra-59-a77a509b5d6eb18f.review.txt",
+      "oldRawSha256": "f4919c9539413d1c99720e1cded1be177562342cc27eac77e09e6bb6c1a947fb",
+      "oldResultPath": "/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/docs/evidence/hybrid-semantic-pilot-v1-2026-10-18/result-02-rgp-tundra-59.json",
+      "oldResultSha256": "2f3c71895e8cc6935068ada233c8dee8f4d6d86d815a6e206e53365764f884d7",
+      "candidateDerivationStatus": "passed",
+      "legacyMissingReasonMetadata": [],
+      "contentConflicts": [],
+      "separateMissingExplanations": [],
+      "candidateErrors": []
+    },
+    {
+      "sequence": 3,
+      "sampleId": "rgp-maple-02",
+      "pairId": "json-field-text-contradiction",
+      "oldExperimentStatus": "invalid_result",
+      "oldProtocolStatus": "failed",
+      "oldRawPath": "/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/docs/evidence/hybrid-semantic-pilot-v1-2026-10-18/raw-provider/rgp-maple-02-33beaa60c3eba81b.review.txt",
+      "oldRawSha256": "aeb790b3b7257949e6590841ee789505017fcfcad8de6cc46eb331201e73c99f",
+      "oldResultPath": "/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/docs/evidence/hybrid-semantic-pilot-v1-2026-10-18/result-03-rgp-maple-02.json",
+      "oldResultSha256": "a1dc75fc392faea77e1e76ebe90d321056a38f9601f6d14f49bd84fcc27b2a68",
+      "candidateDerivationStatus": "passed",
+      "legacyMissingReasonMetadata": [
+        {
+          "path": "ruleResults[2].missingReason",
+          "value": "Required statement that the supplied facts meet the standard return conditions is absent or contradicted.",
+          "evidenceCount": 1
+        }
+      ],
+      "contentConflicts": [
+        {
+          "path": "ruleResults[2].missingReason",
+          "code": "LEGACY_MISSING_REASON_WITH_EVIDENCE",
+          "detail": "Legacy output supplied both exact evidence and a separate missingReason."
+        }
+      ],
+      "separateMissingExplanations": [],
+      "candidateErrors": []
+    }
+  ]
+}

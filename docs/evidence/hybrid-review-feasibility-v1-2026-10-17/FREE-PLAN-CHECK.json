@@ -1,0 +1,22 @@
+{
+  "version": "groq-free-plan-check-v1",
+  "observedAt": "2026-10-17T13:03:09Z",
+  "page": "https://console.groq.com/settings/billing/plans",
+  "method": "read-only authenticated Chrome UI",
+  "accountIdentifier": "lxd215434@gmail.com",
+  "organizationLabel": "Personal",
+  "projectLabel": "Default Project",
+  "plan": "Free",
+  "displayedPrice": "$0",
+  "currentPlan": true,
+  "developerPlanSelected": false,
+  "paymentOrUpgradeActionTaken": false,
+  "officialFreeLimitEvidence": {
+    "page": "https://console.groq.com/docs/rate-limits",
+    "modelId": "openai/gpt-oss-120b",
+    "rpm": 30,
+    "rpd": 1000,
+    "tpm": 8000,
+    "tpd": 200000
+  }
+}

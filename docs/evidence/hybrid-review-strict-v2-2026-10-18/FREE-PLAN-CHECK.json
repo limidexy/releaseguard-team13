@@ -1,0 +1,22 @@
+{
+  "version": "groq-free-plan-check-v2",
+  "observedAt": "2026-10-18T01:50:00Z",
+  "page": "https://console.groq.com/settings/billing/plans",
+  "method": "read-only authenticated Chrome DOM inspection",
+  "accountIdentifier": "lxd215434@gmail.com",
+  "organizationLabel": "Personal",
+  "projectLabel": "Default Project",
+  "plan": "Free",
+  "displayedPrice": "$0",
+  "currentPlanControl": "Current Plan",
+  "currentPlanControlDisabled": true,
+  "developerPlanSelected": false,
+  "paymentOrUpgradeActionTaken": false,
+  "evidenceText": [
+    "Free",
+    "$0",
+    "Current Plan",
+    "Personal",
+    "Default Project"
+  ]
+}

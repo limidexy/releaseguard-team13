@@ -1,0 +1,48 @@
+{
+  "at": "2026-10-11T14:48:33.872Z",
+  "origin": "https://rg-team13.34.21.137.20.sslip.io",
+  "cloud": true,
+  "identity": "Keycloak RS256 client credentials, service=true; NOT a human approval",
+  "commit": "362e8dde09b186d5d6e55e3bd71d67f73f17eaf9",
+  "checks": [
+    {
+      "name": "Unauthenticated API is rejected",
+      "passed": true
+    },
+    {
+      "name": "Tampered JWT is rejected",
+      "passed": true
+    },
+    {
+      "name": "Viewer cannot write",
+      "passed": true
+    },
+    {
+      "name": "Duplicate submission returns the same job",
+      "passed": true
+    },
+    {
+      "name": "Ten-case replay executes and gate passes",
+      "passed": true
+    },
+    {
+      "name": "Service identity cannot approve a release",
+      "passed": true
+    },
+    {
+      "name": "Audit evidence remains pending, not fabricated approval",
+      "passed": true
+    },
+    {
+      "name": "Cross-origin mutation rejected",
+      "passed": true
+    },
+    {
+      "name": "Public identity administration is blocked",
+      "passed": true
+    }
+  ],
+  "jobId": "c5381ea1-8288-4b28-97a5-82ef33549532",
+  "releaseId": "f37c07b9-9586-415d-a8e4-f183662f9804",
+  "passed": true
+}

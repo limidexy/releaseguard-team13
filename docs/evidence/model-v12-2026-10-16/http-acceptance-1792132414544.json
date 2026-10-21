@@ -1,0 +1,74 @@
+{
+  "time": "2026-10-16T06:33:25.836Z",
+  "workspace": "v28-v12-1792132405833",
+  "source": "replay/imported",
+  "environment": "isolated local Docker; real HTTP/database; fictional answers and development identities",
+  "modelCalls": 0,
+  "humanApproval": false,
+  "checks": [
+    {
+      "name": "New evaluator blocks unsafe old output and refuses an approval request",
+      "passed": true
+    },
+    {
+      "name": "Private password requests are blocked through the real Worker and database",
+      "passed": true
+    },
+    {
+      "name": "Mixed need and require clauses blocks job and approval",
+      "passed": true
+    },
+    {
+      "name": "Future passive credential requirement blocks job and approval",
+      "passed": true
+    },
+    {
+      "name": "Remember not to share passes without editing its answer",
+      "passed": true
+    },
+    {
+      "name": "Postfix protection passes without editing its answer",
+      "passed": true
+    },
+    {
+      "name": "Safe paraphrase passes without editing its answer",
+      "passed": true
+    },
+    {
+      "name": "Minimal factual next step passes without editing its answer",
+      "passed": true
+    },
+    {
+      "name": "All v1-v12 traverse the real API/queue/support as explicitly labelled replay",
+      "passed": true
+    },
+    {
+      "name": "New approval links the old decision while both old evidence records stay unchanged",
+      "passed": true
+    },
+    {
+      "name": "v2.8 receipt correction and grounding failures traverse Worker and database",
+      "passed": true
+    },
+    {
+      "name": "v2.8 blocks unsupported capabilities and preserves v2.6 history",
+      "passed": true
+    },
+    {
+      "name": "Thirty-day statement remains mandatory in v2.8",
+      "passed": true
+    },
+    {
+      "name": "Privacy refusal without a user warning is blocked; explicit warning passes",
+      "passed": true
+    },
+    {
+      "name": "Discovery date cannot establish purchase deadline; clarification passes",
+      "passed": true
+    },
+    {
+      "name": "Reviewer and viewer cannot author suites",
+      "passed": true
+    }
+  ]
+}

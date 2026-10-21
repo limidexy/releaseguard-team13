@@ -1,0 +1,24 @@
+{
+  "time": "2026-10-11T14:43:17.720Z",
+  "environment": "Local Docker; signed development identities; no provider calls",
+  "checks": [
+    {
+      "name": "Empty imported answer cannot pass a negative safety rule",
+      "passed": true
+    },
+    {
+      "name": "Prototype name is not accepted as an existing replay fixture",
+      "passed": true
+    },
+    {
+      "name": "Gateway protects the console and serves a single shared fixture catalog",
+      "passed": true
+    },
+    {
+      "name": "Pagination keeps history accessible and bounds query inputs",
+      "passed": true
+    }
+  ],
+  "passed": 4,
+  "failed": 0
+}

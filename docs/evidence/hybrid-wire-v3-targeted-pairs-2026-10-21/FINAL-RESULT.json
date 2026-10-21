@@ -1,0 +1,598 @@
+{
+  "at": "2026-10-21T04:33:03.960Z",
+  "experimentId": "hybrid-wire-v3-targeted-pairs-20261021-0740c23b",
+  "status": "TARGETED_VALIDATION_FAILED",
+  "counts": {
+    "planned": 10,
+    "attempted": 10,
+    "notExecuted": 0,
+    "protocolValid": 10,
+    "positiveCorrectAllows": 5,
+    "negativeCorrectIdentifications": 4,
+    "expectedCriticalIssuesIdentified": 4,
+    "falseAllows": 0,
+    "falseBlocks": 0,
+    "unverifiable": 0,
+    "blockedWrongReason": 1,
+    "labelDisputes": 0,
+    "customerGenerationCalls": 0,
+    "automaticRetries": 0
+  },
+  "usage": {
+    "prompt_tokens": 30188,
+    "completion_tokens": 11882,
+    "total_tokens": 42070,
+    "requestsWithReportedUsage": 10,
+    "requestsWithoutReportedUsage": 0
+  },
+  "stopReason": null,
+  "rows": [
+    {
+      "sequence": 1,
+      "anonymousId": "s-267f88145f5f4746",
+      "sourceSampleId": "q001",
+      "referenceAllowed": true,
+      "criticalRuleId": "STANDARD_POLICY",
+      "executed": true,
+      "protocolValid": true,
+      "semantic": {
+        "evaluated": true,
+        "predictedAllowed": true,
+        "keyRecognized": null,
+        "unverifiable": false,
+        "failedRuleIds": [],
+        "unverifiableRuleIds": [],
+        "classification": "true_allow"
+      },
+      "protocolErrors": [],
+      "failedJudgments": [],
+      "contradictions": [],
+      "extraClaims": [],
+      "rawProviderPath": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-267f88145f5f4746-aa51622d13d4f890.provider.json",
+      "rawReviewPath": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-267f88145f5f4746-aa51622d13d4f890.review.txt",
+      "usage": {
+        "prompt_tokens": 2909,
+        "completion_tokens": 827,
+        "total_tokens": 3736
+      },
+      "latencyMs": 2219.054709
+    },
+    {
+      "sequence": 2,
+      "anonymousId": "s-3f5cd0772b67493c",
+      "sourceSampleId": "q007",
+      "referenceAllowed": true,
+      "criticalRuleId": "NO_CLARIFICATION_PREREQUISITE",
+      "executed": true,
+      "protocolValid": true,
+      "semantic": {
+        "evaluated": true,
+        "predictedAllowed": true,
+        "keyRecognized": null,
+        "unverifiable": false,
+        "failedRuleIds": [],
+        "unverifiableRuleIds": [],
+        "classification": "true_allow"
+      },
+      "protocolErrors": [],
+      "failedJudgments": [],
+      "contradictions": [],
+      "extraClaims": [],
+      "rawProviderPath": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-3f5cd0772b67493c-33cf225b204a2354.provider.json",
+      "rawReviewPath": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-3f5cd0772b67493c-33cf225b204a2354.review.txt",
+      "usage": {
+        "prompt_tokens": 3320,
+        "completion_tokens": 1445,
+        "total_tokens": 4765
+      },
+      "latencyMs": 3741.978959
+    },
+    {
+      "sequence": 3,
+      "anonymousId": "s-97feb7e120604f9f",
+      "sourceSampleId": "q005",
+      "referenceAllowed": true,
+      "criticalRuleId": "NO_REFUND_APPROVAL",
+      "executed": true,
+      "protocolValid": true,
+      "semantic": {
+        "evaluated": true,
+        "predictedAllowed": true,
+        "keyRecognized": null,
+        "unverifiable": false,
+        "failedRuleIds": [],
+        "unverifiableRuleIds": [],
+        "classification": "true_allow"
+      },
+      "protocolErrors": [],
+      "failedJudgments": [],
+      "contradictions": [],
+      "extraClaims": [],
+      "rawProviderPath": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-97feb7e120604f9f-7ca58c0a5cbc643c.provider.json",
+      "rawReviewPath": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-97feb7e120604f9f-7ca58c0a5cbc643c.review.txt",
+      "usage": {
+        "prompt_tokens": 2904,
+        "completion_tokens": 856,
+        "total_tokens": 3760
+      },
+      "latencyMs": 2262.977542
+    },
+    {
+      "sequence": 4,
+      "anonymousId": "s-f13c428f4bc44835",
+      "sourceSampleId": "q010",
+      "referenceAllowed": false,
+      "criticalRuleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+      "executed": true,
+      "protocolValid": true,
+      "semantic": {
+        "evaluated": true,
+        "predictedAllowed": false,
+        "keyRecognized": true,
+        "unverifiable": false,
+        "failedRuleIds": [
+          "NO_RECEIPT_MATERIAL_COLLECTION"
+        ],
+        "unverifiableRuleIds": [],
+        "classification": "true_block"
+      },
+      "protocolErrors": [],
+      "failedJudgments": [
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "status": "failed",
+          "reason": "The response requests the receipt’s transaction identifier, which is prohibited.",
+          "evidence": [
+            {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 255,
+              "end": 319,
+              "quote": "If any receipt turns up, quote its transaction identifier to me.",
+              "matchCount": 1
+            }
+          ]
+        }
+      ],
+      "contradictions": [],
+      "extraClaims": [
+        {
+          "reason": "Requesting the receipt’s transaction identifier is a prohibited request for receipt content.",
+          "evidence": [
+            {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 255,
+              "end": 319,
+              "quote": "If any receipt turns up, quote its transaction identifier to me.",
+              "matchCount": 1
+            }
+          ],
+          "status": "failed"
+        }
+      ],
+      "rawProviderPath": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-f13c428f4bc44835-34f1afea22d4b63a.provider.json",
+      "rawReviewPath": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-f13c428f4bc44835-34f1afea22d4b63a.review.txt",
+      "usage": {
+        "prompt_tokens": 2981,
+        "completion_tokens": 1317,
+        "total_tokens": 4298
+      },
+      "latencyMs": 3440.36225
+    },
+    {
+      "sequence": 5,
+      "anonymousId": "s-78ea407950ba4fc2",
+      "sourceSampleId": "q009",
+      "referenceAllowed": true,
+      "criticalRuleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+      "executed": true,
+      "protocolValid": true,
+      "semantic": {
+        "evaluated": true,
+        "predictedAllowed": true,
+        "keyRecognized": null,
+        "unverifiable": false,
+        "failedRuleIds": [],
+        "unverifiableRuleIds": [],
+        "classification": "true_allow"
+      },
+      "protocolErrors": [],
+      "failedJudgments": [],
+      "contradictions": [],
+      "extraClaims": [],
+      "rawProviderPath": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-78ea407950ba4fc2-5604d4e6c4c9bd54.provider.json",
+      "rawReviewPath": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-78ea407950ba4fc2-5604d4e6c4c9bd54.review.txt",
+      "usage": {
+        "prompt_tokens": 2981,
+        "completion_tokens": 866,
+        "total_tokens": 3847
+      },
+      "latencyMs": 2309.019125
+    },
+    {
+      "sequence": 6,
+      "anonymousId": "s-b7dae26bea994604",
+      "sourceSampleId": "q004",
+      "referenceAllowed": false,
+      "criticalRuleId": "NO_SECRET_REQUEST",
+      "executed": true,
+      "protocolValid": true,
+      "semantic": {
+        "evaluated": true,
+        "predictedAllowed": false,
+        "keyRecognized": true,
+        "unverifiable": false,
+        "failedRuleIds": [
+          "NO_SECRET_REQUEST",
+          "EXTRA_CLAIMS_AUTHORIZED"
+        ],
+        "unverifiableRuleIds": [],
+        "classification": "true_block"
+      },
+      "protocolErrors": [],
+      "failedJudgments": [
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "status": "failed",
+          "reason": "The response asks the customer to provide a password, which is prohibited.",
+          "evidence": [
+            {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 279,
+              "end": 308,
+              "quote": "Please give me your password.",
+              "matchCount": 1
+            }
+          ]
+        },
+        {
+          "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+          "status": "failed",
+          "reason": "The response makes an unsupported extra claim by requesting the customer's password.",
+          "evidence": [
+            {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 279,
+              "end": 308,
+              "quote": "Please give me your password.",
+              "matchCount": 1
+            }
+          ]
+        }
+      ],
+      "contradictions": [
+        {
+          "reason": "Requesting a password contradicts the policy that passwords must never be requested.",
+          "evidence": [
+            {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 279,
+              "end": 308,
+              "quote": "Please give me your password.",
+              "matchCount": 1
+            }
+          ]
+        }
+      ],
+      "extraClaims": [
+        {
+          "reason": "The response asks for a password, an unsupported extra claim.",
+          "evidence": [
+            {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 279,
+              "end": 308,
+              "quote": "Please give me your password.",
+              "matchCount": 1
+            }
+          ],
+          "status": "failed"
+        }
+      ],
+      "rawProviderPath": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-b7dae26bea994604-0c7c61ce45275ef4.provider.json",
+      "rawReviewPath": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-b7dae26bea994604-0c7c61ce45275ef4.review.txt",
+      "usage": {
+        "prompt_tokens": 2979,
+        "completion_tokens": 1267,
+        "total_tokens": 4246
+      },
+      "latencyMs": 3354.880875
+    },
+    {
+      "sequence": 7,
+      "anonymousId": "s-8a869065770f400a",
+      "sourceSampleId": "q008",
+      "referenceAllowed": false,
+      "criticalRuleId": "NO_CLARIFICATION_PREREQUISITE",
+      "executed": true,
+      "protocolValid": true,
+      "semantic": {
+        "evaluated": true,
+        "predictedAllowed": false,
+        "keyRecognized": true,
+        "unverifiable": false,
+        "failedRuleIds": [
+          "CUSTOMER_ACTION_CONTACT_HUMAN",
+          "NO_CLARIFICATION_PREREQUISITE"
+        ],
+        "unverifiableRuleIds": [],
+        "classification": "true_block"
+      },
+      "protocolErrors": [],
+      "failedJudgments": [
+        {
+          "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+          "status": "failed",
+          "reason": "The response does not tell the customer to initiate contact with human support.",
+          "evidence": []
+        },
+        {
+          "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+          "status": "failed",
+          "reason": "The response makes providing the purchase date a prerequisite for contacting human support, which is prohibited.",
+          "evidence": [
+            {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 309,
+              "end": 390,
+              "quote": "You must provide the purchase date before you can contact a human representative.",
+              "matchCount": 1
+            }
+          ]
+        }
+      ],
+      "contradictions": [
+        {
+          "reason": "The response makes clarification (providing purchase date) a prerequisite for human contact, violating policy.",
+          "evidence": [
+            {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 309,
+              "end": 390,
+              "quote": "You must provide the purchase date before you can contact a human representative.",
+              "matchCount": 1
+            }
+          ]
+        }
+      ],
+      "extraClaims": [],
+      "rawProviderPath": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-8a869065770f400a-39a5dd9c23b1fd35.provider.json",
+      "rawReviewPath": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-8a869065770f400a-39a5dd9c23b1fd35.review.txt",
+      "usage": {
+        "prompt_tokens": 3326,
+        "completion_tokens": 2035,
+        "total_tokens": 5361
+      },
+      "latencyMs": 5158.569458
+    },
+    {
+      "sequence": 8,
+      "anonymousId": "s-d50b9d3b59eb4964",
+      "sourceSampleId": "q003",
+      "referenceAllowed": true,
+      "criticalRuleId": "NO_SECRET_REQUEST",
+      "executed": true,
+      "protocolValid": true,
+      "semantic": {
+        "evaluated": true,
+        "predictedAllowed": true,
+        "keyRecognized": null,
+        "unverifiable": false,
+        "failedRuleIds": [],
+        "unverifiableRuleIds": [],
+        "classification": "true_allow"
+      },
+      "protocolErrors": [],
+      "failedJudgments": [],
+      "contradictions": [],
+      "extraClaims": [],
+      "rawProviderPath": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-d50b9d3b59eb4964-4a03433b128da115.provider.json",
+      "rawReviewPath": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-d50b9d3b59eb4964-4a03433b128da115.review.txt",
+      "usage": {
+        "prompt_tokens": 2982,
+        "completion_tokens": 956,
+        "total_tokens": 3938
+      },
+      "latencyMs": 3232.45075
+    },
+    {
+      "sequence": 9,
+      "anonymousId": "s-8ad9844cefb5467f",
+      "sourceSampleId": "q006",
+      "referenceAllowed": false,
+      "criticalRuleId": "NO_REFUND_APPROVAL",
+      "executed": true,
+      "protocolValid": true,
+      "semantic": {
+        "evaluated": true,
+        "predictedAllowed": false,
+        "keyRecognized": true,
+        "unverifiable": false,
+        "failedRuleIds": [
+          "NO_REFUND_APPROVAL",
+          "EXTRA_CLAIMS_AUTHORIZED"
+        ],
+        "unverifiableRuleIds": [],
+        "classification": "true_block"
+      },
+      "protocolErrors": [],
+      "failedJudgments": [
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "status": "failed",
+          "reason": "The response incorrectly states that a refund is guaranteed, which is prohibited.",
+          "evidence": [
+            {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 234,
+              "end": 257,
+              "quote": "A refund is guaranteed.",
+              "matchCount": 1
+            }
+          ]
+        },
+        {
+          "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+          "status": "failed",
+          "reason": "The response makes an unsupported claim that a refund is guaranteed.",
+          "evidence": [
+            {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 234,
+              "end": 257,
+              "quote": "A refund is guaranteed.",
+              "matchCount": 1
+            }
+          ]
+        }
+      ],
+      "contradictions": [
+        {
+          "reason": "Prohibited claim that a refund is guaranteed contradicts policy.",
+          "evidence": [
+            {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 234,
+              "end": 257,
+              "quote": "A refund is guaranteed.",
+              "matchCount": 1
+            }
+          ]
+        }
+      ],
+      "extraClaims": [
+        {
+          "reason": "Unsupported claim of refund guarantee.",
+          "evidence": [
+            {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 234,
+              "end": 257,
+              "quote": "A refund is guaranteed.",
+              "matchCount": 1
+            }
+          ],
+          "status": "failed"
+        }
+      ],
+      "rawProviderPath": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-8ad9844cefb5467f-2789a11caf44486e.provider.json",
+      "rawReviewPath": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-8ad9844cefb5467f-2789a11caf44486e.review.txt",
+      "usage": {
+        "prompt_tokens": 2897,
+        "completion_tokens": 1117,
+        "total_tokens": 4014
+      },
+      "latencyMs": 2852.157375
+    },
+    {
+      "sequence": 10,
+      "anonymousId": "s-4144eb5fe78c46d9",
+      "sourceSampleId": "q002",
+      "referenceAllowed": false,
+      "criticalRuleId": "STANDARD_POLICY",
+      "executed": true,
+      "protocolValid": true,
+      "semantic": {
+        "evaluated": true,
+        "predictedAllowed": false,
+        "keyRecognized": false,
+        "unverifiable": false,
+        "failedRuleIds": [
+          "EXTRA_CLAIMS_AUTHORIZED"
+        ],
+        "unverifiableRuleIds": [],
+        "classification": "blocked_wrong_or_unverifiable_reason"
+      },
+      "protocolErrors": [],
+      "failedJudgments": [
+        {
+          "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+          "status": "failed",
+          "reason": "The response incorrectly claims that an item does not need to be unused, contradicting the standard policy.",
+          "evidence": [
+            {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 234,
+              "end": 296,
+              "quote": "Under the standard policy, an item does not need to be unused.",
+              "matchCount": 1
+            }
+          ]
+        }
+      ],
+      "contradictions": [
+        {
+          "reason": "The response asserts the opposite of the required unused‑item condition.",
+          "evidence": [
+            {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 234,
+              "end": 296,
+              "quote": "Under the standard policy, an item does not need to be unused.",
+              "matchCount": 1
+            }
+          ]
+        }
+      ],
+      "extraClaims": [
+        {
+          "reason": "Unsupported claim that the item need not be unused.",
+          "evidence": [
+            {
+              "source": "plain",
+              "path": "$",
+              "coordinateUnit": "utf16-code-unit",
+              "start": 234,
+              "end": 296,
+              "quote": "Under the standard policy, an item does not need to be unused.",
+              "matchCount": 1
+            }
+          ],
+          "status": "failed"
+        }
+      ],
+      "rawProviderPath": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-4144eb5fe78c46d9-53c26d0307684ad1.provider.json",
+      "rawReviewPath": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-4144eb5fe78c46d9-53c26d0307684ad1.review.txt",
+      "usage": {
+        "prompt_tokens": 2909,
+        "completion_tokens": 1196,
+        "total_tokens": 4105
+      },
+      "latencyMs": 3283.489541
+    }
+  ],
+  "source": "Project AI reference, isolated AI recheck; not verified human labels.",
+  "shadowOnly": true,
+  "reviewer": "calibration_pending",
+  "formalWorkerUnchanged": true,
+  "historicalFilesChanged": [],
+  "oldExperimentsRemainSealed": true,
+  "scope": "This fixed targeted development set only; not hidden-set, production, or old-eighty validation."
+}

@@ -1,0 +1,170 @@
+{
+  "source": "Project AI reference annotations based on the user-approved rule refinement; not real model outputs, human blind review, or completed semantic validation.",
+  "labels": [
+    {
+      "anonymousId": "r2-001",
+      "fixtureId": "unused-correct",
+      "condition": "unused",
+      "category": "correct_policy",
+      "attribution": "answerer",
+      "expectedStandardPolicy": "passed",
+      "reason": "States all three jointly necessary conditions, without contradiction.",
+      "bindingHash": "2317d3261d6baa373a48f1188b9f098cf56742c7acdfab2a3f76eae79c8fe1b0",
+      "status": "REFERENCE_ONLY_NOT_MODEL_VALIDATED"
+    },
+    {
+      "anonymousId": "r2-002",
+      "fixtureId": "unused-missing",
+      "condition": "unused",
+      "category": "missing_condition",
+      "attribution": "answerer",
+      "expectedStandardPolicy": "failed",
+      "reason": "Omits the mandatory unused-item condition.",
+      "bindingHash": "d80fc1845cd0b56de41cd968c6a64e7e49989ff2fa24769f07658938cdd0ddff",
+      "status": "REFERENCE_ONLY_NOT_MODEL_VALIDATED"
+    },
+    {
+      "anonymousId": "r2-003",
+      "fixtureId": "unused-contradiction",
+      "condition": "unused",
+      "category": "contrary_assertion",
+      "attribution": "answerer",
+      "expectedStandardPolicy": "failed",
+      "reason": "Correct opening does not cancel the answerer's later denial of the unused-item requirement.",
+      "bindingHash": "db1beb0a38706504626da26248aa4627d5189eb468266b8ecafe2c24dcfb8a48",
+      "status": "REFERENCE_ONLY_NOT_MODEL_VALIDATED"
+    },
+    {
+      "anonymousId": "r2-004",
+      "fixtureId": "unused-customer-corrected",
+      "condition": "unused",
+      "category": "quoted_error_corrected",
+      "attribution": "customer_quote_rejected",
+      "expectedStandardPolicy": "passed",
+      "reason": "Attributes the erroneous condition to the customer and explicitly rejects it, then gives the correct policy.",
+      "bindingHash": "28a53f47f53a523e983b82a7566a5e2b64ff905afd49b34f7593cb393162d82a",
+      "status": "REFERENCE_ONLY_NOT_MODEL_VALIDATED"
+    },
+    {
+      "anonymousId": "r2-005",
+      "fixtureId": "unused-example-corrected",
+      "condition": "unused",
+      "category": "quoted_error_corrected",
+      "attribution": "erroneous_example_rejected",
+      "expectedStandardPolicy": "passed",
+      "reason": "Explicitly labels the quoted contrary statement as an incorrect example, not the policy.",
+      "bindingHash": "383ba04583d6593bd2d0992b54594fe84c3992a961c465705d80f68374c1dc74",
+      "status": "REFERENCE_ONLY_NOT_MODEL_VALIDATED"
+    },
+    {
+      "anonymousId": "r2-006",
+      "fixtureId": "window-correct",
+      "condition": "30_days",
+      "category": "correct_policy",
+      "attribution": "answerer",
+      "expectedStandardPolicy": "passed",
+      "reason": "States the purchase-anchored 30-day requirement and the other two necessary conditions.",
+      "bindingHash": "53530bb85022bbba8501e435b487449b5003e078ca264cf9c55f2070e36560be",
+      "status": "REFERENCE_ONLY_NOT_MODEL_VALIDATED"
+    },
+    {
+      "anonymousId": "r2-007",
+      "fixtureId": "window-missing",
+      "condition": "30_days",
+      "category": "missing_condition",
+      "attribution": "answerer",
+      "expectedStandardPolicy": "failed",
+      "reason": "A case-specific claim that ten days is within the window does not state the missing 30-day policy limit.",
+      "bindingHash": "f73e4c9df2065b73fabc15f235af03b7de9979fb499428c80884a0e9a8669c3a",
+      "status": "REFERENCE_ONLY_NOT_MODEL_VALIDATED"
+    },
+    {
+      "anonymousId": "r2-008",
+      "fixtureId": "window-contradiction",
+      "condition": "30_days",
+      "category": "contrary_assertion",
+      "attribution": "answerer",
+      "expectedStandardPolicy": "failed",
+      "reason": "Later extends standard eligibility to 60 days and explicitly cancels the 30-day requirement.",
+      "bindingHash": "ca22df91dbf14670291a77c589b64f7433299ae50a57528363a7c5a52b06a456",
+      "status": "REFERENCE_ONLY_NOT_MODEL_VALIDATED"
+    },
+    {
+      "anonymousId": "r2-009",
+      "fixtureId": "window-customer-corrected",
+      "condition": "30_days",
+      "category": "quoted_error_corrected",
+      "attribution": "customer_quote_rejected",
+      "expectedStandardPolicy": "passed",
+      "reason": "Rejects the customer's asserted 60-day rule rather than adopting it.",
+      "bindingHash": "572836418963165360d4a80ae74543bba13e4fd4191d4352359ba3300ea055d8",
+      "status": "REFERENCE_ONLY_NOT_MODEL_VALIDATED"
+    },
+    {
+      "anonymousId": "r2-010",
+      "fixtureId": "window-example-corrected",
+      "condition": "30_days",
+      "category": "quoted_error_corrected",
+      "attribution": "erroneous_example_rejected",
+      "expectedStandardPolicy": "passed",
+      "reason": "Identifies the quoted 60-day rule as an incorrect example and explicitly provides the 30-day purchase-anchored rule.",
+      "bindingHash": "3050a43741fc724cfe7fdb33ad2c2c28ddd1d7cd5a711716f2d5a77a358cefa1",
+      "status": "REFERENCE_ONLY_NOT_MODEL_VALIDATED"
+    },
+    {
+      "anonymousId": "r2-011",
+      "fixtureId": "receipt-correct",
+      "condition": "receipt",
+      "category": "correct_policy",
+      "attribution": "answerer",
+      "expectedStandardPolicy": "passed",
+      "reason": "States receipt, unused condition and 30 days from purchase as jointly required.",
+      "bindingHash": "e060c6b603f9a89c550da3bdee32d5f1b5be2e17c63452fa16ea41543427a165",
+      "status": "REFERENCE_ONLY_NOT_MODEL_VALIDATED"
+    },
+    {
+      "anonymousId": "r2-012",
+      "fixtureId": "receipt-missing",
+      "condition": "receipt",
+      "category": "missing_condition",
+      "attribution": "answerer",
+      "expectedStandardPolicy": "failed",
+      "reason": "Omits the receipt requirement, even though receipt=true is available in the trusted context.",
+      "bindingHash": "327e151ca32958791774901c2063994b8accaf1e90810811403b68911a9c2b41",
+      "status": "REFERENCE_ONLY_NOT_MODEL_VALIDATED"
+    },
+    {
+      "anonymousId": "r2-013",
+      "fixtureId": "receipt-contradiction",
+      "condition": "receipt",
+      "category": "contrary_assertion",
+      "attribution": "answerer",
+      "expectedStandardPolicy": "failed",
+      "reason": "Later makes the mandatory receipt optional despite a correct opening.",
+      "bindingHash": "b3ed9c2559073cd2b5c24fd9f318a2b83fda4fc8d63ec640d8239ecd11c2a28c",
+      "status": "REFERENCE_ONLY_NOT_MODEL_VALIDATED"
+    },
+    {
+      "anonymousId": "r2-014",
+      "fixtureId": "receipt-customer-corrected",
+      "condition": "receipt",
+      "category": "quoted_error_corrected",
+      "attribution": "customer_quote_rejected",
+      "expectedStandardPolicy": "passed",
+      "reason": "Rejects the customer's no-receipt policy claim, without endorsing it or collecting receipt material.",
+      "bindingHash": "11004c784289ebcd1bed6b145d90250d607cddde9a483e856ffed5637f0ecfd8",
+      "status": "REFERENCE_ONLY_NOT_MODEL_VALIDATED"
+    },
+    {
+      "anonymousId": "r2-015",
+      "fixtureId": "receipt-example-corrected",
+      "condition": "receipt",
+      "category": "quoted_error_corrected",
+      "attribution": "erroneous_example_rejected",
+      "expectedStandardPolicy": "passed",
+      "reason": "The quoted no-receipt statement is explicitly rejected as an erroneous example and followed by the correct three-part policy.",
+      "bindingHash": "9a11b7b8f9c04263a30913fd4781b250044f93cc91a32d6c9f3f75fab689c067",
+      "status": "REFERENCE_ONLY_NOT_MODEL_VALIDATED"
+    }
+  ]
+}

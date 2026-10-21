@@ -1,0 +1,7 @@
+{
+  "experimentId": "releaseguard-semantic-wire-v3-real-20261019",
+  "completedAt": "2026-10-19T02:20:11.404Z",
+  "actualRequests": 3,
+  "secondRunAuthorized": false,
+  "finalResultSha256": "7c02cc4d979ee0891221150cd2f68a045a363743a3c8717080ac562515220b81"
+}

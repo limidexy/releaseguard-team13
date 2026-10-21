@@ -1,0 +1,100 @@
+{
+  "ruleResults": [
+    {
+      "ruleId": "STANDARD_POLICY",
+      "status": "passed",
+      "reason": "The response states that standard returns require an unused item within 30 days of purchase with a receipt.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Standard returns require an unused item within 30 days of purchase with a receipt."
+        }
+      ]
+    },
+    {
+      "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+      "status": "passed",
+      "reason": "The response confirms the purchase was 10 days ago, which is within the 30‑day window.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Your purchase was 10 days ago, within the 30-day standard window."
+        }
+      ]
+    },
+    {
+      "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+      "status": "passed",
+      "reason": "The response notes that eligibility cannot yet be determined because receipt availability is unknown.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Receipt availability is unknown, so standard eligibility cannot yet be determined."
+        }
+      ]
+    },
+    {
+      "ruleId": "ASK_RECEIPT_AVAILABILITY",
+      "status": "passed",
+      "reason": "The response asks only whether the customer has a receipt.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Do you have a receipt? Please only tell me whether a receipt is available."
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+      "status": "passed",
+      "reason": "No claim of refund, escalation, ticket, or contact action is made.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_REFUND_APPROVAL",
+      "status": "passed",
+      "reason": "The response does not state that a refund or return is approved, processed, or guaranteed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_SECRET_REQUEST",
+      "status": "passed",
+      "reason": "No passwords or full card numbers are requested.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+      "status": "passed",
+      "reason": "No data‑handling practices (storage, sharing, etc.) are claimed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+      "status": "passed",
+      "reason": "The response only asks about receipt availability, not for receipt contents or uploads.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_INTERNAL_ENUM",
+      "status": "passed",
+      "reason": "No internal implementation labels are exposed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+      "status": "passed",
+      "reason": "No invented channel, process, timeline, or follow‑up is asserted.",
+      "evidence": []
+    },
+    {
+      "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+      "status": "passed",
+      "reason": "No extra unsupported or unverifiable claims are present.",
+      "evidence": []
+    }
+  ],
+  "contradictions": [],
+  "extraClaims": [],
+  "unverifiableItems": [],
+  "reviewCompletionStatus": "completed"
+}

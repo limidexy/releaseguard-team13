@@ -1,0 +1,131 @@
+{
+  "sequence": 7,
+  "fixtureId": "v2-expired-allowed-anchor-analysis",
+  "caseId": "expired",
+  "question": "Can I return something after 60 days?",
+  "originalResponse": "Standard returns require unused condition, receipt availability, and purchase within the past 30 days. “After 60 days” has no stated starting point, so it cannot establish how long ago the purchase occurred. The purchase date is unknown and standard eligibility remains open.\n\nNext step: What was the purchase date? Has the item stayed unused? Is a receipt available?",
+  "reference": {
+    "sourceType": "project_reference_annotation",
+    "expectedAllowed": true,
+    "expectedRuleFamilies": [],
+    "rationale": "Analyzes the interval by its missing starting point rather than equating it with purchase age."
+  },
+  "request": {
+    "reviewInputSha256": "92e85015d42cf4886468ce4af08382201f1b045b776f7c45ac6b7258ee644607",
+    "providerRequestSha256": "776180bfd17c5eba2ba377fad159e64f33799016bfb010b1d2306826794105e1",
+    "labelsSent": false
+  },
+  "run": {
+    "status": "provider_error",
+    "requestsSent": 1,
+    "cacheHit": false,
+    "review": null,
+    "error": "Groq review HTTP 429",
+    "attemptKey": "a0999357df64bbe949ef0fdb6f1695b4a1837326ae8f330c57b085c48f511d01",
+    "cacheKey": "c5c76b14732b77dd6df539603515520656f814179d424710a1882f61ba025d30"
+  },
+  "deterministic": {
+    "version": "deterministic-checks-v1",
+    "status": "passed",
+    "checks": [
+      {
+        "checkId": "IDENTIFIERS_BOUND",
+        "status": "passed",
+        "reason": "Case, run and response identifiers must match."
+      },
+      {
+        "checkId": "RESPONSE_MODE_BOUND",
+        "status": "passed",
+        "reason": "Review input response mode must match the frozen envelope."
+      },
+      {
+        "checkId": "ORIGINAL_RESPONSE_PRESENT",
+        "status": "passed",
+        "reason": "A non-empty original response is required."
+      },
+      {
+        "checkId": "RESPONSE_COMPLETE",
+        "status": "passed",
+        "reason": "Provider completion must be complete and error-free."
+      },
+      {
+        "checkId": "ORIGINAL_RESPONSE_HASH",
+        "status": "passed",
+        "reason": "Review input must contain the byte-identical original response and hash."
+      },
+      {
+        "checkId": "POLICY_BINDING",
+        "status": "passed",
+        "reason": "Policy version, text and hash must match."
+      },
+      {
+        "checkId": "FACTS_BINDING",
+        "status": "passed",
+        "reason": "Facts version, source and hash must match."
+      },
+      {
+        "checkId": "DECISION_BINDING",
+        "status": "passed",
+        "reason": "Deterministic decision version and hash must match."
+      },
+      {
+        "checkId": "CONTRACT_BINDING",
+        "status": "passed",
+        "reason": "Contract version and hash must match."
+      },
+      {
+        "checkId": "CONTRACT_READY",
+        "status": "passed",
+        "reason": "A conflicting response contract cannot be reviewed for delivery."
+      },
+      {
+        "checkId": "RULE_SET_BOUND",
+        "status": "passed",
+        "reason": "Applicable semantic rules must match the frozen contract-derived set."
+      },
+      {
+        "checkId": "OUTPUT_FORMAT_PLAIN",
+        "status": "passed",
+        "reason": "Plain mode must not contain a top-level JSON object."
+      }
+    ]
+  },
+  "validation": {
+    "version": "semantic-review-validation-v1",
+    "status": "failed",
+    "reviewerValidationStatus": "source_unverified",
+    "errors": [
+      "provider_error: Groq review HTTP 429"
+    ],
+    "review": null
+  },
+  "aggregate": {
+    "version": "hybrid-evaluation-v1",
+    "shadowOnly": true,
+    "deterministicCheckStatus": "passed",
+    "semanticReviewStatus": "missing",
+    "semanticRuleResults": [],
+    "candidatePolicyCompliance": "blocked",
+    "candidateDeliveryStatus": "blocked",
+    "reviewerValidationStatus": "source_unverified",
+    "customerOutput": null,
+    "originalResponseHash": "b86bc6bf5d7534005aa1e5292a20ee2de2f35b2cd3eb90a6065acb82fd8a896a",
+    "rewritten": false,
+    "reasons": [
+      "semantic_review_invalid",
+      "reviewer_not_qualified_for_delivery"
+    ],
+    "historicalPath": {
+      "modified": false,
+      "activation": "unchanged"
+    }
+  },
+  "diagnostic": {
+    "predictedAllowed": false,
+    "classification": "false_block",
+    "failedRuleIds": [],
+    "unverifiableRuleIds": [],
+    "reasonMatches": []
+  },
+  "completedAt": "2026-10-17T13:10:35.952Z"
+}

@@ -1,0 +1,6 @@
+{
+  "status": "INVALID_FOR_ACCEPTANCE",
+  "reason": "The r1 TypeScript build reported TS7022 for isAssistant before these diagnostic records were generated. TypeScript emitted JavaScript, but the build was not successful. These are retained development diagnostics only, not a validated/frozen candidate.",
+  "sourceOrResultsOverwritten": false,
+  "nextAction": "Fix the annotation and require a successful build before the next versioned run."
+}

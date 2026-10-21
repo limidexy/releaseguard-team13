@@ -1,0 +1,10 @@
+{
+  "version": "semantic-review-wire-v3-cross-scenario-dev-attempt",
+  "experimentId": "releaseguard-semantic-wire-v3-cross-scenario-dev-20261019",
+  "experimentSequence": 10,
+  "originalPilotSequence": 13,
+  "sampleId": "rgp-falcon-88",
+  "recordedAt": "2026-10-19T03:08:10.320Z",
+  "inputSha256": "2e2a02e4cb726db331675aebb701760ee82929e51de2b29151f13c9641005e9f",
+  "providerRequestSha256": "f6191ecb7a8c79f4b75e3c76694617bb43e8c830bc1aaf59b38a60a252baf6d1"
+}

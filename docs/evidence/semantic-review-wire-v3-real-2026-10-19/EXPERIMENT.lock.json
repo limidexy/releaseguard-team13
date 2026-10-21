@@ -1,0 +1,10 @@
+{
+  "version": "semantic-review-wire-v3-real-lock",
+  "experimentId": "releaseguard-semantic-wire-v3-real-20261019",
+  "startedAt": "2026-10-19T02:19:02.130Z",
+  "maximumRequests": 3,
+  "automaticRetries": 0,
+  "customerGenerationRequests": 0,
+  "manifestSha256": "430fb2ebb83213a3bbb8fc45877e24bbf4626be80fbd0d68dc51d48bfdea89fa",
+  "samplesSha256": "7801539ad96d4e449f076c3bef058ce0f2a5ecd39b65e1aa53656ca35b21122d"
+}

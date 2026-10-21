@@ -1,0 +1,100 @@
+{
+  "checkedAt": "2026-10-21T01:40:30.747Z",
+  "source": "local actual HTTP + RabbitMQ + PostgreSQL + OTLP/Jaeger + Alloy/Loki; synthetic provider fixture",
+  "newModelCalls": 0,
+  "newReviewerCalls": 0,
+  "cloudDeployments": 0,
+  "checks": [
+    {
+      "name": "application created",
+      "passed": true
+    },
+    {
+      "name": "suite created",
+      "passed": true
+    },
+    {
+      "name": "job admitted",
+      "passed": true
+    },
+    {
+      "name": "replay passed",
+      "passed": true
+    },
+    {
+      "name": "single trace crosses five actual services",
+      "passed": true
+    },
+    {
+      "name": "producer and consumer spans present",
+      "passed": true
+    },
+    {
+      "name": "aggregated logs correlate at least five services",
+      "passed": true
+    },
+    {
+      "name": "no auth/query canary in evaluation.jsonl",
+      "passed": true
+    },
+    {
+      "name": "no auth/query canary in gateway.jsonl",
+      "passed": true
+    },
+    {
+      "name": "no auth/query canary in governance.jsonl",
+      "passed": true
+    },
+    {
+      "name": "no auth/query canary in registry.jsonl",
+      "passed": true
+    },
+    {
+      "name": "no auth/query canary in support.jsonl",
+      "passed": true
+    },
+    {
+      "name": "no auth/query canary in worker.jsonl",
+      "passed": true
+    },
+    {
+      "name": "fixture failure 1",
+      "passed": true
+    },
+    {
+      "name": "fixture failure 2",
+      "passed": true
+    },
+    {
+      "name": "fixture failure 3",
+      "passed": true
+    },
+    {
+      "name": "20 concurrent calls rejected without HTTP",
+      "passed": true
+    },
+    {
+      "name": "one cross-instance half-open probe",
+      "passed": true
+    },
+    {
+      "name": "recovery closes circuit",
+      "passed": true
+    }
+  ],
+  "traceId": "0d2894858586c8f4b7ad7a7e009d0a65",
+  "jobId": "014a880b-b5d8-4980-9c1e-f8f9547558ca",
+  "services": [
+    "releaseguard-registry",
+    "releaseguard-gateway",
+    "releaseguard-evaluation",
+    "releaseguard-support",
+    "releaseguard-worker"
+  ],
+  "circuitFixture": {
+    "httpRequests": 5,
+    "circuitTrace": "6c4002a4a80fe882b7bb22e7759e26d4"
+  },
+  "shadowOnly": true,
+  "reviewer": "calibration_pending"
+}

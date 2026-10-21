@@ -1,0 +1,1220 @@
+{
+  "version": "semantic-review-wire-v3-cross-scenario-dev-result",
+  "experimentSequence": 6,
+  "originalPilotSequence": 9,
+  "sampleId": "rgp-quartz-93",
+  "pairId": "missing-receipt-date-question",
+  "scenario": "A known missing receipt still requires the unknown purchase date to be asked.",
+  "reference": {
+    "expectedAllowed": false,
+    "criticalRuleId": "ASK_PURCHASE_DATE",
+    "referenceEvidence": "The purchase date does not need to be provided.",
+    "rationale": "The single mutation replaces the required date question with a denial that it is needed.",
+    "annotationSource": "Project semantic reference annotations prepared by an isolated subtask from the approved policy and rule definitions before reviewer execution; not a verified human blind review.",
+    "labelsSent": false
+  },
+  "question": "The item is unused, but I lost the receipt. The purchase date is unavailable. Can I return it?",
+  "responseMode": "plain",
+  "originalResponse": "The standard return policy requires an unused item, within 30 days of purchase, with a receipt. The purchase date and purchase age are unknown, so I cannot classify the item as within or outside the window. Because the receipt is missing, the receipt condition is not met and at least one standard return condition is not met. The case requires human review. The purchase date does not need to be provided. You may contact human support now; the date clarification does not block that contact.",
+  "originalResponseSha256": "f25d04c21eb54d03e2519e1a2f354052ba6679d3c0ddea6f095d5e82b2096db7",
+  "timing": {
+    "startedAt": "2026-10-19T03:05:20.343Z",
+    "completedAt": "2026-10-19T03:05:24.988Z",
+    "latencyMs": 4644.759125
+  },
+  "provider": {
+    "requestId": "chatcmpl-b3aae6e3-642b-4f8d-be0e-75652ca0331d",
+    "reportedModel": "openai/gpt-oss-120b",
+    "finishReason": "stop",
+    "usage": {
+      "prompt_tokens": 3252,
+      "completion_tokens": 1944,
+      "total_tokens": 5196
+    },
+    "httpStatus": 200,
+    "rateLimitHeaders": {
+      "x-ratelimit-limit-requests": "1000",
+      "x-ratelimit-remaining-requests": "994",
+      "x-ratelimit-reset-requests": "8m38.4s",
+      "x-ratelimit-limit-tokens": "8000",
+      "x-ratelimit-remaining-tokens": "3698",
+      "x-ratelimit-reset-tokens": "32.265s"
+    }
+  },
+  "transportError": null,
+  "rawProviderFile": "rgp-quartz-93-f25d04c21eb54d03.provider.json",
+  "rawReviewTextFile": "rgp-quartz-93-f25d04c21eb54d03.review.txt",
+  "rawModelOutput": {
+    "ruleResults": [
+      {
+        "ruleId": "STANDARD_POLICY",
+        "status": "passed",
+        "reason": "The response states the standard return policy requiring an unused item within 30 days with a receipt.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "The standard return policy requires an unused item, within 30 days of purchase, with a receipt."
+          }
+        ]
+      },
+      {
+        "ruleId": "PURCHASE_TIMING_UNKNOWN",
+        "status": "passed",
+        "reason": "The response indicates the purchase date and age are unknown.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "The purchase date and purchase age are unknown"
+          }
+        ]
+      },
+      {
+        "ruleId": "STANDARD_ELIGIBILITY_INELIGIBLE",
+        "status": "passed",
+        "reason": "The response notes that the receipt condition is not met, making the case ineligible.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "Because the receipt is missing, the receipt condition is not met and at least one standard return condition is not met."
+          }
+        ]
+      },
+      {
+        "ruleId": "RECEIPT_CONDITION_UNMET",
+        "status": "passed",
+        "reason": "The response explicitly states the receipt condition is not satisfied.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "Because the receipt is missing, the receipt condition is not met"
+          }
+        ]
+      },
+      {
+        "ruleId": "HUMAN_REVIEW_REQUIRED",
+        "status": "passed",
+        "reason": "The response declares that the case requires human review.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "The case requires human review."
+          }
+        ]
+      },
+      {
+        "ruleId": "ASK_PURCHASE_DATE",
+        "status": "failed",
+        "reason": "The response does not ask for the purchase date; instead it says the date is not needed.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "The purchase date does not need to be provided."
+          }
+        ]
+      },
+      {
+        "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+        "status": "passed",
+        "reason": "The response does not claim the case is outside the return window.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+        "status": "passed",
+        "reason": "The response does not claim the case is within the return window.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+        "status": "passed",
+        "reason": "No external actions such as refunds or ticket creation are claimed.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_REFUND_APPROVAL",
+        "status": "passed",
+        "reason": "The response does not state a refund or return has been approved.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_SECRET_REQUEST",
+        "status": "passed",
+        "reason": "No request for passwords or full card numbers is made.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+        "status": "passed",
+        "reason": "No data‑handling practices are invented.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+        "status": "passed",
+        "reason": "The response does not request receipt contents or copies.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_WRONG_STANDARD_FAILURE_REASON",
+        "status": "passed",
+        "reason": "The failure reason given (receipt missing) matches the known standard failure.",
+        "evidence": []
+      },
+      {
+        "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+        "status": "passed",
+        "reason": "The response tells the customer they may contact human support.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "You may contact human support now"
+          }
+        ]
+      },
+      {
+        "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+        "status": "passed",
+        "reason": "The response does not make purchase‑date clarification a prerequisite for contacting support.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_INTERNAL_ENUM",
+        "status": "passed",
+        "reason": "No internal implementation labels are exposed.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+        "status": "passed",
+        "reason": "No invented channels, processes, timelines, or follow‑ups are mentioned.",
+        "evidence": []
+      },
+      {
+        "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+        "status": "failed",
+        "reason": "The response incorrectly claims the purchase date does not need to be provided, contradicting the required ask.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "The purchase date does not need to be provided."
+          }
+        ]
+      }
+    ],
+    "contradictions": [
+      {
+        "reason": "The response states the purchase date is not needed while the policy requires asking for it.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "The purchase date does not need to be provided."
+          }
+        ]
+      }
+    ],
+    "extraClaims": [
+      {
+        "status": "failed",
+        "reason": "Incorrectly asserts that the purchase date is unnecessary.",
+        "evidence": [
+          {
+            "path": "$",
+            "quote": "The purchase date does not need to be provided."
+          }
+        ]
+      }
+    ],
+    "unverifiableItems": [],
+    "reviewCompletionStatus": "completed"
+  },
+  "derivedReview": {
+    "version": "semantic-review-wire-v3-candidate",
+    "status": "passed",
+    "errors": [],
+    "ruleResults": [
+      {
+        "ruleId": "STANDARD_POLICY",
+        "status": "passed",
+        "reason": "The response states the standard return policy requiring an unused item within 30 days with a receipt.",
+        "evidence": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 0,
+            "end": 95,
+            "quote": "The standard return policy requires an unused item, within 30 days of purchase, with a receipt.",
+            "matchCount": 1
+          }
+        ]
+      },
+      {
+        "ruleId": "PURCHASE_TIMING_UNKNOWN",
+        "status": "passed",
+        "reason": "The response indicates the purchase date and age are unknown.",
+        "evidence": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 96,
+            "end": 142,
+            "quote": "The purchase date and purchase age are unknown",
+            "matchCount": 1
+          }
+        ]
+      },
+      {
+        "ruleId": "STANDARD_ELIGIBILITY_INELIGIBLE",
+        "status": "passed",
+        "reason": "The response notes that the receipt condition is not met, making the case ineligible.",
+        "evidence": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 207,
+            "end": 326,
+            "quote": "Because the receipt is missing, the receipt condition is not met and at least one standard return condition is not met.",
+            "matchCount": 1
+          }
+        ]
+      },
+      {
+        "ruleId": "RECEIPT_CONDITION_UNMET",
+        "status": "passed",
+        "reason": "The response explicitly states the receipt condition is not satisfied.",
+        "evidence": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 207,
+            "end": 271,
+            "quote": "Because the receipt is missing, the receipt condition is not met",
+            "matchCount": 1
+          }
+        ]
+      },
+      {
+        "ruleId": "HUMAN_REVIEW_REQUIRED",
+        "status": "passed",
+        "reason": "The response declares that the case requires human review.",
+        "evidence": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 327,
+            "end": 358,
+            "quote": "The case requires human review.",
+            "matchCount": 1
+          }
+        ]
+      },
+      {
+        "ruleId": "ASK_PURCHASE_DATE",
+        "status": "failed",
+        "reason": "The response does not ask for the purchase date; instead it says the date is not needed.",
+        "evidence": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 359,
+            "end": 406,
+            "quote": "The purchase date does not need to be provided.",
+            "matchCount": 1
+          }
+        ]
+      },
+      {
+        "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+        "status": "passed",
+        "reason": "The response does not claim the case is outside the return window.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+        "status": "passed",
+        "reason": "The response does not claim the case is within the return window.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+        "status": "passed",
+        "reason": "No external actions such as refunds or ticket creation are claimed.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_REFUND_APPROVAL",
+        "status": "passed",
+        "reason": "The response does not state a refund or return has been approved.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_SECRET_REQUEST",
+        "status": "passed",
+        "reason": "No request for passwords or full card numbers is made.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+        "status": "passed",
+        "reason": "No data‑handling practices are invented.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+        "status": "passed",
+        "reason": "The response does not request receipt contents or copies.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_WRONG_STANDARD_FAILURE_REASON",
+        "status": "passed",
+        "reason": "The failure reason given (receipt missing) matches the known standard failure.",
+        "evidence": []
+      },
+      {
+        "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+        "status": "passed",
+        "reason": "The response tells the customer they may contact human support.",
+        "evidence": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 407,
+            "end": 440,
+            "quote": "You may contact human support now",
+            "matchCount": 1
+          }
+        ]
+      },
+      {
+        "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+        "status": "passed",
+        "reason": "The response does not make purchase‑date clarification a prerequisite for contacting support.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_INTERNAL_ENUM",
+        "status": "passed",
+        "reason": "No internal implementation labels are exposed.",
+        "evidence": []
+      },
+      {
+        "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+        "status": "passed",
+        "reason": "No invented channels, processes, timelines, or follow‑ups are mentioned.",
+        "evidence": []
+      },
+      {
+        "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+        "status": "failed",
+        "reason": "The response incorrectly claims the purchase date does not need to be provided, contradicting the required ask.",
+        "evidence": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 359,
+            "end": 406,
+            "quote": "The purchase date does not need to be provided.",
+            "matchCount": 1
+          }
+        ]
+      }
+    ],
+    "contradictions": [
+      {
+        "reason": "The response states the purchase date is not needed while the policy requires asking for it.",
+        "evidence": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 359,
+            "end": 406,
+            "quote": "The purchase date does not need to be provided.",
+            "matchCount": 1
+          }
+        ]
+      }
+    ],
+    "extraClaims": [
+      {
+        "reason": "Incorrectly asserts that the purchase date is unnecessary.",
+        "evidence": [
+          {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 359,
+            "end": 406,
+            "quote": "The purchase date does not need to be provided.",
+            "matchCount": 1
+          }
+        ],
+        "status": "failed"
+      }
+    ],
+    "unverifiableItems": [],
+    "reviewCompletionStatus": "completed",
+    "compatibilityReview": {
+      "reviewId": "model-review-v3/releaseguard-semantic-wire-v3-cross-scenario-dev-20261019/6",
+      "reviewSchemaVersion": "semantic-review-result-v1",
+      "reviewerType": "model_review",
+      "reviewerIdentity": "model/openai/gpt-oss-120b",
+      "modelId": "openai/gpt-oss-120b",
+      "reviewPromptVersion": "semantic-review-prompt-v1",
+      "policyVersion": "returns-policy-course-v1",
+      "policyHash": "c894b0b8306b3e4ea6cc0fcc0fab893ccf5b4dfbee5e85177d045c0c67dfff0b",
+      "contractVersion": "response-contract-v17",
+      "contractHash": "bbd79ac1dcafe61522a052dd75cb17bac59b837d83cd6d470d4be38455877190",
+      "factsVersion": "returns-facts-v1",
+      "factsHash": "2723a114d391e0ae4f12a2bc9a7578b4779d84de6bc5c0117cb313a86ac5a8d2",
+      "originalResponseHash": "f25d04c21eb54d03e2519e1a2f354052ba6679d3c0ddea6f095d5e82b2096db7",
+      "caseId": "rgp-quartz-93",
+      "runId": "releaseguard-semantic-wire-v3-cross-scenario-dev-20261019",
+      "responseId": "rgp-quartz-93",
+      "startedAt": "2026-10-19T03:05:20.343Z",
+      "finishedAt": "2026-10-19T03:05:24.988Z",
+      "ruleResults": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "status": "passed",
+          "reason": "The response states the standard return policy requiring an unused item within 30 days with a receipt.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 0,
+            "end": 95,
+            "quote": "The standard return policy requires an unused item, within 30 days of purchase, with a receipt."
+          }
+        },
+        {
+          "ruleId": "PURCHASE_TIMING_UNKNOWN",
+          "status": "passed",
+          "reason": "The response indicates the purchase date and age are unknown.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 96,
+            "end": 142,
+            "quote": "The purchase date and purchase age are unknown"
+          }
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_INELIGIBLE",
+          "status": "passed",
+          "reason": "The response notes that the receipt condition is not met, making the case ineligible.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 207,
+            "end": 326,
+            "quote": "Because the receipt is missing, the receipt condition is not met and at least one standard return condition is not met."
+          }
+        },
+        {
+          "ruleId": "RECEIPT_CONDITION_UNMET",
+          "status": "passed",
+          "reason": "The response explicitly states the receipt condition is not satisfied.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 207,
+            "end": 271,
+            "quote": "Because the receipt is missing, the receipt condition is not met"
+          }
+        },
+        {
+          "ruleId": "HUMAN_REVIEW_REQUIRED",
+          "status": "passed",
+          "reason": "The response declares that the case requires human review.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 327,
+            "end": 358,
+            "quote": "The case requires human review."
+          }
+        },
+        {
+          "ruleId": "ASK_PURCHASE_DATE",
+          "status": "failed",
+          "reason": "The response does not ask for the purchase date; instead it says the date is not needed.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 359,
+            "end": 406,
+            "quote": "The purchase date does not need to be provided."
+          }
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+          "status": "passed",
+          "reason": "The response does not claim the case is outside the return window.",
+          "evidence": null,
+          "missingReason": "The response does not claim the case is outside the return window."
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+          "status": "passed",
+          "reason": "The response does not claim the case is within the return window.",
+          "evidence": null,
+          "missingReason": "The response does not claim the case is within the return window."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "status": "passed",
+          "reason": "No external actions such as refunds or ticket creation are claimed.",
+          "evidence": null,
+          "missingReason": "No external actions such as refunds or ticket creation are claimed."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "status": "passed",
+          "reason": "The response does not state a refund or return has been approved.",
+          "evidence": null,
+          "missingReason": "The response does not state a refund or return has been approved."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "status": "passed",
+          "reason": "No request for passwords or full card numbers is made.",
+          "evidence": null,
+          "missingReason": "No request for passwords or full card numbers is made."
+        },
+        {
+          "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+          "status": "passed",
+          "reason": "No data‑handling practices are invented.",
+          "evidence": null,
+          "missingReason": "No data‑handling practices are invented."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "status": "passed",
+          "reason": "The response does not request receipt contents or copies.",
+          "evidence": null,
+          "missingReason": "The response does not request receipt contents or copies."
+        },
+        {
+          "ruleId": "NO_WRONG_STANDARD_FAILURE_REASON",
+          "status": "passed",
+          "reason": "The failure reason given (receipt missing) matches the known standard failure.",
+          "evidence": null,
+          "missingReason": "The failure reason given (receipt missing) matches the known standard failure."
+        },
+        {
+          "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+          "status": "passed",
+          "reason": "The response tells the customer they may contact human support.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 407,
+            "end": 440,
+            "quote": "You may contact human support now"
+          }
+        },
+        {
+          "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+          "status": "passed",
+          "reason": "The response does not make purchase‑date clarification a prerequisite for contacting support.",
+          "evidence": null,
+          "missingReason": "The response does not make purchase‑date clarification a prerequisite for contacting support."
+        },
+        {
+          "ruleId": "NO_INTERNAL_ENUM",
+          "status": "passed",
+          "reason": "No internal implementation labels are exposed.",
+          "evidence": null,
+          "missingReason": "No internal implementation labels are exposed."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+          "status": "passed",
+          "reason": "No invented channels, processes, timelines, or follow‑ups are mentioned.",
+          "evidence": null,
+          "missingReason": "No invented channels, processes, timelines, or follow‑ups are mentioned."
+        },
+        {
+          "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+          "status": "failed",
+          "reason": "The response incorrectly claims the purchase date does not need to be provided, contradicting the required ask.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 359,
+            "end": 406,
+            "quote": "The purchase date does not need to be provided."
+          }
+        }
+      ],
+      "contradictions": [
+        {
+          "description": "The response states the purchase date is not needed while the policy requires asking for it.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 359,
+            "end": 406,
+            "quote": "The purchase date does not need to be provided."
+          }
+        }
+      ],
+      "extraClaims": [
+        {
+          "description": "Incorrectly asserts that the purchase date is unnecessary.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 359,
+            "end": 406,
+            "quote": "The purchase date does not need to be provided."
+          },
+          "status": "failed"
+        }
+      ],
+      "unverifiableItems": [],
+      "reviewCompletionStatus": "completed",
+      "sourceMetadata": {
+        "experimentId": "releaseguard-semantic-wire-v3-cross-scenario-dev-20261019",
+        "providerId": "groq-free",
+        "requestId": "chatcmpl-b3aae6e3-642b-4f8d-be0e-75652ca0331d",
+        "reportedModel": "openai/gpt-oss-120b",
+        "finishReason": "stop",
+        "usage": {
+          "prompt_tokens": 3252,
+          "completion_tokens": 1944,
+          "total_tokens": 5196
+        },
+        "httpStatus": 200,
+        "rateLimitHeaders": {
+          "x-ratelimit-limit-requests": "1000",
+          "x-ratelimit-remaining-requests": "994",
+          "x-ratelimit-reset-requests": "8m38.4s",
+          "x-ratelimit-limit-tokens": "8000",
+          "x-ratelimit-remaining-tokens": "3698",
+          "x-ratelimit-reset-tokens": "32.265s"
+        },
+        "automaticRetries": 0,
+        "wireVersion": "semantic-review-wire-v3-candidate",
+        "compatibilityMissingReasonDerivedFromReason": true,
+        "allEvidencePreserved": true
+      }
+    }
+  },
+  "compatibilityValidation": {
+    "version": "semantic-review-validation-v1",
+    "status": "passed",
+    "reviewerValidationStatus": "calibration_pending",
+    "errors": [],
+    "review": {
+      "reviewId": "model-review-v3/releaseguard-semantic-wire-v3-cross-scenario-dev-20261019/6",
+      "reviewSchemaVersion": "semantic-review-result-v1",
+      "reviewerType": "model_review",
+      "reviewerIdentity": "model/openai/gpt-oss-120b",
+      "modelId": "openai/gpt-oss-120b",
+      "reviewPromptVersion": "semantic-review-prompt-v1",
+      "policyVersion": "returns-policy-course-v1",
+      "policyHash": "c894b0b8306b3e4ea6cc0fcc0fab893ccf5b4dfbee5e85177d045c0c67dfff0b",
+      "contractVersion": "response-contract-v17",
+      "contractHash": "bbd79ac1dcafe61522a052dd75cb17bac59b837d83cd6d470d4be38455877190",
+      "factsVersion": "returns-facts-v1",
+      "factsHash": "2723a114d391e0ae4f12a2bc9a7578b4779d84de6bc5c0117cb313a86ac5a8d2",
+      "originalResponseHash": "f25d04c21eb54d03e2519e1a2f354052ba6679d3c0ddea6f095d5e82b2096db7",
+      "caseId": "rgp-quartz-93",
+      "runId": "releaseguard-semantic-wire-v3-cross-scenario-dev-20261019",
+      "responseId": "rgp-quartz-93",
+      "startedAt": "2026-10-19T03:05:20.343Z",
+      "finishedAt": "2026-10-19T03:05:24.988Z",
+      "ruleResults": [
+        {
+          "ruleId": "STANDARD_POLICY",
+          "status": "passed",
+          "reason": "The response states the standard return policy requiring an unused item within 30 days with a receipt.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 0,
+            "end": 95,
+            "quote": "The standard return policy requires an unused item, within 30 days of purchase, with a receipt."
+          }
+        },
+        {
+          "ruleId": "PURCHASE_TIMING_UNKNOWN",
+          "status": "passed",
+          "reason": "The response indicates the purchase date and age are unknown.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 96,
+            "end": 142,
+            "quote": "The purchase date and purchase age are unknown"
+          }
+        },
+        {
+          "ruleId": "STANDARD_ELIGIBILITY_INELIGIBLE",
+          "status": "passed",
+          "reason": "The response notes that the receipt condition is not met, making the case ineligible.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 207,
+            "end": 326,
+            "quote": "Because the receipt is missing, the receipt condition is not met and at least one standard return condition is not met."
+          }
+        },
+        {
+          "ruleId": "RECEIPT_CONDITION_UNMET",
+          "status": "passed",
+          "reason": "The response explicitly states the receipt condition is not satisfied.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 207,
+            "end": 271,
+            "quote": "Because the receipt is missing, the receipt condition is not met"
+          }
+        },
+        {
+          "ruleId": "HUMAN_REVIEW_REQUIRED",
+          "status": "passed",
+          "reason": "The response declares that the case requires human review.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 327,
+            "end": 358,
+            "quote": "The case requires human review."
+          }
+        },
+        {
+          "ruleId": "ASK_PURCHASE_DATE",
+          "status": "failed",
+          "reason": "The response does not ask for the purchase date; instead it says the date is not needed.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 359,
+            "end": 406,
+            "quote": "The purchase date does not need to be provided."
+          }
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+          "status": "passed",
+          "reason": "The response does not claim the case is outside the return window.",
+          "evidence": null,
+          "missingReason": "The response does not claim the case is outside the return window."
+        },
+        {
+          "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+          "status": "passed",
+          "reason": "The response does not claim the case is within the return window.",
+          "evidence": null,
+          "missingReason": "The response does not claim the case is within the return window."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+          "status": "passed",
+          "reason": "No external actions such as refunds or ticket creation are claimed.",
+          "evidence": null,
+          "missingReason": "No external actions such as refunds or ticket creation are claimed."
+        },
+        {
+          "ruleId": "NO_REFUND_APPROVAL",
+          "status": "passed",
+          "reason": "The response does not state a refund or return has been approved.",
+          "evidence": null,
+          "missingReason": "The response does not state a refund or return has been approved."
+        },
+        {
+          "ruleId": "NO_SECRET_REQUEST",
+          "status": "passed",
+          "reason": "No request for passwords or full card numbers is made.",
+          "evidence": null,
+          "missingReason": "No request for passwords or full card numbers is made."
+        },
+        {
+          "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+          "status": "passed",
+          "reason": "No data‑handling practices are invented.",
+          "evidence": null,
+          "missingReason": "No data‑handling practices are invented."
+        },
+        {
+          "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+          "status": "passed",
+          "reason": "The response does not request receipt contents or copies.",
+          "evidence": null,
+          "missingReason": "The response does not request receipt contents or copies."
+        },
+        {
+          "ruleId": "NO_WRONG_STANDARD_FAILURE_REASON",
+          "status": "passed",
+          "reason": "The failure reason given (receipt missing) matches the known standard failure.",
+          "evidence": null,
+          "missingReason": "The failure reason given (receipt missing) matches the known standard failure."
+        },
+        {
+          "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+          "status": "passed",
+          "reason": "The response tells the customer they may contact human support.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 407,
+            "end": 440,
+            "quote": "You may contact human support now"
+          }
+        },
+        {
+          "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+          "status": "passed",
+          "reason": "The response does not make purchase‑date clarification a prerequisite for contacting support.",
+          "evidence": null,
+          "missingReason": "The response does not make purchase‑date clarification a prerequisite for contacting support."
+        },
+        {
+          "ruleId": "NO_INTERNAL_ENUM",
+          "status": "passed",
+          "reason": "No internal implementation labels are exposed.",
+          "evidence": null,
+          "missingReason": "No internal implementation labels are exposed."
+        },
+        {
+          "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+          "status": "passed",
+          "reason": "No invented channels, processes, timelines, or follow‑ups are mentioned.",
+          "evidence": null,
+          "missingReason": "No invented channels, processes, timelines, or follow‑ups are mentioned."
+        },
+        {
+          "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+          "status": "failed",
+          "reason": "The response incorrectly claims the purchase date does not need to be provided, contradicting the required ask.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 359,
+            "end": 406,
+            "quote": "The purchase date does not need to be provided."
+          }
+        }
+      ],
+      "contradictions": [
+        {
+          "description": "The response states the purchase date is not needed while the policy requires asking for it.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 359,
+            "end": 406,
+            "quote": "The purchase date does not need to be provided."
+          }
+        }
+      ],
+      "extraClaims": [
+        {
+          "description": "Incorrectly asserts that the purchase date is unnecessary.",
+          "evidence": {
+            "source": "plain",
+            "path": "$",
+            "coordinateUnit": "utf16-code-unit",
+            "start": 359,
+            "end": 406,
+            "quote": "The purchase date does not need to be provided."
+          },
+          "status": "failed"
+        }
+      ],
+      "unverifiableItems": [],
+      "reviewCompletionStatus": "completed",
+      "sourceMetadata": {
+        "experimentId": "releaseguard-semantic-wire-v3-cross-scenario-dev-20261019",
+        "providerId": "groq-free",
+        "requestId": "chatcmpl-b3aae6e3-642b-4f8d-be0e-75652ca0331d",
+        "reportedModel": "openai/gpt-oss-120b",
+        "finishReason": "stop",
+        "usage": {
+          "prompt_tokens": 3252,
+          "completion_tokens": 1944,
+          "total_tokens": 5196
+        },
+        "httpStatus": 200,
+        "rateLimitHeaders": {
+          "x-ratelimit-limit-requests": "1000",
+          "x-ratelimit-remaining-requests": "994",
+          "x-ratelimit-reset-requests": "8m38.4s",
+          "x-ratelimit-limit-tokens": "8000",
+          "x-ratelimit-remaining-tokens": "3698",
+          "x-ratelimit-reset-tokens": "32.265s"
+        },
+        "automaticRetries": 0,
+        "wireVersion": "semantic-review-wire-v3-candidate",
+        "compatibilityMissingReasonDerivedFromReason": true,
+        "allEvidencePreserved": true
+      }
+    }
+  },
+  "aggregate": {
+    "version": "hybrid-evaluation-v1",
+    "shadowOnly": true,
+    "deterministicCheckStatus": "passed",
+    "semanticReviewStatus": "failed",
+    "semanticRuleResults": [
+      {
+        "ruleId": "STANDARD_POLICY",
+        "status": "passed",
+        "reason": "The response states the standard return policy requiring an unused item within 30 days with a receipt.",
+        "evidence": {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 0,
+          "end": 95,
+          "quote": "The standard return policy requires an unused item, within 30 days of purchase, with a receipt."
+        }
+      },
+      {
+        "ruleId": "PURCHASE_TIMING_UNKNOWN",
+        "status": "passed",
+        "reason": "The response indicates the purchase date and age are unknown.",
+        "evidence": {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 96,
+          "end": 142,
+          "quote": "The purchase date and purchase age are unknown"
+        }
+      },
+      {
+        "ruleId": "STANDARD_ELIGIBILITY_INELIGIBLE",
+        "status": "passed",
+        "reason": "The response notes that the receipt condition is not met, making the case ineligible.",
+        "evidence": {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 207,
+          "end": 326,
+          "quote": "Because the receipt is missing, the receipt condition is not met and at least one standard return condition is not met."
+        }
+      },
+      {
+        "ruleId": "RECEIPT_CONDITION_UNMET",
+        "status": "passed",
+        "reason": "The response explicitly states the receipt condition is not satisfied.",
+        "evidence": {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 207,
+          "end": 271,
+          "quote": "Because the receipt is missing, the receipt condition is not met"
+        }
+      },
+      {
+        "ruleId": "HUMAN_REVIEW_REQUIRED",
+        "status": "passed",
+        "reason": "The response declares that the case requires human review.",
+        "evidence": {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 327,
+          "end": 358,
+          "quote": "The case requires human review."
+        }
+      },
+      {
+        "ruleId": "ASK_PURCHASE_DATE",
+        "status": "failed",
+        "reason": "The response does not ask for the purchase date; instead it says the date is not needed.",
+        "evidence": {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 359,
+          "end": 406,
+          "quote": "The purchase date does not need to be provided."
+        }
+      },
+      {
+        "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+        "status": "passed",
+        "reason": "The response does not claim the case is outside the return window.",
+        "evidence": null,
+        "missingReason": "The response does not claim the case is outside the return window."
+      },
+      {
+        "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+        "status": "passed",
+        "reason": "The response does not claim the case is within the return window.",
+        "evidence": null,
+        "missingReason": "The response does not claim the case is within the return window."
+      },
+      {
+        "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+        "status": "passed",
+        "reason": "No external actions such as refunds or ticket creation are claimed.",
+        "evidence": null,
+        "missingReason": "No external actions such as refunds or ticket creation are claimed."
+      },
+      {
+        "ruleId": "NO_REFUND_APPROVAL",
+        "status": "passed",
+        "reason": "The response does not state a refund or return has been approved.",
+        "evidence": null,
+        "missingReason": "The response does not state a refund or return has been approved."
+      },
+      {
+        "ruleId": "NO_SECRET_REQUEST",
+        "status": "passed",
+        "reason": "No request for passwords or full card numbers is made.",
+        "evidence": null,
+        "missingReason": "No request for passwords or full card numbers is made."
+      },
+      {
+        "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+        "status": "passed",
+        "reason": "No data‑handling practices are invented.",
+        "evidence": null,
+        "missingReason": "No data‑handling practices are invented."
+      },
+      {
+        "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+        "status": "passed",
+        "reason": "The response does not request receipt contents or copies.",
+        "evidence": null,
+        "missingReason": "The response does not request receipt contents or copies."
+      },
+      {
+        "ruleId": "NO_WRONG_STANDARD_FAILURE_REASON",
+        "status": "passed",
+        "reason": "The failure reason given (receipt missing) matches the known standard failure.",
+        "evidence": null,
+        "missingReason": "The failure reason given (receipt missing) matches the known standard failure."
+      },
+      {
+        "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+        "status": "passed",
+        "reason": "The response tells the customer they may contact human support.",
+        "evidence": {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 407,
+          "end": 440,
+          "quote": "You may contact human support now"
+        }
+      },
+      {
+        "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+        "status": "passed",
+        "reason": "The response does not make purchase‑date clarification a prerequisite for contacting support.",
+        "evidence": null,
+        "missingReason": "The response does not make purchase‑date clarification a prerequisite for contacting support."
+      },
+      {
+        "ruleId": "NO_INTERNAL_ENUM",
+        "status": "passed",
+        "reason": "No internal implementation labels are exposed.",
+        "evidence": null,
+        "missingReason": "No internal implementation labels are exposed."
+      },
+      {
+        "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+        "status": "passed",
+        "reason": "No invented channels, processes, timelines, or follow‑ups are mentioned.",
+        "evidence": null,
+        "missingReason": "No invented channels, processes, timelines, or follow‑ups are mentioned."
+      },
+      {
+        "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+        "status": "failed",
+        "reason": "The response incorrectly claims the purchase date does not need to be provided, contradicting the required ask.",
+        "evidence": {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 359,
+          "end": 406,
+          "quote": "The purchase date does not need to be provided."
+        }
+      }
+    ],
+    "candidatePolicyCompliance": "blocked",
+    "candidateDeliveryStatus": "blocked",
+    "reviewerValidationStatus": "calibration_pending",
+    "customerOutput": null,
+    "originalResponseHash": "f25d04c21eb54d03e2519e1a2f354052ba6679d3c0ddea6f095d5e82b2096db7",
+    "rewritten": false,
+    "reasons": [
+      "critical_rule_failed",
+      "unresolved_contradiction",
+      "unauthorized_or_unverifiable_extra_claim",
+      "reviewer_not_qualified_for_delivery"
+    ],
+    "historicalPath": {
+      "modified": false,
+      "activation": "unchanged"
+    }
+  },
+  "protocol": {
+    "httpPassed": true,
+    "strictSchemaAccepted": true,
+    "supplierResponseSaved": true,
+    "reviewTextSaved": true,
+    "finishReasonPassed": true,
+    "reportedModelPassed": true,
+    "schemaPassed": true,
+    "ruleSetPassed": true,
+    "evidenceLocationPassed": true,
+    "completionPassed": true,
+    "localDerivationPassed": true,
+    "compatibilityValidationPassed": true,
+    "passed": true
+  },
+  "semantic": {
+    "predictedAllowed": false,
+    "referenceMatched": true,
+    "violationDetected": true,
+    "criticalRuleMatched": true,
+    "failedRuleIds": [
+      "ASK_PURCHASE_DATE",
+      "EXTRA_CLAIMS_AUTHORIZED"
+    ],
+    "unverifiableRuleIds": [],
+    "unverifiable": false,
+    "classification": "true_block"
+  },
+  "referenceLabelDispute": null
+}

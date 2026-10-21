@@ -1,0 +1,45 @@
+{
+  "checkedAt": "2026-10-16T08:57:44.646Z",
+  "reportSha256": "dfeee69328467283debc9153e54cf6955757a81e070466b71c1a97b7c0357cb1",
+  "checks": [
+    {
+      "name": "same 20 original questions, criteria, critical flags and threshold",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ '93cb33b3e1a1aeab5ef0229b5a056f0949689706c089217c985e2c72d5b25e27'\n- 'aadb4a6e024416b5defd04cd74567a8955580b0917152b5b6583e584a4543496'\n"
+    },
+    {
+      "name": "frozen prompt, source snapshots and compiled scorer remain unchanged",
+      "passed": true
+    },
+    {
+      "name": "20 unique complete real-provider responses, no retry or truncation",
+      "passed": true
+    },
+    {
+      "name": "raw journal matches report exactly",
+      "passed": true
+    },
+    {
+      "name": "scores reproduce from frozen rules and unmodified answers",
+      "passed": true
+    },
+    {
+      "name": "historical real reports are unchanged",
+      "passed": false,
+      "error": "Error: ENOENT: no such file or directory, open '/Users/ASUS/Desktop/nus- learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/docs/evidence/model-v15-2026-10-16/real-v3-2026-10-14T14-06-07.034Z.json'"
+    },
+    {
+      "name": "business decision and independent delivery validation reproduce without modifying model score",
+      "passed": true
+    },
+    {
+      "name": "offline gate passed before real calls, frozen gate and model scores remain separate",
+      "passed": true
+    }
+  ],
+  "passed": 6,
+  "failed": 2,
+  "score": 90,
+  "gate": "blocked",
+  "scope": "Evidence integrity and deterministic scoring, not independent human review or cloud/CI acceptance"
+}

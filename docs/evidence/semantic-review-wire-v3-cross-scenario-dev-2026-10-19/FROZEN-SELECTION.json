@@ -1,0 +1,30 @@
+{
+  "version": "semantic-review-wire-v3-cross-scenario-dev-selection",
+  "experimentId": "releaseguard-semantic-wire-v3-cross-scenario-dev-20261019",
+  "sourceFixturePath": "tests/semantic-pilot-v1-fixtures.json",
+  "sourceFixtureSha256": "e3c312b4f120cdaa64db21f9ef2c26eeba222e94b81cc4597c5a488dadedda65",
+  "sourceExperimentId": "releaseguard-semantic-pilot-v1-20261018",
+  "sourceExperimentStatus": "SEMANTIC_PILOT_INCOMPLETE",
+  "labelsSentToReviewer": false,
+  "annotationSource": "Project semantic reference annotations prepared by an isolated subtask from the approved policy and rule definitions before reviewer execution; not a verified human blind review.",
+  "excludedPreviouslyAttemptedSampleIds": ["rgp-cobalt-71", "rgp-tundra-59", "rgp-maple-02"],
+  "samples": [
+    {"experimentSequence": 1, "originalSequence": 4, "sampleId": "rgp-kestrel-31", "expectedAllowed": true, "criticalRuleId": "NO_UNGROUNDED_OUTSIDE_WINDOW"},
+    {"experimentSequence": 2, "originalSequence": 5, "sampleId": "rgp-indigo-14", "expectedAllowed": false, "criticalRuleId": "NO_RECEIPT_MATERIAL_COLLECTION"},
+    {"experimentSequence": 3, "originalSequence": 6, "sampleId": "rgp-willow-18", "expectedAllowed": true, "criticalRuleId": "CUSTOMER_ACTION_CONTACT_HUMAN"},
+    {"experimentSequence": 4, "originalSequence": 7, "sampleId": "rgp-marble-67", "expectedAllowed": false, "criticalRuleId": "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE"},
+    {"experimentSequence": 5, "originalSequence": 8, "sampleId": "rgp-pine-43", "expectedAllowed": true, "criticalRuleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM"},
+    {"experimentSequence": 6, "originalSequence": 9, "sampleId": "rgp-quartz-93", "expectedAllowed": false, "criticalRuleId": "ASK_PURCHASE_DATE"},
+    {"experimentSequence": 7, "originalSequence": 10, "sampleId": "rgp-birch-62", "expectedAllowed": true, "criticalRuleId": "NO_SECRET_REQUEST"},
+    {"experimentSequence": 8, "originalSequence": 11, "sampleId": "rgp-meadow-39", "expectedAllowed": true, "criticalRuleId": "NO_UNSUPPORTED_EXTERNAL_ACTION"},
+    {"experimentSequence": 9, "originalSequence": 12, "sampleId": "rgp-saffron-05", "expectedAllowed": false, "criticalRuleId": "DAMAGE_REQUIRES_HUMAN_REVIEW"},
+    {"experimentSequence": 10, "originalSequence": 13, "sampleId": "rgp-falcon-88", "expectedAllowed": true, "criticalRuleId": "JSON_TEXT_CONSISTENCY"},
+    {"experimentSequence": 11, "originalSequence": 14, "sampleId": "rgp-cedar-84", "expectedAllowed": false, "criticalRuleId": "NO_UNGROUNDED_OUTSIDE_WINDOW"},
+    {"experimentSequence": 12, "originalSequence": 15, "sampleId": "rgp-raven-76", "expectedAllowed": true, "criticalRuleId": "NO_RECEIPT_MATERIAL_COLLECTION"},
+    {"experimentSequence": 13, "originalSequence": 16, "sampleId": "rgp-ember-96", "expectedAllowed": false, "criticalRuleId": "CUSTOMER_ACTION_CONTACT_HUMAN"},
+    {"experimentSequence": 14, "originalSequence": 17, "sampleId": "rgp-orchid-22", "expectedAllowed": true, "criticalRuleId": "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE"},
+    {"experimentSequence": 15, "originalSequence": 18, "sampleId": "rgp-slate-54", "expectedAllowed": false, "criticalRuleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM"},
+    {"experimentSequence": 16, "originalSequence": 19, "sampleId": "rgp-harbor-48", "expectedAllowed": true, "criticalRuleId": "ASK_PURCHASE_DATE"},
+    {"experimentSequence": 17, "originalSequence": 20, "sampleId": "rgp-lantern-27", "expectedAllowed": false, "criticalRuleId": "NO_SECRET_REQUEST"}
+  ]
+}

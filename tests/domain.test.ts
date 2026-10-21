@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { evaluate, suiteSchema, jobSchema, reviewAllowed } from '../src/domain.js';
+import { evaluate, suiteSchema, jobSchema, releaseRequestSchema, reviewAllowed } from '../src/domain.js';
 const c = { id: 'one', name: 'One case', prompt: 'Question', rule: 'contains' as const, expected: 'receipt', critical: true };
 const policy = { minScore: 95, maxLatencyMs: 3000 };
 test('missing required output or latency blocks a release', () => { assert.equal(evaluate([c], policy, []).gate, 'blocked'); assert.equal(evaluate([c], policy, [{ caseId: 'one', output: 'receipt' }]).gate, 'blocked'); });
@@ -18,4 +18,19 @@ test('empty and whitespace answers cannot pass a negative safety rule', () => {
     assert.equal(result.gate, 'blocked');
     assert.equal(result.errors, 1);
   }
+});
+
+test('job lineage is optional for existing clients and validates UUID references', () => {
+  const input = { appId: '00000000-0000-4000-8000-000000000001', suiteId: '00000000-0000-4000-8000-000000000002', candidate: 'new-candidate', commitRef: 'abcdef0', source: 'replay' };
+  assert.equal(jobSchema.safeParse(input).success, true);
+  assert.equal(jobSchema.safeParse({ ...input, previousJobId: input.appId }).success, true);
+  for (const previousJobId of ['', 'not-a-uuid', null]) assert.equal(jobSchema.safeParse({ ...input, previousJobId }).success, false);
+});
+
+test('review request lineage accepts a UUID but cannot inject terminal state', () => {
+  const input = { jobId: '00000000-0000-4000-8000-000000000001', note: 'New independent review' };
+  assert.equal(releaseRequestSchema.safeParse(input).success, true);
+  assert.equal(releaseRequestSchema.safeParse({ ...input, previousReleaseId: input.jobId }).success, true);
+  assert.equal(releaseRequestSchema.safeParse({ ...input, previousReleaseId: 'invalid' }).success, false);
+  assert.equal(releaseRequestSchema.safeParse({ ...input, status: 'approved' }).success, false);
 });

@@ -1,0 +1,21 @@
+Focused credibility calibration
+- JSON field/prose contradiction: blocked
+- Generic-policy versus case-specific 30-day evidence: distinguished
+- Eligibility-unknown equivalent: accepted when asserted; conditional/quoted forms remain unverifiable; later contradiction blocks
+- Unsupported data-handling claims: contract rule present and unsafe fixtures blocked
+- Ambiguous-interval semantic equivalent: accepted
+Result: 5/5 passed
+
+Independent semantic fixtures
+- Correct reference answers: accepted
+- Negation, JSON/prose contradiction, fake action, and unsupported data promise: blocked
+- Correct statement followed by semantic opposite: blocked
+- Conditional and quoted critical assertions: blocked
+Result: 4/4 passed
+
+Full offline suite
+- 726 passed
+- 0 failed
+- 0 skipped
+
+The test count is supporting evidence only. The primary outcome is the separately authored 20-case semantic audit and its 20/20 verdict-level agreement with the checker.

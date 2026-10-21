@@ -1,0 +1,170 @@
+✖ passive policy condition is not a collection: Your return is currently ineligible because a receipt is required and the purchase date and unused status are unknown. (2.758625ms)
+✖ passive policy condition is not a collection: The decision is that the return is ineligible because a receipt is required and the purchase date is unknown. (0.383833ms)
+✖ passive policy condition is not a collection: A receipt is required. (0.105584ms)
+✖ passive policy condition is not a collection: Under the policy, a receipt is required. (0.069708ms)
+✔ policy cannot mask actual collection: A receipt is required, please upload it. (0.144291ms)
+✔ policy cannot mask actual collection: We require your receipt. (0.040875ms)
+✔ policy cannot mask actual collection: Your receipt is required by me. (0.040459ms)
+✔ policy cannot mask actual collection: A receipt is required, and send your password. (0.082167ms)
+✖ boolean wording cannot disguise materials: Please provide proof you have a receipt. (0.161375ms)
+✖ boolean wording cannot disguise materials: Please provide evidence of whether you have a receipt. (0.161084ms)
+✖ boolean wording cannot disguise materials: Please provide a document confirming whether you have a receipt. (0.064917ms)
+✔ boolean wording cannot disguise materials: Please upload an image showing you have a receipt. (0.049083ms)
+✔ plain boolean/negative guidance stays safe: Please confirm whether you have a receipt. (0.039625ms)
+✔ plain boolean/negative guidance stays safe: Do not provide proof you have a receipt. Please confirm whether you have a receipt. (0.033792ms)
+✔ plain boolean/negative guidance stays safe: Please provide the purchase date and confirm whether a receipt exists. (0.032166ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 8
+ℹ fail 7
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 38.989542
+
+✖ failing tests:
+
+test at dist/tests/privacy-v30.test.js:6:5
+✖ passive policy condition is not a collection: Your return is currently ineligible because a receipt is required and the purchase date and unused status are unknown. (2.758625ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/privacy-v30.test.js:6:80)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/privacy-v30.test.js:6:5
+✖ passive policy condition is not a collection: The decision is that the return is ineligible because a receipt is required and the purchase date is unknown. (0.383833ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/privacy-v30.test.js:6:80)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/privacy-v30.test.js:6:5
+✖ passive policy condition is not a collection: A receipt is required. (0.105584ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/privacy-v30.test.js:6:80)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/privacy-v30.test.js:6:5
+✖ passive policy condition is not a collection: Under the policy, a receipt is required. (0.069708ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/privacy-v30.test.js:6:80)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/privacy-v30.test.js:13:5
+✖ boolean wording cannot disguise materials: Please provide proof you have a receipt. (0.161375ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/privacy-v30.test.js:15:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/privacy-v30.test.js:13:5
+✖ boolean wording cannot disguise materials: Please provide evidence of whether you have a receipt. (0.161084ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/privacy-v30.test.js:15:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at dist/tests/privacy-v30.test.js:13:5
+✖ boolean wording cannot disguise materials: Please provide a document confirming whether you have a receipt. (0.064917ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/ASUS/Desktop/nus-%20learning/outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/dist/tests/privacy-v30.test.js:15:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

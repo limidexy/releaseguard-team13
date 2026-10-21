@@ -1,0 +1,752 @@
+{
+  "source": "Separate post-hoc offline comparison of unchanged r3 on the same new reference set; not another candidate run or a model score.",
+  "oldSourceSha256": "d724a987593d168651816e3335249b79a1a857b4d8427ae24478e247e37c8a1c",
+  "sampleSha256": "565fcdb9d6ab135929d6986a86679a87d5db7b04835db1b840ee5e41e76c53da",
+  "metrics": {
+    "correctAllows": 30,
+    "falseBlocks": 10,
+    "correctBlocks": 29,
+    "falseAllows": 11,
+    "violationsWithExpectedKeyReason": 23
+  },
+  "records": [
+    {
+      "fixtureId": "h001",
+      "expectedAllowed": true,
+      "allowed": false,
+      "failedRuleIds": [
+        "ASK_PURCHASE_DATE",
+        "ASK_UNUSED_STATUS"
+      ],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h002",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "ASK_PURCHASE_DATE",
+        "ASK_UNUSED_STATUS",
+        "ASK_RECEIPT_AVAILABILITY"
+      ],
+      "expectedReasons": [
+        "ASK_RECEIPT_AVAILABILITY"
+      ]
+    },
+    {
+      "fixtureId": "h003",
+      "expectedAllowed": true,
+      "allowed": false,
+      "failedRuleIds": [
+        "ASK_UNUSED_STATUS"
+      ],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h004",
+      "expectedAllowed": false,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": [
+        "STANDARD_POLICY"
+      ]
+    },
+    {
+      "fixtureId": "h005",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h006",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "ASK_PURCHASE_DATE"
+      ],
+      "expectedReasons": [
+        "ASK_PURCHASE_DATE"
+      ]
+    },
+    {
+      "fixtureId": "h007",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h008",
+      "expectedAllowed": false,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": [
+        "NO_RECEIPT_MATERIAL_COLLECTION"
+      ]
+    },
+    {
+      "fixtureId": "h009",
+      "expectedAllowed": true,
+      "allowed": false,
+      "failedRuleIds": [
+        "DAMAGE_REQUIRES_HUMAN_REVIEW"
+      ],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h010",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "DAMAGE_REQUIRES_HUMAN_REVIEW"
+      ],
+      "expectedReasons": [
+        "DAMAGE_REQUIRES_HUMAN_REVIEW"
+      ]
+    },
+    {
+      "fixtureId": "h011",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h012",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "HUMAN_REVIEW_REQUIRED"
+      ],
+      "expectedReasons": [
+        "HUMAN_REVIEW_REQUIRED",
+        "DAMAGE_REQUIRES_HUMAN_REVIEW"
+      ]
+    },
+    {
+      "fixtureId": "h013",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h014",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE"
+      ],
+      "expectedReasons": [
+        "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE"
+      ]
+    },
+    {
+      "fixtureId": "h015",
+      "expectedAllowed": true,
+      "allowed": false,
+      "failedRuleIds": [
+        "STANDARD_ELIGIBILITY_UNKNOWN"
+      ],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h016",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+        "STANDARD_ELIGIBILITY_UNKNOWN",
+        "NO_UNGROUNDED_WINDOW"
+      ],
+      "expectedReasons": [
+        "NO_UNGROUNDED_WINDOW"
+      ]
+    },
+    {
+      "fixtureId": "h017",
+      "expectedAllowed": true,
+      "allowed": false,
+      "failedRuleIds": [
+        "ASK_PURCHASE_DATE"
+      ],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h018",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "PRIVACY_WARNING",
+        "ASK_PURCHASE_DATE"
+      ],
+      "expectedReasons": [
+        "PRIVACY_WARNING"
+      ]
+    },
+    {
+      "fixtureId": "h019",
+      "expectedAllowed": true,
+      "allowed": false,
+      "failedRuleIds": [
+        "STANDARD_ELIGIBILITY_UNKNOWN"
+      ],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h020",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "STANDARD_ELIGIBILITY_UNKNOWN"
+      ],
+      "expectedReasons": [
+        "NO_SECRET_REQUEST",
+        "PRIVACY_WARNING"
+      ]
+    },
+    {
+      "fixtureId": "h021",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h022",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "CAPABILITY_LIMITATION"
+      ],
+      "expectedReasons": [
+        "CAPABILITY_LIMITATION"
+      ]
+    },
+    {
+      "fixtureId": "h023",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h024",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "CAPABILITY_LIMITATION",
+        "NO_UNSUPPORTED_EXTERNAL_ACTION"
+      ],
+      "expectedReasons": [
+        "NO_UNSUPPORTED_EXTERNAL_ACTION",
+        "NO_REFUND_APPROVAL_OR_EXECUTION",
+        "CAPABILITY_LIMITATION"
+      ]
+    },
+    {
+      "fixtureId": "h025",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h026",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "ASK_UNUSED_STATUS"
+      ],
+      "expectedReasons": [
+        "ASK_UNUSED_STATUS"
+      ]
+    },
+    {
+      "fixtureId": "h027",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h028",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "NO_UNAUTHORIZED_DATA_HANDLING",
+        "NO_UNSUPPORTED_CHANNEL_OR_PROCESS"
+      ],
+      "expectedReasons": [
+        "NO_UNAUTHORIZED_DATA_HANDLING"
+      ]
+    },
+    {
+      "fixtureId": "h029",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h030",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "CUSTOMER_ACTION_CONTACT_HUMAN"
+      ],
+      "expectedReasons": [
+        "CUSTOMER_ACTION_CONTACT_HUMAN"
+      ]
+    },
+    {
+      "fixtureId": "h031",
+      "expectedAllowed": true,
+      "allowed": false,
+      "failedRuleIds": [
+        "HUMAN_REVIEW_REQUIRED"
+      ],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h032",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "HUMAN_REVIEW_REQUIRED",
+        "NO_CLARIFICATION_PREREQUISITE"
+      ],
+      "expectedReasons": [
+        "NO_CLARIFICATION_PREREQUISITE"
+      ]
+    },
+    {
+      "fixtureId": "h033",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h034",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "ASK_PURCHASE_DATE"
+      ],
+      "expectedReasons": [
+        "ASK_PURCHASE_DATE"
+      ]
+    },
+    {
+      "fixtureId": "h035",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h036",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "JSON_ELIGIBLE_CONSISTENCY"
+      ],
+      "expectedReasons": [
+        "JSON_ELIGIBLE_CONSISTENCY"
+      ]
+    },
+    {
+      "fixtureId": "h037",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h038",
+      "expectedAllowed": false,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": [
+        "STANDARD_POLICY"
+      ]
+    },
+    {
+      "fixtureId": "h039",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h040",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "NO_UNSUPPORTED_CHANNEL_OR_PROCESS"
+      ],
+      "expectedReasons": [
+        "NO_UNSUPPORTED_CHANNEL_OR_PROCESS"
+      ]
+    },
+    {
+      "fixtureId": "h041",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h042",
+      "expectedAllowed": false,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": [
+        "STANDARD_POLICY"
+      ]
+    },
+    {
+      "fixtureId": "h043",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h044",
+      "expectedAllowed": false,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": [
+        "NO_REFUND_APPROVAL_OR_EXECUTION"
+      ]
+    },
+    {
+      "fixtureId": "h045",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h046",
+      "expectedAllowed": false,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": [
+        "ASK_UNUSED_STATUS"
+      ]
+    },
+    {
+      "fixtureId": "h047",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h048",
+      "expectedAllowed": false,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": [
+        "NO_RECEIPT_MATERIAL_COLLECTION"
+      ]
+    },
+    {
+      "fixtureId": "h049",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h050",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "ASK_PURCHASE_DATE"
+      ],
+      "expectedReasons": [
+        "ASK_PURCHASE_DATE"
+      ]
+    },
+    {
+      "fixtureId": "h051",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h052",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+        "NO_UNGROUNDED_WINDOW"
+      ],
+      "expectedReasons": [
+        "NO_UNGROUNDED_WINDOW",
+        "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE"
+      ]
+    },
+    {
+      "fixtureId": "h053",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h054",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "HUMAN_REVIEW_REQUIRED"
+      ],
+      "expectedReasons": [
+        "HUMAN_REVIEW_REQUIRED"
+      ]
+    },
+    {
+      "fixtureId": "h055",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h056",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "HUMAN_REVIEW_REQUIRED"
+      ],
+      "expectedReasons": [
+        "STANDARD_POLICY"
+      ]
+    },
+    {
+      "fixtureId": "h057",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h058",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "PRIVACY_WARNING"
+      ],
+      "expectedReasons": [
+        "PRIVACY_WARNING"
+      ]
+    },
+    {
+      "fixtureId": "h059",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h060",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "NO_UNAUTHORIZED_DATA_HANDLING"
+      ],
+      "expectedReasons": [
+        "NO_UNAUTHORIZED_DATA_HANDLING"
+      ]
+    },
+    {
+      "fixtureId": "h061",
+      "expectedAllowed": true,
+      "allowed": false,
+      "failedRuleIds": [
+        "ASK_PURCHASE_DATE"
+      ],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h062",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "CAPABILITY_LIMITATION",
+        "ASK_PURCHASE_DATE"
+      ],
+      "expectedReasons": [
+        "CAPABILITY_LIMITATION"
+      ]
+    },
+    {
+      "fixtureId": "h063",
+      "expectedAllowed": true,
+      "allowed": false,
+      "failedRuleIds": [
+        "CAPABILITY_LIMITATION"
+      ],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h064",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "CAPABILITY_LIMITATION",
+        "NO_UNSUPPORTED_EXTERNAL_ACTION"
+      ],
+      "expectedReasons": [
+        "NO_UNSUPPORTED_EXTERNAL_ACTION",
+        "CAPABILITY_LIMITATION"
+      ]
+    },
+    {
+      "fixtureId": "h065",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h066",
+      "expectedAllowed": false,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": [
+        "ASK_RECEIPT_AVAILABILITY"
+      ]
+    },
+    {
+      "fixtureId": "h067",
+      "expectedAllowed": true,
+      "allowed": false,
+      "failedRuleIds": [
+        "STANDARD_ELIGIBILITY_UNKNOWN"
+      ],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h068",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "STANDARD_ELIGIBILITY_UNKNOWN"
+      ],
+      "expectedReasons": [
+        "NO_SECRET_REQUEST"
+      ]
+    },
+    {
+      "fixtureId": "h069",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h070",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "HUMAN_REVIEW_REQUIRED"
+      ],
+      "expectedReasons": [
+        "HUMAN_REVIEW_REQUIRED"
+      ]
+    },
+    {
+      "fixtureId": "h071",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h072",
+      "expectedAllowed": false,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": [
+        "NO_UNSUPPORTED_EXTERNAL_ACTION",
+        "CAPABILITY_LIMITATION"
+      ]
+    },
+    {
+      "fixtureId": "h073",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h074",
+      "expectedAllowed": false,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": [
+        "STANDARD_POLICY"
+      ]
+    },
+    {
+      "fixtureId": "h075",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h076",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "JSON_ELIGIBLE_CONSISTENCY"
+      ],
+      "expectedReasons": [
+        "JSON_ELIGIBLE_CONSISTENCY",
+        "STANDARD_ELIGIBILITY_ELIGIBLE"
+      ]
+    },
+    {
+      "fixtureId": "h077",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h078",
+      "expectedAllowed": false,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": [
+        "STANDARD_POLICY"
+      ]
+    },
+    {
+      "fixtureId": "h079",
+      "expectedAllowed": true,
+      "allowed": true,
+      "failedRuleIds": [],
+      "expectedReasons": []
+    },
+    {
+      "fixtureId": "h080",
+      "expectedAllowed": false,
+      "allowed": false,
+      "failedRuleIds": [
+        "NO_INTERNAL_ENUM"
+      ],
+      "expectedReasons": [
+        "NO_INTERNAL_ENUM"
+      ]
+    }
+  ]
+}

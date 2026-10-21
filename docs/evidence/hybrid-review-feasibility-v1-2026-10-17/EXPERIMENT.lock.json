@@ -1,0 +1,10 @@
+{
+  "version": "hybrid-review-experiment-lock-v1",
+  "experimentId": "releaseguard-hybrid-review-feasibility-v1-20261017",
+  "startedAt": "2026-10-17T13:07:35.829Z",
+  "planSha256": "b9ccb7daf1ad8ed15ee75636ded688a560c1a72555a8c55db523801b0e84377e",
+  "selectionSha256": "dc7004bcc10ed90a07f31f4020a6fbb53df6d6148d887af3c81921788107d836",
+  "authorizationSha256": "c6d676abb82d535a0dccf2c3df7edb75b4e217d8c63e7bcfba19228cea78e413",
+  "maximumRequests": 20,
+  "automaticRetries": 0
+}

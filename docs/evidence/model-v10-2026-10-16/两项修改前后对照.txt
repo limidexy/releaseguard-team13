@@ -1,0 +1,22 @@
+本轮两个目标问题的修改前后对照
+
+extra-eligibility
+v9原文：You meet all three standard eligibility criteria: the item is unused, you bought it 12 days ago, and you have a receipt. That means the item is eligible for a return under the standard policy.
+
+Next step: contact a human support agent to arrange the return.
+v10原文：You meet all three standard eligibility conditions: the item is unused, the return is within 30 days of the purchase date, and you have a receipt. That means you are eligible for a return under the standard policy.
+
+Next step: contact a human support agent for review and to complete the return process.
+v10/v2.7评分：passed
+
+escalation
+v9原文：I’m sorry you’re unhappy with the decision. I can’t change it, but I can forward your concern for a human review.
+
+Next step: Contact a human support agent to discuss the return and have your case reviewed.
+v10原文：I’m sorry you’re unhappy with the decision. I can’t change it or forward your request.  
+
+Next step: please contact a human support agent for review.
+v10/v2.7评分：passed
+
+评分变更：v2.7完整保留v2.6各项检查，只追加no_unsupported_action_capability。
+v9的“我可以转交”在v2.6通过、v2.7失败；旧原始95分未改，独立复评90分。

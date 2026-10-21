@@ -6,6 +6,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   verify:
     # Enable only after the owner verifies included minutes and a zero-spend budget.
@@ -14,23 +17,33 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
           cache: npm
       - run: npm ci --no-audit --no-fund
       - run: npm test
-      - run: node scripts/setup-local.mjs
+      - run: node --test tests/*.test.mjs
+      - name: Prepare local verification environment
+        id: local_setup
+        run: node scripts/setup-local.mjs
       - run: docker compose build gateway postgres
       - run: docker compose up -d --no-build --wait
       - run: node scripts/verify.mjs --restart
+      - run: node scripts/verify-improvements.mjs
+      - run: node scripts/verify-contracts.mjs
       - run: node scripts/fault-test.mjs
+      - run: node scripts/compare-prompts.mjs replay
+      - name: Verify revised policy with replay (zero model calls)
+        run: RG_SUITE_REVISION=v2 node scripts/compare-prompts.mjs replay
       - name: Dependency advisory gate
         run: npm audit --audit-level=high --json > evidence/dependency-audit.json
       - name: Image advisory gate
         uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # verified v0.36.0
         with:
-          image-ref: releaseguard-course-v2:local
+          image-ref: releaseguard-team13:local
           format: json
           output: evidence/image-audit.json
           exit-code: '1'
@@ -38,19 +51,25 @@ jobs:
           severity: HIGH,CRITICAL
       - name: Save tested image and source identity
         run: |
-          docker image inspect releaseguard-course-v2:local --format '{{.Id}}' > evidence/image-id.txt
+          docker image inspect releaseguard-team13:local --format '{{.Id}}' > evidence/image-id.txt
           git rev-parse HEAD > evidence/source-commit.txt
-          docker save releaseguard-course-v2:local -o image.tar
+          docker save releaseguard-team13:local | gzip > image.tar.gz
+          node scripts/image-identity.mjs archive image.tar.gz evidence/image-config-id.txt
       - uses: actions/upload-artifact@v4
         with:
           name: tested-image
-          path: image.tar
+          path: image.tar.gz
+          compression-level: 0
+          retention-days: 1
       - name: Preserve test reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: verification-evidence
-          path: evidence/
+          path: |
+            evidence/
+            !evidence/private/**
+          retention-days: 7
       - name: Stop containers
-        if: always()
+        if: always() && steps.local_setup.outcome == 'success'
         run: docker compose stop

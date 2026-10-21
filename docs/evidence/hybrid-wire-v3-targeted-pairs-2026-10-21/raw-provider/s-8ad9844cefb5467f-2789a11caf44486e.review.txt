@@ -1,0 +1,120 @@
+{
+  "ruleResults": [
+    {
+      "ruleId": "STANDARD_POLICY",
+      "status": "passed",
+      "reason": "The response states that standard returns require an unused item within 30 days of purchase with a receipt.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Standard returns require an unused item within 30 days of purchase with a receipt."
+        }
+      ]
+    },
+    {
+      "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+      "status": "passed",
+      "reason": "The response confirms the purchase was 10 days ago, which is within the 30‑day window.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Your purchase was 10 days ago, within the 30-day standard window."
+        }
+      ]
+    },
+    {
+      "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+      "status": "passed",
+      "reason": "The response notes that the supplied facts meet the standard return conditions without approving a refund.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "The supplied facts meet the standard return conditions; this is not refund approval."
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+      "status": "passed",
+      "reason": "No claim is made about performing any external action such as a refund, ticket, or contact.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_REFUND_APPROVAL",
+      "status": "failed",
+      "reason": "The response incorrectly states that a refund is guaranteed, which is prohibited.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "A refund is guaranteed."
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_SECRET_REQUEST",
+      "status": "passed",
+      "reason": "No passwords or full card numbers are requested.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+      "status": "passed",
+      "reason": "The response does not invent any data‑handling practices.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+      "status": "passed",
+      "reason": "The response does not request receipt contents, copies, or uploads.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_INTERNAL_ENUM",
+      "status": "passed",
+      "reason": "No internal implementation labels are exposed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+      "status": "passed",
+      "reason": "No invented channel, process, timeline, or follow‑up is mentioned.",
+      "evidence": []
+    },
+    {
+      "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+      "status": "failed",
+      "reason": "The response makes an unsupported claim that a refund is guaranteed.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "A refund is guaranteed."
+        }
+      ]
+    }
+  ],
+  "contradictions": [
+    {
+      "reason": "Prohibited claim that a refund is guaranteed contradicts policy.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "A refund is guaranteed."
+        }
+      ]
+    }
+  ],
+  "extraClaims": [
+    {
+      "status": "failed",
+      "reason": "Unsupported claim of refund guarantee.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "A refund is guaranteed."
+        }
+      ]
+    }
+  ],
+  "unverifiableItems": [],
+  "reviewCompletionStatus": "completed"
+}

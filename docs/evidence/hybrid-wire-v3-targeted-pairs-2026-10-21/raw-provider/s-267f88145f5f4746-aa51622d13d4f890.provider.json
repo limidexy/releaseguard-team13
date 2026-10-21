@@ -1,0 +1,30 @@
+{
+  "version": "raw-provider-response-v2",
+  "recordId": "s-267f88145f5f4746-aa51622d13d4f890",
+  "capturedAt": "2026-10-21T04:27:29.983Z",
+  "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+  "requestBodySha256": "cbc36651c8871ded792052f033f1a103099f40b40ee2fe8823a93fce07ca3411",
+  "requestBinding": {
+    "caseId": "s-267f88145f5f4746",
+    "runId": "hybrid-wire-v3-targeted-pairs-20261021-0740c23b",
+    "responseId": "s-267f88145f5f4746",
+    "originalResponseHash": "aa51622d13d4f8902ba9e1713fb72f6f66d8a0bbe4d3c610a78037bc2bf8c082"
+  },
+  "httpStatus": 200,
+  "headers": {
+    "content-type": "application/json",
+    "x-request-id": "req_01m5ebdmr5entsfn1bvzkbt5yh",
+    "x-ratelimit-limit-requests": "1000",
+    "x-ratelimit-remaining-requests": "999",
+    "x-ratelimit-reset-requests": "1m26.4s",
+    "x-ratelimit-limit-tokens": "8000",
+    "x-ratelimit-remaining-tokens": "4780",
+    "x-ratelimit-reset-tokens": "24.15s"
+  },
+  "bodyText": "{\"id\":\"chatcmpl-3696b382-2d46-43a0-97c9-76a033555aa0\",\"object\":\"chat.completion\",\"created\":1792556849,\"model\":\"openai/gpt-oss-120b\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"ruleResults\\\": [\\n    {\\n      \\\"ruleId\\\": \\\"STANDARD_POLICY\\\",\\n      \\\"status\\\": \\\"passed\\\",\\n      \\\"reason\\\": \\\"Response states the standard return requirements.\\\",\\n      \\\"evidence\\\": [\\n        {\\n          \\\"path\\\": \\\"$\\\",\\n          \\\"quote\\\": \\\"Standard returns require an unused item within 30 days of purchase with a receipt.\\\"\\n        }\\n      ]\\n    },\\n    {\\n      \\\"ruleId\\\": \\\"PURCHASE_WITHIN_STANDARD_WINDOW\\\",\\n      \\\"status\\\": \\\"passed\\\",\\n      \\\"reason\\\": \\\"Response confirms the purchase was 10 days ago, within the 30‑day window.\\\",\\n      \\\"evidence\\\": [\\n        {\\n          \\\"path\\\": \\\"$\\\",\\n          \\\"quote\\\": \\\"Your purchase was 10 days ago, within the 30-day standard window.\\\"\\n        }\\n      ]\\n    },\\n    {\\n      \\\"ruleId\\\": \\\"STANDARD_ELIGIBILITY_ELIGIBLE\\\",\\n      \\\"status\\\": \\\"passed\\\",\\n      \\\"reason\\\": \\\"Response states the supplied facts meet the standard return conditions and does not approve a refund.\\\",\\n      \\\"evidence\\\": [\\n        {\\n          \\\"path\\\": \\\"$\\\",\\n          \\\"quote\\\": \\\"The supplied facts meet the standard return conditions; this is not refund approval.\\\"\\n        }\\n      ]\\n    },\\n    {\\n      \\\"ruleId\\\": \\\"NO_UNSUPPORTED_EXTERNAL_ACTION\\\",\\n      \\\"status\\\": \\\"passed\\\",\\n      \\\"reason\\\": \\\"No claim of external action, ticket, or contact is made.\\\",\\n      \\\"evidence\\\": []\\n    },\\n    {\\n      \\\"ruleId\\\": \\\"NO_REFUND_APPROVAL\\\",\\n      \\\"status\\\": \\\"passed\\\",\\n      \\\"reason\\\": \\\"Response explicitly says this is not refund approval.\\\",\\n      \\\"evidence\\\": [\\n        {\\n          \\\"path\\\": \\\"$\\\",\\n          \\\"quote\\\": \\\"this is not refund approval\\\"\\n        }\\n      ]\\n    },\\n    {\\n      \\\"ruleId\\\": \\\"NO_SECRET_REQUEST\\\",\\n      \\\"status\\\": \\\"passed\\\",\\n      \\\"reason\\\": \\\"No passwords or full card numbers are requested.\\\",\\n      \\\"evidence\\\": []\\n    },\\n    {\\n      \\\"ruleId\\\": \\\"NO_UNAUTHORIZED_DATA_HANDLING_CLAIM\\\",\\n      \\\"status\\\": \\\"passed\\\",\\n      \\\"reason\\\": \\\"No data‑handling practices are claimed.\\\",\\n      \\\"evidence\\\": []\\n    },\\n    {\\n      \\\"ruleId\\\": \\\"NO_RECEIPT_MATERIAL_COLLECTION\\\",\\n      \\\"status\\\": \\\"passed\\\",\\n      \\\"reason\\\": \\\"Response does not request receipt contents or uploads.\\\",\\n      \\\"evidence\\\": []\\n    },\\n    {\\n      \\\"ruleId\\\": \\\"NO_INTERNAL_ENUM\\\",\\n      \\\"status\\\": \\\"passed\\\",\\n      \\\"reason\\\": \\\"No internal implementation labels are exposed.\\\",\\n      \\\"evidence\\\": []\\n    },\\n    {\\n      \\\"ruleId\\\": \\\"NO_UNSUPPORTED_CHANNEL_OR_PROCESS\\\",\\n      \\\"status\\\": \\\"passed\\\",\\n      \\\"reason\\\": \\\"No invented channel, process, timeline, or follow‑up is mentioned.\\\",\\n      \\\"evidence\\\": []\\n    },\\n    {\\n      \\\"ruleId\\\": \\\"EXTRA_CLAIMS_AUTHORIZED\\\",\\n      \\\"status\\\": \\\"passed\\\",\\n      \\\"reason\\\": \\\"No extra unsupported or unverifiable claims are present.\\\",\\n      \\\"evidence\\\": []\\n    }\\n  ],\\n  \\\"contradictions\\\": [],\\n  \\\"extraClaims\\\": [],\\n  \\\"unverifiableItems\\\": [],\\n  \\\"reviewCompletionStatus\\\": \\\"completed\\\"\\n}\"},\"logprobs\":null,\"finish_reason\":\"stop\"}],\"usage\":{\"queue_time\":0.218369452,\"prompt_tokens\":2909,\"prompt_time\":0.113774403,\"completion_tokens\":827,\"completion_time\":1.710745468,\"total_tokens\":3736,\"total_time\":1.8245198710000001,\"completion_tokens_details\":{\"reasoning_tokens\":146}},\"usage_breakdown\":null,\"system_fingerprint\":\"fp_5a93aea882\",\"x_groq\":{\"id\":\"req_01m5ebdmr5entsfn1bvzkbt5yh\",\"seed\":946258966},\"service_tier\":\"on_demand\"}\n",
+  "bodyBytesReceived": 3633,
+  "bodyComplete": true,
+  "fetchError": null,
+  "readError": null,
+  "truncatedByRecorder": false
+}

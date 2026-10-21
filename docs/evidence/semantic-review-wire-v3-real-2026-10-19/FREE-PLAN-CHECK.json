@@ -1,0 +1,36 @@
+{
+  "version": "groq-free-plan-check-v4",
+  "observedAt": "2026-10-19T10:17:07+08:00",
+  "method": "Read-only authenticated Chrome accessibility inspection plus authenticated models API availability check",
+  "organizationLabel": "Personal",
+  "projectLabel": "Default Project",
+  "billingPage": "https://console.groq.com/settings/billing/plans",
+  "plan": "Free",
+  "displayedPrice": "$0",
+  "currentPlanControl": "Current Plan",
+  "currentPlanControlDisabled": true,
+  "developerPlanSelected": false,
+  "paymentOrUpgradeActionTaken": false,
+  "limitsPage": "https://console.groq.com/settings/limits",
+  "modelId": "openai/gpt-oss-120b",
+  "modelApiHttpStatus": 200,
+  "modelAvailableToCurrentCredential": true,
+  "limits": {
+    "requestsPerMinute": 30,
+    "requestsPerDay": 1000,
+    "tokensPerMinute": 8000,
+    "tokensPerDay": 200000
+  },
+  "evidenceText": [
+    "Personal",
+    "Default Project",
+    "Free",
+    "$0",
+    "Current Plan",
+    "openai/gpt-oss-120b",
+    "30 RPM",
+    "1K RPD",
+    "8K TPM",
+    "200K TPD"
+  ]
+}

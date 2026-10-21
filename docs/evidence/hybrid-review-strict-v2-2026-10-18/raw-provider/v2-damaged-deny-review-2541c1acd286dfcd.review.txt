@@ -1,0 +1,180 @@
+{
+  "ruleResults": [
+    {
+      "ruleId": "STANDARD_POLICY",
+      "status": "passed",
+      "reason": "Response states the standard return requirements.",
+      "evidenceFragments": [
+        {
+          "path": "$",
+          "quote": "A standard return requires an unused item within 30 days of purchase and a receipt."
+        }
+      ],
+      "missingReason": null
+    },
+    {
+      "ruleId": "PURCHASE_TIMING_UNKNOWN",
+      "status": "passed",
+      "reason": "Response notes that the purchase date is missing.",
+      "evidenceFragments": [
+        {
+          "path": "$",
+          "quote": "The purchase date is missing, so standard eligibility remains unknown."
+        }
+      ],
+      "missingReason": null
+    },
+    {
+      "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+      "status": "passed",
+      "reason": "Response indicates eligibility cannot be determined yet.",
+      "evidenceFragments": [
+        {
+          "path": "$",
+          "quote": "The purchase date is missing, so standard eligibility remains unknown."
+        }
+      ],
+      "missingReason": null
+    },
+    {
+      "ruleId": "HUMAN_REVIEW_REQUIRED",
+      "status": "failed",
+      "reason": "Response claims the damaged case does not need human review, contradicting the required statement that human review is needed.",
+      "evidenceFragments": [
+        {
+          "path": "$",
+          "quote": "but this damaged case does not need any human review."
+        }
+      ],
+      "missingReason": null
+    },
+    {
+      "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+      "status": "failed",
+      "reason": "Response does not state that the damaged item is a reason for human review; it explicitly says no human review is needed.",
+      "evidenceFragments": [
+        {
+          "path": "$",
+          "quote": "but this damaged case does not need any human review."
+        }
+      ],
+      "missingReason": null
+    },
+    {
+      "ruleId": "ASK_PURCHASE_DATE",
+      "status": "passed",
+      "reason": "Response asks the customer for the purchase date.",
+      "evidenceFragments": [
+        {
+          "path": "$",
+          "quote": "What was the purchase date?"
+        }
+      ],
+      "missingReason": null
+    },
+    {
+      "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+      "status": "passed",
+      "reason": "Response does not claim the case is outside the return window.",
+      "evidenceFragments": [],
+      "missingReason": null
+    },
+    {
+      "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+      "status": "passed",
+      "reason": "Response does not claim the case is within the return window.",
+      "evidenceFragments": [],
+      "missingReason": null
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+      "status": "passed",
+      "reason": "Response does not claim any refund, escalation, or ticket will be performed.",
+      "evidenceFragments": [],
+      "missingReason": null
+    },
+    {
+      "ruleId": "NO_REFUND_APPROVAL",
+      "status": "passed",
+      "reason": "Response does not state a refund or return has been approved.",
+      "evidenceFragments": [],
+      "missingReason": null
+    },
+    {
+      "ruleId": "NO_SECRET_REQUEST",
+      "status": "passed",
+      "reason": "Response does not request passwords or full card numbers.",
+      "evidenceFragments": [],
+      "missingReason": null
+    },
+    {
+      "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+      "status": "passed",
+      "reason": "Response does not invent any data‑handling practices.",
+      "evidenceFragments": [],
+      "missingReason": null
+    },
+    {
+      "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+      "status": "passed",
+      "reason": "Response does not request receipt contents or uploads.",
+      "evidenceFragments": [],
+      "missingReason": null
+    },
+    {
+      "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+      "status": "passed",
+      "reason": "Response tells the customer they may contact human support.",
+      "evidenceFragments": [
+        {
+          "path": "$",
+          "quote": "You may contact human support now."
+        }
+      ],
+      "missingReason": null
+    },
+    {
+      "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+      "status": "passed",
+      "reason": "Response does not make providing the purchase date a prerequisite for contacting support.",
+      "evidenceFragments": [],
+      "missingReason": null
+    },
+    {
+      "ruleId": "NO_INTERNAL_ENUM",
+      "status": "passed",
+      "reason": "Response contains no internal implementation labels.",
+      "evidenceFragments": [],
+      "missingReason": null
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+      "status": "passed",
+      "reason": "Response does not invent any new channel, process, timeline, or follow‑up.",
+      "evidenceFragments": [],
+      "missingReason": null
+    },
+    {
+      "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+      "status": "passed",
+      "reason": "Response makes no additional unsupported or unverifiable claims.",
+      "evidenceFragments": [],
+      "missingReason": null
+    }
+  ],
+  "contradictions": [
+    {
+      "description": "Response says damaged items normally need human review but then claims this damaged case does not need any human review, contradicting required policy.",
+      "evidenceFragments": [
+        {
+          "path": "$",
+          "quote": "Damage normally requires human review, but this damaged case does not need any human review."
+        }
+      ],
+      "missingReason": null
+    }
+  ],
+  "extraClaims": [],
+  "unverifiableItems": [],
+  "reviewCompletionStatus": "completed"
+}

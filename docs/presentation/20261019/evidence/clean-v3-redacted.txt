@@ -1,0 +1,21 @@
+REDACTED DERIVATIVE: host paths removed and trailing whitespace trimmed; raw local log retained privately.
+✔ candidate request sends strict v3 schema with reason and evidence but no missingReason (7.13075ms)
+✔ mock transport saves provider envelope and review text before local interpretation (13.21975ms)
+✔ mock error paths preserve received bytes and never retry (7.146083ms)
+✔ raw persistence failure is fatal before review-text parsing (0.651334ms)
+✔ v3 removes missingReason and exposes every additional local constraint (6.929208ms)
+✔ required and prohibited rules implement the declared evidence matrix (2.229125ms)
+✔ unverifiable remains unchanged and cannot activate formal delivery (1.122417ms)
+✔ explicit contradiction and failed extra claim require evidence (0.504542ms)
+✔ multiple evidence is located mechanically without changing status, reason or quotes (0.451333ms)
+✔ duplicate, absent and ambiguous evidence are rejected (0.747042ms)
+✔ JSON field evidence handles escaping and Unicode while raw or missing fields fail (0.250333ms)
+✔ missing, duplicate and unknown rule IDs and incomplete status fail locally (0.793833ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 67.276042

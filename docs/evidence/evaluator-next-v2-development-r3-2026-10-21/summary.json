@@ -1,0 +1,70 @@
+{
+  "recordedAt": "2026-10-21T03:10:17.390Z",
+  "baseCommit": "a4f50e191b43acb05c8be7c95dfc22bfb3913493",
+  "sourceHashes": {
+    "src/evaluator-next-v1.ts": "d724a987593d168651816e3335249b79a1a857b4d8427ae24478e247e37c8a1c",
+    "src/semantic-evidence-next-v1.ts": "34a27ef6c78441cc94fad4fe530ebc49ffe53b16a79e627bee7d263a94ef0399",
+    "src/evaluator-next-v2.ts": "d6d7519a7cdc883c2aef9a4fdd3374da8c90a4091a11302a924032c1202eae98",
+    "src/semantic-evidence-next-v2.ts": "dee685e1910e18338a66c8bf6422a8bbe23469a0b195719b1ed5ed5653ace263",
+    "tests/evaluator-next-v2-development.test.ts": "b8e9c359b2b3078b93e1d7ae4a5ae3e2563bb59b5aa626be0129ae30620e9006",
+    "tests/evaluator-next-v1-holdout-fixtures.json": "3606f7e2942e541490408c07d0d75161aa4c5559a7edb54d9e607d2a7ebdadd3",
+    "tests/evaluator-next-v1-holdout-v2-fixtures.json": "9488bb0b955f3fc4036a74009a863cd3f2881ec8d44269310cb8110b5de017bf",
+    "src/response-contract-v17.ts": "f3997451d5602aa80c53034e91fdc0937f24ea09a946c3591dbe2a65b62853f9",
+    "src/returns-decision-v1.ts": "e8937bd8f26afb38687def64ba116e0cf5848963f5f4a33880f6aafcba0b8f1c",
+    "src/worker.ts": "9754e344f759b3914021cd61a172e7094eaaa75c6744aaabd48f8e5f2186c381",
+    "package-lock.json": "1442da2d7b99cddc76751e4e9d56a0f466335d1f975a3d7754fc1d27079ee9b4"
+  },
+  "newModelCalls": 0,
+  "newReviewerCalls": 0,
+  "formalWorkerUnchanged": true,
+  "independentValidation": "NOT_PERFORMED",
+  "readiness": "DEVELOPMENT_ONLY_NOT_RELEASE_QUALIFIED",
+  "sets": [
+    {
+      "file": "tests/evaluator-next-v1-holdout-fixtures.json",
+      "old": {
+        "total": 80,
+        "correctReferenceTotal": 40,
+        "violationTotal": 40,
+        "correctAllows": 40,
+        "falseBlocks": 0,
+        "correctBlocks": 40,
+        "falseAllows": 0,
+        "expectedReasonMisses": 0
+      },
+      "candidate": {
+        "total": 80,
+        "correctReferenceTotal": 40,
+        "violationTotal": 40,
+        "correctAllows": 39,
+        "falseBlocks": 1,
+        "correctBlocks": 40,
+        "falseAllows": 0,
+        "expectedReasonMisses": 0
+      }
+    },
+    {
+      "file": "tests/evaluator-next-v1-holdout-v2-fixtures.json",
+      "old": {
+        "total": 80,
+        "correctReferenceTotal": 40,
+        "violationTotal": 40,
+        "correctAllows": 6,
+        "falseBlocks": 34,
+        "correctBlocks": 34,
+        "falseAllows": 6,
+        "expectedReasonMisses": 13
+      },
+      "candidate": {
+        "total": 80,
+        "correctReferenceTotal": 40,
+        "violationTotal": 40,
+        "correctAllows": 40,
+        "falseBlocks": 0,
+        "correctBlocks": 40,
+        "falseAllows": 0,
+        "expectedReasonMisses": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "version": "semantic-review-wire-v3-real-user-authorization",
+  "experimentId": "releaseguard-semantic-wire-v3-real-20261019",
+  "approved": true,
+  "recordedAt": "2026-10-19T09:00:00+08:00",
+  "allowedProvider": "groq",
+  "allowedModelId": "openai/gpt-oss-120b",
+  "maximumSemanticReviewRequests": 3,
+  "customerGenerationRequests": 0,
+  "automaticRetries": 0,
+  "providerSwitches": 0,
+  "paidCallsAllowed": false,
+  "deploymentAllowed": false,
+  "publicationAllowed": false,
+  "gitPushAllowed": false,
+  "scope": "Three frozen fictional returns semantic-review samples only; one attempt per sample."
+}

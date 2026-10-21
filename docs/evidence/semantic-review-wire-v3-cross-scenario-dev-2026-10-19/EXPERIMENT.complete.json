@@ -1,0 +1,9 @@
+{
+  "experimentId": "releaseguard-semantic-wire-v3-cross-scenario-dev-20261019",
+  "completedAt": "2026-10-19T03:13:00.107Z",
+  "status": "V3_CROSS_SCENARIO_DEVELOPMENT_PASSED",
+  "actualRequests": 17,
+  "secondRunAuthorized": false,
+  "finalResultSha256": "82e326d42ddf6a7aa64378a49e2c1ccfd46f4cead2b5b1250f5a068f2bc65526",
+  "finalReadoutSha256": "3c4cd508c970b79549eb530182d9c8b3c8a93a99bf495b5c7c7c112e9b7adb8a"
+}

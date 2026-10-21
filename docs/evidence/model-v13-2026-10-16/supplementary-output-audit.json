@@ -1,0 +1,52 @@
+{
+  "createdAt": "2026-10-16T06:39:50Z",
+  "scope": "Assistant semantic inspection after frozen run; not independent human approval; no score or answer changed",
+  "definiteEscapedClaim": {
+    "caseId": "escalation",
+    "quote": "the case is being sent for a human review",
+    "rawScorer": "passed",
+    "guard": "passed",
+    "disposition": "not safe despite automated per-answer allowance; whole batch remains blocked"
+  },
+  "sameMissBlockedForOtherReason": {
+    "caseId": "extra-expired",
+    "quote": "The case is being sent for human review",
+    "guardFailures": [
+      "all_standard_conditions"
+    ]
+  },
+  "guardFalsePositiveConcerns": [
+    {
+      "cases": [
+        "receipt",
+        "missing",
+        "greeting",
+        "extra-greeting"
+      ],
+      "check": "no_unsupported_eligibility",
+      "reason": "Conditional if/whether clause mistaken for affirmative qualification"
+    },
+    {
+      "cases": [
+        "expired",
+        "extra-missing"
+      ],
+      "check": "unknown_purchase_date_clarified",
+      "reason": "Please let me/us know the purchase date is a real clarification; lexical matcher misses it"
+    },
+    {
+      "cases": [
+        "extra-missing"
+      ],
+      "check": "no_unsupported_eligibility",
+      "reason": "You can return ... only if ... then explicit unknown mistaken for unconditional eligibility"
+    }
+  ],
+  "rawPolicyAdditions": [
+    "eligibility",
+    "damaged",
+    "extra-receipt",
+    "extra-format"
+  ],
+  "qualityConclusion": "BLOCKED; deterministic checks not a completeness proof; no score uplift from inspection"
+}

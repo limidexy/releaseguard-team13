@@ -1,0 +1,89 @@
+{
+  "checkedAt": "2026-10-16T08:43:27.210Z",
+  "head": "20d258d891935b2d5bee3375ebf81b2872adf76f",
+  "commitCreated": false,
+  "pushed": false,
+  "cloudTouched": false,
+  "containers": [
+    {
+      "name": "/rg-v23-v6-20261015-gateway-1",
+      "service": "gateway",
+      "status": "exited",
+      "exitCode": 0
+    },
+    {
+      "name": "/rg-v23-v6-20261015-worker-1",
+      "service": "worker",
+      "status": "exited",
+      "exitCode": 0
+    },
+    {
+      "name": "/rg-v23-v6-20261015-governance-1",
+      "service": "governance",
+      "status": "exited",
+      "exitCode": 0
+    },
+    {
+      "name": "/rg-v23-v6-20261015-evaluation-1",
+      "service": "evaluation",
+      "status": "exited",
+      "exitCode": 0
+    },
+    {
+      "name": "/rg-v23-v6-20261015-registry-1",
+      "service": "registry",
+      "status": "exited",
+      "exitCode": 0
+    },
+    {
+      "name": "/rg-v23-v6-20261015-support-1",
+      "service": "support",
+      "status": "exited",
+      "exitCode": 0
+    },
+    {
+      "name": "/rg-v23-v6-20261015-postgres-1",
+      "service": "postgres",
+      "status": "exited",
+      "exitCode": 0
+    },
+    {
+      "name": "/rg-v23-v6-20261015-rabbitmq-1",
+      "service": "rabbitmq",
+      "status": "exited",
+      "exitCode": 0
+    }
+  ],
+  "volumesDeleted": false,
+  "oldArchivesUnchanged": [
+    {
+      "path": "../ReleaseGuard_v28_v14_Results_20261016.zip",
+      "sha256": "a7df46b16211cbf85b2adc36b714b386323cdb2b894551e360bef259ce38b91d"
+    },
+    {
+      "path": "../ReleaseGuard_v28_v13_Results_20261016.zip",
+      "sha256": "3f51bd5b44b2394a1d22b9c5b988d1674abe6c14e4e2ad8fd2c0211b85e12cb0"
+    },
+    {
+      "path": "../ReleaseGuard_v28_v12_Results_20261016.zip",
+      "sha256": "6fa827cd335efb9a9c747332dcfdab1a0c5c65efb5922ff522a7aa50dcb90bf7"
+    },
+    {
+      "path": "../ReleaseGuard_v28_v11_Results_20261016.zip",
+      "sha256": "61173e30efaf244ecebf5b96eea8f7dacefb9b5788ac8603572992a6c0e44722"
+    },
+    {
+      "path": "../ReleaseGuard_v26_v8_Results_20261016.zip",
+      "sha256": "6c3a05b907175815c2e5839c5800b503fee63a4605e34e0b6af461333aaad5b0"
+    },
+    {
+      "path": "../ReleaseGuard_v26_v9_Results_20261016.zip",
+      "sha256": "dff9e78529a851e076981ce1e66873301829bc0fa9aeeab60b81551cd6d492e5"
+    },
+    {
+      "path": "../ReleaseGuard_v27_v10_Results_20261016.zip",
+      "sha256": "13f5998fe558c1ad03fd5f667bf9f9f54a9e865a7fd7cb0c34b1d99ce78406b1"
+    }
+  ],
+  "scope": "Local isolated stack only; no assertion of cloud or hosted CI verification"
+}

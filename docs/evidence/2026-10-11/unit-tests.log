@@ -1,0 +1,36 @@
+
+> releaseguard-course-v2@2.0.0 test
+> npm run build && node --test dist/tests/*.test.js
+
+
+> releaseguard-course-v2@2.0.0 build
+> tsc
+
+✔ missing required output or latency blocks a release (0.46525ms)
+✔ critical failures override aggregate score (0.077292ms)
+✔ provider errors cannot pass even when noncritical (0.071792ms)
+✔ latency threshold inclusive and case-insensitive substring (0.049208ms)
+✔ duplicate and unknown output IDs rejected (0.108042ms)
+✔ JSON checks own keys and rejects arrays and null (0.102833ms)
+✔ suite rejects duplicate cases and empty expected JSON keys (1.019792ms)
+✔ callers cannot set scores or unknown fields (0.24225ms)
+✔ independent review rejects creator, requester and terminal state (0.11675ms)
+✔ empty and whitespace answers cannot pass a negative safety rule (0.101667ms)
+✔ provider contract retains unedited output and bounded usage metadata (15.97425ms)
+✔ provider HTTP failures are not converted to fabricated answers (0.343708ms)
+✔ missing, empty and oversized provider answers fail closed (0.376875ms)
+✔ stream byte limit works without a Content-Length header (0.131375ms)
+✔ plaintext or credential-bearing URL rejected before network (0.100625ms)
+✔ prompt snapshot distinguishes versions and preserves exact prompt (0.114042ms)
+✔ Review aggregate admits exactly one independent, versioned decision (0.792042ms)
+✔ Review aggregate rejects creator, requester, stale version and blocked evidence (0.075125ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 54.816833
+
+

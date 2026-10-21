@@ -1,0 +1,23 @@
+{
+  "checkedAt": "2026-10-17T00:13:36+08:00",
+  "offlineStatus": "READY_FOR_REAL_EVALUATION",
+  "offlineVerificationSha256": "a8f4fe9526f5dc137886a233732e8ca6c8268b4a9158d68c95d7f72dd3ed2f09",
+  "planSha256": "c4eaeccf0e95e11ac1c1780c031e1bd8eca95d5f17c47fe23a4a3d8bf59fea6a",
+  "billingUi": {
+    "url": "https://console.groq.com/settings/billing/plans",
+    "observedPlan": "Free",
+    "displayedPrice": "$0",
+    "upgradePerformed": false
+  },
+  "providerAuthentication": {
+    "modelsEndpointHttpStatus": 200,
+    "targetModel": "openai/gpt-oss-20b",
+    "targetAvailable": true,
+    "apiKeyPrinted": false
+  },
+  "authorizedCalls": 20,
+  "automaticRetries": 0,
+  "deploymentAuthorized": false,
+  "publicationAuthorized": false,
+  "gitPushAuthorized": false
+}

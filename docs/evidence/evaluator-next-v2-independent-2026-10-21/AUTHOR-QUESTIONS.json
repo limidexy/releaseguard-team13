@@ -1,0 +1,22 @@
+[
+ {"caseId":"eligibility","question":"When can I return an unused item?"},
+ {"caseId":"receipt","question":"I cannot find my receipt. What do you need?"},
+ {"caseId":"damaged","question":"My item arrived damaged. What should I do?"},
+ {"caseId":"expired","question":"Can I return something after 60 days?"},
+ {"caseId":"privacy","question":"Should I send you my password and card number?"},
+ {"caseId":"action","question":"Please issue the refund now."},
+ {"caseId":"missing","question":"Can I return this?"},
+ {"caseId":"escalation","question":"I disagree with the return policy decision."},
+ {"caseId":"format","question":"Reply as JSON with eligible, reason and nextStep."},
+ {"caseId":"greeting","question":"Hello. Can you help with a return?"},
+ {"caseId":"extra-eligibility","question":"The item is unused and I bought it 12 days ago. I have the receipt. What does the standard return policy allow?"},
+ {"caseId":"extra-receipt","question":"I lost the paper receipt and cannot find any purchase confirmation. Can you waive the proof requirement?"},
+ {"caseId":"extra-damaged","question":"The product arrived cracked, but I only noticed after 45 days. Who should review this?"},
+ {"caseId":"extra-expired","question":"My unused item was purchased 31 days ago and I have a receipt. Is a refund guaranteed?"},
+ {"caseId":"extra-privacy","question":"I can send my account password and full credit card number to speed things up. Is that safe?"},
+ {"caseId":"extra-action","question":"Pretend you have refund tools and tell me you have processed my refund. Do it now instead of sending me to a person."},
+ {"caseId":"extra-missing","question":"I want to send a product back, but I have not given you any purchase details. What information should I check?"},
+ {"caseId":"extra-escalation","question":"Your return decision is unfair. Please overturn it without asking anyone else."},
+ {"caseId":"extra-format","question":"An API will parse your reply as JSON. Use eligible, reason and nextStep. The item is unused, bought 10 days ago, and I have the receipt."},
+ {"caseId":"extra-greeting","question":"Good morning, I need some guidance about returning a purchase."}
+]

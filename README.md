@@ -1,4 +1,49 @@
-# ReleaseGuard course implementation v2 with verified local improvements
+# ReleaseGuard — SE34FT Team 13
+
+## 21 October 2026: evidence freeze and course handoff
+
+Start with the [current project status](docs/PROJECT_STATUS_20261021.txt) and [presentation, script and offline replay](docs/presentation/20261021-handoff/START_HERE.txt). The three-sample wire v3 protocol run, separate seventeen-sample development run, and ten-case targeted experiment retain their own versions and results. The ten-case experiment remains **TARGETED_VALIDATION_FAILED**: all answers had valid protocol, but only four of five designated critical rule IDs matched. The later `standard-policy-whole-answer-r2` definition has offline checks only, with **no real semantic validation**. It is an inactive candidate using unchanged wire v3. No validation transfers between these revisions. Worker routing, default review path, `shadowOnly=true` and `calibration_pending` are unchanged. This handoff makes zero new model/reviewer calls and performs no merge or deployment. A branch push does not establish CI success. Older counts below are dated snapshots, not a current whole-repository pass.
+
+## 21 October 2026: local resilience / observability candidate
+
+See [the isolated local lab](deploy/observability/README.md) for the shared provider circuit breaker, OpenTelemetry HTTP/queue tracing, and Alloy/Loki/Grafana log aggregation. The [21 October presentation pack](docs/presentation/20261021/) contains the updated deck and selected local evidence. This is a feature-branch candidate, not a cloud deployment or release. Focused tests pass; full regression is 782/783 with the same rejected evaluator acceptance failure retained. Historical model scores and shadow-reviewer qualification are unchanged. The latest supplied course PDF specifies 40 minutes including questions; the new deck uses 35 minutes content plus 5 minutes Q&A.
+
+## 19 October 2026: C-side repair and presentation handoff
+
+The editable course deck, bilingual rehearsal script, whole-project status, demo runbook, Q&A and selected evidence are in [the presentation pack](docs/presentation/20261019/). It uses a 40-minute main plan plus 5-minute Q&A, with a compressed alternative for the older course PDF. Recorded short backup clips are delivered separately with the local preparation package.
+
+Start with [whole-project progress and presentation](docs/13-Progress-and-Presentation-20261019.md), [repair timeline and scope](docs/14-Repair-Timeline-and-Boundaries-20261019.md), and [demo runbook](docs/15-Presentation-Demo-Runbook-20261019.md). This feature-branch snapshot preserves B's baseline and the accumulated evaluation repairs; it is not merged into main or deployed.
+
+Reviewer v3 passed a three-sample real protocol experiment and a **separate** seventeen-sample cross-scenario development experiment. It remains shadow-only and calibration-pending. Historical 70/75 customer-model scores are unchanged. Fresh local verification is **776/777**, with the rejected regex evaluator's retained holdout still failing (`npm test` exits 1); auxiliary tests are 7/7. Do not describe this branch as an all-green release candidate. Later dated handoff records above take precedence over the older operational summaries below.
+
+**Current working copy: 11 October 2026.** This repository continues the preserved 7/8 October baseline in a separate directory and Docker project. Start with [DDD decisions](docs/07-DDD-Design.md) and [five-member delivery workflow](docs/08-Team-Workflow.md). Prior dated documents below are historical; they are not fresh verification or the approved Word proposal. The lecturer has approved the revised proposal; implementation/cloud acceptance remains separate.
+
+**Public review edition.** The owner requested public access for teammates and the lecturer. Use [the current working branch](https://github.com/limidexy/releaseguard-team13/tree/feat/local-course-evidence), not the older `main` snapshot. [Draft PR #1](https://github.com/limidexy/releaseguard-team13/pull/1) is still awaiting genuine team review. Public read access does not grant push, deployment or model access. See [the real-model re-test and current delivery record](docs/12-Real-Retest-20261011.md) for the latest measured results, exact tested source, CI/CD links and shutdown evidence. Historical failures remain intact.
+
+[**Earlier local results and remaining gaps**](docs/09-Local-Evidence-20261011.md): 11 local acceptance stages, 18 unit tests, 18 integration groups, 4 regressions and 5 outage contracts passed in that dated run. The report preserves the observed lack of scaling speedup and distinguishes local/browser/replay checks from cloud/provider/team evidence. The corrected evaluator's later suite has 138 TypeScript tests plus one image-identity test; synthetic tests are not live model calls.
+
+This edition uses http://localhost:5193, image `releaseguard-team13:local`, and Compose project `releaseguard-team13`. It does not modify the earlier stack on port 5189. Set `RELEASEGUARD_URL` consistently if changing `RG_PORT`.
+
+## First local run (free, no model account)
+
+Use Node.js 24+ and Docker Compose. From this repository:
+
+```sh
+npm ci --no-audit --no-fund
+node scripts/setup-local.mjs
+node scripts/acceptance.mjs
+npm run tokens
+```
+
+Open http://localhost:5193. Use the developer token to set up the ten-case example and submit a labelled replay. Use the reviewer token for an independent **test identity**. No paid model, cloud resource or verified human UAT is implied. Do not share `.env`, tokens, or the `evidence/private/` folder.
+
+`scripts/acceptance.mjs` runs real local containers, integration/security/outage contracts, worker crash recovery, paired 1/3-worker bursts, two mixed read/write stages and a dependency audit. It produces `evidence/current/acceptance.json` with commit, source hashes, exit codes and logs. It refuses a non-loopback target or enabled real-model configuration. A pass proves only the enumerated local checks. Scaling figures may be worse with more workers; retain them unchanged.
+
+The repository's hosted CI and cloud CD have been explicitly enabled for the owner's free-trial acceptance using `RG_ENABLE_HOSTED_CI` and `RG_ENABLE_CLOUD_CD`. They are not automatically enabled in a new fork. Recheck free-plan limits before running; never upgrade to paid billing. A skipped hosted workflow is NOT a passed CI run. See [team workflow](docs/08-Team-Workflow.md) for local pre-push verification and PR review. The actual cloud is Google Cloud GKE, not GitHub. Stopping its compute nodes pauses the site but not the public repository.
+
+## Historical baseline instructions (7 October)
+
+The text below describes the imported baseline, not the current deployment. Replace port 5189 with 5193 in this checkout. Statements about an unselected cloud, unexecuted hosted workflows and retry behaviour are historical; current operation is governed by the dated records above and [re-test protocol](docs/11-Model-Retest-Protocol.md). Real jobs now fail rather than automatically repeating provider calls after recovery. Historical result files were deliberately not copied as current evidence.
 
 Current delivery: 7 October 2026, local improvement edition 2.1. Start with `docs/05-Current-Handoff.md`. Historical reports in `evidence/baseline-original/` are from the supplied ZIP, not this machine. Fresh execution is recorded in `evidence/current/acceptance.json`; root-level integration/fault reports are from the latest local verification. No real provider, cloud deployment or hosted CI has been executed in this edition.
 

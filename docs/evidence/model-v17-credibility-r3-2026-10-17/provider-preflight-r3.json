@@ -1,0 +1,14 @@
+{
+  "checkedAt": "2026-10-17T06:20:01.572Z",
+  "endpoint": "https://api.groq.com/openai/v1/models",
+  "httpStatus": 200,
+  "credentialAccepted": true,
+  "targets": [
+    {"id": "openai/gpt-oss-20b", "listed": true, "active": true, "ownedBy": "OpenAI"},
+    {"id": "openai/gpt-oss-120b", "listed": true, "active": true, "ownedBy": "OpenAI"}
+  ],
+  "generationCallsMade": 0,
+  "billingPlan": "not_reverified_by_models_endpoint",
+  "quotaFor40CallsGuaranteed": false,
+  "notes": ["The API key was not printed or copied into this artifact.", "HTTP 200 and active model listings establish account/API availability only, not current Free-plan quota.", "Refresh the Free-plan UI state immediately before any authorized run."]
+}

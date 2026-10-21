@@ -1,0 +1,9 @@
+{
+  "version": "semantic-review-strict-v2-experiment-lock",
+  "experimentId": "releaseguard-semantic-review-strict-v2-20261018",
+  "startedAt": "2026-10-18T01:53:52.171Z",
+  "maximumRequests": 2,
+  "automaticRetries": 0,
+  "customerGenerationRequests": 0,
+  "manifestSha256": "2b6192d4dbb1b120bafbfee8db1db0e4cfbace418feb9fb1a5a23a60e65f946c"
+}

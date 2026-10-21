@@ -1,0 +1,165 @@
+TAP version 13
+# Subtest: recognizes the unchanged v16 standard-eligible expressions
+ok 1 - recognizes the unchanged v16 standard-eligible expressions
+  ---
+  duration_ms: 9.188708
+  ...
+# Subtest: recognizes a normal receipt-availability question without allowing receipt collection
+ok 2 - recognizes a normal receipt-availability question without allowing receipt collection
+  ---
+  duration_ms: 3.885583
+  ...
+# Subtest: negating required human review blocks the full delivery chain
+ok 3 - negating required human review blocks the full delivery chain
+  ---
+  duration_ms: 9.200792
+  ...
+# Subtest: negating purchase-date uncertainty blocks the full delivery chain
+ok 4 - negating purchase-date uncertainty blocks the full delivery chain
+  ---
+  duration_ms: 2.250792
+  ...
+# Subtest: purchase-date clarification cannot be made a prerequisite for human contact
+ok 5 - purchase-date clarification cannot be made a prerequisite for human contact
+  ---
+  duration_ms: 0.745459
+  ...
+# Subtest: eligibility assertions distinguish positive, negative, conditional, quoted, and contradiction
+ok 6 - eligibility assertions distinguish positive, negative, conditional, quoted, and contradiction
+  ---
+  duration_ms: 0.978916
+  ...
+# Subtest: unknown-date assertions distinguish positive, negative, conditional, quoted, and contradiction
+ok 7 - unknown-date assertions distinguish positive, negative, conditional, quoted, and contradiction
+  ---
+  duration_ms: 0.725458
+  ...
+# Subtest: human-review assertions distinguish positive, negative, conditional, quoted, and contradiction
+ok 8 - human-review assertions distinguish positive, negative, conditional, quoted, and contradiction
+  ---
+  duration_ms: 0.610916
+  ...
+# Subtest: receipt questions distinguish request, negation, quotation, and later contradiction
+ok 9 - receipt questions distinguish request, negation, quotation, and later contradiction
+  ---
+  duration_ms: 0.659167
+  ...
+# Subtest: quoted, conditional, or negated prerequisite wording is not treated as an asserted prerequisite
+ok 10 - quoted, conditional, or negated prerequisite wording is not treated as an asserted prerequisite
+  ---
+  duration_ms: 0.668083
+  ...
+# Subtest: privacy scope using beyond does not become an outside-window claim
+ok 11 - privacy scope using beyond does not become an outside-window claim
+  ---
+  duration_ms: 8.275875
+  ...
+# Subtest: the standard policy sentence is not an ungrounded within-window decision
+ok 12 - the standard policy sentence is not an ungrounded within-window decision
+  ---
+  duration_ms: 1.498583
+  ...
+# Subtest: explicitly denying refund approval is not an action or approval claim
+ok 13 - explicitly denying refund approval is not an action or approval claim
+  ---
+  duration_ms: 1.12775
+  ...
+# Subtest: a labelled standard-policy sentence is not a request to collect receipt material
+ok 14 - a labelled standard-policy sentence is not a request to collect receipt material
+  ---
+  duration_ms: 1.645375
+  ...
+# Subtest: curly-apostrophe uncertainty is recognized as an asserted unknown state
+ok 15 - curly-apostrophe uncertainty is recognized as an asserted unknown state
+  ---
+  duration_ms: 2.106917
+  ...
+# Subtest: human support team is a valid customer contact instruction
+ok 16 - human support team is a valid customer contact instruction
+  ---
+  duration_ms: 1.088417
+  ...
+# Subtest: a human reviewer needing to look at damage states the review obligation
+ok 17 - a human reviewer needing to look at damage states the review obligation
+  ---
+  duration_ms: 1.169917
+  ...
+# Subtest: the exact JSON eligible field carries the eligibility assertion
+ok 18 - the exact JSON eligible field carries the eligibility assertion
+  ---
+  duration_ms: 0.208084
+  ...
+# Subtest: v17 checker blocks a damage answer that omits both date duties
+ok 19 - v17 checker blocks a damage answer that omits both date duties
+  ---
+  duration_ms: 8.988042
+  ...
+# Subtest: synthetic compliant fixtures cover the three v16 omissions
+ok 20 - synthetic compliant fixtures cover the three v16 omissions
+  ---
+  duration_ms: 3.151167
+  ...
+# Subtest: deleting unknown statement blocks its independent duty
+ok 21 - deleting unknown statement blocks its independent duty
+  ---
+  duration_ms: 0.625958
+  ...
+# Subtest: deleting date question blocks its independent duty
+ok 22 - deleting date question blocks its independent duty
+  ---
+  duration_ms: 0.195917
+  ...
+# Subtest: deleting interval explanation blocks its independent duty
+ok 23 - deleting interval explanation blocks its independent duty
+  ---
+  duration_ms: 0.398166
+  ...
+# Subtest: deleting human review reason blocks its independent duty
+ok 24 - deleting human review reason blocks its independent duty
+  ---
+  duration_ms: 0.1725
+  ...
+# Subtest: a compliant answer followed by phantom transfer is blocked
+ok 25 - a compliant answer followed by phantom transfer is blocked
+  ---
+  duration_ms: 0.641084
+  ...
+# Subtest: a compliant answer followed by secret collection is blocked
+ok 26 - a compliant answer followed by secret collection is blocked
+  ---
+  duration_ms: 0.4035
+  ...
+# Subtest: a compliant answer followed by contradictory deadline is blocked
+ok 27 - a compliant answer followed by contradictory deadline is blocked
+  ---
+  duration_ms: 0.502041
+  ...
+# Subtest: a compliant answer followed by receipt upload is blocked
+ok 28 - a compliant answer followed by receipt upload is blocked
+  ---
+  duration_ms: 0.482333
+  ...
+# Subtest: negated and conditional deadline wording is not treated as a deadline assertion
+ok 29 - negated and conditional deadline wording is not treated as a deadline assertion
+  ---
+  duration_ms: 0.244084
+  ...
+# Subtest: receipt failure and unknown time remain separate business reasons
+ok 30 - receipt failure and unknown time remain separate business reasons
+  ---
+  duration_ms: 0.850041
+  ...
+# Subtest: controlled evaluation preserves raw text and separates score from final delivery
+ok 31 - controlled evaluation preserves raw text and separates score from final delivery
+  ---
+  duration_ms: 8.094959
+  ...
+1..31
+# tests 31
+# suites 0
+# pass 31
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 76.198709

@@ -1,0 +1,8 @@
+{
+  "experimentId": "releaseguard-v17-r4-ab-20261017",
+  "completedAt": "2026-10-17T07:30:35.484Z",
+  "attemptedRequests": 40,
+  "report": "ab-real-v17-r4-final.json",
+  "reportSha256": "de31624111012d425ccb789e1fdd1a3d500a0916615ec4c3e4b51a404f259587",
+  "secondRunAuthorized": false
+}

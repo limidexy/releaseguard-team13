@@ -1,0 +1,114 @@
+{
+  "at": "2026-10-11T13:21:20.572Z",
+  "cloud": true,
+  "sourceCommit": "dbf6a4be21a978e96510f16837f732b12401d096",
+  "method": "pg_dump custom format; restore to newly created scratch database on the same PostgreSQL instance; compare public-table row counts and sorted row-content hashes; remove only this run-created scratch DB.",
+  "limitations": "Same-instance logical restore; not regional disaster recovery, managed backup scheduling, identity-store recovery or a measured recovery-time SLA.",
+  "databases": [
+    {
+      "database": "rg_registry",
+      "dumpBytes": 6930,
+      "elapsedMs": 12101.796125,
+      "source": [
+        {
+          "table": "applications",
+          "count": 23,
+          "hash": "462082eafd890bc8c27e5b6f5a28828d"
+        },
+        {
+          "table": "suites",
+          "count": 23,
+          "hash": "c3d5ce5e0810f996d9b977857a8797ae"
+        }
+      ],
+      "restored": [
+        {
+          "table": "applications",
+          "count": 23,
+          "hash": "462082eafd890bc8c27e5b6f5a28828d"
+        },
+        {
+          "table": "suites",
+          "count": 23,
+          "hash": "c3d5ce5e0810f996d9b977857a8797ae"
+        }
+      ],
+      "sourceStableDuringCheck": true,
+      "passed": true
+    },
+    {
+      "database": "rg_evaluation",
+      "dumpBytes": 786069,
+      "elapsedMs": 16599.333917000004,
+      "source": [
+        {
+          "table": "admission_limits",
+          "count": 2,
+          "hash": "aa49e39f790eb568ccf0efe24cc23480"
+        },
+        {
+          "table": "jobs",
+          "count": 3033,
+          "hash": "f40a97de3d2597d3934666ba473686e0"
+        },
+        {
+          "table": "outbox",
+          "count": 3033,
+          "hash": "d2bb7c3afaba6d5201d4d0b0f0f90f67"
+        }
+      ],
+      "restored": [
+        {
+          "table": "admission_limits",
+          "count": 2,
+          "hash": "aa49e39f790eb568ccf0efe24cc23480"
+        },
+        {
+          "table": "jobs",
+          "count": 3033,
+          "hash": "f40a97de3d2597d3934666ba473686e0"
+        },
+        {
+          "table": "outbox",
+          "count": 3033,
+          "hash": "d2bb7c3afaba6d5201d4d0b0f0f90f67"
+        }
+      ],
+      "sourceStableDuringCheck": true,
+      "passed": true
+    },
+    {
+      "database": "rg_governance",
+      "dumpBytes": 8756,
+      "elapsedMs": 10363.514,
+      "source": [
+        {
+          "table": "audit",
+          "count": 3,
+          "hash": "4812cb505ec73f26067c27b718b2a932"
+        },
+        {
+          "table": "releases",
+          "count": 3,
+          "hash": "d9d76a7368321e01b02648c8cacc32ac"
+        }
+      ],
+      "restored": [
+        {
+          "table": "audit",
+          "count": 3,
+          "hash": "4812cb505ec73f26067c27b718b2a932"
+        },
+        {
+          "table": "releases",
+          "count": 3,
+          "hash": "d9d76a7368321e01b02648c8cacc32ac"
+        }
+      ],
+      "sourceStableDuringCheck": true,
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "finishedAt": "2026-10-11T13:22:01.665Z"
+}

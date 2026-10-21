@@ -1,0 +1,12 @@
+{
+  "time": "2026-10-11T14:43:31.313Z",
+  "environment": "Local Docker; replay only; deliberately pause support and kill worker",
+  "passed": true,
+  "jobId": "42ace32b-6509-43c9-8a52-8382f5efbbd7",
+  "attempts": 2,
+  "firstWorker": "ffe972695d5e",
+  "finalWorker": "ffe972695d5e",
+  "createdAt": "2026-10-11T14:43:31.630Z",
+  "finishedAt": "2026-10-11T14:43:47.106Z",
+  "notes": "One final job row/result retained. This proves local worker process recovery, not database restore or HA."
+}

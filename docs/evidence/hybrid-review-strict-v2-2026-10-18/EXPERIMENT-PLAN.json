@@ -1,0 +1,21 @@
+{
+  "version": "semantic-review-strict-v2-plan",
+  "experimentId": "releaseguard-semantic-review-strict-v2-20261018",
+  "status": "AUTHORIZED_FROZEN_NOT_STARTED",
+  "provider": "Groq Free",
+  "providerEndpoint": "https://api.groq.com/openai/v1/chat/completions",
+  "modelId": "openai/gpt-oss-120b",
+  "temperature": 0,
+  "reasoningEffort": "low",
+  "maxOutputTokens": 2400,
+  "requestTimeoutMs": 60000,
+  "responseFormat": "json_schema",
+  "strict": true,
+  "maximumRequests": 2,
+  "customerGenerationRequests": 0,
+  "automaticRetries": 0,
+  "paidCallsAllowed": false,
+  "stopAfterFirstProtocolFailure": true,
+  "labelsSentToProvider": false,
+  "formalDeliveryActivation": false
+}

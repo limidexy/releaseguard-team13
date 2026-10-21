@@ -1,0 +1,193 @@
+{
+  "ruleResults": [
+    {
+      "ruleId": "STANDARD_POLICY",
+      "status": "passed",
+      "reason": "The response states the standard return policy correctly.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "The standard return policy requires an unused item, within 30 days of purchase, with a receipt."
+        }
+      ]
+    },
+    {
+      "ruleId": "PURCHASE_TIMING_UNKNOWN",
+      "status": "passed",
+      "reason": "The response explicitly says the purchase date and age are unknown.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "The purchase date and purchase age are unknown."
+        }
+      ]
+    },
+    {
+      "ruleId": "MENTIONED_INTERVAL_DOES_NOT_ESTABLISH_PURCHASE_AGE",
+      "status": "failed",
+      "reason": "The response incorrectly claims the 40‑day interval establishes the purchase age, contrary to the required statement that the interval does not establish purchase age.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Discovering the damage after 40 days establishes a purchase age of 40 days, so standard eligibility cannot yet be determined."
+        }
+      ]
+    },
+    {
+      "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+      "status": "passed",
+      "reason": "The response notes that standard eligibility cannot yet be determined.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "standard eligibility cannot yet be determined."
+        }
+      ]
+    },
+    {
+      "ruleId": "HUMAN_REVIEW_REQUIRED",
+      "status": "passed",
+      "reason": "The response states that the case requires human review.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Because the item is damaged, the case requires human review."
+        }
+      ]
+    },
+    {
+      "ruleId": "DAMAGE_REQUIRES_HUMAN_REVIEW",
+      "status": "passed",
+      "reason": "The response links the damaged item to the need for human review.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Because the item is damaged, the case requires human review."
+        }
+      ]
+    },
+    {
+      "ruleId": "ASK_PURCHASE_DATE",
+      "status": "passed",
+      "reason": "The response asks the customer for the purchase date.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "What was the purchase date?"
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_UNGROUNDED_OUTSIDE_WINDOW",
+      "status": "passed",
+      "reason": "The response does not claim the case is outside the return window.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNGROUNDED_WITHIN_WINDOW",
+      "status": "passed",
+      "reason": "The response does not claim the case is within the return window.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+      "status": "passed",
+      "reason": "No external refund or escalation actions are claimed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_REFUND_APPROVAL",
+      "status": "passed",
+      "reason": "No refund approval is stated.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_SECRET_REQUEST",
+      "status": "passed",
+      "reason": "No secret information is requested.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+      "status": "passed",
+      "reason": "No data‑handling practices are invented.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+      "status": "passed",
+      "reason": "The response does not request receipt contents or copies.",
+      "evidence": []
+    },
+    {
+      "ruleId": "CUSTOMER_ACTION_CONTACT_HUMAN",
+      "status": "passed",
+      "reason": "The response tells the customer to contact human support.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Please contact human support now; the date clarification does not block that contact."
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_CLARIFICATION_PREREQUISITE",
+      "status": "passed",
+      "reason": "The response explicitly states clarification is not a prerequisite for contacting support.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "the date clarification does not block that contact."
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_INTERNAL_ENUM",
+      "status": "passed",
+      "reason": "No internal implementation labels are exposed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+      "status": "passed",
+      "reason": "No invented channels, processes, timelines, or follow‑ups are mentioned.",
+      "evidence": []
+    },
+    {
+      "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+      "status": "failed",
+      "reason": "The response makes an unsupported claim that the 40‑day interval establishes the purchase age.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Discovering the damage after 40 days establishes a purchase age of 40 days, so standard eligibility cannot yet be determined."
+        }
+      ]
+    }
+  ],
+  "contradictions": [
+    {
+      "reason": "The response claims the 40‑day interval establishes purchase age, contradicting the required statement that the interval does not establish purchase age.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Discovering the damage after 40 days establishes a purchase age of 40 days, so standard eligibility cannot yet be determined."
+        }
+      ]
+    }
+  ],
+  "extraClaims": [
+    {
+      "status": "failed",
+      "reason": "Unsupported claim that the 40‑day interval determines purchase age.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Discovering the damage after 40 days establishes a purchase age of 40 days, so standard eligibility cannot yet be determined."
+        }
+      ]
+    }
+  ],
+  "unverifiableItems": [],
+  "reviewCompletionStatus": "completed"
+}

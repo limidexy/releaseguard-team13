@@ -1,0 +1,79 @@
+{
+  "note": "Derived field allowlist; hostname/worker identity omitted. Original local record retained unchanged.",
+  "entries": [
+    {
+      "at": "1792546824103691295",
+      "level": 30,
+      "time": 1792546823866,
+      "service": "worker",
+      "traceId": "0d2894858586c8f4b7ad7a7e009d0a65",
+      "spanId": "f34f6c4ff2c4ddfe",
+      "jobId": "014a880b-b5d8-4980-9c1e-f8f9547558ca",
+      "gate": "passed",
+      "msg": "evaluation completed"
+    },
+    {
+      "at": "1792546824103741711",
+      "level": 30,
+      "time": 1792546823865,
+      "service": "support",
+      "traceId": "0d2894858586c8f4b7ad7a7e009d0a65",
+      "spanId": "cd52e36bbfe28d0f",
+      "event": "http_completed",
+      "method": "POST",
+      "route": "/execute",
+      "status": 200,
+      "msg": "request completed"
+    },
+    {
+      "at": "1792546828832117422",
+      "level": 30,
+      "time": 1792546823614,
+      "service": "registry",
+      "traceId": "0d2894858586c8f4b7ad7a7e009d0a65",
+      "spanId": "2749d2cfa75e4839",
+      "event": "http_completed",
+      "method": "GET",
+      "route": "/internal/snapshot/:appId/:suiteId",
+      "status": 200,
+      "msg": "request completed"
+    },
+    {
+      "at": "1792546828832190464",
+      "level": 30,
+      "time": 1792546823618,
+      "service": "gateway",
+      "traceId": "0d2894858586c8f4b7ad7a7e009d0a65",
+      "spanId": "bd2f6a60f2c523de",
+      "event": "http_completed",
+      "method": "POST",
+      "route": "/api/v2/*",
+      "status": 202,
+      "msg": "request completed"
+    },
+    {
+      "at": "1792546828832106714",
+      "level": 30,
+      "time": 1792546823857,
+      "service": "evaluation",
+      "traceId": "0d2894858586c8f4b7ad7a7e009d0a65",
+      "spanId": "3f2bb809e1fb329f",
+      "event": "job_published",
+      "jobId": "014a880b-b5d8-4980-9c1e-f8f9547558ca",
+      "msg": "job published"
+    },
+    {
+      "at": "1792546828831975047",
+      "level": 30,
+      "time": 1792546823617,
+      "service": "evaluation",
+      "traceId": "0d2894858586c8f4b7ad7a7e009d0a65",
+      "spanId": "a1300637eb67f55f",
+      "event": "http_completed",
+      "method": "POST",
+      "route": "/jobs",
+      "status": 202,
+      "msg": "request completed"
+    }
+  ]
+}
