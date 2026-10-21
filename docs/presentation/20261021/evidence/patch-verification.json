@@ -1,0 +1,38 @@
+{
+  "base": "429b83ffd240f97cc7e352b916c5d84d6154178a",
+  "results": [
+    {
+      "name": "clean-archive",
+      "exitCode": 0
+    },
+    {
+      "name": "clean-extract",
+      "exitCode": 0
+    },
+    {
+      "name": "patch-check",
+      "exitCode": 0
+    },
+    {
+      "name": "patch-apply",
+      "exitCode": 0
+    },
+    {
+      "name": "clean-install",
+      "exitCode": 0
+    },
+    {
+      "name": "clean-build",
+      "exitCode": 0
+    },
+    {
+      "name": "clean-targeted",
+      "exitCode": 0
+    }
+  ],
+  "targetedTests": 6,
+  "passed": 6,
+  "fullRegressionRerun": false,
+  "newModelCalls": 0,
+  "source": "isolated git archive + delivered patch + locked dependency install"
+}

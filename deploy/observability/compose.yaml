@@ -1,0 +1,43 @@
+name: releaseguard-observability-lab
+# Isolated, localhost-only course verification; never reuses existing project data.
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_PASSWORD: ${RG_LAB_DB_PASSWORD:?Use the local lab launcher}
+    ports: ["127.0.0.1:54951:5432"]
+  rabbitmq:
+    image: rabbitmq:4-management-alpine
+    environment:
+      RABBITMQ_DEFAULT_USER: rg_lab
+      RABBITMQ_DEFAULT_PASS: ${RG_LAB_BROKER_PASSWORD:?Use the local lab launcher}
+    ports: ["127.0.0.1:54952:5672"]
+  jaeger:
+    image: cr.jaegertracing.io/jaegertracing/jaeger:2.22.0
+    ports: ["127.0.0.1:54686:16686", "127.0.0.1:54318:4318"]
+  loki:
+    image: grafana/loki:3.6.0
+    command: ["-config.file=/etc/loki/rg.yaml"]
+    volumes: ["./loki.yaml:/etc/loki/rg.yaml:ro"]
+    ports: ["127.0.0.1:54310:3100"]
+  alloy:
+    image: grafana/alloy:v1.12.0
+    command: ["run", "--server.http.listen-addr=0.0.0.0:12345", "/etc/alloy/config.alloy"]
+    volumes:
+      - ./config.alloy:/etc/alloy/config.alloy:ro
+      - ${RG_LAB_LOG_DIR:?Use the local lab launcher}:/var/rg-logs:ro
+    depends_on: [loki]
+  grafana:
+    image: grafana/grafana:12.2.0
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+      GF_AUTH_DISABLE_LOGIN_FORM: "true"
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+      GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+    volumes:
+      - ./grafana-datasources.yaml:/etc/grafana/provisioning/datasources/rg.yaml:ro
+      - ./grafana-dashboards.yaml:/etc/grafana/provisioning/dashboards/rg.yaml:ro
+      - ./dashboard.json:/etc/grafana/dashboards/rg.json:ro
+    ports: ["127.0.0.1:54300:3000"]
+    depends_on: [loki,jaeger]

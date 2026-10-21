@@ -4,6 +4,10 @@ import { internal, HttpError } from './common.js';
 import { caseSchema, type Output } from './domain.js';
 import { providerAnswer, promptSnapshot } from './provider.js';
 import { setTimeout as delay } from 'node:timers/promises';
+import pg from 'pg';
+import {createHash} from 'node:crypto';
+import {CircuitBreaker,MemoryCircuitStore,PostgresCircuitStore,CircuitOpenError,type CircuitStore} from './circuit-breaker.js';
+import {tracedFetch} from './observability.js';
 let nextProviderSlot = 0;
 const replay: Record<string, string> = {
   eligibility: 'Unused products can be returned within 30 days with a receipt.',
@@ -18,6 +22,14 @@ const replay: Record<string, string> = {
   greeting: 'Hello. I can explain the fictional returns policy and help you contact support.',
 };
 export async function support(app: FastifyInstance) {
+  let circuitStore:CircuitStore=new MemoryCircuitStore();
+  // Optional shared Support-owned store. Without it, protection is process-local.
+  if(process.env.SUPPORT_DATABASE_URL){
+    const database=new pg.Pool({connectionString:process.env.SUPPORT_DATABASE_URL,max:3,connectionTimeoutMillis:3000,statement_timeout:5000});
+    const shared=new PostgresCircuitStore(database);await shared.init();circuitStore=shared;
+    app.addHook('onClose',async()=>{await database.end();});
+  }
+  const breaker=new CircuitBreaker(circuitStore,{threshold:3,cooldownMs:30000,probeLeaseMs:25000},fields=>app.log.info(fields,'provider circuit'));
   app.post('/execute', async req => {
     await internal(req, ['worker']);
     const input = z.object({ source: z.enum(['real', 'replay']), promptVersion: z.enum(['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8', 'v9', 'v10', 'v11', 'v12', 'v13', 'v14', 'v15', 'v16', 'v17']), scenario: z.enum(['passing', 'failing', 'error']), cases: z.array(caseSchema).min(1).max(60) }).strict().parse(req.body);
@@ -40,16 +52,19 @@ export async function support(app: FastifyInstance) {
     for (const c of input.cases) {
       // One support replica in the trial; serialize starts even across concurrent jobs.
       // This is NOT a distributed quota. Provider-side Free limits remain authoritative.
-      const slot = Math.max(Date.now(), nextProviderSlot); nextProviderSlot = slot + 20000;
-      await delay(Math.max(0, slot - Date.now()));
       const start = performance.now();
       try {
-        const { output, metadata, error } = await providerAnswer({ url: providerUrl, key, model }, input.promptVersion, c.prompt);
+        const quotaKey=createHash('sha256').update(new URL(providerUrl).origin+'\0'+key).digest('hex');
+        await breaker.assertAvailable(quotaKey); // reject before waiting for a rate slot
+        const slot = Math.max(Date.now(), nextProviderSlot); nextProviderSlot = slot + 20000;
+        await delay(Math.max(0, slot - Date.now()));
+        const { output, metadata, error } = await breaker.run(quotaKey,()=>providerAnswer({ url: providerUrl, key, model }, input.promptVersion, c.prompt,
+          (url,init)=>tracedFetch('model-provider',url as URL,init)));
         outputs.push({ caseId: c.id, output, ...(error ? { error } : {}), latencyMs: performance.now() - start });
         requestMetadata.push({ caseId: c.id, ...metadata });
       } catch (e) {
         // Do not propagate fetch errors that may contain URLs or credentials.
-        const error = e instanceof Error && /^Provider (HTTP \d{3}$|response (?:body missing|exceeds size limit)$)/.test(e.message) ? e.message : e instanceof Error && ['TimeoutError', 'AbortError'].includes(e.name) ? 'Provider request timed out' : 'Provider transport or JSON parse error';
+        const error = e instanceof CircuitOpenError ? e.message : e instanceof Error && /^Provider (HTTP \d{3}$|response (?:body missing|exceeds size limit)$)/.test(e.message) ? e.message : e instanceof Error && ['TimeoutError', 'AbortError'].includes(e.name) ? 'Provider request timed out' : 'Provider transport or JSON parse error';
         outputs.push({ caseId: c.id, error, latencyMs: performance.now() - start });
         requestMetadata.push({ caseId: c.id, error, requestId: null, finishReason: null, usage: {} });
       }

@@ -1,0 +1,14 @@
+✔ shared breaker opens, skips transport, admits one probe and recovers (2.068708ms)
+✔ late successful closed requests cannot close an already opened breaker (0.373667ms)
+✔ probe failure or expired probe lease reopens; caller errors do not trip (0.614625ms)
+✔ breaker state-store failure is fail closed and never calls provider (0.127458ms)
+✔ W3C HTTP and queue carriers share trace with correct parentage; no baggage copied (10.271959ms)
+✔ invalid incoming carrier is not trusted and transport error produces failed span (0.662584ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 124.8075

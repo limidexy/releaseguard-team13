@@ -1,5 +1,9 @@
 # ReleaseGuard — SE34FT Team 13
 
+## 21 October 2026: local resilience / observability candidate
+
+See [the isolated local lab](deploy/observability/README.md) for the shared provider circuit breaker, OpenTelemetry HTTP/queue tracing, and Alloy/Loki/Grafana log aggregation. The [21 October presentation pack](docs/presentation/20261021/) contains the updated deck and selected local evidence. This is a feature-branch candidate, not a cloud deployment or release. Focused tests pass; full regression is 782/783 with the same rejected evaluator acceptance failure retained. Historical model scores and shadow-reviewer qualification are unchanged. The latest supplied course PDF specifies 40 minutes including questions; the new deck uses 35 minutes content plus 5 minutes Q&A.
+
 ## 19 October 2026: C-side repair and presentation handoff
 
 The editable course deck, bilingual rehearsal script, whole-project status, demo runbook, Q&A and selected evidence are in [the presentation pack](docs/presentation/20261019/). It uses a 40-minute main plan plus 5-minute Q&A, with a compressed alternative for the older course PDF. Recorded short backup clips are delivered separately with the local preparation package.

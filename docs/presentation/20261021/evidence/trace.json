@@ -1,0 +1,454 @@
+{
+  "data": [
+    {
+      "traceID": "0d2894858586c8f4b7ad7a7e009d0a65",
+      "spans": [
+        {
+          "traceID": "0d2894858586c8f4b7ad7a7e009d0a65",
+          "spanID": "2749d2cfa75e4839",
+          "flags": 1,
+          "operationName": "GET /internal/snapshot/:appId/:suiteId",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "0d2894858586c8f4b7ad7a7e009d0a65",
+              "spanID": "b61241f8b428a5d2"
+            }
+          ],
+          "startTime": 1792546823612000,
+          "duration": 1806,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "releaseguard"
+            },
+            {
+              "key": "otel.scope.version",
+              "type": "string",
+              "value": "1"
+            },
+            {
+              "key": "http.request.method",
+              "type": "string",
+              "value": "GET"
+            },
+            {
+              "key": "http.status_code",
+              "type": "int64",
+              "value": 200
+            },
+            {
+              "key": "http.route",
+              "type": "string",
+              "value": "/internal/snapshot/:appId/:suiteId"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "server"
+            }
+          ],
+          "logs": [],
+          "processID": "p1",
+          "warnings": [
+            "clock skew adjustment disabled; not applying calculated delta of -521.979µs"
+          ]
+        },
+        {
+          "traceID": "0d2894858586c8f4b7ad7a7e009d0a65",
+          "spanID": "6cb729b7601ea418",
+          "flags": 1,
+          "operationName": "http evaluation",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "0d2894858586c8f4b7ad7a7e009d0a65",
+              "spanID": "bd2f6a60f2c523de"
+            }
+          ],
+          "startTime": 1792546823609000,
+          "duration": 8897,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "releaseguard"
+            },
+            {
+              "key": "otel.scope.version",
+              "type": "string",
+              "value": "1"
+            },
+            {
+              "key": "http.status_code",
+              "type": "int64",
+              "value": 202
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "client"
+            }
+          ],
+          "logs": [],
+          "processID": "p2",
+          "warnings": null
+        },
+        {
+          "traceID": "0d2894858586c8f4b7ad7a7e009d0a65",
+          "spanID": "bd2f6a60f2c523de",
+          "flags": 1,
+          "operationName": "POST /api/v2/*",
+          "references": [],
+          "startTime": 1792546823609000,
+          "duration": 9387,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "releaseguard"
+            },
+            {
+              "key": "otel.scope.version",
+              "type": "string",
+              "value": "1"
+            },
+            {
+              "key": "http.request.method",
+              "type": "string",
+              "value": "POST"
+            },
+            {
+              "key": "http.status_code",
+              "type": "int64",
+              "value": 202
+            },
+            {
+              "key": "http.route",
+              "type": "string",
+              "value": "/api/v2/*"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "server"
+            }
+          ],
+          "logs": [],
+          "processID": "p2",
+          "warnings": null
+        },
+        {
+          "traceID": "0d2894858586c8f4b7ad7a7e009d0a65",
+          "spanID": "b61241f8b428a5d2",
+          "flags": 1,
+          "operationName": "http registry",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "0d2894858586c8f4b7ad7a7e009d0a65",
+              "spanID": "a1300637eb67f55f"
+            }
+          ],
+          "startTime": 1792546823611000,
+          "duration": 2762,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "releaseguard"
+            },
+            {
+              "key": "otel.scope.version",
+              "type": "string",
+              "value": "1"
+            },
+            {
+              "key": "http.status_code",
+              "type": "int64",
+              "value": 200
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "client"
+            }
+          ],
+          "logs": [],
+          "processID": "p3",
+          "warnings": null
+        },
+        {
+          "traceID": "0d2894858586c8f4b7ad7a7e009d0a65",
+          "spanID": "a1300637eb67f55f",
+          "flags": 1,
+          "operationName": "POST /jobs",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "0d2894858586c8f4b7ad7a7e009d0a65",
+              "spanID": "6cb729b7601ea418"
+            }
+          ],
+          "startTime": 1792546823609000,
+          "duration": 7825,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "releaseguard"
+            },
+            {
+              "key": "otel.scope.version",
+              "type": "string",
+              "value": "1"
+            },
+            {
+              "key": "http.request.method",
+              "type": "string",
+              "value": "POST"
+            },
+            {
+              "key": "http.status_code",
+              "type": "int64",
+              "value": 202
+            },
+            {
+              "key": "http.route",
+              "type": "string",
+              "value": "/jobs"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "server"
+            }
+          ],
+          "logs": [],
+          "processID": "p3",
+          "warnings": null
+        },
+        {
+          "traceID": "0d2894858586c8f4b7ad7a7e009d0a65",
+          "spanID": "3f2bb809e1fb329f",
+          "flags": 1,
+          "operationName": "rabbitmq publish",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "0d2894858586c8f4b7ad7a7e009d0a65",
+              "spanID": "a1300637eb67f55f"
+            }
+          ],
+          "startTime": 1792546823855000,
+          "duration": 1416,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "releaseguard"
+            },
+            {
+              "key": "otel.scope.version",
+              "type": "string",
+              "value": "1"
+            },
+            {
+              "key": "job.id",
+              "type": "string",
+              "value": "014a880b-b5d8-4980-9c1e-f8f9547558ca"
+            },
+            {
+              "key": "messaging.destination.name",
+              "type": "string",
+              "value": "releaseguard.evaluate"
+            },
+            {
+              "key": "messaging.system",
+              "type": "string",
+              "value": "rabbitmq"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "producer"
+            }
+          ],
+          "logs": [],
+          "processID": "p3",
+          "warnings": [
+            "clock skew adjustment disabled; not applying calculated delta of -242.795438ms"
+          ]
+        },
+        {
+          "traceID": "0d2894858586c8f4b7ad7a7e009d0a65",
+          "spanID": "cd52e36bbfe28d0f",
+          "flags": 1,
+          "operationName": "POST /execute",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "0d2894858586c8f4b7ad7a7e009d0a65",
+              "spanID": "705dd4e32f88b55a"
+            }
+          ],
+          "startTime": 1792546823864000,
+          "duration": 905,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "releaseguard"
+            },
+            {
+              "key": "otel.scope.version",
+              "type": "string",
+              "value": "1"
+            },
+            {
+              "key": "http.request.method",
+              "type": "string",
+              "value": "POST"
+            },
+            {
+              "key": "http.status_code",
+              "type": "int64",
+              "value": 200
+            },
+            {
+              "key": "http.route",
+              "type": "string",
+              "value": "/execute"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "server"
+            }
+          ],
+          "logs": [],
+          "processID": "p4",
+          "warnings": null
+        },
+        {
+          "traceID": "0d2894858586c8f4b7ad7a7e009d0a65",
+          "spanID": "705dd4e32f88b55a",
+          "flags": 1,
+          "operationName": "http support",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "0d2894858586c8f4b7ad7a7e009d0a65",
+              "spanID": "f34f6c4ff2c4ddfe"
+            }
+          ],
+          "startTime": 1792546823863000,
+          "duration": 2706,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "releaseguard"
+            },
+            {
+              "key": "otel.scope.version",
+              "type": "string",
+              "value": "1"
+            },
+            {
+              "key": "http.status_code",
+              "type": "int64",
+              "value": 200
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "client"
+            }
+          ],
+          "logs": [],
+          "processID": "p5",
+          "warnings": null
+        },
+        {
+          "traceID": "0d2894858586c8f4b7ad7a7e009d0a65",
+          "spanID": "f34f6c4ff2c4ddfe",
+          "flags": 1,
+          "operationName": "rabbitmq process",
+          "references": [
+            {
+              "refType": "CHILD_OF",
+              "traceID": "0d2894858586c8f4b7ad7a7e009d0a65",
+              "spanID": "3f2bb809e1fb329f"
+            }
+          ],
+          "startTime": 1792546823857000,
+          "duration": 9855,
+          "tags": [
+            {
+              "key": "otel.scope.name",
+              "type": "string",
+              "value": "releaseguard"
+            },
+            {
+              "key": "otel.scope.version",
+              "type": "string",
+              "value": "1"
+            },
+            {
+              "key": "job.id",
+              "type": "string",
+              "value": "014a880b-b5d8-4980-9c1e-f8f9547558ca"
+            },
+            {
+              "key": "messaging.destination.name",
+              "type": "string",
+              "value": "releaseguard.evaluate"
+            },
+            {
+              "key": "messaging.system",
+              "type": "string",
+              "value": "rabbitmq"
+            },
+            {
+              "key": "span.kind",
+              "type": "string",
+              "value": "consumer"
+            }
+          ],
+          "logs": [],
+          "processID": "p5",
+          "warnings": null
+        }
+      ],
+      "processes": {
+        "p1": {
+          "serviceName": "releaseguard-registry",
+          "tags": []
+        },
+        "p2": {
+          "serviceName": "releaseguard-gateway",
+          "tags": []
+        },
+        "p3": {
+          "serviceName": "releaseguard-evaluation",
+          "tags": []
+        },
+        "p4": {
+          "serviceName": "releaseguard-support",
+          "tags": []
+        },
+        "p5": {
+          "serviceName": "releaseguard-worker",
+          "tags": []
+        }
+      },
+      "warnings": null
+    }
+  ],
+  "total": 0,
+  "limit": 0,
+  "offset": 0,
+  "errors": null
+}

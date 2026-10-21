@@ -1,0 +1,18 @@
+{
+  "base": "429b83ffd240f97cc7e352b916c5d84d6154178a",
+  "trackedFilesCompared": 1145,
+  "changed": [
+    ".gitignore",
+    "README.md",
+    "package-lock.json",
+    "package.json",
+    "src/common.ts",
+    "src/evaluation.ts",
+    "src/gateway.ts",
+    "src/main.ts",
+    "src/support.ts",
+    "src/worker.ts"
+  ],
+  "existingEvidenceUnchanged": true,
+  "noCommitOrPush": true
+}

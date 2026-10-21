@@ -3,6 +3,7 @@ import { returnsSuiteV29 } from './returns-policy-v29.js';
 import { returnsSuiteV28 } from './returns-policy-v28.js';
 import { returnsSuiteV27 } from './returns-policy-v27.js';
 import type { FastifyInstance } from 'fastify';
+import {tracedFetch} from './observability.js';
 import { readFile } from 'node:fs/promises';
 import { HttpError } from './common.js';
 import { revisedReturnsSuite, returnsSuiteV22, returnsSuiteV23, returnsSuiteV24, returnsSuiteV25, returnsSuiteV26 } from './returns-policy.js';
@@ -82,7 +83,7 @@ export async function gateway(app: FastifyInstance) {
     const headers: Record<string, string> = { 'content-type': 'application/json' };
     if (req.headers.authorization) headers.authorization = req.headers.authorization;
     if (req.headers['idempotency-key']) headers['idempotency-key'] = String(req.headers['idempotency-key']);
-    const res = await fetch(base + '/' + tail, { method: req.method, headers, body: req.method === 'POST' ? JSON.stringify(req.body) : undefined, signal: AbortSignal.timeout(10000), redirect: 'error' });
+    const res = await tracedFetch(target,base + '/' + tail, { method: req.method, headers, body: req.method === 'POST' ? JSON.stringify(req.body) : undefined, signal: AbortSignal.timeout(10000), redirect: 'error' });
     return reply.code(res.status).type('application/json').send(await res.text());
   });
 }

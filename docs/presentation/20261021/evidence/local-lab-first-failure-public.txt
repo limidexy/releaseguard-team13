@@ -1,0 +1,10 @@
+REDACTED DERIVATIVE: host paths removed. Raw failure retained locally.
+file://<REPOSITORY>/scripts/observability-lab.mjs:24
+async function eventually(f,timeout=60000){const end=Date.now()+timeout;let last;do{try{const v=await f();if(v)return v;}catch(e){last=e;}await sleep(500);}while(Date.now()<end);throw new Error('Readiness timeout: '+(last?.message??''));}
+                                                                                                                                                                                        ^
+
+Error: Readiness timeout: fetch failed
+    at eventually (file://<REPOSITORY>/scripts/observability-lab.mjs:24:185)
+    at async file://<REPOSITORY>/scripts/observability-lab.mjs:78:14
+
+Node.js v24.19.0
