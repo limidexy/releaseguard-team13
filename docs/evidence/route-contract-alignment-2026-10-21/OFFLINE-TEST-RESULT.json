@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-21T04:13:35.760Z",
+  "command": [
+    "/Users/ASUS/.local/share/devspace-stable/runtime/node-v24.19.0/bin/node",
+    "--test",
+    "--test-isolation=none",
+    "dist/tests/answer-evaluation-binding-v1.test.js",
+    "dist/tests/semantic-review-wire-v3.test.js"
+  ],
+  "exitCode": 0,
+  "signal": null,
+  "scope": "Routing, provenance, full sample binding, raw preservation, strict wire and mechanical evidence checks only. No semantic capability claim.",
+  "customerGenerationCalls": 0,
+  "semanticReviewerCalls": 0
+}

@@ -1,0 +1,291 @@
+ReleaseGuard 演讲稿与中文提示
+35分钟正文 + 5分钟Q&A；隐藏页仅追问时使用。
+成员职责不是独立贡献证明。历史回放，不新增模型调用。
+
+Slide 1
+Presenter: A · TANG YUCHEN · Target: 0.2 minutes
+
+Script:
+Good morning. We are Team 13. Our project is ReleaseGuard: a platform that lets an application team check the evidence for an AI prompt change before a different person makes the release decision.
+
+中文提示：一句话开场，报队名和项目一句话定位，马上切到下一页。
+
+21 Oct timing: 0.2 minutes. Current supplied PDF: 40 minutes INCLUDING questions. This deck allocates 35 minutes to content + 5 minutes Q&A. New circuit/tracing/log collection is local-only, not deployed to GKE. Historical model scores remain 70/75, reviewer shadowOnly / calibration_pending.
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 2
+Presenter: A · TANG YUCHEN · Target: 1 minutes
+
+Script:
+A prompt change can produce a convincing answer that still breaks policy. On the right, the candidate scores 90 out of 100, but one critical case says returns are accepted forever, so the gate blocks it. Teams need fixed acceptance cases, the original outputs and a review trail. Because model calls are slow and bursty, evaluation must run asynchronously and scale out. Our scenario is a fictional retailer returns assistant with ten fixed cases.
+
+中文提示：强调“流畅≠合规”，指右图的 Blocked；再点出为什么要异步 + 可扩展。
+
+21 Oct timing: 1 minutes. Current supplied PDF: 40 minutes INCLUDING questions. This deck allocates 35 minutes to content + 5 minutes Q&A. New circuit/tracing/log collection is local-only, not deployed to GKE. Historical model scores remain 70/75, reviewer shadowOnly / calibration_pending.
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 3
+Presenter: A · TANG YUCHEN · Target: 0.8 minutes
+
+Script:
+In platform terms, the seed is the versioned test suites and checking policies. Producers are test authors and application developers who register applications and create suite versions. Consumers are the support application, a CLI or CI pipeline, and human reviewers; they all reuse the same APIs. The toolbox is our REST API, CLI and console, and matchmaking is the gate that matches outputs to policy and routes passing candidates to an independent reviewer. Scope ends at a recorded review decision; we do not train models or deploy automatically.
+
+中文提示：用课上 PE01 的术语：Seed / Producer / Consumer / Toolbox / Matchmaking；Magnet 被问再解释。
+
+21 Oct timing: 0.8 minutes. Current supplied PDF: 40 minutes INCLUDING questions. This deck allocates 35 minutes to content + 5 minutes Q&A. New circuit/tracing/log collection is local-only, not deployed to GKE. Historical model scores remain 70/75, reviewer shadowOnly / calibration_pending.
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 4
+A: Our platform has dated implementation and technical evidence. The latest reviewer experiment completed ten calls with valid protocol and blocked all five negative references, but only four of five designated rule IDs matched. The frozen experiment remains failed. The r2 rule-definition refinement has offline checks only. It is not enabled and has no real semantic validation. Our last full-regression evidence is dated and includes a retained failure. 中文：区分平台成果、十条失败实验、r2未实测，不说全部完成。
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 5
+Presenter: A · TANG YUCHEN · Target: 0.8 minutes
+
+Script:
+These are our five responsibility areas and the main deliverables of each member. The last column is each member’s rough total effort. The proposal planned fifty person-days, ten per member; the numbers here are our own actual estimates. Our definition of done is a reproducible build and tests, immutable evidence, permission and release invariants, and independent review.
+
+中文提示：“Rough total effort”列必须在展示前由每位组员填好，替换 TBC。
+
+21 Oct timing: 0.8 minutes. Current supplied PDF: 40 minutes INCLUDING questions. This deck allocates 35 minutes to content + 5 minutes Q&A. New circuit/tracing/log collection is local-only, not deployed to GKE. Historical model scores remain 70/75, reviewer shadowOnly / calibration_pending.
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 6
+Presenter: B · ZHU PENGXU · Target: 1.5 minutes
+
+Script:
+Two decisions shaped the logical architecture. First, we split by bounded context into three business services instead of a modular monolith or six fine-grained services: a monolith cannot scale execution, and six services would add distributed transactions without a business reason. Second, evaluation runs asynchronously through a durable queue: the API accepts the job, commits it with an outbox entry in one transaction, and competing workers consume it. This is Queue-Based Load Leveling with Competing Consumers; the cost is at-least-once delivery, which we handle with idempotent receivers. The other four decisions are summarised below.
+
+中文提示：只展开上面两张决策表；下面四条一句话带过。老师可能追问“为何不用 Saga”→ 备用页 B3。
+
+21 Oct timing: 1.5 minutes. Current supplied PDF: 40 minutes INCLUDING questions. This deck allocates 35 minutes to content + 5 minutes Q&A. New circuit/tracing/log collection is local-only, not deployed to GKE. Historical model scores remain 70/75, reviewer shadowOnly / calibration_pending.
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 7
+Presenter: B · ZHU PENGXU · Target: 2 minutes
+
+Script:
+This is the logical detail deployment view for the Submit Evaluation use case, drawn the way the course method describes. Users reach the gateway from the Internet. Inside the cluster, each subsystem is deployed to its own node, and each manifests boundary, control and entity classes. Evaluation Admission accepts the job and writes the Evaluation Job; the Execution subsystem on the worker claims and completes jobs and runs the gate; Review & Evidence creates the release request. The model provider is only reached through the Model Provider Interface boundary.
+
+中文提示：从左到右：入口 → 三个业务 context → Worker → 模型适配器；用手指 B/C/E 三类。
+
+21 Oct timing: 2 minutes. Current supplied PDF: 40 minutes INCLUDING questions. This deck allocates 35 minutes to content + 5 minutes Q&A. New circuit/tracing/log collection is local-only, not deployed to GKE. Historical model scores remain 70/75, reviewer shadowOnly / calibration_pending.
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 8
+Presenter: B · ZHU PENGXU · Target: 1.5 minutes
+
+Script:
+Our core domain is evidence-backed release assurance: Evaluation and Review. Test Assets is a supporting subdomain. Test Assets is upstream of Evaluation through an open host service with a published language: a read-only snapshot API with immutable suite IDs. Evaluation is upstream of Review in a customer–supplier relationship; Review copies its own evidence snapshot. The external model provider sits behind an anticorruption layer. The aggregate roots are Application, SuiteVersion, EvaluationJob and ReleaseRequest. One phrase from our ubiquitous language matters most: execution succeeded is not rule eligible, and rule eligible is not approved.
+
+中文提示：按课上 PE04 的 U/D、OHS/PL、ACL、Customer–Supplier 讲；最后强调那句通用语言。
+
+21 Oct timing: 1.5 minutes. Current supplied PDF: 40 minutes INCLUDING questions. This deck allocates 35 minutes to content + 5 minutes Q&A. New circuit/tracing/log collection is local-only, not deployed to GKE. Historical model scores remain 70/75, reviewer shadowOnly / calibration_pending.
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 9
+Presenter: B · ZHU PENGXU · Target: 1 minutes
+
+Script:
+This table follows the course Integration Endpoints format. Producers register an application and append suite versions; old versions are never overwritten. Consumers integrate through the same gateway: the console, and a CLI that returns exit code 3 when the gate blocks, so any CI pipeline can stop a release. Inside the cluster services use audience-bound service tokens, the broker uses AMQPS, and only one hop needs transformation: the anticorruption layer between the support adapter and the model provider. Workspace and role come from OIDC claims; viewers are read-only and service identities can never review.
+
+中文提示：重点指 CLI exit code 3 和唯一一行 “Yes” 的 ACL。
+
+21 Oct timing: 1 minutes. Current supplied PDF: 40 minutes INCLUDING questions. This deck allocates 35 minutes to content + 5 minutes Q&A. New circuit/tracing/log collection is local-only, not deployed to GKE. Historical model scores remain 70/75, reviewer shadowOnly / calibration_pending.
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 10
+Presenter: D · LIAO CAN · Target: 1.2 minutes
+
+Script:
+Physically, we deployed to GKE in Singapore on two e2-standard-2 nodes, which fits the free trial. Databases, the broker and the identity provider run inside the cluster: cheaper and fully controllable, but without managed high availability. Workers scale with KEDA on queue depth because model calls are I/O-bound and CPU would not show the backlog. For security we use Workload Identity Federation instead of stored keys, deploy images pinned by digest, encrypt database and broker traffic, and restrict ingress with NetworkPolicy. After acceptance we scaled the node pool to zero to stay within budget.
+
+中文提示：每行一句话，主动说 trade-off（单区、无托管 HA）。
+
+21 Oct timing: 1.2 minutes. Current supplied PDF: 40 minutes INCLUDING questions. This deck allocates 35 minutes to content + 5 minutes Q&A. New circuit/tracing/log collection is local-only, not deployed to GKE. Historical model scores remain 70/75, reviewer shadowOnly / calibration_pending.
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 11
+Presenter: D · LIAO CAN · Target: 1.8 minutes
+
+Script:
+Users reach a static IP over HTTPS; Caddy terminates TLS and forwards to two gateway replicas. All six application deployments and the four infrastructure containers run on the GKE node pool. Workers scale from one to three with KEDA. Images are pushed from GitHub Actions to Artifact Registry through Workload Identity Federation and pulled by digest. PostgreSQL and RabbitMQ keep their data on persistent volume claims. Only the support adapter calls the external model API, with a server-side key. Locally the same images run as eight Docker Compose containers.
+
+中文提示：沿着 HTTPS 入口 → Node Pool → Registry / Disks / 外部模型 讲；PVC 与 LB 细节待 D 确认后再说死。
+
+21 Oct timing: 1.8 minutes. Current supplied PDF: 40 minutes INCLUDING questions. This deck allocates 35 minutes to content + 5 minutes Q&A. New circuit/tracing/log collection is local-only, not deployed to GKE. Historical model scores remain 70/75, reviewer shadowOnly / calibration_pending.
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 12
+Presenter: B · ZHU PENGXU · Target: 1.5 minutes
+
+Script:
+Each service owns one PostgreSQL database with its own non-superuser login, and there are no foreign keys across databases. Suites are append-only, with a parent link to the previous version. In Evaluation, a job and its outbox entry are written in one transaction, and the lease columns guard the single terminal write. Review copies the job evidence into a frozen JSONB snapshot; the job ID is copied by an API call, not referenced by a foreign key. Decisions and audit records commit together. We verified backup by dumping each database, restoring it and comparing row counts and content hashes.
+
+中文提示：强调“跨库不建外键、只复制快照”；最后一句带过备份恢复验证。
+
+21 Oct timing: 1.5 minutes. Current supplied PDF: 40 minutes INCLUDING questions. This deck allocates 35 minutes to content + 5 minutes Q&A. New circuit/tracing/log collection is local-only, not deployed to GKE. Historical model scores remain 70/75, reviewer shadowOnly / calibration_pending.
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 13
+Presenter: B · ZHU PENGXU · Target: 1.5 minutes
+
+Script:
+Here is the representative use case end to end. One: the contributor submits with an idempotency key bound to the workspace, so a retry returns the same job. Two: the job and its outbox entry commit atomically, and the API returns 202 immediately. The publisher sends a persistent message and waits for the broker confirm. Three: a worker claims the job with an expiring lease, runs the fixed cases, applies the fail-closed gate, and only the lease holder can write the final result. Four: a review request copies the completed, passing evidence into a frozen snapshot. Five: a different person decides with an expected version; the author can never approve their own candidate.
+
+中文提示：只讲 ①–⑤ 五个橙色标号，其余消息一带而过。
+
+21 Oct timing: 1.5 minutes. Current supplied PDF: 40 minutes INCLUDING questions. This deck allocates 35 minutes to content + 5 minutes Q&A. New circuit/tracing/log collection is local-only, not deployed to GKE. Historical model scores remain 70/75, reviewer shadowOnly / calibration_pending.
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 14
+D: These branches and pull requests show source and artifact management. The current handoff stays on the feature branch. A push is not a passing CI result. Cloud deployment uses a separate manual workflow and this presentation does not launch it. We must quote the exact commit and workflow result in the handoff report. 中文：展示真实Git交接记录，不把push当CI或部署。
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 15
+Presenter: D · LIAO CAN · Target: 2 minutes
+
+Script:
+We treat the pipeline as a set of fitness functions. The main line installs locked dependencies, runs unit tests, builds and starts the containers, runs integration tests and a replay comparison with zero model calls. The gates check resiliency with restart and fault tests, cross-service contracts, dependency advisories with npm audit, and image vulnerabilities with Trivy, then record the tested artifact identity. Any failed gate stops the run. Promotion is a manual CD workflow that accepts only a successful CI run of the same commit, deploys by digest, and proves rollback. On the right is the successful matched run, and a CD run that correctly refused a failed CI.
+
+中文提示：按 青→粉→橙 讲；右侧截图证明“同一 commit 才能部署”。
+
+21 Oct timing: 2 minutes. Current supplied PDF: 40 minutes INCLUDING questions. This deck allocates 35 minutes to content + 5 minutes Q&A. New circuit/tracing/log collection is local-only, not deployed to GKE. Historical model scores remain 70/75, reviewer shadowOnly / calibration_pending.
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 16
+E: The cloud and pipeline findings remain tied to their dated evidence. C: For semantic review we preserve separate experiments. Wire v3 had a three-sample protocol run and a separate seventeen-sample development run. On 21 October we reviewed ten targeted reference answers. All ten had valid protocol. All five positive references were allowed and all five negative references were blocked. One negative answer explicitly said an item need not be unused. The reviewer quoted that contradiction and failed EXTRA_CLAIMS_AUTHORIZED, but left STANDARD_POLICY passed. The frozen criterion required that specific rule to fail, so the experiment remains failed. We clarified that rule in r2. Its offline tests check request content and preservation, not model understanding. r2 remains inactive and untested by a real reviewer. 中文：模型看到了矛盾，但逐规则归属未达标。别说它完全没理解，也别追认通过。 Sources: docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/FINAL-RESULT.json; result-10.json; docs/evidence/standard-policy-review-r2-offline-2026-10-21/FINAL-OFFLINE-VERIFICATION.json.
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 17
+Lead: C (adapter) + D/E (verification). Target: 1 minutes
+We added an availability circuit to the Support adapter. PostgreSQL serialises admission across adapter instances and admits one recovery probe. The local fixture returned three 503 responses. Twenty later attempts made no HTTP request. One probe and one healthy call brought the total to five. The fixture used a short cooldown to keep the test fast. This is not a model-quality test or a new cloud deployment.
+中文：真正熔断，不是重试。测试中两个独立适配器共用 PostgreSQL；没有声称部署了两个 Support 副本。三次失败后，20次拒绝不发请求，冷却后一个探针恢复。
+
+21 Oct timing: 1 minutes. Current supplied PDF: 40 minutes INCLUDING questions. This deck allocates 35 minutes to content + 5 minutes Q&A. New circuit/tracing/log collection is local-only, not deployed to GKE. Historical model scores remain 70/75, reviewer shadowOnly / calibration_pending.
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 18
+Lead: D, with B for persistence. Target: 1 minutes
+This is a saved screenshot of the actual local Jaeger timeline. A job submission crosses five services. The trace context is stored with the job and outbox, then carried in RabbitMQ headers. The producer and worker consumer spans remain in the same trace even though the HTTP response has already returned. This is request-level observability, separate from the business audit trail. We do not collect prompts or credentials in spans.
+中文：这是真实本地链路的保存画面，不是新 Groq 调用；Trace ID不等于job ID。能看到排队间隔与各服务耗时。云端还未部署本轮改动。
+
+21 Oct timing: 1 minutes. Current supplied PDF: 40 minutes INCLUDING questions. This deck allocates 35 minutes to content + 5 minutes Q&A. New circuit/tracing/log collection is local-only, not deployed to GKE. Historical model scores remain 70/75, reviewer shadowOnly / calibration_pending.
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 19
+Lead: D + E. Target: 1 minutes
+The application now emits structured logs with the same trace and span identifiers. Alloy collects only the isolated verification directory, without access to the Docker socket, and Loki stores the logs centrally. We queried one trace and retrieved five services. A canary check found no injected authorization, cookie or query secret in those application logs. The dashboard also counts failure events, but we have not configured notification alerts or production retention.
+中文：日志聚合确实入库并按trace查询，不是只开了一个空Grafana。没有告警通知、生产保留策略或云端验收。
+
+21 Oct timing: 1 minutes. Current supplied PDF: 40 minutes INCLUDING questions. This deck allocates 35 minutes to content + 5 minutes Q&A. New circuit/tracing/log collection is local-only, not deployed to GKE. Historical model scores remain 70/75, reviewer shadowOnly / calibration_pending.
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 20
+A and B: This segment uses saved evidence, not fresh model execution. Show the immutable suite, the original output and the recorded gate. Then show the recorded self-review rejection and a distinct test-identity approval. Test identities prove a technical invariant, not that a teammate independently reviewed this release. C can open Historical_Review_Replay.html to show the separate v3 experiments and the ten-case failure. Never click a real inference or approval action during this evidence-only demonstration. 中文：历史回放，测试身份不等于真人独立审核。
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 21
+E: Use the dated performance and scaling evidence. Explain queue depth, worker replica counts and the failure timeline. State the run date and synthetic/replay workload. Do not present a screenshot as new load-test execution or sustained real-provider throughput. 中文：讲历史扩容实验和限制，不启动云资源或模型调用。
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 22
+Presenter: D · LIAO CAN → A · TANG YUCHEN · Target: 3 minutes
+
+Script:
+D: Here are the matched CI and CD runs for the same commit: the CD workflow checked the CI run, deployed by digest, proved rollback and redeployed, with smoke tests at every stage. A: To close: we delivered a traceable evaluation and review platform, built it to scale with service-owned data, asynchronous execution and queue-driven autoscaling, and learned to keep score and gate apart, to save evidence before validating it, and to report failed experiments honestly. Thank you — we are happy to take questions.
+
+中文提示：D 展示历史 run（仅回放已保存历史运行，不触发 CI/CD）；A 用三条 take-away 收尾，留时间给 Q&A。
+
+21 Oct timing: 3 minutes. Current supplied PDF: 40 minutes INCLUDING questions. This deck allocates 35 minutes to content + 5 minutes Q&A. New circuit/tracing/log collection is local-only, not deployed to GKE. Historical model scores remain 70/75, reviewer shadowOnly / calibration_pending.
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 23（隐藏备份）
+Presenter: C · LIN XINDA · Target: Q&A only
+
+Script:
+Use only if asked about model results. Keep the two reviewer runs separate and state that the reviewer is still calibration_pending and shadow-only.
+
+中文提示：只在被问到模型结果时打开；两组实验分开讲。
+
+21 Oct timing: backup / questions only. Current supplied PDF: 40 minutes INCLUDING questions. This deck allocates 35 minutes to content + 5 minutes Q&A. New circuit/tracing/log collection is local-only, not deployed to GKE. Historical model scores remain 70/75, reviewer shadowOnly / calibration_pending.
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 24（隐藏备份）
+Presenter: E · LIAO BINFENG · Target: Q&A only
+
+Script:
+Use if asked how we tested. Each layer establishes something different; none of them is a claim of semantic accuracy.
+
+中文提示：被问测试策略时打开。
+
+21 Oct timing: backup / questions only. Current supplied PDF: 40 minutes INCLUDING questions. This deck allocates 35 minutes to content + 5 minutes Q&A. New circuit/tracing/log collection is local-only, not deployed to GKE. Historical model scores remain 70/75, reviewer shadowOnly / calibration_pending.
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 25（隐藏备份）
+Presenter: B · ZHU PENGXU · Target: Q&A only
+
+Script:
+The course covers Saga for distributed transactions. The job and outbox entry commit atomically. A publisher subsequently sends the message with broker confirmation.
+
+中文提示：老师问“为什么不用 Saga”时打开。
+
+21 Oct timing: backup / questions only. Current supplied PDF: 40 minutes INCLUDING questions. This deck allocates 35 minutes to content + 5 minutes Q&A. New circuit/tracing/log collection is local-only, not deployed to GKE. Historical model scores remain 70/75, reviewer shadowOnly / calibration_pending.
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 26（隐藏备份）
+Presenter: B + C · Target: Q&A only
+
+Script:
+A score is one condition; the gate is the intersection of all conditions, and review is a separate later step.
+
+中文提示：分数和硬条件取交集，审核是下一步。
+
+21 Oct timing: backup / questions only. Current supplied PDF: 40 minutes INCLUDING questions. This deck allocates 35 minutes to content + 5 minutes Q&A. New circuit/tracing/log collection is local-only, not deployed to GKE. Historical model scores remain 70/75, reviewer shadowOnly / calibration_pending.
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 27（隐藏备份）
+Implementation, analysis and presentation preparation used AI assistance. Reference labels include project AI annotations and are not verified human blind review. Planned responsibilities are retained, but actual hours and independent approval must come from the members. Do not claim a completed five-person rehearsal or UAT without records.
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 28（隐藏备份）
+C: Show these as four distinct rows, not a combined 30/30 claim. Wire v3 is the transport protocol. r2 is a later rule-definition refinement using unchanged wire v3, not a new validated semantic model. Original customer-generation scores 70/75 are another experiment entirely. 中文：每行版本独立，不互相继承。
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 29（隐藏备份）
+C: The reviewer identified the exact policy contradiction in case ten. This is not unrelated blocking or a dangerous answer being allowed. But STANDARD_POLICY was still passed, and the pre-frozen acceptance required that rule ID to fail. Keep the failure, do not remap the output. Usage: 30,188 input plus 11,882 output, total 42,070 tokens. One call per reference, no retries. Source: docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/FINAL-RESULT.json and POSTRUN-INTERPRETATION.txt. 中文：阻断5/5，但指定规则4/5，仍失败。
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.
+
+Slide 30（隐藏备份）
+C: We completed a definition refinement after the failed ten-case run. It distinguishes statement completeness, whole-answer consistency and assertion ownership. Offline program checks confirm the definition enters the request, exact source answers stay unchanged and synthetic statuses are not rewritten. We have not asked a real model to use r2. These references are AI annotations, not model scores. Source: docs/evidence/standard-policy-review-r2-offline-2026-10-21/FINAL-OFFLINE-VERIFICATION.json. 中文：定义改进已完成，真实理解验证未做；候选未启用。
+
+Handoff 21 Oct: 35 minutes content plus 5 minutes Q&A within the 40-minute slot. Evidence replay only. This material does not authorise a provider call or deployment.

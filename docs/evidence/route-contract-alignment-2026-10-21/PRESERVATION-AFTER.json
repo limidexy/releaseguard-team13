@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-21T04:13:35.978Z",
+  "comparedExistingFiles": 1264,
+  "changedExistingFiles": [],
+  "newSourceFiles": [
+    "src/answer-evaluation-binding-v1.ts"
+  ],
+  "newTestFiles": [
+    "tests/answer-evaluation-binding-v1.test.ts"
+  ],
+  "formalWorkerUnchanged": true,
+  "handwrittenCandidatesUnchanged": true,
+  "historyUnchanged": true,
+  "newModelCalls": 0,
+  "newReviewerCalls": 0
+}

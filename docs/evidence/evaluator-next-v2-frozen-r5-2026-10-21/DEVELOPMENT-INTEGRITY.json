@@ -1,0 +1,14 @@
+{
+  "candidate": "evaluator-next-v2-r5",
+  "source": "docs/evidence/evaluator-next-v2-development-r5-2026-10-21/records.json",
+  "samples": 160,
+  "evidenceSpansChecked": 1035,
+  "invalidEvidenceSpans": 0,
+  "method": "For every saved candidate rule evidence span, slice the unchanged original plain response or the identified decoded JSON string field and compare with the saved verbatim text.",
+  "trackedFilesComparedWithHEAD": 1172,
+  "existingTrackedFilesChanged": 0,
+  "newTests": {"development":160,"focusedSafety":15,"passed":175,"failed":0},
+  "fullRegression": {"total":958,"passed":957,"failed":1,"retainedFailure":"evaluator-next-v1-holdout-v2"},
+  "inferenceOrReviewCalls": 0,
+  "meaning": "Program/evidence integrity only. This does not certify semantic judgments or change model/reviewer calibration."
+}

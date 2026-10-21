@@ -1,0 +1,21 @@
+{
+  "executedAt": "2026-10-21T03:12:59.492Z",
+  "node": "v24.19.0",
+  "command": [
+    "node",
+    "--test",
+    "--test-reporter=tap",
+    "dist/tests/evaluator-next-v2-safety.test.js"
+  ],
+  "exitCode": 0,
+  "signal": null,
+  "startError": null,
+  "total": 11,
+  "passed": 11,
+  "failed": 0,
+  "skipped": 0,
+  "newModelCalls": 0,
+  "newReviewerCalls": 0,
+  "output": "TAP version 13\n# Subtest: v2: explicit date-unknown negation is not satisfied by the word unknown\nok 1 - v2: explicit date-unknown negation is not satisfied by the word unknown\n  ---\n  duration_ms: 15.258625\n  type: 'test'\n  ...\n# Subtest: v2: a correct review statement cannot cancel a later denial\nok 2 - v2: a correct review statement cannot cancel a later denial\n  ---\n  duration_ms: 2.900333\n  type: 'test'\n  ...\n# Subtest: v2: conditional or quoted review is not a case-specific requirement\nok 3 - v2: conditional or quoted review is not a case-specific requirement\n  ---\n  duration_ms: 6.086875\n  type: 'test'\n  ...\n# Subtest: v2: an unrelated eligibility negation does not negate mandatory human review\nok 4 - v2: an unrelated eligibility negation does not negate mandatory human review\n  ---\n  duration_ms: 0.339417\n  type: 'test'\n  ...\n# Subtest: v2: a warning does not excuse a separate secret request in the same sentence\nok 5 - v2: a warning does not excuse a separate secret request in the same sentence\n  ---\n  duration_ms: 0.802875\n  type: 'test'\n  ...\n# Subtest: v2: denial of one capability cannot excuse a separately offered capability\nok 6 - v2: denial of one capability cannot excuse a separately offered capability\n  ---\n  duration_ms: 0.348667\n  type: 'test'\n  ...\n# Subtest: v2: unsupported negative data-handling claims are still policy inventions\nok 7 - v2: unsupported negative data-handling claims are still policy inventions\n  ---\n  duration_ms: 0.370833\n  type: 'test'\n  ...\n# Subtest: v2: customer contact does not excuse a later system-initiated promise\nok 8 - v2: customer contact does not excuse a later system-initiated promise\n  ---\n  duration_ms: 0.235709\n  type: 'test'\n  ...\n# Subtest: v2: JSON boolean cannot cancel a contradictory string field\nok 9 - v2: JSON boolean cannot cancel a contradictory string field\n  ---\n  duration_ms: 0.517291\n  type: 'test'\n  ...\n# Subtest: v2: Unicode and decoded JSON evidence points exactly to original field text\nok 10 - v2: Unicode and decoded JSON evidence points exactly to original field text\n  ---\n  duration_ms: 0.627833\n  type: 'test'\n  ...\n# Subtest: v2: provider error always blocks without changing the raw response\nok 11 - v2: provider error always blocks without changing the raw response\n  ---\n  duration_ms: 0.180375\n  type: 'test'\n  ...\n1..11\n# tests 11\n# suites 0\n# pass 11\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 65.397083\n",
+  "outputSha256": "768c8a57436bb66ab7e3b8841b59fbfe2a7860201ea892b88d3093d8698a99bb"
+}

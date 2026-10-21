@@ -1,0 +1,10 @@
+{
+  "experimentId": "evaluator-next-v2-independent-20261021",
+  "startedAt": "2026-10-21T03:24:25.666Z",
+  "freezeSha256": "09ee58ea7ed60867a0827eca955f3d328fec66f235e0191f41ef6782c3466ddb",
+  "sampleSha256": "565fcdb9d6ab135929d6986a86679a87d5db7b04835db1b840ee5e41e76c53da",
+  "runnerSha256": "9860fdf599206915aeccf35cb38dbef1336e450db5b2d97f23943f5d11faec00",
+  "newModelCalls": 0,
+  "newReviewerCalls": 0,
+  "maximumOfflineEvaluations": 80
+}

@@ -1,0 +1,66 @@
+{
+  "at": "2026-10-21T08:20:47.096Z",
+  "revision": "standard-policy-whole-answer-r2",
+  "buildExitCode": 0,
+  "buildOutput": "",
+  "testExitCode": 0,
+  "testOutput": "✔ v3 removes missingReason and exposes every additional local constraint (6.817041ms)\n✔ required and prohibited rules implement the declared evidence matrix (2.381417ms)\n✔ unverifiable remains unchanged and cannot activate formal delivery (0.792584ms)\n✔ explicit contradiction and failed extra claim require evidence (0.476292ms)\n✔ multiple evidence is located mechanically without changing status, reason or quotes (0.472958ms)\n✔ duplicate, absent and ambiguous evidence are rejected (0.513ms)\n✔ JSON field evidence handles escaping and Unicode while raw or missing fields fail (0.455917ms)\n✔ missing, duplicate and unknown rule IDs and incomplete status fail locally (0.336ms)\n✔ r2 instructions require completeness, whole-answer consistency and ownership, not keyword negation (0.075125ms)\n✔ references cover all three conditions and four categories, with both corrected-quote owners (0.147541ms)\n✔ new revision preserves original context and isolates itself from the old request version/hash (0.914584ms)\n✔ existing transport receives the actual r2 body for all references via a local fake fetcher only (17.742958ms)\n✔ wire derivation does not rewrite a deliberately inconsistent synthetic STANDARD_POLICY judgment (0.275959ms)\n✔ old failed experiment remains failed with its original per-rule judgments (0.751ms)\nℹ tests 14\nℹ suites 0\nℹ pass 14\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 48.47175\n",
+  "initialOfflineFailurePreserved": true,
+  "correction": {
+    "file": "tests/standard-policy-review-r2.test.ts",
+    "before": "all three jointly necessary conditions",
+    "after": "all three jointly necessary standard-return conditions",
+    "reason": "Literal prompt-content assertion omitted the standard-return words already present in the reviewed definition. No semantic requirement, prompt, schema, fixture or historical judgment changed."
+  },
+  "changedExistingFiles": [],
+  "revisionFiles": [
+    {
+      "path": "src/standard-policy-review-r2.ts",
+      "originalSha256": "ad3e132c00a02a69ed8c52db23ad2cfc6ea1ee4141bcc5b87a80af453c5e6537",
+      "currentSha256": "ad3e132c00a02a69ed8c52db23ad2cfc6ea1ee4141bcc5b87a80af453c5e6537"
+    },
+    {
+      "path": "tests/standard-policy-review-r2.test.ts",
+      "originalSha256": "c9e804185858ba6890f62d3e99cd02f0e8f1238e0a1c5e3ccc5803f0c6abb647",
+      "currentSha256": "6ecb02b458b80f3d3019ee6e33a91aaaa708f479a94d91a6afe1b80b3b3a4344"
+    },
+    {
+      "path": "tests/standard-policy-review-r2-fixtures.json",
+      "originalSha256": "dab74c00540e735c8227ac05984af05486dbae60436401d825e72d6117a16539",
+      "currentSha256": "dab74c00540e735c8227ac05984af05486dbae60436401d825e72d6117a16539"
+    },
+    {
+      "path": "dist/src/standard-policy-review-r2.js",
+      "originalSha256": "a33e2d4f30d0a4572a9ef539d529054707eec63d2081cb6a5114c6b0c15ce0ba",
+      "currentSha256": "a33e2d4f30d0a4572a9ef539d529054707eec63d2081cb6a5114c6b0c15ce0ba"
+    },
+    {
+      "path": "src/groq-semantic-review-transport-v2.ts",
+      "originalSha256": "339905c9e034122f0424a6ba3bd10c2fc50a1c953fc7603e7b18a80b000d89ea",
+      "currentSha256": "339905c9e034122f0424a6ba3bd10c2fc50a1c953fc7603e7b18a80b000d89ea"
+    },
+    {
+      "path": "src/semantic-review-wire-v3.ts",
+      "originalSha256": "a66cd592fed23cbf76033d0ab4a47a4610af509a7e2a16f81af62bbac9817b2f",
+      "currentSha256": "a66cd592fed23cbf76033d0ab4a47a4610af509a7e2a16f81af62bbac9817b2f"
+    },
+    {
+      "path": "src/worker.ts",
+      "originalSha256": "9754e344f759b3914021cd61a172e7094eaaa75c6744aaabd48f8e5f2186c381",
+      "currentSha256": "9754e344f759b3914021cd61a172e7094eaaa75c6744aaabd48f8e5f2186c381"
+    },
+    {
+      "path": "scripts/standard-policy-r2-offline.mjs",
+      "originalSha256": "85ccaab08887d9cb1da646699554eb0a12f336c8be8904c53a85af6d3e3502ba",
+      "currentSha256": "85ccaab08887d9cb1da646699554eb0a12f336c8be8904c53a85af6d3e3502ba"
+    }
+  ],
+  "unexpectedRevisionChanges": [],
+  "oldExperimentStatus": "TARGETED_VALIDATION_FAILED",
+  "realRequests": 0,
+  "semanticValidation": "NOT_PERFORMED",
+  "referenceSamples": 15,
+  "localFakeTransportDispatches": 15,
+  "shadowOnly": true,
+  "reviewer": "calibration_pending"
+}

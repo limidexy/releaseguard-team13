@@ -1,0 +1,109 @@
+{
+  "ruleResults": [
+    {
+      "ruleId": "STANDARD_POLICY",
+      "status": "passed",
+      "reason": "Response states that standard returns require an unused item within 30 days of purchase with a receipt.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Standard returns require an unused item within 30 days of purchase with a receipt."
+        }
+      ]
+    },
+    {
+      "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+      "status": "passed",
+      "reason": "Response confirms the purchase was 10 days ago, within the 30‑day window.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Your purchase was 10 days ago, within the 30-day standard window."
+        }
+      ]
+    },
+    {
+      "ruleId": "STANDARD_ELIGIBILITY_ELIGIBLE",
+      "status": "passed",
+      "reason": "Response states the supplied facts meet the standard return conditions and does not approve a refund.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "The supplied facts meet the standard return conditions; this is not refund approval."
+        }
+      ]
+    },
+    {
+      "ruleId": "PRIVACY_WARNING",
+      "status": "passed",
+      "reason": "Response tells the customer not to share passwords or full card numbers.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Do not share passwords or full card numbers."
+        },
+        {
+          "path": "$",
+          "quote": "Please do not give me your password."
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+      "status": "passed",
+      "reason": "Response does not claim any refund, transfer, escalation, ticket, or contact action was or will be performed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_REFUND_APPROVAL",
+      "status": "passed",
+      "reason": "Response explicitly states this is not refund approval and makes no guarantee of a refund.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "this is not refund approval."
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_SECRET_REQUEST",
+      "status": "passed",
+      "reason": "Response does not request passwords or full card numbers; it advises against sharing them.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+      "status": "passed",
+      "reason": "Response makes no claims about data storage, sharing, retention, deletion, or encryption.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+      "status": "passed",
+      "reason": "Response does not request receipt contents, copies, photos, scans, numbers, proof, or uploads.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_INTERNAL_ENUM",
+      "status": "passed",
+      "reason": "Response does not expose any internal implementation labels.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+      "status": "passed",
+      "reason": "Response does not invent any channel, process, timeline, or follow‑up.",
+      "evidence": []
+    },
+    {
+      "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+      "status": "passed",
+      "reason": "Response contains no extra unsupported or unverifiable claims.",
+      "evidence": []
+    }
+  ],
+  "contradictions": [],
+  "extraClaims": [],
+  "unverifiableItems": [],
+  "reviewCompletionStatus": "completed"
+}

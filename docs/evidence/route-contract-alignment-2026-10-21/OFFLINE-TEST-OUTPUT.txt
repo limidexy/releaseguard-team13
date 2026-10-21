@@ -1,0 +1,23 @@
+✔ all five objects and policy have versions/hashes; annotator and reviewer share facts and contract (9.321458ms)
+✔ question, facts, decision, contract, answer and versions cannot be silently replaced (6.054ms)
+✔ reference sidecar is excluded from the actual strict wire v3 HTTP body (0.637625ms)
+✔ saved review replay is restricted to the original full context, not a new answer or contract (2.692625ms)
+✔ missing review blocks with no handwritten evaluator fallback (0.968459ms)
+✔ mechanical wire derivation preserves mock judgment and cannot qualify an uncalibrated reviewer (1.747167ms)
+✔ formal Worker dependency closure excludes both handwritten candidates and Hybrid activation (4.75925ms)
+✔ v3 removes missingReason and exposes every additional local constraint (1.02925ms)
+✔ required and prohibited rules implement the declared evidence matrix (1.056333ms)
+✔ unverifiable remains unchanged and cannot activate formal delivery (0.422875ms)
+✔ explicit contradiction and failed extra claim require evidence (0.833667ms)
+✔ multiple evidence is located mechanically without changing status, reason or quotes (0.369833ms)
+✔ duplicate, absent and ambiguous evidence are rejected (0.410875ms)
+✔ JSON field evidence handles escaping and Unicode while raw or missing fields fail (0.314625ms)
+✔ missing, duplicate and unknown rule IDs and incomplete status fail locally (0.787625ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 49.524125

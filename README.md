@@ -1,5 +1,9 @@
 # ReleaseGuard — SE34FT Team 13
 
+## 21 October 2026: evidence freeze and course handoff
+
+Start with the [current project status](docs/PROJECT_STATUS_20261021.txt) and [presentation, script and offline replay](docs/presentation/20261021-handoff/START_HERE.txt). The three-sample wire v3 protocol run, separate seventeen-sample development run, and ten-case targeted experiment retain their own versions and results. The ten-case experiment remains **TARGETED_VALIDATION_FAILED**: all answers had valid protocol, but only four of five designated critical rule IDs matched. The later `standard-policy-whole-answer-r2` definition has offline checks only, with **no real semantic validation**. It is an inactive candidate using unchanged wire v3. No validation transfers between these revisions. Worker routing, default review path, `shadowOnly=true` and `calibration_pending` are unchanged. This handoff makes zero new model/reviewer calls and performs no merge or deployment. A branch push does not establish CI success. Older counts below are dated snapshots, not a current whole-repository pass.
+
 ## 21 October 2026: local resilience / observability candidate
 
 See [the isolated local lab](deploy/observability/README.md) for the shared provider circuit breaker, OpenTelemetry HTTP/queue tracing, and Alloy/Loki/Grafana log aggregation. The [21 October presentation pack](docs/presentation/20261021/) contains the updated deck and selected local evidence. This is a feature-branch candidate, not a cloud deployment or release. Focused tests pass; full regression is 782/783 with the same rejected evaluator acceptance failure retained. Historical model scores and shadow-reviewer qualification are unchanged. The latest supplied course PDF specifies 40 minutes including questions; the new deck uses 35 minutes content plus 5 minutes Q&A.

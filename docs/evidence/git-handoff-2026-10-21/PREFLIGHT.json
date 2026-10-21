@@ -1,0 +1,921 @@
+{
+  "at": "2026-10-21T09:06:18.913Z",
+  "branch": "feat/c-review-v3-handoff-20261019",
+  "base": "a4f50e191b43acb05c8be7c95dfc22bfb3913493",
+  "origin": "https://github.com/limidexy/releaseguard-team13.git",
+  "files": [
+    {
+      "file": "README.md",
+      "sha256": "238d83ba849d1bc8c3faa153929edc3f2f7ea0a936ace49bc97a4fb684223f98"
+    },
+    {
+      "file": "docs/PROJECT_STATUS_20261021.txt",
+      "sha256": "ab53816826b5e2c8fcecc475708534b2415561d049077e62bf3624a0506b6370"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-baseline-2026-10-21/records.json",
+      "sha256": "672f73735af475ee6a3905d9300df26ab0676101a3f4b4fa27461cff889aa2d7"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-baseline-2026-10-21/safety-red.json",
+      "sha256": "f0d009963a510743f17aec1db84d342f6855e680e5ab49312727f0cb750b6420"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-baseline-2026-10-21/summary.json",
+      "sha256": "0936738517e6846064aedad48686aced0602ccd8b435ad6c3ebe0916adbb4e9d"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-development-r1-2026-10-21/BUILD-LIMITATION.json",
+      "sha256": "ff3af55532da5322447945d64b1f0063a004d1a96fe4d5a3bda7f550ad8774b3"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-development-r1-2026-10-21/records.json",
+      "sha256": "3871d9aa54e6dacbdb06cc50ad66e468d0d5ab64c234a4e249053c937bf70a63"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-development-r1-2026-10-21/summary.json",
+      "sha256": "1ce9fead4890ed9993651eb470d45d52d9a47cb23e787b0acc0c0a872f56e2f6"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-development-r2-2026-10-21/records.json",
+      "sha256": "42dd8a96050c4985a1c12f10577a7d09733791868fcc7d31ca9f1897617c258e"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-development-r2-2026-10-21/summary.json",
+      "sha256": "738d1e692e5dd5212f7463a6777fcce84bbcd5e7230bcf0c022abdeb818afa01"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-development-r3-2026-10-21/records.json",
+      "sha256": "ced888716720d13b4d4dcc7165f24bc12f81816be333b42c76a2c2e5ac45ed8b"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-development-r3-2026-10-21/safety-expanded-red.json",
+      "sha256": "f38317a3e491dc14671069841dad9f1757f8d50cbf8803e3580e84834b922807"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-development-r3-2026-10-21/safety-r4.json",
+      "sha256": "605a44e1a74ed9060026c50e2ce4e035273f30b007b9f06850a77ec28c4443f2"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-development-r3-2026-10-21/summary.json",
+      "sha256": "ceb09f46966aea9a2466fdbdbcc41d351db44fc2a03c7dc174ab42a106f7bd63"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-development-r4-2026-10-21/records.json",
+      "sha256": "73d0cec5863a8a8370e875a120967d7eac6e5ea7abf3ce45aa928667efdd3f25"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-development-r4-2026-10-21/summary.json",
+      "sha256": "31a19a13b425aa44299e7193f5a81e4dbaaba4805dd011c3de721f7d055071f1"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-development-r4-2026-10-21/targeted.json",
+      "sha256": "147e26df30b9263805826451cab0c4c27cfe0d20d9160205894ef2548c1fc01f"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-development-r5-2026-10-21/records.json",
+      "sha256": "7ab2edee4c51f55594bc045725a864aa4cbc57880e37ffcc2a19c59c1cbf830a"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-development-r5-2026-10-21/summary.json",
+      "sha256": "530e9c9bdfce9241813ee31949ffddbd1fb08a015373059a06385998fde323ed"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-development-r5-2026-10-21/targeted.json",
+      "sha256": "35e0ab9a905d1b29b0e04977746f233b1c7d6a32709dec8b240fd6fd13a0d52b"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-frozen-r5-2026-10-21/DEVELOPMENT-INTEGRITY.json",
+      "sha256": "f11061f1ffe5605a123b4d1c5dc564369a77e1e6630a36902ef5d866fcb29664"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-frozen-r5-2026-10-21/FREEZE.json",
+      "sha256": "09ee58ea7ed60867a0827eca955f3d328fec66f235e0191f41ef6782c3466ddb"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-frozen-r5-2026-10-21/INDEPENDENT-VALIDATION-PLAN.json",
+      "sha256": "75c4587f13b0f8b8f6a548d96767f58a3a9f40eff1a3fff72a9bab60f0c03ff4"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-frozen-r5-2026-10-21/full-regression.json",
+      "sha256": "cb09156dbf685a6c73030743bdb2114625c0e429e126e33b0aabcc0cb7f61410"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-independent-2026-10-21/ATTEMPT.lock.json",
+      "sha256": "6555d1300836e669222e4f83df6e17d0177d488b92e79da41fcbcebb9edc9be4"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-independent-2026-10-21/AUTHOR-INSTRUCTIONS.md",
+      "sha256": "7803cd9a070ee0c4fba583c3ccb8f5e78a3e2b12d587e7d48dd94114204f0dc2"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-independent-2026-10-21/AUTHOR-NOTE.txt",
+      "sha256": "a21fcd3e723039e0d9241f9d11232e4fca0edeedddd516f7014c47e3999d8101"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-independent-2026-10-21/AUTHOR-POLICY.md",
+      "sha256": "e3cc79d4282b1453ec90e92bdecf6f79bd8b15389ef2ff160b2faf8b3e5ce5e7"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-independent-2026-10-21/AUTHOR-QUESTIONS.json",
+      "sha256": "fa24a54c1ac232bc00ea37a206cbe7732d97085c3d5c2c78d7dba23e9de62d43"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-independent-2026-10-21/FROZEN-REFERENCES.json",
+      "sha256": "565fcdb9d6ab135929d6986a86679a87d5db7b04835db1b840ee5e41e76c53da"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-independent-2026-10-21/POSTHOC-OLD-BASELINE.json",
+      "sha256": "f68fa290700463730871bf269f02dfb3ba64ca010fca242937c96fd25e1cee44"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-independent-2026-10-21/POSTHOC-REVIEW.json",
+      "sha256": "4d835db488e0ce49e4d961d7ee3dfd13470375b588a050e28ad832881c415a3a"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-independent-2026-10-21/records.json",
+      "sha256": "80b6be2dd83c7c0b4322f986c72cfe1b5d02c08ad2e6389da4ab1f4c4c2f6071"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-independent-2026-10-21/summary.json",
+      "sha256": "0058d1e8e2d52a6187d988b0ba318f69980bb3003e8b6d8da19fa8979181a570"
+    },
+    {
+      "file": "docs/evidence/evaluator-next-v2-independent-2026-10-21/逐题结果.txt",
+      "sha256": "ffa5d7eb3b22e49ece9e2958fd7082c46069e1b8d2654685701351e481a226fc"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/ATTEMPTS.jsonl",
+      "sha256": "03d30ee559177da6fad2b50ea73a9978d2836aa0d2bc0d7520fd6f435089093a"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/BUILD-CHECK.json",
+      "sha256": "43f85e1a2719df04eceaef10a66e5c470de423dd4455a44af0ac7fe7a56e6a82"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/EXPERIMENT-PLAN.json",
+      "sha256": "70e88290cd250ca4c2cd273e06651e177d479332d55522bc75a8d90a891c050a"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/EXPERIMENT.complete.json",
+      "sha256": "2a0d0a52cf4243b95728b207f840214813c1fe5bd7bc9575c918660e2cd832bb"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/FINAL-RESULT.json",
+      "sha256": "67fdca86868030d71fdad3f0d7b66eebcb9e58b327d502479967b6d1778f9968"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/FREE-PLAN-CHECK.json",
+      "sha256": "b35b6fdf7bca410dd2e7a026fe3753989318f278eda26e06321135d4a3885806"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/FREE-PLAN-OBSERVATIONS.txt",
+      "sha256": "fe7cc013569f2fff2749201670accc6d4182b58771fe06cd5d1521855f6cfcd2"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/FREEZE-MANIFEST.json",
+      "sha256": "bec7b328cc6589376d421d1430c424740ba240910157210fd43a21f28fc6ed78"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/FROZEN-CONTEXTS.json",
+      "sha256": "f9a11a1df5d114e8d0dfac96c1e8ecab635926c9cfd7255491d81071282ac691"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/MODELS-ENDPOINT-OBSERVATION.json",
+      "sha256": "0f1c13fcc46b4cde360ec5d16eae6a10b82712bda9067575f79568f42a7cde95"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/OFFLINE-CHECK.json",
+      "sha256": "c91fd368d5add90b76b93ab04269d36c463186f1cf67b3a3b7bf14acf12e0d4a"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/POSTRUN-INTERPRETATION.txt",
+      "sha256": "4811144503c7a0dfb27cba49af0f385d4396c6b1f7f910a21a2e69b78c9fc397"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/PREPARED-SAMPLES.json",
+      "sha256": "6ff555d3e44f3871072fc328d2dc663633e5f9b9d7a4c5cd0a31fefc0b15b315"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/PRESERVATION-BEFORE.json",
+      "sha256": "16b33ef0cebdf7c278bba3ec4cc534f9ecbb395819f174857ff747787e745e1b"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/REFERENCE-LABELS.json",
+      "sha256": "6eb1d3cfea62d2f20ab558359a7fc3f10f7ae776fb83e64647ebd2ea08deb2d7"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/REFERENCE-REVIEW-INPUT.json",
+      "sha256": "b44c3f74fc9147c313482c5a6e6cef79791fef7a3d7fe581751e57dea21aa05e"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/REFERENCE-REVIEW.json",
+      "sha256": "6319ee7c145b1bbfb221393f7d363ce62602c2e418ba7477420bdce2fb8a8898"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/RUN-ONCE.lock.json",
+      "sha256": "52d31572e7eb193bb8f6cdf4f052e3c26f497a709dcc24fc306eb55a58f7d2c8"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/SOURCE-INVENTORY.json",
+      "sha256": "072462f6097134cfc0a82e87dc5ae3aecd2cf24254254ce69f54d2513df0e052"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/TOKEN-BUDGET.json",
+      "sha256": "1899f00e2a75110eb25dbd1999889a9059b87e711df53a693277ec2219a1e621"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/attempts/s-267f88145f5f4746.json",
+      "sha256": "cab2c08585efb4a01042df5c051225b417696b55b80089395f02a4e14a986ac1"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/attempts/s-3f5cd0772b67493c.json",
+      "sha256": "9b47ed576f925d91b8374560ca77fc1985266b1115c8caebee89fc81e59d834c"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/attempts/s-4144eb5fe78c46d9.json",
+      "sha256": "b06e0be8ba71dc9b3103b519bd8071dcb981dab5a822c7181bb1bd075b8efcf4"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/attempts/s-78ea407950ba4fc2.json",
+      "sha256": "9af44562db834f920fc540cb4a921f74c9fb3ec4e44fea9cf90ab5f2064f1e5a"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/attempts/s-8a869065770f400a.json",
+      "sha256": "06b75bfa3c80cf560af7f9cc270dfabf5b73e04486b79e52b69367e79204187e"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/attempts/s-8ad9844cefb5467f.json",
+      "sha256": "66ca3e130d1bbf51918d756871dbbbd21acb6d230bc56385c4eecee97578b71b"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/attempts/s-97feb7e120604f9f.json",
+      "sha256": "13e45979ae0c3a8d1c792bbad686629b161d2b86f32c8082047ebc7fed9912d9"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/attempts/s-b7dae26bea994604.json",
+      "sha256": "fc4a0b1832a7123003d38978de78168d2b13c29b9a7a12fdc9e6716143d5b52a"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/attempts/s-d50b9d3b59eb4964.json",
+      "sha256": "2d76ffbdae3bcbc82b0b02411af7ac9a01ddca5350a958f8f387aa7d47d10e3d"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/attempts/s-f13c428f4bc44835.json",
+      "sha256": "a8dec6fd7a1134f39df1efd66519cff64720ad7e151f7170632bed380555c4a1"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/frozen-request-1.json",
+      "sha256": "9ea97b15e0b77640914bbc90e0e94d5c03783f64c0a9e544423a427f65a28c8f"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/frozen-request-10.json",
+      "sha256": "f33d1a954429ae723f904c759a86a1ec85e67db036f1cb41c88a12ade532387e"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/frozen-request-2.json",
+      "sha256": "f4e52ec2000ea1708745d437febba424175b8efb95a4b78693723a4041e900f9"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/frozen-request-3.json",
+      "sha256": "2d45f4978c20a53e417c74991819d8cb49e7e98c9b01bd9a9cabd1968ebe4141"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/frozen-request-4.json",
+      "sha256": "6174ae189bf1dbc271d131f31c6f525679dbd63c8a036fd1387dcd214459c2fb"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/frozen-request-5.json",
+      "sha256": "6a7ea69c99e8526cea05994e09d6e6abe63b7db9b50549261cda1ae85c0612ee"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/frozen-request-6.json",
+      "sha256": "314453ca6c16dcdec9ea1b10c6dcf68a32ea05eae9a49e3e7733b48e1730fe7c"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/frozen-request-7.json",
+      "sha256": "eb1868be47539a2b34fe1e053acd902b9e58fcb7c66f344d7ee38dd11c48c15b"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/frozen-request-8.json",
+      "sha256": "728747da8b9407269543eeff0c1ab1f8b36b39811fb93c08dfef4e476eaec019"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/frozen-request-9.json",
+      "sha256": "c67d2bead1df87dba23eae8bec159e0b4c8ba0edbe1e8734ab197aca9bba39a3"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-267f88145f5f4746-aa51622d13d4f890.provider.json",
+      "sha256": "974c0defa2497e3995f683e85e18d0bb915ba2496c225b0405f28aaca3398991"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-267f88145f5f4746-aa51622d13d4f890.review.txt",
+      "sha256": "8a25caa1ec0de89c6882394431ff4da72c06e2ed0cc8082b046ed248571b40f3"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-3f5cd0772b67493c-33cf225b204a2354.provider.json",
+      "sha256": "eea7b9f4fdc82a1c7d2b3382ced23879da9af2134dc9ab66982ffe8f765760be"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-3f5cd0772b67493c-33cf225b204a2354.review.txt",
+      "sha256": "ddbc5e00a41478e8f1384f73ffe94d1db5b103a6e67943f88afd8f48506f99ae"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-4144eb5fe78c46d9-53c26d0307684ad1.provider.json",
+      "sha256": "3f8f925a21cc8b16e8d393b5b7e290ecbcf21930d168e64865371db3d724d189"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-4144eb5fe78c46d9-53c26d0307684ad1.review.txt",
+      "sha256": "92eeebb0d8505cedce002ee6841fb069f8b77e6be37b7ffa5d9da1ec437b4b38"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-78ea407950ba4fc2-5604d4e6c4c9bd54.provider.json",
+      "sha256": "091bcc7ebc768dc07142c23f26227b12c84dc0dcd4d684aff729aa38911b0e0a"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-78ea407950ba4fc2-5604d4e6c4c9bd54.review.txt",
+      "sha256": "900043355aa86cd215b788f6058e21c17ab0b20c8d20212614cf55360a56373f"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-8a869065770f400a-39a5dd9c23b1fd35.provider.json",
+      "sha256": "411412843fdf2006d61f163b0b79352525f526ae4409c5b48e0df769a99a48bf"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-8a869065770f400a-39a5dd9c23b1fd35.review.txt",
+      "sha256": "6b2eec45af1cf74b11b2036914bef071dc13adf98ca0eca3148f6d995088c3c1"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-8ad9844cefb5467f-2789a11caf44486e.provider.json",
+      "sha256": "9e45ac1aaa9620c558cf6b1f28398d33c166659e99452977f055279891fb7f35"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-8ad9844cefb5467f-2789a11caf44486e.review.txt",
+      "sha256": "abf5e30d6c940fd564f41f454f212d66ff312efd8e92e92eb055eea3806af2d2"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-97feb7e120604f9f-7ca58c0a5cbc643c.provider.json",
+      "sha256": "03503f6405aff10ee939000d682de9898b30ee96bbdd16f21c22248008f165c1"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-97feb7e120604f9f-7ca58c0a5cbc643c.review.txt",
+      "sha256": "0894b76ffa55386869dc4c124f1dc6fef7c5a5b457f4a04ebfc53e8cce9001e6"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-b7dae26bea994604-0c7c61ce45275ef4.provider.json",
+      "sha256": "815314f6e2b402a06b10876d35283ce2544fe931de33c1b9489d64ecf495a118"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-b7dae26bea994604-0c7c61ce45275ef4.review.txt",
+      "sha256": "87154affe76e5d220d5122e0ca911b64c869339aa1c923a62499984bce46c8f4"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-d50b9d3b59eb4964-4a03433b128da115.provider.json",
+      "sha256": "dc88503b637b80ed208d8690374f7d73d1cade807055508e8728f7ba697d4c49"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-d50b9d3b59eb4964-4a03433b128da115.review.txt",
+      "sha256": "5385b8fce3280f75b40a4f46a87ce3d282ce75cad600acb057c8aeaee4b18532"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-f13c428f4bc44835-34f1afea22d4b63a.provider.json",
+      "sha256": "d0aa965e7f4905a4c939e9e702c76aeac576884627011281147003e544bc215e"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-f13c428f4bc44835-34f1afea22d4b63a.review.txt",
+      "sha256": "61a1bcfe40bd707e9c00a3014aa41f38762d7af4663e93cb870f1442d16a7af6"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/request-1.json",
+      "sha256": "1dc6e1d915b02d308d0d6d7c7c35b144c5557b3bb04a1bd533d4e9cbbab10468"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/request-10.json",
+      "sha256": "346bb181e45ef25c1010e01073b5b0da679f1f36779f594c52efa796a1ba4125"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/request-2.json",
+      "sha256": "0e338889042a5b97c7aaf735ff93c77ce63cd29bcfb8bb6954fb1d9acabfedb0"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/request-3.json",
+      "sha256": "6e3c79d669fd984085dc0b421cd9ea37ba4a360ff12611d997dd8fa4fc03ddc9"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/request-4.json",
+      "sha256": "cf7351eba3d64e2d3560c929ddf4ee387d9856cfd207c13632cb181e1b273e7d"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/request-5.json",
+      "sha256": "ead9331c0d8e1b95f346121642a84105c54e9e71f3407799d1c431711a481dac"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/request-6.json",
+      "sha256": "0d8d4fccc09b12fcfb40c72fcb3c1ca5f73c5e8468191b08e72f44ac474bb7ac"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/request-7.json",
+      "sha256": "0f608b2939312f56bae498301e54b458c9fc1e2eada55e5235a2423ede8035b3"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/request-8.json",
+      "sha256": "6f38c963aafbf524b8a051834b552966e14af7474190ea8da588f5021eeaa554"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/request-9.json",
+      "sha256": "04d474044478a0fe533ad58dc27b4e2cd67771df8ccfa30b69eeac7b59489e08"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/result-1.json",
+      "sha256": "de97fa9dd411a21b4c5650edd06d70dd5e437aac108c3be6660d137d526b377e"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/result-10.json",
+      "sha256": "37d79819d88068ce96057e8dbac4a59fe1225e1c106b41e46c23ec82dcdf9c2d"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/result-2.json",
+      "sha256": "3308a2d602cc6fab43c3d58e2a79663095f7502b6ef277e9a928c3d0b296946e"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/result-3.json",
+      "sha256": "4f8c5f55cd2c60e90b73d2539fa4d1adcbc908c0515f109c9c1e6fcb325054ff"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/result-4.json",
+      "sha256": "9a4d488427667bfbc80a44291149e3a81d71dcad65bcb3803109a8e655daed7d"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/result-5.json",
+      "sha256": "8b8ab5045996c1879cc787f361d00f223b70e54866156d2a8c6dcf2bb2950da4"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/result-6.json",
+      "sha256": "9b20682620c2ca341aa2cd0111e822715e9ff3810610d220a630a4d330cb50c2"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/result-7.json",
+      "sha256": "988154359fdcd04852551b53b9cee13d8fb43aee19d29fa00f6b5ffe73dc28c8"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/result-8.json",
+      "sha256": "cfcba5335af328f9b78d55215804348d25dc83746b6f4e268d86ef9cbc04d241"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/result-9.json",
+      "sha256": "7144f1291e08ee6aa5a0f700cbd869fe3b7a0703ad6dbdf55316ed17827a72d5"
+    },
+    {
+      "file": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/结果表.txt",
+      "sha256": "4d09c9cc527f9d4aa867a185ca220f5a55048edb0bfaaa84cae06469fd945652"
+    },
+    {
+      "file": "docs/evidence/route-contract-alignment-2026-10-21/BOUND-80-PREPARED-ONLY.json",
+      "sha256": "2d704b6e3c34b0aec01c1abcf58662d8281173157ed04c8b04907f0b501ca4f8"
+    },
+    {
+      "file": "docs/evidence/route-contract-alignment-2026-10-21/BOUNDARY-NOTES.txt",
+      "sha256": "1e4e8ac9cac2e428c0f02ac2943af4d2268b65a7aadac7f013882c4d23cccbc3"
+    },
+    {
+      "file": "docs/evidence/route-contract-alignment-2026-10-21/CONTRACT-DISPUTES.json",
+      "sha256": "68b7c9bb62ab9eff6b43c5def77c9f76a740c0a9a537d263e35412380450a6ab"
+    },
+    {
+      "file": "docs/evidence/route-contract-alignment-2026-10-21/FACT-EXTRACTION-SEPARATE.json",
+      "sha256": "1ee297fece2caac7249f7c80e0d7229d3790540ec0cde9f32fd6dd5d45aff056"
+    },
+    {
+      "file": "docs/evidence/route-contract-alignment-2026-10-21/OFFLINE-TEST-OUTPUT.txt",
+      "sha256": "aec7755f947b3430fd7d235068eee29f1c75e908789e5364de4559ea14b3ba43"
+    },
+    {
+      "file": "docs/evidence/route-contract-alignment-2026-10-21/OFFLINE-TEST-RESULT.json",
+      "sha256": "ac7dbc6fff3289cf8e3f1f61a3fc33cc24f4b3a3cf88466493bbfaf22ac28c3d"
+    },
+    {
+      "file": "docs/evidence/route-contract-alignment-2026-10-21/PRESERVATION-AFTER.json",
+      "sha256": "e9350d12de3535dd5c1833f1e6935e43be8874bfd0dd859fc89925d7b8b66e24"
+    },
+    {
+      "file": "docs/evidence/route-contract-alignment-2026-10-21/PRESERVATION-BEFORE.json",
+      "sha256": "560bb1de67e2475b9c4438620928fb08c70967cedc2412adfd91748f4f453af1"
+    },
+    {
+      "file": "docs/evidence/route-contract-alignment-2026-10-21/REFERENCE-LABELS-80-SEPARATE.json",
+      "sha256": "60a75090554a00a58ab26cd096e1a12a96c41c1c81d6fb0853d3fd48db23b742"
+    },
+    {
+      "file": "docs/evidence/route-contract-alignment-2026-10-21/ROUTE-EVIDENCE.json",
+      "sha256": "714161acca35efea90fc05d2c97e93bcc02829ffcfcb62eab1dd90a292de3800"
+    },
+    {
+      "file": "docs/evidence/route-contract-alignment-2026-10-21/TARGETED-PAIR-SOURCE.json",
+      "sha256": "9fab3080457004b2e105f7e6aaea80ba7035366fc994f559f96c125e1ec91285"
+    },
+    {
+      "file": "docs/evidence/route-contract-alignment-2026-10-21/TARGETED-PAIRS-BOUND.json",
+      "sha256": "2f6f0e0fbefb35bb3c2003e7deab7807f1759d8649f1b43599496af6a5dc8543"
+    },
+    {
+      "file": "docs/evidence/route-contract-alignment-2026-10-21/TARGETED-PAIRS-LABELS-SEPARATE.json",
+      "sha256": "0cb808bd533b5e1fcfa41828617383af33642bc300c0a6ca4f3891a5746e198f"
+    },
+    {
+      "file": "docs/evidence/route-contract-alignment-2026-10-21/交接说明.txt",
+      "sha256": "2d135f6643f4ee45c7340316a6cd0b2ef65260e6803953b90a7ee1ad41ec16e3"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/BOUND-REFERENCES.json",
+      "sha256": "33984d95b92e42b59cfe837977355a44c1e226d8b4cc641a0283edae92349c1f"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/BUILD.json",
+      "sha256": "1a69d17049160c92e03ebc0bc614f33ef799a9e45421b4ba042d7fcde25f9c53"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/FINAL-OFFLINE-VERIFICATION.json",
+      "sha256": "e2d53ce0ddc4bff4914cf2f843a10b0020cf276df2653c9782c4471dc7b44244"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/OFFLINE-RESULT.json",
+      "sha256": "f461f64c54fb36fbffcf49f4cbcd97e1f8c6647296698ed5532a8bfa0c7e05e8"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/OFFLINE-TESTS.json",
+      "sha256": "0ad13b13148317b67809ca7c0a6e7dffc8e9181781f781d93c2ba7e139332d4a"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/PRESERVATION-BEFORE.json",
+      "sha256": "05c7993e445e9bc4b521c25b0a554d0dfb44e3e673b4fb74d77d9c8e15270424"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/REFERENCE-LABELS-SEPARATE.json",
+      "sha256": "aa3b13d1a15f4c0f1f9437a1cacc0d772138f8d52f3d71d4d5dc5e0da59f3e4a"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/REVISION-MANIFEST.json",
+      "sha256": "ebb4edfd75ab60a19de8212ca4f979429b2844c49bf8547cf41a9c115e5bd18e"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/request-preview-r2-001.json",
+      "sha256": "2a90f21b73cc4632b480ba97c0179adf3998193b5e2ab27c8fd2ca6e9a7a078d"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/request-preview-r2-002.json",
+      "sha256": "7385d67dcd66288a13efe11b399f731db82c942ba36c0a6a9298b76e2cd3b8a3"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/request-preview-r2-003.json",
+      "sha256": "6450fa4b1082e0a5a1f207071e9a347db159ab9230f0fdf70dfa6406f52921fd"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/request-preview-r2-004.json",
+      "sha256": "32ae03e56e67b1ceba8f84a35ad1917101552b2bf203639a64c75c4c63b6c51a"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/request-preview-r2-005.json",
+      "sha256": "b77ffd82e8feaf4cae6523902bc6081e0d2d9d0f6a0627ae1a8e6b7962b438a1"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/request-preview-r2-006.json",
+      "sha256": "f65618d29361b86310618a36b5d54d97972222ebcbe70cb2d745a64c81c9dfa5"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/request-preview-r2-007.json",
+      "sha256": "558d3cbcc5a62744dc0ba913c150429db3ab2b14f0a422d90b6194098a8f411b"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/request-preview-r2-008.json",
+      "sha256": "c557786364bd85ab87b2d618d9f59aaa6522799fcea5ffe48c096a89f592ec1b"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/request-preview-r2-009.json",
+      "sha256": "00d08f183a64602416e3218717b361904d4e162e5511ee49724fd7b09f32b87a"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/request-preview-r2-010.json",
+      "sha256": "53a1f10d9e003f70fa4bcea37ca831ef1c040930c4ef447b71633ce744a0cf36"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/request-preview-r2-011.json",
+      "sha256": "e123f12cc161c2b24b35be0c9867a802ecd03abcacd09f9b20e105d65081967d"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/request-preview-r2-012.json",
+      "sha256": "5e562ff132d96ccfab6916b186f4421e71c35e4692d0b92afc290aa7f9382ad9"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/request-preview-r2-013.json",
+      "sha256": "380a89c236917ff9d288004b90aa7bd0d9f9e0189b87b7d1166d55fc5d69e514"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/request-preview-r2-014.json",
+      "sha256": "a687bc2a083ea383b0b5d942cc0847fa332cfcb15e36349a85adb8f5705b83a1"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/request-preview-r2-015.json",
+      "sha256": "2d5b6c0c9c4ce890abf9aa84dd2c1e79e6c7a163ef7bf7c9271802621fb7c0f1"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/规则定义差异与最终离线结果.txt",
+      "sha256": "a6e7ef49d9ef2e2d6922fd1ee5f1260dda1e5d446802e8bfa9181fd54a8d5d66"
+    },
+    {
+      "file": "docs/evidence/standard-policy-review-r2-offline-2026-10-21/规则定义差异与离线结果.txt",
+      "sha256": "106fe2ebf47b3adffa82f7889807477d9b443ddd9f23c29612136f114363dced"
+    },
+    {
+      "file": "docs/presentation/20261021-handoff/DELIVERY-MANIFEST.json",
+      "sha256": "6e162399238fb1f6846f5bf05a52f628acab805608c402bee7edf67a5ae7c122"
+    },
+    {
+      "file": "docs/presentation/20261021-handoff/Demo_Runbook.txt",
+      "sha256": "906fb9d43cdf74ed0d36ddca391930251b4efe3fa1521eb486bd2bbd82202708"
+    },
+    {
+      "file": "docs/presentation/20261021-handoff/Historical_Review_Replay.html",
+      "sha256": "13420e7709e46c9d29fa53db83cf6edb8907b6e9c82dbd1fb7c726fa7c5cfa93"
+    },
+    {
+      "file": "docs/presentation/20261021-handoff/ReleaseGuard_Presentation_v4_Handoff_20261021.pptx",
+      "sha256": "3ddb7db6c7c398fd204e92c0f24e52c4ead318c7902c76146c0da5c3f3baa214"
+    },
+    {
+      "file": "docs/presentation/20261021-handoff/Replay_Data.json",
+      "sha256": "d66674629ed8e8c2298d02ff3356ece3def4bc936eb61b4abc42a08e68745380"
+    },
+    {
+      "file": "docs/presentation/20261021-handoff/START_HERE.txt",
+      "sha256": "78a6b9b398e0d79685504fae430765245a95f34f42f9a87c35584825eff612db"
+    },
+    {
+      "file": "docs/presentation/20261021-handoff/Speaker_Notes_EN_ZH.txt",
+      "sha256": "725d2bf9caee5230a60a451bf0a116d27f989b9d7bcab34949e3ade6439ba88f"
+    },
+    {
+      "file": "scripts/build-handoff-materials-20261021.mjs",
+      "sha256": "6c6f98ac5ca39d9365150468a39dce700c1e70066be85a6642e1f1736fb7a886"
+    },
+    {
+      "file": "scripts/evaluator-next-v2-check.mjs",
+      "sha256": "a0a017db0380ee16d010229be5fee265f78b3a31b5076ee13c9724bacf0380c0"
+    },
+    {
+      "file": "scripts/evaluator-next-v2-development.mjs",
+      "sha256": "bdefbff5fb80deb518bab9d0dffb7c47a51a170163a18f6ac00df46405c13dc3"
+    },
+    {
+      "file": "scripts/evaluator-next-v2-freeze.mjs",
+      "sha256": "358988866ef165ef049b11123fe9c2610ecd7daab744efc1724b04753a5ce547"
+    },
+    {
+      "file": "scripts/evaluator-next-v2-independent.mjs",
+      "sha256": "9860fdf599206915aeccf35cb38dbef1336e450db5b2d97f23943f5d11faec00"
+    },
+    {
+      "file": "scripts/evaluator-next-v2-report.mjs",
+      "sha256": "3ec006f97715c436485f4910b8294b2e5bae1015549ea717aa6adb33bec623f9"
+    },
+    {
+      "file": "scripts/freeze-targeted-review-v3.mjs",
+      "sha256": "08d1e48fea0613999e0577b9be0d07445252fdbd85e09cbd8bc85eb2dfc967a0"
+    },
+    {
+      "file": "scripts/prepare-targeted-review-v3.mjs",
+      "sha256": "fe734049146947fe6fec503dbd0e67d4383a422f42ccf5f83f6bb740aaee0238"
+    },
+    {
+      "file": "scripts/route-alignment-snapshot.mjs",
+      "sha256": "fb4d844d91515e258fc43caf34a3cc622d33bd60c48d31dff6f8eff184539ad0"
+    },
+    {
+      "file": "scripts/route-contract-alignment.mjs",
+      "sha256": "c1af63913231e5d62612dbb058dfb40891ee4b8c80edf0477e31dff469c6dd0f"
+    },
+    {
+      "file": "scripts/run-targeted-review-v3.mjs",
+      "sha256": "b2ebd5ae27c97f5925e133695a1a367764b0cae5178d6b5bf110cd84f6bd339c"
+    },
+    {
+      "file": "scripts/standard-policy-r2-offline.mjs",
+      "sha256": "85ccaab08887d9cb1da646699554eb0a12f336c8be8904c53a85af6d3e3502ba"
+    },
+    {
+      "file": "scripts/verify-standard-policy-r2-offline.mjs",
+      "sha256": "d55a0db415362e8fe31f5c0d90ea72b47851d1b307cd33fa489ab8fd38dd0384"
+    },
+    {
+      "file": "src/answer-evaluation-binding-v1.ts",
+      "sha256": "3ec9607513c67d2b35facd1f048cc29025505b9ac2a116826db716516e46d212"
+    },
+    {
+      "file": "src/evaluator-next-v2.ts",
+      "sha256": "25f105c8d1d5c698e1bd26ad9e1e40e0a4191430d72562110f6f83eb207a5bde"
+    },
+    {
+      "file": "src/semantic-evidence-next-v2.ts",
+      "sha256": "6012e22dd77805f868bda4584082d32907ba726a1cba6cf0056e6f8a2e103474"
+    },
+    {
+      "file": "src/standard-policy-review-r2.ts",
+      "sha256": "ad3e132c00a02a69ed8c52db23ad2cfc6ea1ee4141bcc5b87a80af453c5e6537"
+    },
+    {
+      "file": "tests/answer-evaluation-binding-v1.test.ts",
+      "sha256": "f0364239a7792197115b85c8339ba445211198fc2e285541a144993d9c8fe10a"
+    },
+    {
+      "file": "tests/evaluator-next-v2-development.test.ts",
+      "sha256": "b8e9c359b2b3078b93e1d7ae4a5ae3e2563bb59b5aa626be0129ae30620e9006"
+    },
+    {
+      "file": "tests/evaluator-next-v2-safety.test.ts",
+      "sha256": "980a9ea344729af7c90c7ab72ecd8a3dd58692287d8ade06062f43d85dd3930b"
+    },
+    {
+      "file": "tests/standard-policy-review-r2-fixtures.json",
+      "sha256": "dab74c00540e735c8227ac05984af05486dbae60436401d825e72d6117a16539"
+    },
+    {
+      "file": "tests/standard-policy-review-r2.test.ts",
+      "sha256": "6ecb02b458b80f3d3019ee6e33a91aaaa708f479a94d91a6afe1b80b3b3a4344"
+    }
+  ],
+  "sensitivePatternFindings": [],
+  "scanLimit": "Pattern scan including PPT ZIP contents; not a guarantee of absence of every possible secret.",
+  "dependencies": [
+    {
+      "name": "@opentelemetry/api",
+      "installed": "1.9.0",
+      "locked": "1.9.0",
+      "match": true
+    },
+    {
+      "name": "@opentelemetry/exporter-trace-otlp-http",
+      "installed": "0.223.0",
+      "locked": "0.223.0",
+      "match": true
+    },
+    {
+      "name": "@opentelemetry/resources",
+      "installed": "2.12.0",
+      "locked": "2.12.0",
+      "match": true
+    },
+    {
+      "name": "@opentelemetry/sdk-trace-base",
+      "installed": "2.12.0",
+      "locked": "2.12.0",
+      "match": true
+    },
+    {
+      "name": "@opentelemetry/sdk-trace-node",
+      "installed": "2.12.0",
+      "locked": "2.12.0",
+      "match": true
+    },
+    {
+      "name": "amqplib",
+      "installed": "2.2.0",
+      "locked": "2.2.0",
+      "match": true
+    },
+    {
+      "name": "fastify",
+      "installed": "5.12.5",
+      "locked": "5.12.5",
+      "match": true
+    },
+    {
+      "name": "jose",
+      "installed": "6.2.12",
+      "locked": "6.2.12",
+      "match": true
+    },
+    {
+      "name": "pg",
+      "installed": "8.23.1",
+      "locked": "8.23.1",
+      "match": true
+    },
+    {
+      "name": "zod",
+      "installed": "3.25.76",
+      "locked": "3.25.76",
+      "match": true
+    },
+    {
+      "name": "@types/amqplib",
+      "installed": "0.10.8",
+      "locked": "0.10.8",
+      "match": true
+    },
+    {
+      "name": "@types/node",
+      "installed": "24.19.1",
+      "locked": "24.19.1",
+      "match": true
+    },
+    {
+      "name": "@types/pg",
+      "installed": "8.23.1",
+      "locked": "8.23.1",
+      "match": true
+    },
+    {
+      "name": "typescript",
+      "installed": "5.9.3",
+      "locked": "5.9.3",
+      "match": true
+    }
+  ],
+  "protectedFiles": [
+    {
+      "file": "package.json",
+      "sha256": "d1f0444c110fb6bf020dbd3fd0adcb217bf43601d1cb894263308d81ed0ecca6",
+      "unchangedFromHead": true
+    },
+    {
+      "file": "package-lock.json",
+      "sha256": "1442da2d7b99cddc76751e4e9d56a0f466335d1f975a3d7754fc1d27079ee9b4",
+      "unchangedFromHead": true
+    },
+    {
+      "file": ".github/workflows/ci.yml",
+      "sha256": "9c9f0c817b900b4da411e0c659a486ba8c12b5b987c84837412a74082d225cec",
+      "unchangedFromHead": true
+    },
+    {
+      "file": ".github/workflows/cd.yml",
+      "sha256": "6b2a74b94d3b9df08cdb8c198ffe65f0ce5f535a9781cb898e228529766a0aba",
+      "unchangedFromHead": true
+    },
+    {
+      "file": "src/worker.ts",
+      "sha256": "9754e344f759b3914021cd61a172e7094eaaa75c6744aaabd48f8e5f2186c381",
+      "unchangedFromHead": true
+    },
+    {
+      "file": "src/semantic-review-wire-v3.ts",
+      "sha256": "a66cd592fed23cbf76033d0ab4a47a4610af509a7e2a16f81af62bbac9817b2f",
+      "unchangedFromHead": true
+    },
+    {
+      "file": "src/hybrid-evaluation-v1.ts",
+      "sha256": "b9f71e6049890273f94be77d1e6bf5694cf4e024e0aa87ce90957b08690e2c11",
+      "unchangedFromHead": true
+    }
+  ],
+  "manifestMatches": true,
+  "rawPreserved": true,
+  "replayCounts": [
+    {
+      "experiment": "wire3-protocol",
+      "count": 3
+    },
+    {
+      "experiment": "wire3-development",
+      "count": 17
+    },
+    {
+      "experiment": "targeted10",
+      "count": 10
+    }
+  ],
+  "targetedBuild": {
+    "exitCode": 0
+  },
+  "targetedChecks": {
+    "tests": 13,
+    "pass": 13,
+    "fail": 0,
+    "selection": [
+      "answer-evaluation-binding-v1",
+      "standard-policy-review-r2"
+    ],
+    "fullSuite": false
+  },
+  "browserSmoke": {
+    "protocol3": true,
+    "development17": true,
+    "targetedCase10": true,
+    "r2OfflineOnly": true
+  },
+  "customerModelCalls": 0,
+  "reviewModelCalls": 0,
+  "deploymentRequested": false,
+  "mergeRequested": false,
+  "cdTrigger": "workflow_dispatch only; not dispatched",
+  "whitespaceCheck": {
+    "newSourceAndHandoffFiles": "passed",
+    "preservedHistoricalEvidence": "git diff --cached --check reports three Markdown hard-break trailing spaces in AUTHOR-POLICY.md and a final blank line in the saved per-case TXT. Frozen files are deliberately not rewritten."
+  },
+  "presentationVerification": {
+    "slideCount": 30,
+    "packageIntegrity": "passed",
+    "layoutAndFontChecks": "passed",
+    "firstPartyReimport": "passed",
+    "allSlideRendersInspected": true,
+    "nativePowerPointExecution": false
+  }
+}

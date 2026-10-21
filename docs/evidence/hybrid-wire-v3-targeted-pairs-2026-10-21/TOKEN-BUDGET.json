@@ -1,0 +1,69 @@
+{
+  "maximumInferenceRequests": 10,
+  "conservativeTotalTokens": 71419,
+  "observedDailyLimit": 200000,
+  "initialUsage24hObserved": 0,
+  "perRequest": [
+    {
+      "sequence": 1,
+      "anonymousId": "s-267f88145f5f4746",
+      "providerRequestSha256": "cbc36651c8871ded792052f033f1a103099f40b40ee2fe8823a93fce07ca3411",
+      "conservativeTokenBudget": 6957
+    },
+    {
+      "sequence": 2,
+      "anonymousId": "s-3f5cd0772b67493c",
+      "providerRequestSha256": "e49f5c192cc92244267866aaa66a59c5e02d73d9fc3cdf6c568b859dd56be1a2",
+      "conservativeTokenBudget": 7650
+    },
+    {
+      "sequence": 3,
+      "anonymousId": "s-97feb7e120604f9f",
+      "providerRequestSha256": "defac8db16064b13cf9c5d839d7cfc9fef88d10be502519b4521a3692dbe3254",
+      "conservativeTokenBudget": 6949
+    },
+    {
+      "sequence": 4,
+      "anonymousId": "s-f13c428f4bc44835",
+      "providerRequestSha256": "b030a1c9f5af71312545fb334f7a61af705cbb92626c59014062712fac457208",
+      "conservativeTokenBudget": 7073
+    },
+    {
+      "sequence": 5,
+      "anonymousId": "s-78ea407950ba4fc2",
+      "providerRequestSha256": "944abc9c327d56152f6763cba1e79f35bc372102d238021ac2d5efa94d4e30c6",
+      "conservativeTokenBudget": 7069
+    },
+    {
+      "sequence": 6,
+      "anonymousId": "s-b7dae26bea994604",
+      "providerRequestSha256": "b84efb1a4751bd070ef768c5776f08b5482e6ef91efed96628b76ccc7ad971c7",
+      "conservativeTokenBudget": 7078
+    },
+    {
+      "sequence": 7,
+      "anonymousId": "s-8a869065770f400a",
+      "providerRequestSha256": "cf48f94c97ae124122fda39854c271d696e28ab6f35eb9b7bf9bcdd3cee3ef10",
+      "conservativeTokenBudget": 7653
+    },
+    {
+      "sequence": 8,
+      "anonymousId": "s-d50b9d3b59eb4964",
+      "providerRequestSha256": "6fd385821e3923bab96042760a2ab1a1c57e2b80aa4b73ad9269bea12b726186",
+      "conservativeTokenBudget": 7081
+    },
+    {
+      "sequence": 9,
+      "anonymousId": "s-8ad9844cefb5467f",
+      "providerRequestSha256": "48d8fe871bbd17390e07b71d86ff55df374c3a44687f46b30b960e77dd4d78c7",
+      "conservativeTokenBudget": 6948
+    },
+    {
+      "sequence": 10,
+      "anonymousId": "s-4144eb5fe78c46d9",
+      "providerRequestSha256": "d8e9ac04ebf5644e63c5cd8c636b03297e299d8fbb5759dbeec8eeebbb736246",
+      "conservativeTokenBudget": 6961
+    }
+  ],
+  "subsequentScheduling": "Observed remaining-token/request headers and reset times; no fixed-interval guarantee and no retries."
+}

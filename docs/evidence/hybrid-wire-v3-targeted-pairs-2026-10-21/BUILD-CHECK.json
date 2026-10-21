@@ -1,0 +1,12 @@
+{
+  "at": "2026-10-21T04:27:14.196Z",
+  "command": [
+    "/Users/ASUS/.local/share/devspace-stable/runtime/node-v24.19.0/bin/node",
+    "node_modules/typescript/bin/tsc",
+    "--pretty",
+    "false",
+    "--noEmitOnError"
+  ],
+  "exitCode": 0,
+  "output": ""
+}

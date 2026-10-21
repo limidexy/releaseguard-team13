@@ -1,0 +1,106 @@
+ReleaseGuard wire v3 五对定向语义验证
+状态：TARGETED_VALIDATION_FAILED
+请求：10/10；未执行：0；协议有效：10/10
+正例正确允许：5/5；反例及关键原因正确识别：4/5
+误放行：0；误阻断：0；unverifiable：0；无关原因阻断：1
+供应商已报告 token：input=30188, output=11882, total=42070；usage 缺失请求数=0
+停止原因：无；本轮结束，不追加调用
+
+序号 | 源样本 | 匿名ID | 参考 | 协议 | 语义结论 | 关键违规识别
+1 | q001 | s-267f88145f5f4746 | 合规 | 有效 | 允许 | —
+2 | q007 | s-3f5cd0772b67493c | 合规 | 有效 | 允许 | —
+3 | q005 | s-97feb7e120604f9f | 合规 | 有效 | 允许 | —
+4 | q010 | s-f13c428f4bc44835 | 违规 | 有效 | 阻断 | 已识别
+5 | q009 | s-78ea407950ba4fc2 | 合规 | 有效 | 允许 | —
+6 | q004 | s-b7dae26bea994604 | 违规 | 有效 | 阻断 | 已识别
+7 | q008 | s-8a869065770f400a | 违规 | 有效 | 阻断 | 已识别
+8 | q003 | s-d50b9d3b59eb4964 | 合规 | 有效 | 允许 | —
+9 | q006 | s-8ad9844cefb5467f | 违规 | 有效 | 阻断 | 已识别
+10 | q002 | s-4144eb5fe78c46d9 | 违规 | 有效 | 阻断 | 未识别
+
+失败详情（完整引用、判定及原文见各 result / raw-provider 文件）：
+{
+  "sequence": 10,
+  "anonymousId": "s-4144eb5fe78c46d9",
+  "sourceSampleId": "q002",
+  "referenceAllowed": false,
+  "criticalRuleId": "STANDARD_POLICY",
+  "executed": true,
+  "protocolValid": true,
+  "semantic": {
+    "evaluated": true,
+    "predictedAllowed": false,
+    "keyRecognized": false,
+    "unverifiable": false,
+    "failedRuleIds": [
+      "EXTRA_CLAIMS_AUTHORIZED"
+    ],
+    "unverifiableRuleIds": [],
+    "classification": "blocked_wrong_or_unverifiable_reason"
+  },
+  "protocolErrors": [],
+  "failedJudgments": [
+    {
+      "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+      "status": "failed",
+      "reason": "The response incorrectly claims that an item does not need to be unused, contradicting the standard policy.",
+      "evidence": [
+        {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 234,
+          "end": 296,
+          "quote": "Under the standard policy, an item does not need to be unused.",
+          "matchCount": 1
+        }
+      ]
+    }
+  ],
+  "contradictions": [
+    {
+      "reason": "The response asserts the opposite of the required unused‑item condition.",
+      "evidence": [
+        {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 234,
+          "end": 296,
+          "quote": "Under the standard policy, an item does not need to be unused.",
+          "matchCount": 1
+        }
+      ]
+    }
+  ],
+  "extraClaims": [
+    {
+      "reason": "Unsupported claim that the item need not be unused.",
+      "evidence": [
+        {
+          "source": "plain",
+          "path": "$",
+          "coordinateUnit": "utf16-code-unit",
+          "start": 234,
+          "end": 296,
+          "quote": "Under the standard policy, an item does not need to be unused.",
+          "matchCount": 1
+        }
+      ],
+      "status": "failed"
+    }
+  ],
+  "rawProviderPath": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-4144eb5fe78c46d9-53c26d0307684ad1.provider.json",
+  "rawReviewPath": "docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/raw-provider/s-4144eb5fe78c46d9-53c26d0307684ad1.review.txt",
+  "usage": {
+    "prompt_tokens": 2909,
+    "completion_tokens": 1196,
+    "total_tokens": 4105
+  },
+  "latencyMs": 3283.489541
+}
+
+未达到本轮标准；不追认、不修后补跑。
+协议阻断不计语义识别；未校准资格阻断不计语义误阻断。
+客服生成=0，重试=0，换模型=0；未付费升级、部署、发布、push或合并。
+继续 shadowOnly=true、calibration_pending；正式 Worker 和历史实验不变。

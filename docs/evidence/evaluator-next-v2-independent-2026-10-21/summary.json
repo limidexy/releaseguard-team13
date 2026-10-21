@@ -1,0 +1,34 @@
+{
+  "completedAt": "2026-10-21T03:24:25.699Z",
+  "candidate": "evaluator-next-v2-r5",
+  "freezeSha256": "09ee58ea7ed60867a0827eca955f3d328fec66f235e0191f41ef6782c3466ddb",
+  "sampleSha256": "565fcdb9d6ab135929d6986a86679a87d5db7b04835db1b840ee5e41e76c53da",
+  "runnerSha256": "9860fdf599206915aeccf35cb38dbef1336e450db5b2d97f23943f5d11faec00",
+  "metrics": {
+    "plannedSamples": 80,
+    "executed": 80,
+    "correctReferences": 40,
+    "violations": 40,
+    "correctAllows": 21,
+    "falseBlocks": 19,
+    "correctBlocks": 38,
+    "falseAllows": 2,
+    "violationsWithExpectedKeyReason": 36,
+    "unverifiableSamples": 0,
+    "evidenceErrors": 0,
+    "rawAlterations": 0
+  },
+  "status": "INDEPENDENT_PROJECT_REFERENCE_FAILED",
+  "newModelCalls": 0,
+  "newReviewerCalls": 0,
+  "shadowOnly": true,
+  "reviewer": "calibration_pending",
+  "productionAuthorization": false,
+  "originalExperimentalScoresUnchanged": true,
+  "limitations": [
+    "Independent AI sample author, not verified human labels or cryptographic blindness.",
+    "Old fixture sets are development data. No hidden production set validated.",
+    "No candidate tuning after these independent labels/results were read.",
+    "A blocked unverifiable response is not counted as identifying its expected violation."
+  ]
+}

@@ -1,0 +1,51 @@
+ReleaseGuard 项目状态与课程交接
+更新日期：21 October 2026。此文档取代旧材料的“当前状态”描述，不覆盖历史记录。
+
+1. 平台与实验分开验收
+正式 Worker 仍按原 promptVersion 路由；v17 使用 evaluateControlledV17。Hybrid 评审、手写 evaluator-next-v2 和 r2 定义候选均未替换正式路径。
+shadowOnly=true；reviewer=calibration_pending。Git 入库或推送不更改资格、运行配置、默认评审路径或客户放行条件。95分门槛、历史70/75分和16条 unavailable 不变。
+
+2. 各实验独立，不互相继承验证
+对象 / 日期 / 实际证据 / 当前结论
+wire v3 三条协议实验 / 19 Oct / 真实请求3；strict schema、完整规则、逐字引用与参考匹配各3/3 / 仅该三条协议验证。不是校准完成。
+  docs/evidence/semantic-review-wire-v3-real-2026-10-19/FINAL-RESULT.json
+wire v3 十七条开发实验 / 19 Oct / 真实请求17；协议17/17；正例9/9；反例和关键原因8/8 / 原开发集通过，仍影子模式，与三条分开。
+  docs/evidence/semantic-review-wire-v3-cross-scenario-dev-2026-10-19/FINAL-RESULT.json
+wire v3 五对十条定向实验 / 21 Oct / 请求10；协议10/10；正例允许5/5；反例均阻断；指定关键规则4/5 / TARGETED_VALIDATION_FAILED，保持封口。
+  docs/evidence/hybrid-wire-v3-targeted-pairs-2026-10-21/FINAL-RESULT.json
+  第10条确实引用“无需未使用”的政策矛盾并在 EXTRA_CLAIMS_AUTHORIZED 判失败，但 STANDARD_POLICY 仍 passed。不能称为没理解或无关阻断，也不能重映射追认指定规则通过。实际总token42070，非本阶段新增调用。
+standard-policy-whole-answer-r2 / 21 Oct / 15条AI参考；最终14/14离线程序检查；真实请求0 / 新定义尚未经过真实模型验证；独立、未启用候选。
+  docs/evidence/standard-policy-review-r2-offline-2026-10-21/FINAL-OFFLINE-VERIFICATION.json
+  初次测试文案断言失败及修正记录保留。wire v3与基准prompt不改；新请求携带独立revision/hash，不能借用旧v3结果证明r2语义能力。
+手写 evaluator-next-v2 r5 / 21 Oct / 独立AI参考80条，正例允许21/40，反例阻断38/40，指定原因36/40 / INDEPENDENT_PROJECT_REFERENCE_FAILED。仅诊断对照，无自动放行权。
+  docs/evidence/evaluator-next-v2-independent-2026-10-21/summary.json
+  h001/h003/h046的标注/事实/契约分歧独立保存；原标签与结果不改。旧手写r3与Hybrid wire v3不是同一版本。
+
+3. 平台成果和日期边界
+已有：版本化suite及不可变快照、异步任务/事务outbox、幂等worker和租约、权限与审核终态、证据导出、双语console。平台测试身份不是组员真实独立审批的证明。
+历史云端：11 Oct 的 GKE、队列扩容、CI/CD、回滚与恢复，适用于各自记录的commit。没有本阶段云端复测。
+21 Oct 本地韧性：熔断、HTTP/RabbitMQ tracing、Alloy/Loki/Grafana，有合成故障与replay技术证据；不等于Groq真实故障或云端新部署。
+最近全仓库回归证据：21 Oct韧性包782/783，保留旧拒绝候选失败。随后又增加了实验源码/测试，因此不能将782/783写成当前新树的全回归结果。本阶段不为演示重复跑全仓库测试。
+新r2定点检查14/14仅是离线程序验证，不是CI、模型成绩或发布验收。
+
+4. 五人职责保留（不是独立贡献/工时证明）
+A TANG YUCHEN：需求、界面、UAT与演示组织。
+B ZHU PENGXU：接口、数据库、领域模型、审核与历史关联。
+C LIN XINDA：消费应用、provider、模型/评审实验及证据解释。
+D LIAO CAN：容器、云端访问、CI/CD、恢复与运行说明。
+E LIAO BINFENG：安全、性能、故障及扩容测试分析。
+成员实际工时、团队回顾、交叉审核和多人UAT仍需真实记录；不以提交、AI运行时间或测试身份推算。
+
+5. 项目进度与Presentation
+Sprint 1计划8–13 Oct；Sprint 2计划14–20 Oct，作为原计划保留。已有提交和实验是实际进展，不能倒填所有任务完成时间。
+26 Oct 09:45–10:25为所提供课程PDF中的Team13时段。该PDF规定总时长40分钟含问答，本包安排35分钟内容+5分钟问答。若教师另有更新，以最新通知为准。
+演示优先使用保存的真实响应、逐项判定、失败记录及发布阻断。模型回答参考文本是虚构样本，真实的是评审调用，不把参考文本冒充客服真实生成。
+演示入口：docs/presentation/20261021-handoff/START_HERE.txt。
+
+6. Git与未完成项
+当前目标分支feat/c-review-v3-handoff-20261019，公开origin为limidexy/releaseguard-team13。PR#5仍是草稿；本阶段不合并、不dispatch工作流、不部署。
+CI已配置main push及PR事件，PR同步可能触发CI；推送结果、确切commit及CI状态另见交接结果。失败/未完成的CI不能写成通过。
+未完成：r2真实语义验证、语义评审正式资格、未见/隐藏集与生产可靠性、当前树完整发布门禁、团队真实独立review/最终UAT/工时、完整五人计时彩排、当前云端重新验收。
+本阶段新增客服/评审模型调用0。没有追加校准计划。
+
+工具使用说明：实现、分析、测试和交接材料使用AI辅助。项目AI参考与真人审核分开记录；成员对提交材料负责。

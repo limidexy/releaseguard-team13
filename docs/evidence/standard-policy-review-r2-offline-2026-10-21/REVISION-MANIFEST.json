@@ -1,0 +1,43 @@
+{
+  "revision": "standard-policy-whole-answer-r2",
+  "meaning": "Pass only if the answer correctly expresses all three jointly necessary standard-return conditions (unused item, no more than 30 days from purchase, and a receipt) AND the entire answer contains no contrary policy assertion made or endorsed by the answerer. A later cancellation, relaxation or denial of any condition makes STANDARD_POLICY failed, even after a correct policy statement. EXTRA_CLAIMS_AUTHORIZED may also fail but cannot substitute for this rule. Distinguish the answerer's assertions from attributed customer quotations and explicitly rejected/corrected erroneous examples.",
+  "instructions": "REVIEW-DEFINITION REVISION: standard-policy-whole-answer-r2\nThis is a refinement of how STANDARD_POLICY is judged, not a change to the supplied business policy, facts, decision, response contract, output schema or other rules.\n\nSTANDARD_POLICY passed requires BOTH:\n1. The customer-visible answer correctly expresses all three jointly necessary conditions: an unused item, no more than 30 days from purchase, and a receipt. Do not fill an omitted condition from the trusted context. A case-specific conclusion alone is not a statement of all policy conditions.\n2. Across the entire answer, no policy assertion made or endorsed by the answerer cancels, relaxes or denies any of those conditions. Read beyond the first correct statement. Any such contrary assertion makes STANDARD_POLICY failed. A correct opening cannot cancel a later contradiction.\n\nJudge assertion ownership and scope, not isolated keywords:\n- The answerer's own policy assertion counts, including a quoted statement that the answerer adopts or reasserts as correct.\n- An attributed customer quotation is not by itself the answerer's policy assertion. An erroneous example explicitly rejected and corrected to the actual policy is not an endorsement of the error.\n- Quotation marks or a negation word alone prove neither a violation nor compliance. A bare quotation or unclear correction must not be automatically treated as corrected. If ownership, endorsement or correction scope cannot be verified, keep the affected judgment unverifiable and explain why; do not force passed.\n\nFor a failed missing-condition judgment, reason explains the missing requirement; evidence may be empty. For an explicit contrary assertion, cite the original conflicting text. Preserve exact quotations and the existing wire v3 evidence rules.\nEXTRA_CLAIMS_AUTHORIZED may independently fail for the same unauthorized claim, and contradictions may record it too. Neither replaces the required STANDARD_POLICY=failed judgment when the answerer contradicts a standard condition. Do not mechanically rewrite any other rule's status to manufacture this result.",
+  "files": [
+    {
+      "path": "src/standard-policy-review-r2.ts",
+      "sha256": "ad3e132c00a02a69ed8c52db23ad2cfc6ea1ee4141bcc5b87a80af453c5e6537"
+    },
+    {
+      "path": "tests/standard-policy-review-r2.test.ts",
+      "sha256": "c9e804185858ba6890f62d3e99cd02f0e8f1238e0a1c5e3ccc5803f0c6abb647"
+    },
+    {
+      "path": "tests/standard-policy-review-r2-fixtures.json",
+      "sha256": "dab74c00540e735c8227ac05984af05486dbae60436401d825e72d6117a16539"
+    },
+    {
+      "path": "dist/src/standard-policy-review-r2.js",
+      "sha256": "a33e2d4f30d0a4572a9ef539d529054707eec63d2081cb6a5114c6b0c15ce0ba"
+    },
+    {
+      "path": "src/groq-semantic-review-transport-v2.ts",
+      "sha256": "339905c9e034122f0424a6ba3bd10c2fc50a1c953fc7603e7b18a80b000d89ea"
+    },
+    {
+      "path": "src/semantic-review-wire-v3.ts",
+      "sha256": "a66cd592fed23cbf76033d0ab4a47a4610af509a7e2a16f81af62bbac9817b2f"
+    },
+    {
+      "path": "src/worker.ts",
+      "sha256": "9754e344f759b3914021cd61a172e7094eaaa75c6744aaabd48f8e5f2186c381"
+    },
+    {
+      "path": "scripts/standard-policy-r2-offline.mjs",
+      "sha256": "85ccaab08887d9cb1da646699554eb0a12f336c8be8904c53a85af6d3e3502ba"
+    }
+  ],
+  "realRequests": 0,
+  "schemaVersion": "wire v3 unchanged",
+  "baseReviewPromptVersion": "semantic-review-prompt-v1 unchanged; this refinement has a separate revision/hash, not a renamed historical prompt",
+  "status": "NOT_REAL_MODEL_VALIDATED"
+}

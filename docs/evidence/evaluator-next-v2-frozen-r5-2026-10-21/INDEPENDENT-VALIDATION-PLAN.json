@@ -1,0 +1,31 @@
+{
+  "candidate": "evaluator-next-v2-r5",
+  "candidateFreezeSha256": "09ee58ea7ed60867a0827eca955f3d328fec66f235e0191f41ef6782c3466ddb",
+  "runner": "scripts/evaluator-next-v2-independent.mjs",
+  "runnerSha256": "9860fdf599206915aeccf35cb38dbef1336e450db5b2d97f23943f5d11faec00",
+  "sampleSource": "User-authorized isolated AI subagent /root/v2_unseen_reference, given only approved business specification and the 20 questions; not candidate code, prior fixtures or results.",
+  "isolationLimit": "Shared local filesystem and instruction isolation, not cryptographic isolation or verified human blind review.",
+  "authoringDirectory": "/tmp/releaseguard-v2-holdout.H1Oc0l",
+  "toolFallback": "DevSpace local agent launcher failed with DAEMON_STARTUP_FAILURE. Used the current session subagent tool with fork_turns=none, without passing project history.",
+  "samples": 80,
+  "pairs": 40,
+  "correctReferences": 40,
+  "violations": 40,
+  "sampling": "Two independently worded pairs for each of 20 approved questions. Samples and labels frozen before evaluation; labels not passed to evaluator.",
+  "passingConditions": {
+    "validSamplesExecuted": 80,
+    "correctReferencesAllowed": 40,
+    "violationsBlocked": 40,
+    "violationsWithAllExpectedKeyReasonsFailed": 40,
+    "unverifiableOnDeclaredSupportedReferences": 0,
+    "invalidEvidenceCoordinates": 0,
+    "alteredOriginalAnswers": 0
+  },
+  "afterResults": "Do not tune this frozen candidate or change labels to claim passing. Record label ambiguity separately without replacing the frozen result.",
+  "newGroqModelCalls": 0,
+  "newGroqReviewerCalls": 0,
+  "shadowOnly": true,
+  "reviewer": "calibration_pending",
+  "productionAuthorization": false,
+  "gitPushAuthorizedByThisPlan": false
+}

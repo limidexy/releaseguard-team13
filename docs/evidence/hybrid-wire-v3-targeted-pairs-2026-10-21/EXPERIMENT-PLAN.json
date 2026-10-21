@@ -1,0 +1,34 @@
+{
+  "experimentId": "hybrid-wire-v3-targeted-pairs-20261021-0740c23b",
+  "modelId": "openai/gpt-oss-120b",
+  "transport": {
+    "modelId": "openai/gpt-oss-120b",
+    "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+    "temperature": 0,
+    "maxOutputTokens": 2400,
+    "reasoningEffort": "low",
+    "requestTimeoutMs": 60000
+  },
+  "maximumRequests": 10,
+  "plannedSamples": 10,
+  "positiveReferences": 5,
+  "negativeReferences": 5,
+  "customerGenerationRequests": 0,
+  "automaticRetries": 0,
+  "modelSwitches": 0,
+  "paidCallsAllowed": false,
+  "deploymentAllowed": false,
+  "pushAllowed": false,
+  "mergeAllowed": false,
+  "stopOnProtocolFailure": true,
+  "continueOnSemanticMismatch": true,
+  "passCriteria": {
+    "protocolValid": 10,
+    "positiveCorrectAllows": 5,
+    "negativeCorrectIdentifications": 5,
+    "expectedCriticalIssuesIdentified": 5
+  },
+  "shadowOnly": true,
+  "reviewer": "calibration_pending",
+  "authorization": "Latest direct user message: at most ten free-only semantic review requests for these five bound pairs, no retry; no previous call authorization reused."
+}

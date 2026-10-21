@@ -1,0 +1,7 @@
+{
+  "status": "TARGETED_VALIDATION_FAILED",
+  "completedAt": "2026-10-21T04:33:03.960Z",
+  "attempts": 10,
+  "finalResultSha256": "67fdca86868030d71fdad3f0d7b66eebcb9e58b327d502479967b6d1778f9968",
+  "noAdditionalRequestsAuthorized": true
+}

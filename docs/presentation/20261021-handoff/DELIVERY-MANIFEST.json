@@ -1,0 +1,33 @@
+{
+  "at": "2026-10-21T09:04:33.950Z",
+  "files": [
+    {
+      "path": "docs/presentation/20261021-handoff/Demo_Runbook.txt",
+      "sha256": "906fb9d43cdf74ed0d36ddca391930251b4efe3fa1521eb486bd2bbd82202708"
+    },
+    {
+      "path": "docs/presentation/20261021-handoff/Historical_Review_Replay.html",
+      "sha256": "13420e7709e46c9d29fa53db83cf6edb8907b6e9c82dbd1fb7c726fa7c5cfa93"
+    },
+    {
+      "path": "docs/presentation/20261021-handoff/ReleaseGuard_Presentation_v4_Handoff_20261021.pptx",
+      "sha256": "3ddb7db6c7c398fd204e92c0f24e52c4ead318c7902c76146c0da5c3f3baa214"
+    },
+    {
+      "path": "docs/presentation/20261021-handoff/Replay_Data.json",
+      "sha256": "d66674629ed8e8c2298d02ff3356ece3def4bc936eb61b4abc42a08e68745380"
+    },
+    {
+      "path": "docs/presentation/20261021-handoff/START_HERE.txt",
+      "sha256": "78a6b9b398e0d79685504fae430765245a95f34f42f9a87c35584825eff612db"
+    },
+    {
+      "path": "docs/presentation/20261021-handoff/Speaker_Notes_EN_ZH.txt",
+      "sha256": "725d2bf9caee5230a60a451bf0a116d27f989b9d7bcab34949e3ade6439ba88f"
+    }
+  ],
+  "customerModelCalls": 0,
+  "reviewerModelCalls": 0,
+  "historicalReplay": true,
+  "noRuntimeActivation": true
+}

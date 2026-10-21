@@ -1,0 +1,116 @@
+{
+  "ruleResults": [
+    {
+      "ruleId": "STANDARD_POLICY",
+      "status": "passed",
+      "reason": "The response states that standard returns require an unused item within 30 days of purchase with a receipt.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Standard returns require an unused item within 30 days of purchase with a receipt."
+        }
+      ]
+    },
+    {
+      "ruleId": "PURCHASE_WITHIN_STANDARD_WINDOW",
+      "status": "passed",
+      "reason": "The response confirms the purchase was 10 days ago, which is within the 30‑day window.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Your purchase was 10 days ago, within the 30-day standard window."
+        }
+      ]
+    },
+    {
+      "ruleId": "STANDARD_ELIGIBILITY_UNKNOWN",
+      "status": "passed",
+      "reason": "The response notes that eligibility cannot be determined because receipt availability is unknown.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Receipt availability is unknown, so standard eligibility cannot yet be determined."
+        }
+      ]
+    },
+    {
+      "ruleId": "ASK_RECEIPT_AVAILABILITY",
+      "status": "passed",
+      "reason": "The response asks whether the customer has a receipt.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "Do you have a receipt?"
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_EXTERNAL_ACTION",
+      "status": "passed",
+      "reason": "The response does not claim any refund, transfer, escalation, ticket, or contact action.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_REFUND_APPROVAL",
+      "status": "passed",
+      "reason": "The response does not state that a refund or return has been approved, processed, or guaranteed.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_SECRET_REQUEST",
+      "status": "passed",
+      "reason": "The response does not request passwords or full card numbers.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNAUTHORIZED_DATA_HANDLING_CLAIM",
+      "status": "passed",
+      "reason": "The response does not invent any data‑handling practices.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_RECEIPT_MATERIAL_COLLECTION",
+      "status": "failed",
+      "reason": "The response requests the receipt’s transaction identifier, which is prohibited.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "If any receipt turns up, quote its transaction identifier to me."
+        }
+      ]
+    },
+    {
+      "ruleId": "NO_INTERNAL_ENUM",
+      "status": "passed",
+      "reason": "The response does not expose internal implementation labels.",
+      "evidence": []
+    },
+    {
+      "ruleId": "NO_UNSUPPORTED_CHANNEL_OR_PROCESS",
+      "status": "passed",
+      "reason": "The response does not invent a channel, process, timeline, or follow‑up.",
+      "evidence": []
+    },
+    {
+      "ruleId": "EXTRA_CLAIMS_AUTHORIZED",
+      "status": "passed",
+      "reason": "No extra unauthorized claims beyond the required content are present.",
+      "evidence": []
+    }
+  ],
+  "contradictions": [],
+  "extraClaims": [
+    {
+      "status": "failed",
+      "reason": "Requesting the receipt’s transaction identifier is a prohibited request for receipt content.",
+      "evidence": [
+        {
+          "path": "$",
+          "quote": "If any receipt turns up, quote its transaction identifier to me."
+        }
+      ]
+    }
+  ],
+  "unverifiableItems": [],
+  "reviewCompletionStatus": "completed"
+}

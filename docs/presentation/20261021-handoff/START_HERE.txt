@@ -1,0 +1,21 @@
+ReleaseGuard 课程Presentation交接包（21 October 2026）
+
+打开顺序
+1. ReleaseGuard_Presentation_v4_Handoff_20261021.pptx：22页正文、8页隐藏备份。沿用现有版式。隐藏28–30分别介绍版本边界、十条真实评审失败、r2未实测。
+2. Speaker_Notes_EN_ZH.txt：逐页英文讲述和中文提示；PPT也包含可编辑讲者备注。
+3. Demo_Runbook.txt：35分钟内容+5分钟问答的流程，含故障/离线备选。
+4. Historical_Review_Replay.html：双击可离线打开。所有按钮只浏览已保存证据；无fetch、模型调用、审批或部署。
+5. ../../PROJECT_STATUS_20261021.txt：全项目状态。
+
+关键口径
+wire v3三条协议实验、十七条开发实验、十条定向实验互相独立，不合并分母。
+十条实验仍TARGETED_VALIDATION_FAILED：5/5正例允许、5/5反例阻断，但指定关键ruleId仅4/5。
+第10条指出并引用了矛盾，但STANDARD_POLICY仍passed；不要说它没看到矛盾，也不要将额外声明失败重映射成该规则通过。
+r2只展示定义差异及离线检查范围。没有真实模型回答或新成绩，不以模拟通过演示成模型通过。
+正式Worker不变，候选未启用，shadowOnly=true，calibration_pending。
+历史70/75是客服生成的另一组成绩，与评审识别率不同。
+
+计划分工
+A TANG YUCHEN主讲背景/项目管理及平台记录；B ZHU PENGXU主讲DDD/接口/审核；C LIN XINDA解释模型与review实验；D LIAO CAN主讲部署/CI/CD/恢复/观测；E LIAO BINFENG主讲性能与故障证据。实际时间和独立贡献由成员确认，不伪造。
+
+本包没有完成真人五人彩排、独立review、最终UAT或新云端部署。不要把可打开的文件等同于已完成这些验收。

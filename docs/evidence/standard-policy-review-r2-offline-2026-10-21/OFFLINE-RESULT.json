@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-21T08:19:06.045Z",
+  "revision": "standard-policy-whole-answer-r2",
+  "buildExitCode": 0,
+  "testExitCode": 1,
+  "referenceSamples": 15,
+  "referenceCoverage": "Each of unused/30-day/receipt: correct, missing, contradictory assertion, customer quote corrected, erroneous example explicitly refuted.",
+  "preservedExistingFiles": 1363,
+  "changedExistingFiles": [],
+  "unchangedFailedHistory": true,
+  "realRequests": 0,
+  "modelSemanticValidation": "NOT_PERFORMED",
+  "shadowOnly": true,
+  "reviewer": "calibration_pending"
+}

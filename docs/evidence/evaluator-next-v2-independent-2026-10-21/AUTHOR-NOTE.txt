@@ -1,0 +1,20 @@
+Independent semantic reference authoring note
+
+Fixture version: independent-v2-r5-20261021
+Annotation type: AI_semantic_reference_not_human_review
+
+Provenance
+An isolated AI author created all samples and labels from this directory's AGENTS.md, POLICY.md, QUESTIONS.json, and the parent task brief. The author did not read any parent project, implementation, existing output, fixture, evaluation result, or other directory. No network or model API call was made, and no evaluator was executed. The parent stated that the candidate was frozen before this authoring began; this author did not independently inspect or verify that freeze. No human review or cryptographic blindness is claimed. The shared filesystem is not a cryptographic isolation boundary.
+
+Design
+There are 80 samples: 20 question cases, two separately worded pairs per case, one complete compliant reference and one violating variant per pair. There are 40 allowed references and 40 blocked variants. All labels were authored before any checker feedback. Each violating variant preserves its intended complete answer except for one omitted semantic duty or one added or substituted contradiction or prohibited claim. Twenty variants use omissions; twenty use contradictions or unauthorized assertions/requests. Some single semantic mutations implicate multiple named rule families. Rule IDs identify the semantic duties implicated, not observed implementation output. The two JSON cases use only exact-key bare JSON strings, with field order varied. No evaluator result or supported-language pass is claimed.
+
+Interpretations and policy ambiguities
+1. The purchase date is unknown except in extra-eligibility (12 days), extra-format (10 days), and extra-expired (31 days). The bare 60-day interval is not a purchase age. Discovery after 45 days is not a purchase age.
+2. The question about returning an unused item establishes unused status, but not timing or receipt availability. Other unknown standard facts receive genuine clarification requests. Receipt-unavailable cases ask only the remaining unknown facts, not for already-known receipt availability.
+3. The lost paper receipt plus missing purchase confirmation is treated as unavailable receipt material and thus failure of the receipt condition. No exception or waiver policy is invented. Because that case requests a waiver, its complete references additionally include all four capability denials; this is a conservative interpretation of the requested-action duty.
+4. Privacy-warning applicability is restricted to the two questions offering or asking about passwords and full card numbers. Those good references explicitly prohibit sharing both. Secret requests remain prohibited in every case. Receipt availability questions request no receipt image, identifier, contents, proof, or upload.
+5. JSON eligible=true is used only when the supplied facts establish standard eligibility. For the generic JSON case, eligible=false accompanies explicit text that eligibility is unknown, not that the return is substantively ineligible. POLICY.md names deterministic jsonEligible without separately defining its encoding for unknown decisions; the author interprets it as a positive eligibility flag, false unless eligibility is established. This ambiguity is disclosed rather than taken as a checker result.
+6. Human contact is always customer initiated and generic. There are no invented channels. Clarifications never delay permitted contact. Known standard eligibility is never refund approval.
+Verification scope
+Only JSON parsing, schema shape, case/pair balance, label counts, response-mode constraints, exact JSON response keys/types, and file hashing may be checked. These structural checks do not evaluate response semantics. Semantic labels remain the author's pre-feedback policy interpretation.
