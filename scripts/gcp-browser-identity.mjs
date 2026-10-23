@@ -1,0 +1,3 @@
+export const browserClientRoles=['contributor','reviewer','viewer'];
+export function browserRoleMapper(){return {name:'role',protocol:'openid-connect',protocolMapper:'oidc-usermodel-client-role-mapper',config:{'usermodel.clientRoleMapping.clientId':'releaseguard-browser','usermodel.clientRoleMapping.rolePrefix':'','multivalued':'false','claim.name':'role','jsonType.label':'String','access.token.claim':'true','id.token.claim':'true','userinfo.token.claim':'true'}};}
+export function personalBrowserRoleDefinitions(){return browserClientRoles.map(name=>({name,description:'Administrator-assigned individual '+name,composite:false,clientRole:true}));}

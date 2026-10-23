@@ -1,5 +1,9 @@
 # ReleaseGuard — SE34FT Team 13
 
+## 23 October 2026: personal review access and presentation
+
+Use the [updated status](docs/presentation/20261023/PROJECT_STATUS.txt), [27-slide presentation](docs/presentation/20261023/ReleaseGuard_Presentation_v4_Updated_20261023.pptx), [demo and Q&A](docs/presentation/20261023/DEMO_AND_QA.txt), and [personal login guide](docs/team/REVIEWER_LOGIN_20261023.txt). `liaobinfeng` and `liaocan` have reviewer roles. Their own password setup, login and independent decisions remain pending. The original cloud image is unchanged and compute is stopped. Latest local r14 full-16 status: **0/16 sent, free budget insufficient**, not a model pass. Later candidate sources and raw evidence remain local pending publication review. This small handoff adds no model calls, merge or deployment. Older entries below are dated snapshots.
+
 ## 21 October 2026: evidence freeze and course handoff
 
 Start with the [current project status](docs/PROJECT_STATUS_20261021.txt) and [presentation, script and offline replay](docs/presentation/20261021-handoff/START_HERE.txt). The three-sample wire v3 protocol run, separate seventeen-sample development run, and ten-case targeted experiment retain their own versions and results. The ten-case experiment remains **TARGETED_VALIDATION_FAILED**: all answers had valid protocol, but only four of five designated critical rule IDs matched. The later `standard-policy-whole-answer-r2` definition has offline checks only, with **no real semantic validation**. It is an inactive candidate using unchanged wire v3. No validation transfers between these revisions. Worker routing, default review path, `shadowOnly=true` and `calibration_pending` are unchanged. This handoff makes zero new model/reviewer calls and performs no merge or deployment. A branch push does not establish CI success. Older counts below are dated snapshots, not a current whole-repository pass.
