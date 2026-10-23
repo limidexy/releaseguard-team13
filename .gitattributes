@@ -1,0 +1,4 @@
+# Scripts executed by Linux containers and hooks must keep Unix line endings.
+*.sh text eol=lf
+.githooks/* text eol=lf
+
