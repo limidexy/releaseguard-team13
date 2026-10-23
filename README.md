@@ -1,5 +1,7 @@
 # ReleaseGuard course implementation v2 with verified local improvements
 
+Repository maintainer: [LIN XINDA (@limidexy)](https://github.com/limidexy).
+
 Current delivery: 7 October 2026, local improvement edition 2.1. Start with `docs/05-Current-Handoff.md`. Historical reports in `evidence/baseline-original/` are from the supplied ZIP, not this machine. Fresh execution is recorded in `evidence/current/acceptance.json`; root-level integration/fault reports are from the latest local verification. No real provider, cloud deployment or hosted CI has been executed in this edition.
 
 The console now has Chinese/English navigation, readable per-case results, same-suite comparisons and paginated job history. Test inputs and original answers remain untranslated to preserve evidence. Browser and scripts consume one fixture catalog.
