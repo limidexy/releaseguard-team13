@@ -7,6 +7,8 @@ COPY tests ./tests
 RUN npm test
 RUN npm prune --omit=dev
 FROM node:24-bookworm-slim
+# Runtime starts node directly; npm is needed only in the build stage.
+RUN rm -rf /usr/local/lib/node_modules/npm /usr/local/bin/npm /usr/local/bin/npx
 ENV NODE_ENV=production
 WORKDIR /app
 COPY --from=build --chown=node:node /app/node_modules ./node_modules
