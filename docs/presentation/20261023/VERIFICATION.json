@@ -1,0 +1,77 @@
+{
+  "at": "2026-10-23T07:37:19.287Z",
+  "reviewers": [
+    {
+      "name": "LIAO BINFENG",
+      "username": "liaobinfeng",
+      "clientRoles": [
+        "reviewer"
+      ],
+      "requiredActions": [
+        "UPDATE_PASSWORD"
+      ],
+      "personalLoginVerified": false,
+      "humanReviewPerformed": false
+    },
+    {
+      "name": "LIAO CAN",
+      "username": "liaocan",
+      "clientRoles": [
+        "reviewer"
+      ],
+      "requiredActions": [
+        "UPDATE_PASSWORD"
+      ],
+      "personalLoginVerified": false,
+      "humanReviewPerformed": false
+    }
+  ],
+  "xindaRole": "contributor",
+  "loopbackLoginFormReached": true,
+  "loginFixtureTests": {
+    "passed": 19,
+    "total": 19,
+    "realPersonalLogin": false
+  },
+  "candidateOfflineTests": {
+    "passed": 20,
+    "total": 20,
+    "realSemanticValidation": false
+  },
+  "typeCheck": "tsc --noEmit passed",
+  "cloud": {
+    "actualNodes": 0,
+    "targetSize": 0,
+    "stable": true,
+    "verifiedAt": "2026-10-23T07:36:02.366Z",
+    "applicationImageUnchanged": true,
+    "modelCalls": 0,
+    "deployments": 0,
+    "humanApprovals": 0
+  },
+  "latestR14": {
+    "status": "NOT_EXECUTED_FREE_BUDGET_INSUFFICIENT",
+    "attempted": 0,
+    "planned": 16
+  },
+  "sourceDeckUnchanged": true,
+  "pptSha256": "f8395ce39b4f825c36a5d278b0807bcc3c8b36fe60ed0ff0a2a68c4ab43392ac",
+  "slideCount": 27,
+  "changedSlides": [
+    4,
+    11,
+    14,
+    16,
+    17,
+    21,
+    22,
+    23,
+    25
+  ],
+  "formalReviewer": {
+    "shadowOnly": true,
+    "status": "calibration_pending"
+  },
+  "independentReviewPending": true,
+  "publicScope": "Small personal-login and presentation handoff only; later experimental sources and raw records remain local. Candidate offline20/20 describes the local workspace, not code introduced by this public branch."
+}

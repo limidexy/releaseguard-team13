@@ -1,0 +1,34 @@
+ReleaseGuard handoff, 23 October 2026
+
+Formal system
+The deployed application remains the existing digest-pinned 362e8dd trial image. No new image, Worker, default reviewer route or business policy is deployed by this handoff. Restoring the original nodes is not a deployment.
+The semantic reviewer remains shadowOnly=true and calibration_pending. The95 rule-score threshold and historical customer scores70/75 are unchanged.
+
+Personal accounts
+xinda personally changed password and completed contributor identity/read access verification earlier on23 Oct. That does not establish all write and approval invariants.
+Administrator provisioned liaobinfeng and liaocan with only the browser reviewer role and required initial password change. Account/role readback verified; no impersonated login or approval performed. Personal passwords, complete login and genuine independent review remain with the respective members.
+A portable PKCE loopback login helper is included. It has no admin/cloud/model credentials and performs only two workspace read calls after login. The login form was reached in Chrome without entering a password. Local JWT/PKCE fixture tests do not replace either member's actual login.
+
+Model and reviewer evidence
+Customer A/B70/75, wire v3 three-sample protocol run, wire v3 seventeen-sample development run, the failed ten-case targeted run and later standard-policy revisions remain separate experiments.
+The targeted run remains TARGETED_VALIDATION_FAILED even though all10 protocol records were valid: the designated policy-rule criterion matched4/5 negatives.
+The initial r2 offline record remains a historical record. Later real r2–r13 experiments do not alter it or inherit its result.
+Latest preserved r14 full-16 status: NOT_EXECUTED_FREE_BUDGET_INSUFFICIENT, planned16, attempted0, unexecuted16. This handoff makes zero inference/reviewer requests. Zero attempted is not a zero model score or a passing result.
+Raw typed model policy extraction and program-derived aggregation are separate. Offline fixtures and source hashes establish program behavior and provenance, not semantic reliability.
+
+Presentation
+The user's supplied27-slide v4 is the source. Content updates preserve the blue/gold design, existing figures, historical failures and five-member responsibilities.
+Cloud network correction: external L4 TCP LoadBalancer Service, then Caddy TLS, then gateway/identity. The three PVCs belong to PostgreSQL5Gi, RabbitMQ2Gi and Caddy1Gi. Keycloak uses PostgreSQL.
+The11 Oct1-to-3-to-1 scaling run completed500 jobs, all on the original worker. It demonstrates the scaling control loop, not throughput gains from the added workers. The short1-versus3 benchmark is separate.
+The22 Oct replay rehearsal is dated separately. On23 Oct account setup used zero model calls and no new application jobs or review decisions.
+
+Git and verification
+Use the existing feature branch and draft PR5. No force push, merge, new CD dispatch or history rewrite. Adding inactive candidate code does not change runtime routing.
+Publication scope: this is a separate, small handoff branch based on the published22993aa. It includes only the personal-login helper, future-bootstrap role mapping, focused tests, guide, presentation and sanitized status. It targets the existing feature branch without merging it. The large local archive commit ea1b21c and later r3–r14 raw evidence remain local pending explicit publication review. PR5 itself is unchanged.
+Historical full regression776/777 and782/783 remain dated results, not a fresh green result. A new CI result belongs to the new commit only; do not label a push as CI success.
+Only public, secret-scanned code, tests, dated evidence and documents enter Git. Private bootstrap credentials, personal tokens, admin tokens, kubeconfig and account screenshots remain outside public delivery.
+
+Remaining
+Each reviewer must finish personal password setup/login and perform a real independent review when the maintainer schedules free-trial access.
+No production semantic qualification, hidden-set validation, sustained scalability or HA claim is made.
+At completion, consult the new shutdown receipt for actual node count, target size and retained-image comparison. Zero compute nodes does not imply zero retained-resource costs.
