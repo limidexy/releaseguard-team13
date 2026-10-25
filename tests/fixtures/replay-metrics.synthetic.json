@@ -1,0 +1,26 @@
+{
+  "synthetic": true,
+  "window": { "startedAt": "2026-01-01T00:00:00Z", "endedAt": "2026-01-01T00:00:10Z" },
+  "responses": [
+    { "requestId": "request-1", "id": "job-1", "status": 202, "elapsedMs": 0 },
+    { "requestId": "request-2", "id": "job-2", "status": 504, "elapsedMs": 200 }
+  ],
+  "rows": [
+    { "id": "job-1", "cohortId": "synthetic", "source": "replay", "provenanceSource": "replay", "provenanceTrust": "labelled_static_fixture", "providerCalls": 0, "attempts": 1, "status": "succeeded", "workerId": "worker-1", "createdAt": "2026-01-01T00:00:00Z", "startedAt": "2026-01-01T00:00:01Z", "finishedAt": "2026-01-01T00:00:02Z", "sentAt": "2025-12-31T23:59:59Z" },
+    { "id": "job-2", "cohortId": "synthetic", "source": "replay", "provenanceSource": "replay", "provenanceTrust": "labelled_static_fixture", "providerCalls": 0, "attempts": 1, "status": "failed", "workerId": "worker-2", "createdAt": "2026-01-01T00:00:00Z", "startedAt": "2026-01-01T00:00:03Z", "finishedAt": "2026-01-01T00:00:12Z", "sentAt": null }
+  ],
+  "readyWorkers": ["worker-1", "worker-2", "worker-zero"],
+  "cases": {
+    "unfinishedStatus": "running",
+    "unknownStatus": "unrecognised",
+    "singleMetric": { "wholeBatchMs": 70, "completionP95Ms": 90 },
+    "manualController": "manual",
+    "queueZero": { "name": "releaseguard.evaluate", "vhost": "releaseguard", "messages_ready": 0, "messages_unacknowledged": 0, "messages": 0 },
+    "queueNull": { "name": "releaseguard.evaluate", "vhost": "releaseguard", "messages_ready": null, "messages_unacknowledged": 0, "messages": 0 }
+  },
+  "scaleSamples": [
+    { "at": "2026-01-01T00:00:00Z", "cohortId": "synthetic", "controller": "automatic", "desired": 2, "ready": 1, "hpa": { "desiredReplicas": 2 }, "workers": [{ "id": "worker-1", "ready": true }] },
+    { "at": "2026-01-01T00:00:02Z", "cohortId": "synthetic", "controller": "automatic", "desired": 2, "ready": 2, "hpa": { "desiredReplicas": 2 }, "workers": [{ "id": "worker-1", "ready": true }, { "id": "worker-2", "ready": true }] },
+    { "at": "2026-01-01T00:00:13Z", "cohortId": "synthetic", "controller": "automatic", "desired": 1, "ready": 1, "hpa": { "desiredReplicas": 1 }, "workers": [{ "id": "worker-1", "ready": true }] }
+  ]
+}
