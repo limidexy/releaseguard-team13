@@ -1,0 +1,982 @@
+{
+  "at": "2026-10-25T08:16:39.612Z",
+  "sourcePathBase": "user workspace; paths intentionally relative",
+  "packageFileLimit": 200,
+  "files": [
+    {
+      "target": "research/2026-10-25/http-deadline-r10/candidate/source/src/admission-atomic.ts",
+      "bytes": 1721,
+      "sha256": "e6d4990fb895322ffe50e5fe8a88b18a4999e63ef5a210c09d9f18c49020c190",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/candidate/source/src/admission-atomic.ts",
+          "sha256": "e6d4990fb895322ffe50e5fe8a88b18a4999e63ef5a210c09d9f18c49020c190"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/candidate/source/src/common.ts",
+      "bytes": 7043,
+      "sha256": "37ff373d19f4e9b890e39f7550677a22b1409f3600ca2ecc6dbee17eba1429b0",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/candidate/source/src/common.ts",
+          "sha256": "37ff373d19f4e9b890e39f7550677a22b1409f3600ca2ecc6dbee17eba1429b0"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/candidate/source/src/contexts/review.ts",
+      "bytes": 988,
+      "sha256": "8a7eed471337e738277c4ed0e9883ca8b0e261da930614115172f19f8125a7dd",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/candidate/source/src/contexts/review.ts",
+          "sha256": "8a7eed471337e738277c4ed0e9883ca8b0e261da930614115172f19f8125a7dd"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/candidate/source/src/database-evidence.ts",
+      "bytes": 3965,
+      "sha256": "f9832312fd9fcf46774c0b6e1ebb9944b4376755f08c03b6ca719ad54500a29a",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/candidate/source/src/database-evidence.ts",
+          "sha256": "f9832312fd9fcf46774c0b6e1ebb9944b4376755f08c03b6ca719ad54500a29a"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/candidate/source/src/domain.ts",
+      "bytes": 5343,
+      "sha256": "405f88e4ce40d92af4734c9a1f108d08efec2949e8c03a6356b853611fc55215",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/candidate/source/src/domain.ts",
+          "sha256": "405f88e4ce40d92af4734c9a1f108d08efec2949e8c03a6356b853611fc55215"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/candidate/source/src/evaluation.ts",
+      "bytes": 12108,
+      "sha256": "025bba9111e6a996ed9833d7dc995fcddd18a54474412e0fb97cba65ad54ebef",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/candidate/source/src/evaluation.ts",
+          "sha256": "025bba9111e6a996ed9833d7dc995fcddd18a54474412e0fb97cba65ad54ebef"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/candidate/source/src/gateway.ts",
+      "bytes": 6145,
+      "sha256": "cf6ab5bffcc38a784ef7f06d70ccd075bf944f63e4a529bd1b74c10f82183c12",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/candidate/source/src/gateway.ts",
+          "sha256": "cf6ab5bffcc38a784ef7f06d70ccd075bf944f63e4a529bd1b74c10f82183c12"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/candidate/source/src/governance.ts",
+      "bytes": 4513,
+      "sha256": "c08b6197e331b1e09c2a8c488402e114111528e9c6acb665252ac64d46a65b0b",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/candidate/source/src/governance.ts",
+          "sha256": "c08b6197e331b1e09c2a8c488402e114111528e9c6acb665252ac64d46a65b0b"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/candidate/source/src/main.ts",
+      "bytes": 1097,
+      "sha256": "5029063f2c537d80072052c0d3d167fe5d733a65a4814ac6c4551c023aca4fcc",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/candidate/source/src/main.ts",
+          "sha256": "5029063f2c537d80072052c0d3d167fe5d733a65a4814ac6c4551c023aca4fcc"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/candidate/source/src/provider.ts",
+      "bytes": 11646,
+      "sha256": "5a70dcd908a6234af94b01a402c36153d21a6428a6a1e094dc2ffb2a8d2f6813",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/candidate/source/src/provider.ts",
+          "sha256": "5a70dcd908a6234af94b01a402c36153d21a6428a6a1e094dc2ffb2a8d2f6813"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/candidate/source/src/queue.ts",
+      "bytes": 585,
+      "sha256": "708929e857cbc6fcbaf582e23ec8bc2a17ea3d44cb6a8d37b0f42114c7892a1c",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/candidate/source/src/queue.ts",
+          "sha256": "708929e857cbc6fcbaf582e23ec8bc2a17ea3d44cb6a8d37b0f42114c7892a1c"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/candidate/source/src/registry.ts",
+      "bytes": 5354,
+      "sha256": "f7e10778504a6a39399f4c7d82c70af5b54b5fadde5d7e7687527c1b1908a507",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/candidate/source/src/registry.ts",
+          "sha256": "f7e10778504a6a39399f4c7d82c70af5b54b5fadde5d7e7687527c1b1908a507"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/candidate/source/src/returns-policy.ts",
+      "bytes": 6225,
+      "sha256": "20f044926ca817741ed03cbd9e29d9f49d4c5372a7b45604f8d60634034a3278",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/candidate/source/src/returns-policy.ts",
+          "sha256": "20f044926ca817741ed03cbd9e29d9f49d4c5372a7b45604f8d60634034a3278"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/candidate/source/src/submission-deadline.ts",
+      "bytes": 5649,
+      "sha256": "8c515037054fe34b7c1bf0fd0866647292190e372f2f10703a63a3fa0cbffd87",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/candidate/source/src/submission-deadline.ts",
+          "sha256": "8c515037054fe34b7c1bf0fd0866647292190e372f2f10703a63a3fa0cbffd87"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/candidate/source/src/submission-state.ts",
+      "bytes": 2791,
+      "sha256": "fcad88436d6bbbeb4537950341dce9d8058d281f5a1985b98d9e30327a8b20b2",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/candidate/source/src/submission-state.ts",
+          "sha256": "fcad88436d6bbbeb4537950341dce9d8058d281f5a1985b98d9e30327a8b20b2"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/candidate/source/src/submission-transport.ts",
+      "bytes": 4318,
+      "sha256": "7d1cf56309d10e01af1b4ae52669a9fc40ff5d179b7798fb2007a16be21ae870",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/candidate/source/src/submission-transport.ts",
+          "sha256": "7d1cf56309d10e01af1b4ae52669a9fc40ff5d179b7798fb2007a16be21ae870"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/candidate/source/src/support.ts",
+      "bytes": 4820,
+      "sha256": "15df5e9b4287d581809b8784a00155d90f9cd648f93d919262a0785de834db02",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/candidate/source/src/support.ts",
+          "sha256": "15df5e9b4287d581809b8784a00155d90f9cd648f93d919262a0785de834db02"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/candidate/source/src/worker.ts",
+      "bytes": 4546,
+      "sha256": "98289f07a8d633c47c6df1aa22885dc23f9fad9a2392782053f26a0fe7114427",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/candidate/source/src/worker.ts",
+          "sha256": "98289f07a8d633c47c6df1aa22885dc23f9fad9a2392782053f26a0fe7114427"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/candidate/source/package.json",
+      "bytes": 693,
+      "sha256": "194785d063f329d19350dcd7772717480ded73141bc56df83adf0b8ff64c3650",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/candidate/source/package.json",
+          "sha256": "194785d063f329d19350dcd7772717480ded73141bc56df83adf0b8ff64c3650"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/candidate/source/tsconfig.json",
+      "bytes": 221,
+      "sha256": "38271e2065f7cfd68ba29b53865af9fc3353449bc2bb744667bd7f1a781dd989",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/candidate/source/tsconfig.json",
+          "sha256": "38271e2065f7cfd68ba29b53865af9fc3353449bc2bb744667bd7f1a781dd989"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/candidate/source/package-lock.json",
+      "bytes": 31223,
+      "sha256": "edbec9021091f0b178c6e747372548ffdabbecbaac78cfca84f87987e251f3e8",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "ReleaseGuard_Team13/package-lock.json",
+          "sha256": "edbec9021091f0b178c6e747372548ffdabbecbaac78cfca84f87987e251f3e8"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/admission-rootcause-r9/candidate/source/src/admission-atomic.ts",
+      "bytes": 1721,
+      "sha256": "e6d4990fb895322ffe50e5fe8a88b18a4999e63ef5a210c09d9f18c49020c190",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-admission-rootcause-offline-20261025-r9/candidate/source/src/admission-atomic.ts",
+          "sha256": "e6d4990fb895322ffe50e5fe8a88b18a4999e63ef5a210c09d9f18c49020c190"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/admission-rootcause-r9/candidate/source/src/common.ts",
+      "bytes": 7002,
+      "sha256": "c09ad325f2b01d190ab57af0f5a618783f1d6e6b5f52409bff54cb2fd48e3883",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-admission-rootcause-offline-20261025-r9/candidate/source/src/common.ts",
+          "sha256": "c09ad325f2b01d190ab57af0f5a618783f1d6e6b5f52409bff54cb2fd48e3883"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/admission-rootcause-r9/candidate/source/src/contexts/review.ts",
+      "bytes": 988,
+      "sha256": "8a7eed471337e738277c4ed0e9883ca8b0e261da930614115172f19f8125a7dd",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-admission-rootcause-offline-20261025-r9/candidate/source/src/contexts/review.ts",
+          "sha256": "8a7eed471337e738277c4ed0e9883ca8b0e261da930614115172f19f8125a7dd"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/admission-rootcause-r9/candidate/source/src/database-evidence.ts",
+      "bytes": 3965,
+      "sha256": "f9832312fd9fcf46774c0b6e1ebb9944b4376755f08c03b6ca719ad54500a29a",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-admission-rootcause-offline-20261025-r9/candidate/source/src/database-evidence.ts",
+          "sha256": "f9832312fd9fcf46774c0b6e1ebb9944b4376755f08c03b6ca719ad54500a29a"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/admission-rootcause-r9/candidate/source/src/domain.ts",
+      "bytes": 5343,
+      "sha256": "405f88e4ce40d92af4734c9a1f108d08efec2949e8c03a6356b853611fc55215",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-admission-rootcause-offline-20261025-r9/candidate/source/src/domain.ts",
+          "sha256": "405f88e4ce40d92af4734c9a1f108d08efec2949e8c03a6356b853611fc55215"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/admission-rootcause-r9/candidate/source/src/evaluation.ts",
+      "bytes": 10283,
+      "sha256": "1f27a0b6af7bdbfb9b612de4a165fb7007d312119a720a80b6e27ead2d828fc0",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-admission-rootcause-offline-20261025-r9/candidate/source/src/evaluation.ts",
+          "sha256": "1f27a0b6af7bdbfb9b612de4a165fb7007d312119a720a80b6e27ead2d828fc0"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/admission-rootcause-r9/candidate/source/src/gateway.ts",
+      "bytes": 5399,
+      "sha256": "453f9d67187607e7c250bbd19755342c6974a3b5f358b403d37c4d7e6d0556d2",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-admission-rootcause-offline-20261025-r9/candidate/source/src/gateway.ts",
+          "sha256": "453f9d67187607e7c250bbd19755342c6974a3b5f358b403d37c4d7e6d0556d2"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/admission-rootcause-r9/candidate/source/src/governance.ts",
+      "bytes": 4513,
+      "sha256": "c08b6197e331b1e09c2a8c488402e114111528e9c6acb665252ac64d46a65b0b",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-admission-rootcause-offline-20261025-r9/candidate/source/src/governance.ts",
+          "sha256": "c08b6197e331b1e09c2a8c488402e114111528e9c6acb665252ac64d46a65b0b"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/admission-rootcause-r9/candidate/source/src/main.ts",
+      "bytes": 1097,
+      "sha256": "5029063f2c537d80072052c0d3d167fe5d733a65a4814ac6c4551c023aca4fcc",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-admission-rootcause-offline-20261025-r9/candidate/source/src/main.ts",
+          "sha256": "5029063f2c537d80072052c0d3d167fe5d733a65a4814ac6c4551c023aca4fcc"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/admission-rootcause-r9/candidate/source/src/provider.ts",
+      "bytes": 11646,
+      "sha256": "5a70dcd908a6234af94b01a402c36153d21a6428a6a1e094dc2ffb2a8d2f6813",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-admission-rootcause-offline-20261025-r9/candidate/source/src/provider.ts",
+          "sha256": "5a70dcd908a6234af94b01a402c36153d21a6428a6a1e094dc2ffb2a8d2f6813"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/admission-rootcause-r9/candidate/source/src/queue.ts",
+      "bytes": 585,
+      "sha256": "708929e857cbc6fcbaf582e23ec8bc2a17ea3d44cb6a8d37b0f42114c7892a1c",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-admission-rootcause-offline-20261025-r9/candidate/source/src/queue.ts",
+          "sha256": "708929e857cbc6fcbaf582e23ec8bc2a17ea3d44cb6a8d37b0f42114c7892a1c"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/admission-rootcause-r9/candidate/source/src/registry.ts",
+      "bytes": 4157,
+      "sha256": "04635f7375625382048c836143bb0e345f467bb58fd8e2ad33f692549f11d7eb",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-admission-rootcause-offline-20261025-r9/candidate/source/src/registry.ts",
+          "sha256": "04635f7375625382048c836143bb0e345f467bb58fd8e2ad33f692549f11d7eb"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/admission-rootcause-r9/candidate/source/src/returns-policy.ts",
+      "bytes": 6225,
+      "sha256": "20f044926ca817741ed03cbd9e29d9f49d4c5372a7b45604f8d60634034a3278",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-admission-rootcause-offline-20261025-r9/candidate/source/src/returns-policy.ts",
+          "sha256": "20f044926ca817741ed03cbd9e29d9f49d4c5372a7b45604f8d60634034a3278"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/admission-rootcause-r9/candidate/source/src/submission-state.ts",
+      "bytes": 2791,
+      "sha256": "fcad88436d6bbbeb4537950341dce9d8058d281f5a1985b98d9e30327a8b20b2",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-admission-rootcause-offline-20261025-r9/candidate/source/src/submission-state.ts",
+          "sha256": "fcad88436d6bbbeb4537950341dce9d8058d281f5a1985b98d9e30327a8b20b2"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/admission-rootcause-r9/candidate/source/src/submission-transport.ts",
+      "bytes": 4318,
+      "sha256": "7d1cf56309d10e01af1b4ae52669a9fc40ff5d179b7798fb2007a16be21ae870",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-admission-rootcause-offline-20261025-r9/candidate/source/src/submission-transport.ts",
+          "sha256": "7d1cf56309d10e01af1b4ae52669a9fc40ff5d179b7798fb2007a16be21ae870"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/admission-rootcause-r9/candidate/source/src/support.ts",
+      "bytes": 4820,
+      "sha256": "15df5e9b4287d581809b8784a00155d90f9cd648f93d919262a0785de834db02",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-admission-rootcause-offline-20261025-r9/candidate/source/src/support.ts",
+          "sha256": "15df5e9b4287d581809b8784a00155d90f9cd648f93d919262a0785de834db02"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/admission-rootcause-r9/candidate/source/src/worker.ts",
+      "bytes": 4546,
+      "sha256": "98289f07a8d633c47c6df1aa22885dc23f9fad9a2392782053f26a0fe7114427",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-admission-rootcause-offline-20261025-r9/candidate/source/src/worker.ts",
+          "sha256": "98289f07a8d633c47c6df1aa22885dc23f9fad9a2392782053f26a0fe7114427"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/admission-rootcause-r9/candidate/source/package.json",
+      "bytes": 693,
+      "sha256": "194785d063f329d19350dcd7772717480ded73141bc56df83adf0b8ff64c3650",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-admission-rootcause-offline-20261025-r9/candidate/source/package.json",
+          "sha256": "194785d063f329d19350dcd7772717480ded73141bc56df83adf0b8ff64c3650"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/admission-rootcause-r9/candidate/source/tsconfig.json",
+      "bytes": 221,
+      "sha256": "38271e2065f7cfd68ba29b53865af9fc3353449bc2bb744667bd7f1a781dd989",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-admission-rootcause-offline-20261025-r9/candidate/source/tsconfig.json",
+          "sha256": "38271e2065f7cfd68ba29b53865af9fc3353449bc2bb744667bd7f1a781dd989"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/admission-rootcause-r9/candidate/source/package-lock.json",
+      "bytes": 31223,
+      "sha256": "edbec9021091f0b178c6e747372548ffdabbecbaac78cfca84f87987e251f3e8",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "ReleaseGuard_Team13/package-lock.json",
+          "sha256": "edbec9021091f0b178c6e747372548ffdabbecbaac78cfca84f87987e251f3e8"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/tests/deadline-wire.test.mjs",
+      "bytes": 18757,
+      "sha256": "bbd6a7a3ae1d4f3ae39547753cff46d2f02b89a99f955af62b1d6ad74de21840",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/tests/deadline-wire.test.mjs",
+          "sha256": "bbd6a7a3ae1d4f3ae39547753cff46d2f02b89a99f955af62b1d6ad74de21840"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/tests/http-chain-bootstrap.mjs",
+      "bytes": 3960,
+      "sha256": "04507265fb2b64cd2ab195a335f9d09772ed1da5e18c77c3ff0aeeb8a60940e7",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/tests/http-chain-bootstrap.mjs",
+          "sha256": "04507265fb2b64cd2ab195a335f9d09772ed1da5e18c77c3ff0aeeb8a60940e7"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/tests/http-chain-cleanup-readback.mjs",
+      "bytes": 1875,
+      "sha256": "0c603f41d8da7e4ad5a778008cfaa1c51475d848095d674b7b3ee16788ca4a0a",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/tests/http-chain-cleanup-readback.mjs",
+          "sha256": "0c603f41d8da7e4ad5a778008cfaa1c51475d848095d674b7b3ee16788ca4a0a"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/tests/http-chain.integration.mjs",
+      "bytes": 29573,
+      "sha256": "c0eeba208ecd9900fea28043d017febc05bd6e8358a1f84cb85f0c51d1526f20",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/tests/http-chain.integration.mjs",
+          "sha256": "c0eeba208ecd9900fea28043d017febc05bd6e8358a1f84cb85f0c51d1526f20"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/reference-input/demo-fixtures.json",
+      "bytes": 4857,
+      "sha256": "f2861c2608b7f97b510d5e8c0cd4706000bfd6efd3d58142cc90c474b9e688d2",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-v23-v6-20261015.41NMNE/ReleaseGuard/public/demo-fixtures.json",
+          "sha256": "f2861c2608b7f97b510d5e8c0cd4706000bfd6efd3d58142cc90c474b9e688d2"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/evidence/FINAL-RESULT.json",
+      "bytes": 7829,
+      "sha256": "b6f94d81acca7f35436ebb2b01a593a798eebb2692e728af8712014703990802",
+      "transformation": "JSON derivative: personal absolute paths removed; semantic values unchanged",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/FINAL-RESULT.json",
+          "sha256": "ce7350da1d15de4420e13b2e3e452919bffc482d6833e4af42aa75d5baa5a8c4"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/evidence/DELIVERY-VERIFICATION.json",
+      "bytes": 475,
+      "sha256": "a85b68c6cee1b093ec0595bd5110caf925e34e0c7b93832c9af8db598ba40b20",
+      "transformation": "JSON derivative: personal absolute paths removed; semantic values unchanged",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/DELIVERY-VERIFICATION.json",
+          "sha256": "cdd97d3c85a64e2e853d619cdfc0b8d9fe5c259877cc8e32eef6f44e6c2dd729"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/evidence/FINAL-INDEPENDENT-READBACK.json",
+      "bytes": 1014,
+      "sha256": "2bd43f9a7cdc43a24085db0ba52bc46d4950fccb228826d41310e8878a290a35",
+      "transformation": "JSON derivative: personal absolute paths removed; semantic values unchanged",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/FINAL-INDEPENDENT-READBACK.json",
+          "sha256": "8a4e38ffc290ec23e9030525676e562f27cbaf7040f8525b3d9322b95ea2f43b"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/evidence/CANDIDATE-MANIFEST.json",
+      "bytes": 5370,
+      "sha256": "056c582b6c0c3256f2c963340e010125fd3a816c4ce78c0476186119afee29ca",
+      "transformation": "JSON derivative: personal absolute paths removed; semantic values unchanged",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/CANDIDATE-MANIFEST.json",
+          "sha256": "3dde78aba5c059a322a909a6d3c1a57fbd49ec14c978ded251f19bca00a48b11"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/evidence/deadline-wire-green-RESULT.json",
+      "bytes": 12241,
+      "sha256": "332e97b448e285edbd1863141995a54e5f5f4768fe74962562b3cd3f2a5a3135",
+      "transformation": "JSON derivative: personal absolute paths removed; semantic values unchanged",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/evidence/deadline-wire-green-RESULT.json",
+          "sha256": "80fc7a0f0b0b3bb48a575dca2a60e3792ad781572c7af2ace2ac70122a456528"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/evidence/deadline-wire-green-VERIFICATION.json",
+      "bytes": 1437,
+      "sha256": "69c5da338f5baabefaa9b37ff6b9ddef2994e2e2d85c50f04f34e5e83d012205",
+      "transformation": "JSON derivative: personal absolute paths removed; semantic values unchanged",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/evidence/deadline-wire-green-VERIFICATION.json",
+          "sha256": "69c5da338f5baabefaa9b37ff6b9ddef2994e2e2d85c50f04f34e5e83d012205"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/evidence/deadline-wire-red-RESULT.json",
+      "bytes": 899,
+      "sha256": "4a1e68adb9bfdc623d2fd31bc34e77eeee251e32b8546b53a511564fa9e5de0a",
+      "transformation": "JSON derivative: personal absolute paths removed; semantic values unchanged",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/evidence/deadline-wire-red-RESULT.json",
+          "sha256": "6f9f2fec1c77ec69e044675f7dc9a5800ef859eeb8dcb464256e1337487c029b"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/evidence/deadline-wire-red-cleanup-NOTE.json",
+      "bytes": 775,
+      "sha256": "4df3a23518aa25e5a1132d669d47b693e174c9e807e3d41abbc91277998fc8b5",
+      "transformation": "JSON derivative: personal absolute paths removed; semantic values unchanged",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/evidence/deadline-wire-red-cleanup-NOTE.json",
+          "sha256": "20886cccd17bce1983c46e1c5b779d14f03a40894c8eb10bd782fdad012a60d5"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/evidence/http-baseline-r2-result.json",
+      "bytes": 8246,
+      "sha256": "646b49e098b41866fbe92e9bb36cbf28238af4588f8cd3c4793a57ab418cacc8",
+      "transformation": "JSON derivative: personal absolute paths removed; semantic values unchanged",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/evidence/http-baseline-r2-result.json",
+          "sha256": "4934ee3ee12eb310749cb16e13a24d7753a77b283f41243cf766d695de985ce6"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/evidence/http-green-r1-result.json",
+      "bytes": 7670,
+      "sha256": "0b6d8e647d1c524ac876dbb81ddbf36c039a5b5ca9a404b6ec9b0dee6863eebb",
+      "transformation": "JSON derivative: personal absolute paths removed; semantic values unchanged",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/evidence/http-green-r1-result.json",
+          "sha256": "55e403291b6b8afff08e74521917bd47e12d68e9bd19ea403a7d018166e1eddc"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/evidence/http-green-registry-close-supplement-result.json",
+      "bytes": 1249,
+      "sha256": "23468186e05732df30287f97ca853a1c55770b68eb9a2393a25decf3f69065c9",
+      "transformation": "JSON derivative: personal absolute paths removed; semantic values unchanged",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/evidence/http-green-registry-close-supplement-result.json",
+          "sha256": "696fceeeabbb881549105d32769ba2d347a1a02e14504a9535b4724629178f05"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/evidence/http-green-registry-close-diagnostic-r2-result.json",
+      "bytes": 11508,
+      "sha256": "c6f99eda5f85e8a7247d14e7486091cd9a232eff5915c7c88094e873cd7f6898",
+      "transformation": "JSON derivative: personal absolute paths removed; semantic values unchanged",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/evidence/http-green-registry-close-diagnostic-r2-result.json",
+          "sha256": "71b67b78a7e4fc02d83b36742bc3fa365841cece3b1bef26943ac7249b17c18b"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/evidence/http-green-r1-postcleanup-readback.json",
+      "bytes": 715,
+      "sha256": "c43c8f5b096a3c86c5951c72b0819167cad4190101fae76d229edd5fe71fa874",
+      "transformation": "JSON derivative: personal absolute paths removed; semantic values unchanged",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/evidence/http-green-r1-postcleanup-readback.json",
+          "sha256": "5fba5b1545232975eb961225cbc7421c20bd01633fbc22ba8924db4030bbe603"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/evidence/http-green-registry-close-diagnostic-r2-postcleanup-readback.json",
+      "bytes": 741,
+      "sha256": "ca2a95af4f2b401b7ef95a4a04fa652b2d8f5057c55d66ed692631f2b7a90ba0",
+      "transformation": "JSON derivative: personal absolute paths removed; semantic values unchanged",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-http-deadline-offline-20261025-r10/evidence/http-green-registry-close-diagnostic-r2-postcleanup-readback.json",
+          "sha256": "10f4122aba006385eb56fe0d763a1528f99c4b5732e7cd9200e8c13fd118924b"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/c2-reference/proposition-consistency-c2.mjs",
+      "bytes": 8763,
+      "sha256": "cf7c7891a89ec7fdb8538190fb82f78b23ac8799050b0ae8526a5c1531d687f1",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-r16-consistency-c2-20261024/candidate/proposition-consistency-c2.mjs",
+          "sha256": "cf7c7891a89ec7fdb8538190fb82f78b23ac8799050b0ae8526a5c1531d687f1"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/c2-reference/OFFLINE-RESULT.json",
+      "bytes": 1213,
+      "sha256": "dda9cfc653d6f15d96e0c44dac2ad3ca673c62971e0f356c7514e1398158dfc8",
+      "transformation": "JSON derivative: personal absolute paths removed; semantic values unchanged",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-r16-consistency-c2-20261024/results/FINAL-RESULT.json",
+          "sha256": "dda9cfc653d6f15d96e0c44dac2ad3ca673c62971e0f356c7514e1398158dfc8"
+        }
+      ]
+    },
+    {
+      "target": "docs/progress/2026-10-25/evidence/c2-single-provider-summary.json",
+      "bytes": 5261,
+      "sha256": "53bc836688c640085c0108a126184ade1a5ff82036e3f9ce91aef5885d36d2ad",
+      "transformation": "JSON derivative: personal absolute paths removed; semantic values unchanged",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-c2-provider-single-20261024-r1/FINAL-RESULT.json",
+          "sha256": "ff7df467618e8a5e2f327104e788a0577219f0ed708798d79200d3ca147f183b"
+        }
+      ]
+    },
+    {
+      "target": "docs/progress/2026-10-25/evidence/r14-summary.json",
+      "bytes": 19126,
+      "sha256": "28e5ec395dce88819d05e9da0f6b0840f3bfe17b5e66d008dfeed35c5bfa1400",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-v6-evidence-alignment-20261024-r1/final/evidence/r14-summary.json",
+          "sha256": "28e5ec395dce88819d05e9da0f6b0840f3bfe17b5e66d008dfeed35c5bfa1400"
+        }
+      ]
+    },
+    {
+      "target": "docs/progress/2026-10-25/evidence/r16-20261024-055119-historical-wait-snapshot.json",
+      "bytes": 1189,
+      "sha256": "69a4a8a18499a1eb5ef5e851656a908efae16cc30753b3cfd8ea34eab69ee2d8",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-v6-evidence-alignment-20261024-r1/final/evidence/r16-summary.json",
+          "sha256": "69a4a8a18499a1eb5ef5e851656a908efae16cc30753b3cfd8ea34eab69ee2d8"
+        }
+      ]
+    },
+    {
+      "target": "docs/progress/2026-10-25/evidence/personal-review-summary.json",
+      "bytes": 171,
+      "sha256": "b584c531b7a8f116f2e4f146bdcc1acc936af15a3920fab358c5f0883507d2ab",
+      "transformation": "Public v2 aggregate only; names, usernames, IDs, times, note/addendum assessment and all individual details excluded; originals retained locally",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-v6-evidence-alignment-20261024-r1/final/evidence/personal-review-summary.json",
+          "sha256": "61ce8ae50ecf73e9e81272ab40494873839bd722bff78c336d9bf203620d5fd4"
+        }
+      ]
+    },
+    {
+      "target": "docs/progress/2026-10-25/evidence/r16-full16-actual-summary.json",
+      "bytes": 6686,
+      "sha256": "3d506adf6ab8a9a4bbc70fa813c3f56070f7ad80bf6f0db6afdc2ffcd7dd57e3",
+      "transformation": "Allowlisted typed terminal fields only; raw errors, responses, original text and quota account data omitted",
+      "sources": [
+        {
+          "path": "outputs/standard-policy-r16-quota-authorized-full16-20261024T130418-0d396dcf/FINAL-RESULT.json",
+          "sha256": "4910c083f135aa7f7a754291c3f76cbe0143abe48d7ba4f795f6251bece0536a"
+        }
+      ]
+    },
+    {
+      "target": "docs/progress/2026-10-25/archss-course-coverage.json",
+      "bytes": 12774,
+      "sha256": "bce1b2592cbcfa78d4a5eea9c2684d1594c5f30690fa5a87ed26e29ea64a849c",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-archss-freeze-20261025-r1/final/课程覆盖矩阵.json",
+          "sha256": "bce1b2592cbcfa78d4a5eea9c2684d1594c5f30690fa5a87ed26e29ea64a849c"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/demo-entry-ui/entry.js",
+      "bytes": 2216,
+      "sha256": "50a29e39ed822e4b968e04cb9a467c89a73aef7910026ae0f3f34e8ea433b69f",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-archss-freeze-20261025-r1/final/demo-entry/entry.js",
+          "sha256": "50a29e39ed822e4b968e04cb9a467c89a73aef7910026ae0f3f34e8ea433b69f"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/demo-entry-ui/readonly.html",
+      "bytes": 2264,
+      "sha256": "a54e3c460daa547af75e7d8df127f75c490ebdf3cba01cde3ba577eaea553a7f",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-archss-freeze-20261025-r1/final/demo-entry/readonly.html",
+          "sha256": "a54e3c460daa547af75e7d8df127f75c490ebdf3cba01cde3ba577eaea553a7f"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/demo-entry-ui/contributor.html",
+      "bytes": 1874,
+      "sha256": "e03940f5bae204dafe0e48cec8973c968eb1e7cb67f23f56db3cb6a2d60cd415",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-archss-freeze-20261025-r1/final/demo-entry/contributor.html",
+          "sha256": "e03940f5bae204dafe0e48cec8973c968eb1e7cb67f23f56db3cb6a2d60cd415"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/demo-entry-ui/check-entry.mjs",
+      "bytes": 3848,
+      "sha256": "3192429fcacd592a99a6dfb74df1d7fb23283a5aa019f451576b68f7dff6b5d1",
+      "transformation": "byte-identical source copy",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-local-entry-check-20261025-r1/check-entry.mjs",
+          "sha256": "3192429fcacd592a99a6dfb74df1d7fb23283a5aa019f451576b68f7dff6b5d1"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/demo-entry-ui/evidence/before-result.json",
+      "bytes": 1368,
+      "sha256": "e9fa55b055092a6f489de60073ba2e3079f824c8dcfcc86841d8cfd6ebeea595",
+      "transformation": "JSON derivative: personal absolute paths removed; semantic values unchanged",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-local-entry-check-20261025-r1/before-result.json",
+          "sha256": "e9fa55b055092a6f489de60073ba2e3079f824c8dcfcc86841d8cfd6ebeea595"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/demo-entry-ui/evidence/after-result.json",
+      "bytes": 935,
+      "sha256": "ab7a1c85f923d5907ac9dba7cbb69022133539203e414f5c36055aa59d630d0b",
+      "transformation": "JSON derivative: personal absolute paths removed; semantic values unchanged",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-local-entry-check-20261025-r1/after-result.json",
+          "sha256": "ab7a1c85f923d5907ac9dba7cbb69022133539203e414f5c36055aa59d630d0b"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/demo-entry-ui/evidence/after-final-result.json",
+      "bytes": 878,
+      "sha256": "ffb63cb4ab3fbd8d513cc558653d2134223d1c87adc91617c7da0b51f4b03baa",
+      "transformation": "JSON derivative: personal absolute paths removed; semantic values unchanged",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-local-entry-check-20261025-r1/after-final-result.json",
+          "sha256": "ffb63cb4ab3fbd8d513cc558653d2134223d1c87adc91617c7da0b51f4b03baa"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/demo-entry-ui/README.md",
+      "bytes": 1204,
+      "sha256": "103c33ecf94f6d4c06a20b2ccd9ea153b229e2505e1743ab739bacd6759f3ca2",
+      "transformation": "Public v2 adds observed real browser refresh/history8 from separate DIAGNOSIS evidence; original failing-request cause remains unestablished",
+      "sources": []
+    },
+    {
+      "target": "docs/progress/2026-10-25/ARCHSS-design-report-historical.html",
+      "bytes": 58556,
+      "sha256": "4f6077c6c874cfdecd12466aaedafce74d508dfd4ba0c97bdaa05e7066232863",
+      "transformation": "Public v2 historical report derivative: replace identified individual-review row with aggregate account/audit boundary; original local report and public-v1 package retained",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-archss-freeze-20261025-r1/final/ARCHSS补齐报告.html",
+          "sha256": "38006aee559e73617f62aba6c727497ef92eba6e926f7fcf9a8b14d39af854b1"
+        }
+      ]
+    },
+    {
+      "target": "research/2026-10-25/http-deadline-r10/RUNBOOK.md",
+      "bytes": 4399,
+      "sha256": "6bea7217c0ceee4aa6b1f12505583da8b4bd0ae0be61ef6f9c56451b520cf71b",
+      "transformation": "new publication note; clarify compatible classroom lock provenance and historical installed-module limitation",
+      "sources": []
+    },
+    {
+      "target": "research/2026-10-25/c2-reference/README.md",
+      "bytes": 872,
+      "sha256": "53173df68a6c78537d347a8589aa35723fa89a3eea53082b6db6ec4f9bc50879",
+      "transformation": "new publication note",
+      "sources": []
+    },
+    {
+      "target": "docs/progress/2026-10-25/README.md",
+      "bytes": 3719,
+      "sha256": "b47344d84044dd3a077859a45c2686d4a0894486492567125827f65b8e7872cd",
+      "transformation": "Public v2 uses aggregated personal-review evidence and accurately labels inactive model-capable source",
+      "sources": []
+    },
+    {
+      "target": "RELEASEGUARD_PROGRESS_20261025.md",
+      "bytes": 656,
+      "sha256": "c8197dba37bb485eaea985566f8fe349a329dfe1bde25ee3a7acd68f31737a35",
+      "transformation": "Public v2 wording correction: no live driver or invocation, not an assertion that archived provider/support/Worker source lacks model capability",
+      "sources": []
+    },
+    {
+      "target": "PUBLICATION-SCAN.json",
+      "bytes": 613,
+      "sha256": "336eba93960b586e7bae256858ecf5e2960e9fcc903e1b3e77ee3d166621245c",
+      "transformation": "Public v2 regenerated bounded secret and individual-review minimization scan",
+      "sources": []
+    },
+    {
+      "target": "research/2026-10-25/demo-entry-ui/evidence/DIAGNOSIS-public.json",
+      "sources": [
+        {
+          "path": "outputs/releaseguard-local-entry-check-20261025-r1/DIAGNOSIS.json",
+          "sha256": "2778d9beb5e80e9c45272ad9d9c416d5f1dab7eef7c89b90bebad30d5594fe8f"
+        }
+      ],
+      "bytes": 1996,
+      "sha256": "bff83eabb18aa8a36ef0a5c1f5de2ab8db126dc81e1f7a5d48575ec7c58e992a",
+      "transformation": "Selected diagnosis derivative; screenshot filenames excluded; no tokens or helper backend included"
+    },
+    {
+      "target": "PUBLICATION-REDACTIONS.json",
+      "sources": [],
+      "bytes": 3407,
+      "sha256": "503fe80a7408277a70450280e16309e1f5eee13d3a55a0a7937c2617590d211a",
+      "transformation": "Public v2 minimal redaction receipt; hashes only for removed individual-review paragraph; no removed text republished"
+    }
+  ],
+  "revision": "public-v2",
+  "previousPublicManifestSha256": "d598d85c1882f0796e58b962d14657b55ca697ce9c6c83c9d9a2505778d3f46b"
+}

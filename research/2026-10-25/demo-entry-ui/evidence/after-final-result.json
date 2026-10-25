@@ -1,0 +1,40 @@
+{
+  "at": "2026-10-25T08:10:47.360Z",
+  "mode": "after",
+  "passed": 7,
+  "failed": 0,
+  "tests": [
+    {
+      "name": "successful copy explains manual connection",
+      "passed": true
+    },
+    {
+      "name": "network failure is not a clipboard error",
+      "passed": true
+    },
+    {
+      "name": "origin failure identifies HTTP403",
+      "passed": true
+    },
+    {
+      "name": "clipboard denial does not claim connected",
+      "passed": true
+    },
+    {
+      "name": "clipboard unavailable is distinct",
+      "passed": true
+    },
+    {
+      "name": "invalid response never copies",
+      "passed": true
+    },
+    {
+      "name": "contributor stays contributor",
+      "passed": true
+    }
+  ],
+  "scope": "UI-only deterministic error handling, simulated transport and clipboard; not a live API or replay run",
+  "models": 0,
+  "jobPosts": 0,
+  "cloud": 0
+}

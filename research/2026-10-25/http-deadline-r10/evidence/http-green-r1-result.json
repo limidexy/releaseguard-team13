@@ -1,0 +1,264 @@
+{
+  "mode": "green",
+  "runLabel": "r1",
+  "at": "2026-10-25T07:47:41.707Z",
+  "source": "outputs/releaseguard-http-deadline-offline-20261025-r10/candidate/source",
+  "scope": "isolated local PG/Rabbit and Gateway/Evaluation/Registry only; fault injection is not a cloud root-cause proof",
+  "tests": [
+    {
+      "name": "normal one-shot Gateway submission remains202 and retains job/outbox",
+      "passed": true,
+      "wire": {
+        "status": 202,
+        "raw": "{\"id\":\"e278e983-7f49-4311-90e8-f9f2b83bd9c6\",\"status\":\"queued\",\"replayed\":false}",
+        "json": {
+          "id": "e278e983-7f49-4311-90e8-f9f2b83bd9c6",
+          "status": "queued",
+          "replayed": false
+        },
+        "elapsedMs": 44.37504199999967
+      },
+      "counts": {
+        "jobs": "1",
+        "outbox": "1",
+        "reservations": "1"
+      }
+    },
+    {
+      "name": "actual client close propagates Gateway→Evaluation; pool-queued admission dispatches no SQL",
+      "passed": true,
+      "wire": {
+        "status": null,
+        "error": "controlled-client-close",
+        "elapsedMs": 66.52895799999988
+      },
+      "before": {
+        "jobs": "0",
+        "outbox": "0",
+        "reservations": "1"
+      },
+      "counts": {
+        "jobs": "0",
+        "outbox": "0",
+        "reservations": "1"
+      },
+      "closesObserved": [
+        "gateway",
+        "evaluation"
+      ],
+      "sqlDispatches": 0
+    },
+    {
+      "name": "SQL already dispatched remains wire-unknown after actual close; no automatic resubmission",
+      "passed": true,
+      "wire": {
+        "status": null,
+        "error": "controlled-client-close",
+        "elapsedMs": 12.522375000000466
+      },
+      "counts": {
+        "jobs": "1",
+        "outbox": "1",
+        "reservations": "2"
+      },
+      "sqlDispatches": 1,
+      "postAttempts": 1
+    },
+    {
+      "name": "independently signed expired deadline cannot dispatch a job with connection still open",
+      "passed": true,
+      "wire": {
+        "status": 504,
+        "raw": "{\"error\":\"submission_outcome_unknown\",\"submissionState\":\"unknown\",\"idempotencyKey\":\"r10_expired_76bbab1871\",\"statusUrl\":\"/api/v2/jobs/submissions/r10_expired_76bbab1871\",\"doNotResubmit\":true,\"automaticRetry\":false}",
+        "json": {
+          "error": "submission_outcome_unknown",
+          "submissionState": "unknown",
+          "idempotencyKey": "r10_expired_76bbab1871",
+          "statusUrl": "/api/v2/jobs/submissions/r10_expired_76bbab1871",
+          "doNotResubmit": true,
+          "automaticRetry": false
+        },
+        "elapsedMs": 1.293916999999965
+      },
+      "counts": {
+        "jobs": "0",
+        "outbox": "0",
+        "reservations": "2"
+      }
+    },
+    {
+      "name": "tampered deadline cannot fall back to legacy direct Evaluation",
+      "passed": true,
+      "wire": {
+        "status": 401,
+        "raw": "{\"error\":\"Invalid submission deadline context\"}",
+        "json": {
+          "error": "Invalid submission deadline context"
+        },
+        "elapsedMs": 1.1257089999999152
+      },
+      "counts": {
+        "jobs": "0",
+        "outbox": "0",
+        "reservations": "2"
+      }
+    },
+    {
+      "name": "10s original wire timeout plus injected9200+1100ms cannot become late pre-dispatch commit",
+      "passed": true,
+      "wire": {
+        "status": 504,
+        "raw": "{\"error\":\"submission_outcome_unknown\",\"submissionState\":\"unknown\",\"idempotencyKey\":\"r10_late_76bbab1871\",\"statusUrl\":\"/api/v2/jobs/submissions/r10_late_76bbab1871\",\"doNotResubmit\":true,\"automaticRetry\":false}",
+        "json": {
+          "error": "submission_outcome_unknown",
+          "submissionState": "unknown",
+          "idempotencyKey": "r10_late_76bbab1871",
+          "statusUrl": "/api/v2/jobs/submissions/r10_late_76bbab1871",
+          "doNotResubmit": true,
+          "automaticRetry": false
+        },
+        "elapsedMs": 10003.883333
+      },
+      "counts": {
+        "jobs": "0",
+        "outbox": "0",
+        "reservations": "2"
+      },
+      "before": {
+        "jobs": "0",
+        "outbox": "0",
+        "reservations": "2"
+      },
+      "injectedEvaluationForwardDelayMs": 9200,
+      "injectedRegistryHoldMs": 1100,
+      "deliberatelySuppressedGatewayToEvaluationClose": true
+    },
+    {
+      "name": "actual Registry pool acquisition delay is distinct from SQL round-trip",
+      "passed": true,
+      "wire": {
+        "status": 202,
+        "raw": "{\"id\":\"4aabd1b8-7a62-4bd6-8974-ef9426b59d84\",\"status\":\"queued\",\"replayed\":false}",
+        "json": {
+          "id": "4aabd1b8-7a62-4bd6-8974-ef9426b59d84",
+          "status": "queued",
+          "replayed": false
+        },
+        "elapsedMs": 193.75229199999922
+      },
+      "registrySpan": {
+        "operation": "registry_application",
+        "poolAtRequest": {
+          "total": 8,
+          "idle": 0,
+          "waiting": 0
+        },
+        "poolAtAcquire": {
+          "total": 8,
+          "idle": 7,
+          "waiting": 0
+        },
+        "acquiredMs": 181.45583400000032,
+        "queryDispatchedMs": 181.45912500000122,
+        "queryCompletedMs": 184.01387500000055,
+        "releasedMs": 184.03204200000073,
+        "poolWaitMs": 181.45583400000032,
+        "databaseRoundTripMs": 2.5547499999993306,
+        "totalMs": 184.03220900000088,
+        "outcome": "completed"
+      },
+      "counts": {
+        "jobs": "1",
+        "outbox": "1",
+        "reservations": "3"
+      }
+    }
+  ],
+  "attempts": [
+    {
+      "scenario": "normal",
+      "keySha256": "02575364461cf662108e3f1bed3637e60c9a3c3f447525399a5db612c776e2d9",
+      "sent": 1,
+      "retries": 0
+    },
+    {
+      "scenario": "pool-close",
+      "keySha256": "9287f2ba2fad99a6163bb87ac26fe85e295902795a1b337d1935bdab6c341742",
+      "sent": 1,
+      "retries": 0
+    },
+    {
+      "scenario": "close-after-dispatch",
+      "keySha256": "6c974210bf510407294cf11cdced6ac6c64e04c96290d446e14f7958c6d10a6b",
+      "sent": 1,
+      "retries": 0
+    },
+    {
+      "scenario": "expired-budget",
+      "keySha256": "4fafb2a0e2c2810187018d5051cb166a6bd49d34ed407664aa934b78572da4ff",
+      "sent": 1,
+      "retries": 0
+    },
+    {
+      "scenario": "tampered-budget",
+      "keySha256": "a08bc41e981a615565344190af40dded56d0e24894d474bd927d149ffd8d9977",
+      "sent": 1,
+      "retries": 0
+    },
+    {
+      "scenario": "late-budget-with-delayed-close",
+      "keySha256": "b2c380fdc23e25d207f489f9251aad3559ab051f1546460c3b5ba5cfeb798ccc",
+      "sent": 1,
+      "retries": 0
+    },
+    {
+      "scenario": "registry-pool-wait",
+      "keySha256": "7d65a7c2f1c7bf43a3029da2141b8714c09a2f03969293f3668d5f1819179a2e",
+      "sent": 1,
+      "retries": 0
+    }
+  ],
+  "cloudActions": 0,
+  "modelCalls": 0,
+  "retries": 0,
+  "processes": [
+    {
+      "role": "registry",
+      "pid": 83303,
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "role": "evaluation",
+      "pid": 83324,
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "role": "gateway",
+      "pid": 83325,
+      "exit": 0,
+      "signal": null
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "rg-r10-http-mq-76bbab1871",
+      "id": "69d82e7f5fa7bd1043c95cbaff766697864dde4d61d8b90df8fa693550c22d5e",
+      "removed": true,
+      "nameAbsent": true,
+      "idAbsent": true
+    },
+    {
+      "name": "rg-r10-http-pg-76bbab1871",
+      "id": "b892d7f02837bbe86fbb7448718bc63f9a66119aa222a383f326adaedfdadc61",
+      "removed": true,
+      "nameAbsent": true,
+      "idAbsent": true
+    }
+  ],
+  "remainingLabelledContainers": [],
+  "passed": 7,
+  "failed": 0,
+  "status": "REGRESSIONS_PASSED"
+}

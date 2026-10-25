@@ -1,0 +1,59 @@
+{
+  "at": "2026-10-25T08:16:39.605Z",
+  "revision": "public-v2-minimization",
+  "previousPublicManifestSha256": "d598d85c1882f0796e58b962d14657b55ca697ce9c6c83c9d9a2505778d3f46b",
+  "originalLocalRecordsUnchanged": true,
+  "previousPackageRetainedLocally": true,
+  "paragraphRedactions": [
+    {
+      "target": "docs/progress/2026-10-25/ARCHSS-design-report-historical.html",
+      "section": "F / individual review row",
+      "originalLocalParagraphSha256": "6543c5aa8aa6e0d48fdcd75b0a8c503463fa3a4c5c7d1ae8acc54f62c79525ad",
+      "replacementParagraphSha256": "311d9d989ce075c0dcc3348a8327861755670930f1cb7d76205fcc8e3e27b703",
+      "removedCategories": [
+        "individual identifiers",
+        "individual rationale critique",
+        "personal addendum/signature details"
+      ],
+      "replacement": "aggregate account/audit boundary only"
+    }
+  ],
+  "changed": [
+    {
+      "target": "docs/progress/2026-10-25/evidence/personal-review-summary.json",
+      "previousPublicSha256": "cba09380925abbab3a68097bd7cf2c617176ca03028d44173662ec4599ae80fc",
+      "publicSha256": "b584c531b7a8f116f2e4f146bdcc1acc936af15a3920fab358c5f0883507d2ab",
+      "transformation": "Public v2 aggregate only; names, usernames, IDs, times, note/addendum assessment and all individual details excluded; originals retained locally"
+    },
+    {
+      "target": "docs/progress/2026-10-25/ARCHSS-design-report-historical.html",
+      "previousPublicSha256": "94bd11c418bf80daefcbcc6af14792f9227d3add5166ed4beac82793c9f4774e",
+      "publicSha256": "4f6077c6c874cfdecd12466aaedafce74d508dfd4ba0c97bdaa05e7066232863",
+      "transformation": "Public v2 historical report derivative: replace identified individual-review row with aggregate account/audit boundary; original local report and public-v1 package retained"
+    },
+    {
+      "target": "RELEASEGUARD_PROGRESS_20261025.md",
+      "previousPublicSha256": "fa113d7c39800ad9e6e1e08cf829a20ad495fd440fd2930b225de0c80dbd3b9d",
+      "publicSha256": "c8197dba37bb485eaea985566f8fe349a329dfe1bde25ee3a7acd68f31737a35",
+      "transformation": "Public v2 wording correction: no live driver or invocation, not an assertion that archived provider/support/Worker source lacks model capability"
+    },
+    {
+      "target": "research/2026-10-25/demo-entry-ui/README.md",
+      "previousPublicSha256": "767a8980d8f5016e41d52fdc417da532a68eda049ef233d771da896551de18b2",
+      "publicSha256": "103c33ecf94f6d4c06a20b2ccd9ea153b229e2505e1743ab739bacd6759f3ca2",
+      "transformation": "Public v2 adds observed real browser refresh/history8 from separate DIAGNOSIS evidence; original failing-request cause remains unestablished"
+    },
+    {
+      "target": "research/2026-10-25/demo-entry-ui/evidence/DIAGNOSIS-public.json",
+      "previousPublicSha256": null,
+      "publicSha256": "bff83eabb18aa8a36ef0a5c1f5de2ab8db126dc81e1f7a5d48575ec7c58e992a",
+      "transformation": "Selected diagnosis derivative; screenshot filenames excluded; no tokens or helper backend included"
+    },
+    {
+      "target": "docs/progress/2026-10-25/README.md",
+      "previousPublicSha256": "9e3f9a251dfb282d8bfbe24bef2b37960d24b8b56f8a86fbb87025617c6a9ba7",
+      "publicSha256": "b47344d84044dd3a077859a45c2686d4a0894486492567125827f65b8e7872cd",
+      "transformation": "Public v2 uses aggregated personal-review evidence and accurately labels inactive model-capable source"
+    }
+  ]
+}

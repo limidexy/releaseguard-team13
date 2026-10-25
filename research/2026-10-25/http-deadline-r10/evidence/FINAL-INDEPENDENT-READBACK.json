@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-25T08:02:57.139Z",
+  "status": "INDEPENDENT_FINAL_READBACK_PASSED",
+  "frozenFilesChecked": 118,
+  "mismatches": [],
+  "planCodeHashesMatched": 10,
+  "remainingTemporaryContainersForOwnLabel": [],
+  "media": [
+    {
+      "name": "classroom",
+      "durationSeconds": 465,
+      "audioTracks": 0,
+      "readerCompleted": true,
+      "selectedDecodedFrames": 16
+    },
+    {
+      "name": "backup",
+      "durationSeconds": 720,
+      "audioTracks": 0,
+      "readerCompleted": true,
+      "selectedDecodedFrames": 16
+    }
+  ],
+  "rootSelectedFramesInspected": [
+    "classroom throughput",
+    "classroom failing replay evidence",
+    "classroom CI saved screenshot",
+    "classroom opening"
+  ],
+  "limits": [
+    "Video shows read-only browser navigation with saved local and historical evidence, not a new live cloud workload",
+    "No fresh GCP free/clock/node-state verification or cloud probe was performed",
+    "No full production root-cause or throughput/scaling benefit claim"
+  ]
+}

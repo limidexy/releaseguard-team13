@@ -1,0 +1,224 @@
+{
+  "at": "2026-10-24T13:50:06.977Z",
+  "experimentId": "c2-schema-semantic-single-20261024T134901-07510d89",
+  "status": "C2_SINGLE_SCHEMA_AND_TARGETED_SEMANTICS_PASSED",
+  "requests": 1,
+  "maximumRequests": 1,
+  "retries": 0,
+  "customerGeneration": 0,
+  "modelSwitches": 0,
+  "schemaAcceptance": {
+    "httpStatus": 200,
+    "httpAccepted": true,
+    "fullResponseAvailable": true,
+    "localSchemaPassed": true
+  },
+  "protocol": {
+    "httpAccepted": true,
+    "responseComplete": true,
+    "finishStop": true,
+    "modelMatched": true,
+    "c2SchemaPassed": true,
+    "c2LocalValidationPassed": true,
+    "sourceAndBindingPassed": true,
+    "errors": [],
+    "passed": true
+  },
+  "semantic": {
+    "evaluated": true,
+    "rawPropositionComparison": [
+      {
+        "unit": "u001",
+        "expected": [
+          [
+            "unused",
+            "general_policy",
+            "requirement",
+            "answerer",
+            "endorsed",
+            null,
+            "not_applicable"
+          ],
+          [
+            "purchaseWindow",
+            "general_policy",
+            "requirement",
+            "answerer",
+            "endorsed",
+            null,
+            "purchase"
+          ],
+          [
+            "receipt",
+            "general_policy",
+            "requirement",
+            "answerer",
+            "endorsed",
+            null,
+            "not_applicable"
+          ]
+        ],
+        "actual": [
+          [
+            "unused",
+            "general_policy",
+            "requirement",
+            "answerer",
+            "endorsed",
+            null,
+            "not_applicable"
+          ],
+          [
+            "purchaseWindow",
+            "general_policy",
+            "requirement",
+            "answerer",
+            "endorsed",
+            null,
+            "purchase"
+          ],
+          [
+            "receipt",
+            "general_policy",
+            "requirement",
+            "answerer",
+            "endorsed",
+            null,
+            "not_applicable"
+          ]
+        ],
+        "matched": true
+      },
+      {
+        "unit": "u002",
+        "expected": [
+          [
+            "purchaseWindow",
+            "this_case",
+            "satisfied",
+            "answerer",
+            "endorsed",
+            null,
+            "not_applicable"
+          ]
+        ],
+        "actual": [
+          [
+            "purchaseWindow",
+            "this_case",
+            "satisfied",
+            "answerer",
+            "endorsed",
+            null,
+            "not_applicable"
+          ]
+        ],
+        "matched": true
+      },
+      {
+        "unit": "u003",
+        "expected": [
+          [
+            "overallEligibility",
+            "this_case",
+            "satisfied",
+            "answerer",
+            "endorsed",
+            null,
+            "not_applicable"
+          ]
+        ],
+        "actual": [
+          [
+            "overallEligibility",
+            "this_case",
+            "satisfied",
+            "answerer",
+            "endorsed",
+            null,
+            "not_applicable"
+          ]
+        ],
+        "matched": true
+      },
+      {
+        "unit": "u004",
+        "expected": [
+          [
+            "unused",
+            "general_policy",
+            "waiver_or_relaxation",
+            "answerer",
+            "endorsed",
+            null,
+            "not_applicable"
+          ]
+        ],
+        "actual": [
+          [
+            "unused",
+            "general_policy",
+            "waiver_or_relaxation",
+            "answerer",
+            "endorsed",
+            null,
+            "not_applicable"
+          ]
+        ],
+        "matched": true
+      }
+    ],
+    "allRawPropositionsMatch": true,
+    "rawCaseWindow": "passed",
+    "expectedCaseWindow": "passed",
+    "caseWindowMatched": true,
+    "expectedStandardPolicy": "failed",
+    "programStandardPolicy": "failed",
+    "policyMatched": true,
+    "policyAuditComparison": [
+      {
+        "field": "unused",
+        "expected": "expressed",
+        "actual": "expressed"
+      },
+      {
+        "field": "receipt",
+        "expected": "expressed",
+        "actual": "expressed"
+      },
+      {
+        "field": "purchaseWindow",
+        "expected": "expressed",
+        "actual": "expressed"
+      },
+      {
+        "field": "purchaseAnchor",
+        "expected": "purchase",
+        "actual": "purchase"
+      },
+      {
+        "field": "wholeAnswer",
+        "expected": "contradicted",
+        "actual": "contradicted"
+      }
+    ],
+    "policyAuditMatched": true,
+    "protocolFailureIsNotSemanticSuccess": true
+  },
+  "usage": {
+    "prompt_tokens": 4203,
+    "completion_tokens": 1745,
+    "total_tokens": 5948
+  },
+  "actualTokenConsumptionKnown": true,
+  "unknownUsageReserve": 0,
+  "frozenFilesVerified": 1439,
+  "shadowOnly": true,
+  "reviewer": "calibration_pending",
+  "formalWorkerUnchanged": true,
+  "deployment": false,
+  "push": false,
+  "oldExperimentsUnchanged": true,
+  "scope": "One unchanged development sample only. Does not validate the other15, original80, or production/general semantic reliability.",
+  "artifactType": "Derived selected result; not raw model output. Original extraction and program summary remain separate locally."
+}

@@ -1,0 +1,47 @@
+{
+  "revision": "r16-consistency-c2-unenabled",
+  "status": "OFFLINE_PROGRAM_FIXES_VERIFIED_PROVIDER_AND_SEMANTICS_UNVALIDATED",
+  "scope": "new independent directory only",
+  "tests": {
+    "red": {
+      "tests": 42,
+      "pass": 36,
+      "fail": 6,
+      "skipped": 0
+    },
+    "green": {
+      "tests": 42,
+      "pass": 42,
+      "fail": 0,
+      "skipped": 0
+    },
+    "c1-compatibility": {
+      "tests": 40,
+      "pass": 40,
+      "fail": 0,
+      "skipped": 0
+    }
+  },
+  "frozenFiles": {
+    "manifestSha256": "9cb34dd43512ad8a6e95595ad1e9f85cb0ed8e7c1fa79d0fbce657f957dde419",
+    "filesChecked": 1307,
+    "changedOrMissing": []
+  },
+  "realRequestsIssuedByThisTask": 0,
+  "customerGeneration": 0,
+  "deployment": false,
+  "push": false,
+  "enabled": false,
+  "changes": [
+    "endorsed attributed propositions are not discarded",
+    "aggregate anchors by set priority not last value",
+    "flatten target nullable anyOf into equivalent typed enum",
+    "retain C1 guards and raw model outputs"
+  ],
+  "notProven": [
+    "provider accepts simplified schema",
+    "model scope/stance/attribution correctness",
+    "end-to-end semantic reliability"
+  ],
+  "frozenExperimentsOverwritten": false
+}

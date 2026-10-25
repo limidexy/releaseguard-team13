@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-25T07:48:19.457Z",
+  "originalEvidence": "http-green-r1-result.json",
+  "originalUnmodified": true,
+  "mutations": 0,
+  "containers": [
+    {
+      "name": "rg-r10-http-mq-76bbab1871",
+      "id": "69d82e7f5fa7bd1043c95cbaff766697864dde4d61d8b90df8fa693550c22d5e",
+      "nameAbsent": true,
+      "idAbsent": true
+    },
+    {
+      "name": "rg-r10-http-pg-76bbab1871",
+      "id": "b892d7f02837bbe86fbb7448718bc63f9a66119aa222a383f326adaedfdadc61",
+      "nameAbsent": true,
+      "idAbsent": true
+    }
+  ],
+  "remainingByLabels": [
+    {
+      "tag": "76bbab1871",
+      "containers": []
+    },
+    {
+      "tag": "76bbab1871",
+      "containers": []
+    }
+  ],
+  "verifiedAllRemoved": true
+}

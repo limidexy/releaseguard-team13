@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-25T07:58:07.512Z",
+  "originalEvidence": "http-green-registry-close-diagnostic-r2-result.json",
+  "originalUnmodified": true,
+  "mutations": 0,
+  "containers": [
+    {
+      "name": "rg-r10-http-mq-997ec48450",
+      "id": "cb743fe3e4ff79b12fd69a07553fe3309bccae7f156cd18405cb9f6afc1bcecc",
+      "nameAbsent": true,
+      "idAbsent": true
+    },
+    {
+      "name": "rg-r10-http-pg-997ec48450",
+      "id": "fb8718b041786f60d9ae3ab5a9071360f6ee48bc1ab41e2b93c6c93b068ee786",
+      "nameAbsent": true,
+      "idAbsent": true
+    }
+  ],
+  "remainingByLabels": [
+    {
+      "tag": "997ec48450",
+      "containers": []
+    },
+    {
+      "tag": "997ec48450",
+      "containers": []
+    }
+  ],
+  "verifiedAllRemoved": true
+}

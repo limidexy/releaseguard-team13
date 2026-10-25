@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-25T08:00:57.055Z",
+  "status": "VERIFIED_OFFLINE_DELIVERY_NOT_CLOUD_DEPLOYMENT",
+  "priorFiles": 100,
+  "priorChanges": [],
+  "protectedChecks": 13,
+  "sourceCompiled": true,
+  "wireTests": 72,
+  "httpCases": 7,
+  "independentCloseCases": 1,
+  "oldFailedInitializationsPreserved": true,
+  "cleanupReadbacks": 5,
+  "localLinksChecked": 11,
+  "brokenLinks": [],
+  "manifestFiles": 118,
+  "cloudActions": 0,
+  "models": 0,
+  "deployments": 0,
+  "pushes": 0
+}

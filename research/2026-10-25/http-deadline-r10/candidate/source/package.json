@@ -1,0 +1,28 @@
+{
+  "name": "releaseguard-course-v2",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/src/main.js",
+    "test": "npm run build && node --test dist/tests/*.test.js",
+    "tokens": "node scripts/dev-tokens.mjs",
+    "verify": "node scripts/verify.mjs",
+    "benchmark": "node scripts/benchmark.mjs"
+  },
+  "dependencies": {
+    "amqplib": "2.2.0",
+    "fastify": "5.12.5",
+    "jose": "^6.1.0",
+    "pg": "^8.16.3",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/amqplib": "^0.10.7",
+    "@types/node": "^24.0.0",
+    "@types/pg": "^8.15.5",
+    "typescript": "^5.9.3"
+  }
+}

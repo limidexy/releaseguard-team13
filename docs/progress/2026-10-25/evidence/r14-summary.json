@@ -1,0 +1,549 @@
+{
+  "artifactType": "Derived minimal historical summary, not raw model output",
+  "historicalZeroCallExperiment": {
+    "experimentId": "standard-policy-r14-full16-2026-10-22-e0c0db01",
+    "savedAt": "2026-10-22T14:10:56.864Z",
+    "status": "NOT_EXECUTED_FREE_BUDGET_INSUFFICIENT",
+    "planned": 16,
+    "attempted": 0,
+    "notExecuted": 16
+  },
+  "independentRealExperiment": {
+    "experimentId": "standard-policy-r14-full16-2026-10-23-d3ebca05",
+    "savedAt": "2026-10-23T12:00:07.321Z",
+    "status": "R14_FULL16_VALIDATION_INCOMPLETE",
+    "planned": 16,
+    "attempted": 16,
+    "notExecuted": 0
+  },
+  "counts": {
+    "planned": 16,
+    "attempted": 16,
+    "notExecuted": 0,
+    "protocolValid": 14,
+    "schemaPassed": 14,
+    "evidencePassed": 14,
+    "targetMatches": 14,
+    "expectedPassCorrect": 8,
+    "expectedFailCorrect": 6,
+    "falsePolicyPass": 0,
+    "falsePolicyFail": 0,
+    "unverifiable": 0,
+    "componentAuditMatches": 11,
+    "targetAndComponentsCorrect": 11,
+    "caseWindowMatches": 14,
+    "allMeasuredJudgmentsCorrect": 11,
+    "unusedCoverageMatches": 12,
+    "falseUnusedMissing": 2,
+    "reportedUsageRequests": 14,
+    "unknownUsageRequests": 2
+  },
+  "modelAndProgramSeparation": {
+    "modelRawPolicyGrade": null,
+    "programPolicyOrigin": "deterministic_projection_from_model_extraction",
+    "componentExtractionAndAggregationReportedSeparately": true,
+    "noRawOutputEdited": true,
+    "noHistoricalResultRegraded": true,
+    "otherUnmeasuredRulesNotAssumedCorrect": true
+  },
+  "usage": {
+    "reportedRequests": 14,
+    "unknownUsageRequests": 2,
+    "knownReportedTokens": {
+      "prompt_tokens": 53665,
+      "completion_tokens": 17372,
+      "total_tokens": 71037
+    },
+    "completeTotalTokens": null,
+    "unknownIsNotZero": true
+  },
+  "referenceSource": "Existing project AI annotations plus separately frozen policy-component and case-window annotations; not human blind review. Bound question/facts/decision/contract/answer/policy and original STANDARD_POLICY labels unchanged.",
+  "rows": [
+    {
+      "sequence": 1,
+      "anonymousId": "s-36ef39dc5248c00c",
+      "executed": true,
+      "protocolValid": true,
+      "modelRawExtractionSummary": {
+        "unused": "missing",
+        "receipt": "expressed",
+        "purchaseWindow": "expressed",
+        "purchaseAnchor": "purchase",
+        "rawStandardPolicyGrade": null,
+        "note": "Selected typed status fields from saved extraction, not the original full response. Quotes and original reasons are not copied or changed."
+      },
+      "programAggregation": {
+        "standardPolicy": "failed",
+        "wholeAnswer": "contradicted",
+        "origin": "deterministic_projection_from_model_extraction",
+        "targetMatchesReference": true,
+        "componentAuditMatches": false,
+        "caseWindowMatches": true
+      },
+      "referenceMismatches": [
+        {
+          "field": "unused",
+          "expected": "expressed",
+          "actual": "missing"
+        }
+      ],
+      "protocolErrors": [],
+      "reportedTokenUsage": {
+        "prompt_tokens": 3844,
+        "completion_tokens": 1300,
+        "total_tokens": 5144
+      },
+      "semanticEvaluation": "Recorded frozen references, no regrading"
+    },
+    {
+      "sequence": 2,
+      "anonymousId": "s-e93026cbe1bb7723",
+      "executed": true,
+      "protocolValid": true,
+      "modelRawExtractionSummary": {
+        "unused": "expressed",
+        "receipt": "expressed",
+        "purchaseWindow": "expressed",
+        "purchaseAnchor": "purchase",
+        "rawStandardPolicyGrade": null,
+        "note": "Selected typed status fields from saved extraction, not the original full response. Quotes and original reasons are not copied or changed."
+      },
+      "programAggregation": {
+        "standardPolicy": "passed",
+        "wholeAnswer": "consistent",
+        "origin": "deterministic_projection_from_model_extraction",
+        "targetMatchesReference": true,
+        "componentAuditMatches": true,
+        "caseWindowMatches": true
+      },
+      "referenceMismatches": [],
+      "protocolErrors": [],
+      "reportedTokenUsage": {
+        "prompt_tokens": 3812,
+        "completion_tokens": 1033,
+        "total_tokens": 4845
+      },
+      "semanticEvaluation": "Recorded frozen references, no regrading"
+    },
+    {
+      "sequence": 3,
+      "anonymousId": "s-471689b74617927c",
+      "executed": true,
+      "protocolValid": true,
+      "modelRawExtractionSummary": {
+        "unused": "missing",
+        "receipt": "expressed",
+        "purchaseWindow": "expressed",
+        "purchaseAnchor": "purchase",
+        "rawStandardPolicyGrade": null,
+        "note": "Selected typed status fields from saved extraction, not the original full response. Quotes and original reasons are not copied or changed."
+      },
+      "programAggregation": {
+        "standardPolicy": "failed",
+        "wholeAnswer": "consistent",
+        "origin": "deterministic_projection_from_model_extraction",
+        "targetMatchesReference": true,
+        "componentAuditMatches": true,
+        "caseWindowMatches": true
+      },
+      "referenceMismatches": [],
+      "protocolErrors": [],
+      "reportedTokenUsage": {
+        "prompt_tokens": 3808,
+        "completion_tokens": 1368,
+        "total_tokens": 5176
+      },
+      "semanticEvaluation": "Recorded frozen references, no regrading"
+    },
+    {
+      "sequence": 4,
+      "anonymousId": "s-6a6c04343c584af1",
+      "executed": true,
+      "protocolValid": true,
+      "modelRawExtractionSummary": {
+        "unused": "expressed",
+        "receipt": "expressed",
+        "purchaseWindow": "expressed",
+        "purchaseAnchor": "purchase",
+        "rawStandardPolicyGrade": null,
+        "note": "Selected typed status fields from saved extraction, not the original full response. Quotes and original reasons are not copied or changed."
+      },
+      "programAggregation": {
+        "standardPolicy": "failed",
+        "wholeAnswer": "contradicted",
+        "origin": "deterministic_projection_from_model_extraction",
+        "targetMatchesReference": true,
+        "componentAuditMatches": true,
+        "caseWindowMatches": true
+      },
+      "referenceMismatches": [],
+      "protocolErrors": [],
+      "reportedTokenUsage": {
+        "prompt_tokens": 3840,
+        "completion_tokens": 1465,
+        "total_tokens": 5305
+      },
+      "semanticEvaluation": "Recorded frozen references, no regrading"
+    },
+    {
+      "sequence": 5,
+      "anonymousId": "s-63e7ac25c6abc987",
+      "executed": true,
+      "protocolValid": true,
+      "modelRawExtractionSummary": {
+        "unused": "expressed",
+        "receipt": "expressed",
+        "purchaseWindow": "expressed",
+        "purchaseAnchor": "purchase",
+        "rawStandardPolicyGrade": null,
+        "note": "Selected typed status fields from saved extraction, not the original full response. Quotes and original reasons are not copied or changed."
+      },
+      "programAggregation": {
+        "standardPolicy": "passed",
+        "wholeAnswer": "consistent",
+        "origin": "deterministic_projection_from_model_extraction",
+        "targetMatchesReference": true,
+        "componentAuditMatches": true,
+        "caseWindowMatches": true
+      },
+      "referenceMismatches": [],
+      "protocolErrors": [],
+      "reportedTokenUsage": {
+        "prompt_tokens": 3851,
+        "completion_tokens": 1104,
+        "total_tokens": 4955
+      },
+      "semanticEvaluation": "Recorded frozen references, no regrading"
+    },
+    {
+      "sequence": 6,
+      "anonymousId": "s-d92651bdc97df27b",
+      "executed": true,
+      "protocolValid": true,
+      "modelRawExtractionSummary": {
+        "unused": "expressed",
+        "receipt": "expressed",
+        "purchaseWindow": "expressed",
+        "purchaseAnchor": "purchase",
+        "rawStandardPolicyGrade": null,
+        "note": "Selected typed status fields from saved extraction, not the original full response. Quotes and original reasons are not copied or changed."
+      },
+      "programAggregation": {
+        "standardPolicy": "passed",
+        "wholeAnswer": "consistent",
+        "origin": "deterministic_projection_from_model_extraction",
+        "targetMatchesReference": true,
+        "componentAuditMatches": true,
+        "caseWindowMatches": true
+      },
+      "referenceMismatches": [],
+      "protocolErrors": [],
+      "reportedTokenUsage": {
+        "prompt_tokens": 3850,
+        "completion_tokens": 971,
+        "total_tokens": 4821
+      },
+      "semanticEvaluation": "Recorded frozen references, no regrading"
+    },
+    {
+      "sequence": 7,
+      "anonymousId": "s-d1ff3514a777ec14",
+      "executed": true,
+      "protocolValid": false,
+      "modelRawExtractionSummary": null,
+      "programAggregation": null,
+      "referenceMismatches": [],
+      "protocolErrors": [
+        "Groq review HTTP 400; raw evidence docs/evidence/standard-policy-r14-full16-2026-10-23-r1/raw-provider/s-d1ff3514a777ec14-35de4175434ac222.provider.json"
+      ],
+      "reportedTokenUsage": null,
+      "semanticEvaluation": "Unavailable: protocol failure is not semantic success"
+    },
+    {
+      "sequence": 8,
+      "anonymousId": "s-9ae90fb64b23942a",
+      "executed": true,
+      "protocolValid": true,
+      "modelRawExtractionSummary": {
+        "unused": "expressed",
+        "receipt": "expressed",
+        "purchaseWindow": "missing",
+        "purchaseAnchor": "missing",
+        "rawStandardPolicyGrade": null,
+        "note": "Selected typed status fields from saved extraction, not the original full response. Quotes and original reasons are not copied or changed."
+      },
+      "programAggregation": {
+        "standardPolicy": "failed",
+        "wholeAnswer": "consistent",
+        "origin": "deterministic_projection_from_model_extraction",
+        "targetMatchesReference": true,
+        "componentAuditMatches": true,
+        "caseWindowMatches": true
+      },
+      "referenceMismatches": [],
+      "protocolErrors": [],
+      "reportedTokenUsage": {
+        "prompt_tokens": 3800,
+        "completion_tokens": 1060,
+        "total_tokens": 4860
+      },
+      "semanticEvaluation": "Recorded frozen references, no regrading"
+    },
+    {
+      "sequence": 9,
+      "anonymousId": "s-335a81d1a1bd33c9",
+      "executed": true,
+      "protocolValid": false,
+      "modelRawExtractionSummary": null,
+      "programAggregation": null,
+      "referenceMismatches": [],
+      "protocolErrors": [
+        "Groq review HTTP 400; raw evidence docs/evidence/standard-policy-r14-full16-2026-10-23-r1/raw-provider/s-335a81d1a1bd33c9-cee245712012ef71.provider.json"
+      ],
+      "reportedTokenUsage": null,
+      "semanticEvaluation": "Unavailable: protocol failure is not semantic success"
+    },
+    {
+      "sequence": 10,
+      "anonymousId": "s-329a18200506f0a7",
+      "executed": true,
+      "protocolValid": true,
+      "modelRawExtractionSummary": {
+        "unused": "expressed",
+        "receipt": "expressed",
+        "purchaseWindow": "expressed",
+        "purchaseAnchor": "purchase",
+        "rawStandardPolicyGrade": null,
+        "note": "Selected typed status fields from saved extraction, not the original full response. Quotes and original reasons are not copied or changed."
+      },
+      "programAggregation": {
+        "standardPolicy": "passed",
+        "wholeAnswer": "consistent",
+        "origin": "deterministic_projection_from_model_extraction",
+        "targetMatchesReference": true,
+        "componentAuditMatches": true,
+        "caseWindowMatches": true
+      },
+      "referenceMismatches": [],
+      "protocolErrors": [],
+      "reportedTokenUsage": {
+        "prompt_tokens": 3855,
+        "completion_tokens": 1060,
+        "total_tokens": 4915
+      },
+      "semanticEvaluation": "Recorded frozen references, no regrading"
+    },
+    {
+      "sequence": 11,
+      "anonymousId": "s-0b9f486a9c148e25",
+      "executed": true,
+      "protocolValid": true,
+      "modelRawExtractionSummary": {
+        "unused": "expressed",
+        "receipt": "expressed",
+        "purchaseWindow": "expressed",
+        "purchaseAnchor": "purchase",
+        "rawStandardPolicyGrade": null,
+        "note": "Selected typed status fields from saved extraction, not the original full response. Quotes and original reasons are not copied or changed."
+      },
+      "programAggregation": {
+        "standardPolicy": "passed",
+        "wholeAnswer": "consistent",
+        "origin": "deterministic_projection_from_model_extraction",
+        "targetMatchesReference": true,
+        "componentAuditMatches": true,
+        "caseWindowMatches": true
+      },
+      "referenceMismatches": [],
+      "protocolErrors": [],
+      "reportedTokenUsage": {
+        "prompt_tokens": 3854,
+        "completion_tokens": 1085,
+        "total_tokens": 4939
+      },
+      "semanticEvaluation": "Recorded frozen references, no regrading"
+    },
+    {
+      "sequence": 12,
+      "anonymousId": "s-88d7d49c398b5937",
+      "executed": true,
+      "protocolValid": true,
+      "modelRawExtractionSummary": {
+        "unused": "expressed",
+        "receipt": "expressed",
+        "purchaseWindow": "expressed",
+        "purchaseAnchor": "purchase",
+        "rawStandardPolicyGrade": null,
+        "note": "Selected typed status fields from saved extraction, not the original full response. Quotes and original reasons are not copied or changed."
+      },
+      "programAggregation": {
+        "standardPolicy": "passed",
+        "wholeAnswer": "consistent",
+        "origin": "deterministic_projection_from_model_extraction",
+        "targetMatchesReference": true,
+        "componentAuditMatches": true,
+        "caseWindowMatches": true
+      },
+      "referenceMismatches": [],
+      "protocolErrors": [],
+      "reportedTokenUsage": {
+        "prompt_tokens": 3826,
+        "completion_tokens": 1333,
+        "total_tokens": 5159
+      },
+      "semanticEvaluation": "Recorded frozen references, no regrading"
+    },
+    {
+      "sequence": 13,
+      "anonymousId": "s-86870962f79a5b56",
+      "executed": true,
+      "protocolValid": true,
+      "modelRawExtractionSummary": {
+        "unused": "missing",
+        "receipt": "missing",
+        "purchaseWindow": "missing",
+        "purchaseAnchor": "missing",
+        "rawStandardPolicyGrade": null,
+        "note": "Selected typed status fields from saved extraction, not the original full response. Quotes and original reasons are not copied or changed."
+      },
+      "programAggregation": {
+        "standardPolicy": "failed",
+        "wholeAnswer": "consistent",
+        "origin": "deterministic_projection_from_model_extraction",
+        "targetMatchesReference": true,
+        "componentAuditMatches": false,
+        "caseWindowMatches": true
+      },
+      "referenceMismatches": [
+        {
+          "field": "unused",
+          "expected": "expressed",
+          "actual": "missing"
+        },
+        {
+          "field": "purchaseWindow",
+          "expected": "expressed",
+          "actual": "missing"
+        },
+        {
+          "field": "purchaseAnchor",
+          "expected": "purchase",
+          "actual": "missing"
+        }
+      ],
+      "protocolErrors": [],
+      "reportedTokenUsage": {
+        "prompt_tokens": 3810,
+        "completion_tokens": 1577,
+        "total_tokens": 5387
+      },
+      "semanticEvaluation": "Recorded frozen references, no regrading"
+    },
+    {
+      "sequence": 14,
+      "anonymousId": "s-ceaf396942934245",
+      "executed": true,
+      "protocolValid": true,
+      "modelRawExtractionSummary": {
+        "unused": "expressed",
+        "receipt": "missing",
+        "purchaseWindow": "expressed",
+        "purchaseAnchor": "purchase",
+        "rawStandardPolicyGrade": null,
+        "note": "Selected typed status fields from saved extraction, not the original full response. Quotes and original reasons are not copied or changed."
+      },
+      "programAggregation": {
+        "standardPolicy": "failed",
+        "wholeAnswer": "contradicted",
+        "origin": "deterministic_projection_from_model_extraction",
+        "targetMatchesReference": true,
+        "componentAuditMatches": false,
+        "caseWindowMatches": true
+      },
+      "referenceMismatches": [
+        {
+          "field": "receipt",
+          "expected": "expressed",
+          "actual": "missing"
+        }
+      ],
+      "protocolErrors": [],
+      "reportedTokenUsage": {
+        "prompt_tokens": 3830,
+        "completion_tokens": 1582,
+        "total_tokens": 5412
+      },
+      "semanticEvaluation": "Recorded frozen references, no regrading"
+    },
+    {
+      "sequence": 15,
+      "anonymousId": "s-cca77b78ef4d1d7d",
+      "executed": true,
+      "protocolValid": true,
+      "modelRawExtractionSummary": {
+        "unused": "expressed",
+        "receipt": "expressed",
+        "purchaseWindow": "expressed",
+        "purchaseAnchor": "purchase",
+        "rawStandardPolicyGrade": null,
+        "note": "Selected typed status fields from saved extraction, not the original full response. Quotes and original reasons are not copied or changed."
+      },
+      "programAggregation": {
+        "standardPolicy": "passed",
+        "wholeAnswer": "consistent",
+        "origin": "deterministic_projection_from_model_extraction",
+        "targetMatchesReference": true,
+        "componentAuditMatches": true,
+        "caseWindowMatches": true
+      },
+      "referenceMismatches": [],
+      "protocolErrors": [],
+      "reportedTokenUsage": {
+        "prompt_tokens": 3843,
+        "completion_tokens": 1389,
+        "total_tokens": 5232
+      },
+      "semanticEvaluation": "Recorded frozen references, no regrading"
+    },
+    {
+      "sequence": 16,
+      "anonymousId": "s-0780329e59286a3b",
+      "executed": true,
+      "protocolValid": true,
+      "modelRawExtractionSummary": {
+        "unused": "expressed",
+        "receipt": "expressed",
+        "purchaseWindow": "expressed",
+        "purchaseAnchor": "purchase",
+        "rawStandardPolicyGrade": null,
+        "note": "Selected typed status fields from saved extraction, not the original full response. Quotes and original reasons are not copied or changed."
+      },
+      "programAggregation": {
+        "standardPolicy": "passed",
+        "wholeAnswer": "consistent",
+        "origin": "deterministic_projection_from_model_extraction",
+        "targetMatchesReference": true,
+        "componentAuditMatches": true,
+        "caseWindowMatches": true
+      },
+      "referenceMismatches": [],
+      "protocolErrors": [],
+      "reportedTokenUsage": {
+        "prompt_tokens": 3842,
+        "completion_tokens": 1045,
+        "total_tokens": 4887
+      },
+      "semanticEvaluation": "Recorded frozen references, no regrading"
+    }
+  ],
+  "outcome": "R14_FULL16_VALIDATION_INCOMPLETE. 14/16 protocol valid. All measured judgments match in 11/16. This is not a 16/16 semantic pass.",
+  "unchanged": {
+    "customerGenerationHistoricalScores": [
+      70,
+      75
+    ],
+    "shadowOnly": true,
+    "reviewer": "calibration_pending"
+  },
+  "newModelCallsByThisPackagingTask": 0
+}

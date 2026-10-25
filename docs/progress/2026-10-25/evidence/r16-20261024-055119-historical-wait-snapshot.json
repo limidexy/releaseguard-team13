@@ -1,0 +1,37 @@
+{
+  "artifactType": "Derived historical snapshot summary, not a new experiment or live quota check",
+  "originalZeroCallExperiment": {
+    "experimentId": "standard-policy-r16-full16-2026-10-23-52f52753",
+    "savedAt": "2026-10-23T12:56:47.168Z",
+    "status": "NOT_EXECUTED_FREE_BUDGET_INSUFFICIENT",
+    "planned": 16,
+    "attempted": 0,
+    "notExecuted": 16
+  },
+  "separatelyAuthorizedWaitingSnapshot": {
+    "savedAt": "2026-10-24T05:51:19Z",
+    "authorizationId": "releaseguard-r16-quota-wait-once-20261023",
+    "status": "WAITING_FOR_VERIFIED_SUFFICIENT_FREE_BUDGET",
+    "terminal": false,
+    "attempted": 0,
+    "planned": 16,
+    "notExecuted": 16,
+    "startedLockOrAttemptLedgerFound": false,
+    "frozenManifestSha256": "9cb34dd43512ad8a6e95595ad1e9f85cb0ed8e7c1fa79d0fbce657f957dde419",
+    "savedFreezeCheckMatches": true,
+    "modelScore": null,
+    "rawExtraction": null,
+    "programAggregation": null
+  },
+  "noResultInheritance": true,
+  "noFreshQuotaClaim": true,
+  "noNewModelCallsByThisPackagingTask": 0,
+  "unchanged": {
+    "shadowOnly": true,
+    "reviewer": "calibration_pending",
+    "customerGenerationHistoricalScores": [
+      70,
+      75
+    ]
+  }
+}

@@ -1,0 +1,392 @@
+{
+  "mode": "green",
+  "runLabel": "registry-close-diagnostic-r2",
+  "at": "2026-10-25T07:57:16.490Z",
+  "source": "outputs/releaseguard-http-deadline-offline-20261025-r10/candidate/source",
+  "scope": "isolated local PG/Rabbit and Gateway/Evaluation/Registry only; fault injection is not a cloud root-cause proof",
+  "tests": [
+    {
+      "name": "active Registry GET close propagates across all three HTTP services before read SQL dispatch",
+      "passed": true,
+      "wire": {
+        "status": null,
+        "error": "controlled-client-close",
+        "elapsedMs": 66.16549999999916
+      },
+      "traceId": "07384eb6-72c1-414e-b196-ee881d5ad1e0",
+      "keySha256": "4614e440beca99f1cf985545030858bc5fca21b14cda75c889d4e43977bb9a43",
+      "before": {
+        "jobs": "0",
+        "outbox": "0",
+        "reservations": "0"
+      },
+      "counts": {
+        "jobs": "0",
+        "outbox": "0",
+        "reservations": "0"
+      },
+      "closes": [
+        {
+          "role": "gateway",
+          "observedAtMs": 11782.469458,
+          "event": "http_close",
+          "kind": "submission",
+          "keySha256": "4614e440beca99f1cf985545030858bc5fca21b14cda75c889d4e43977bb9a43",
+          "traceId": null,
+          "writableFinished": false
+        },
+        {
+          "role": "evaluation",
+          "observedAtMs": 11783.488916,
+          "event": "http_close",
+          "kind": "submission",
+          "keySha256": "4614e440beca99f1cf985545030858bc5fca21b14cda75c889d4e43977bb9a43",
+          "traceId": "07384eb6-72c1-414e-b196-ee881d5ad1e0",
+          "writableFinished": false
+        },
+        {
+          "role": "registry",
+          "observedAtMs": 11785.57775,
+          "event": "http_close",
+          "kind": "registry_snapshot",
+          "keySha256": "4614e440beca99f1cf985545030858bc5fca21b14cda75c889d4e43977bb9a43",
+          "traceId": "07384eb6-72c1-414e-b196-ee881d5ad1e0",
+          "writableFinished": false
+        }
+      ],
+      "registrySpan": {
+        "operation": "registry_application",
+        "poolAtRequest": {
+          "total": 8,
+          "idle": 0,
+          "waiting": 0
+        },
+        "poolAtAcquire": {
+          "total": 8,
+          "idle": 7,
+          "waiting": 0
+        },
+        "acquiredMs": 26.803459000000657,
+        "queryDispatchedMs": null,
+        "queryCompletedMs": null,
+        "releasedMs": 26.859375,
+        "poolWaitMs": 26.803459000000657,
+        "databaseRoundTripMs": null,
+        "totalMs": 26.860500000000684,
+        "outcome": "cancelled_before_dispatch"
+      },
+      "registryApplicationSqlDispatches": 0
+    }
+  ],
+  "skipped": [
+    "normal one-shot Gateway submission remains202 and retains job/outbox",
+    "actual client close propagates Gateway→Evaluation; pool-queued admission dispatches no SQL",
+    "SQL already dispatched remains wire-unknown after actual close; no automatic resubmission",
+    "independently signed expired deadline cannot dispatch a job with connection still open",
+    "tampered deadline cannot fall back to legacy direct Evaluation",
+    "10s original wire timeout plus injected9200+1100ms cannot become late pre-dispatch commit",
+    "actual Registry pool acquisition delay is distinct from SQL round-trip"
+  ],
+  "attempts": [
+    {
+      "scenario": "active-registry-close",
+      "keySha256": "4614e440beca99f1cf985545030858bc5fca21b14cda75c889d4e43977bb9a43",
+      "sent": 1,
+      "retries": 0
+    }
+  ],
+  "startup": [
+    {
+      "at": "2026-10-25T07:57:27.483Z",
+      "name": "rg-r10-http-mq-997ec48450",
+      "id": "cb743fe3e4ff79b12fd69a07553fe3309bccae7f156cd18405cb9f6afc1bcecc",
+      "phase": "startup",
+      "state": {
+        "Status": "running",
+        "Running": true,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 33120,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-25T07:57:17.400292291Z",
+        "FinishedAt": "0001-01-01T00:00:00Z"
+      },
+      "stdout": {
+        "bytes": 24373,
+        "sha256": "bc9d8f857b7a9a99c659a47e8d95e20fe732af4b32c156e538612120da843306",
+        "rawLogSaved": true,
+        "credentialMatch": false,
+        "path": "http-green-registry-close-diagnostic-r2-mq-startup.stdout.txt"
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "rawLogSaved": true,
+        "credentialMatch": false,
+        "path": "http-green-registry-close-diagnostic-r2-mq-startup.stderr.txt"
+      }
+    },
+    {
+      "at": "2026-10-25T07:57:28.453Z",
+      "name": "rg-r10-http-mq-997ec48450",
+      "id": "cb743fe3e4ff79b12fd69a07553fe3309bccae7f156cd18405cb9f6afc1bcecc",
+      "phase": "final",
+      "state": {
+        "Status": "running",
+        "Running": true,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 33120,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-25T07:57:17.400292291Z",
+        "FinishedAt": "0001-01-01T00:00:00Z"
+      },
+      "stdout": {
+        "bytes": 25053,
+        "sha256": "e9efebb9c714c5259c991606fc4b9323b93630f38d598b045c956afff5454b78",
+        "rawLogSaved": true,
+        "credentialMatch": false,
+        "path": "http-green-registry-close-diagnostic-r2-mq-final.stdout.txt"
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "rawLogSaved": true,
+        "credentialMatch": false,
+        "path": "http-green-registry-close-diagnostic-r2-mq-final.stderr.txt"
+      }
+    },
+    {
+      "at": "2026-10-25T07:57:29.754Z",
+      "name": "rg-r10-http-pg-997ec48450",
+      "id": "fb8718b041786f60d9ae3ab5a9071360f6ee48bc1ab41e2b93c6c93b068ee786",
+      "phase": "final",
+      "state": {
+        "Status": "running",
+        "Running": true,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 33028,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-25T07:57:16.761031555Z",
+        "FinishedAt": "0001-01-01T00:00:00Z"
+      },
+      "stdout": {
+        "bytes": 2337,
+        "sha256": "8614273fc353e2eb1fb0f2e6136713a7c07b62fb0549699ba59e02a3d5bc16d5",
+        "rawLogSaved": true,
+        "credentialMatch": false,
+        "path": "http-green-registry-close-diagnostic-r2-pg-final.stdout.txt"
+      },
+      "stderr": {
+        "bytes": 1058,
+        "sha256": "436b3e3915f93973471c9e4ac1b718043262ad7f6bbedfd69cf2713e0e52a30c",
+        "rawLogSaved": true,
+        "credentialMatch": false,
+        "path": "http-green-registry-close-diagnostic-r2-pg-final.stderr.txt"
+      }
+    }
+  ],
+  "cloudActions": 0,
+  "modelCalls": 0,
+  "retries": 0,
+  "rabbitReadiness": {
+    "intervalMs": 500,
+    "samples": [
+      {
+        "at": "2026-10-25T07:57:18.580Z",
+        "running": true,
+        "status": "running",
+        "exitCode": 0,
+        "oomKilled": false,
+        "startupCompleteLog": false,
+        "tcpReady": false
+      },
+      {
+        "at": "2026-10-25T07:57:19.196Z",
+        "running": true,
+        "status": "running",
+        "exitCode": 0,
+        "oomKilled": false,
+        "startupCompleteLog": false,
+        "tcpReady": false
+      },
+      {
+        "at": "2026-10-25T07:57:19.821Z",
+        "running": true,
+        "status": "running",
+        "exitCode": 0,
+        "oomKilled": false,
+        "startupCompleteLog": false,
+        "tcpReady": false
+      },
+      {
+        "at": "2026-10-25T07:57:20.377Z",
+        "running": true,
+        "status": "running",
+        "exitCode": 0,
+        "oomKilled": false,
+        "startupCompleteLog": false,
+        "tcpReady": false
+      },
+      {
+        "at": "2026-10-25T07:57:20.948Z",
+        "running": true,
+        "status": "running",
+        "exitCode": 0,
+        "oomKilled": false,
+        "startupCompleteLog": false,
+        "tcpReady": false
+      },
+      {
+        "at": "2026-10-25T07:57:21.559Z",
+        "running": true,
+        "status": "running",
+        "exitCode": 0,
+        "oomKilled": false,
+        "startupCompleteLog": false,
+        "tcpReady": false
+      },
+      {
+        "at": "2026-10-25T07:57:22.186Z",
+        "running": true,
+        "status": "running",
+        "exitCode": 0,
+        "oomKilled": false,
+        "startupCompleteLog": false,
+        "tcpReady": false
+      },
+      {
+        "at": "2026-10-25T07:57:22.746Z",
+        "running": true,
+        "status": "running",
+        "exitCode": 0,
+        "oomKilled": false,
+        "startupCompleteLog": false,
+        "tcpReady": false
+      },
+      {
+        "at": "2026-10-25T07:57:23.333Z",
+        "running": true,
+        "status": "running",
+        "exitCode": 0,
+        "oomKilled": false,
+        "startupCompleteLog": false,
+        "tcpReady": false
+      },
+      {
+        "at": "2026-10-25T07:57:23.944Z",
+        "running": true,
+        "status": "running",
+        "exitCode": 0,
+        "oomKilled": false,
+        "startupCompleteLog": false,
+        "tcpReady": false
+      },
+      {
+        "at": "2026-10-25T07:57:24.541Z",
+        "running": true,
+        "status": "running",
+        "exitCode": 0,
+        "oomKilled": false,
+        "startupCompleteLog": false,
+        "tcpReady": false
+      },
+      {
+        "at": "2026-10-25T07:57:25.173Z",
+        "running": true,
+        "status": "running",
+        "exitCode": 0,
+        "oomKilled": false,
+        "startupCompleteLog": false,
+        "tcpReady": false
+      },
+      {
+        "at": "2026-10-25T07:57:25.731Z",
+        "running": true,
+        "status": "running",
+        "exitCode": 0,
+        "oomKilled": false,
+        "startupCompleteLog": false,
+        "tcpReady": false
+      },
+      {
+        "at": "2026-10-25T07:57:26.311Z",
+        "running": true,
+        "status": "running",
+        "exitCode": 0,
+        "oomKilled": false,
+        "startupCompleteLog": false,
+        "tcpReady": false
+      },
+      {
+        "at": "2026-10-25T07:57:26.866Z",
+        "running": true,
+        "status": "running",
+        "exitCode": 0,
+        "oomKilled": false,
+        "startupCompleteLog": false,
+        "tcpReady": false
+      },
+      {
+        "at": "2026-10-25T07:57:27.443Z",
+        "running": true,
+        "status": "running",
+        "exitCode": 0,
+        "oomKilled": false,
+        "startupCompleteLog": true,
+        "tcpReady": true
+      }
+    ],
+    "method": "container State plus Server startup complete log plus loopback TCP; no Erlang diagnostic process"
+  },
+  "processes": [
+    {
+      "role": "registry",
+      "pid": 87286,
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "role": "evaluation",
+      "pid": 87374,
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "role": "gateway",
+      "pid": 87375,
+      "exit": 0,
+      "signal": null
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "rg-r10-http-mq-997ec48450",
+      "id": "cb743fe3e4ff79b12fd69a07553fe3309bccae7f156cd18405cb9f6afc1bcecc",
+      "removed": true,
+      "nameAbsent": true,
+      "idAbsent": true
+    },
+    {
+      "name": "rg-r10-http-pg-997ec48450",
+      "id": "fb8718b041786f60d9ae3ab5a9071360f6ee48bc1ab41e2b93c6c93b068ee786",
+      "removed": true,
+      "nameAbsent": true,
+      "idAbsent": true
+    }
+  ],
+  "remainingLabelledContainers": [],
+  "passed": 1,
+  "failed": 0,
+  "status": "REGRESSIONS_PASSED"
+}

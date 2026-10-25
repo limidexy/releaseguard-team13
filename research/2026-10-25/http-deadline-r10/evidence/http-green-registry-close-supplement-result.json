@@ -1,0 +1,44 @@
+{
+  "mode": "green",
+  "runLabel": "registry-close-supplement",
+  "at": "2026-10-25T07:53:03.089Z",
+  "source": "outputs/releaseguard-http-deadline-offline-20261025-r10/candidate/source",
+  "scope": "isolated local PG/Rabbit and Gateway/Evaluation/Registry only; fault injection is not a cloud root-cause proof",
+  "tests": [],
+  "skipped": [],
+  "attempts": [],
+  "cloudActions": 0,
+  "modelCalls": 0,
+  "retries": 0,
+  "fatal": {
+    "name": "Error",
+    "message": "Controlled HTTP boundary not reached"
+  },
+  "processes": [
+    {
+      "role": "registry",
+      "pid": 84360,
+      "exit": 0,
+      "signal": null
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "rg-r10-http-mq-28d9a4d055",
+      "id": "36e003406b5a552eb6e556353f0a99988adefdc5325cf1b4156d92e781c7b3e1",
+      "removed": false,
+      "error": "Command failed: docker inspect rg-r10-http-mq-28d9a4d055\nerror: no such object: rg-r10-http-mq-28d9a4d055\n"
+    },
+    {
+      "name": "rg-r10-http-pg-28d9a4d055",
+      "id": "6c1bcdc5dd905e81e927c9ac7cb5d2693599333c8b1da613ac6dc756f54149b3",
+      "removed": true,
+      "nameAbsent": true,
+      "idAbsent": true
+    }
+  ],
+  "remainingLabelledContainers": [],
+  "passed": 0,
+  "failed": 0,
+  "status": "INFRASTRUCTURE_FAILURE"
+}

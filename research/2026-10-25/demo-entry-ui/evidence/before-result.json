@@ -1,0 +1,45 @@
+{
+  "at": "2026-10-25T08:10:09.748Z",
+  "mode": "before",
+  "passed": 2,
+  "failed": 5,
+  "tests": [
+    {
+      "name": "successful copy explains manual connection",
+      "passed": true
+    },
+    {
+      "name": "network failure is not a clipboard error",
+      "passed": false,
+      "error": "The input did not match the regular expression /生成.*失败|生成.*未完成/. Input:"
+    },
+    {
+      "name": "origin failure identifies HTTP403",
+      "passed": false,
+      "error": "The input did not match the regular expression /403/. Input:"
+    },
+    {
+      "name": "clipboard denial does not claim connected",
+      "passed": false,
+      "error": "The input did not match the regular expression /已生成.*未复制/. Input:"
+    },
+    {
+      "name": "clipboard unavailable is distinct",
+      "passed": false,
+      "error": "The input did not match the regular expression /已生成.*未复制/. Input:"
+    },
+    {
+      "name": "invalid response never copies",
+      "passed": false,
+      "error": "The input did not match the regular expression /返回.*无效|响应.*无效/. Input:"
+    },
+    {
+      "name": "contributor stays contributor",
+      "passed": true
+    }
+  ],
+  "scope": "UI-only deterministic error handling, simulated transport and clipboard; not a live API or replay run",
+  "models": 0,
+  "jobPosts": 0,
+  "cloud": 0
+}

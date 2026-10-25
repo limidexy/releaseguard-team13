@@ -1,0 +1,161 @@
+{
+  "at": "2026-10-25T08:00:57.034Z",
+  "kind": "source and compiled local candidate, not a container image",
+  "files": [
+    {
+      "path": "dist/src/admission-atomic.js",
+      "sha256": "701c08c39e5be6795977732b7e26f7c39036f5dad7cbbf8c2c3e1fbb3e8cc1cd"
+    },
+    {
+      "path": "dist/src/common.js",
+      "sha256": "a019bcb78f6aa0d50fec4d21ba2b141bd1a4ddb170e03c4ac05cfd17686c47a5"
+    },
+    {
+      "path": "dist/src/contexts/review.js",
+      "sha256": "4dda8da2bb03cc9e8ad87892e400e0a36e62b79f2ade2f52cfcca7cc802d94b9"
+    },
+    {
+      "path": "dist/src/database-evidence.js",
+      "sha256": "548e1a79462f835e619859de1550fa502a97f51d1e7518ebc697328f2f6a793f"
+    },
+    {
+      "path": "dist/src/domain.js",
+      "sha256": "d4d738b69fb45b6d4f612f9a927291aa0be37dee6e25ad97d765b1fd10f8708c"
+    },
+    {
+      "path": "dist/src/evaluation.js",
+      "sha256": "9ae6715375c4abd6eb9ccdcb9b5775737383e8aa0d6bb0b18a447123a619d9e1"
+    },
+    {
+      "path": "dist/src/gateway.js",
+      "sha256": "678a6f0543a7c0a0b884be5c33211473da7d0e4ea1fe872d24a424144a5d1a65"
+    },
+    {
+      "path": "dist/src/governance.js",
+      "sha256": "49315dd15420d55138e216c64e7852d7653a8f2607d8cc74a701ffcb1caf5b3b"
+    },
+    {
+      "path": "dist/src/main.js",
+      "sha256": "fc3ed0b8f2b3d36539fd337347db500d62de9819443a35ba4b0cd8284ec0fed2"
+    },
+    {
+      "path": "dist/src/provider.js",
+      "sha256": "2460358b9d0e738d174a6b930c9ae116c9205da6eea0fa401161025a7dc76e19"
+    },
+    {
+      "path": "dist/src/queue.js",
+      "sha256": "066631f533c101c9a5c11f57ca0ead12731292cc47eaad8b8e95a1941afaa39f"
+    },
+    {
+      "path": "dist/src/registry.js",
+      "sha256": "0d0e443233a2f357455a1e80259902038c445abacdb0f5447e501e62ecc63703"
+    },
+    {
+      "path": "dist/src/returns-policy.js",
+      "sha256": "a01b13ca09d19ee24d339d4045e70f1bce172cea9888d5a89f8c732854b49f1f"
+    },
+    {
+      "path": "dist/src/submission-deadline.js",
+      "sha256": "b4cb6121abb17645fc56eb8281bd9412509304d7d96d8edafd8516e2d13dc800"
+    },
+    {
+      "path": "dist/src/submission-state.js",
+      "sha256": "6de2dc10109a9b17d85ed529eace3e3edf37f65002e9d579bd7947f3f95a88fa"
+    },
+    {
+      "path": "dist/src/submission-transport.js",
+      "sha256": "ba1c097c1e53d550468df4fc4bd974fa8426921f902f5d274ea4cf4a82ff42b8"
+    },
+    {
+      "path": "dist/src/support.js",
+      "sha256": "4d7a1df94929d9e12b6474509ed09c18814f139fa8acec3a9461cbf7148a2435"
+    },
+    {
+      "path": "dist/src/worker.js",
+      "sha256": "7500592c4c9b2abafb70ac9b37c39763efb6049f5bbbc0bb2de865a572a7c2f3"
+    },
+    {
+      "path": "package.json",
+      "sha256": "194785d063f329d19350dcd7772717480ded73141bc56df83adf0b8ff64c3650"
+    },
+    {
+      "path": "src/admission-atomic.ts",
+      "sha256": "e6d4990fb895322ffe50e5fe8a88b18a4999e63ef5a210c09d9f18c49020c190"
+    },
+    {
+      "path": "src/common.ts",
+      "sha256": "37ff373d19f4e9b890e39f7550677a22b1409f3600ca2ecc6dbee17eba1429b0"
+    },
+    {
+      "path": "src/contexts/review.ts",
+      "sha256": "8a7eed471337e738277c4ed0e9883ca8b0e261da930614115172f19f8125a7dd"
+    },
+    {
+      "path": "src/database-evidence.ts",
+      "sha256": "f9832312fd9fcf46774c0b6e1ebb9944b4376755f08c03b6ca719ad54500a29a"
+    },
+    {
+      "path": "src/domain.ts",
+      "sha256": "405f88e4ce40d92af4734c9a1f108d08efec2949e8c03a6356b853611fc55215"
+    },
+    {
+      "path": "src/evaluation.ts",
+      "sha256": "025bba9111e6a996ed9833d7dc995fcddd18a54474412e0fb97cba65ad54ebef"
+    },
+    {
+      "path": "src/gateway.ts",
+      "sha256": "cf6ab5bffcc38a784ef7f06d70ccd075bf944f63e4a529bd1b74c10f82183c12"
+    },
+    {
+      "path": "src/governance.ts",
+      "sha256": "c08b6197e331b1e09c2a8c488402e114111528e9c6acb665252ac64d46a65b0b"
+    },
+    {
+      "path": "src/main.ts",
+      "sha256": "5029063f2c537d80072052c0d3d167fe5d733a65a4814ac6c4551c023aca4fcc"
+    },
+    {
+      "path": "src/provider.ts",
+      "sha256": "5a70dcd908a6234af94b01a402c36153d21a6428a6a1e094dc2ffb2a8d2f6813"
+    },
+    {
+      "path": "src/queue.ts",
+      "sha256": "708929e857cbc6fcbaf582e23ec8bc2a17ea3d44cb6a8d37b0f42114c7892a1c"
+    },
+    {
+      "path": "src/registry.ts",
+      "sha256": "f7e10778504a6a39399f4c7d82c70af5b54b5fadde5d7e7687527c1b1908a507"
+    },
+    {
+      "path": "src/returns-policy.ts",
+      "sha256": "20f044926ca817741ed03cbd9e29d9f49d4c5372a7b45604f8d60634034a3278"
+    },
+    {
+      "path": "src/submission-deadline.ts",
+      "sha256": "8c515037054fe34b7c1bf0fd0866647292190e372f2f10703a63a3fa0cbffd87"
+    },
+    {
+      "path": "src/submission-state.ts",
+      "sha256": "fcad88436d6bbbeb4537950341dce9d8058d281f5a1985b98d9e30327a8b20b2"
+    },
+    {
+      "path": "src/submission-transport.ts",
+      "sha256": "7d1cf56309d10e01af1b4ae52669a9fc40ff5d179b7798fb2007a16be21ae870"
+    },
+    {
+      "path": "src/support.ts",
+      "sha256": "15df5e9b4287d581809b8784a00155d90f9cd648f93d919262a0785de834db02"
+    },
+    {
+      "path": "src/worker.ts",
+      "sha256": "98289f07a8d633c47c6df1aa22885dc23f9fad9a2392782053f26a0fe7114427"
+    },
+    {
+      "path": "tsconfig.json",
+      "sha256": "38271e2065f7cfd68ba29b53865af9fc3353449bc2bb744667bd7f1a781dd989"
+    }
+  ],
+  "dependencies": "Existing unchanged node_modules link; package/tsconfig unchanged; no dependency install",
+  "imageBuilt": false,
+  "imageDigest": null
+}

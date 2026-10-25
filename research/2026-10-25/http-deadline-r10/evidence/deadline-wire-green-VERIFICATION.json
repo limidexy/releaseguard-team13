@@ -1,0 +1,40 @@
+{
+  "at": "2026-10-25T07:49:10.318Z",
+  "status": "GREEN_INDEPENDENT_READBACK_VERIFIED",
+  "tests": 72,
+  "passed": 72,
+  "failed": 0,
+  "newGatewayRequests": 1,
+  "redPreserved": {
+    "tests": 1,
+    "failed": 1,
+    "requests": 1,
+    "cleanupSocketSample": 1,
+    "note": "Old RED stored1 tracked socket at its sampling point; do not retrospectively claim0. GREEN cleanup now awaits close events."
+  },
+  "greenCleanup": {
+    "serverListening": false,
+    "openTrackedSockets": 0,
+    "gatewayClosed": true,
+    "poolEndedWithoutQuery": true
+  },
+  "scope": {
+    "databaseQueries": 0,
+    "cloud": 0,
+    "models": 0,
+    "docker": 0,
+    "site5193": false,
+    "retries": 0
+  },
+  "candidateHashes": {
+    "submission-deadline.js": "b4cb6121abb17645fc56eb8281bd9412509304d7d96d8edafd8516e2d13dc800",
+    "gateway.js": "678a6f0543a7c0a0b884be5c33211473da7d0e4ea1fe872d24a424144a5d1a65",
+    "database-evidence.js": "548e1a79462f835e619859de1550fa502a97f51d1e7518ebc697328f2f6a793f"
+  },
+  "limits": [
+    "Gateway budget starts at handler entry, not body upload or kernel accept.",
+    "Pure/manual-clock tests do not establish actual cross-node GKE clock skew.",
+    "Expired context prevented fake-pool acquisition through actual databaseQuery, but no real DB or full Evaluation broker initialization was executed.",
+    "This verifies an offline protocol/cancellation boundary, not cloud capacity or autoscaling benefit."
+  ]
+}

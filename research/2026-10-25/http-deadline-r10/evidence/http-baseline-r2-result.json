@@ -1,0 +1,272 @@
+{
+  "mode": "baseline",
+  "runLabel": "r2",
+  "at": "2026-10-25T07:46:27.376Z",
+  "source": "outputs/releaseguard-http-deadline-offline-20261025-r10/../releaseguard-admission-rootcause-offline-20261025-r9/candidate/source",
+  "scope": "isolated local PG/Rabbit and Gateway/Evaluation/Registry only; fault injection is not a cloud root-cause proof",
+  "tests": [
+    {
+      "name": "normal one-shot Gateway submission remains202 and retains job/outbox",
+      "passed": true,
+      "wire": {
+        "status": 202,
+        "raw": "{\"id\":\"3a94d5a2-5cae-4f7c-b663-5d7cb88c15d6\",\"status\":\"queued\",\"replayed\":false}",
+        "json": {
+          "id": "3a94d5a2-5cae-4f7c-b663-5d7cb88c15d6",
+          "status": "queued",
+          "replayed": false
+        },
+        "elapsedMs": 43.02366600000005
+      },
+      "counts": {
+        "jobs": "1",
+        "outbox": "1",
+        "reservations": "1"
+      }
+    },
+    {
+      "name": "actual client close propagates Gateway→Evaluation; pool-queued admission dispatches no SQL",
+      "passed": true,
+      "wire": {
+        "status": null,
+        "error": "controlled-client-close",
+        "elapsedMs": 82.38374999999996
+      },
+      "before": {
+        "jobs": "0",
+        "outbox": "0",
+        "reservations": "1"
+      },
+      "counts": {
+        "jobs": "0",
+        "outbox": "0",
+        "reservations": "1"
+      },
+      "closesObserved": [
+        "gateway",
+        "evaluation"
+      ],
+      "sqlDispatches": 0
+    },
+    {
+      "name": "SQL already dispatched remains wire-unknown after actual close; no automatic resubmission",
+      "passed": true,
+      "wire": {
+        "status": null,
+        "error": "controlled-client-close",
+        "elapsedMs": 25.361791999999696
+      },
+      "counts": {
+        "jobs": "1",
+        "outbox": "1",
+        "reservations": "2"
+      },
+      "sqlDispatches": 1,
+      "postAttempts": 1
+    },
+    {
+      "name": "independently signed expired deadline cannot dispatch a job with connection still open",
+      "passed": false,
+      "error": "Expired deadline accepted or wrong response",
+      "actual": {
+        "wire": {
+          "status": 202,
+          "raw": "{\"id\":\"585bdb54-7f62-4747-a687-c2c69194e3f6\",\"status\":\"queued\",\"replayed\":false}",
+          "json": {
+            "id": "585bdb54-7f62-4747-a687-c2c69194e3f6",
+            "status": "queued",
+            "replayed": false
+          },
+          "elapsedMs": 7.739417000000685
+        },
+        "counts": {
+          "jobs": "1",
+          "outbox": "1",
+          "reservations": "3"
+        }
+      }
+    },
+    {
+      "name": "tampered deadline cannot fall back to legacy direct Evaluation",
+      "passed": false,
+      "error": "Tampered deadline accepted or fell back",
+      "actual": {
+        "wire": {
+          "status": 202,
+          "raw": "{\"id\":\"2ded54c7-674c-41c4-9f2c-6a0a6c4a7b57\",\"status\":\"queued\",\"replayed\":false}",
+          "json": {
+            "id": "2ded54c7-674c-41c4-9f2c-6a0a6c4a7b57",
+            "status": "queued",
+            "replayed": false
+          },
+          "elapsedMs": 6.379541000000245
+        },
+        "counts": {
+          "jobs": "1",
+          "outbox": "1",
+          "reservations": "4"
+        }
+      }
+    },
+    {
+      "name": "10s original wire timeout plus injected9200+1100ms cannot become late pre-dispatch commit",
+      "passed": false,
+      "error": "Budget expired but a new job was admitted",
+      "actual": {
+        "wire": {
+          "status": 504,
+          "raw": "{\"error\":\"submission_outcome_unknown\",\"submissionState\":\"unknown\",\"idempotencyKey\":\"r10_late_ca243f130b\",\"statusUrl\":\"/api/v2/jobs/submissions/r10_late_ca243f130b\",\"doNotResubmit\":true,\"automaticRetry\":false}",
+          "json": {
+            "error": "submission_outcome_unknown",
+            "submissionState": "unknown",
+            "idempotencyKey": "r10_late_ca243f130b",
+            "statusUrl": "/api/v2/jobs/submissions/r10_late_ca243f130b",
+            "doNotResubmit": true,
+            "automaticRetry": false
+          },
+          "elapsedMs": 10003.423833
+        },
+        "counts": {
+          "jobs": "1",
+          "outbox": "1",
+          "reservations": "5"
+        },
+        "before": {
+          "jobs": "0",
+          "outbox": "0",
+          "reservations": "4"
+        },
+        "injectedEvaluationForwardDelayMs": 9200,
+        "injectedRegistryHoldMs": 1100,
+        "deliberatelySuppressedGatewayToEvaluationClose": true
+      }
+    },
+    {
+      "name": "actual Registry pool acquisition delay is distinct from SQL round-trip",
+      "passed": true,
+      "wire": {
+        "status": 202,
+        "raw": "{\"id\":\"39397ce2-938d-4fe3-8d9e-e60c73f87bef\",\"status\":\"queued\",\"replayed\":false}",
+        "json": {
+          "id": "39397ce2-938d-4fe3-8d9e-e60c73f87bef",
+          "status": "queued",
+          "replayed": false
+        },
+        "elapsedMs": 191.94595800000025
+      },
+      "registrySpan": {
+        "operation": "registry_application",
+        "poolAtRequest": {
+          "total": 8,
+          "idle": 0,
+          "waiting": 0
+        },
+        "poolAtAcquire": {
+          "total": 8,
+          "idle": 7,
+          "waiting": 0
+        },
+        "acquiredMs": 179.81416700000045,
+        "queryDispatchedMs": 179.81733299999905,
+        "queryCompletedMs": 181.0049999999992,
+        "releasedMs": 181.0252079999991,
+        "poolWaitMs": 179.81416700000045,
+        "databaseRoundTripMs": 1.1876670000001468,
+        "totalMs": 181.02541699999892,
+        "outcome": "completed"
+      },
+      "counts": {
+        "jobs": "1",
+        "outbox": "1",
+        "reservations": "6"
+      }
+    }
+  ],
+  "attempts": [
+    {
+      "scenario": "normal",
+      "keySha256": "ba2b4e7565666a2f8efcb0085bc0a8cd2062b2d1d465d9dbbb22b84e559cc651",
+      "sent": 1,
+      "retries": 0
+    },
+    {
+      "scenario": "pool-close",
+      "keySha256": "2762098da6ca649b1b2f7625b23e454b41ed27f4dcd442c459cdb3878304f315",
+      "sent": 1,
+      "retries": 0
+    },
+    {
+      "scenario": "close-after-dispatch",
+      "keySha256": "b11870e11873e0161cc8f2a065ea97efae89872f084f5c4bfde0cfa13f30d0a4",
+      "sent": 1,
+      "retries": 0
+    },
+    {
+      "scenario": "expired-budget",
+      "keySha256": "dc4f8e9103a1c41a4dea5f939ec861c55c2b753e22bd6ed959226bf8618846af",
+      "sent": 1,
+      "retries": 0
+    },
+    {
+      "scenario": "tampered-budget",
+      "keySha256": "13e5c403aac70249887ea8b42b1930bbc9973db4ae87a1e2405bbdfa076ba548",
+      "sent": 1,
+      "retries": 0
+    },
+    {
+      "scenario": "late-budget-with-delayed-close",
+      "keySha256": "18c17ff7519c02068df255581c00ca6a7b5cd5c9e895a7d8256a1ed4456ffe4d",
+      "sent": 1,
+      "retries": 0
+    },
+    {
+      "scenario": "registry-pool-wait",
+      "keySha256": "6b57d401b810ff5bbdfeb051a6dff033b4f69ccb1bce884bf6131fbbc2695399",
+      "sent": 1,
+      "retries": 0
+    }
+  ],
+  "cloudActions": 0,
+  "modelCalls": 0,
+  "retries": 0,
+  "processes": [
+    {
+      "role": "registry",
+      "pid": 83015,
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "role": "evaluation",
+      "pid": 83029,
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "role": "gateway",
+      "pid": 83033,
+      "exit": 0,
+      "signal": null
+    }
+  ],
+  "cleanup": [
+    {
+      "name": "rg-r10-http-mq-ca243f130b",
+      "id": "a5497fd763bcb81cd7ee98dfde3fe183a0ae3d3880608a3111fc7c5319c65727",
+      "removed": false,
+      "nameAbsent": false,
+      "error": "Command failed: docker inspect a5497fd763bcb81cd7ee98dfde3fe183a0ae3d3880608a3111fc7c5319c65727\nerror: no such object: a5497fd763bcb81cd7ee98dfde3fe183a0ae3d3880608a3111fc7c5319c65727\n"
+    },
+    {
+      "name": "rg-r10-http-pg-ca243f130b",
+      "id": "8951ade8ac1a2d02bb85e8b14a241027f5759208fc95b1aa53521296477b7b87",
+      "removed": false,
+      "nameAbsent": false,
+      "error": "Command failed: docker inspect 8951ade8ac1a2d02bb85e8b14a241027f5759208fc95b1aa53521296477b7b87\nerror: no such object: 8951ade8ac1a2d02bb85e8b14a241027f5759208fc95b1aa53521296477b7b87\n"
+    }
+  ],
+  "remainingLabelledContainers": [],
+  "passed": 4,
+  "failed": 3,
+  "status": "REGRESSION_FAILED"
+}

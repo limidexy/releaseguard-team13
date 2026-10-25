@@ -1,0 +1,330 @@
+[
+  {
+    "source": "01 p4–18",
+    "topic": "架构职责、EA与SA、架构评审",
+    "status": "本轮补齐的设计/计算",
+    "evidence": "本轮需求/决策/证据链；角色责任是计划，不冒充签字",
+    "ppt": "P7–19",
+    "gap": "架构评审人/日期待本人确认"
+  },
+  {
+    "source": "01 p19–22 / Appendix",
+    "topic": "ISO25010属性、关系与utility tree",
+    "status": "本轮补齐的设计/计算",
+    "evidence": "本轮效用树；安全检查增加成本、性能与可用性存在取舍",
+    "ppt": "P16 / 场景附录",
+    "gap": "目标值不是实测SLA"
+  },
+  {
+    "source": "03 p12–31",
+    "topic": "Glossary、系统上下文、需求优先级、ASR、用例、六要素场景",
+    "status": "本轮补齐的设计/计算",
+    "evidence": "UC1/UC2、H/M风险与端到端追踪",
+    "ppt": "P4、P8、P16",
+    "gap": "业务预测缺确认，明确标课程情景"
+  },
+  {
+    "source": "03 p33–80",
+    "topic": "逻辑/物理架构、组件和部署视图、决策替代方案与验证",
+    "status": "已实现且有对应证据",
+    "evidence": "原图、服务数据边界及运行镜像；本轮纠正版本范围",
+    "ppt": "P7–15",
+    "gap": "图上配置要与历史/当前范围一致"
+  },
+  {
+    "source": "02 p10–29",
+    "topic": "Client-server / tiered / service-oriented / microservice styles",
+    "status": "已实现且有对应证据",
+    "evidence": "Browser/Gateway/3上下文/独立Support/Workers",
+    "ppt": "P4、P9–11",
+    "gap": "一个共享应用镜像不等于单进程；单体亦可另拆worker"
+  },
+  {
+    "source": "02 styles",
+    "topic": "Pipeline / event-driven / asynchronous messaging",
+    "status": "已实现且有对应证据",
+    "evidence": "RabbitMQ、outbox、lease和worker",
+    "ppt": "P9、P15、P32",
+    "gap": "at-least-once，不保证模型恰好一次"
+  },
+  {
+    "source": "02 styles",
+    "topic": "P2P / pipe-filter作为整体风格",
+    "status": "未采用及理由",
+    "evidence": "平台需要集中身份、审计和持久任务队列，无可信P2P需求",
+    "ppt": "附录覆盖",
+    "gap": "内部处理步骤不冒称采用所有风格"
+  },
+  {
+    "source": "02 integration",
+    "topic": "REST/HTTP、JSON与集成边界",
+    "status": "已实现且有对应证据",
+    "evidence": "/api/v2、JSON schema、support adapter",
+    "ppt": "P11",
+    "gap": "本轮不修改接口"
+  },
+  {
+    "source": "02 integration",
+    "topic": "SOAP/WSDL/XML、遗留系统集成",
+    "status": "未采用及理由",
+    "evidence": "没有SOAP遗留接口；REST满足现有Web/CLI消费者",
+    "ppt": "附录覆盖",
+    "gap": "不能为名词覆盖而新增"
+  },
+  {
+    "source": "02 data",
+    "topic": "RDBMS、关系模型、事务、索引",
+    "status": "已实现且有对应证据",
+    "evidence": "PostgreSQL三个业务DB、参数化SQL、事务与workspace索引",
+    "ppt": "P14",
+    "gap": "逻辑数据分离，物理共享实例单点"
+  },
+  {
+    "source": "02 data",
+    "topic": "NoSQL / 分布式数据 / 大数据风格",
+    "status": "未采用及理由",
+    "evidence": "当前以事务审核和结构化证据为主；未证实RDBMS不足",
+    "ppt": "附录覆盖",
+    "gap": "未来大体积原答对象存储是设计，非已迁移"
+  },
+  {
+    "source": "02 reference architectures",
+    "topic": "Web/Cloud参考架构、service models、描述视图",
+    "status": "本轮补齐的设计/计算",
+    "evidence": "现有GKE和本轮依赖/责任视图对应",
+    "ppt": "P9、P13",
+    "gap": "不能把参考架构当实测可用性"
+  },
+  {
+    "source": "04 p4–33",
+    "topic": "CIA/AAA/NR、STRIDE、crown jewels与stepping stones",
+    "status": "本轮补齐的设计/计算",
+    "evidence": "2类核心资产、4类跳板、R1–R8风险表",
+    "ppt": "P17",
+    "gap": "SHA256不提供身份/不可抵赖"
+  },
+  {
+    "source": "04 p32–47",
+    "topic": "Likelihood/impact、风险评价与mitigate/avoid/transfer/accept",
+    "status": "本轮补齐的设计/计算",
+    "evidence": "定性H/M风险、责任角色、残余风险；本轮avoid继续探测",
+    "ppt": "P17 / 风险附录",
+    "gap": "未取得风险接受签字"
+  },
+  {
+    "source": "04 controls",
+    "topic": "身份认证授权、最小权限、输入/SQL注入防护",
+    "status": "已实现且有对应证据",
+    "evidence": "JWT、workspace、write/review、zod、参数化SQL",
+    "ppt": "P17",
+    "gap": "历史负例与代码存在，不等于当期渗透通过"
+  },
+  {
+    "source": "04 crypto",
+    "topic": "Hash、MAC、数字签名/PKI、密钥管理",
+    "status": "局部验证",
+    "evidence": "JWT签名、SHA256、WIF；说明密钥信任边界",
+    "ppt": "P17 / 风险附录",
+    "gap": "无独立证据签名/WORM，HS256开发身份不是云个人证明"
+  },
+  {
+    "source": "04 crypto",
+    "topic": "HSM、硬件密钥保管",
+    "status": "未采用及理由",
+    "evidence": "本课程试用项目不需新增HSM；长期密钥治理为残余风险",
+    "ppt": "附录覆盖",
+    "gap": "不宣称已有HSM保障"
+  },
+  {
+    "source": "04 networking",
+    "topic": "TLS、分区、DMZ、防火墙/NetworkPolicy",
+    "status": "局部验证",
+    "evidence": "历史HTTPS/DB TLS/AMQPS，入站策略；5193仅loopback HTTP",
+    "ppt": "P13、P17",
+    "gap": "出站非全面限制；未完成端到端渗透验证"
+  },
+  {
+    "source": "04 security operations",
+    "topic": "扫描、补丁、日志、defence in depth",
+    "status": "局部验证",
+    "evidence": "locked CI、audit/Trivy、redaction，历史记录",
+    "ppt": "P20–22",
+    "gap": "扫描规则有盲区；报警响应和生产保留期未达成"
+  },
+  {
+    "source": "05 p4–9",
+    "topic": "Availability/reliability/MTTR、串并联计算",
+    "status": "本轮补齐的设计/计算",
+    "evidence": "五条量化行（执行分replay/real），共享故障只计一次",
+    "ppt": "P18 / 可用性附录",
+    "gap": "输入全是规划假设，不是测得可用率"
+  },
+  {
+    "source": "05 p14–23",
+    "topic": "过载/共同故障/计划与非计划停机",
+    "status": "局部验证",
+    "evidence": "原限额、超时、queue、历史失败；免费停机为已知计划不可用",
+    "ppt": "P18、P22",
+    "gap": "云端0不等于24x7可用"
+  },
+  {
+    "source": "05 tactics",
+    "topic": "故障检测、探针、重试/恢复/降级",
+    "status": "局部验证",
+    "evidence": "health、lease、outbox恢复；历史故障实验",
+    "ppt": "P15、P28",
+    "gap": "自动恢复可能重复provider；本轮不注入故障"
+  },
+  {
+    "source": "05 redundancy",
+    "topic": "节点/服务/数据冗余与故障域",
+    "status": "局部验证",
+    "evidence": "历史云配置2节点，Gateway2；Worker曾1→3；最新节点0",
+    "ppt": "P12–13、隐藏P36",
+    "gap": "同区不具跨区容错，shared PG/broker/identity仍单点"
+  },
+  {
+    "source": "05 data / DR",
+    "topic": "备份、恢复、RTO/RPO、灾备",
+    "status": "本轮补齐的设计/计算",
+    "evidence": "本轮策略和目标；历史三个业务库同实例恢复",
+    "ppt": "P18 / 恢复附录",
+    "gap": "跨区/身份库/队列全量恢复及SLA尚未验证"
+  },
+  {
+    "source": "05 RAID",
+    "topic": "RAID0/1/5/6/10、SAN、数据冗余",
+    "status": "未采用及理由",
+    "evidence": "使用云持久盘，不自行实现硬件RAID；RAID不能替代备份",
+    "ppt": "附录覆盖",
+    "gap": "不把供应商底层冗余算作已测系统HA"
+  },
+  {
+    "source": "06 p4–28",
+    "topic": "响应/服务/等待时间、吞吐、利用率、负载",
+    "status": "局部验证",
+    "evidence": "r6/r8逐阶段HTTP与任务状态，单位口径分开",
+    "ppt": "P22、隐藏P36",
+    "gap": "整体完成吞吐/p95不可用"
+  },
+  {
+    "source": "06 queueing",
+    "topic": "排队模型、Little定律、利用率与非线性",
+    "status": "本轮补齐的设计/计算",
+    "evidence": "λ mean × W mean 的同稳定窗口规划例；共享瓶颈解释",
+    "ppt": "P19 / 计算附录",
+    "gap": "不以p95代入，不把突发r8当稳态"
+  },
+  {
+    "source": "06 tactics",
+    "topic": "负载均衡、缓存、并行化、池化",
+    "status": "局部验证",
+    "evidence": "Gateway2/Workers、JWKS缓存；r7 bounded pool本地有效云失败",
+    "ppt": "P7、P22、隐藏P36",
+    "gap": "不把最终DB/CPU根因写死"
+  },
+  {
+    "source": "07 p4–9",
+    "topic": "需求→资源、应用与系统指标",
+    "status": "本轮补齐的设计/计算",
+    "evidence": "三情景需求、9项指标/阈值/动作/责任角色",
+    "ppt": "P19 / 指标附录",
+    "gap": "阈值是建议目标，告警未全部接入"
+  },
+  {
+    "source": "07 p10–22",
+    "topic": "五年存储、增长/趋势/保留期",
+    "status": "本轮补齐的设计/计算",
+    "evidence": "原答、快照、审核、索引、日志、备份与敏感性",
+    "ppt": "P19 / 存储附录",
+    "gap": "无真实业务长期样本；不声称拟合准确率"
+  },
+  {
+    "source": "07 p23–43",
+    "topic": "三年峰值吞吐、benchmark、Amdahl和非线性",
+    "status": "本轮补齐的设计/计算",
+    "evidence": "3年jobs/cases/request/tokens；串行路径限制的解释",
+    "ppt": "P19 / 容量附录",
+    "gap": "未隔离可用service-time，不能给已验证CPU核数"
+  },
+  {
+    "source": "07 p49–54",
+    "topic": "采购/配额/部署提前期、弹性冷启动/防震荡",
+    "status": "本轮补齐的设计/计算",
+    "evidence": "T-14/T-7/T-2规划清单；原deadline不可延期",
+    "ppt": "附录资源/指标",
+    "gap": "不承诺Groq配额重置时刻或新付费"
+  },
+  {
+    "source": "08 p7–24",
+    "topic": "变化来源、cohesion/coupling、encapsulation、接口版本",
+    "status": "已实现且有对应证据",
+    "evidence": "3个上下文、provider adapter、suite追加版本",
+    "ppt": "P7、P10–11",
+    "gap": "当前磁盘代码与5193不同，必须固定运行版本"
+  },
+  {
+    "source": "08 p19",
+    "topic": "Kafka schema registry",
+    "status": "未采用及理由",
+    "evidence": "现用RabbitMQ/JSON合同；无Kafka消费者演进需求",
+    "ppt": "附录覆盖",
+    "gap": "业务suite registry不是Kafka Schema Registry"
+  },
+  {
+    "source": "08 p25–41",
+    "topic": "扩展点、可靠变更、可分析性、质量工具",
+    "status": "局部验证",
+    "evidence": "版本化prompt/contracts、历史CI、独立候选、分层日志",
+    "ppt": "P20–22 / 观测附录",
+    "gap": "本轮未跑完整仓库测试；局部工具不等于已投产"
+  },
+  {
+    "source": "正式Briefing p5",
+    "topic": "Working platform + 独立应用",
+    "status": "已实现且有对应证据",
+    "evidence": "5193运行镜像、已有Support app和本轮2条replay",
+    "ppt": "P4、P9、P23",
+    "gap": "真实业务价值/节省工时未测"
+  },
+  {
+    "source": "正式Briefing p5",
+    "topic": "云原生实现并证明伸缩",
+    "status": "尚未满足的实作要求",
+    "evidence": "历史GKE与扩缩控制存在；r8有分工但602504",
+    "ppt": "P13、P22、隐藏P36",
+    "gap": "持续有效负载的收益比较未完成，不能用设计补成通过"
+  },
+  {
+    "source": "正式Briefing p5",
+    "topic": "DevSecOps自动化脚本及真实流水线",
+    "status": "局部验证",
+    "evidence": "历史exact-commit CI/CD、失败阻断和rollback smoke",
+    "ppt": "P20–21",
+    "gap": "本轮不运行CI/CD；历史成功不代表当前候选已通过"
+  },
+  {
+    "source": "正式Briefing p5",
+    "topic": "最小安全控制",
+    "status": "局部验证",
+    "evidence": "实现及历史测试存在，本轮安全风险分析补齐",
+    "ppt": "P17",
+    "gap": "当前版本完整安全验证/凭据治理仍有限"
+  },
+  {
+    "source": "正式通知V2.8 p1",
+    "topic": "演示关键用例、质量属性与DevOps pipeline",
+    "status": "局部验证",
+    "evidence": "主Demo基础平台流程；质量属性/历史CI在各自架构与DevOps部分；个人审核仅历史备用",
+    "ppt": "P16–22、P23–26；Q&A隐藏页",
+    "gap": "现场8分钟彩排和成员交接未由本人验证"
+  },
+  {
+    "source": "正式通知V2.8 p1",
+    "topic": "实际里程碑与成员rough effort",
+    "status": "局部验证",
+    "evidence": "2026-10-25 LIN XINDA提供团队粗估：每人80小时，5人合计400小时；里程碑对应日期证据",
+    "ppt": "P5–6",
+    "gap": "已据团队口述填写；未独立核验每人timesheet/签字。UAT、会议及审核理由另行保留状态"
+  }
+]

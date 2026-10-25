@@ -1,0 +1,456 @@
+{
+  "at": "2026-10-25T07:48:54.065Z",
+  "mode": "green",
+  "source": "outputs/releaseguard-http-deadline-offline-20261025-r10/candidate/source/",
+  "events": [
+    {
+      "test": "real_gateway_trusted_header",
+      "requests": 1,
+      "status": "PASS",
+      "trustedHeaderObserved": true,
+      "signatureManuallyVerified": true,
+      "correctBindings": true,
+      "logsExcludeHeader": true,
+      "cleanup": {
+        "serverListening": false,
+        "openTrackedSockets": 0,
+        "gatewayClosed": true,
+        "poolEndedWithoutQuery": true
+      }
+    },
+    {
+      "test": "independent hand-signed literal evaluation claims are accepted with conservative skew deduction",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "creator claims and HMAC match an independent literal vector",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "canonical body test vector is independent and common digest preserves key-order equivalence",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject signed claim with altered traceId",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject expected request binding with altered traceId",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject signed claim with altered method",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject expected request binding with altered method",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject signed claim with altered route",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject expected request binding with altered route",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject signed claim with altered keySha256",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject expected request binding with altered keySha256",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject signed claim with altered bodySha256",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject expected request binding with altered bodySha256",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject signed claim with altered authorizationSha256",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject expected request binding with altered authorizationSha256",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject signed wrong protocol claim v",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject signed wrong protocol claim purpose",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject signed wrong protocol claim iss",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject signed wrong protocol claim aud",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject signed wrong protocol claim caller",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject changed signature",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject claims signed with a different synthetic secret",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject unsigned payload modification without re-signing",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject malformed/missing header vector 0",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject malformed/missing header vector 1",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject malformed/missing header vector 2",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject malformed/missing header vector 3",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject malformed/missing header vector 4",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject malformed/missing header vector 5",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject malformed/missing header vector 6",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject malformed/missing header vector 7",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject malformed/missing header vector 8",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject malformed/missing header vector 9",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject malformed/missing header vector 10",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject invalid signed time started-as-string",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject invalid signed time started-fraction",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject invalid signed time started-zero",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject invalid signed time started-negative",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject invalid signed time deadline-as-string",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject invalid signed time deadline-null",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject invalid signed time window9999",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject invalid signed time window10001",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "reject invalid signed time future-beyond-skew",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "receiver rejects a non-finite wall clock",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "missing/invalid configured skew fails closed: undefined",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "missing/invalid configured skew fails closed: ",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "missing/invalid configured skew fails closed: -1",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "missing/invalid configured skew fails closed: 1.5",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "missing/invalid configured skew fails closed: +1",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "missing/invalid configured skew fails closed: NaN",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "missing/invalid configured skew fails closed: Infinity",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "missing/invalid configured skew fails closed: 1e2",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "missing/invalid configured skew fails closed: 10000",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "missing/invalid configured skew fails closed: 9007199254740992",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "explicit valid skew strings are accepted, with no implicit default",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "receiver rejects invalid skew value: undefined",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "receiver rejects invalid skew value: null",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "receiver rejects invalid skew value: -1",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "receiver rejects invalid skew value: 0.5",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "receiver rejects invalid skew value: NaN",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "receiver rejects invalid skew value: Infinity",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "receiver rejects invalid skew value: 0",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "receiver rejects invalid skew value: 10000",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "secret configuration fails closed: undefined",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "secret configuration fails closed: ",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "secret configuration fails closed: short",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "remaining time uses monotonic elapsed time after receipt despite wall-clock rollback",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "expired signed deadline aborts before any actual database helper acquisition or SQL dispatch",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "public state is safe for logs and contains neither signed header nor binding data",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "registry audience and caller are independently bound and cannot be used as an evaluation deadline",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    },
+    {
+      "test": "registry child context keeps the original start rather than resetting the budget",
+      "status": "PASS",
+      "actualHttpRequests": 0,
+      "actualDbQueries": 0
+    }
+  ],
+  "cloud": 0,
+  "databaseQueries": 0,
+  "models": 0,
+  "docker": 0,
+  "site5193": false,
+  "retries": 0,
+  "syntheticSecretsOnly": true,
+  "headerOrAuthorizationSaved": false
+}

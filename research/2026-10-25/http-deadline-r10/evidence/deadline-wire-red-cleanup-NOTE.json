@@ -1,0 +1,12 @@
+{
+  "note": "Preserves an observed RED harness limitation; does not modify or rerun its request.",
+  "originalResult": "deadline-wire-red-RESULT.json",
+  "originalCleanupObserved": {
+    "serverListening": false,
+    "openTrackedSockets": 1
+  },
+  "interpretation": "The RED harness destroyed its socket and closed the server, but sampled the tracked socket set after one setImmediate rather than awaiting its close event. The stored value is1, not0; do not claim the RED evidence independently verified zero tracked sockets.",
+  "greenHarnessChange": "Await every tracked socket close event before saving the GREEN cleanup evidence. This changes only the local test harness, not candidate code or the preserved RED run.",
+  "redRerun": false,
+  "oldRecordPreserved": true
+}

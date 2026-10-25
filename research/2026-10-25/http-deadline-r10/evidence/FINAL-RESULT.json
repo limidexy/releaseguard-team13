@@ -1,0 +1,235 @@
+{
+  "at": "2026-10-25T08:00:57.035Z",
+  "status": "OFFLINE_HTTP_DEADLINE_BOUNDARIES_VERIFIED_CLOUD_BOTTLENECK_AND_BENEFIT_UNPROVEN",
+  "baselineR9": {
+    "files": 100,
+    "changedOrMissing": [],
+    "httpPassed": 4,
+    "httpFailed": 3
+  },
+  "current": {
+    "deadlineChecks": {
+      "passed": 72,
+      "failed": 0,
+      "composition": "71 no-HTTP pure/helper checks plus1 actual Gateway inject-to-local-upstream"
+    },
+    "realHttp": {
+      "mainPassed": 7,
+      "mainFailed": 0,
+      "independentRegistryClosePassed": 1,
+      "independentRegistryCloseSkippedOriginalCases": 7
+    },
+    "compilation": {
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "candidate": {
+    "manifest": "CANDIDATE-MANIFEST.json",
+    "sha256": "3dde78aba5c059a322a909a6d3c1a57fbd49ec14c978ded251f19bca00a48b11",
+    "imageDigest": null,
+    "imageBuilt": false
+  },
+  "protectedChecks": [
+    {
+      "path": "src/admission-atomic.ts",
+      "unchanged": true,
+      "sha256": "e6d4990fb895322ffe50e5fe8a88b18a4999e63ef5a210c09d9f18c49020c190"
+    },
+    {
+      "path": "src/database-evidence.ts",
+      "unchanged": true,
+      "sha256": "f9832312fd9fcf46774c0b6e1ebb9944b4376755f08c03b6ca719ad54500a29a"
+    },
+    {
+      "path": "src/domain.ts",
+      "unchanged": true,
+      "sha256": "405f88e4ce40d92af4734c9a1f108d08efec2949e8c03a6356b853611fc55215"
+    },
+    {
+      "path": "src/worker.ts",
+      "unchanged": true,
+      "sha256": "98289f07a8d633c47c6df1aa22885dc23f9fad9a2392782053f26a0fe7114427"
+    },
+    {
+      "path": "src/support.ts",
+      "unchanged": true,
+      "sha256": "15df5e9b4287d581809b8784a00155d90f9cd648f93d919262a0785de834db02"
+    },
+    {
+      "path": "src/provider.ts",
+      "unchanged": true,
+      "sha256": "5a70dcd908a6234af94b01a402c36153d21a6428a6a1e094dc2ffb2a8d2f6813"
+    },
+    {
+      "path": "src/queue.ts",
+      "unchanged": true,
+      "sha256": "708929e857cbc6fcbaf582e23ec8bc2a17ea3d44cb6a8d37b0f42114c7892a1c"
+    },
+    {
+      "path": "src/returns-policy.ts",
+      "unchanged": true,
+      "sha256": "20f044926ca817741ed03cbd9e29d9f49d4c5372a7b45604f8d60634034a3278"
+    },
+    {
+      "path": "src/submission-transport.ts",
+      "unchanged": true,
+      "sha256": "7d1cf56309d10e01af1b4ae52669a9fc40ff5d179b7798fb2007a16be21ae870"
+    },
+    {
+      "path": "src/submission-state.ts",
+      "unchanged": true,
+      "sha256": "fcad88436d6bbbeb4537950341dce9d8058d281f5a1985b98d9e30327a8b20b2"
+    },
+    {
+      "path": "src/contexts/review.ts",
+      "unchanged": true,
+      "sha256": "8a7eed471337e738277c4ed0e9883ca8b0e261da930614115172f19f8125a7dd"
+    },
+    {
+      "path": "package.json",
+      "unchanged": true,
+      "sha256": "194785d063f329d19350dcd7772717480ded73141bc56df83adf0b8ff64c3650"
+    },
+    {
+      "path": "tsconfig.json",
+      "unchanged": true,
+      "sha256": "38271e2065f7cfd68ba29b53865af9fc3353449bc2bb744667bd7f1a781dd989"
+    }
+  ],
+  "poolConfigurationUnchanged": true,
+  "cleanupReadbacks": [
+    {
+      "file": "http-baseline-postcleanup-readback.json",
+      "containers": [
+        {
+          "name": "rg-r10-http-mq-064acab42d",
+          "id": "b1661405d6c03c4472e7612633e46d689b88feae3f9fb60514471e2544206519",
+          "nameAbsent": true,
+          "idAbsent": true
+        },
+        {
+          "name": "rg-r10-http-pg-064acab42d",
+          "id": "cff27655ba740f666084b7d450e4af3310b0bb912d8413b1462ca9a99d5427b4",
+          "nameAbsent": true,
+          "idAbsent": true
+        }
+      ]
+    },
+    {
+      "file": "http-baseline-r2-postcleanup-readback.json",
+      "containers": [
+        {
+          "name": "rg-r10-http-mq-ca243f130b",
+          "id": "a5497fd763bcb81cd7ee98dfde3fe183a0ae3d3880608a3111fc7c5319c65727",
+          "nameAbsent": true,
+          "idAbsent": true
+        },
+        {
+          "name": "rg-r10-http-pg-ca243f130b",
+          "id": "8951ade8ac1a2d02bb85e8b14a241027f5759208fc95b1aa53521296477b7b87",
+          "nameAbsent": true,
+          "idAbsent": true
+        }
+      ]
+    },
+    {
+      "file": "http-green-r1-postcleanup-readback.json",
+      "containers": [
+        {
+          "name": "rg-r10-http-mq-76bbab1871",
+          "id": "69d82e7f5fa7bd1043c95cbaff766697864dde4d61d8b90df8fa693550c22d5e",
+          "nameAbsent": true,
+          "idAbsent": true
+        },
+        {
+          "name": "rg-r10-http-pg-76bbab1871",
+          "id": "b892d7f02837bbe86fbb7448718bc63f9a66119aa222a383f326adaedfdadc61",
+          "nameAbsent": true,
+          "idAbsent": true
+        }
+      ]
+    },
+    {
+      "file": "http-green-registry-close-diagnostic-r2-postcleanup-readback.json",
+      "containers": [
+        {
+          "name": "rg-r10-http-mq-997ec48450",
+          "id": "cb743fe3e4ff79b12fd69a07553fe3309bccae7f156cd18405cb9f6afc1bcecc",
+          "nameAbsent": true,
+          "idAbsent": true
+        },
+        {
+          "name": "rg-r10-http-pg-997ec48450",
+          "id": "fb8718b041786f60d9ae3ab5a9071360f6ee48bc1ab41e2b93c6c93b068ee786",
+          "nameAbsent": true,
+          "idAbsent": true
+        }
+      ]
+    },
+    {
+      "file": "http-green-registry-close-supplement-postcleanup-readback.json",
+      "containers": [
+        {
+          "name": "rg-r10-http-mq-28d9a4d055",
+          "id": "36e003406b5a552eb6e556353f0a99988adefdc5325cf1b4156d92e781c7b3e1",
+          "nameAbsent": true,
+          "idAbsent": true
+        },
+        {
+          "name": "rg-r10-http-pg-28d9a4d055",
+          "id": "6c1bcdc5dd905e81e927c9ac7cb5d2693599333c8b1da613ac6dc756f54149b3",
+          "nameAbsent": true,
+          "idAbsent": true
+        }
+      ]
+    }
+  ],
+  "rootCause": {
+    "confirmed": "Request-bound trusted deadline and real HTTP-close guards now reach Evaluation and Registry; expired pre-dispatch work does not start SQL in tested scenarios",
+    "controlledWait": "Registry connection acquisition181.456ms versus client-observed database RTT2.555ms under a deliberate pool hold; not a production latency benchmark",
+    "stillUnknown": "Original GCP upstream latency split between pool wait, server locks, execution, scheduling, CPU/disk/network remains unproven; no arbitrary cache/pool/resource/timeout tuning"
+  },
+  "limits": [
+    "Gateway total begins at handler entry, not upload or kernel accept",
+    "Cross-Pod initial skew bound must be separately justified; localhost0 is not a GKE guarantee",
+    "After SQL dispatch, a disconnected request may still commit; unknown is not retry permission",
+    "72 checks and7+1 HTTP cases overlap in purpose and are not a sum of independent capabilities",
+    "Original897 cloud probe and AB/BA were not executed"
+  ],
+  "failuresRetained": [
+    "First HTTP harness fixture path initialization failure (0 job POST)",
+    "First Registry-close supplement Rabbit startup failure (0 job POST), cause unproven",
+    "Original RED tracked-socket sampling value1, with appended explanation rather than rewriting it",
+    "All baseline expired/tampered/late504 raw failures"
+  ],
+  "boundaries": {
+    "models": 0,
+    "cloudActions": 0,
+    "deployments": 0,
+    "pushes": 0,
+    "classroom5193Modified": false,
+    "workerChanged": false,
+    "businessRulesChanged": false,
+    "admissionLimitChanged": false,
+    "resourcesChanged": false,
+    "original897Executed": false,
+    "benefitComparisonExecuted": false
+  },
+  "futurePlan": {
+    "services": [
+      "gateway",
+      "evaluation",
+      "registry"
+    ],
+    "freeStatus": "UNVERIFIED",
+    "clockSkewStatus": "NOT_VERIFIED_IN_GKE",
+    "authority": "STATIC_PLAN_ONLY_NO_CLOUD_AUTHORITY",
+    "window": "At most20min from before first restoration; original runner40min cannot be reused",
+    "files": [
+      "plan/原897探测_待批准计划.html",
+      "plan/r10已实现差异与新增门槛.html"
+    ]
+  }
+}

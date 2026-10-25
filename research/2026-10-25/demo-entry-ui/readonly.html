@@ -1,0 +1,10 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>ReleaseGuard 只读查看入口</title><link rel="stylesheet" href="/demo-entry/style.css"><body data-role="viewer">
+<p><a href="/">返回统一交付入口</a></p><h1>只读查看现有证据</h1>
+<p>身份：<strong>Local demo viewer / 本地演示只读身份</strong>。仅使用现有本地开发认证，工作空间固定为 <code>presentation-rehearsal-1792392871535</code>。</p>
+<p class="warning"><strong>这是查看入口，不是新建评测入口。</strong>不会自动提交评测、申请审核、批准、部署或调用模型。原站按钮保留，但 viewer 无写权限。此身份不代表真实云端审核人。</p>
+<p>想自己操作 New evaluation？请改用<a href="/demo-entry/contributor.html">提交者现场演示入口</a>，只选择 Static replay · no model。这里只看已有记录，不新增任务。</p>
+<button id="copy">生成并复制15分钟只读凭据</button><a class="button" href="http://localhost:5193/#history" target="_blank" rel="noreferrer">打开5193网站</a>
+<p id="status" role="status">凭据只在内存和剪贴板中流转，不显示、不写文件、不进入URL或日志。</p>
+<ol><li>先点复制，再打开网站。复制成功不会自动连接5193。右上角 Language 选择 English。</li><li>展开 Workspace connection，把剪贴板内容粘贴至 Access token，点 Refresh workspace。旧凭据超过15分钟会失效，请从本页重新生成。</li><li>应用ID：<code>aa1e5dc7-0acf-43e1-8476-2719f80092f0</code><br>Suite version ID：<code>fe9c358c-d160-4afc-b2fc-88d2c23b23bb</code>。复用，不点击 Register。</li><li>可查看 History、View evidence、Compare 和已有 Reviews。现在不点击 Submit、Register、Request review、Approve、Reject 或 Export evidence。</li></ol>
+<p>刷新报401：重新生成并粘贴短期凭据。报403：核对角色和工作空间，不升级权限。其他请求失败：记录按钮名称、错误文字和时间；不要反复提交，不发送令牌。</p>
+<p>使用后清空网站令牌、关闭本页，并清空剪贴板。过期后从此入口重新生成，不复用截图中的旧令牌。</p><script src="/demo-entry/entry.js"></script></body></html>

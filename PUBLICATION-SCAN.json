@@ -1,0 +1,21 @@
+{
+  "at": "2026-10-25T08:16:39.612Z",
+  "revision": "public-v2",
+  "scope": "All publication bytes, followed by independent final manifest/scan readback; bounded regex scan is not a complete secret/security audit",
+  "rules": [
+    "jwt",
+    "groq_api_key",
+    "github_token",
+    "private_key",
+    "absolute_home",
+    "secret_in_url",
+    "individual_review_identifiers"
+  ],
+  "findings": [],
+  "syntheticTestSecretsAllowed": true,
+  "realCredentialsAllowed": false,
+  "individualReviewDetailsExcluded": true,
+  "originalsKeptLocal": true,
+  "freshCloudCheck": false,
+  "executedInPublishedLayout": false
+}

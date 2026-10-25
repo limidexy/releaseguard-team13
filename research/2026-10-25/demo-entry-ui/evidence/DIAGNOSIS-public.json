@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-25",
+  "userReportedFailureAction": "Refresh workspace on the existing localhost:5193 site",
+  "originalFailureRootCause": "NOT_ESTABLISHED: the original failing request and its HTTP status were not captured",
+  "freshVerification": {
+    "entryHttpStatus": 200,
+    "siteHttpStatus": 200,
+    "siteReadinessRoute": "/health/ready",
+    "siteReadinessHttpStatus": 200,
+    "roles": [
+      "viewer",
+      "contributor"
+    ],
+    "readOnlyPaths": [
+      "applications",
+      "suites",
+      "jobs",
+      "releases",
+      "existing passing job",
+      "existing failing job"
+    ],
+    "allReadStatuses": 200,
+    "actualBrowserRefreshWithFreshViewer": "PASSED",
+    "browserHistoryCount": 8,
+    "browserUiLanguage": "English",
+    "workspace": "presentation-rehearsal-1792392871535",
+    "screenshotsKeptLocal": true
+  },
+  "changes": {
+    "onlyIndependentEntryFiles": [
+      "entry.js",
+      "readonly.html",
+      "contributor.html"
+    ],
+    "purpose": "Separate generation/HTTP/clipboard errors and explain manual paste/refresh and role limits",
+    "existing5193ImageChanged": false,
+    "authenticationPrivilegesExpanded": false,
+    "tokenLifetimeSeconds": 900,
+    "tokensSavedOrDisplayed": false,
+    "originalEntryFiles": "original/"
+  },
+  "targetedUiRegression": {
+    "before": {
+      "passed": 2,
+      "failed": 5
+    },
+    "intermediate": {
+      "passed": 6,
+      "failed": 1
+    },
+    "final": {
+      "passed": 7,
+      "failed": 0
+    },
+    "scope": "Deterministic browser script behavior with controlled transport/clipboard, not full website acceptance"
+  },
+  "jobPosts": 0,
+  "reviewWrites": 0,
+  "modelCalls": 0,
+  "cloudActions": 0,
+  "deployments": 0,
+  "limitations": [
+    "Fresh successful refresh does not prove what caused the user's earlier failure",
+    "The generated viewer credential is short-lived and does not authorize submitting evaluations",
+    "Existing site capabilities and database records remain unchanged"
+  ]
+}
