@@ -1,4 +1,4 @@
-// Disposable integration: imported synthetic answers and static replay, never a model call.
+// Disposable integration: imported/replay plus disabled-real no-resend guards, never a model call.
 import assert from 'node:assert/strict';
 import { randomUUID } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
@@ -31,7 +31,17 @@ const definition = (rule, extra = {}) => ({ name: 'Synthetic returns contract', 
   cases: ['privacy', 'format'].map(id => ({ id, name: id, prompt: 'Synthetic ' + id, rule, expected: id, critical: true })),
   policy: { minScore: 95, maxLatencyMs: null }, ...extra });
 const outputs = (privacy = safe, json = format) => [{ caseId: 'privacy', output: privacy }, { caseId: 'format', output: json }];
-let app;
+let app, workerPaused = false;
+function supportRequestCount() {
+  const code = [
+    "import { SignJWT } from 'jose';",
+    "const token=await new SignJWT({caller:'monitor'}).setProtectedHeader({alg:'HS256'}).setIssuer('releaseguard-services').setAudience('support').setIssuedAt().setExpirationTime('30s').sign(new TextEncoder().encode(process.env.INTERNAL_SECRET));",
+    "const r=await fetch('http://127.0.0.1:8080/metrics',{headers:{authorization:'Bearer '+token}});if(!r.ok)throw Error('Synthetic support metric unavailable');",
+    "let count=0;for(const line of(await r.text()).split('\\n'))if(line.includes('method=\"POST\"')&&line.includes('route=\"/execute\"'))count+=Number(line.slice(line.lastIndexOf(' ')+1));console.log(count);",
+  ].join('\n');
+  const count = Number(execFileSync('docker', ['compose', 'exec', '-T', 'support', 'node', '--input-type=module'], { input: code, encoding: 'utf8', timeout: 30000 }).trim());
+  assert.ok(Number.isSafeInteger(count) && count >= 0); return count;
+}
 const submit = async (suiteId, answers, extra = {}) => completed((await required('jobs', author,
   { appId: app.id, suiteId, candidate: 'synthetic-version-contract', commitRef: 'synthetic-local-test', source: 'imported', outputs: answers, ...extra }, key())).id, author);
 const evidence = id => required('evidence/' + id, reviewer);
@@ -173,8 +183,40 @@ try {
     }
     assert.equal(await (await fetch(base + '/demo-fixtures.json')).text(), legacyBytes);
   });
+  await check('Disabled-real failure is terminal; seeded crash recovery never dispatches another runner request', async () => {
+    // ALLOW_REAL_MODEL=false was asserted above. A /execute HTTP request is NOT
+    // a provider request; all provider access remains disabled in this CI stack.
+    const input = { appId: app.id, suiteId: suites[2].id, candidate: 'synthetic-disabled-real', commitRef: 'synthetic-no-provider', source: 'real', promptVersion: 'v1' };
+    const before = supportRequestCount(), idempotency = key();
+    const failed = await completed((await required('jobs', author, input, idempotency)).id, author);
+    assert.equal(failed.status, 'failed'); assert.equal(failed.attempts, 1); assert.equal(failed.result, null);
+    assert.match(failed.error, /no automatic retry/); assert.equal(supportRequestCount() - before, 1);
+    const replay = await required('jobs', author, input, idempotency);
+    assert.equal(replay.id, failed.id); assert.equal(replay.replayed, true);
+    assert.deepEqual(await required('jobs/' + failed.id, author), failed);
+    assert.equal((await request('releases', author, { jobId: failed.id, note: 'Synthetic failed real task is never review eligible' })).status, 409);
+
+    // Simulate a recorded, unconfirmed first attempt in a NEW synthetic job.
+    // This is fixture seeding in a disposable DB, not a historical model call.
+    workerPaused = true; execFileSync('docker', ['compose', 'pause', 'worker'], { encoding: 'utf8', timeout: 30000 });
+    const count = supportRequestCount();
+    const recovered = await required('jobs', author, { ...input, candidate: 'synthetic-seeded-crash' }, key());
+    execFileSync('docker', ['compose', 'exec', '-T', 'evaluation', 'node', '--input-type=module'], {
+      input: "import pg from 'pg';const c=new pg.Client({connectionString:process.env.DATABASE_URL});await c.connect();try{const r=await c.query(\"UPDATE jobs SET attempts=1 WHERE id=$1 AND workspace=$2 AND status='queued' AND attempts=0\"," + JSON.stringify([recovered.id, workspace]) + ");if(r.rowCount!==1)throw Error('Synthetic crash seed CAS failed');}finally{await c.end();}",
+      encoding: 'utf8', timeout: 30000,
+    });
+    execFileSync('docker', ['compose', 'unpause', 'worker'], { encoding: 'utf8', timeout: 30000 }); workerPaused = false;
+    const terminal = await completed(recovered.id, author);
+    assert.equal(terminal.status, 'failed'); assert.equal(terminal.attempts, 2); assert.equal(terminal.result, null);
+    assert.match(terminal.error, /retry limit exceeded/); assert.equal(supportRequestCount(), count, 'recovered real task must never call support again');
+    report.realExecutionGuard = { providerEnabled: false, providerCalls: 0, disabledJobId: failed.id, disabledJobAttempts: 1, disabledSupportRequests: 1, seededCrashJobId: terminal.id, seededPriorAttempts: 1, finalClaims: 2, recoveredSupportRequests: 0 };
+  });
 } catch (error) { report.error = String(error); process.exitCode = 1; console.error(String(error)); }
 finally {
+  if (workerPaused) {
+    try { execFileSync('docker', ['compose', 'unpause', 'worker'], { encoding: 'utf8', timeout: 30000 }); }
+    catch { report.error = (report.error ? report.error + '; ' : '') + 'Disposable worker cleanup failed'; process.exitCode = 1; }
+  }
   report.status = report.error ? 'failed' : 'passed'; report.passed = report.checks.filter(c => c.passed).length;
   report.failed = report.checks.filter(c => !c.passed).length;
   await mkdir('evidence', { recursive: true }); await writeFile('evidence/returns-integration.json', JSON.stringify(report, null, 2));

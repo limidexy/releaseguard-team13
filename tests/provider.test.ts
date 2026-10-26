@@ -9,15 +9,17 @@ test('provider contract retains unedited output and bounded usage metadata', asy
   const result = await providerAnswer(config, 'v2', 'Can I return this?', fetcher);
   assert.equal(result.output, ' Raw answer. '); assert.equal(result.metadata.requestId, 'req-1');
   assert.deepEqual(result.metadata.usage, { total_tokens: 17 });
-  assert.equal(submitted.messages[1].content, 'Can I return this?'); assert.equal(submitted.max_tokens, 300);
+  assert.equal(submitted.messages[1].content, 'Can I return this?'); assert.equal(submitted.max_completion_tokens, 1536); assert.equal(submitted.max_tokens, undefined);
   assert.match(submitted.messages[0].content, /Never claim to issue refunds/);
 });
 test('provider HTTP failures are not converted to fabricated answers', async () => {
   await assert.rejects(providerAnswer(config, 'v1', 'q', fake({ error: 'private details' }, 429)), /^Error: Provider HTTP 429$/);
 });
-test('missing, empty and oversized provider answers fail closed', async () => {
-  for (const body of [{}, { choices: [] }, { choices: [{ message: { content: '  ' } }] }, { choices: [{ message: { content: 'x'.repeat(10001) } }] }])
-    await assert.rejects(providerAnswer(config, 'v1', 'q', fake(body)), /contract invalid/);
+test('missing, empty and oversized provider answers fail closed while preserving bounded protocol evidence', async () => {
+  for (const body of [{}, { choices: [] }, { choices: [{ message: { content: '  ' } }] }, { choices: [{ message: { content: 'x'.repeat(10001) } }] }]) {
+    const result = await providerAnswer(config, 'v1', 'q', fake(body));
+    assert.match(result.error ?? '', /contract invalid/); assert.ok((result.output?.length ?? 0) <= 10000);
+  }
 });
 test('stream byte limit works without a Content-Length header', async () => {
   await assert.rejects(boundedJson(new Response('x'.repeat(101)), 100), /size limit/);
