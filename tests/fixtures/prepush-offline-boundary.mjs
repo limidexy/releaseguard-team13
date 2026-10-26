@@ -5,7 +5,15 @@ import child from 'node:child_process';
 import { basename, resolve } from 'node:path';
 import { syncBuiltinESMExports } from 'node:module';
 const root = fs.realpathSync(process.env.RG_HOOK_FIXTURE_ROOT ?? '');
-if (!/[/\\]rg-hook-[^/\\]+[/\\]repo$/.test(root) || fs.realpathSync(process.cwd()) !== root) throw Error('Owned offline hook fixture required');
+if (!/[/\\]rg-hook-[^/\\]+[/\\]repo$/.test(root)) throw Error('Owned offline hook fixture required');
+const cwd = fs.realpathSync(process.cwd());
+const rootIdentity = fs.statSync(root, { bigint: true }), cwdIdentity = fs.statSync(cwd, { bigint: true });
+// Compare the actual directory, not Windows drive-case / 8.3 path spellings.
+// A different directory or unavailable identity still fails before any command.
+const sameDirectory = rootIdentity.isDirectory() && cwdIdentity.isDirectory() && rootIdentity.ino !== 0n &&
+  rootIdentity.dev === cwdIdentity.dev && rootIdentity.ino === cwdIdentity.ino;
+if (cwd !== root) console.error('OFFLINE_FIXTURE_DIRECTORY_IDENTITY:' + JSON.stringify({ root, cwd, sameDirectory }));
+if (!sameDirectory) throw Error('Owned offline hook fixture required');
 const marker = resolve(root, 'forbidden-boundary');
 function deny(kind) {
   fs.writeFileSync(marker, kind);

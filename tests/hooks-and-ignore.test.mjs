@@ -74,6 +74,14 @@ test('Git normalizes a subdirectory invocation to the fixture repository root', 
   const result = f.invoke(subdir); assertNoBoundary(f, result);
   assert.equal(result.status, 0, result.stderr); assert.equal(unitCount(f), 1);
 });
+test('the fixture still denies a genuinely different working directory before any command', t => {
+  const f = fixture(t), subdir = join(f.repo, 'different-directory'); mkdirSync(subdir);
+  const result = spawnSync(process.execPath, ['--input-type=module', '-e', 'process.exit(0)'], {
+    cwd: subdir, env: f.guarded, encoding: 'utf8', timeout: 10000,
+  });
+  assert.notEqual(result.status, 0); assert.match(result.stderr, /Owned offline hook fixture required/);
+  assert.equal(unitCount(f), 0); assert.equal(existsSync(f.marker), false);
+});
 for (const [name, path, value] of [
   ['tracked local env', '.env.groq', 'MODEL_API_KEY=synthetic-not-used'],
   ['tracked SSH key file', 'id_ed25519', 'synthetic-not-a-real-key'],
