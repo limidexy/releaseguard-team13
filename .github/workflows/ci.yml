@@ -12,6 +12,9 @@ jobs:
     if: vars.RG_ENABLE_HOSTED_CI == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    env:
+      # Every Compose operation, including fault/recovery checks, uses this runner-only project.
+      COMPOSE_PROJECT_NAME: rg-ci-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -20,9 +23,18 @@ jobs:
           cache: npm
       - run: npm ci --no-audit --no-fund
       - run: npm test
+      - name: Cross-platform tooling regressions
+        run: node --test tests/windows-compat.test.mjs tests/tooling-checkout.test.mjs tests/tooling-consumers.test.mjs
+      - name: Replay metrics and scale-evidence regressions
+        run: node --test tests/replay-metrics.test.mjs tests/replay-timeline.test.mjs
       - run: node scripts/setup-local.mjs
       - run: docker compose build gateway postgres
       - run: docker compose up -d --no-build --wait
+      - name: Submission deadlines and database atomicity integration
+        env:
+          RG_SUBMISSION_INTEGRATION: '1'
+          RELEASEGUARD_URL: http://127.0.0.1:5189
+        run: node scripts/verify-submission.mjs | tee evidence/submission-integration.log
       - run: node scripts/verify.mjs --restart
       - run: node scripts/fault-test.mjs
       - name: Dependency advisory gate
@@ -54,3 +66,15 @@ jobs:
       - name: Stop containers
         if: always()
         run: docker compose stop
+  windows-tooling:
+    # Public-repository standard runner; no install, Docker, cloud or model steps.
+    if: vars.RG_ENABLE_HOSTED_CI == 'true'
+    runs-on: windows-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Native Windows tooling regressions
+        run: node --test tests/windows-compat.test.mjs tests/tooling-checkout.test.mjs tests/tooling-consumers.test.mjs
