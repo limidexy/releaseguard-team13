@@ -20,6 +20,8 @@ jobs:
           cache: npm
       - run: npm ci --no-audit --no-fund
       - run: npm test
+      - name: Cross-platform tooling regressions
+        run: node --test tests/windows-compat.test.mjs tests/tooling-checkout.test.mjs tests/tooling-consumers.test.mjs
       - run: node scripts/setup-local.mjs
       - run: docker compose build gateway postgres
       - run: docker compose up -d --no-build --wait
@@ -54,3 +56,15 @@ jobs:
       - name: Stop containers
         if: always()
         run: docker compose stop
+  windows-tooling:
+    # Public-repository standard runner; no install, Docker, cloud or model steps.
+    if: vars.RG_ENABLE_HOSTED_CI == 'true'
+    runs-on: windows-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Native Windows tooling regressions
+        run: node --test tests/windows-compat.test.mjs tests/tooling-checkout.test.mjs tests/tooling-consumers.test.mjs
