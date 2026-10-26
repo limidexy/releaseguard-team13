@@ -36,11 +36,13 @@ function harness(status: number, body: string, language = 'en', token = ' offlin
   };
 }
 
-for (const [language, prefix] of [['zh', '操作冲突'], ['en', 'Conflict']]) {
+for (const [language, prefix] of [['zh', /^操作.*冲突/], ['en', /^The action conflicts/]] as const) {
   test('409 reports a localized conflict and preserves the reason in ' + language, async () => {
     const h = harness(409, JSON.stringify({ error: 'Independent pending review required' }), language);
     await assert.rejects(h.api('releases/review'), (e: Error) => {
-      assert.equal(e.message, prefix + ' (Independent pending review required)');
+      assert.match(e.message, prefix);
+      assert.ok(e.message.endsWith(' (Independent pending review required)'));
+      assert.ok(!e.message.includes('{'));
       return true;
     });
     assert.equal(h.requests.length, 1, 'errors do not automatically retry');
@@ -52,7 +54,7 @@ test('400 preserves the validation path/reason without dumping JSON', async () =
     { path: ['outputs', 0, 'output'], message: 'Expected string, received number' },
   ] }), 'zh');
   await assert.rejects(h.api('jobs'), (e: Error) => {
-    assert.match(e.message, /^未通过校验/);
+    assert.match(e.message, /未通过校验/);
     assert.match(e.message, /outputs\[0\]\.output/);
     assert.match(e.message, /Expected string, received number/);
     assert.ok(!e.message.includes('{'));
@@ -149,4 +151,34 @@ test('validation details are bounded to three errors', async () => {
     return true;
   });
 });
+
+for (const [language, hints] of [
+  ['zh', [/审核自己提交或申请/, /审核版本已过期/, /未通过门禁/, /刷新后换合适的身份/]],
+  ['en', [/created or requested/, /stale review version/, /did not pass the gate/, /Refresh and retry/]],
+] as const) {
+  test('409 provides actionable independent-review, stale-version and gate guidance in ' + language, async () => {
+    const h = harness(409, '{"error":"Independent pending review required"}', language);
+    await assert.rejects(h.api('releases/review'), (e: Error) => {
+      for (const hint of hints) assert.match(e.message, hint);
+      assert.ok(e.message.endsWith(' (Independent pending review required)'));
+      return true;
+    });
+    assert.equal(h.requests.length, 1);
+  });
+}
+
+for (const [language, instruction] of [
+  ['zh', /字段位置和原因.*重试/],
+  ['en', /Fix the field and reason.*retry/],
+] as const) {
+  test('400 tells the user how to correct the field without hiding validation details in ' + language, async () => {
+    const h = harness(400, '{"error":"validation_error","details":[{"path":["candidate"],"message":"Required"}]}', language);
+    await assert.rejects(h.api('jobs'), (e: Error) => {
+      assert.match(e.message, instruction);
+      assert.match(e.message, /candidate: Required/);
+      assert.ok(!e.message.includes('{'));
+      return true;
+    });
+  });
+}
 
