@@ -1,7 +1,8 @@
-import test from 'node:test';
+import test, { mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
+import { Socket } from 'node:net';
 import Fastify, { type FastifyInstance } from 'fastify';
 import { SignJWT } from 'jose';
 import { evaluate, suiteSchema } from '../src/domain.js';
@@ -9,9 +10,13 @@ import { revisedReturnsSuite, returnsSuiteV22 } from '../src/returns-policy.js';
 
 // No real provider, database or running classroom service. Each route is injected.
 const secret = 'synthetic-catalogue-test-secret-not-a-credential';
+mock.method(Socket.prototype, 'connect', () => { throw Error('Catalogue regression forbids TCP'); });
+mock.method(globalThis, 'fetch', async () => { throw Error('Catalogue regression forbids external fetch'); });
+process.env.DATABASE_URL = 'postgresql://offline:offline@127.0.0.1:1/offline'; process.env.AMQP_URL = 'amqp://offline:offline@127.0.0.1:1';
 process.env.AUTH_MODE = 'dev'; process.env.ALLOW_DEV_AUTH = 'true';
 process.env.AUTH_SECRET = secret; process.env.INTERNAL_SECRET = secret;
 process.env.SERVICE_ROLE = 'support'; process.env.ALLOW_REAL_MODEL = 'false';
+delete process.env.RG_DEPLOYMENT_ENV; delete process.env.RG_DEPLOYMENT_REGION;
 const { gateway } = await import('../src/gateway.js');
 const { support } = await import('../src/support.js');
 const legacyBytes = readFileSync('public/demo-fixtures.json', 'utf8');
@@ -60,13 +65,17 @@ class Element {
   insertCell() { const cell = new Element(); this.append(cell); return cell; }
   addEventListener() {} focus() {}
 }
-function consoleHarness(app: FastifyInstance, language: string, unavailable = false, token = 'synthetic-ui-only', pollSource?: 'real' | 'replay') {
+function consoleHarness(app: FastifyInstance, language: string, unavailable = false, token = 'synthetic-ui-only', pollSource?: 'real' | 'replay', environmentResponse?: () => Promise<Response>) {
   const html = readFileSync('public/index.html', 'utf8');
   const elements = new Map([...html.matchAll(/\bid="([^"]+)"/g)].map(m => [m[1], new Element()]));
   const get = (id: string) => { const element = elements.get(id); assert.ok(element, 'actual HTML must contain #' + id); return element; };
+  const labels = [...html.matchAll(/<[^>]+\bdata-i18n="([^"]+)"[^>]*>/g)].map(m => {
+    const id = m[0].match(/\bid="([^"]+)"/)?.[1]; const element = id ? get(id) : new Element();
+    element.dataset.i18n = m[1]; return element;
+  });
   get('language').value = language; get('source').value = 'replay'; get('token').value = token;
   let now = 0;
-  const calls: { url: string; method: string; body?: any; headers?: HeadersInit; at: number }[] = [];
+  const calls: { url: string; method: string; body?: any; headers?: HeadersInit; cache?: RequestCache; at: number }[] = [];
   if (pollSource) {
     for (const [id, value] of Object.entries({ source: pollSource, prompt: 'v1', scenario: 'passing', appId: 'synthetic-app-id', suiteId: 'synthetic-suite-id', candidate: 'synthetic-poll-only', commitRef: 'synthetic-no-provider' })) get(id).value = value;
   }
@@ -76,10 +85,14 @@ function consoleHarness(app: FastifyInstance, language: string, unavailable = fa
     crypto: { randomUUID: () => 'synthetic-idempotency-key' },
     // Synthetic observation time only; never a performance/latency measurement.
     setTimeout: (callback: () => void, milliseconds: number) => { now += Math.max(milliseconds, 60000); callback(); },
-    document: { getElementById: get, querySelectorAll: () => [], documentElement: { lang: '' }, createElement: () => new Element() },
+    document: { getElementById: get, querySelectorAll: (selector: string) => selector === '[data-i18n]' ? labels : [], documentElement: { lang: '' }, createElement: () => new Element() },
     fetch: async (url: string, init: RequestInit = {}) => {
       const method = init.method ?? 'GET', body = init.body === undefined ? undefined : JSON.parse(String(init.body));
-      calls.push({ url, method, body, headers: init.headers, at: now });
+      calls.push({ url, method, body, headers: init.headers, cache: init.cache, at: now });
+      if (url === '/environment.json') {
+        if (environmentResponse) return environmentResponse();
+        const r = await app.inject(url); return new Response(r.body, { status: r.statusCode });
+      }
       if (pollSource && url === '/api/v2/jobs' && method === 'POST') return Response.json({ id: 'synthetic-job' });
       if (pollSource && url === '/api/v2/jobs/synthetic-job') return Response.json({ id: 'synthetic-job', input: { source: pollSource, candidate: 'synthetic-poll-only', commitRef: 'synthetic-no-provider' }, status: 'running', attempts: 1, created_at: '2026-01-01T00:00:00Z' });
       if (url.endsWith('.json')) {
@@ -92,20 +105,21 @@ function consoleHarness(app: FastifyInstance, language: string, unavailable = fa
       throw Error('Unexpected UI network operation: ' + method + ' ' + url);
     },
   });
-  vm.runInContext(readFileSync('public/app.js', 'utf8'), context, { timeout: 1000 });
-  return { calls, get, click: () => get('setup').onclick!(), submit: () => get('submit').onclick!() };
+  const ready = Promise.resolve(vm.runInContext(readFileSync('public/app.js', 'utf8'), context, { timeout: 1000 }));
+  return { calls, get, labels: (key: string) => labels.filter(e => e.dataset.i18n === key).map(e => e.textContent), ready,
+    click: () => get('setup').onclick!(), submit: () => get('submit').onclick!() };
 }
 for (const source of ['real', 'replay'] as const) {
   test('actual UI ' + source + ' observation remains bounded without resubmitting an unfinished job', async () => {
     const app = Fastify(); await gateway(app);
     try {
-      const h = consoleHarness(app, 'en', false, 'synthetic-ui-only', source); await h.submit();
+      const h = consoleHarness(app, 'en', false, 'synthetic-ui-only', source); await h.ready; await h.submit();
       assert.equal(h.calls.filter(c => c.method === 'POST').length, 1);
       const last = h.calls.filter(c => c.url === '/api/v2/jobs/synthetic-job').at(-1)!;
       assert.ok(last.at >= (source === 'real' ? 400000 : 100000));
       assert.ok(last.at < (source === 'real' ? 450000 : 180000));
       assert.equal(h.get('message').textContent, 'Job is still active; refresh shortly');
-      assert.ok(h.calls.every(c => c.url.startsWith('/api/v2/jobs')));
+      assert.ok(h.calls.every(c => c.url === '/environment.json' || c.url.startsWith('/api/v2/jobs')));
     } finally { await app.close(); }
   });
 }
@@ -114,18 +128,20 @@ for (const language of ['zh', 'en']) {
     const app = Fastify(); await gateway(app);
     try {
       const h = consoleHarness(app, language);
-      assert.equal(h.calls.length, 0, 'loading the page must not register or submit anything');
+      await h.ready;
+      assert.deepEqual(h.calls.map(c => [c.method, c.url]), [['GET', '/environment.json']], 'page load only reads optional public configuration');
       await h.click();
       assert.deepEqual(h.calls.map(c => [c.method, c.url]), [
+        ['GET', '/environment.json'],
         ['GET', '/returns-fixtures-v2-2.json'], ['POST', '/api/v2/applications'], ['POST', '/api/v2/suites'],
         ['GET', '/api/v2/jobs?limit=25&offset=0'], ['GET', '/api/v2/releases'],
       ]);
-      assert.deepEqual(h.calls[1].body, legacy.application);
-      assert.deepEqual(h.calls[2].body, catalogues[1].suite);
+      assert.deepEqual(h.calls.find(c => c.url === '/api/v2/applications')!.body, legacy.application);
+      assert.deepEqual(h.calls.find(c => c.url === '/api/v2/suites')!.body, catalogues[1].suite);
       assert.equal(h.get('appId').value, 'synthetic-app-id'); assert.equal(h.get('suiteId').value, 'synthetic-suite-id');
       assert.equal(h.get('connection').open, false);
       assert.equal(h.get('message').textContent, language === 'en' ? 'Done. Evidence updated.' : '操作完成，证据已更新。');
-      for (const c of h.calls.slice(1)) assert.equal(new Headers(c.headers).get('authorization'), 'Bearer synthetic-ui-only');
+      for (const c of h.calls.filter(c => c.url.startsWith('/api/'))) assert.equal(new Headers(c.headers).get('authorization'), 'Bearer synthetic-ui-only');
       assert.ok(h.calls.every(c => !c.url.includes('synthetic-ui-only')));
     } finally { await app.close(); }
   });
@@ -133,8 +149,8 @@ for (const language of ['zh', 'en']) {
 test('catalogue failure is reported without attempting asset registration, submission or review', async () => {
   const app = Fastify(); await gateway(app);
   try {
-    const h = consoleHarness(app, 'en', true); await h.click();
-    assert.deepEqual(h.calls.map(c => c.url), ['/returns-fixtures-v2-2.json']);
+    const h = consoleHarness(app, 'en', true); await h.ready; await h.click();
+    assert.deepEqual(h.calls.map(c => c.url), ['/environment.json', '/returns-fixtures-v2-2.json']);
     assert.match(h.get('message').textContent, /^The request did not finish\./);
     assert.equal(h.get('appId').value, ''); assert.equal(h.get('suiteId').value, '');
     assert.equal(h.get('message').className, 'error');
@@ -143,10 +159,67 @@ test('catalogue failure is reported without attempting asset registration, submi
 test('a missing token still prevents registration; choosing a catalogue does not grant an identity', async () => {
   const app = Fastify(); await gateway(app);
   try {
-    const h = consoleHarness(app, 'en', false, ''); await h.click();
-    assert.deepEqual(h.calls.map(c => c.url), ['/returns-fixtures-v2-2.json']);
+    const h = consoleHarness(app, 'en', false, ''); await h.ready; await h.click();
+    assert.deepEqual(h.calls.map(c => c.url), ['/environment.json', '/returns-fixtures-v2-2.json']);
     assert.equal(h.get('message').textContent, 'Enter an access token first'); assert.equal(h.get('connection').open, true);
   } finally { await app.close(); }
+});
+
+for (const language of ['zh', 'en']) for (const [environment, expected] of [
+  ['local', ['本地/开发配置', 'Local/dev configuration']],
+  ['gcp-trial', ['配置：GCP试用', 'Configured: GCP trial']],
+  ['unconfirmed', ['环境未确认', 'Environment unconfirmed']],
+] as const) {
+  test('actual ' + language + ' UI displays configuration, not hosting proof: ' + environment, async () => {
+    const app = Fastify(); await gateway(app);
+    try {
+      const h = consoleHarness(app, language, false, '', undefined, async () => Response.json({ environment, configurationOnly: true }));
+      await h.ready;
+      assert.deepEqual(h.labels('localOnly'), [expected[language === 'zh' ? 0 : 1], expected[language === 'zh' ? 0 : 1]]);
+      assert.match(h.labels('footer')[0], language === 'zh' ? /配置.*不是.*部署证明/ : /[Cc]onfiguration.*not.*deployment evidence/);
+      assert.deepEqual(h.calls.map(c => [c.method, c.url]), [['GET', '/environment.json']]);
+      assert.equal(h.calls[0].cache, 'no-store'); assert.equal(new Headers(h.calls[0].headers).has('authorization'), false);
+      assert.equal(h.get('message').textContent, '');
+    } finally { await app.close(); }
+  });
+}
+const invalidEnvironmentResponses: [string, () => Promise<Response>][] = [
+  ['HTTP failure', async () => Response.json({ environment: 'gcp-trial', configurationOnly: true }, { status: 503 })],
+  ['non-JSON', async () => new Response('<html>unavailable</html>')],
+  ['null', async () => Response.json(null)],
+  ['unknown environment', async () => Response.json({ environment: '<script>private</script>', configurationOnly: true })],
+  ['no declaration flag', async () => Response.json({ environment: 'gcp-trial' })],
+  ['network error', async () => { throw new TypeError('private transport details'); }],
+  ['timeout', async () => { throw Object.assign(new Error('private timeout'), { name: 'TimeoutError' }); }],
+];
+for (const [name, respond] of invalidEnvironmentResponses) test('optional environment ' + name + ' stays unconfirmed and preserves user input', async () => {
+  const app = Fastify(); await gateway(app);
+  try {
+    const h = consoleHarness(app, 'en', false, 'synthetic-ui-only', undefined, respond);
+    h.get('candidate').value = 'keep-my-candidate'; h.get('outputs').value = 'keep-original-answers';
+    h.get('message').textContent = 'Keep the existing operation result'; h.get('message').className = 'error';
+    await h.ready;
+    assert.ok(h.labels('localOnly').every(label => label === 'Environment unconfirmed'));
+    assert.equal(h.get('candidate').value, 'keep-my-candidate'); assert.equal(h.get('outputs').value, 'keep-original-answers');
+    assert.equal(h.get('token').value, 'synthetic-ui-only'); assert.equal(h.get('connection').open, false);
+    assert.equal(h.get('message').textContent, 'Keep the existing operation result'); assert.equal(h.get('message').className, 'error');
+    assert.deepEqual(h.calls.map(c => c.url), ['/environment.json']);
+  } finally { await app.close(); }
+});
+test('late metadata uses the latest language without resetting the connection or candidate', async () => {
+  let release!: (response: Response) => void;
+  const pending = new Promise<Response>(resolve => { release = resolve; });
+  const app = Fastify(); await gateway(app);
+  const h = consoleHarness(app, 'zh', false, 'synthetic-ui-only', undefined, () => pending);
+  try {
+    assert.ok(h.labels('localOnly').every(label => label === '环境未确认'));
+    h.get('language').value = 'en'; h.get('language').onchange!();
+    h.get('connectionState').textContent = 'Current identity loaded'; h.get('candidate').value = 'keep-this-name';
+    release(Response.json({ environment: 'gcp-trial', configurationOnly: true })); await h.ready;
+    assert.ok(h.labels('localOnly').every(label => label === 'Configured: GCP trial'));
+    assert.equal(h.get('connectionState').textContent, 'Current identity loaded'); assert.equal(h.get('candidate').value, 'keep-this-name');
+    assert.match(h.labels('tokenHint')[0], /workspace identity/);
+  } finally { release(Response.json({})); await h.ready; await app.close(); }
 });
 
 for (const catalogue of catalogues) for (const promptVersion of ['v1', 'v2']) for (const scenario of ['passing', 'failing', 'error']) {
