@@ -38,7 +38,7 @@ export async function runCloudSmokeCLI(args){
    if(process.env.GITHUB_ACTIONS!=='true'||process.env.GITHUB_EVENT_NAME!=='workflow_dispatch'||process.env.GITHUB_WORKFLOW!=='Approved cloud deployment'||
     c.runId!=='cd-'+process.env.GITHUB_RUN_ID+'-'+process.env.GITHUB_RUN_ATTEMPT||c.commit!==process.env.GITHUB_SHA||c.authMode!=='token')deny();
   }
-  const sourceNames=['scripts/cloud-smoke.mjs','scripts/cloud-smoke-core.mjs','scripts/cloud-smoke-http.mjs','scripts/cloud-token.mjs','scripts/cloud-token-core.mjs','public/demo-fixtures.json'],sources={};
+  const sourceNames=['scripts/cloud-smoke.mjs','scripts/cloud-smoke-core.mjs','scripts/cloud-smoke-http.mjs','scripts/cloud-http.mjs','scripts/cloud-token.mjs','scripts/cloud-token-core.mjs','public/demo-fixtures.json'],sources={};
   for(const name of sourceNames)sources[name]=hash(await read(join(root,name)));
   mask=process.umask(0o077);controller=new AbortController();deadline=performance.now()+180000;timer=setTimeout(stop,180000);process.on('SIGINT',stop);process.on('SIGTERM',stop);
   let output;const json=(name,value)=>exclusive(join(output,name),JSON.stringify(value,null,2)+'\n'),summary=join(root,'evidence/cloud-smoke-'+c.runId+'.json');
