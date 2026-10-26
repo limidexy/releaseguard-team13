@@ -17,7 +17,7 @@ async function check(name, fn) {
   catch (e) { report.checks.push({ name, passed: false, error: String(e) }); throw e; }
 }
 try {
-  report.containers = target.prove();
+  report.containers = await target.prove();
   // Only import credential readers and clients after the complete target proof.
   const { token } = await import('./dev-tokens.mjs');
   const { base, required, request, completed, key } = await import('./client.mjs');
@@ -245,6 +245,7 @@ finally {
   try { await target.cleanup(); }
   catch (error) { report.cleanupError = String(error); process.exitCode = 1; console.error(String(error)); }
   report.finishedAt = new Date().toISOString();
+  report.healthObservations = target.observations;
   report.passed = report.checks.filter(c => c.passed).length;
   report.failed = report.checks.filter(c => !c.passed).length;
   report.status = report.error || report.cleanupError ? 'failed' : 'passed';

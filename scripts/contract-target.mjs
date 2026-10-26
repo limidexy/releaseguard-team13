@@ -24,10 +24,33 @@ export function validateContractEnvironment(env) {
   return { project: env.COMPOSE_PROJECT_NAME, endpoint };
 }
 
+// Docker marks health unhealthy when pause closes the health monitor. Unpause
+// resumes the monitor, but does not itself prove the next probe has succeeded.
+// Poll only observations: never restart a service or accept unhealthy as ready.
+export async function waitForContractHealth(service, read, { timeoutMs = 120000, pollMs = 250, observe = () => {} } = {}) {
+  const deadline = Date.now() + timeoutMs;
+  let previous;
+  for (;;) {
+    const state = read();
+    assert.equal(state.State?.Running, true, 'Container must already be running: ' + service);
+    assert.notEqual(state.State.Paused, true, 'Container must not already be paused: ' + service);
+    const status = state.State.Health?.Status;
+    assert.ok(['healthy', 'starting', 'unhealthy'].includes(status), 'Container must have a health check: ' + service);
+    if (status !== previous) {
+      observe({ service, at: new Date().toISOString(), status, failingStreak: state.State.Health.FailingStreak ?? null });
+      previous = status;
+    }
+    if (status === 'healthy') return state;
+    assert.ok(Date.now() < deadline, 'Health readiness deadline exceeded: ' + service);
+    await delay(pollMs);
+  }
+}
+
 export function contractTarget(env = process.env, execute = execFileSync) {
   const { project, endpoint } = validateContractEnvironment(env);
   const originals = new Map(), changes = new Map();
   let proven = false;
+  const observations = [];
   const run = (...args) => execute('docker', ['--context', 'default', ...args], {
     cwd: root, env, encoding: 'utf8', timeout: 120000, maxBuffer: 1024 * 1024, stdio: 'pipe',
   }).trim();
@@ -58,16 +81,21 @@ export function contractTarget(env = process.env, execute = execFileSync) {
   }
   return {
     project,
-    prove() {
+    observations,
+    async prove() {
       assert.equal(proven, false, 'Target can only be proven once');
       const host = JSON.parse(run('context', 'inspect', 'default', '--format', '{{json .Endpoints.docker.Host}}'));
       assert.match(host, /^unix:\/\/\//, 'Default Docker context must use a local Unix socket');
+      observations.push({ kind: 'dockerServer', version: run('version', '--format', '{{.Server.Version}}'), at: new Date().toISOString() });
       for (const service of services) {
         const ids = compose('ps', '--all', '--quiet', service).split(/\s+/).filter(Boolean);
         assert.equal(ids.length, 1, 'Exactly one existing container is required: ' + service);
         const state = inspect(ids[0]);
         assert.equal(state.Id, ids[0], 'Compose/inspect container mismatch');
-        owned(service, state); healthy(service, state); originals.set(service, state);
+        owned(service, state); originals.set(service, state);
+        await waitForContractHealth(service, () => {
+          const latest = inspect(state.Id); owned(service, latest); return latest;
+        }, { observe: entry => observations.push(entry) });
       }
       const bindings = originals.get('gateway').Ports?.['8080/tcp'];
       assert.equal(bindings?.length, 1, 'Exactly one gateway loopback binding is required');
@@ -107,14 +135,7 @@ export function contractTarget(env = process.env, execute = execFileSync) {
       } else if (!state.State.Running) {
         run('start', state.Id); // The original container only: no up, pull or rebuild.
       }
-      const deadline = Date.now() + 120000;
-      for (;;) {
-        const restored = current(service);
-        assert.notEqual(restored.State.Health?.Status, 'unhealthy', 'Restored service is unhealthy: ' + service);
-        if (restored.State.Running && !restored.State.Paused && restored.State.Health?.Status === 'healthy') break;
-        assert.ok(Date.now() < deadline, 'Recovery readiness deadline exceeded: ' + service);
-        await delay(250);
-      }
+      await waitForContractHealth(service, () => current(service), { observe: entry => observations.push(entry) });
       changes.delete(service);
     },
     async cleanup() {
