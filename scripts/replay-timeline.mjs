@@ -41,10 +41,22 @@ export function judgeScale(samples, rows, initialWorkerIds, cohortId) {
     if (s.queue != null) verifyTotals(s.queue);
   }
   const initial = new Set(initialWorkerIds);
-  const readyIds = [...new Set(samples.flatMap(s => s.workers.filter(w => w.ready).map(w => w.id)))];
+  const initialWorkersObserved = samples.length > 0 && samples[0].ready === initial.size &&
+    initialWorkerIds.every(id => samples[0].workers.some(w => w.id === id && w.ready));
+  const firstReady = new Map();
+  for (const s of samples) for (const w of s.workers) {
+    if (w.ready && !firstReady.has(w.id)) firstReady.set(w.id, timestamp(s.at));
+  }
+  const readyIds = [...firstReady.keys()];
   const newIds = readyIds.filter(id => !initial.has(id));
   const recommendation = samples.find(s => s.controller === 'automatic' && s.hpa?.desiredReplicas > initial.size && s.desired > initial.size);
-  const readySample = recommendation && samples.find(s => s.controller === 'automatic' && timestamp(s.at) >= timestamp(recommendation.at) && s.ready > initial.size && s.workers.some(w => w.ready && newIds.includes(w.id)));
+  const recommendationAt = recommendation ? timestamp(recommendation.at) : null;
+  // First-observed Ready is evidence, not an inferred transition time. A worker
+  // already Ready before (or in the same sample as) a recommendation cannot
+  // establish recommendation -> Ready order by appearing again later.
+  const readinessOrdered = !!recommendation && newIds.length > 0 &&
+    newIds.every(id => firstReady.get(id) > recommendationAt);
+  const readySample = readinessOrdered && samples.find(s => s.controller === 'automatic' && timestamp(s.at) > recommendationAt && s.ready > initial.size && s.workers.some(w => w.ready && newIds.includes(w.id)));
   const counts = Object.fromEntries(readyIds.map(id => [id, 0]));
   const lastWork = [];
   for (const r of rows) {
@@ -60,5 +72,11 @@ export function judgeScale(samples, rows, initialWorkerIds, cohortId) {
   const newWorkersProcessed = newIds.length > 0 && newIds.every(id => counts[id] > 0);
   const down = readySample && samples.find(s => timestamp(s.at) > timestamp(readySample.at) && timestamp(s.at) >= Math.max(-Infinity, ...lastWork) && s.controller === 'automatic' && s.ready === initial.size && s.desired === initial.size && s.hpa?.desiredReplicas === initial.size);
   const automaticOnly = samples.length > 0 && samples.every(s => s.controller === 'automatic');
-  return { requested: !!recommendation, becameReady: !!readySample, newWorkerIds: newIds, perObservedReadyWorker: counts, newWorkersProcessed, returnedToInitial: !!down, automaticOnly, evidenceStatus: samples.length ? 'OBSERVED_ONLY' : 'UNAVAILABLE', passed: automaticOnly && !!recommendation && !!readySample && newWorkersProcessed && !!down };
+  return {
+    requested: !!recommendation, becameReady: !!readySample, initialWorkersObserved, readinessOrdered,
+    firstObservedReadyAt: Object.fromEntries([...firstReady].map(([id, at]) => [id, new Date(at).toISOString()])),
+    newWorkerIds: newIds, perObservedReadyWorker: counts, newWorkersProcessed, returnedToInitial: !!down,
+    automaticOnly, evidenceStatus: samples.length ? 'OBSERVED_ONLY' : 'UNAVAILABLE',
+    passed: automaticOnly && initialWorkersObserved && !!recommendation && readinessOrdered && !!readySample && newWorkersProcessed && !!down,
+  };
 }
