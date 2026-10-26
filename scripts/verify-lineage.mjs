@@ -73,6 +73,52 @@ try {
       } finally {if(app)await app.close();if(pool)await pool.end();await control.query('DROP SCHEMA IF EXISTS '+schema+' CASCADE');await control.end();}
     `);
   });
+  await check('Actual review transitions commit once under row locks and roll back state when audit fails', async () => {
+    // Only this disposable runner's Governance database, in a fresh schema.
+    // These are synthetic route calls, not real-person release approvals.
+    const reviewer2=await token('synthetic-second-reviewer','reviewer',workspace);
+    inside('governance', `
+      import assert from 'node:assert/strict';import pg from 'pg';import {randomUUID} from 'node:crypto';
+      globalThis.fetch=async()=>{throw Error('Review transition must not call an upstream, deployment or model');};
+      const schema='rg_review_'+randomUUID().replaceAll('-','');assert.match(schema,/^rg_review_[a-f0-9]+$/);
+      const control=new pg.Client({connectionString:process.env.DATABASE_URL});await control.connect();let app,pool;
+      try {
+        await control.query('CREATE SCHEMA '+schema);
+        const url=new URL(process.env.DATABASE_URL);url.searchParams.set('options','-csearch_path='+schema);process.env.DATABASE_URL=url.toString();
+        const common=await import('./dist/src/common.js');pool=common.pool;
+        assert.equal((await pool.query('SELECT current_schema() AS s')).rows[0].s,schema);
+        const {governance}=await import('./dist/src/governance.js');app=common.server();app.log.level='silent';await governance(app);
+        const evidence={result:{gate:'passed',score:100},snapshot:{synthetic:true},execution:{provenance:{source:'replay'},outputs:[{caseId:'retained',output:'Original synthetic answer, never repaired'}]}};
+        const seed=async()=>{const id=randomUUID();await pool.query("INSERT INTO releases(id,workspace,job_id,created_by,requested_by,evidence,request_note) VALUES($1,$2,$3,'synthetic-author','synthetic-requester',$4,'Synthetic original request')",[id,${JSON.stringify(workspace)},randomUUID(),evidence]);return id;};
+        const read=async id=>(await pool.query('SELECT * FROM releases WHERE id=$1',[id])).rows[0];
+        const audits=async id=>(await pool.query('SELECT * FROM audit WHERE entity_id=$1 ORDER BY seq',[id])).rows;
+        const send=(id,decision,token=${JSON.stringify(reviewer)})=>app.inject({method:'POST',url:'/releases/'+id+'/review',headers:{authorization:'Bearer '+token},payload:{decision,note:'Synthetic CI decision, not human acceptance',version:1}});
+        for(const decision of ['approved','rejected']) {
+          const id=await seed(),before=await read(id),response=await send(id,decision);
+          assert.equal(response.statusCode,200);assert.deepEqual(response.json(),{id,status:decision,version:2});
+          const after=await read(id),audit=await audits(id);
+          assert.equal(after.status,decision);assert.equal(after.version,2);assert.equal(after.reviewed_by,'synthetic-independent-reviewer');
+          assert.equal(after.review_note,'Synthetic CI decision, not human acceptance');assert.ok(after.reviewed_at instanceof Date);
+          assert.deepEqual(after.evidence,before.evidence);assert.equal(after.request_note,before.request_note);assert.equal(after.previous_release_id,before.previous_release_id);
+          assert.equal(audit.length,1);assert.equal(audit[0].action,decision==='approved'?'ReleaseApproved':'ReleaseRejected');
+          assert.equal(audit[0].workspace,${JSON.stringify(workspace)});assert.equal(audit[0].actor,after.reviewed_by);assert.equal(audit[0].details.jobId,before.job_id);
+          const saved=await read(id),savedAudit=await audits(id);
+          assert.equal((await send(id,decision)).statusCode,409);assert.deepEqual(await read(id),saved);assert.deepEqual(await audits(id),savedAudit);
+        }
+        const competing=await seed();
+        const responses=await Promise.all([send(competing,'approved'),send(competing,'rejected',${JSON.stringify(reviewer2)})]);
+        assert.deepEqual(responses.map(r=>r.statusCode).sort(),[200,409]);
+        const winner=responses.find(r=>r.statusCode===200).json(),final=await read(competing),audit=await audits(competing);
+        assert.equal(final.version,2);assert.equal(final.status,winner.status);assert.equal(audit.length,1);
+        assert.equal(audit[0].action,final.status==='approved'?'ReleaseApproved':'ReleaseRejected');assert.equal(audit[0].actor,final.reviewed_by);assert.deepEqual(final.evidence,evidence);
+        const failed=await seed(),before=await read(failed);
+        await pool.query(\`CREATE FUNCTION fail_review_audit() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN RAISE EXCEPTION 'synthetic decision audit failure'; END $$; CREATE TRIGGER fail_review_audit BEFORE INSERT ON audit FOR EACH ROW EXECUTE FUNCTION fail_review_audit();\`);
+        const rejected=await send(failed,'approved');assert.equal(rejected.statusCode,503);assert.deepEqual(rejected.json(),{error:'service_unavailable'});
+        assert.deepEqual(await read(failed),before);assert.deepEqual(await audits(failed),[]);
+        console.log('both decisions, one concurrent winner, original evidence and atomic decision/audit rollback checked');
+      } finally {if(app)await app.close();if(pool)await pool.end();await control.query('DROP SCHEMA IF EXISTS '+schema+' CASCADE');await control.end();}
+    `);
+  });
   const terminals = [];
   await check('New job/review linkage preserves both approved and rejected histories, including automatic pointers', async () => {
     const revised = await required('suites', author, { ...suite, parentId: s.id });
