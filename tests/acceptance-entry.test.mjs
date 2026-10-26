@@ -4,9 +4,10 @@ import { spawnSync } from 'node:child_process';
 import { mkdtempSync, mkdirSync, readdirSync, readFileSync, writeFileSync, existsSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 const source = resolve('scripts');
-const boundary = resolve('tests/fixtures/acceptance-boundary.mjs');
+const boundary = pathToFileURL(resolve('tests/fixtures/acceptance-boundary.mjs')).href;
 const id = 'f7df9b5c-08e9-4d1d-9c73-7cbd99bcb50a';
 const planned = ['unit-tests', 'container-build', 'container-start', 'integration', 'improvements', 'ddd-contracts',
   'fault-recovery', 'prompt-replay', 'repeated-scaling', 'mixed-read-write', 'dependency-audit'];
