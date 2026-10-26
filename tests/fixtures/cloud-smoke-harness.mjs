@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { config,runId,token } from './cloud-smoke-data.mjs';
 const repo=fileURLToPath(new URL('../../',import.meta.url));
-const names=['scripts/cloud-smoke.mjs','scripts/cloud-smoke-core.mjs','scripts/cloud-smoke-http.mjs','scripts/cloud-token.mjs','scripts/cloud-token-core.mjs','public/demo-fixtures.json'];
+const names=['scripts/cloud-smoke.mjs','scripts/cloud-smoke-core.mjs','scripts/cloud-smoke-http.mjs','scripts/cloud-http.mjs','scripts/cloud-token.mjs','scripts/cloud-token-core.mjs','public/demo-fixtures.json'];
 export function harness(t,overrides={}){
  const root=mkdtempSync(join(realpathSync(tmpdir()),'rg-cloud-smoke-'));t.after(()=>{assert.match(root,/\/rg-cloud-smoke-[^/]+$/);rmSync(root,{recursive:true});});
  for(const d of ['scripts','public','auth'])mkdirSync(join(root,d),{mode:0o700});

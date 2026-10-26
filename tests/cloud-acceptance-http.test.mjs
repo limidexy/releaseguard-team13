@@ -1,0 +1,24 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import net from 'node:net';
+import { cloudRequest } from '../scripts/cloud-http.mjs';
+import { acceptanceRequest } from '../scripts/cloud-acceptance-http.mjs';
+import { config,token,ids } from './fixtures/cloud-acceptance-data.mjs';
+net.Socket.prototype.connect=()=>{throw Error('Native TCP forbidden');};globalThis.fetch=()=>{throw Error('Native fetch forbidden');};
+const c=config(),credentials={contributor:token('contributor'),viewer:token('viewer'),tampered:'INSECURE_TEST_ONLY_TAMPERED'},json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:{'content-type':'application/json'}});
+const request=(op,fetcher,allow=true)=>acceptanceRequest(c.origin,op,credentials,1000,undefined,fetcher,allow);
+test('anonymous acceptance sends no authorization header, and HTTP401 remains unchanged',async()=>{let n=0;const r=await request({name:'anonymous',path:'applications',method:'GET'},async(url,init)=>{n++;assert.equal(url,c.origin+'/api/v2/applications');assert.equal(Object.hasOwn(init.headers,'authorization'),false);assert.equal(init.redirect,'error');return json({error:'unauthorized'},401);});assert.equal(n,1);assert.equal(r.status,401);assert.equal(r.code,'response_received');});
+test('viewer mutation uses only the viewer token, and original403 is not converted',async()=>{const r=await request({name:'viewer',path:'applications',method:'POST',body:{name:'synthetic'}},async(url,init)=>{assert.equal(init.headers.authorization,'Bearer '+credentials.viewer);assert.equal(init.headers.origin,undefined);return json({error:'write role required'},403);});assert.equal(r.status,403);});
+for(const body of [null,'<h1>Not Found</h1>'])test('admin404 may have an empty/HTML entity without inventing a JSON result',async()=>{const r=await request({name:'admin',path:'auth/admin/',method:'GET'},async(url,init)=>{assert.equal(url,c.origin+'/auth/admin/');assert.equal(Object.hasOwn(init.headers,'authorization'),false);return new Response(body,{status:404,headers:{'content-type':'text/html'}});});assert.equal(r.code,'response_received');assert.equal(r.status,404);assert.equal(r.body,null);assert.equal(r.bodyComplete,true);assert.equal(Buffer.from(r.rawEntityBase64,'base64').toString(),body??'');});
+test('cross-origin probe uses the fixed untrusted Origin without changing the bearer or target',async()=>{const r=await request({name:'crossOrigin',path:'applications',method:'POST',body:{}},async(url,init)=>{assert.equal(url,c.origin+'/api/v2/applications');assert.equal(init.headers.origin,'https://untrusted.invalid');assert.equal(init.headers.authorization,'Bearer '+credentials.contributor);return json({},403);});assert.equal(r.status,403);});
+for(const op of [
+ {name:'release',path:'releases/'+ids.release+'/review',method:'POST'},
+ {name:'unknown',path:'applications',method:'POST'},
+ {name:'anonymous',path:'applications',method:'DELETE'},
+ {name:'observe',path:'jobs/../releases',method:'GET'},
+ {name:'deniedReview',path:'releases/'+ids.release+'/review',method:'POST',body:{decision:'rejected',version:1,note:'Automated negative authorization check'}},
+])test('closed route/probe table refuses '+JSON.stringify(op)+' before fetch',async()=>{let n=0;const r=await request(op,async()=>{n++;return json({});});assert.equal(n,0);assert.equal(r.code,'invalid_request');});
+test('a valid review POST needs its separate explicit negative-probe capability',async()=>{const op={name:'deniedReview',path:'releases/'+ids.release+'/review',method:'POST',body:{decision:'approved',version:1,note:'Automated negative authorization check'}};let n=0;const fetcher=async()=>{n++;return json({},403);};assert.equal((await request(op,fetcher,false)).code,'invalid_request');assert.equal(n,0);assert.equal((await request(op,fetcher,true)).status,403);assert.equal(n,1);});
+test('a response echoing another selected identity is withheld, even when that bearer was not sent',async()=>{const r=await request({name:'application',path:'applications',method:'POST',body:{}},async()=>json({echo:credentials.viewer},201));assert.equal(r.credentialEchoWithheld,true);assert.equal(r.rawEntityBase64,null);assert.equal(r.body,null);});
+test('invalid known-secret collection yields an invalid request, not an uncaught exception or dispatch',async()=>{let n=0;const r=await cloudRequest(c.origin,{route:'/api/v2/jobs',method:'GET'},credentials.contributor,1000,undefined,async()=>{n++;return json({});},{bad:true});assert.equal(r.code,'invalid_request');assert.equal(n,0);});
+test('cyclic JSON failure occurs before actual fetch and does not claim network entry',async()=>{const body={};body.self=body;let n=0;const r=await cloudRequest(c.origin,{route:'/api/v2/jobs',method:'POST',body},credentials.contributor,1000,undefined,async()=>{n++;return json({});});assert.equal(r.networkEntered,false);assert.equal(n,0);assert.equal(r.status,null);});
