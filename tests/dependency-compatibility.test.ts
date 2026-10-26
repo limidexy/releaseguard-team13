@@ -203,6 +203,8 @@ test('dependency compatibility: actual route validation and HTTP 400 stay offlin
     encoding: 'utf8', timeout: 15000, maxBuffer: 262144,
     env: {
       AUTH_MODE: 'dev', ALLOW_DEV_AUTH: 'true', SERVICE_ROLE: 'gateway',
+      // The injected apps share this process clock; production still requires an explicit bound.
+      SUBMISSION_CLOCK_SKEW_BOUND_MS: '0',
       AUTH_SECRET: 'synthetic-dependency-test-secret-not-a-real-credential',
       DATABASE_URL: 'postgres://unused:unused@127.0.0.1:1/never_connected',
       AMQP_URL: 'amqp://127.0.0.1:1/never_connected',
