@@ -1,11 +1,14 @@
-import test from 'node:test';
+import test, { mock } from 'node:test';
 import assert from 'node:assert/strict';
 import Fastify from 'fastify';
 import { SignJWT } from 'jose';
 import http from 'node:http';
 import type { AddressInfo } from 'node:net';
+// Only explicitly mocked provider transports may run. Scope restoration cannot
+// expose a background operation to a real endpoint or an inherited DB URL.
+mock.method(globalThis, 'fetch', async () => { throw new Error('Offline Support regression forbids external fetch'); });
 const secret = 'synthetic-support-lifecycle-secret-not-a-real-credential';
-Object.assign(process.env, { AUTH_MODE: 'dev', ALLOW_DEV_AUTH: 'true', AUTH_SECRET: secret, INTERNAL_SECRET: secret, SERVICE_ROLE: 'support', ALLOW_REAL_MODEL: 'true', MODEL_API_URL: 'https://provider.invalid/execute', MODEL_API_KEY: 'synthetic-secret-never-sent', MODEL_ID: 'synthetic-model' });
+Object.assign(process.env, { AUTH_MODE: 'dev', ALLOW_DEV_AUTH: 'true', AUTH_SECRET: secret, INTERNAL_SECRET: secret, SERVICE_ROLE: 'support', ALLOW_REAL_MODEL: 'true', MODEL_API_URL: 'https://provider.invalid/execute', MODEL_API_KEY: 'synthetic-secret-never-sent', MODEL_ID: 'synthetic-model', DATABASE_URL: 'postgresql://offline:offline@127.0.0.1:1/offline', AMQP_URL: 'amqp://offline:offline@127.0.0.1:1' });
 const { support } = await import('../src/support.js');
 const authorization = 'Bearer ' + await new SignJWT({ caller: 'worker' }).setProtectedHeader({ alg: 'HS256' }).setIssuer('releaseguard-services').setAudience('support').setIssuedAt().setExpirationTime('1h').sign(new TextEncoder().encode(secret));
 const input = { source: 'real', promptVersion: 'v2', scenario: 'passing', cases: [{ id: 'receipt', name: 'Synthetic', prompt: 'Synthetic', rule: 'contains', expected: 'receipt', critical: true }] };

@@ -1,14 +1,23 @@
-import test, { type TestContext } from 'node:test';
+import test, { mock, type TestContext } from 'node:test';
 import assert from 'node:assert/strict';
 import { EventEmitter } from 'node:events';
 import Fastify from 'fastify';
 import amqp from 'amqplib';
+import net from 'node:net';
+// File-wide barriers survive per-test mock restoration, even if a test fails.
+// A forgotten/unmocked dependency must never fall back to an existing database.
+mock.method(globalThis, 'fetch', async () => { throw new Error('Offline Worker regression forbids external fetch'); });
+mock.method(net.Socket.prototype, 'connect', () => { throw new Error('Offline Worker regression forbids sockets'); });
 const secret = 'synthetic-worker-lifecycle-secret-not-real';
-Object.assign(process.env, { AUTH_MODE: 'dev', ALLOW_DEV_AUTH: 'true', AUTH_SECRET: secret, INTERNAL_SECRET: secret, SERVICE_ROLE: 'worker', RUNNER_ORIGINS: 'http://synthetic-runner.invalid' });
+Object.assign(process.env, { AUTH_MODE: 'dev', ALLOW_DEV_AUTH: 'true', AUTH_SECRET: secret, INTERNAL_SECRET: secret, SERVICE_ROLE: 'worker', RUNNER_ORIGINS: 'http://synthetic-runner.invalid', DATABASE_URL: 'postgresql://offline:offline@127.0.0.1:1/offline', AMQP_URL: 'amqp://offline:offline@127.0.0.1:1' });
 const common = await import('../src/common.js');
 const { worker } = await import('../src/worker.js');
 const jobId = '00000000-0000-4000-8000-000000000001';
 const flush = async () => { for (let i = 0; i < 30; i++) await Promise.resolve(); };
+test('offline Worker fixtures reject an unmocked fetch and socket before transport', async () => {
+  await assert.rejects(fetch('http://127.0.0.1:1/'), /Offline Worker regression forbids external fetch/);
+  assert.throws(() => net.connect({ host: '127.0.0.1', port: 1 }), /Offline Worker regression forbids sockets/);
+});
 async function harness(t: TestContext, source: 'real' | 'replay', attempts = 1) {
   const saved: any = { status: 'running' }, logs: string[] = [];
   const app = Fastify({ logger: { level: 'error', stream: { write: (line: string) => { logs.push(line); } } } });
