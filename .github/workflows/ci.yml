@@ -41,6 +41,8 @@ jobs:
         run: node --test tests/image-identity.test.mjs
       - name: CD identity gate regressions (offline)
         run: node --test tests/cd-identity.test.mjs
+      - name: Inactive provider smoke ledger and redaction regressions (offline, no real calls)
+        run: node --test tests/provider-smoke.test.mjs
       - name: Disposable contract target safety regressions (offline)
         run: node --test tests/contracts-entry-guard.test.mjs tests/contracts-target.test.mjs
       - name: Artifact rollback isolation and recovery regressions (offline)
