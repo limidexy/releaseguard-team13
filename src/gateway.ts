@@ -4,6 +4,7 @@ import { HttpError, uuid, digest } from './common.js';
 import { installFetchTiming, newFetchTiming, withinFetch, publicFetchTiming, unknownSubmission, validSubmissionKey, keyHash } from './submission-state.js';
 import { SubmissionTransport } from './submission-transport.js';
 import { createSubmissionDeadline, SUBMISSION_BUDGET_HEADER, SUBMISSION_BUDGET_MS } from './submission-deadline.js';
+import { revisedReturnsSuite, returnsSuiteV22 } from './returns-policy.js';
 export async function gateway(app: FastifyInstance) {
   installFetchTiming(app);
   const submissions = new SubmissionTransport(16);
@@ -12,6 +13,16 @@ export async function gateway(app: FastifyInstance) {
   app.get('/app.js', async (_req, reply) => reply.type('application/javascript').send(await readFile('public/app.js', 'utf8')));
   app.get('/style.css', async (_req, reply) => reply.type('text/css').send(await readFile('public/style.css', 'utf8')));
   app.get('/demo-fixtures.json', async (_req, reply) => reply.type('application/json').send(await readFile('public/demo-fixtures.json', 'utf8')));
+  app.get('/returns-fixtures-v2.json', async () => {
+    const legacy = JSON.parse(await readFile('public/demo-fixtures.json', 'utf8'));
+    const suite = revisedReturnsSuite(legacy.suite);
+    return { application: legacy.application, cases: suite.cases, suite };
+  });
+  app.get('/returns-fixtures-v2-2.json', async () => {
+    const legacy = JSON.parse(await readFile('public/demo-fixtures.json', 'utf8'));
+    const suite = returnsSuiteV22(legacy.suite);
+    return { application: legacy.application, cases: suite.cases, suite };
+  });
   app.addHook('onSend', async (_req, reply) => { reply.header('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'").header('Referrer-Policy', 'no-referrer'); });
   app.all('/api/v2/*', async (req, reply) => {
     const entryMonotonic = performance.now(), entryEpochMs = Date.now();
