@@ -20,7 +20,9 @@ function fixture(script) {
   }));
   writeFileSync(path.join(repo, 'reject-test.mjs'), "console.error('Controlled offline unit failure'); process.exit(23);\n");
   writeFileSync(path.join(repo, '.env'), 'ALLOW_REAL_MODEL=false\n');
-  for (const file of [script, 'npm-command.mjs']) writeFileSync(path.join(repo, 'scripts', file), readFileSync(path.join('scripts', file)));
+  for (const file of [script, 'npm-command.mjs', ...(script === 'acceptance.mjs' ? ['acceptance-core.mjs', 'acceptance-process.mjs'] : [])]) {
+    writeFileSync(path.join(repo, 'scripts', file), readFileSync(path.join('scripts', file)));
+  }
   // No real Docker or other service can be reached if a fail-fast regression occurs.
   writeFileSync(path.join(bin, 'docker'), '#!' + process.execPath + '\n' +
     "require('node:fs').writeFileSync(process.env.RG_FORBIDDEN_COMMAND_MARKER,'called');process.exit(97);\n", { mode: 0o755 });
@@ -29,6 +31,7 @@ function fixture(script) {
     PATH: [bin, path.dirname(process.execPath), path.dirname(findCommand('npm')), path.dirname(findCommand('git')),
       ...(process.platform === 'win32' ? [path.join(process.env.SystemRoot, 'System32')] : ['/usr/bin', '/bin'])].join(path.delimiter),
     CI: 'true', ALLOW_REAL_MODEL: 'false', RELEASEGUARD_URL: 'http://127.0.0.1:1',
+    RG_ACCEPTANCE_RUN_ID: '411da169-92b5-4da4-bc61-45d89378626b',
     DOCKER_HOST: 'tcp://127.0.0.1:1', RG_FORBIDDEN_COMMAND_MARKER: marker,
     npm_config_offline: 'true', npm_config_audit: 'false', npm_config_fund: 'false', npm_config_update_notifier: 'false',
     npm_config_cache: path.join(tmp, 'npm-cache'), npm_config_userconfig: emptyConfig, npm_config_globalconfig: emptyGlobal,
@@ -55,7 +58,7 @@ for (const script of ['acceptance.mjs', 'prepush.mjs']) {
       assert.equal(result.status, 1, 'a rejected unit gate must keep the consumer unsuccessful');
       assert.ok(!existsSync(f.marker), 'no Docker/service command may run after the failed unit gate');
       assert.match(result.stderr, /exited with 23/, 'the real npm exit must be reported, not an EINVAL/ENOENT start error');
-      const file = script === 'acceptance.mjs' ? 'evidence/current/acceptance.json' : 'evidence/git/pre-push.json';
+      const file = script === 'acceptance.mjs' ? 'evidence/private/acceptance/411da169-92b5-4da4-bc61-45d89378626b/report.json' : 'evidence/git/pre-push.json';
       const report = JSON.parse(readFileSync(path.join(f.repo, file), 'utf8'));
       if (script === 'acceptance.mjs') {
         assert.equal(report.steps.length, 1);
