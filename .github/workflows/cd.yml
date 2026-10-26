@@ -77,6 +77,12 @@ jobs:
           PUBLIC_ORIGIN: ${{ vars.PUBLIC_ORIGIN }}
           AUTH_ISSUER: ${{ vars.AUTH_ISSUER }}
           OIDC_JWKS_URL: ${{ vars.OIDC_JWKS_URL }}
+          # Must be justified for the target hosts; never infer a zero skew.
+          SUBMISSION_CLOCK_SKEW_BOUND_MS: ${{ vars.SUBMISSION_CLOCK_SKEW_BOUND_MS }}
+          RG_INTERNAL_CA: ${{ vars.RG_INTERNAL_CA }}
+          RG_TRIAL_SMALL: ${{ vars.RG_TRIAL_SMALL }}
+          RG_SKIP_NAMESPACE: ${{ vars.RG_SKIP_NAMESPACE }}
+          RG_DEPLOYMENT_ENV: ${{ vars.RG_DEPLOYMENT_ENV }}
         run: |
           node scripts/render-cloud.mjs
           kubectl apply -f deploy/k8s/rendered/services.yaml
