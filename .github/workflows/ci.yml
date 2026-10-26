@@ -33,6 +33,8 @@ jobs:
         run: node --test tests/image-identity.test.mjs
       - name: CD identity gate regressions (offline)
         run: node --test tests/cd-identity.test.mjs
+      - name: Disposable contract target safety regressions (offline)
+        run: node --test tests/contracts-entry-guard.test.mjs tests/contracts-target.test.mjs
       - run: node scripts/setup-local.mjs
       - run: docker compose build gateway postgres
       - run: docker compose up -d --no-build --wait
@@ -54,6 +56,11 @@ jobs:
           RG_RETURNS_INTEGRATION: '1'
           RELEASEGUARD_URL: http://127.0.0.1:5189
         run: node scripts/verify-returns.mjs
+      - name: Isolated service-fault and business-contract integration
+        env:
+          RG_CONTRACTS_INTEGRATION: '1'
+          RELEASEGUARD_URL: http://127.0.0.1:5189
+        run: node scripts/verify-contracts.mjs
       - run: node scripts/verify.mjs --restart
       - run: node scripts/fault-test.mjs
       - name: Dependency advisory gate
