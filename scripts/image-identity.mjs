@@ -25,7 +25,7 @@ function tar(args) {
       env: { PATH: process.env.PATH, LANG: 'C', LC_ALL: 'C', ...(process.env.SystemRoot ? { SystemRoot: process.env.SystemRoot } : {}) } });
   } catch { throw new Error('Cannot read the requested image archive metadata'); }
 }
-async function archiveConfig(archive, output) {
+export function readArchiveIdentity(archive) {
   const file = resolve(archive), names = tar(['-tf', file]).toString().split(/\r?\n/);
   if (names.filter(name => name === 'manifest.json').length !== 1) throw new Error('Expected exactly one archive manifest');
   const entries = parseJSON(tar(['-xOf', file, '--', 'manifest.json']), 'archive manifest');
@@ -38,6 +38,10 @@ async function archiveConfig(archive, output) {
   if (!config || typeof config !== 'object' || Array.isArray(config)) throw new Error('Expected an image config object');
   const digest = 'sha256:' + createHash('sha256').update(raw).digest('hex');
   if (digest.slice(7) !== (match[1] ?? match[2])) throw new Error('Archive config integrity mismatch');
+  return { digest, repoTags: entries[0].RepoTags ?? [] };
+}
+async function archiveConfig(archive, output) {
+  const { digest } = readArchiveIdentity(archive);
   // Additive evidence only: an old report or the input archive is never replaced.
   await writeFile(output, digest + '\n', { flag: 'wx' });
   console.log('Verified archive config identity:', digest);

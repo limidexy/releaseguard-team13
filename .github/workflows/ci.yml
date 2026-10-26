@@ -10,6 +10,11 @@ jobs:
   verify:
     # Enable only after the owner verifies included minutes and a zero-spend budget.
     if: vars.RG_ENABLE_HOSTED_CI == 'true'
+    # Read only this public repository's pinned historical verification artifacts.
+    # No Actions writes, id-token, registry publishing or cloud permissions.
+    permissions:
+      contents: read
+      actions: read
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
@@ -17,6 +22,9 @@ jobs:
       COMPOSE_PROJECT_NAME: rg-ci-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Compare the whole push range, not only its last commit.
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
@@ -35,6 +43,13 @@ jobs:
         run: node --test tests/cd-identity.test.mjs
       - name: Disposable contract target safety regressions (offline)
         run: node --test tests/contracts-entry-guard.test.mjs tests/contracts-target.test.mjs
+      - name: Artifact rollback isolation and recovery regressions (offline)
+        run: node --test tests/rollback-entry-guard.test.mjs tests/rollback-target.test.mjs tests/rollback-artifacts.test.mjs tests/rollback-flow.test.mjs tests/rollback-ci-scope.test.mjs
+      - name: Determine retained-image rollback scope
+        id: rollback-scope
+        env:
+          RG_CI_BEFORE_SHA: ${{ github.event.before }}
+        run: node scripts/rollback-ci-scope.mjs
       - run: node scripts/setup-local.mjs
       - run: docker compose build gateway postgres
       - run: docker compose up -d --no-build --wait
@@ -63,6 +78,55 @@ jobs:
         run: node scripts/verify-contracts.mjs
       - run: node scripts/verify.mjs --restart
       - run: node scripts/fault-test.mjs
+      - name: Verify pinned retained rollback run and artifacts
+        if: steps.rollback-scope.outputs.required == 'true'
+        id: rollback-source
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RG_ROLLBACK_INTEGRATION: '1'
+          RELEASEGUARD_URL: http://127.0.0.1:5189
+          REPOSITORY: ${{ github.repository }}
+          RUN_ID: '40324194461'
+          EXPECTED_SHA: 00de3e970922f50c35c052eaf58e118608a02d07
+          RG_ROLLBACK_IMAGE_ARTIFACT_ID: '12650895906'
+          RG_ROLLBACK_EVIDENCE_ARTIFACT_ID: '12650034306'
+          RG_ROLLBACK_IMAGE_ARTIFACT_DIGEST: sha256:85aabe81ed2b03b7d3772deb3eeaa3d87c5c8d39fe28caf271d3d31f126c61b2
+          RG_ROLLBACK_EVIDENCE_ARTIFACT_DIGEST: sha256:5652f0552d966d8633805d5268fe1e8979cecc6e15f16f228de2f3ceb11f4c6c
+          RG_ROLLBACK_ARTIFACT_DIR: ${{ runner.temp }}/rg-rollback-source-${{ github.run_id }}-${{ github.run_attempt }}
+        run: |
+          node scripts/rollback-artifacts.mjs request
+          mkdir "$RG_ROLLBACK_ARTIFACT_DIR"
+          gh api "repos/$REPOSITORY/actions/runs/$RUN_ID" > "$RG_ROLLBACK_ARTIFACT_DIR/run.json"
+          node scripts/rollback-artifacts.mjs run "$RG_ROLLBACK_ARTIFACT_DIR/run.json"
+          gh api "repos/$REPOSITORY/actions/runs/$RUN_ID/artifacts" > "$RG_ROLLBACK_ARTIFACT_DIR/artifacts.json"
+          node scripts/rollback-artifacts.mjs metadata "$RG_ROLLBACK_ARTIFACT_DIR"
+          printf 'directory=%s\n' "$RG_ROLLBACK_ARTIFACT_DIR" >> "$GITHUB_OUTPUT"
+      - name: Download only pinned retained rollback artifacts
+        if: steps.rollback-scope.outputs.required == 'true'
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # verified v8, Node24
+        with:
+          artifact-ids: 12650895906,12650034306
+          run-id: '40324194461'
+          repository: ${{ github.repository }}
+          github-token: ${{ github.token }}
+          path: ${{ steps.rollback-source.outputs.directory }}
+          merge-multiple: false
+          digest-mismatch: error
+      - name: Retained artifact Governance rollback and exact restoration (isolated)
+        if: steps.rollback-scope.outputs.required == 'true'
+        env:
+          RG_ROLLBACK_INTEGRATION: '1'
+          RELEASEGUARD_URL: http://127.0.0.1:5189
+          REPOSITORY: ${{ github.repository }}
+          RUN_ID: '40324194461'
+          EXPECTED_SHA: 00de3e970922f50c35c052eaf58e118608a02d07
+          RG_ROLLBACK_IMAGE_ARTIFACT_ID: '12650895906'
+          RG_ROLLBACK_EVIDENCE_ARTIFACT_ID: '12650034306'
+          RG_ROLLBACK_IMAGE_ARTIFACT_DIGEST: sha256:85aabe81ed2b03b7d3772deb3eeaa3d87c5c8d39fe28caf271d3d31f126c61b2
+          RG_ROLLBACK_EVIDENCE_ARTIFACT_DIGEST: sha256:5652f0552d966d8633805d5268fe1e8979cecc6e15f16f228de2f3ceb11f4c6c
+          RG_ROLLBACK_ARTIFACT_DIR: ${{ steps.rollback-source.outputs.directory }}
+        run: node scripts/verify-rollback.mjs
       - name: Dependency advisory gate
         run: npm audit --audit-level=high --json > evidence/dependency-audit.json
       - name: Image advisory gate
