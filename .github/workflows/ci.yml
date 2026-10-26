@@ -31,6 +31,8 @@ jobs:
         run: node --test tests/submission-ci.test.mjs
       - name: Image configuration identity regressions
         run: node --test tests/image-identity.test.mjs
+      - name: CD identity gate regressions (offline)
+        run: node --test tests/cd-identity.test.mjs
       - run: node scripts/setup-local.mjs
       - run: docker compose build gateway postgres
       - run: docker compose up -d --no-build --wait

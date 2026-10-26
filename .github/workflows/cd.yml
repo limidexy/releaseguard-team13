@@ -17,16 +17,24 @@ jobs:
     outputs:
       source: ${{ steps.verify.outputs.source }}
     steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
       - name: Validate successful CI workflow and source
         id: verify
+        shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
           RUN_ID: ${{ inputs.verify_run_id }}
           REPOSITORY: ${{ github.repository }}
           EXPECTED_SHA: ${{ github.sha }}
         run: |
+          node scripts/cd-identity.mjs request
           gh api "repos/$REPOSITORY/actions/runs/$RUN_ID" > run.json
-          node -e "const r=require('./run.json');if(r.conclusion!=='success'||r.head_sha!==process.env.EXPECTED_SHA||r.path!=='.github/workflows/ci.yml'||r.head_repository.full_name!==process.env.REPOSITORY)process.exit(1);require('fs').appendFileSync(process.env.GITHUB_OUTPUT,'source='+r.head_sha+'\n')"
+          node scripts/cd-identity.mjs run run.json
   deploy:
     needs: check
     runs-on: ubuntu-latest
@@ -46,13 +54,16 @@ jobs:
           github-token: ${{ github.token }}
           path: ci-evidence
       - name: Compare pushed image identity to tested image
+        shell: bash
         env:
           RG_IMAGE: ${{ inputs.image }}
+          EXPECTED_SHA: ${{ needs.check.outputs.source }}
         run: |
-          node -e "if(!/^[a-zA-Z0-9./:_-]+@sha256:[a-f0-9]{64}$/.test(process.env.RG_IMAGE))process.exit(1)"
+          node scripts/cd-identity.mjs artifacts ci-evidence
           docker pull "$RG_IMAGE"
-          docker image inspect "$RG_IMAGE" --format '{{.Id}}' > pulled-id.txt
-          diff ci-evidence/image-id.txt pulled-id.txt
+          docker image save "$RG_IMAGE" -o pulled-image.tar
+          node scripts/image-identity.mjs archive pulled-image.tar pulled-config-id.txt
+          node scripts/cd-identity.mjs pulled ci-evidence pulled-config-id.txt
       - name: Configure approved kube context
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
@@ -88,3 +99,6 @@ jobs:
           path: |
             evidence/
             deploy/k8s/rendered/
+            pulled-config-id.txt
+            ci-evidence/source-commit.txt
+            ci-evidence/image-config-id.txt
