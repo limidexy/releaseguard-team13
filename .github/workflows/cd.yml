@@ -95,15 +95,18 @@ jobs:
           RG_CLOUD_ALLOWED_ORIGINS: ${{ vars.PUBLIC_ORIGIN }}
           RELEASEGUARD_URL: ${{ vars.PUBLIC_ORIGIN }}
           RELEASEGUARD_TOKEN: ${{ secrets.CLOUD_SMOKE_TOKEN }}
+          RG_CLOUD_SMOKE_AUTH_MODE: 'token'
+          RG_CLOUD_SMOKE_RUN_ID: cd-${{ github.run_id }}-${{ github.run_attempt }}
           RG_IMAGE: ${{ inputs.image }}
           RG_COMMIT: ${{ needs.check.outputs.source }}
-        run: node scripts/cloud-smoke.mjs
+        run: node scripts/cloud-smoke.mjs --execute-replay-smoke
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: deployment-evidence
           path: |
             evidence/
+            !evidence/private/**
             deploy/k8s/rendered/
             pulled-config-id.txt
             ci-evidence/source-commit.txt
