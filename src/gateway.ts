@@ -12,6 +12,19 @@ export async function gateway(app: FastifyInstance) {
   app.get('/', async (_req, reply) => reply.type('text/html').send(await readFile('public/index.html', 'utf8')));
   app.get('/app.js', async (_req, reply) => reply.type('application/javascript').send(await readFile('public/app.js', 'utf8')));
   app.get('/style.css', async (_req, reply) => reply.type('text/css').send(await readFile('public/style.css', 'utf8')));
+  // Public, whitelisted configuration only. This route does not attest hosting,
+  // cloud acceptance, node state, provider execution or a human review.
+  app.get('/environment.json', async (_req, reply) => {
+    const configured = process.env.RG_DEPLOYMENT_ENV;
+    const environment = configured === 'local' || configured === 'gcp-trial' ? configured
+      : configured === undefined && process.env.AUTH_MODE === 'dev' ? 'local' : 'unconfirmed';
+    const region = process.env.RG_DEPLOYMENT_REGION;
+    reply.header('Cache-Control', 'no-store');
+    return { environment, configurationOnly: true,
+      provider: environment === 'gcp-trial' ? 'Google Cloud / GKE' : null,
+      region: environment === 'gcp-trial' && region && region.length <= 40 && /^[a-z]{2,16}(?:-[a-z]{2,16})+[1-9][0-9]?$/.test(region) ? region : null,
+      modelApproval: 'See each job; human review required' };
+  });
   app.get('/demo-fixtures.json', async (_req, reply) => reply.type('application/json').send(await readFile('public/demo-fixtures.json', 'utf8')));
   app.get('/returns-fixtures-v2.json', async () => {
     const legacy = JSON.parse(await readFile('public/demo-fixtures.json', 'utf8'));

@@ -14,13 +14,14 @@ const copy = {
 Object.assign(copy, {
   skip:['跳至主要内容','Skip to main content'],workspace:['评测与发布审核','Evaluation workspace'],
   navEvidence:['评测证据','Evidence'],navHistory:['任务历史','History'],navCompare:['版本比较','Compare'],navReview:['人工审核','Reviews'],
-  localOnly:['本地环境','Local environment'],sidebarHint:['评测、核验证据，再决定是否发布。','Evaluate, inspect the evidence, then make the release decision.'],
+  localOnly:['环境未确认','Environment unconfirmed'],sidebarHint:['评测、核验证据，再决定是否发布。','Evaluate, inspect the evidence, then make the release decision.'],
   evidenceLead:['每一次发布决定，都有可检查的依据。','Every release decision starts with evidence you can inspect.'],
   historyLead:['追踪候选版本，区分执行状态与规则结论。','Track candidates with execution and rule outcomes kept separate.'],
   compareLead:['相同测试条件下，逐项检查回答的变化。','Inspect answer changes under the same test conditions.'],
   reviewLead:['规则检查之后，由独立审核人作出决定。','An independent reviewer decides after the rule checks.'],
   newEvaluation:['新建评测','New evaluation'],evidenceBoundary:['证据边界','Evidence boundary'],
-  boundary:['本地课程基线；静态回放不是模型实测。规则通过不等于业务正确，人工批准不会自动部署。','Local course baseline. Replay is not a model run. Passing rules does not prove correctness; approval does not deploy.'],
+  boundary:['静态回放不是模型实测。规则通过不等于业务正确，人工批准不会自动部署。','Replay is not a model run. Passing rules does not prove correctness; approval does not deploy.'],
+  tokenHint:['仅使用当前工作空间授权的身份，凭据只保留在当前页面，不要分享。独立审核须由非提交者本人完成。','Use an authorized workspace identity. Credentials stay in this page; do not share them. A non-author must perform the independent review.'],
   identity:['工作空间配置','Workspace connection'],notConnected:['尚未连接','Not connected'],connected:['已载入当前身份的数据','Current identity loaded'],
   setupHint:['首次使用？登记示例应用与 10 条固定测试用例。已有资产可直接填写 ID。','First time? Register the sample app and 10 fixed cases, or enter existing asset IDs.'],
   submitTitle:['提交候选评测','Submit a candidate'],emptyTitle:['从一份评测证据开始','Start with evaluation evidence'],
@@ -49,11 +50,29 @@ Object.assign(copy, {
   expiredToken:['令牌无效或已过期。请生成新的本地令牌并重新连接。','The token is invalid or expired. Generate a fresh local token and reconnect.'],
   offline:['请求未完成。请检查本地服务，然后重试；不要重复提交不同候选。','The request did not finish. Check the local service, then retry without changing the candidate.'],
   invalidJson:['导入内容不是有效 JSON，请检查格式。','The imported content is not valid JSON. Check its format.'],
-  footer:['本地课程原型；云端验收与真实模型实验尚未完成。','Local course prototype. Cloud acceptance and real-model experiments remain pending.'],
+  footer:['环境未确认。配置标签不是部署证明；评测结论请看任务证据。','Environment unconfirmed. Configuration labels are not deployment evidence. Inspect each job.'],
   done:['操作完成，证据已更新。','Done. Evidence updated.'],error:['执行错误示例','Execution error fixture'],evidenceError:['证据错误','Evidence error']
 });
+const environmentCopy={
+  local:{localOnly:['本地/开发配置','Local/dev configuration'],
+    footer:['本地/开发配置不是部署证明。回放不是模型实测；规则通过仍需独立审核。','Local/dev configuration is not deployment evidence. Replay is not a model run; passing rules still requires independent review.'],
+    tokenHint:['仅保留在当前页面。可用 npm run tokens 生成本地开发身份；独立审核须由非提交者本人完成。不要分享凭据。','Kept only in this page. Use npm run tokens for a local/dev workspace identity. A non-author must perform the independent review. Do not share credentials.']},
+  'gcp-trial':{localOnly:['配置：GCP试用','Configured: GCP trial'],
+    footer:['GCP试用配置不是实际部署证明。请核对任务证据；规则通过仍需独立审核。','GCP trial configuration is not deployment evidence. Inspect each job; passing rules still requires independent review.']}
+};
+let environment='unconfirmed';
 let language='zh', offset=0, jobs=[], releases=[], selected=null, comparePair=null, lastBody='',lastKey='',busy=false, connected=false, attentionOnly=false;
-const t=key=>copy[key]?.[language==='zh'?0:1]??key;
+const t=key=>(environmentCopy[environment]?.[key]??copy[key])?.[language==='zh'?0:1]??key;
+async function loadEnvironment(){
+  try{
+    const response=await fetch('/environment.json',{cache:'no-store',redirect:'error',signal:AbortSignal.timeout(5000)});
+    if(!response.ok)throw Error('Environment unavailable');
+    const value=await response.json();
+    environment=value?.configurationOnly===true&&['local','gcp-trial','unconfirmed'].includes(value.environment)?value.environment:'unconfirmed';
+  }catch{environment='unconfirmed';}
+  // Optional metadata must never reset a connection, user input or job evidence.
+  document.querySelectorAll('[data-i18n]').forEach(element=>{if(['localOnly','footer','tokenHint'].includes(element.dataset.i18n))element.textContent=t(element.dataset.i18n);});
+}
 const number=value=>typeof value==='number'?new Intl.NumberFormat(language==='zh'?'zh-CN':'en-US').format(value):value;
 function message(text,error=false){$('message').textContent=text;$('message').className=error?'error':busy&&text===t('working')?'working':'';}
 function openConnection(){ $('connection').open=true; $('token').focus(); }
@@ -111,3 +130,4 @@ $('requestSelected').onclick=()=>safe(()=>requestReview(selected.id));
 $('allCases').onclick=()=>{attentionOnly=false;if(selected)renderJob(selected);};$('failedCases').onclick=()=>{attentionOnly=true;if(selected)renderJob(selected);};
 window.addEventListener('hashchange',showView);
 $('language').onchange=setLanguage;$('source').onchange=sourceChanged;setLanguage();
+loadEnvironment();
