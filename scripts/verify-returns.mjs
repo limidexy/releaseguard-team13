@@ -1,4 +1,4 @@
-// Disposable integration: imported synthetic answers only, never a model call.
+// Disposable integration: imported synthetic answers and static replay, never a model call.
 import assert from 'node:assert/strict';
 import { randomUUID } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
@@ -13,7 +13,7 @@ const endpoint = new URL(base);
 assert.ok(['localhost', '127.0.0.1', '[::1]'].includes(endpoint.hostname), 'Only a loopback endpoint is allowed');
 assert.notEqual(endpoint.port, '5193', 'The classroom endpoint is forbidden');
 const workspace = 'returns-' + randomUUID();
-const report = { workspace, environment: 'disposable Compose; imported literal answers; synthetic development identities; not semantic accuracy or human acceptance', checks: [] };
+const report = { workspace, environment: 'disposable Compose; imported literal answers and static replay; synthetic development identities; not semantic accuracy or human acceptance', checks: [] };
 async function check(name, run) {
   try { await run(); report.checks.push({ name, passed: true }); console.log('PASS ' + name); }
   catch (error) { report.checks.push({ name, passed: false, error: String(error) }); throw error; }
@@ -120,6 +120,58 @@ try {
     }
     assert.equal((await required('suites', author)).length, count);
     assert.deepEqual((await required('suites', author)).find(s => s.id === old.id), old);
+  });
+  await check('Both catalogue revisions execute all ten replay cases with passing, failing and error gates', async () => {
+    const legacyResponse = await fetch(base + '/demo-fixtures.json'); assert.equal(legacyResponse.status, 200);
+    const legacyBytes = await legacyResponse.text(), legacy = JSON.parse(legacyBytes);
+    for (const [path, rule, evaluatorVersion] of [
+      ['/returns-fixtures-v2.json', 'returns_policy_v2_1', 'returns-policy-v2.1'],
+      ['/returns-fixtures-v2-2.json', 'returns_policy_v2_2', 'returns-policy-v2.2'],
+    ]) {
+      const response = await fetch(base + path); assert.equal(response.status, 200); const catalogue = await response.json();
+      assert.equal(catalogue.cases.length, 10); assert.deepEqual(catalogue.cases, catalogue.suite.cases);
+      assert.ok(catalogue.cases.every(c => c.rule === rule));
+      assert.deepEqual(catalogue.cases.map(c => [c.id, c.prompt, c.critical]), legacy.suite.cases.map(c => [c.id, c.prompt, c.critical]));
+      assert.deepEqual(catalogue.suite.policy, legacy.suite.policy);
+      const replayApp = await required('applications', author, catalogue.application), suite = await required('suites', author, catalogue.suite);
+      const retainedSuite = (await required('suites', author)).find(s => s.id === suite.id);
+      assert.ok(retainedSuite); assert.deepEqual(retainedSuite.data, catalogue.suite);
+      const jobs = [];
+      for (const promptVersion of ['v1', 'v2']) for (const scenario of ['passing', 'failing', 'error']) {
+        const job = await completed((await required('jobs', author, {
+          appId: replayApp.id, suiteId: suite.id, candidate: 'synthetic-catalogue-' + promptVersion + '-' + scenario,
+          commitRef: 'synthetic-catalogue-integration', source: 'replay', promptVersion, scenario,
+        }, key())).id, author); jobs.push(job);
+        assert.equal(job.status, 'succeeded'); assert.equal(job.result.total, 10);
+        assert.equal(job.result.score, scenario === 'passing' ? 100 : 90);
+        assert.equal(job.result.gate, scenario === 'passing' ? 'passed' : 'blocked');
+        assert.equal(job.result.passed, scenario === 'passing' ? 10 : 9);
+        assert.equal(job.result.criticalFailures, scenario === 'passing' ? 0 : 1); assert.equal(job.result.errors, scenario === 'error' ? 1 : 0);
+        assert.equal(job.execution.provenance.source, 'replay'); assert.equal(job.execution.provenance.trust, 'labelled_static_fixture');
+        assert.equal(job.execution.provenance.fixtureVersion, 'fictional-returns-v1'); assert.equal(job.execution.provenance.promptVersion, promptVersion);
+        assert.equal(job.execution.provenance.requestMetadata, undefined);
+        assert.deepEqual(job.result.results.map(o => o.caseId), catalogue.cases.map(c => c.id));
+        for (const detail of job.result.results) {
+          const errored = scenario === 'error' && detail.caseId === catalogue.cases[0].id;
+          assert.equal(detail.evaluatorVersion, evaluatorVersion);
+          assert.equal(detail.evaluatorStatus, errored ? 'not_run' : 'checked');
+          assert.equal(detail.latencyMs, errored ? null : 0);
+          if (errored) { assert.equal(detail.output, null); assert.equal(detail.reason, 'Explicit replay fixture error'); assert.deepEqual(detail.checks, []); }
+          else { assert.equal(typeof detail.output, 'string'); assert.ok(detail.output.length > 0); }
+        }
+        if (scenario === 'failing') assert.equal(job.result.results[0].output, 'Returns are accepted forever.');
+        if (scenario !== 'passing') assert.deepEqual(job.result.results.slice(1), jobs.find(j => j.input.promptVersion === promptVersion && j.input.scenario === 'passing').result.results.slice(1));
+        assert.deepEqual((await required('suites', author)).find(s => s.id === suite.id), retainedSuite);
+      }
+      // Replay is fixed across prompts: it proves plumbing, not prompt improvement.
+      assert.deepEqual(jobs[0].result, jobs[3].result);
+      const history = await required('jobs?limit=25', author);
+      for (const job of jobs) assert.ok(history.some(j => j.id === job.id));
+      assert.ok(jobs.every(j => j.input.appId === replayApp.id && j.input.suiteId === suite.id && j.input.source === 'replay'));
+      const releases = await required('releases', author);
+      assert.ok(jobs.every(j => !releases.some(r => r.job_id === j.id)), 'replay never automatically requests or approves a release');
+    }
+    assert.equal(await (await fetch(base + '/demo-fixtures.json')).text(), legacyBytes);
   });
 } catch (error) { report.error = String(error); process.exitCode = 1; console.error(String(error)); }
 finally {
