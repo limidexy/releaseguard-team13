@@ -47,6 +47,8 @@ jobs:
         run: node --test tests/provider-smoke.test.mjs
       - name: Inactive retained-report derivation regressions (owned synthetic data only)
         run: node --test tests/rescore-retained.test.mjs
+      - name: Inactive mixed workload guards and measurement regressions (offline synthetic only)
+        run: node --test tests/mixed-load-core.test.mjs tests/mixed-load-cli.test.mjs
       - name: Disposable contract target safety regressions (offline)
         run: node --test tests/contracts-entry-guard.test.mjs tests/contracts-target.test.mjs
       - name: Artifact rollback isolation and recovery regressions (offline)
