@@ -63,7 +63,7 @@ export async function serviceFetch(target: string, path: string, workspace: stri
   return res.json() as Promise<any>;
 }
 export function server(): FastifyInstance {
-  const app = Fastify({ logger: { level: 'info', redact: ['req.headers.authorization', 'req.headers.cookie'] }, bodyLimit: 500000, requestTimeout: 30000 });
+  const app = Fastify({ logger: { level: 'info', redact: ['req.headers.authorization', 'req.headers.cookie', 'req.headers["x-rg-submission-budget"]'] }, bodyLimit: 500000, requestTimeout: 30000 });
   const requests = new Map<string, number>();
   app.addHook('onResponse', async (req, reply) => { const key = `${req.method}:${req.routeOptions.url ?? 'unmatched'}:${reply.statusCode}`; requests.set(key, (requests.get(key) ?? 0) + 1); });
   app.addHook('onSend', async (_req, reply) => { reply.header('Cache-Control', 'no-store').header('X-Content-Type-Options', 'nosniff'); });
