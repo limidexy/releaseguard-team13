@@ -5,6 +5,8 @@ RUN npm ci --no-audit --no-fund
 COPY src ./src
 COPY tests ./tests
 COPY public ./public
+# Build-time CLI guard fixtures only; these are not copied into the runtime stage.
+COPY scripts/client.mjs scripts/dev-tokens.mjs scripts/fixtures.mjs scripts/verify-lineage.mjs ./scripts/
 RUN npm test
 RUN npm prune --omit=dev
 FROM node:24-bookworm-slim
