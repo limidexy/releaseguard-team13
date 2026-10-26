@@ -49,6 +49,8 @@ jobs:
         run: node --test tests/rescore-retained.test.mjs
       - name: Inactive mixed workload guards and measurement regressions (offline synthetic only)
         run: node --test tests/mixed-load-core.test.mjs tests/mixed-load-cli.test.mjs
+      - name: Inactive complete acceptance lifecycle (owned synthetic/process boundaries only)
+        run: node --test tests/acceptance-core.test.mjs tests/acceptance-entry.test.mjs tests/acceptance-target.test.mjs tests/acceptance-evidence.test.mjs tests/acceptance-process.test.mjs tests/acceptance-full-cli.test.mjs
       - name: Disposable contract target safety regressions (offline)
         run: node --test tests/contracts-entry-guard.test.mjs tests/contracts-target.test.mjs
       - name: Artifact rollback isolation and recovery regressions (offline)
@@ -176,4 +178,4 @@ jobs:
         with:
           node-version: '24'
       - name: Native Windows tooling regressions
-        run: node --test tests/windows-compat.test.mjs tests/tooling-checkout.test.mjs tests/tooling-consumers.test.mjs tests/hooks-and-ignore.test.mjs tests/render-cloud.test.mjs
+        run: node --test tests/windows-compat.test.mjs tests/tooling-checkout.test.mjs tests/tooling-consumers.test.mjs tests/hooks-and-ignore.test.mjs tests/render-cloud.test.mjs tests/acceptance-core.test.mjs tests/acceptance-entry.test.mjs tests/acceptance-process.test.mjs
