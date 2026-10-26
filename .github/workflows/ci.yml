@@ -40,6 +40,11 @@ jobs:
         run: |
           mkdir -p evidence
           node scripts/verify-submission.mjs | tee evidence/submission-integration.log
+      - name: Re-evaluation lineage and legacy migration integration
+        env:
+          RG_LINEAGE_INTEGRATION: '1'
+          RELEASEGUARD_URL: http://127.0.0.1:5189
+        run: node scripts/verify-lineage.mjs
       - run: node scripts/verify.mjs --restart
       - run: node scripts/fault-test.mjs
       - name: Dependency advisory gate

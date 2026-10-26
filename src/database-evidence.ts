@@ -1,6 +1,6 @@
 import type { Pool, PoolClient, QueryResult, QueryResultRow } from 'pg';
 
-export type DatabaseOperation = 'existing_lookup' | 'admission_atomic' | 'registry_application' | 'registry_suite';
+export type DatabaseOperation = 'existing_lookup' | 'lineage_lookup' | 'admission_atomic' | 'registry_application' | 'registry_suite';
 type PoolCounts = { total: number; idle: number; waiting: number };
 export type DatabaseSpan = {
   operation: DatabaseOperation;
