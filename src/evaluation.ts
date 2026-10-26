@@ -66,6 +66,14 @@ export async function evaluation(app: FastifyInstance) {
     const existing = async () => (await databaseQuery(pool, 'existing_lookup', 'SELECT id,status,request_hash FROM jobs WHERE workspace=$1 AND idempotency_key=$2', [a.workspace, key], { isAbandoned: abandoned, observe: s => databaseSpans.push(s) })).rows[0];
     const replay = (r: any) => { if (r.request_hash !== hash) throw new HttpError(409, 'Idempotency key payload conflict'); return { id: r.id, status: r.status, replayed: true }; };
     const previous = await existing(); checkpoint('existingLookup'); if (abandoned()) return stoppedReply(); if (previous) { outcome = 'existing'; return replay(previous); }
+    if (input.previousJobId) {
+      const parent = (await databaseQuery(pool, 'lineage_lookup', 'SELECT status,input FROM jobs WHERE id=$1 AND workspace=$2',
+        [input.previousJobId, a.workspace], { isAbandoned: abandoned, observe: s => databaseSpans.push(s) })).rows[0];
+      checkpoint('lineageLookup'); if (abandoned()) return stoppedReply();
+      if (!parent) throw new HttpError(404, 'Previous job not found');
+      if (!['succeeded', 'failed'].includes(parent.status)) throw new HttpError(409, 'Previous job must be completed');
+      if (parent.input.appId !== input.appId) throw new HttpError(409, 'Previous job belongs to another application');
+    }
     const registryUrl = process.env.REGISTRY_URL; if (!registryUrl) throw new HttpError(503, 'Service endpoint unavailable');
     snapshotTiming.started = performance.now();
     const snapshotPath = `/internal/snapshot/${input.appId}/${input.suiteId}?workspace=` + encodeURIComponent(a.workspace);
@@ -126,7 +134,7 @@ export async function evaluation(app: FastifyInstance) {
   });
   app.get('/jobs', async req => {
     const a = await actor(req); const { limit, offset } = z.object({ limit: z.coerce.number().int().min(1).max(100).default(25), offset: z.coerce.number().int().min(0).max(10000).default(0) }).parse(req.query);
-    return (await pool.query("SELECT id,status,created_by,created_at,started_at,finished_at,worker_id,input->>'candidate' AS candidate,input->>'source' AS source,result->>'gate' AS gate,result->>'score' AS score FROM jobs WHERE workspace=$1 ORDER BY created_at DESC,id DESC LIMIT $2 OFFSET $3", [a.workspace, limit, offset])).rows;
+    return (await pool.query("SELECT id,status,created_by,created_at,started_at,finished_at,worker_id,input->>'candidate' AS candidate,input->>'source' AS source,input->>'previousJobId' AS previous_job_id,result->>'gate' AS gate,result->>'score' AS score FROM jobs WHERE workspace=$1 ORDER BY created_at DESC,id DESC LIMIT $2 OFFSET $3", [a.workspace, limit, offset])).rows;
   });
   app.get('/jobs/:id', async req => { const a = await actor(req); const { id } = z.object({ id: z.string().uuid() }).parse(req.params); return detail(id, a.workspace); });
   app.get('/internal/jobs/:id', async req => { await internal(req, ['governance']); const { id } = z.object({ id: z.string().uuid() }).parse(req.params); const { workspace } = z.object({ workspace: z.string() }).parse(req.query); return detail(id, workspace); });
