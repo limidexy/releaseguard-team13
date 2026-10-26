@@ -19,6 +19,7 @@ function rsa(pGroup,qGroup){
  const d=inverse(e,phi),bytes=x=>B.from((x.toString(16).length%2?'0':'')+x.toString(16),'hex').toString('base64url');
  return createPrivateKey({format:'jwk',key:Object.fromEntries(Object.entries({kty:'RSA',n:p*q,e,d,p,q,dp:d%(p-1n),dq:d%(q-1n),qi:inverse(q,p)}).map(([k,v])=>[k,typeof v==='bigint'?bytes(v):v]))});
 }
+export const insecureFixtureCAKey=()=>rsa('modp2','modp14').export({format:'pem',type:'pkcs8'}).toString();
 function cert({subject,issuer,publicKey,signingKey,serial=1,isCA=false,hosts=[],serverAuth=true,from='240101000000Z',to='340101000000Z'}){
  const exts=[seq(oid('2.5.29.19'),tlv(1,B.from([255])),tlv(4,isCA?seq(tlv(1,B.from([255]))):seq()))];
  if(hosts.length)exts.push(seq(oid('2.5.29.17'),tlv(4,seq(...hosts.map(h=>tlv(0x82,B.from(h)))))));
@@ -27,9 +28,9 @@ function cert({subject,issuer,publicKey,signingKey,serial=1,isCA=false,hosts=[],
  return pem('CERTIFICATE',seq(tbs,alg(signingKey),tlv(3,B.concat([B.from([0]),sign('sha256',tbs,signingKey)]))));
 }
 export function privateFixture(options={}){
- const caKey=options.rsa?rsa('modp2','modp14'):key(options.caScalar??1),pgKey=options.pgUsesCAKey?caKey:options.weakRSA?rsa('modp1',3n):options.rsa?rsa('modp2','modp15'):key(2),rabbitKey=options.sharedLeafKey?pgKey:key(3),caName='INSECURE TEST ONLY CA';
+ const caKey=options.rsa?rsa('modp2','modp14'):key(options.caScalar??1),pgKey=options.pgUsesCAKey?caKey:options.weakRSA?rsa('modp1',3n):options.rsa?rsa('modp2','modp15'):key(2),rabbitKey=options.sharedLeafKey?pgKey:options.rsaAll?rsa('modp14','modp15'):key(3),caName='INSECURE TEST ONLY CA';
  const hosts=name=>[name,name+'.releaseguard.svc',name+'.releaseguard.svc.cluster.local'];
- const ca=cert({subject:caName,issuer:caName,publicKey:caKey,signingKey:caKey,isCA:true});
+ const ca=cert({subject:caName,issuer:caName,publicKey:caKey,signingKey:caKey,isCA:true,...options.ca});
  const leaf=(name,k,opts={})=>({certificate:cert({subject:name,issuer:caName,publicKey:k,signingKey:caKey,serial:name==='postgres'?2:3,hosts:hosts(name),...opts}),key:k.export({format:'pem',type:'pkcs8'}).toString()});
  const input={
   infrastructure:{publicOrigin:'https://releaseguard.example.test',publicIP:'203.0.113.10',podCIDR:'10.44.0.0/16',clockSkewBoundMs:137,
