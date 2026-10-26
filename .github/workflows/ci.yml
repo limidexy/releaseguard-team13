@@ -27,14 +27,19 @@ jobs:
         run: node --test tests/windows-compat.test.mjs tests/tooling-checkout.test.mjs tests/tooling-consumers.test.mjs
       - name: Replay metrics and scale-evidence regressions
         run: node --test tests/replay-metrics.test.mjs tests/replay-timeline.test.mjs
+      - name: Submission CI wrapper regressions
+        run: node --test tests/submission-ci.test.mjs
       - run: node scripts/setup-local.mjs
       - run: docker compose build gateway postgres
       - run: docker compose up -d --no-build --wait
       - name: Submission deadlines and database atomicity integration
+        shell: bash
         env:
           RG_SUBMISSION_INTEGRATION: '1'
           RELEASEGUARD_URL: http://127.0.0.1:5189
-        run: node scripts/verify-submission.mjs | tee evidence/submission-integration.log
+        run: |
+          mkdir -p evidence
+          node scripts/verify-submission.mjs | tee evidence/submission-integration.log
       - run: node scripts/verify.mjs --restart
       - run: node scripts/fault-test.mjs
       - name: Dependency advisory gate
