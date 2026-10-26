@@ -134,6 +134,8 @@ try {
       assert.deepEqual(catalogue.cases.map(c => [c.id, c.prompt, c.critical]), legacy.suite.cases.map(c => [c.id, c.prompt, c.critical]));
       assert.deepEqual(catalogue.suite.policy, legacy.suite.policy);
       const replayApp = await required('applications', author, catalogue.application), suite = await required('suites', author, catalogue.suite);
+      const retainedSuite = (await required('suites', author)).find(s => s.id === suite.id);
+      assert.ok(retainedSuite); assert.deepEqual(retainedSuite.data, catalogue.suite);
       const jobs = [];
       for (const promptVersion of ['v1', 'v2']) for (const scenario of ['passing', 'failing', 'error']) {
         const job = await completed((await required('jobs', author, {
@@ -159,7 +161,7 @@ try {
         }
         if (scenario === 'failing') assert.equal(job.result.results[0].output, 'Returns are accepted forever.');
         if (scenario !== 'passing') assert.deepEqual(job.result.results.slice(1), jobs.find(j => j.input.promptVersion === promptVersion && j.input.scenario === 'passing').result.results.slice(1));
-        assert.deepEqual((await required('suites', author)).find(s => s.id === suite.id), suite);
+        assert.deepEqual((await required('suites', author)).find(s => s.id === suite.id), retainedSuite);
       }
       // Replay is fixed across prompts: it proves plumbing, not prompt improvement.
       assert.deepEqual(jobs[0].result, jobs[3].result);
