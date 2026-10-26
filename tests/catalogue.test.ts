@@ -60,18 +60,28 @@ class Element {
   insertCell() { const cell = new Element(); this.append(cell); return cell; }
   addEventListener() {} focus() {}
 }
-function consoleHarness(app: FastifyInstance, language: string, unavailable = false, token = 'synthetic-ui-only') {
+function consoleHarness(app: FastifyInstance, language: string, unavailable = false, token = 'synthetic-ui-only', pollSource?: 'real' | 'replay') {
   const html = readFileSync('public/index.html', 'utf8');
   const elements = new Map([...html.matchAll(/\bid="([^"]+)"/g)].map(m => [m[1], new Element()]));
   const get = (id: string) => { const element = elements.get(id); assert.ok(element, 'actual HTML must contain #' + id); return element; };
   get('language').value = language; get('source').value = 'replay'; get('token').value = token;
-  const calls: { url: string; method: string; body?: any; headers?: HeadersInit }[] = [];
+  let now = 0;
+  const calls: { url: string; method: string; body?: any; headers?: HeadersInit; at: number }[] = [];
+  if (pollSource) {
+    for (const [id, value] of Object.entries({ source: pollSource, prompt: 'v1', scenario: 'passing', appId: 'synthetic-app-id', suiteId: 'synthetic-suite-id', candidate: 'synthetic-poll-only', commitRef: 'synthetic-no-provider' })) get(id).value = value;
+  }
   const context = vm.createContext({
     AbortSignal, console, location: { hash: '' }, window: { addEventListener() {} },
+    Date: class extends Date { static now() { return now; } },
+    crypto: { randomUUID: () => 'synthetic-idempotency-key' },
+    // Synthetic observation time only; never a performance/latency measurement.
+    setTimeout: (callback: () => void, milliseconds: number) => { now += Math.max(milliseconds, 60000); callback(); },
     document: { getElementById: get, querySelectorAll: () => [], documentElement: { lang: '' }, createElement: () => new Element() },
     fetch: async (url: string, init: RequestInit = {}) => {
       const method = init.method ?? 'GET', body = init.body === undefined ? undefined : JSON.parse(String(init.body));
-      calls.push({ url, method, body, headers: init.headers });
+      calls.push({ url, method, body, headers: init.headers, at: now });
+      if (pollSource && url === '/api/v2/jobs' && method === 'POST') return Response.json({ id: 'synthetic-job' });
+      if (pollSource && url === '/api/v2/jobs/synthetic-job') return Response.json({ id: 'synthetic-job', input: { source: pollSource, candidate: 'synthetic-poll-only', commitRef: 'synthetic-no-provider' }, status: 'running', attempts: 1, created_at: '2026-01-01T00:00:00Z' });
       if (url.endsWith('.json')) {
         if (unavailable) return new Response('{"error":"service_unavailable"}', { status: 503 });
         const r = await app.inject(url); return new Response(r.body, { status: r.statusCode });
@@ -83,7 +93,21 @@ function consoleHarness(app: FastifyInstance, language: string, unavailable = fa
     },
   });
   vm.runInContext(readFileSync('public/app.js', 'utf8'), context, { timeout: 1000 });
-  return { calls, get, click: () => get('setup').onclick!() };
+  return { calls, get, click: () => get('setup').onclick!(), submit: () => get('submit').onclick!() };
+}
+for (const source of ['real', 'replay'] as const) {
+  test('actual UI ' + source + ' observation remains bounded without resubmitting an unfinished job', async () => {
+    const app = Fastify(); await gateway(app);
+    try {
+      const h = consoleHarness(app, 'en', false, 'synthetic-ui-only', source); await h.submit();
+      assert.equal(h.calls.filter(c => c.method === 'POST').length, 1);
+      const last = h.calls.filter(c => c.url === '/api/v2/jobs/synthetic-job').at(-1)!;
+      assert.ok(last.at >= (source === 'real' ? 400000 : 100000));
+      assert.ok(last.at < (source === 'real' ? 450000 : 180000));
+      assert.equal(h.get('message').textContent, 'Job is still active; refresh shortly');
+      assert.ok(h.calls.every(c => c.url.startsWith('/api/v2/jobs')));
+    } finally { await app.close(); }
+  });
 }
 for (const language of ['zh', 'en']) {
   test('actual ' + language + ' console registers v2.2 only after a click, then reads history without submitting or reviewing', async () => {

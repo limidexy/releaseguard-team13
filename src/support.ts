@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { internal, HttpError } from './common.js';
 import { caseSchema, type Output } from './domain.js';
 import { providerAnswer, promptSnapshot } from './provider.js';
+import { ProviderStartGate, PROVIDER_START_INTERVAL_MS, REAL_EXECUTION_TIMEOUT_MS } from './provider-lifecycle.js';
 const replay: Record<string, string> = {
   eligibility: 'Unused products can be returned within 30 days with a receipt.',
   receipt: 'Please provide a receipt or order reference before eligibility can be checked.',
@@ -16,7 +17,8 @@ const replay: Record<string, string> = {
   greeting: 'Hello. I can explain the fictional returns policy and help you contact support.',
 };
 export async function support(app: FastifyInstance) {
-  app.post('/execute', async req => {
+  const starts = new ProviderStartGate();
+  app.post('/execute', async (req, reply) => {
     await internal(req, ['worker']);
     const input = z.object({ source: z.enum(['real', 'replay']), promptVersion: z.enum(['v1', 'v2']), scenario: z.enum(['passing', 'failing', 'error']), cases: z.array(caseSchema).min(1).max(60) }).strict().parse(req.body);
     if (input.source === 'replay') {
@@ -30,19 +32,47 @@ export async function support(app: FastifyInstance) {
     const key = process.env.MODEL_API_KEY, providerUrl = process.env.MODEL_API_URL, model = process.env.MODEL_ID;
     if (process.env.ALLOW_REAL_MODEL !== 'true' || !key || !providerUrl || !model) throw new HttpError(503, 'Real provider is not enabled/configured; no simulated fallback');
     if (input.cases.length > 10) throw new HttpError(400, 'Real provider run is limited to ten cases by the course budget guard');
-    if (new URL(providerUrl).protocol !== 'https:') throw new HttpError(503, 'Provider requires HTTPS');
+    const url = new URL(providerUrl);
+    if (url.protocol !== 'https:' || url.username || url.password) throw new HttpError(503, 'Provider requires HTTPS without URL credentials');
     // One bounded sequential request per case; this is a cost-conscious application adapter.
     // Provider quota is shared across replicas and is not increased by adding workers.
     const outputs: Output[] = [];
     const requestMetadata: unknown[] = [];
+    const controller = new AbortController(), deadline = performance.now() + REAL_EXECUTION_TIMEOUT_MS;
+    const stop = () => controller.abort(new DOMException('Provider execution cancelled or deadline expired', 'AbortError'));
+    const onClose = () => { if (!reply.raw.writableFinished) stop(); };
+    reply.raw.once('close', onClose);
+    const timer = setTimeout(stop, REAL_EXECUTION_TIMEOUT_MS);
+    let stopped = false, dispatched = 0;
+    const checkpoint = () => { if (reply.raw.destroyed || performance.now() >= deadline) stop(); controller.signal.throwIfAborted(); };
+    try {
     for (const c of input.cases) {
-      const start = performance.now();
+      if (stopped || controller.signal.aborted) {
+        const error = 'Provider case not sent: execution stopped';
+        outputs.push({ caseId: c.id, error }); requestMetadata.push({ caseId: c.id, attempted: false, error, requestId: null, finishReason: null, usage: {} }); continue;
+      }
+      let attempted = false, callStarted: number | undefined;
       try {
-        const { output, metadata } = await providerAnswer({ url: providerUrl, key, model }, input.promptVersion, c.prompt);
-        outputs.push({ caseId: c.id, output, latencyMs: performance.now() - start });
-        requestMetadata.push({ caseId: c.id, ...metadata });
-      } catch (e) { outputs.push({ caseId: c.id, error: e instanceof Error ? e.message.slice(0, 500) : 'Provider error', latencyMs: performance.now() - start }); }
+        checkpoint(); await starts.wait(controller.signal); checkpoint();
+        callStarted = performance.now();
+        const { output, metadata, error } = await providerAnswer({ url: providerUrl, key, model }, input.promptVersion, c.prompt,
+          (target, options) => { attempted = true; dispatched++; return fetch(target, options); }, controller.signal);
+        if (performance.now() >= deadline) stop();
+        const evidenceError = error ?? (controller.signal.aborted ? 'Provider execution deadline expired; incomplete evidence' : undefined);
+        outputs.push({ caseId: c.id, output, ...(evidenceError ? { error: evidenceError } : {}), latencyMs: performance.now() - callStarted });
+        requestMetadata.push({ caseId: c.id, attempted, ...metadata });
+      } catch (e) {
+        // Never return private URL, credential, response-body or JSON parse fragments.
+        const error = e instanceof Error && /^Provider (HTTP \d{3}$|response (?:body missing|exceeds size limit)$|local start queue full$)/.test(e.message) ? e.message : e instanceof Error && ['TimeoutError', 'AbortError'].includes(e.name) ? 'Provider request cancelled or timed out' : 'Provider transport or JSON parse error';
+        outputs.push({ caseId: c.id, error, ...(attempted ? { latencyMs: performance.now() - callStarted! } : {}) });
+        requestMetadata.push({ caseId: c.id, attempted, error, requestId: null, finishReason: null, usage: {} }); stopped = true;
+      }
     }
-    return { outputs, provenance: { source: 'real', providerOrigin: new URL(providerUrl).origin, model, promptVersion: input.promptVersion, promptSnapshot: promptSnapshot(input.promptVersion), requestMetadata, executedAt: new Date().toISOString(), trust: 'application_reported_provider_execution' } };
+    } finally {
+      clearTimeout(timer); reply.raw.off('close', onClose);
+      app.log.info({ event: 'provider_execution_end', dispatched, returnedCases: outputs.length, cancelled: controller.signal.aborted, stopped }, 'bounded provider execution evidence');
+    }
+    if (reply.raw.destroyed) return reply;
+    return { outputs, provenance: { source: 'real', providerOrigin: url.origin, model, promptVersion: input.promptVersion, promptSnapshot: promptSnapshot(input.promptVersion), requestMetadata, minimumStartIntervalMs: PROVIDER_START_INTERVAL_MS, executionBudgetMs: REAL_EXECUTION_TIMEOUT_MS, stopped: stopped || controller.signal.aborted, executedAt: new Date().toISOString(), trust: 'application_reported_provider_execution' } };
   });
 }
