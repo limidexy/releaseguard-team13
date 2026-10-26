@@ -32,7 +32,7 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - run: npm test
       - name: Cross-platform tooling regressions
-        run: node --test tests/windows-compat.test.mjs tests/tooling-checkout.test.mjs tests/tooling-consumers.test.mjs
+        run: node --test tests/windows-compat.test.mjs tests/tooling-checkout.test.mjs tests/tooling-consumers.test.mjs tests/hooks-and-ignore.test.mjs
       - name: Replay metrics and scale-evidence regressions
         run: node --test tests/replay-metrics.test.mjs tests/replay-timeline.test.mjs
       - name: Submission CI wrapper regressions
@@ -170,4 +170,4 @@ jobs:
         with:
           node-version: '24'
       - name: Native Windows tooling regressions
-        run: node --test tests/windows-compat.test.mjs tests/tooling-checkout.test.mjs tests/tooling-consumers.test.mjs
+        run: node --test tests/windows-compat.test.mjs tests/tooling-checkout.test.mjs tests/tooling-consumers.test.mjs tests/hooks-and-ignore.test.mjs
