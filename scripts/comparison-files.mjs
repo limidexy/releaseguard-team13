@@ -30,7 +30,7 @@ export function strictComparisonJSON(bytes){
  value(0);return result;
 }
 export function comparisonFiles(root,runId,namespace='comparison'){
- if(!['comparison','cloud-retained-rescore'].includes(namespace)||!/^[a-f0-9]{8}-[a-f0-9]{4}-[1-5][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/.test(runId??''))deny();
+ if(!['comparison','cloud-retained-rescore','cloud-evidence'].includes(namespace)||!/^[a-f0-9]{8}-[a-f0-9]{4}-[1-5][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/.test(runId??''))deny();
  let output,total=0;
  async function put(name,bytes){
   if(!output||!/^(?:operations\/\d{4}-(?:intent|observed|result|authentication)|[a-z0-9-]+)\.(?:json|bin)$/.test(name))deny();
