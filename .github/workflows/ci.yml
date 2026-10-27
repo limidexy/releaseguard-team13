@@ -71,6 +71,12 @@ jobs:
         run: node --test tests/cloud-autoscale-core.test.mjs tests/cloud-autoscale-target.test.mjs tests/cloud-autoscale-native.test.mjs tests/cloud-autoscale-source.test.mjs tests/cloud-autoscale-entry.test.mjs tests/cloud-autoscale-consumer.test.mjs
       - name: Inactive complete500-job Worker fault stimulus (owned VM signals and fake cloud, actual replay consumers, no target)
         run: node --test tests/worker-pause-program.test.mjs tests/worker-pause-init.test.mjs tests/worker-pause-core.test.mjs tests/worker-pause-target.test.mjs tests/worker-pause-native.test.mjs tests/worker-pause-source.test.mjs tests/worker-pause-entry.test.mjs tests/worker-pause-consumer.test.mjs
+      - name: Inactive complete three-database backup protocol (owned binary fixtures and fake cloud only)
+        run: node --test tests/backup-core.test.mjs tests/backup-native.test.mjs tests/backup-process.test.mjs tests/backup-entry.test.mjs tests/backup-source.test.mjs tests/backup-sql-guard.test.mjs
+      - name: Disposable PostgreSQL17 backup SQL and binary contract (network-none hosted CI only)
+        env:
+          RG_BACKUP_SQL_INTEGRATION: '1'
+        run: node scripts/verify-backup-sql.mjs
       - name: Inactive mixed workload guards and measurement regressions (offline synthetic only)
         run: node --test tests/mixed-load-core.test.mjs tests/mixed-load-cli.test.mjs
       - name: Inactive complete acceptance lifecycle (owned synthetic/process boundaries only)
@@ -213,5 +219,7 @@ jobs:
         run: node --test tests/cloud-autoscale-core.test.mjs tests/cloud-autoscale-target.test.mjs tests/cloud-autoscale-native.test.mjs tests/cloud-autoscale-source.test.mjs tests/cloud-autoscale-entry.test.mjs
       - name: Native Worker fault protocol (VM-only fake signals, private operator entry explicitly skipped)
         run: node --test tests/worker-pause-program.test.mjs tests/worker-pause-init.test.mjs tests/worker-pause-core.test.mjs tests/worker-pause-target.test.mjs tests/worker-pause-native.test.mjs tests/worker-pause-source.test.mjs tests/worker-pause-entry.test.mjs
+      - name: Native backup protocol (synthetic only; POSIX private entry explicitly skipped)
+        run: node --test tests/backup-core.test.mjs tests/backup-native.test.mjs tests/backup-process.test.mjs tests/backup-entry.test.mjs tests/backup-source.test.mjs tests/backup-sql-guard.test.mjs
       - name: Native Windows tooling regressions
         run: node --test tests/windows-compat.test.mjs tests/tooling-checkout.test.mjs tests/tooling-consumers.test.mjs tests/hooks-and-ignore.test.mjs tests/render-cloud.test.mjs tests/acceptance-core.test.mjs tests/acceptance-entry.test.mjs tests/acceptance-process.test.mjs tests/gcp-infra-core.test.mjs tests/gcp-infra-entry.test.mjs tests/gcp-private-core.test.mjs tests/gcp-private-entry.test.mjs tests/gcp-bootstrap-core.test.mjs tests/gcp-bootstrap-entry.test.mjs tests/cloud-token.test.mjs tests/cloud-token-entry.test.mjs tests/cloud-smoke-core.test.mjs tests/cloud-smoke-http.test.mjs tests/cloud-smoke-entry.test.mjs tests/cloud-acceptance-core.test.mjs tests/cloud-acceptance-http.test.mjs tests/cloud-acceptance-entry.test.mjs
