@@ -24,3 +24,9 @@ test('exclusive run/record reservation cannot overwrite or resume, and records s
  assert.deepEqual(JSON.parse(fs.readFileSync(join(store.directory,'report.json'))),{original:true});assert.equal(fs.statSync(join(store.directory,'report.json')).mode&0o777,0o600);
  assert.equal(fs.statSync(store.directory).mode&0o777,0o700);await assert.rejects(store.json('../outside.json',{}));assert.equal(fs.existsSync(join(root,'outside.json')),false);
 });
+test('retained tool namespace is independent and cannot escape a closed path or invalid run ID',posix,async t=>{
+ const root=fixture(t),a=comparisonFiles(root,id),b=comparisonFiles(root,id,'cloud-retained-rescore');await a.reserve({tool:'comparison'});await b.reserve({tool:'retained'});
+ assert.notEqual(a.directory,b.directory);await a.json('report.json',{original:true});await b.json('report.json',{derived:true});
+ assert.deepEqual(JSON.parse(fs.readFileSync(join(a.directory,'report.json'))),{original:true});
+ for(const [runId,namespace]of [['../outside','comparison'],[id,'../outside'],[id,'unknown']])assert.throws(()=>comparisonFiles(root,runId,namespace));
+});

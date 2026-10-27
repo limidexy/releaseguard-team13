@@ -29,7 +29,8 @@ export function strictComparisonJSON(bytes){
   else if(text[i]==='"')string();else while(i<text.length&&!/[\s,\]}]/.test(text[i]))i++;}
  value(0);return result;
 }
-export function comparisonFiles(root,runId){
+export function comparisonFiles(root,runId,namespace='comparison'){
+ if(!['comparison','cloud-retained-rescore'].includes(namespace)||!/^[a-f0-9]{8}-[a-f0-9]{4}-[1-5][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/.test(runId??''))deny();
  let output,total=0;
  async function put(name,bytes){
   if(!output||!/^(?:operations\/\d{4}-(?:intent|observed|result|authentication)|[a-z0-9-]+)\.(?:json|bin)$/.test(name))deny();
@@ -41,7 +42,7 @@ export function comparisonFiles(root,runId){
  }
  const json=(name,v)=>put(name,JSON.stringify(v,null,2)+'\n');
  return {get owned(){return Boolean(output);},get directory(){return output;},json,put,
-  async reserve(metadata){await noComparisonLinks(root);let parent=root;for(const [part,priv]of [['evidence',false],['private',true],['comparison',true]]){parent=join(parent,part);await directory(parent,priv);}
+  async reserve(metadata){await noComparisonLinks(root);let parent=root;for(const [part,priv]of [['evidence',false],['private',true],[namespace,true]]){parent=join(parent,part);await directory(parent,priv);}
    const proposed=join(parent,runId);await mkdir(proposed,{mode:0o700});output=proposed;await syncComparisonDirectory(parent);
    await json('started.json',metadata);await directory(join(output,'operations'));},
  };
