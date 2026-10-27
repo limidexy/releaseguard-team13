@@ -5,7 +5,10 @@ import { cloudRequest } from '../scripts/cloud-http.mjs';
 const origin='https://comparison.example.test',token='INSECURE_SYNTHETIC_HTTP_ONLY',job='10000000-0000-4000-8000-000000000010';
 const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:{'content-type':'application/json'}});
 for(const op of [{method:'POST',route:'/applications',body:{name:'Synthetic'}},{method:'POST',route:'/suites',body:{cases:[]}},{method:'POST',route:'/jobs',key:'synthetic-key',body:{}},{method:'GET',route:'/jobs/'+job}])test('closed HTTP route uses actual /api/v2 prefix, bounded no-redirect transport: '+op.route,async()=>{
- let calls=0;const r=await comparisonRequest(origin,op,token,1000,undefined,async(url,init)=>{calls++;assert.equal(url,origin+'/api/v2'+op.route);assert.equal(init.redirect,'error');assert.equal(init.cache,'no-store');assert.equal(init.headers.authorization,'Bearer '+token);return json({synthetic:true},op.method==='GET'?200:201);});
+ // Prepare the synthetic response before measuring transport. Node can lazily
+ // initialize its Web Response implementation; that is fixture setup here.
+ const response=json({synthetic:true},op.method==='GET'?200:201);
+ let calls=0;const r=await comparisonRequest(origin,op,token,1000,undefined,async(url,init)=>{calls++;assert.equal(url,origin+'/api/v2'+op.route);assert.equal(init.redirect,'error');assert.equal(init.cache,'no-store');assert.equal(init.headers.authorization,'Bearer '+token);return response;});
  assert.equal(calls,1);assert.equal(r.code,'response_received');assert.deepEqual(JSON.parse(Buffer.from(r.rawEntityBase64,'base64')),r.body);
 });
 for(const op of [{method:'POST',route:'/releases',body:{}},{method:'POST',route:'/reviews',body:{}},{method:'POST',route:'/jobs/'+job,body:{}},{method:'DELETE',route:'/jobs/'+job},
@@ -31,6 +34,11 @@ test('deadline covers an uncooperative fetch and entire streamed body, with part
  const hung=await comparisonRequest(origin,op,token,15,undefined,()=>{calls++;return new Promise(()=>{});});assert.equal(calls,1);assert.equal(hung.code,'deadline_exceeded');assert.equal(hung.networkEntered,true);
  const part=Buffer.from('{"incomplete":'),stream=new ReadableStream({start(c){c.enqueue(part);}}),r=await comparisonRequest(origin,op,token,15,undefined,async()=>new Response(stream,{headers:{'content-type':'application/json'}}));
  assert.equal(r.code,'deadline_exceeded');assert.equal(r.bodyComplete,false);assert.deepEqual(Buffer.from(r.rawEntityBase64,'base64'),part);
+});
+test('a synchronous uncooperative fetch still exceeds the original deadline without retrying',async()=>{
+ const response=json({synthetic:true}),op={method:'GET',route:'/jobs/'+job};let calls=0;
+ const r=await comparisonRequest(origin,op,token,100,undefined,()=>{calls++;Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0,150);return response;});
+ assert.equal(calls,1);assert.equal(r.code,'deadline_exceeded');assert.equal(r.networkEntered,true);
 });
 test('cancellation before dispatch sends zero; too-large response retains bounded prefix and stops',async()=>{
  const controller=new AbortController();controller.abort();let calls=0;const op={method:'GET',route:'/jobs/'+job};
