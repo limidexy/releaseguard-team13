@@ -18,7 +18,7 @@ async function fixture(t){
   const root=await mkdtemp(join(realpathSync(tmpdir()),'rg-gcp-infra-'));
   t.after(()=>rm(root,{recursive:true,force:true}));
   for(const sub of ['scripts','deploy/postgres','tests/fixtures'])await mkdir(join(root,sub),{recursive:true});
-  for(const file of ['scripts/gcp-render-infra.mjs','scripts/gcp-infra-core.mjs','scripts/render-cloud.mjs','deploy/postgres/init.sql','tests/fixtures/gcp-infra-boundary.mjs'])await copyFile(new URL('../'+file,import.meta.url),join(root,file));
+  for(const file of ['scripts/gcp-render-infra.mjs','scripts/gcp-infra-core.mjs','scripts/render-cloud.mjs','scripts/worker-pause-init.mjs','scripts/worker-pause-program.mjs','deploy/postgres/init.sql','tests/fixtures/gcp-infra-boundary.mjs'])await copyFile(new URL('../'+file,import.meta.url),join(root,file));
   await writeFile(join(root,'input.json'),JSON.stringify(config()));
   await writeFile(join(root,'.env.groq'),'MODEL_API_KEY=TEST_ONLY_FILE_SECRET_DO_NOT_PRINT');
   return root;
