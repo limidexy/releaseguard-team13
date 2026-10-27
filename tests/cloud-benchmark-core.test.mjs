@@ -72,3 +72,15 @@ test('omitting jobs retains the original default100 while explicitly invalid job
  const b=protocolBoundary();delete b.c.jobs;assert.equal(validatePairedBenchmark(b.c).jobs,100);const r=await run(b);assert.equal(r.passed,true);assert.equal(r.stages.flatMap(s=>s.tasks).length,400);assert.equal(b.calls.filter(c=>c.route==='/api/v2/jobs'&&c.method==='POST').length,420);
  const invalid=protocolBoundary();invalid.c.jobs=undefined;assert.throws(()=>validatePairedBenchmark(invalid.c));
 });
+test('source-stability failure labels the overall comparison failed while preserving completed cohorts',async()=>{
+ const b=protocolBoundary({sourceDrift:true}),r=await run(b);assert.equal(r.passed,false);assert.equal(r.state,'failed_or_unknown_retained');assert.equal(r.throughputRatio,null);assert.match(r.interpretation,/^Failed/i);
+ assert.equal(r.stages.every(s=>s.state==='completed'),true);assert.equal(r.summaries.reduce((n,s)=>n+s.outcomes.uniqueSucceededJobs,0),80);
+});
+test('terminal persistence failure returns unknown state and no valid comparison, without resending requests',async()=>{
+ const b=protocolBoundary();b.io.terminal=async()=>{throw Error('Synthetic terminal sync failure');};const r=await run(b);assert.equal(r.passed,false);assert.equal(r.evidenceState,'terminal_persistence_unknown');assert.equal(r.state,'failed_or_unknown_retained');assert.equal(r.throughputRatio,null);assert.match(r.interpretation,/^Failed/i);
+ assert.equal(b.calls.filter(c=>c.method==='POST'&&c.route==='/api/v2/jobs').length,100);assert.equal(r.restoration.state,'restored');
+});
+test('cancellation during final persistence returns failed-or-unknown and preserves the attempted terminal record',async()=>{
+ const b=protocolBoundary(),terminal=b.io.terminal;b.io.terminal=async v=>{await terminal(v);b.controller.abort();};const r=await run(b);assert.equal(r.passed,false);assert.equal(r.state,'failed_or_unknown_retained');assert.equal(r.throughputRatio,null);assert.match(r.interpretation,/^Failed/i);assert.equal(r.evidenceState,'completion_deadline_or_cancellation');
+ assert.equal(b.records.get('terminal.json').state,'completed');assert.equal(b.records.get('terminal.json').passed,true);assert.equal(r.restoration.state,'restored');
+});
