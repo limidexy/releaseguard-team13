@@ -34,8 +34,12 @@ export async function verifyAcceptanceEvidence(cwd, step, runId, result) {
     if (r.passed !== true || r.error || r.cleanupError || !Number.isInteger(r.attempts) || r.attempts < 2) fail(); return;
   }
   if (step === 'prompt-replay') {
-    const files = (await readdir(current)).filter(n => /^prompt-comparison-replay-\d+\.json$/.test(n));
-    if (files.length !== 1) fail(); const r = await json(join(current, files[0]));
+    const dir = join(evidence, 'private/comparison', runId), r = await json(join(dir, 'report.json')), terminal = await json(join(dir, 'terminal.json'));
+    if (r.runId !== runId || r.workspace !== 'comparison-' + runId || terminal.runId !== runId || terminal.status !== 'completed' ||
+      terminal.modelRequestBudget !== 0 || terminal.modelRequestsReserved !== 0 || terminal.states?.length !== 2 ||
+      terminal.states.some((s, i) => s.promptVersion !== ['v1','v2'][i] || s.state !== 'completed') ||
+      r.suiteRevision !== 'legacy' || r.evaluatorVersion !== 'legacy-literal-v1' || r.shadowOnly !== true || r.reviewer !== 'calibration_pending' ||
+      !r.semanticConclusion?.startsWith('NOT_ASSESSED')) fail();
     if (!['2.1', '2.2'].includes(r.schemaVersion) || r.source !== 'replay' || r.cloud !== false || r.error || r.cases?.length !== 10 ||
       new Set(r.cases.map(c => c.id)).size !== 10 || r.policy?.minScore !== 95 || r.runs?.length !== 2 || r.caseComparison?.length !== 10) fail();
     const ids = r.cases.map(c => c.id);
@@ -44,10 +48,12 @@ export async function verifyAcceptanceEvidence(cwd, step, runId, result) {
       const j = r.runs[i];
       if (j.input?.promptVersion !== version || j.input?.source !== 'replay' || j.status !== 'succeeded' || j.result?.total !== 10 || j.result?.results?.length !== 10) fail();
       if (j.input.appId !== r.appId || j.input.suiteId !== r.suiteId || !sameIds(j.result.results, ids, 'caseId') ||
+        j.workspace !== r.workspace ||
         j.result.gate !== 'passed' || j.result.score !== 100 || j.result.passed !== 10 || j.result.errors !== 0 || j.result.criticalFailures !== 0 ||
         j.result.results.some(c => c.status !== 'passed')) fail();
       for (const row of r.caseComparison) if (row.versions?.length !== 2 || row.versions[i]?.promptVersion !== version ||
-        !isDeepStrictEqual(row.versions[i].caseResult, j.result.results.find(c => c.caseId === row.caseId))) fail();
+        !isDeepStrictEqual(row.versions[i].caseResult, j.result.results.find(c => c.caseId === row.caseId)) ||
+        !isDeepStrictEqual(row.humanReview, { reviewer:null, policyAccuracy:null, safety:null, helpfulness:null, reason:null })) fail();
     }
     return;
   }

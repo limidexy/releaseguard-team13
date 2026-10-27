@@ -5,12 +5,14 @@ import { createHash } from 'node:crypto';
 import { performance } from 'node:perf_hooks';
 const max=2*1024*1024,hash=b=>createHash('sha256').update(b).digest('hex');
 const discard=body=>{try{Promise.resolve(body?.cancel()).catch(()=>{});}catch{}};
-export async function cloudRequest(origin,op,token,timeoutMs,signal,fetcher,knownSecrets=[]){
+export async function cloudRequest(origin,op,token,timeoutMs,signal,fetcher,knownSecrets=[],transport={}){
  let sent=false,status=null,response,reader,timer,off,code='invalid_request',size=0,complete=false,truncated=false,contentType=null;
  const chunks=[],controller=new AbortController();
  try{
   const url=new URL(origin);
-  if(url.protocol!=='https:'||url.origin!==origin||url.username||url.password||
+  const explicitLoopback=transport?.allowExplicitLoopback===true&&url.protocol==='http:'&&url.hostname==='127.0.0.1'&&Number(url.port)>=1024&&url.port!=='5193';
+  if(Object.keys(transport).some(k=>k!=='allowExplicitLoopback')||transport.allowExplicitLoopback!==undefined&&typeof transport.allowExplicitLoopback!=='boolean'||
+   url.protocol!=='https:'&&!explicitLoopback||url.origin!==origin||url.username||url.password||
    !op||typeof op.route!=='string'||!/^\/[A-Za-z0-9/_-]+$/.test(op.route)||op.route.includes('//')||
    !['POST','GET'].includes(op.method)||token!==null&&(typeof token!=='string'||token.length>16384||!/^[-A-Za-z0-9._~+/]+=*$/.test(token))||
    op.key!==undefined&&(typeof op.key!=='string'||!/^[-A-Za-z0-9_]{8,100}$/.test(op.key))||

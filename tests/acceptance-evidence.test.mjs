@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { join } from 'node:path';
 import { verifyAcceptanceEvidence } from '../scripts/acceptance-evidence.mjs';
-import { evidenceFixture, evidenceRunId as id, promptReceipt, repeatedReceipt, mixedReceipt } from './fixtures/acceptance-evidence-fixture.mjs';
+import { evidenceFixture, evidenceRunId as id, promptReceipt, comparisonTerminal, repeatedReceipt, mixedReceipt } from './fixtures/acceptance-evidence-fixture.mjs';
 
 for (const [step, path, count] of [['integration', 'evidence/integration-local.json', 18],
   ['improvements', 'evidence/current/improvements-integration.json', 4],
@@ -27,7 +27,8 @@ test('fault recovery needs the original recovery attempt evidence and no error',
 });
 test('complete replay comparison is accepted without modifying original scores or answers', async () => {
   const f = evidenceFixture();
-  try { const saved = f.put('evidence/current/prompt-comparison-replay-1.json', promptReceipt());
+  try { f.put('evidence/private/comparison/' + id + '/terminal.json', comparisonTerminal());
+    const saved = f.put('evidence/private/comparison/' + id + '/report.json', promptReceipt());
     await verifyAcceptanceEvidence(f.root, 'prompt-replay', id, {}); assert.equal(fs.readFileSync(saved.file, 'utf8'), saved.raw);
   } finally { f.cleanup(); }
 });
@@ -38,7 +39,8 @@ for (const [label, patch] of [
   ['real-model source hidden in a replay report', r => { r.runs[0].input.source = 'real'; }],
 ]) test('replay child receipt rejects ' + label, async () => {
   const f = evidenceFixture();
-  try { const r = promptReceipt(); patch(r); const saved = f.put('evidence/current/prompt-comparison-replay-1.json', r);
+  try { const r = promptReceipt(); patch(r); f.put('evidence/private/comparison/' + id + '/terminal.json', comparisonTerminal());
+    const saved = f.put('evidence/private/comparison/' + id + '/report.json', r);
     await assert.rejects(verifyAcceptanceEvidence(f.root, 'prompt-replay', id, {})); assert.equal(fs.readFileSync(saved.file, 'utf8'), saved.raw);
   } finally { f.cleanup(); }
 });

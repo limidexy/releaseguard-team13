@@ -69,7 +69,7 @@ export function targetFixture({ existingRoot } = {}) {
     }
   }
   return { root, runDir, cwd, sourceFiles, execute, engine, config, states, aliases, ids, calls, events, build, start,
-    options: { root, runDir, runId: fixtureRunId, env: { PATH: process.env.PATH, npm_config_offline: 'true' }, sourceFiles,
+    options: { root, runDir, runId: fixtureRunId, sourceCommit: 'a'.repeat(40), env: { PATH: process.env.PATH, npm_config_offline: 'true' }, sourceFiles,
       remaining: () => { if (engine.expired) throw Error('Original work deadline expired'); return 100000; }, record: async e => events.push(JSON.parse(JSON.stringify(e))) },
     cleanup: () => { if (existingRoot) throw Error('Fixture does not own supplied root cleanup'); fs.rmSync(tmp, { recursive: true, force: true }); } };
 }

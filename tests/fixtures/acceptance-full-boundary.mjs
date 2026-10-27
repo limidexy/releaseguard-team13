@@ -9,7 +9,7 @@ import { EventEmitter } from 'node:events';
 import { PassThrough } from 'node:stream';
 import { basename, join, resolve } from 'node:path';
 import { targetFixture, fixtureRunId as id } from './acceptance-target-fixture.mjs';
-import { promptReceipt, repeatedReceipt, mixedReceipt } from './acceptance-evidence-fixture.mjs';
+import { promptReceipt, comparisonTerminal, repeatedReceipt, mixedReceipt } from './acceptance-evidence-fixture.mjs';
 const supplied = process.env.RG_ACCEPTANCE_FULL_FIXTURE_ROOT;
 if (!supplied || !basename(supplied).startsWith('rg-acceptance-full-')) throw Error('Not an owned full fixture');
 const root = fs.realpathSync(supplied);
@@ -69,7 +69,14 @@ function run(bin, args, options) {
   if (name === 'improvements') save('evidence/current/improvements-integration.json', checkReport(4));
   if (name === 'ddd-contracts') save('evidence/contracts-' + id + '/ddd-contracts.json', checkReport(18));
   if (name === 'fault-recovery') save('evidence/fault-local.json', { passed: true, attempts: 2 });
-  if (name === 'prompt-replay') save('evidence/current/prompt-comparison-replay-1.json', promptReceipt());
+  if (name === 'prompt-replay') {
+    if (args[1] !== '--execute-comparison' || options.env.RG_COMPARISON_ACCEPTANCE_RUN_ID !== id || options.env.RG_ACCEPTANCE_INTEGRATION !== '1') deny('comparison_child_without_explicit_guard');
+    const config = JSON.parse(read(options.env.RG_COMPARISON_CONFIG_FILE)), auth = JSON.parse(read(options.env.RG_COMPARISON_AUTH_FILE));
+    if (config.source !== 'replay' || config.modelRequestBudget !== 0 || config.targetKind !== 'isolated-acceptance' || config.image !== f.ids.app ||
+      config.workspace !== 'comparison-' + id || auth.subject !== 'comparison-local-acceptance' || auth.secret !== '1'.repeat(64)) deny('comparison_private_inputs_mismatch');
+    save('evidence/private/comparison/' + id + '/report.json', promptReceipt());
+    save('evidence/private/comparison/' + id + '/terminal.json', comparisonTerminal());
+  }
   if (name === 'repeated-scaling') save('evidence/current/scaling-repeated.json', repeatedReceipt());
   if (name === 'mixed-read-write') {
     if (options.env.RG_MIXED_LOAD_RUN_ID !== id || options.env.RG_MIXED_LOAD_INTEGRATION !== '1') deny('mixed_child_without_reserved_id');

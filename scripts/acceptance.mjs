@@ -97,7 +97,7 @@ async function main() {
         // engine before reading credentials or using shared source image aliases.
         if (!gitCommit || gitDirty === null) deny();
         const { acceptanceTarget } = await import('./acceptance-target.mjs');
-        target = acceptanceTarget({ root, runDir, runId: id, env, sourceFiles, remaining, record });
+        target = acceptanceTarget({ root, runDir, runId: id, env, sourceFiles, sourceCommit: gitCommit, remaining, record });
         await target.prepare();
       },
       beforeStep: async step => { if (target) await target.beforeStep(step); },
