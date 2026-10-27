@@ -68,8 +68,9 @@ export function autoscaleTarget(input,io){
  }
  async function wait(fn,ms=30000,clean=false){const end=io.now()+ms;for(let n=0;n<360;n++){check(clean);if(io.now()>=end)deny();const r=await fn();if(r)return r;await io.sleep(1000,clean);}deny();}
  function list(x){if(!Array.isArray(x?.items)||x.items.length>1000||x.metadata?.continue)deny();return x.items;}
- async function hpa(held,clean=false,bindNew=false){
+ async function hpa(held,clean=false,bindNew=false,pendingAllowed=false){
   const selected=list(await read('hpas',clean)).filter(x=>x.spec?.scaleTargetRef?.name===c.workerName);
+  if(selected.length===0&&pendingAllowed)return null;
   if(selected.length!==1)deny();const h=selected[0],m=h.spec?.metrics?.[0];
   if(h.apiVersion!=='autoscaling/v2'||h.kind!=='HorizontalPodAutoscaler'||h.metadata?.name!=='keda-hpa-'+c.controllerName||h.metadata.namespace!==c.namespace||
    !h.metadata.uid||h.metadata.deletionTimestamp||!h.metadata.ownerReferences?.some(o=>o.uid===c.controllerUID&&o.kind==='ScaledObject'&&o.controller===true)||
@@ -90,7 +91,7 @@ export function autoscaleTarget(input,io){
    if(p.metadata?.namespace!==c.namespace||p.metadata.deletionTimestamp||!p.metadata?.uid||typeof p.metadata.name!=='string'||!c.nodeNames.includes(p.spec?.nodeName)||
     !p.metadata.ownerReferences?.some(o=>o.kind==='ReplicaSet'&&rs.has(o.uid)&&o.controller===true)||v?.length!==1||!same(v[0],w.spec.template.spec.containers[0])||
     !p.status?.conditions?.some(x=>x.type==='Ready'&&x.status==='True')||!status?.ready||!status.state?.running||!status.containerID||status.imageID?.match(/sha256:[a-f0-9]{64}$/)?.[0]!==c.imageDigest)return null;
-   const row={name:p.metadata.name,uid:p.metadata.uid,node:p.spec.nodeName,imageID:status.imageID};
+   const row={name:p.metadata.name,uid:p.metadata.uid,node:p.spec.nodeName,imageID:status.imageID,containerID:status.containerID};
    if(knownPods.has(row.name)&&knownPods.get(row.name).uid!==row.uid)deny();rows.push(row);
   }
   if(new Set(rows.map(x=>x.uid)).size!==n||new Set(rows.map(x=>x.name)).size!==n)deny();
@@ -111,6 +112,17 @@ export function autoscaleTarget(input,io){
    return s;
  }
  return {
+  // Shared read-only inspection for the separate fault-stimulus consumer.
+  // No lifecycle preparation, annotation mutation, scale or signal occurs here.
+  async inspectCurrent(clean=false){
+   const controller=bound(await read('controller',clean),'controller'),worker=bound(await read('worker',clean),'worker');
+   if(controller.spec.minReplicaCount!==1)deny();let members=await cohort(clean,false);
+   if(members&&(members.desired!==worker.spec.replicas||members.ready!==(worker.status?.readyReplicas??0)))members=null;
+   const full=Object.hasOwn(pauseMap(controller),pauses[1]);let hp=null;
+   if(full){if(list(await read('hpas',clean)).some(x=>x.spec?.scaleTargetRef?.name===c.workerName))deny();}
+   else hp=await hpa(false,clean,true,true);
+   return {controller:copy(controller),worker:copy(worker),cohort:members,hpa:copy(hp)};
+  },
   async preflight(){if(preflighted||started)deny();const s=await initial();original=copy(s);accepted=stamp(s);preflighted=true;return {controllerUID:c.controllerUID,workerUID:c.workerUID,profile:c.controllerProfile};},
   async prepare(){
    if(started||!preflighted)deny();started=true;const s=await initial();if(!same(stamp(s),stamp(original)))deny();

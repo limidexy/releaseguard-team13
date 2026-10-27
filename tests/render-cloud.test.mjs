@@ -5,6 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import test from 'node:test';
+import {workerPauseInitProgram} from '../scripts/worker-pause-init.mjs';
 import { configuredClockSkewBound } from '../src/submission-deadline.ts';
 const repo = fileURLToPath(new URL('../', import.meta.url));
 const image = 'registry.example.test/team/releaseguard@sha256:' + 'a'.repeat(64);
@@ -14,7 +15,7 @@ const posix = { skip: process.platform === 'win32' ? 'Manual CD runs on Ubuntu; 
 function fixture(t) {
   const root = mkdtempSync(join(tmpdir(), 'rg-render-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
-  mkdirSync(join(root, 'scripts')); copyFileSync(join(repo, 'scripts/render-cloud.mjs'), join(root, 'scripts/render-cloud.mjs'));
+  mkdirSync(join(root, 'scripts')); for (const file of ['render-cloud.mjs', 'worker-pause-init.mjs', 'worker-pause-program.mjs']) copyFileSync(join(repo, 'scripts', file), join(root, 'scripts', file));
   const preload = join(root, 'boundary.mjs'); copyFileSync(join(repo, 'tests/fixtures/render-cloud-boundary.mjs'), preload);
   writeFileSync(join(root, '.env'), 'PRIVATE_CREDENTIAL_MUST_NOT_BE_READ');
   return { root, script: join(root, 'scripts/render-cloud.mjs'), out: join(root, 'deploy/k8s/rendered/services.yaml'),
@@ -95,6 +96,30 @@ test('false source flags keep the existing resource/probe defaults', t => {
   const f = fixture(t), r = run(f, { RG_INTERNAL_CA: 'false', RG_TRIAL_SMALL: 'false', RG_SKIP_NAMESPACE: 'false' });
   assert.equal(r.status, 0, r.stderr); const d = docs(f); assert.equal(d.filter(x => x.kind === 'Namespace').length, 1);
   assert.ok(workloads(d).every(w => w.spec.template.spec.containers[0].resources.requests.cpu === '250m' && !w.spec.template.spec.volumes));
+});
+test('fault fixture is disabled by default; explicitfalse preserves byte-identical rendereddefaults', t => {
+  const a = fixture(t), b = fixture(t); assert.equal(run(a).status, 0); assert.equal(run(b, { RG_ENABLE_WORKER_FAULT_FIXTURE: 'false' }).status, 0);
+  assert.deepEqual(docs(a), docs(b));
+  assert.equal(workloads(docs(a)).some(w => w.spec.template.spec.containers[0].env.some(e => e.name === 'RG_TRIAL_POD_UID')), false);
+});
+test('explicitisolatedfaultfixture addsonlyWorkerDownwardUID andboundedmemoryjournal withoutweakeningreadonlyroot', t => {
+  const f = fixture(t); assert.equal(run(f, { RG_ENABLE_WORKER_FAULT_FIXTURE: 'true', RG_INTERNAL_CA: 'true' }).status, 0); const d = docs(f);
+  for (const w of workloads(d)) {
+    const p = w.spec.template.spec, c = p.containers[0], uid = c.env.find(e => e.name === 'RG_TRIAL_POD_UID');
+    assert.equal(c.securityContext.readOnlyRootFilesystem, true); assert.equal(c.securityContext.allowPrivilegeEscalation, false);
+    assert.equal(c.resources.limits.cpu, '500m'); assert.equal(c.resources.limits.memory, '384Mi'); assert.equal(p.automountServiceAccountToken, false);
+    if (w.metadata.name === 'worker') {
+      assert.deepEqual(uid, { name: 'RG_TRIAL_POD_UID', valueFrom: { fieldRef: { apiVersion: 'v1', fieldPath: 'metadata.uid' } } });
+      assert.equal(p.securityContext.fsGroup, 1000);
+      assert.deepEqual(c.command, ['/usr/local/bin/node', '-e', workerPauseInitProgram]);
+      assert.deepEqual(p.volumes.find(v => v.name === 'worker-fault-journal'), { name: 'worker-fault-journal', emptyDir: { medium: 'Memory', sizeLimit: '1Mi' } });
+      assert.deepEqual(c.volumeMounts.find(v => v.name === 'worker-fault-journal'), { name: 'worker-fault-journal', mountPath: '/run/releaseguard-fault' });
+    } else { assert.equal(c.command, undefined); assert.equal(uid, undefined); assert.equal(p.securityContext.fsGroup, undefined); assert.equal(p.volumes.some(v => v.name === 'worker-fault-journal'), false); }
+    assert.ok(c.volumeMounts.some(v => v.name === 'trust')); // Existing CA survives the isolated fixture option.
+  }
+});
+test('invalid faultfixtureflag refusesrendering, never coercedintotrue', t => {
+  const f = fixture(t); assert.notEqual(run(f, { RG_ENABLE_WORKER_FAULT_FIXTURE: 'yes' }).status, 0); assert.equal(existsSync(f.out), false);
 });
 for (const value of ['0', '9999']) test('explicit boundary skew ' + value + ' is preserved, never invented as a default', t => {
   const f = fixture(t), r = run(f, { SUBMISSION_CLOCK_SKEW_BOUND_MS: value }); assert.equal(r.status, 0, r.stderr);

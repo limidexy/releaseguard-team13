@@ -4,6 +4,7 @@ import { constants } from 'node:fs';
 import { lstat, mkdir, open } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { workerPauseInitProgram } from './worker-pause-init.mjs';
 const root = fileURLToPath(new URL('../', import.meta.url));
 function invalid() { throw Error('Invalid render configuration'); }
 function required(name) {
@@ -35,7 +36,7 @@ try {
   const origin = https(required('PUBLIC_ORIGIN'), true), issuer = https(required('AUTH_ISSUER')), jwks = https(required('OIDC_JWKS_URL'));
   const skew = required('SUBMISSION_CLOCK_SKEW_BOUND_MS'), bound = Number(skew);
   if (!/^\d+$/.test(skew) || !Number.isSafeInteger(bound) || bound < 0 || bound >= 10000) invalid();
-  const ca = flag('RG_INTERNAL_CA'), small = flag('RG_TRIAL_SMALL'), skipNamespace = flag('RG_SKIP_NAMESPACE');
+  const ca = flag('RG_INTERNAL_CA'), small = flag('RG_TRIAL_SMALL'), skipNamespace = flag('RG_SKIP_NAMESPACE'), faultFixture = flag('RG_ENABLE_WORKER_FAULT_FIXTURE');
   const configured = process.env.RG_DEPLOYMENT_ENV;
   if (configured && !['gcp-trial', 'unconfirmed'].includes(configured)) invalid();
   const namespace = 'releaseguard', documents = [], roles = ['registry', 'evaluation', 'governance', 'support', 'worker', 'gateway'];
@@ -51,6 +52,8 @@ try {
   const fromSecret = (name, key, optional = false) => ({ secretKeyRef: { name, key, optional } });
   for (const role of roles) {
     const env = [{ name: 'SERVICE_ROLE', value: role }, { name: 'INTERNAL_SECRET', valueFrom: fromSecret('rg-internal', 'INTERNAL_SECRET') }];
+    // Future isolated fault fixture only; no default deployment or signal tool.
+    if (faultFixture && role === 'worker') env.push({ name: 'RG_TRIAL_POD_UID', valueFrom: { fieldRef: { apiVersion: 'v1', fieldPath: 'metadata.uid' } } });
     if (ca) env.push({ name: 'NODE_EXTRA_CA_CERTS', value: '/trust/ca.crt' });
     if (['registry', 'evaluation', 'governance', 'worker'].includes(role)) env.push({ name: 'DATABASE_URL', valueFrom: fromSecret('rg-' + (role === 'worker' ? 'evaluation' : role), 'DATABASE_URL') });
     if (['evaluation', 'worker'].includes(role)) env.push({ name: 'AMQP_URL', valueFrom: fromSecret('rg-broker', 'AMQP_URL') });
@@ -58,6 +61,7 @@ try {
     const labels = { app: role, 'app.kubernetes.io/part-of': 'releaseguard' };
     const container = {
       name: role, image, imagePullPolicy: 'IfNotPresent', envFrom: [{ configMapRef: { name: 'rg-config' } }], env,
+      ...(faultFixture && role === 'worker' ? { command: ['/usr/local/bin/node', '-e', workerPauseInitProgram] } : {}),
       ports: [{ containerPort: 8080 }],
       resources: { requests: { cpu: small ? role === 'worker' ? '150m' : '100m' : '250m', memory: '128Mi' }, limits: { cpu: '500m', memory: '384Mi' } },
       securityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: { drop: ['ALL'] } },
@@ -71,6 +75,11 @@ try {
       securityContext: { runAsNonRoot: true, runAsUser: 1000, runAsGroup: 1000 },
       containers: [container], ...(ca ? { volumes: [{ name: 'trust', secret: { secretName: 'rg-internal-ca' } }] } : {}),
     };
+    if (faultFixture && role === 'worker') {
+      pod.securityContext.fsGroup = 1000;
+      pod.volumes = [...(pod.volumes ?? []), { name: 'worker-fault-journal', emptyDir: { medium: 'Memory', sizeLimit: '1Mi' } }];
+      container.volumeMounts = [...(container.volumeMounts ?? []), { name: 'worker-fault-journal', mountPath: '/run/releaseguard-fault' }];
+    }
     documents.push({ apiVersion: 'apps/v1', kind: 'Deployment', metadata: { name: role, namespace }, spec: {
       replicas: role === 'gateway' ? 2 : 1, strategy: { type: 'RollingUpdate', rollingUpdate: { maxUnavailable: 0, maxSurge: 1 } },
       selector: { matchLabels: { app: role } }, template: { metadata: { labels }, spec: pod },
