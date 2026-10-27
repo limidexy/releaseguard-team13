@@ -75,6 +75,8 @@ jobs:
         run: node --test tests/backup-core.test.mjs tests/backup-native.test.mjs tests/backup-process.test.mjs tests/backup-entry.test.mjs tests/backup-source.test.mjs tests/backup-sql-guard.test.mjs
       - name: Inactive deployment object ownership and full-field recovery prerequisite (in-memory only)
         run: node --test tests/deploy-object-core.test.mjs tests/deploy-object-source.test.mjs tests/deploy-object-import.test.mjs tests/deploy-object-managed-fields.test.mjs
+      - name: Inactive complete six-service deployment consumer (owned boundaries only)
+        run: node --test tests/deploy-core.test.mjs tests/deploy-native.test.mjs tests/deploy-entry.test.mjs
       - name: Disposable PostgreSQL17 backup SQL and binary contract (network-none hosted CI only)
         env:
           RG_BACKUP_SQL_INTEGRATION: '1'
@@ -225,5 +227,7 @@ jobs:
         run: node --test tests/backup-core.test.mjs tests/backup-native.test.mjs tests/backup-process.test.mjs tests/backup-entry.test.mjs tests/backup-source.test.mjs tests/backup-sql-guard.test.mjs
       - name: Inactive deployment object ownership prerequisite (in-memory only)
         run: node --test tests/deploy-object-core.test.mjs tests/deploy-object-source.test.mjs tests/deploy-object-import.test.mjs tests/deploy-object-managed-fields.test.mjs
+      - name: Inactive complete six-service deployment consumer (owned boundaries only)
+        run: node --test tests/deploy-core.test.mjs tests/deploy-native.test.mjs tests/deploy-entry.test.mjs
       - name: Native Windows tooling regressions
         run: node --test tests/windows-compat.test.mjs tests/tooling-checkout.test.mjs tests/tooling-consumers.test.mjs tests/hooks-and-ignore.test.mjs tests/render-cloud.test.mjs tests/acceptance-core.test.mjs tests/acceptance-entry.test.mjs tests/acceptance-process.test.mjs tests/gcp-infra-core.test.mjs tests/gcp-infra-entry.test.mjs tests/gcp-private-core.test.mjs tests/gcp-private-entry.test.mjs tests/gcp-bootstrap-core.test.mjs tests/gcp-bootstrap-entry.test.mjs tests/cloud-token.test.mjs tests/cloud-token-entry.test.mjs tests/cloud-smoke-core.test.mjs tests/cloud-smoke-http.test.mjs tests/cloud-smoke-entry.test.mjs tests/cloud-acceptance-core.test.mjs tests/cloud-acceptance-http.test.mjs tests/cloud-acceptance-entry.test.mjs

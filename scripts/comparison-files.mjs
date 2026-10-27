@@ -30,7 +30,7 @@ export function strictComparisonJSON(bytes){
  value(0);return result;
 }
 export function comparisonFiles(root,runId,namespace='comparison'){
- if(!['comparison','cloud-retained-rescore','cloud-evidence','cloud-benchmark','cloud-autoscale','cloud-worker-pause','cloud-backup'].includes(namespace)||!/^[a-f0-9]{8}-[a-f0-9]{4}-[1-5][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/.test(runId??''))deny();
+ if(!['comparison','cloud-retained-rescore','cloud-evidence','cloud-benchmark','cloud-autoscale','cloud-worker-pause','cloud-backup','cloud-deploy'].includes(namespace)||!/^[a-f0-9]{8}-[a-f0-9]{4}-[1-5][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/.test(runId??''))deny();
  let output,total=0,recoveryTotal=0;
  async function put(name,bytes){
   const permitted=['cloud-benchmark','cloud-autoscale','cloud-worker-pause'].includes(namespace)?/^(?:operations\/\d{6}-(?:intent|observed|result|authentication)|[a-z0-9-]+)\.(?:json|bin)$/:/^(?:operations\/\d{4}-(?:intent|observed|result|authentication)|[a-z0-9-]+)\.(?:json|bin)$/;
@@ -38,7 +38,11 @@ export function comparisonFiles(root,runId,namespace='comparison'){
   await noComparisonLinks(dirname(join(output,name)));const b=Buffer.isBuffer(bytes)?bytes:Buffer.from(bytes);
   const h=await open(join(output,name),constants.O_WRONLY|constants.O_CREAT|constants.O_EXCL|constants.O_NOFOLLOW,0o600);
   try{await h.writeFile(b);await h.sync();}finally{await h.close();}await syncComparisonDirectory(dirname(join(output,name)));
-  const recovery=namespace==='cloud-backup'?/^cleanup-(?:native-\d{6}-(?:intent|observed)|operation-\d{6}-(?:intent|observed|stdout|stderr))\.(?:json|bin)$/.test(name):['cloud-benchmark','cloud-autoscale','cloud-worker-pause'].includes(namespace)&&/^cleanup-(?:native-\d{6}-(?:intent|observed|result)|kube-patch-\d{6})\.json$/.test(name);
+  // The lifecycle intent is persisted before its native command. It and the
+  // recovery smoke must use the same bounded recovery allowance, otherwise a
+  // full normal ledger prevents cleanup before the first restoration call.
+  const deployRecovery=/^(?:cleanup-(?:native-\d{6}-(?:intent|observed|stdout|stderr)|request-\d{6})\.(?:json|bin)|cleanup-operation-\d{4}-(?:intent|observed)\.json|cleanup-unknown-(?:service|deployment|configmap)-[a-z0-9-]+\.json|smoke-failure-recovery-(?:started|job|terminal|\d{4}-(?:intent|observed|result))\.json)$/.test(name);
+  const recovery=namespace==='cloud-deploy'?deployRecovery:namespace==='cloud-backup'?/^cleanup-(?:native-\d{6}-(?:intent|observed)|operation-\d{6}-(?:intent|observed|stdout|stderr))\.(?:json|bin)$/.test(name):['cloud-benchmark','cloud-autoscale','cloud-worker-pause'].includes(namespace)&&/^cleanup-(?:native-\d{6}-(?:intent|observed|result)|kube-patch-\d{6})\.json$/.test(name);
   if(recovery)recoveryTotal+=b.length;else total+=b.length;
   // Preserve the last bounded response, then stop; this is not a hard byte quota.
   // These operator tools have a separate16MiB recovery receipt allowance. This

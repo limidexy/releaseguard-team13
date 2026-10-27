@@ -133,7 +133,7 @@ export function planDeploymentRelease(last,latest,runId){
  const current=selectedOwned(last,latest,runId),after=clone(current.fields);delete after.annotations.value[deploymentOwnerAnnotation];if(Object.keys(after.annotations.value).length===0)after.annotations={exists:false};
  return makePlan('release',current,after,runId);
 }
-export function verifyDeploymentChange(plan,observed,serverDryRun){
+function verifiedPreview(plan,serverDryRun){
  const p=json(plan,8*1024*1024);exact(p,['formatVersion','operation','runId','before','afterFields','patch','checksum']);
  if(p.formatVersion!==1||!['claim','update','restore','release'].includes(p.operation))deny();
  const rebuilt=makePlan(p.operation,p.before,p.afterFields,p.runId);if(!rebuilt||!same(rebuilt,p))deny();
@@ -141,7 +141,14 @@ export function verifyDeploymentChange(plan,observed,serverDryRun){
  // Its managed-field ownership effects cannot be guessed locally or treated as
  // identical to SSA. The caller retains both raw preview and real response.
  const preview=json(serverDryRun,2*1024*1024);exact(preview,['planChecksum','observation']);if(preview.planChecksum!==p.checksum)deny();
- const expected=captureDeploymentObject(p.before.ref,preview.observation),s=captureDeploymentObject(p.before.ref,observed);
+ const expected=captureDeploymentObject(p.before.ref,preview.observation);
  if(expected.uid!==p.before.uid||expected.resourceVersion!==p.before.resourceVersion||!sameFixedContext(expected.context,p.before.context)||!same(expected.fields,p.afterFields))deny();
+ return {plan:p,expected};
+}
+// Validate the real preview before mutation without inventing any response or
+// changing a raw server observation. This alone is not an executed change.
+export function verifyDeploymentPreview(plan,serverDryRun){return verifiedPreview(plan,serverDryRun).expected;}
+export function verifyDeploymentChange(plan,observed,serverDryRun){
+ const {plan:p,expected}=verifiedPreview(plan,serverDryRun),s=captureDeploymentObject(p.before.ref,observed);
  if(s.uid!==p.before.uid||s.resourceVersion===p.before.resourceVersion||!sameOwnership(s.context,expected.context)||!same(s.fields,p.afterFields))deny();return s;
 }

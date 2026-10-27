@@ -1,0 +1,18 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {join,dirname} from 'node:path';import {tmpdir} from 'node:os';import {fileURLToPath} from 'node:url';import {spawnSync} from 'node:child_process';
+import {deploySources} from '../../scripts/cloud-deploy.mjs';import {deployFixture} from './deploy-lifecycle.mjs';import {kubeconfig} from './gcp-evidence-data.mjs';
+const repo=fileURLToPath(new URL('../../',import.meta.url));
+export function deployHarness(t,{missing=[],proveRollback=false}={}){
+ const root=fs.mkdtempSync(join(fs.realpathSync(tmpdir()),'rg-deploy-owned-'));t.after(()=>{assert.match(root,/[/\\]rg-deploy-owned-[^/\\]+$/);fs.rmSync(root,{recursive:true});});
+ for(const n of [...deploySources,'tests/fixtures/deploy-lifecycle.mjs','tests/fixtures/deploy-object-api.mjs','tests/fixtures/gcp-evidence-data.mjs']){fs.mkdirSync(dirname(join(root,n)),{recursive:true,mode:0o700});fs.copyFileSync(join(repo,n),join(root,n));}
+ for(const n of ['inputs','bin','cloud-config'])fs.mkdirSync(join(root,n),{mode:0o700});for(const n of ['gcloud','kubectl','gke-gcloud-auth-plugin'])fs.writeFileSync(join(root,'bin',n),'SYNTHETIC - NEVER EXECUTED\n',{mode:0o700});
+ const {c}=deployFixture();c.proveRollback=proveRollback;c.render.issuer=c.render.origin+'/identity/realms/synthetic';c.render.jwks=c.render.issuer+'/protocol/openid-connect/certs';c.authFile=join(root,'inputs/auth.json');
+ Object.assign(c.cloud,{gcloudExecutable:join(root,'bin/gcloud'),kubectlExecutable:join(root,'bin/kubectl'),pluginExecutable:join(root,'bin/gke-gcloud-auth-plugin'),gcloudConfigDirectory:join(root,'cloud-config'),kubeconfigFile:join(root,'inputs/kube.json')});
+ const input=join(root,'inputs/config.json'),auth={allowServiceAuthentication:true,targetOrigin:c.render.origin,allowedOrigins:c.allowedOrigins,issuer:c.render.issuer,clientId:'synthetic-service',clientSecret:'INSECURE_SYNTHETIC_SECRET',timeoutMs:15000};
+ fs.writeFileSync(input,JSON.stringify(c),{mode:0o600});fs.writeFileSync(c.authFile,JSON.stringify(auth),{mode:0o600});fs.writeFileSync(c.cloud.kubeconfigFile,JSON.stringify(kubeconfig(c.cloud)),{mode:0o600});fs.writeFileSync(join(root,'missing.json'),JSON.stringify(missing),{mode:0o600});fs.writeFileSync(join(root,'.env'),'MUST_NOT_READ_PRIVATE_ENV',{mode:0o600});fs.writeFileSync(join(root,'package.json'),'{"type":"module","private":true}\n');fs.copyFileSync(join(repo,'tests/fixtures/deploy-cli-preload.mjs'),join(root,'test-preload.mjs'));
+ const env={PATH:process.env.PATH},args=['--execute-owned-deployment','--input',input],preload=['--import',join(root,'test-preload.mjs')];
+ // The full three-phase real-entry fixture performs thousands of durable local
+ // file operations. This is a harness ceiling, not the protocol's deadline.
+ const execute=(extra={},override=args)=>{const r=spawnSync(process.execPath,[...preload,'scripts/cloud-deploy.mjs',...override],{cwd:root,env:{...env,...extra},encoding:'utf8',timeout:120000,killSignal:'SIGKILL'});assert.ifError(r.error);assert.equal(r.signal,null);return r;};
+ const importOnly=()=>spawnSync(process.execPath,[...preload,'--input-type=module','-e',"await import('./scripts/cloud-deploy.mjs')"],{cwd:root,env,encoding:'utf8',timeout:10000}),commands=()=>fs.existsSync(join(root,'synthetic-commands.jsonl'))?fs.readFileSync(join(root,'synthetic-commands.jsonl'),'utf8').trim().split('\n').map(JSON.parse):[],requests=()=>fs.existsSync(join(root,'synthetic-requests.jsonl'))?fs.readFileSync(join(root,'synthetic-requests.jsonl'),'utf8').trim().split('\n').map(JSON.parse):[];
+ return {root,c,input,execute,importOnly,commands,requests,run:join(root,'evidence/private/cloud-deploy',c.runId),json:p=>JSON.parse(fs.readFileSync(p))};
+}
