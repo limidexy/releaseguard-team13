@@ -37,3 +37,16 @@ test('evidence archive shares no run or record with comparison or retained-resco
  for(let n=0;n<stores.length;n++)assert.deepEqual(JSON.parse(fs.readFileSync(join(stores[n].directory,'report.json'))),{index:n});
  await assert.rejects(comparisonFiles(root,id,'cloud-evidence').reserve({overwrite:true}));
 });
+test('paired benchmark keeps six-digit operation records in its own namespace without widening old callers',posix,async t=>{
+ const root=fixture(t),a=comparisonFiles(root,id,'cloud-benchmark'),b=comparisonFiles(root,id);await a.reserve({tool:'paired'});await b.reserve({tool:'comparison'});
+ await a.json('operations/000001-intent.json',{planned:true});await assert.rejects(b.json('operations/000001-intent.json',{}));await assert.rejects(a.json('operations/0001-intent.json',{}));
+ assert.equal(fs.existsSync(join(a.directory,'operations/000001-intent.json')),true);assert.equal(fs.existsSync(join(b.directory,'operations/000001-intent.json')),false);
+});
+test('paired benchmark normal evidence limit cannot consume the separate bounded recovery receipt allowance',posix,async t=>{
+ const root=fixture(t),s=comparisonFiles(root,id,'cloud-benchmark');await s.reserve({synthetic:true});const block=Buffer.alloc(8*1024*1024,32);
+ for(let i=0;i<8;i++){try{await s.put('synthetic-padding-'+i+'.bin',block);}catch{assert.equal(i,7);}}
+ await assert.rejects(s.json('normal-after-limit.json',{state:'failed'}));
+ await s.json('cleanup-native-000001-intent.json',{state:'restore-intent'});await s.json('cleanup-native-000001-observed.json',{state:'original-response'});
+ await assert.rejects(s.json('cleanup-native-000001-intent.json',{overwrite:true}));await s.json('terminal.json',{passed:false});
+ assert.deepEqual(JSON.parse(fs.readFileSync(join(s.directory,'cleanup-native-000001-observed.json'))),{state:'original-response'});
+});

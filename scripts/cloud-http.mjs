@@ -14,7 +14,8 @@ export async function cloudRequest(origin,op,token,timeoutMs,signal,fetcher,know
   if(Object.keys(transport).some(k=>k!=='allowExplicitLoopback')||transport.allowExplicitLoopback!==undefined&&typeof transport.allowExplicitLoopback!=='boolean'||
    url.protocol!=='https:'&&!explicitLoopback||url.origin!==origin||url.username||url.password||
    !op||typeof op.route!=='string'||!/^\/[A-Za-z0-9/_-]+$/.test(op.route)||op.route.includes('//')||
-   !['POST','GET'].includes(op.method)||token!==null&&(typeof token!=='string'||token.length>16384||!/^[-A-Za-z0-9._~+/]+=*$/.test(token))||
+   !['POST','GET'].includes(op.method)||op.query!==undefined&&!(typeof op.query==='string'&&op.method==='GET'&&op.route==='/api/v2/jobs'&&/^limit=25&offset=(?:0|25|50|75)$/.test(op.query))||
+   token!==null&&(typeof token!=='string'||token.length>16384||!/^[-A-Za-z0-9._~+/]+=*$/.test(token))||
    op.key!==undefined&&(typeof op.key!=='string'||!/^[-A-Za-z0-9_]{8,100}$/.test(op.key))||
    op.originHeader!==undefined&&(typeof op.originHeader!=='string'||new URL(op.originHeader).origin!==op.originHeader||new URL(op.originHeader).protocol!=='https:')||
    op.expectJSON!==undefined&&typeof op.expectJSON!=='boolean'||!Array.isArray(knownSecrets)||knownSecrets.length>4||knownSecrets.some(v=>typeof v!=='string'||!v.length||v.length>16384)||
@@ -26,12 +27,13 @@ export async function cloudRequest(origin,op,token,timeoutMs,signal,fetcher,know
   const until=async p=>{check();const result=await Promise.race([p,aborted]);check();return result;};
   code='transport_unknown';const onAbort=()=>abort('cancelled');signal?.addEventListener('abort',onAbort,{once:true});off=()=>signal?.removeEventListener('abort',onAbort);
   if(signal?.aborted)onAbort();timer=setTimeout(()=>abort('deadline_exceeded'),timeoutMs);
+  const requestURL=origin+op.route+(op.query!==undefined?'?'+op.query:'');
   const pending=Promise.resolve().then(()=>{check();const init={method:op.method,redirect:'error',cache:'no-store',
    headers:{...(token===null?{}:{authorization:'Bearer '+token}),...(op.originHeader?{origin:op.originHeader}:{}),accept:'application/json',...(op.method==='POST'?{'content-type':'application/json'}:{}),...(op.key?{'idempotency-key':op.key}:{})},
-   body:op.method==='POST'?JSON.stringify(op.body):undefined,signal:controller.signal};check();sent=true;return fetcher(origin+op.route,init);});
+   body:op.method==='POST'?JSON.stringify(op.body):undefined,signal:controller.signal};check();sent=true;return fetcher(requestURL,init);});
   pending.then(r=>{if(controller.signal.aborted||performance.now()>=end)discard(r?.body);}).catch(()=>{});
   response=await until(pending);if(!(response instanceof Response))throw Error('invalid response');status=response.status;contentType=response.headers.get('content-type');
-  if(response.redirected||response.url&&response.url!==origin+op.route){code='unexpected_response';throw Error('redirect');}
+  if(response.redirected||response.url&&response.url!==requestURL){code='unexpected_response';throw Error('redirect');}
   if(!response.body){complete=true;code=op.expectJSON===false?'response_received':'invalid_json';}
   else{
    reader=response.body.getReader();for(;;){const part=await until(reader.read());if(part.done){complete=true;break;}
