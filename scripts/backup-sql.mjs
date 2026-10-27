@@ -14,7 +14,9 @@ function owned(c,db,scratchOID){if(!oid(scratchOID))deny();const s=backupScratch
 const guarded=(guard,sql)=>`\\set ON_ERROR_STOP on\nSELECT (${guard}) AS rg_allowed \\gset\n\\if :rg_allowed\n${sql}\n\\else\nSELECT 1/0;\n\\endif\n`;
 export function backupSQL(c,kind,db,scratchOID,table){
  const target=identity(c),s=db===undefined?null:backupScratch(c,db),marker=db===undefined?null:backupMarker(c,db);
- if(kind==='identity')return {database:'postgres',mode:'query',guard:'',sql:"SELECT json_build_object('systemIdentifier',(pg_control_system()).system_identifier::text,'serverVersionNum',current_setting('server_version_num')::int,'postmasterEpoch',extract(epoch from pg_postmaster_start_time())::text,'role',current_user,'databaseOIDs',(SELECT json_object_agg(datname,oid) FROM pg_database WHERE datname IN ('rg_registry','rg_evaluation','rg_governance')));"};
+ // PostgreSQL emits the OID type as a JSON string. Cast at the SQL boundary
+ // to bigint so both the identity and scratch receipts have exact numeric OIDs.
+ if(kind==='identity')return {database:'postgres',mode:'query',guard:'',sql:"SELECT json_build_object('systemIdentifier',(pg_control_system()).system_identifier::text,'serverVersionNum',current_setting('server_version_num')::int,'postmasterEpoch',extract(epoch from pg_postmaster_start_time())::text,'role',current_user,'databaseOIDs',(SELECT json_object_agg(datname,oid::bigint) FROM pg_database WHERE datname IN ('rg_registry','rg_evaluation','rg_governance')));"};
  const base=target+' AND '+source(c,db);
  if(kind==='dump')return {database:db,mode:'dump',guard:'SELECT ('+base+` AND current_database()=${q(db)});`,sql:''};
  if(kind==='create')return {database:'postgres',mode:'query',guard:'',sql:guarded(base+` AND NOT EXISTS(SELECT 1 FROM pg_database WHERE datname=${q(s)})`,
@@ -29,7 +31,7 @@ export function backupSQL(c,kind,db,scratchOID,table){
   return {database:isSource?db:s,mode:'query',guard:'',sql:guarded(guard,`SELECT json_build_object('table',${q(table)},'count',count(*)::text,'hash',COALESCE(md5(string_agg(row_to_json(t)::text,'' ORDER BY row_to_json(t)::text)),'empty')) FROM public.${ident(table)} t;`)};
  }deny();
 }
-function ownedQuery(s,marker){return `SELECT json_build_object('exists',EXISTS(SELECT 1 FROM pg_database WHERE datname=${q(s)}),'owned',EXISTS(SELECT 1 FROM pg_database WHERE datname=${q(s)} AND datdba=(SELECT oid FROM pg_roles WHERE rolname=current_user) AND shobj_description(oid,'pg_database')=${q(marker)}),'oid',(SELECT oid FROM pg_database WHERE datname=${q(s)}),'marker',(SELECT shobj_description(oid,'pg_database') FROM pg_database WHERE datname=${q(s)}),'owner',(SELECT pg_get_userbyid(datdba) FROM pg_database WHERE datname=${q(s)}));`;}
+function ownedQuery(s,marker){return `SELECT json_build_object('exists',EXISTS(SELECT 1 FROM pg_database WHERE datname=${q(s)}),'owned',EXISTS(SELECT 1 FROM pg_database WHERE datname=${q(s)} AND datdba=(SELECT oid FROM pg_roles WHERE rolname=current_user) AND shobj_description(oid,'pg_database')=${q(marker)}),'oid',(SELECT oid::bigint FROM pg_database WHERE datname=${q(s)}),'marker',(SELECT shobj_description(oid,'pg_database') FROM pg_database WHERE datname=${q(s)}),'owner',(SELECT pg_get_userbyid(datdba) FROM pg_database WHERE datname=${q(s)}));`;}
 // SQL scripts are fixed builder output passed as one quoted argument, never a
 // caller-provided shell fragment. The dump remains binary on stdout/stdin.
 export const backupRemoteProgram=`db=$1

@@ -27,7 +27,10 @@ async function main(){
    await psql(db,"CREATE TABLE records(id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY, label text NOT NULL, payload jsonb, amount numeric, optional text);\nINSERT INTO records(label,payload,amount,optional) VALUES ('SYNTHETIC 中文', '{\"nested\":[1,true,null]}',12.3400,NULL), (E'SYNTHETIC newline\\nquote ''', '{\"quoted\":\"value\"}',-2.5,'x');\nCREATE INDEX records_label ON records(label);\n");
   }
   const b=backupBoundary(),c=b.c;c.runId=token;assert.match(process.env.GITHUB_SHA??'',/^[a-f0-9]{40}$/);c.sourceCommit=process.env.GITHUB_SHA;result.sourceCommit=c.sourceCommit;
-  const actual=JSON.parse((await psql('postgres',backupSQL(c,'identity').sql)).toString());Object.assign(c.target,{systemIdentifier:actual.systemIdentifier,serverVersionNum:actual.serverVersionNum,postmasterEpoch:actual.postmasterEpoch,databaseOIDs:actual.databaseOIDs});
+  const wire=JSON.parse((await psql('postgres',"SELECT json_build_object('raw',oid,'numeric',oid::bigint) FROM pg_database WHERE datname='rg_registry';")).toString());
+  assert.equal(typeof wire.raw,'string');assert.equal(typeof wire.numeric,'number');assert.equal(wire.raw,String(wire.numeric));
+  const actual=JSON.parse((await psql('postgres',backupSQL(c,'identity').sql)).toString());assert.equal(Object.keys(actual.databaseOIDs).length,3);assert.ok(Object.values(actual.databaseOIDs).every(x=>Number.isInteger(x)&&x>=16384&&x<=4294967295));Object.assign(c.target,{systemIdentifier:actual.systemIdentifier,serverVersionNum:actual.serverVersionNum,postmasterEpoch:actual.postmasterEpoch,databaseOIDs:actual.databaseOIDs});
+  result.checks.push({name:'PostgreSQL OID wire-type regression: raw string remains observable; explicit bigint returns exact numeric source identities',passed:true,rawOIDType:typeof wire.raw,numericOIDType:typeof wire.numeric});
   assert.ok(c.target.serverVersionNum>=170000&&c.target.serverVersionNum<180000);
   const files=comparisonFiles(root,c.runId,'cloud-backup'),schemaChecked=[];
   const io={signal:new AbortController().signal,now:()=>performance.now(),remaining:()=>600000,get owned(){return files.owned;},reserve:()=>files.reserve({scope:result.scope,sourceCommit:c.sourceCommit}),json:files.json,put:files.put,
