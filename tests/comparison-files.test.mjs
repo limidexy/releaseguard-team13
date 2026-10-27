@@ -30,3 +30,10 @@ test('retained tool namespace is independent and cannot escape a closed path or 
  assert.deepEqual(JSON.parse(fs.readFileSync(join(a.directory,'report.json'))),{original:true});
  for(const [runId,namespace]of [['../outside','comparison'],[id,'../outside'],[id,'unknown']])assert.throws(()=>comparisonFiles(root,runId,namespace));
 });
+test('evidence archive shares no run or record with comparison or retained-rescore namespaces',posix,async t=>{
+ const root=fixture(t),stores=['comparison','cloud-retained-rescore','cloud-evidence'].map(n=>comparisonFiles(root,id,n));
+ for(let n=0;n<stores.length;n++){await stores[n].reserve({tool:n});await stores[n].json('report.json',{index:n});}
+ assert.equal(new Set(stores.map(x=>x.directory)).size,3);
+ for(let n=0;n<stores.length;n++)assert.deepEqual(JSON.parse(fs.readFileSync(join(stores[n].directory,'report.json'))),{index:n});
+ await assert.rejects(comparisonFiles(root,id,'cloud-evidence').reserve({overwrite:true}));
+});
