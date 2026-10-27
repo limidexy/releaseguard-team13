@@ -45,7 +45,9 @@ async function main(){
   for(const row of report.databases){const raw=fs.readFileSync(join(files.directory,row.dump.path));assert.equal(raw.subarray(0,5).toString(),'PGDMP');assert.equal(sha256(raw),row.dump.sha256);}
   result.checks.push({name:'Exact custom-format binary archives survive private storage',passed:true});
   assert.equal(schemaChecked.length,3);result.checks.push({name:'Synthetic index and identity-sequence fixture restored in all three scratch databases',passed:true});
-  const remaining=JSON.parse((await psql('postgres',"SELECT json_agg(datname) FROM pg_database WHERE datname LIKE 'rg_verify_%';")).toString());assert.equal(remaining,null);
+  // Aggregate NULL is blank in psql's unaligned output, not the JSON literal
+  // null. Require the exact count text instead; blank/unknown cannot pass.
+  const remaining=(await psql('postgres',"SELECT count(*) FROM pg_database WHERE datname LIKE 'rg_verify_%';")).toString().trim();assert.equal(remaining,'0');
   result.checks.push({name:'No run-owned scratch databases remain after the successful protocol',passed:true});
   // PostgreSQL must refuse a wrong in-session system identity before DDL.
   const wrong=structuredClone(c);wrong.runId=randomUUID();wrong.target.systemIdentifier='1';const sql=backupSQL(wrong,'create','rg_registry'),wrongRun=await backupProcess('docker',['exec','-i',id,'psql','-X','-w','-U','rg_admin','-d','postgres','-A','-t','-q','-v','ON_ERROR_STOP=1','-f','-'],{cwd:repo,env:{PATH:process.env.PATH},input:Buffer.from(sql.sql),timeout:5000,maxBuffer:1024*1024});assert.notEqual(wrongRun.status,0);
