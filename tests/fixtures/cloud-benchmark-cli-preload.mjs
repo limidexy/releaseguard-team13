@@ -20,7 +20,7 @@ net.Socket.prototype.connect=deny;net.Server.prototype.listen=deny;dgram.createS
 for(const name of ['spawnSync','exec','execSync','execFile','execFileSync','fork'])child[name]=deny;
 globalThis.fetch=async(url,init)=>{
  if(!String(url).startsWith(c.origin+'/'))deny();fs.appendFileSync(join(root,'synthetic-requests.jsonl'),JSON.stringify({url,method:init.method})+'\n',{mode:0o600});
- if(url.endsWith('/protocol/openid-connect/token')){if(init.redirect!=='error'||!String(init.body).includes('grant_type=client_credentials'))deny();return new Response(JSON.stringify({access_token:token,token_type:'Bearer',expires_in:300}),{headers:{'content-type':'application/json'}});}
+ if(url.endsWith('/protocol/openid-connect/token')){if(init.redirect!=='error'||!String(init.body).includes('grant_type=client_credentials'))deny();return new Response(JSON.stringify({access_token:fault==='malformed-issuer-token'?'true':token,token_type:'Bearer',expires_in:300}),{headers:{'content-type':'application/json'}});}
  if(init.headers.authorization!=='Bearer '+token)deny();return b.fetcher(url,init);
 };
 const opened=fsp.open;let syncUsed=false;
@@ -42,6 +42,7 @@ child.spawn=(command,args,options)=>{
   value=b.f.apply(selected,JSON.parse(fs.readFileSync(patch)));
  }else if(['worker','controller','hpas','pods','replicaSets'].includes(kind))value=structuredClone(b.f.state[kind]);else deny();
  if(fault==='foreign-replica'&&kind==='worker'&&count>30&&b.f.state.worker.spec.replicas===3){b.f.state.worker.spec.replicas=2;b.f.state.worker.metadata.resourceVersion='999';b.f.reconcile();value=structuredClone(b.f.state.worker);}
+ if(fault==='late-native-credential-echo'&&kind==='worker'&&b.calls.length>0)value.metadata.annotations.echo=token;
  fs.appendFileSync(join(root,'synthetic-commands.jsonl'),JSON.stringify({command,args,kind})+'\n',{mode:0o600});count++;
  const p=new EventEmitter();p.stdout=new EventEmitter();p.stderr=new EventEmitter();p.kill=deny;
  queueMicrotask(()=>{if(fault==='command-failure'){p.stderr.emit('data',Buffer.from('original synthetic command failure'));p.emit('close',1,null);}

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {join} from 'node:path';
 import {benchmarkHarness} from './fixtures/cloud-benchmark-cli-harness.mjs';
+import {token} from './fixtures/cloud-benchmark-protocol.mjs';
 const posix={skip:process.platform==='win32'?'Private fsync/operator entry is POSIX-only':false};
 test('actual CLI completes full100-job/800-history protocol through native fake API commands, retains private raw receipts and owned restoration',posix,t=>{
  const h=benchmarkHarness(t),r=h.execute();assert.equal(r.status,0,r.stderr);const term=h.json(join(h.run,'terminal.json'));assert.equal(term.passed,true);assert.equal(term.requests,1008);assert.equal(term.restoration.state,'restored');
@@ -38,4 +39,26 @@ test('selected identity receipt mismatch refuses before any command or credentia
 test('private selected input mode and kubeconfig plugin cannot fall back to ambient runtime',posix,t=>{
  const h=benchmarkHarness(t);fs.chmodSync(h.configFile,0o644);assert.equal(h.execute().status,1);fs.chmodSync(h.configFile,0o600);
  const k=h.json(h.c.cloud.kubeconfigFile);k.users[0].user.exec.command='/bin/sh';fs.writeFileSync(h.c.cloud.kubeconfigFile,JSON.stringify(k));assert.equal(h.execute().status,1);assert.equal(h.commands().length,0);
+});
+for(const selectedToken of ['', 'true', ' '])test('invalid selected token is refused before it can poison native cleanup credential-echo detection',posix,t=>{
+ const h=benchmarkHarness(t);fs.writeFileSync(h.c.authFile,JSON.stringify({token:selectedToken}));const r=h.execute();assert.equal(r.status,1);assert.equal(h.requests().length,0);
+ const terminal=h.json(join(h.run,'terminal.json'));assert.equal(terminal.passed,false);assert.equal(terminal.restoration.state,'restored');assert.equal(terminal.restoration.workerRestored,true);assert.equal(terminal.restoration.controllerRestored,true);
+});
+test('empty client secret is refused before issuer transport and does not poison owned cleanup',posix,t=>{
+ const h=benchmarkHarness(t);h.c.authMode='client-credentials';fs.writeFileSync(h.configFile,JSON.stringify(h.c));fs.writeFileSync(h.c.authFile,JSON.stringify({allowServiceAuthentication:true,targetOrigin:h.c.origin,allowedOrigins:[h.c.origin],issuer:h.c.origin+'/identity/realms/synthetic',clientId:'synthetic',clientSecret:'',timeoutMs:1000}));
+ const r=h.execute();assert.equal(r.status,1);assert.equal(h.requests().length,0);const terminal=h.json(join(h.run,'terminal.json'));assert.equal(terminal.passed,false);assert.equal(terminal.restoration.state,'restored');
+});
+for(const clientSecret of ['true','synthetic-worker-uid'])test('a secret colliding with already observed native data refuses before issuer transport and preserves cleanup',posix,t=>{
+ const h=benchmarkHarness(t);h.c.authMode='client-credentials';fs.writeFileSync(h.configFile,JSON.stringify(h.c));fs.writeFileSync(h.c.authFile,JSON.stringify({allowServiceAuthentication:true,targetOrigin:h.c.origin,allowedOrigins:[h.c.origin],issuer:h.c.origin+'/identity/realms/synthetic',clientId:'synthetic',clientSecret,timeoutMs:1000}));
+ const r=h.execute();assert.equal(r.status,1);assert.equal(h.requests().length,0);assert.equal(h.json(join(h.run,'terminal.json')).restoration.state,'restored');
+});
+test('malformed issuer token is withheld and refused before API transport without poisoning owned cleanup or retrying issuer',posix,t=>{
+ const h=benchmarkHarness(t);h.c.authMode='client-credentials';fs.writeFileSync(h.configFile,JSON.stringify(h.c));fs.writeFileSync(h.c.authFile,JSON.stringify({allowServiceAuthentication:true,targetOrigin:h.c.origin,allowedOrigins:[h.c.origin],issuer:h.c.origin+'/identity/realms/synthetic',clientId:'synthetic',clientSecret:'INSECURE_SYNTHETIC_ONLY_CLIENT',timeoutMs:1000}));
+ const r=h.execute({RG_SYNTHETIC_BENCHMARK_FAULT:'malformed-issuer-token'});assert.equal(r.status,1);assert.equal(h.requests().length,1);assert.equal(h.requests()[0].url.endsWith('/protocol/openid-connect/token'),true);
+ const terminal=h.json(join(h.run,'terminal.json'));assert.equal(terminal.passed,false);assert.equal(terminal.restoration.state,'restored');assert.equal(h.json(join(h.run,'authentication-0-observed.json')).tokenAndSecretWithheld,true);
+});
+test('a genuine token echo after registration remains withheld and unknown, never a bypass for restoration',posix,t=>{
+ const h=benchmarkHarness(t),r=h.execute({RG_SYNTHETIC_BENCHMARK_FAULT:'late-native-credential-echo'});assert.equal(r.status,1);const terminal=h.json(join(h.run,'terminal.json'));assert.equal(terminal.passed,false);assert.equal(terminal.restoration.controllerRestored,false);
+ const observations=fs.readdirSync(h.run).filter(n=>n.endsWith('-observed.json')).map(n=>h.json(join(h.run,n)));assert.equal(observations.some(o=>o.credentialLikeContentWithheld===true&&o.rawStdout===null),true);
+ for(const name of fs.readdirSync(h.run).filter(n=>n.endsWith('.json')))assert.equal(fs.readFileSync(join(h.run,name),'utf8').includes(token),false);assert.equal((r.stdout+r.stderr).includes(token),false);
 });

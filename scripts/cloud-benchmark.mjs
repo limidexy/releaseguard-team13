@@ -20,6 +20,7 @@ import {benchmarkTarget} from './cloud-benchmark-target.mjs';
 import {benchmarkCommand,confirmBenchmarkCloud} from './cloud-benchmark-native.mjs';
 import {benchmarkRequest} from './cloud-benchmark-http.mjs';
 import {cloudToken} from './cloud-token.mjs';
+import {declaredServiceActor} from './cloud-acceptance-core.mjs';
 const script=fileURLToPath(import.meta.url),root=resolve(dirname(script),'..'),deny=()=>{throw Error('Paired benchmark refused');};
 export const benchmarkSources=['scripts/cloud-benchmark.mjs','scripts/cloud-benchmark-core.mjs','scripts/cloud-benchmark-target.mjs','scripts/cloud-benchmark-native.mjs','scripts/cloud-benchmark-metrics.mjs','scripts/cloud-benchmark-http.mjs',
  'scripts/cloud-http.mjs','scripts/cloud-token.mjs','scripts/cloud-token-core.mjs','scripts/cloud-smoke-core.mjs','scripts/cloud-acceptance-core.mjs','scripts/gcp-evidence-core.mjs','scripts/comparison-files.mjs','scripts/acceptance-process.mjs','scripts/retained-rescore-input.mjs','public/demo-fixtures.json'];
@@ -50,7 +51,15 @@ export async function runPairedBenchmarkCLI(args){
   if(!identity||Object.keys(identity).sort().join(',')!=='image,sourceCommit'||identity.sourceCommit!==c.commit||identity.image!==c.image)deny();
   const remaining=restoring=>Math.floor(c.deadlineMs-(performance.now()-began)-(restoring?0:300000));if(remaining(false)<=0)deny();
   active=new AbortController();cleanup=new AbortController();activeTimer=setTimeout(stop,remaining(false));hardTimer=setTimeout(()=>{active.abort();cleanup.abort();},remaining(true));process.on('SIGINT',stop);process.on('SIGTERM',stop);
-  mask=process.umask(0o077);files=comparisonFiles(root,c.runId,'cloud-benchmark');let nativeSequence=0,secrets=[];
+  mask=process.umask(0o077);files=comparisonFiles(root,c.runId,'cloud-benchmark');let nativeSequence=0,secrets=[],credentialsReady=false,preCredentialBytes=0;const preCredentialOutputs=[];
+  function registerSecret(value,kind){
+   if(kind==='token')declaredServiceActor(value,'contributor',c.workspace); // Configuration only, never JWT authentication.
+   else if(typeof value!=='string'||!value.length||value.length>4096||/[\x00-\x1f\x7f]/.test(value))deny();
+   // A public native value is ambiguous as a secret: reject BEFORE registering
+   // it, without weakening echo withholding or poisoning owned cleanup reads.
+   if(preCredentialOutputs.some(text=>text.includes(value)))deny();
+   if(!secrets.includes(value))secrets.push(value);if(secrets.length>5)deny();
+  }
   async function verifyRuntime(){
    if(sha256(await comparisonBytes(input,{privateMode:true}))!==sha256(configBytes)||sha256(await comparisonBytes(cloud.kubeconfigFile,{privateMode:true}))!==sha256(kubeBytes)||sha256(await comparisonBytes(c.identity.path,{privateMode:true}))!==c.identity.sha256)deny();
    for(const [name,hash]of Object.entries(sourceHashes))if(sha256(await comparisonBytes(join(root,name)))!==hash)deny();
@@ -70,6 +79,7 @@ export async function runPairedBenchmarkCLI(args){
    await files.json(name+'-observed.json',{kind,status:raw.status,signal:raw.signal,errorCode:raw.error?'COMMAND_FAILED_OR_UNKNOWN':null,truncated:raw.outputTruncated===true,
     rawStdout:withheld?null:out,rawStderr:withheld?null:err,stdoutSHA256:sha256(out),stderrSHA256:sha256(err),credentialLikeContentWithheld:withheld,processEncoding:'UTF8 decoded; replacement characters rejected; not original byte attestation'});
    if(raw.status!==0||raw.signal||raw.error||raw.outputTruncated||withheld||out.includes('\ufffd')||err.includes('\ufffd')||signal.aborted||remaining(restoring)<=0)deny();
+   if(!restoring&&!credentialsReady){preCredentialBytes+=Buffer.byteLength(out)+Buffer.byteLength(err);if(preCredentialBytes>8*1024*1024)deny();preCredentialOutputs.push(out,err);}
    const value=strictComparisonJSON(Buffer.from(out));await files.json(name+'-result.json',{kind,state:'parsed'});return value;
   }
   const io={signal:active.signal,now:()=>performance.now(),remaining,get owned(){return files.owned;},json:files.json,
@@ -82,15 +92,19 @@ export async function runPairedBenchmarkCLI(args){
      {now:io.now,remaining,sleep:io.sleep,read:(kind,restoring)=>command(kind,restoring),patch:(kind,ops,restoring)=>command('patch-'+kind,restoring,ops)});
    },
    async authInputs(){const bytes=await comparisonBytes(c.authFile,{privateMode:true}),auth=strictComparisonJSON(bytes);
-    if(c.authMode==='token'){if(!auth||Object.keys(auth).join(',')!=='token'||typeof auth.token!=='string')deny();secrets=[auth.token];}
-    else{if(!auth||auth.targetOrigin!==c.origin||!Array.isArray(auth.allowedOrigins)||auth.allowedOrigins.some(o=>!c.allowedOrigins.includes(o))||typeof auth.clientSecret!=='string')deny();secrets=[auth.clientSecret];}
+    if(c.authMode==='token'){if(!auth||Object.keys(auth).join(',')!=='token'||typeof auth.token!=='string')deny();
+     // Configuration check only; the API still verifies the actual signature,
+     // issuer, expiry and authorization. Reject before registering echo secrets.
+     registerSecret(auth.token,'token');}
+    else{if(!auth||auth.targetOrigin!==c.origin||!Array.isArray(auth.allowedOrigins)||auth.allowedOrigins.some(o=>!c.allowedOrigins.includes(o))||typeof auth.clientSecret!=='string'||
+     !auth.clientSecret.length||auth.clientSecret.length>4096||/[\x00-\x1f\x7f]/.test(auth.clientSecret))deny();registerSecret(auth.clientSecret,'secret');}
     return auth;
    },
    async authorize(auth,config,index){const prefix='authentication-'+index;await files.json(prefix+'-intent.json',{mode:c.authMode,state:'intent',tokenAndSecretWithheld:true});
-    if(active.signal.aborted||remaining(false)<=0)deny();let value;
-    try{value=c.authMode==='token'?auth.token:await cloudToken({...auth,timeoutMs:Math.min(auth.timeoutMs,15000,remaining(false))},{fetch:globalThis.fetch,signal:active.signal});}
-    catch(e){await files.json(prefix+'-observed.json',{outcome:e?.outcome==='not_sent'?'not_sent':'failed_or_unknown',status:Number.isInteger(e?.status)?e.status:null,tokenAndSecretWithheld:true});throw Error('unconfirmed');}
-    if(!secrets.includes(value))secrets.push(value);if(secrets.length>5)deny();
+    if(active.signal.aborted||remaining(false)<=0)deny();let value,returned=false;
+    try{value=c.authMode==='token'?auth.token:await cloudToken({...auth,timeoutMs:Math.min(auth.timeoutMs,15000,remaining(false))},{fetch:globalThis.fetch,signal:active.signal});returned=true;registerSecret(value,'token');}
+    catch(e){await files.json(prefix+'-observed.json',{outcome:returned?'token_returned_unconfirmed':e?.outcome==='not_sent'?'not_sent':'failed_or_unknown',status:returned&&c.authMode==='client-credentials'?200:Number.isInteger(e?.status)?e.status:null,tokenAndSecretWithheld:true});throw Error('unconfirmed');}
+    credentialsReady=true;preCredentialOutputs.length=0;preCredentialBytes=0;
     await files.json(prefix+'-observed.json',{outcome:'token_returned_not_identity_attestation',tokenAndSecretWithheld:true});return value;
    },
    request:(origin,op,token,timeout,signal)=>benchmarkRequest(origin,op,token,timeout,signal,globalThis.fetch,secrets.filter(s=>s!==token).slice(-4)),
