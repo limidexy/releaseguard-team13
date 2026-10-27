@@ -68,3 +68,7 @@ test('deadline prevents next dispatch while separate restoration budget remains 
 test('job observation has a bounded120second deadline and does not resend its accepted POST',async()=>{
  const b=protocolBoundary({mutateJob:j=>{j.status='running';j.result=null;}}),r=await run(b);assert.equal(r.passed,false);assert.equal(b.calls.filter(c=>c.method==='POST'&&c.route==='/api/v2/jobs').length,1);assert.equal(r.stages[0].warmups[0].job.status,'running');assert.equal(r.restoration.state,'restored');
 });
+test('omitting jobs retains the original default100 while explicitly invalid jobs still refuse',async()=>{
+ const b=protocolBoundary();delete b.c.jobs;assert.equal(validatePairedBenchmark(b.c).jobs,100);const r=await run(b);assert.equal(r.passed,true);assert.equal(r.stages.flatMap(s=>s.tasks).length,400);assert.equal(b.calls.filter(c=>c.route==='/api/v2/jobs'&&c.method==='POST').length,420);
+ const invalid=protocolBoundary();invalid.c.jobs=undefined;assert.throws(()=>validatePairedBenchmark(invalid.c));
+});

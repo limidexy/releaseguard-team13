@@ -11,7 +11,8 @@ import {sha256} from './comparison-files.mjs';
 const deny=()=>{throw Error('Paired benchmark unconfirmed');},plain=x=>x&&Object.getPrototypeOf(x)===Object.prototype;
 const id=x=>typeof x==='string'&&/^[a-f0-9]{8}-[a-f0-9]{4}-[1-5][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/.test(x);
 const keys=(x,names)=>{if(!plain(x)||Object.keys(x).length!==names.length||names.some(n=>!Object.hasOwn(x,n)))deny();};
-export function validatePairedBenchmark(v){
+export function validatePairedBenchmark(input){
+ const v=plain(input)&&!Object.hasOwn(input,'jobs')?{...input,jobs:100}:input;
  keys(v,['allowPairedReplay','runId','deadlineMs','jobs','origin','allowedOrigins','commit','image','workspace','authMode','authFile','cloud','target','fixtureSHA256','identity']);
  if(v.allowPairedReplay!==true||!Number.isInteger(v.jobs)||v.jobs<20||v.jobs>200||!Number.isInteger(v.deadlineMs)||v.deadlineMs<600000||v.deadlineMs>1200000||
   !id(v.runId)||!/^[-A-Za-z0-9_/]{1,100}$/.test(v.workspace??'')||!['token','client-credentials'].includes(v.authMode)||
