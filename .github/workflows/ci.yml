@@ -59,6 +59,8 @@ jobs:
         run: node --test tests/provider-smoke.test.mjs
       - name: Inactive retained-report derivation regressions (owned synthetic data only)
         run: node --test tests/rescore-retained.test.mjs
+      - name: Inactive versioned comparison regressions (fake issuer/API, actual replay consumers, no model)
+        run: node --test tests/comparison-core.test.mjs tests/comparison-http.test.mjs tests/comparison-files.test.mjs tests/comparison-entry.test.mjs tests/comparison-consumer.test.mjs
       - name: Inactive mixed workload guards and measurement regressions (offline synthetic only)
         run: node --test tests/mixed-load-core.test.mjs tests/mixed-load-cli.test.mjs
       - name: Inactive complete acceptance lifecycle (owned synthetic/process boundaries only)
@@ -189,5 +191,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - name: Native comparison HTTP guards (no install, private operator execution, target or provider)
+        run: node --test tests/comparison-http.test.mjs
       - name: Native Windows tooling regressions
         run: node --test tests/windows-compat.test.mjs tests/tooling-checkout.test.mjs tests/tooling-consumers.test.mjs tests/hooks-and-ignore.test.mjs tests/render-cloud.test.mjs tests/acceptance-core.test.mjs tests/acceptance-entry.test.mjs tests/acceptance-process.test.mjs tests/gcp-infra-core.test.mjs tests/gcp-infra-entry.test.mjs tests/gcp-private-core.test.mjs tests/gcp-private-entry.test.mjs tests/gcp-bootstrap-core.test.mjs tests/gcp-bootstrap-entry.test.mjs tests/cloud-token.test.mjs tests/cloud-token-entry.test.mjs tests/cloud-smoke-core.test.mjs tests/cloud-smoke-http.test.mjs tests/cloud-smoke-entry.test.mjs tests/cloud-acceptance-core.test.mjs tests/cloud-acceptance-http.test.mjs tests/cloud-acceptance-entry.test.mjs

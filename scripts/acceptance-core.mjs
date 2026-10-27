@@ -32,7 +32,7 @@ export function acceptancePlan(node = process.execPath) {
     ['improvements', node, ['scripts/verify-improvements.mjs']],
     ['ddd-contracts', node, ['scripts/verify-contracts.mjs']],
     ['fault-recovery', node, ['scripts/fault-test.mjs']],
-    ['prompt-replay', node, ['scripts/compare-prompts.mjs', 'replay']],
+    ['prompt-replay', node, ['scripts/compare-prompts.mjs', '--execute-comparison', 'replay']],
     ['repeated-scaling', node, ['scripts/benchmark-repeated.mjs']],
     ['mixed-read-write', node, ['scripts/mixed-load.mjs']],
     ['dependency-audit', 'npm', ['audit', '--audit-level=high', '--json']],

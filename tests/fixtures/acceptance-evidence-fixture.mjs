@@ -12,12 +12,17 @@ export function promptReceipt() {
     input: { appId: uuid(20), suiteId: uuid(21), candidate: 'support-' + promptVersion, commitRef: 'course-v2', source: 'replay', promptVersion, scenario: 'passing' },
     result: structuredClone(result), attempts: 1, created_by: 'comparison-author',
     created_at: '2026-01-01T00:00:00.000Z', started_at: '2026-01-01T00:00:00.001Z', finished_at: '2026-01-01T00:00:00.002Z' }));
-  return { schemaVersion: '2.1', source: 'replay', cloud: false, appId: uuid(20), suiteId: uuid(21), cases,
+  for (const job of runs) job.workspace = 'comparison-' + evidenceRunId;
+  return { schemaVersion: '2.2', runId: evidenceRunId, workspace: 'comparison-' + evidenceRunId,
+    suiteRevision: 'legacy', evaluatorVersion: 'legacy-literal-v1', shadowOnly: true, reviewer: 'calibration_pending',
+    source: 'replay', cloud: false, appId: uuid(20), suiteId: uuid(21), cases,
     policy: { minScore: 95, maxLatencyMs: null }, runs, semanticConclusion: 'NOT_ASSESSED: synthetic replay only',
     caseComparison: cases.map(c => ({ caseId: c.id, prompt: c.prompt, critical: c.critical,
       versions: runs.map(r => ({ promptVersion: r.input.promptVersion, caseResult: structuredClone(r.result.results.find(x => x.caseId === c.id)) })),
       humanReview: { reviewer: null, policyAccuracy: null, safety: null, helpfulness: null, reason: null } })) };
 }
+export function comparisonTerminal() { return { runId: evidenceRunId, status: 'completed', modelRequestBudget: 0, modelRequestsReserved: 0,
+  states: ['v1','v2'].map(promptVersion => ({ promptVersion, state: 'completed' })) }; }
 export function repeatedReceipt() {
   const stages = [[1, 1], [1, 3], [2, 3], [2, 1], [3, 1], [3, 3]].map(([round, replicas], stage) => ({
     round, replicas, workspace: 'repeat-synthetic-' + stage, elapsedMs: 1000, requested: 120, completed: 120, errors: 0, errorRate: 0, blocked: 0,

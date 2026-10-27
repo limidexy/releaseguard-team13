@@ -44,7 +44,7 @@ async function copyTree(source, dest, rows, prefix = '') {
   }
 }
 
-export function acceptanceTarget({ root, runDir, runId, env, sourceFiles, remaining, record }, execute = execFileSync) {
+export function acceptanceTarget({ root, runDir, runId, env, sourceFiles, sourceCommit, remaining, record }, execute = execFileSync) {
   if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(runId ?? '') ||
     !isAbsolute(root) || !isAbsolute(runDir) || !Array.isArray(sourceFiles) || !sourceFiles.length ||
     env.DOCKER_HOST || env.DOCKER_CONTEXT || env.DOCKER_CONFIG || env.COMPOSE_FILE || env.CI || env.GITHUB_ACTIONS) deny();
@@ -186,6 +186,19 @@ export function acceptanceTarget({ root, runDir, runId, env, sourceFiles, remain
       if (step.name === 'container-build') emptyEngine();
       else if (step.name === 'container-start') { imageAliases(); if (scan().length) deny(); startIntent = true; }
       else await proveRuntime();
+      if (step.name === 'prompt-replay') {
+        if (!/^[a-f0-9]{40}$/.test(sourceCommit ?? '') || !imagePattern.test(appImage ?? '') || !/^[a-f0-9]{64}$/.test(secrets[0] ?? '')) deny();
+        const inputs = join(runDir, 'comparison-input'); await freshDir(inputs);
+        const config = { origin: childEnv.RELEASEGUARD_URL, allowedOrigins: [childEnv.RELEASEGUARD_URL], targetKind: 'isolated-acceptance',
+          runId, commit: sourceCommit, image: appImage, workspace: 'comparison-' + runId, source: 'replay', suiteRevision: 'legacy',
+          authMode: 'development', modelRequestBudget: 0, deadlineMs: Math.min(300000, remaining()) };
+        await put(join(inputs, 'config.json'), JSON.stringify(config) + '\n');
+        await put(join(inputs, 'auth.json'), JSON.stringify({ secret: secrets[0], subject: 'comparison-local-acceptance' }) + '\n');
+        Object.assign(childEnv, { RG_COMPARISON_CONFIG_FILE: join(inputs, 'config.json'), RG_COMPARISON_AUTH_FILE: join(inputs, 'auth.json'),
+          RG_ACCEPTANCE_INTEGRATION: '1', RG_COMPARISON_ACCEPTANCE_RUN_ID: runId });
+        await record({ kind: 'comparison_private_inputs_prepared', runId, sourceCommit, image: appImage,
+          workspace: config.workspace, modelRequestBudget: 0, identityDeclaredNotImageAttestation: true });
+      }
       // Only audit may contact the public advisory endpoint, using empty npm
       // configs; no install, registry token, provider or cloud credential is added.
       childEnv.npm_config_offline = step.name === 'dependency-audit' ? 'false' : 'true';

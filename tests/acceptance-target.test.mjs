@@ -123,3 +123,15 @@ test('original work deadline expiry does not remove the separate bounded cleanup
     assert.equal(f.calls.filter(c => c[0] === 'stop').length, 8);
   } finally { f.cleanup(); }
 });
+test('comparison compatibility inputs are created only after runtime proof and bind this run source/image/workspace', async () => {
+  const f = targetFixture();
+  try { const t = await started(f); await t.beforeStep({ name: 'prompt-replay' });
+    const c = JSON.parse(fs.readFileSync(t.env.RG_COMPARISON_CONFIG_FILE)), a = JSON.parse(fs.readFileSync(t.env.RG_COMPARISON_AUTH_FILE));
+    assert.equal(c.targetKind, 'isolated-acceptance'); assert.equal(c.source, 'replay'); assert.equal(c.suiteRevision, 'legacy');
+    assert.equal(c.image, f.ids.app); assert.equal(c.commit, 'a'.repeat(40)); assert.equal(c.workspace, 'comparison-' + f.options.runId);
+    assert.equal(c.modelRequestBudget, 0); assert.equal(a.secret, '1'.repeat(64)); assert.equal(a.subject, 'comparison-local-acceptance');
+    assert.equal(fs.statSync(t.env.RG_COMPARISON_AUTH_FILE).mode & 0o777, 0o600);
+    assert.equal(t.env.RG_COMPARISON_ACCEPTANCE_RUN_ID, f.options.runId);
+    assert.doesNotMatch(JSON.stringify(t.summary), /1111111111111111111111111111111111111111111111111111111111111111/);
+  } finally { f.cleanup(); }
+});

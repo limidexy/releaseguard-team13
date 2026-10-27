@@ -26,7 +26,7 @@ test('full protocol actually coordinates all eleven original command contracts i
     ['improvements', '/owned/node', ['scripts/verify-improvements.mjs']],
     ['ddd-contracts', '/owned/node', ['scripts/verify-contracts.mjs']],
     ['fault-recovery', '/owned/node', ['scripts/fault-test.mjs']],
-    ['prompt-replay', '/owned/node', ['scripts/compare-prompts.mjs', 'replay']],
+    ['prompt-replay', '/owned/node', ['scripts/compare-prompts.mjs', '--execute-comparison', 'replay']],
     ['repeated-scaling', '/owned/node', ['scripts/benchmark-repeated.mjs']],
     ['mixed-read-write', '/owned/node', ['scripts/mixed-load.mjs']],
     ['dependency-audit', 'npm', ['audit', '--audit-level=high', '--json']],
