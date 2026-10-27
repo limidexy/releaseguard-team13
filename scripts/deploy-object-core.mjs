@@ -4,11 +4,15 @@
 // or deployment authorization. The caller must persist intent, validate its
 // selected cluster/namespace and desired server dry-run, and never retry an
 // unknown mutation. This module does not make a multi-object transaction.
+// Snapshots require unstripped managedFields. Successful response verification
+// requires the selected server's exact JSON-patch dry-run bound to this plan.
+// Writable configuration is restored; server field-management history is not.
 import {createHash} from 'node:crypto';
 import {isDeepStrictEqual as same} from 'node:util';
 
 export const deploymentRoles=Object.freeze(['registry','evaluation','governance','support','worker','gateway']);
 export const deploymentOwnerAnnotation='releaseguard.io/deployment-run';
+export const deploymentFieldManager='releaseguard-owned-deploy';
 const deny=()=>{throw Error('Deployment object transition refused');};
 const clone=x=>structuredClone(x);
 const plain=x=>x!==null&&typeof x==='object'&&Object.getPrototypeOf(x)===Object.prototype;
@@ -53,7 +57,16 @@ function fields(value,r){
  return clone(value);
 }
 const owner=f=>f.annotations.exists?f.annotations.value[deploymentOwnerAnnotation]:undefined;
-function context(value){exact(value,['ownerReferences','finalizers']);for(const s of Object.values(value)){if(!plain(s)||typeof s.exists!=='boolean')deny();exact(s,s.exists?['exists','value']:['exists']);if(s.exists&&!Array.isArray(s.value))deny();}return clone(value);}
+function context(value){exact(value,['ownerReferences','finalizers','managedFields']);for(const s of Object.values(value)){if(!plain(s)||typeof s.exists!=='boolean')deny();exact(s,s.exists?['exists','value']:['exists']);if(s.exists&&!Array.isArray(s.value))deny();}if(!value.managedFields.exists||value.managedFields.value.some(e=>!plain(e)))deny();return clone(value);}
+// Preserve raw managedFields in each snapshot and conditional patch test. For
+// comparisons, timestamps are not ownership. Only an entry whose entire field
+// set is status is excluded; a status-labelled spec/metadata claim is retained.
+function ownership(c){
+ const entries=c.managedFields.value.map(e=>{if(!plain(e))deny();const x=clone(e);delete x.time;return x;}).filter(e=>!(e.subresource==='status'&&e.fieldsType==='FieldsV1'&&plain(e.fieldsV1)&&Object.keys(e.fieldsV1).every(k=>k==='f:status')));
+ entries.sort((a,b)=>canonical(a)<canonical(b)?-1:canonical(a)>canonical(b)?1:0);return {ownerReferences:c.ownerReferences,finalizers:c.finalizers,managedFields:entries};
+}
+const sameOwnership=(a,b)=>same(ownership(a),ownership(b));
+const sameFixedContext=(a,b)=>same(a.ownerReferences,b.ownerReferences)&&same(a.finalizers,b.finalizers);
 function snapshot(value){
  const x=json(value,2*1024*1024);exact(x,['formatVersion','ref','uid','resourceVersion','fields','context','observationSHA256','checksum']);
  if(x.formatVersion!==1||typeof x.uid!=='string'||!/^[-A-Za-z0-9]{1,128}$/.test(x.uid)||typeof x.resourceVersion!=='string'||!x.resourceVersion||x.resourceVersion.length>256||/[\x00-\x20\x7f]/.test(x.resourceVersion)||!/^[a-f0-9]{64}$/.test(x.observationSHA256))deny();
@@ -64,7 +77,7 @@ export function captureDeploymentObject(reference,document){
  if(d.apiVersion!==r.apiVersion||d.kind!==r.kind||!plain(m)||m.name!==r.name||m.namespace!==r.namespace||m.deletionTimestamp!=null||Object.hasOwn(m,'deletionGracePeriodSeconds'))deny();
  if(r.kind==='ConfigMap'&&Object.hasOwn(d,'spec')||r.kind!=='ConfigMap'&&['data','binaryData','immutable'].some(k=>Object.hasOwn(d,k)))deny();
  const f={labels:slot(m,'labels'),annotations:slot(m,'annotations')};for(const key of fieldNames(r).slice(2))f[key]=slot(d,key);
- const body={formatVersion:1,ref:r,uid:m.uid,resourceVersion:m.resourceVersion,fields:f,context:{ownerReferences:slot(m,'ownerReferences'),finalizers:slot(m,'finalizers')},observationSHA256:hash(d)};
+ const body={formatVersion:1,ref:r,uid:m.uid,resourceVersion:m.resourceVersion,fields:f,context:{ownerReferences:slot(m,'ownerReferences'),finalizers:slot(m,'finalizers'),managedFields:slot(m,'managedFields')},observationSHA256:hash(d)};
  return snapshot({...body,checksum:hash(body)});
 }
 function immutable(before,target){
@@ -103,27 +116,32 @@ export function planDeploymentClaim(input,runId){
 }
 export function planDeploymentUpdate(input,desiredServerDryRun,runId){
  const s=snapshot(input),d=captureDeploymentObject(s.ref,desiredServerDryRun);run(runId);
- if(s.uid!==d.uid||s.resourceVersion!==d.resourceVersion||owner(s.fields)!==runId||owner(d.fields)!==runId||!same(s.context,d.context))deny();
+ if(s.uid!==d.uid||s.resourceVersion!==d.resourceVersion||owner(s.fields)!==runId||owner(d.fields)!==runId||!sameFixedContext(s.context,d.context))deny();
  return makePlan('update',s,d.fields,runId);
 }
 function selectedOwned(last,latest,runId){
  const a=snapshot(last),b=snapshot(latest);run(runId);
- if(!same(a.ref,b.ref)||a.uid!==b.uid||owner(a.fields)!==runId||owner(b.fields)!==runId||!same(a.fields,b.fields)||!same(a.context,b.context))deny();
+ if(!same(a.ref,b.ref)||a.uid!==b.uid||owner(a.fields)!==runId||owner(b.fields)!==runId||!same(a.fields,b.fields)||!sameOwnership(a.context,b.context))deny();
  return b;
 }
 export function planDeploymentRestore(baseline,last,latest,runId){
  const original=snapshot(baseline),current=selectedOwned(last,latest,runId);
- if(!same(original.ref,current.ref)||original.uid!==current.uid||!same(original.context,current.context)||original.fields.annotations.exists&&Object.hasOwn(original.fields.annotations.value,deploymentOwnerAnnotation))deny();
+ if(!same(original.ref,current.ref)||original.uid!==current.uid||!sameFixedContext(original.context,current.context)||original.fields.annotations.exists&&Object.hasOwn(original.fields.annotations.value,deploymentOwnerAnnotation))deny();
  return makePlan('restore',current,original.fields,runId);
 }
 export function planDeploymentRelease(last,latest,runId){
  const current=selectedOwned(last,latest,runId),after=clone(current.fields);delete after.annotations.value[deploymentOwnerAnnotation];if(Object.keys(after.annotations.value).length===0)after.annotations={exists:false};
  return makePlan('release',current,after,runId);
 }
-export function verifyDeploymentChange(plan,observed){
+export function verifyDeploymentChange(plan,observed,serverDryRun){
  const p=json(plan,8*1024*1024);exact(p,['formatVersion','operation','runId','before','afterFields','patch','checksum']);
  if(p.formatVersion!==1||!['claim','update','restore','release'].includes(p.operation))deny();
  const rebuilt=makePlan(p.operation,p.before,p.afterFields,p.runId);if(!rebuilt||!same(rebuilt,p))deny();
- const s=captureDeploymentObject(p.before.ref,observed);
- if(s.uid!==p.before.uid||s.resourceVersion===p.before.resourceVersion||!same(s.context,p.before.context)||!same(s.fields,p.afterFields))deny();return s;
+ // The exact conditional JSON patch must be previewed by the selected server.
+ // Its managed-field ownership effects cannot be guessed locally or treated as
+ // identical to SSA. The caller retains both raw preview and real response.
+ const preview=json(serverDryRun,2*1024*1024);exact(preview,['planChecksum','observation']);if(preview.planChecksum!==p.checksum)deny();
+ const expected=captureDeploymentObject(p.before.ref,preview.observation),s=captureDeploymentObject(p.before.ref,observed);
+ if(expected.uid!==p.before.uid||expected.resourceVersion!==p.before.resourceVersion||!sameFixedContext(expected.context,p.before.context)||!same(expected.fields,p.afterFields))deny();
+ if(s.uid!==p.before.uid||s.resourceVersion===p.before.resourceVersion||!sameOwnership(s.context,expected.context)||!same(s.fields,p.afterFields))deny();return s;
 }

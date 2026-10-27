@@ -8,7 +8,7 @@ test('import and pure plan construction cannot enter blocked native, provider or
  for(const x of [http,https])for(const k of ['request','get','createServer'])x[k]=blocked;
  for(const k of ['connect','createConnection','createServer'])net[k]=blocked;for(const k of ['connect','createServer'])tls[k]=blocked;globalThis.fetch=blocked;syncBuiltinESMExports();
  const m=await import(${JSON.stringify(moduleURL)}),r=m.deploymentObjectRef('ConfigMap','rg-config');
- const s=m.captureDeploymentObject(r,{apiVersion:'v1',kind:'ConfigMap',metadata:{name:'rg-config',namespace:'releaseguard',uid:'synthetic-uid',resourceVersion:'opaque:1'},data:{SYNTHETIC:'before'}});
+ const s=m.captureDeploymentObject(r,{apiVersion:'v1',kind:'ConfigMap',metadata:{name:'rg-config',namespace:'releaseguard',uid:'synthetic-uid',resourceVersion:'opaque:1',managedFields:[]},data:{SYNTHETIC:'before'}});
  const p=m.planDeploymentClaim(s,'81111111-1111-4111-8111-111111111111');if(!p||entered)throw Error('Unexpected IO or missing plan');console.log(JSON.stringify({entered,operation:p.operation}));
  `;
  const result=spawnSync(process.execPath,['--input-type=module','-e',code],{env:{PATH:process.env.PATH},encoding:'utf8',timeout:10000});
