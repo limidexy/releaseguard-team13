@@ -121,10 +121,12 @@ export async function runPairedBenchmark(input,io){
   if(target){try{restoration=await target.restore();}catch{restoration={workerRestored:false,controllerRestored:false,state:'restore_threw_unknown',retryAllowed:false};}}
  }
  const summary=summarizePairedBenchmark(stages,restoration),passed=Boolean(reserved&&!halt&&summary.passed&&!io.signal?.aborted&&io.remaining(true)>0);
+ const failureInterpretation='Failed/incomplete/unknown run or evidence persistence; no valid benefit comparison.';
  const report={...summary,passed,state:passed?'completed':reserved?'failed_or_unknown_retained':'refused_before_reservation',runId:c?.runId??null,origin:c?.origin??null,
   sourceCommit:c?.commit??null,image:c?.image??null,requests,stages,errors,created,retryAllowed:false,resumeAllowed:false,modelCallsRequested:0,actualProviderCallsIndependentlyMeasured:false,
-  throughputRatio:passed?summary.throughputRatio:null,identityDeclarationIsNotAuthentication:true,cloudCostOrDeploymentAccepted:false};
- if(reserved||io.owned){try{terminalAttempted=true;await io.terminal(report);if(passed&&(io.signal?.aborted||io.remaining(true)<=0))return {...report,passed:false,evidenceState:'completion_deadline_or_cancellation'};}
-  catch{return {...report,passed:false,evidenceState:'terminal_persistence_unknown',terminalAttempted};}}
+  throughputRatio:passed?summary.throughputRatio:null,interpretation:passed?summary.interpretation:failureInterpretation,identityDeclarationIsNotAuthentication:true,cloudCostOrDeploymentAccepted:false};
+ const unconfirmed=evidenceState=>({...report,passed:false,state:'failed_or_unknown_retained',throughputRatio:null,interpretation:failureInterpretation,evidenceState,terminalAttempted});
+ if(reserved||io.owned){try{terminalAttempted=true;await io.terminal(report);if(passed&&(io.signal?.aborted||io.remaining(true)<=0))return unconfirmed('completion_deadline_or_cancellation');}
+  catch{return unconfirmed('terminal_persistence_unknown');}}
  return report;
 }
