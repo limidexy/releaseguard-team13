@@ -34,9 +34,10 @@ async function main(){
    preflight:b.io.preflight,verifyRuntime:async()=>{},terminal:r=>files.json('terminal.json',r),readDump:(path,size)=>comparisonBytes(join(files.directory,path),{privateMode:true,limit:size}),
    async command(kind,row,extra,clean){await owned();const plan=backupCommand(c,kind,row,extra),after=plan.args.indexOf('--');assert.ok(after>0);const cmd=plan.args.slice(after+1);assert.deepEqual(cmd.slice(0,2),['env','-i']);
     const r=await backupProcess('docker',['exec',...(plan.input?['-i']:[]),id,...cmd],{cwd:repo,env:{PATH:process.env.PATH},input:plan.input,timeout:120000,maxBuffer:66*1024*1024});
+    if(r.status!==0||r.signal||r.error||r.outputTruncated)result.lastFailedSyntheticBoundary={kind,status:r.status,signal:r.signal??null,errorCode:r.error?.code??null,stderr:r.stderr.toString('utf8').slice(0,4000)};
     if(kind==='restore'&&r.status===0&&!r.error){const actual=(await psql(backupScratch(c,row.database),"SELECT ((SELECT count(*) FROM pg_indexes WHERE schemaname='public' AND tablename='records')=2 AND (SELECT last_value FROM public.records_id_seq)=2);\n")).toString().trim();assert.equal(actual,'t');schemaChecked.push(row.database);}return r;},
   };
-  const report=await runBackup(c,io);assert.equal(report.passed,true,JSON.stringify(report.errors));assert.equal(report.verified,3);assert.equal(report.databases.every(x=>x.cleanup.state==='dropped_observed'),true);
+  const report=await runBackup(c,io);result.protocol={state:report.state,verified:report.verified,errors:report.errors,databases:report.databases.map(x=>({database:x.database,state:x.state,creation:x.creation.state,restore:x.restore.state,cleanup:x.cleanup.state}))};assert.equal(report.passed,true,JSON.stringify(report.errors));assert.equal(report.verified,3);assert.equal(report.databases.every(x=>x.cleanup.state==='dropped_observed'),true);
   result.checks.push({name:'Full three-database native custom dump/restore/public fingerprint/owned cleanup',passed:true,databases:3,commandIntents:report.commandIntents});
   for(const row of report.databases){const raw=fs.readFileSync(join(files.directory,row.dump.path));assert.equal(raw.subarray(0,5).toString(),'PGDMP');assert.equal(sha256(raw),row.dump.sha256);}
   result.checks.push({name:'Exact custom-format binary archives survive private storage',passed:true});
@@ -56,7 +57,7 @@ async function main(){
   // the negative fixture; the operator never rewrites an unowned marker.
   await psql('postgres',`COMMENT ON DATABASE "${scratch}" IS '${backupMarker(negative,'rg_registry')}';\n`);assert.equal(JSON.parse((await psql('postgres',backupSQL(negative,'drop','rg_registry',created.oid).sql)).toString()).absent,true);
   result.serverVersionNum=c.target.serverVersionNum;result.passed=true;
- }catch(e){result.failureCode=e?.code??e?.message??'unconfirmed';process.exitCode=1;}
+ }catch(e){result.failureCode=e?.code??e?.message??'unconfirmed';result.failureMessage=String(e?.message??'unconfirmed').slice(0,4000);process.exitCode=1;}
  finally{
   if(runAttempted)try{await owned();await docker(['stop','--time','5',id]);const x=await owned();assert.equal(x.State.Running,false);result.fixtureStopped=true;await docker(['rm',id]);result.fixtureRemoved=true;}catch{result.cleanupUnconfirmed=true;result.passed=false;process.exitCode=1;}
   if(!result.fixtureStopped||!result.fixtureRemoved){result.passed=false;process.exitCode=1;}
