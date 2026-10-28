@@ -25,12 +25,25 @@ jobs:
         with:
           # Compare the whole push range, not only its last commit.
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - name: Node for pull-request verification (no retained cache)
+        if: github.event_name == 'pull_request'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Node for main/manual verification
+        if: github.event_name != 'pull_request'
+        uses: actions/setup-node@v4
         with:
           node-version: '24'
           cache: npm
       - run: npm ci --no-audit --no-fund
       - run: npm test
+      - name: Real admission-slot isolation and atomicity (disposable PostgreSQL)
+        env:
+          RG_ADMISSION_EVIDENCE_DIR: ${{ runner.temp }}/rg-admission-slots
+        run: |
+          docker pull postgres:16-alpine
+          npm run test:admission-db
       - name: Cross-platform tooling regressions
         run: node --test tests/windows-compat.test.mjs tests/tooling-checkout.test.mjs tests/tooling-consumers.test.mjs tests/hooks-and-ignore.test.mjs
       - name: Replay metrics and scale-evidence regressions
@@ -186,12 +199,16 @@ jobs:
           git rev-parse HEAD > evidence/source-commit.txt
           docker save releaseguard-course-v2:local -o image.tar
           node scripts/image-identity.mjs archive image.tar evidence/image-config-id.txt
-      - uses: actions/upload-artifact@v4
+      # Pull-request verification must not consume the repository's retained
+      # artifact quota. The tested image is only needed after a main-branch
+      # verification when a separately authorized CD may consume it.
+      - if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
         with:
           name: tested-image
           path: image.tar
       - name: Preserve test reports
-        if: always()
+        if: always() && github.event_name != 'pull_request'
         uses: actions/upload-artifact@v4
         with:
           name: verification-evidence

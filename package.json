@@ -8,6 +8,7 @@
     "build": "tsc",
     "start": "node dist/src/main.js",
     "test": "npm run build && node --test dist/tests/*.test.js",
+    "test:admission-db": "npm run build && node tests/admission-postgres.mjs",
     "tokens": "node scripts/dev-tokens.mjs",
     "verify": "node scripts/verify.mjs",
     "benchmark": "node scripts/benchmark.mjs"
