@@ -25,11 +25,6 @@ export async function evaluation(app: FastifyInstance) {
   installFetchTiming(app);
   await evaluationSchema();
   const { channel } = await broker();
-  // Registry assets are append-only/versioned. Cache only completed immutable
-  // snapshots per workspace/app/suite; never share an in-flight request whose
-  // cancellation/deadline belongs to another submission.
-  const snapshotCache = new Map<string, any>();
-  const snapshotCacheLimit = 512;
   let publishing = false;
   const timer = setInterval(async () => {
     if (publishing) return; publishing = true;
@@ -52,7 +47,7 @@ export async function evaluation(app: FastifyInstance) {
     const started = performance.now(), traceId = typeof req.headers['x-rg-trace-id'] === 'string' && /^[a-f0-9-]{36}$/.test(req.headers['x-rg-trace-id']) ? req.headers['x-rg-trace-id'] : uuid();
     const closed = new AbortController(), stages: Record<string, number> = {}, snapshotTiming = newFetchTiming(), databaseSpans: DatabaseSpan[] = [];
     const onClose = () => { if (!reply.raw.writableFinished) closed.abort(); }; reply.raw.once('close', onClose);
-    let mutationMayHaveStarted = false, outcome = 'before_mutation', keyForLog: string | undefined, snapshotCacheHit: boolean | null = null;
+    let mutationMayHaveStarted = false, outcome = 'before_mutation', keyForLog: string | undefined;
     let budget: ReturnType<typeof receiveSubmissionDeadline> | undefined;
     const checkpoint = (name: string) => { stages[name] = performance.now() - started; };
     const disconnected = () => closed.signal.aborted || reply.raw.destroyed;
@@ -80,28 +75,21 @@ export async function evaluation(app: FastifyInstance) {
       if (parent.input.appId !== input.appId) throw new HttpError(409, 'Previous job belongs to another application');
     }
     const registryUrl = process.env.REGISTRY_URL; if (!registryUrl) throw new HttpError(503, 'Service endpoint unavailable');
-    const cacheKey = JSON.stringify([a.workspace, input.appId, input.suiteId]);
-    let snapshot = snapshotCache.get(cacheKey); snapshotCacheHit = snapshot !== undefined;
-    if (!snapshotCacheHit) {
-      snapshotTiming.started = performance.now();
-      const snapshotPath = `/internal/snapshot/${input.appId}/${input.suiteId}?workspace=` + encodeURIComponent(a.workspace);
-      const registryHeaders = { ...await internalHeader('registry'), 'x-rg-trace-id': traceId, [SUBMISSION_KEY_HASH_HEADER]: keyHash(key) };
-      const registryBudget = createSubmissionDeadline({ traceId, method: 'GET', route: snapshotPath,
-        keySha256: keyHash(key), bodySha256: digest(null), authorizationSha256: keyHash(registryHeaders.authorization) },
-        process.env.INTERNAL_SECRET, budget.startedAtMs, 'registry');
-      if (abandoned()) return stoppedReply();
-      const response = await withinFetch(snapshotTiming, async () => fetch(registryUrl + snapshotPath, { headers: { ...registryHeaders, [SUBMISSION_BUDGET_HEADER]: registryBudget }, signal: AbortSignal.any([AbortSignal.timeout(5000), closed.signal, budget!.signal]) }));
-      if (!response.ok) {
-        await response.body?.cancel().catch(() => {});
-        throw new HttpError(response.status === 404 ? 404 : 503, 'Upstream service unavailable or record not found');
-      }
-      const loaded = await response.json() as any;
-      if (!loaded || typeof loaded !== 'object' || loaded.application?.data === undefined || loaded.suite?.data === undefined || !Array.isArray(loaded.suite.data.cases)) {
-        throw new HttpError(503, 'Upstream service returned an invalid snapshot');
-      }
-      snapshot = loaded;
-      snapshotCache.set(cacheKey, snapshot);
-      if (snapshotCache.size > snapshotCacheLimit) snapshotCache.delete(snapshotCache.keys().next().value!);
+    snapshotTiming.started = performance.now();
+    const snapshotPath = `/internal/snapshot/${input.appId}/${input.suiteId}?workspace=` + encodeURIComponent(a.workspace);
+    const registryHeaders = { ...await internalHeader('registry'), 'x-rg-trace-id': traceId, [SUBMISSION_KEY_HASH_HEADER]: keyHash(key) };
+    const registryBudget = createSubmissionDeadline({ traceId, method: 'GET', route: snapshotPath,
+      keySha256: keyHash(key), bodySha256: digest(null), authorizationSha256: keyHash(registryHeaders.authorization) },
+      process.env.INTERNAL_SECRET, budget.startedAtMs, 'registry');
+    if (abandoned()) return stoppedReply();
+    const response = await withinFetch(snapshotTiming, async () => fetch(registryUrl + snapshotPath, { headers: { ...registryHeaders, [SUBMISSION_BUDGET_HEADER]: registryBudget }, signal: AbortSignal.any([AbortSignal.timeout(5000), closed.signal, budget!.signal]) }));
+    if (!response.ok) {
+      await response.body?.cancel().catch(() => {});
+      throw new HttpError(response.status === 404 ? 404 : 503, 'Upstream service unavailable or record not found');
+    }
+    const snapshot = await response.json() as any;
+    if (!snapshot || typeof snapshot !== 'object' || snapshot.application?.data === undefined || snapshot.suite?.data === undefined || !Array.isArray(snapshot.suite.data.cases)) {
+      throw new HttpError(503, 'Upstream service returned an invalid snapshot');
     }
     checkpoint('registrySnapshot'); if (abandoned()) return stoppedReply();
     if (input.outputs?.some(o => !snapshot.suite.data.cases.some((c: any) => c.id === o.caseId)) || (input.outputs && new Set(input.outputs.map(o => o.caseId)).size !== input.outputs.length)) throw new HttpError(400, 'Unknown or duplicate output case');
@@ -137,7 +125,7 @@ export async function evaluation(app: FastifyInstance) {
       budget?.dispose();
       if (abandoned() && !mutationMayHaveStarted && outcome === 'before_mutation') outcome = disconnected() ? 'cancelled_before_mutation' : 'deadline_before_mutation';
       app.log.info({ event: 'submission_evaluation_timing', traceId, requestId: req.id, keySha256: keyForLog ? keyHash(keyForLog) : null,
-        stages, databaseSpans, deadline: budget?.publicState() ?? null, snapshotFetch: publicFetchTiming(snapshotTiming), snapshotCacheHit, registryDeadlineMs: 5000, mutationMayHaveStarted, outcome, totalMs: performance.now() - started }, 'submission evaluation phase evidence');
+        stages, databaseSpans, deadline: budget?.publicState() ?? null, snapshotFetch: publicFetchTiming(snapshotTiming), registryDeadlineMs: 5000, mutationMayHaveStarted, outcome, totalMs: performance.now() - started }, 'submission evaluation phase evidence');
     }
   });
   app.get('/jobs/submissions/:key', async (req, reply) => {

@@ -384,52 +384,7 @@ test('submission route contracts', { timeout: 20000 }, async t => {
     assert.equal(admissions[0][6], key);
   });
 
-  await t.test('evaluation caches a completed immutable snapshot for repeated app/suite submissions', async t => {
-    process.env.REGISTRY_URL = 'http://synthetic-registry.invalid';
-    let snapshots = 0, admissions = 0;
-    const app = await evaluationApp(t, async sql => {
-      if (sql.includes('SELECT id,status,request_hash')) return result();
-      if (sql.includes('INSERT INTO jobs') && sql.includes('INSERT INTO outbox')) { admissions++; return result([{ job_id: jobId }]); }
-      return result();
-    });
-    t.mock.method(globalThis, 'fetch', (async () => {
-      snapshots++;
-      return Response.json({ application: { data: {} }, suite: { data: { cases: [] } } });
-    }) as any);
-    const authorization = await userToken();
-    for (const [suffix, idempotencyKey] of [['a', 'snapshot-cache-a'], ['b', 'snapshot-cache-b']] as const) {
-      const payload = { ...input, candidate: 'cache-' + suffix };
-      const reply = await app.inject({ method: 'POST', url: '/jobs', payload,
-        headers: signedHeaders(authorization, '/jobs', payload, Date.now(), 'evaluation', idempotencyKey) });
-      assert.equal(reply.statusCode, 202);
-    }
-    assert.equal(admissions, 2);
-    assert.equal(snapshots, 1);
-  });
-
-  await t.test('snapshot cache is scoped by workspace and never reuses another workspace entry', async t => {
-    process.env.REGISTRY_URL = 'http://synthetic-registry.invalid';
-    let snapshots = 0;
-    const app = await evaluationApp(t, async sql => {
-      if (sql.includes('SELECT id,status,request_hash')) return result();
-      if (sql.includes('INSERT INTO jobs') && sql.includes('INSERT INTO outbox')) return result([{ job_id: jobId }]);
-      return result();
-    });
-    t.mock.method(globalThis, 'fetch', (async () => {
-      snapshots++;
-      return Response.json({ application: { data: {} }, suite: { data: { cases: [] } } });
-    }) as any);
-    for (const [workspace, idempotencyKey] of [['workspace-a', 'snapshot-scope-a'], ['workspace-b', 'snapshot-scope-b']] as const) {
-      const authorization = await userToken(workspace);
-      const payload = { ...input, candidate: 'scope-' + workspace };
-      const reply = await app.inject({ method: 'POST', url: '/jobs', payload,
-        headers: signedHeaders(authorization, '/jobs', payload, Date.now(), 'evaluation', idempotencyKey) });
-      assert.equal(reply.statusCode, 202);
-    }
-    assert.equal(snapshots, 2);
-  });
-
-  await t.test('an invalid Registry snapshot is not cached for a later submission', async t => {
+  await t.test('an invalid Registry snapshot fails closed and a later submission fetches again', async t => {
     process.env.REGISTRY_URL = 'http://synthetic-registry.invalid';
     let snapshots = 0, admissions = 0;
     const app = await evaluationApp(t, async sql => {
