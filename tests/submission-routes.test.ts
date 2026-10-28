@@ -75,12 +75,12 @@ test('submission route contracts', { timeout: 20000 }, async t => {
   const internalToken = async () => 'Bearer ' + await new SignJWT({ caller: 'evaluation' })
     .setProtectedHeader({ alg: 'HS256' }).setIssuer('releaseguard-services').setAudience(common.role)
     .setIssuedAt().setExpirationTime('1m').sign(new TextEncoder().encode(secret));
-  const signedHeaders = (authorization: string, route: string, payload: unknown, startedAtMs = Date.now(), target: 'evaluation' | 'registry' = 'evaluation') => ({
-    authorization, 'idempotency-key': key, 'x-rg-trace-id': traceId,
-    [deadlines.SUBMISSION_KEY_HASH_HEADER]: keyHash(key),
+  const signedHeaders = (authorization: string, route: string, payload: unknown, startedAtMs = Date.now(), target: 'evaluation' | 'registry' = 'evaluation', idempotencyKey = key) => ({
+    authorization, 'idempotency-key': idempotencyKey, 'x-rg-trace-id': traceId,
+    [deadlines.SUBMISSION_KEY_HASH_HEADER]: keyHash(idempotencyKey),
     [deadlines.SUBMISSION_BUDGET_HEADER]: deadlines.createSubmissionDeadline({
       traceId, method: target === 'registry' ? 'GET' : 'POST', route,
-      keySha256: keyHash(key), bodySha256: common.digest(payload), authorizationSha256: keyHash(authorization),
+      keySha256: keyHash(idempotencyKey), bodySha256: common.digest(payload), authorizationSha256: keyHash(authorization),
     }, secret, startedAtMs, target),
   });
 
@@ -268,7 +268,7 @@ test('submission route contracts', { timeout: 20000 }, async t => {
     assert.equal(dispatched, 0);
   });
 
-  await t.test('registry reads the signed workspace and releases both borrowed clients', async t => {
+  await t.test('registry reads the signed workspace with one snapshot query and releases one borrowed client', async t => {
     t.mock.method(common.pool, 'query', (async () => result()) as any);
     const queries: { sql: string; values: unknown[] }[] = [];
     let released = 0;
@@ -276,7 +276,7 @@ test('submission route contracts', { timeout: 20000 }, async t => {
       const client = new EventEmitter() as any;
       client.query = async (sql: string, values: unknown[]) => {
         queries.push({ sql, values });
-        return result(sql.includes('FROM applications') ? [{ id: appId, data: { name: 'Synthetic app' } }] : [{ id: suiteId, version: 1, data: { cases: [] } }]);
+        return result([{ application_id: appId, application_data: { name: 'Synthetic app' }, suite_id: suiteId, suite_version: 1, suite_data: { cases: [] } }]);
       };
       client.release = () => { released++; };
       return client;
@@ -288,8 +288,10 @@ test('submission route contracts', { timeout: 20000 }, async t => {
     const reply = await app.inject({ url: route, headers: signedHeaders(await internalToken(), route, null, Date.now(), 'registry') });
     assert.equal(reply.statusCode, 200);
     assert.equal(reply.json().application.id, appId);
-    assert.deepEqual(queries.map(q => q.values), [[appId, 'workspace-a'], [suiteId, 'workspace-a']]);
-    assert.equal(released, 2);
+    assert.equal(reply.json().suite.id, suiteId);
+    assert.equal(queries.length, 1);
+    assert.deepEqual(queries[0].values, [appId, suiteId, 'workspace-a']);
+    assert.equal(released, 1);
   });
 
   // Freeze only the background interval: deadline timeouts remain real. These
@@ -380,6 +382,75 @@ test('submission route contracts', { timeout: 20000 }, async t => {
     assert.equal(admissions[0][3], 'workspace-a');
     assert.equal(admissions[0][4], 'synthetic-contributor');
     assert.equal(admissions[0][6], key);
+  });
+
+  await t.test('evaluation caches a completed immutable snapshot for repeated app/suite submissions', async t => {
+    process.env.REGISTRY_URL = 'http://synthetic-registry.invalid';
+    let snapshots = 0, admissions = 0;
+    const app = await evaluationApp(t, async sql => {
+      if (sql.includes('SELECT id,status,request_hash')) return result();
+      if (sql.includes('INSERT INTO jobs') && sql.includes('INSERT INTO outbox')) { admissions++; return result([{ job_id: jobId }]); }
+      return result();
+    });
+    t.mock.method(globalThis, 'fetch', (async () => {
+      snapshots++;
+      return Response.json({ application: { data: {} }, suite: { data: { cases: [] } } });
+    }) as any);
+    const authorization = await userToken();
+    for (const [suffix, idempotencyKey] of [['a', 'snapshot-cache-a'], ['b', 'snapshot-cache-b']] as const) {
+      const payload = { ...input, candidate: 'cache-' + suffix };
+      const reply = await app.inject({ method: 'POST', url: '/jobs', payload,
+        headers: signedHeaders(authorization, '/jobs', payload, Date.now(), 'evaluation', idempotencyKey) });
+      assert.equal(reply.statusCode, 202);
+    }
+    assert.equal(admissions, 2);
+    assert.equal(snapshots, 1);
+  });
+
+  await t.test('snapshot cache is scoped by workspace and never reuses another workspace entry', async t => {
+    process.env.REGISTRY_URL = 'http://synthetic-registry.invalid';
+    let snapshots = 0;
+    const app = await evaluationApp(t, async sql => {
+      if (sql.includes('SELECT id,status,request_hash')) return result();
+      if (sql.includes('INSERT INTO jobs') && sql.includes('INSERT INTO outbox')) return result([{ job_id: jobId }]);
+      return result();
+    });
+    t.mock.method(globalThis, 'fetch', (async () => {
+      snapshots++;
+      return Response.json({ application: { data: {} }, suite: { data: { cases: [] } } });
+    }) as any);
+    for (const [workspace, idempotencyKey] of [['workspace-a', 'snapshot-scope-a'], ['workspace-b', 'snapshot-scope-b']] as const) {
+      const authorization = await userToken(workspace);
+      const payload = { ...input, candidate: 'scope-' + workspace };
+      const reply = await app.inject({ method: 'POST', url: '/jobs', payload,
+        headers: signedHeaders(authorization, '/jobs', payload, Date.now(), 'evaluation', idempotencyKey) });
+      assert.equal(reply.statusCode, 202);
+    }
+    assert.equal(snapshots, 2);
+  });
+
+  await t.test('an invalid Registry snapshot is not cached for a later submission', async t => {
+    process.env.REGISTRY_URL = 'http://synthetic-registry.invalid';
+    let snapshots = 0, admissions = 0;
+    const app = await evaluationApp(t, async sql => {
+      if (sql.includes('SELECT id,status,request_hash')) return result();
+      if (sql.includes('INSERT INTO jobs') && sql.includes('INSERT INTO outbox')) { admissions++; return result([{ job_id: jobId }]); }
+      return result();
+    });
+    t.mock.method(globalThis, 'fetch', (async () => {
+      snapshots++;
+      return snapshots === 1 ? Response.json({ malformed: true }) : Response.json({ application: { data: {} }, suite: { data: { cases: [] } } });
+    }) as any);
+    const authorization = await userToken();
+    const first = { ...input, candidate: 'invalid-snapshot-a' };
+    const failed = await app.inject({ method: 'POST', url: '/jobs', payload: first,
+      headers: signedHeaders(authorization, '/jobs', first, Date.now(), 'evaluation', 'invalid-snapshot-a') });
+    assert.equal(failed.statusCode, 503);
+    const second = { ...input, candidate: 'invalid-snapshot-b' };
+    const recovered = await app.inject({ method: 'POST', url: '/jobs', payload: second,
+      headers: signedHeaders(authorization, '/jobs', second, Date.now(), 'evaluation', 'invalid-snapshot-b') });
+    assert.equal(recovered.statusCode, 202);
+    assert.equal(snapshots, 2); assert.equal(admissions, 1);
   });
 
   await t.test('a configured zero admission limit returns 429 without dispatching admission SQL', async t => {

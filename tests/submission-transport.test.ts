@@ -1,7 +1,7 @@
 import test, { type TestContext } from 'node:test';
 import assert from 'node:assert/strict';
 import http from 'node:http';
-import { SubmissionTransport } from '../src/submission-transport.js';
+import { SubmissionTransport, configuredSubmissionConnectionLimit } from '../src/submission-transport.js';
 import { newFetchTiming } from '../src/submission-state.js';
 
 async function endpoint(t: TestContext, handler: http.RequestListener) {
@@ -97,4 +97,12 @@ test('submission response buffering stops at the configured byte bound', async t
   const url = await endpoint(t, (_req, res) => res.end('x'.repeat(1024)));
   const transport = new SubmissionTransport(1, 64); t.after(() => transport.close());
   await assert.rejects(submit(transport, url), /response exceeds size bound/);
+});
+
+test('submission connection limit is bounded and defaults above the old 16-socket ceiling', () => {
+  assert.equal(configuredSubmissionConnectionLimit(undefined), 128);
+  assert.equal(configuredSubmissionConnectionLimit('16'), 16);
+  assert.equal(configuredSubmissionConnectionLimit('128'), 128);
+  assert.equal(configuredSubmissionConnectionLimit('256'), 256);
+  for (const value of ['0', '15', '257', '1.5', 'abc']) assert.throws(() => configuredSubmissionConnectionLimit(value));
 });
