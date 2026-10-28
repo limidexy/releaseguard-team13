@@ -4,6 +4,11 @@ export type DatabaseOperation = 'existing_lookup' | 'lineage_lookup' | 'admissio
 type PoolCounts = { total: number; idle: number; waiting: number };
 export type DatabaseSpan = {
   operation: DatabaseOperation;
+  // Correlation hints, not proof of SQL/lock/CPU causality. Join a retained
+  // server observation from the same database/instance and overlapping window.
+  // Wall clocks can differ; durations below remain monotonic.
+  operationStartedAtUnixMs: number;
+  backendPid: number | null;
   poolAtRequest: PoolCounts;
   poolAtAcquire: PoolCounts | null;
   acquiredMs: number | null;
@@ -36,7 +41,8 @@ export async function databaseQuery<Row extends QueryResultRow = any>(
   const elapsed = () => performance.now() - started;
   const counts = (): PoolCounts => ({ total: pool.totalCount, idle: pool.idleCount, waiting: pool.waitingCount });
   const span: DatabaseSpan = {
-    operation, poolAtRequest: counts(), poolAtAcquire: null,
+    operation, operationStartedAtUnixMs: Date.now(), backendPid: null,
+    poolAtRequest: counts(), poolAtAcquire: null,
     acquiredMs: null, queryDispatchedMs: null, queryCompletedMs: null,
     releasedMs: null, poolWaitMs: null, databaseRoundTripMs: null,
     totalMs: 0, outcome: 'acquire_failed',
@@ -53,6 +59,10 @@ export async function databaseQuery<Row extends QueryResultRow = any>(
   try {
     check();
     client = await pool.connect();
+    // node-postgres supplies this from BackendKeyData. Do not send another
+    // query on the hot path, or fabricate a PID when it is unavailable.
+    const backendPid = (client as PoolClient & { processID?: unknown }).processID;
+    if (typeof backendPid === 'number' && Number.isSafeInteger(backendPid) && backendPid > 0) span.backendPid = backendPid;
     // Pool.query normally owns this listener. Once we explicitly borrow a
     // client, preserve that protection against a broken backend/socket.
     const connectionFailure = new Promise<never>((_resolve, reject) => {
