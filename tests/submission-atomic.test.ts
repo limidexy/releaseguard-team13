@@ -23,6 +23,9 @@ test('atomic admission binds the configured limit, identity, idempotency key, jo
   const p = poolDouble([{ job_id: admission.id }]);
   assert.equal(await admitAtomic(p.pool, admission), true);
   assert.equal(p.queries.length, 1);
+  assert.match(p.queries[0].text, /claim_admission_slot_v1\(\$1,\$2\)/);
+  assert.match(p.queries[0].text, /INSERT INTO jobs/);
+  assert.match(p.queries[0].text, /INSERT INTO outbox/);
   assert.deepEqual(p.queries[0].values, [
     admission.rateKey, 2000, admission.id, admission.workspace, admission.principal,
     admission.hash, admission.key, admission.input, admission.snapshot, admission.outboxId,
@@ -37,7 +40,7 @@ test('a rejected reservation reports false and dispatches no follow-up job write
 
 test('invalid admission limits fail before pool acquisition', async () => {
   const p = poolDouble([]);
-  for (const limit of [-1, 1.5, NaN, Infinity, Number.MAX_SAFE_INTEGER + 1]) {
+  for (const limit of [-1, 1.5, NaN, Infinity, 10001, Number.MAX_SAFE_INTEGER + 1]) {
     await assert.rejects(admitAtomic(p.pool, { ...admission, limit }), /Invalid admission limit/);
   }
   assert.equal(p.queries.length, 0);

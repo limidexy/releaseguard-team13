@@ -18,7 +18,58 @@ export async function evaluationSchema() {
     CREATE INDEX IF NOT EXISTS jobs_status_lease ON jobs(status,lease_until);
     CREATE TABLE IF NOT EXISTS outbox(id uuid PRIMARY KEY,job_id uuid NOT NULL REFERENCES jobs(id),sent_at timestamptz,created_at timestamptz NOT NULL DEFAULT now());
     CREATE INDEX IF NOT EXISTS outbox_pending ON outbox(created_at) WHERE sent_at IS NULL;
-    CREATE TABLE IF NOT EXISTS admission_limits(key text PRIMARY KEY,count integer NOT NULL,expires_at timestamptz NOT NULL);`);
+    CREATE TABLE IF NOT EXISTS admission_limits(key text PRIMARY KEY,count integer NOT NULL,expires_at timestamptz NOT NULL);
+    CREATE TABLE IF NOT EXISTS admission_windows(
+      key text PRIMARY KEY,limit_count integer NOT NULL CHECK(limit_count>0),
+      legacy_count integer NOT NULL DEFAULT 0 CHECK(legacy_count>=0),expires_at timestamptz NOT NULL);
+    ALTER TABLE admission_windows ADD COLUMN IF NOT EXISTS legacy_count integer NOT NULL DEFAULT 0;
+    CREATE INDEX IF NOT EXISTS admission_windows_expiry ON admission_windows(expires_at);
+    CREATE TABLE IF NOT EXISTS admission_slots(
+      key text NOT NULL REFERENCES admission_windows(key) ON DELETE CASCADE,
+      slot integer NOT NULL CHECK(slot>0),claimed boolean NOT NULL DEFAULT false,
+      PRIMARY KEY(key,slot));
+    CREATE INDEX IF NOT EXISTS admission_slots_available ON admission_slots(key,slot) WHERE claimed=false;
+    CREATE OR REPLACE FUNCTION claim_admission_slot_v1(p_key text,p_limit integer)
+    RETURNS TABLE(claimed_slot integer) LANGUAGE plpgsql VOLATILE AS $slot$
+    DECLARE inserted_count integer; retained_count integer; original_limit integer;
+            current_legacy integer; chosen_slot integer;
+    BEGIN
+      IF p_limit<1 OR p_limit>10000 THEN
+        RAISE EXCEPTION 'Unsupported admission limit' USING ERRCODE='22023';
+      END IF;
+      -- Concurrent cold callers wait only for initialization. Unlike sibling
+      -- data-modifying CTEs, subsequent VOLATILE statements see that commit.
+      INSERT INTO admission_windows(key,limit_count,legacy_count,expires_at)
+      VALUES(p_key,p_limit,COALESCE((SELECT l.count FROM admission_limits l WHERE l.key=p_key),0),now()+interval '2 minutes')
+      ON CONFLICT(key) DO NOTHING;
+      GET DIAGNOSTICS inserted_count = ROW_COUNT;
+      SELECT w.limit_count,w.legacy_count INTO original_limit,retained_count
+      FROM admission_windows w WHERE w.key=p_key;
+      IF original_limit IS DISTINCT FROM p_limit THEN
+        RAISE EXCEPTION 'Admission limit changed within an active window' USING ERRCODE='22023';
+      END IF;
+      SELECT COALESCE((SELECT l.count FROM admission_limits l WHERE l.key=p_key),0) INTO current_legacy;
+      IF current_legacy IS DISTINCT FROM retained_count THEN
+        RAISE EXCEPTION 'Legacy admission writer changed after cutover' USING ERRCODE='55000';
+      END IF;
+      IF inserted_count=1 THEN
+        INSERT INTO admission_slots(key,slot,claimed)
+        SELECT p_key,g,g<=retained_count FROM generate_series(1,p_limit) AS g;
+        -- Bounded maintenance only on a new window. Never wait for another
+        -- window's row lock, or delete the current window or business evidence.
+        WITH stale AS MATERIALIZED (
+          SELECT w.key FROM admission_windows w
+          WHERE w.expires_at<now() AND w.key<>p_key
+          ORDER BY w.expires_at FOR UPDATE SKIP LOCKED LIMIT 1
+        ) DELETE FROM admission_windows w USING stale s WHERE w.key=s.key;
+      END IF;
+      SELECT s.slot INTO chosen_slot FROM admission_slots s
+      WHERE s.key=p_key AND s.claimed=false
+      ORDER BY s.slot FOR UPDATE OF s SKIP LOCKED LIMIT 1;
+      IF chosen_slot IS NULL THEN RETURN; END IF;
+      UPDATE admission_slots s SET claimed=true WHERE s.key=p_key AND s.slot=chosen_slot;
+      RETURN QUERY SELECT chosen_slot;
+    END $slot$;`);
 }
 export async function evaluation(app: FastifyInstance) {
   const clockSkewBoundMs = configuredClockSkewBound(process.env.SUBMISSION_CLOCK_SKEW_BOUND_MS);
