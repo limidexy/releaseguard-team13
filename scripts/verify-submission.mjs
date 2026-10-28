@@ -87,7 +87,17 @@ await check('PostgreSQL atomically enforces quotas, rolls back duplicate keys an
     const pool=new pg.Pool({connectionString:process.env.DATABASE_URL,max:8});
     const workspace=${JSON.stringify(workspace + '-atomic')};
     const admission=(rateKey,key=randomUUID(),outboxId=randomUUID())=>({rateKey,limit:3,id:randomUUID(),outboxId,workspace,principal:'submission-test',hash:'synthetic',key,input:${JSON.stringify(body)},snapshot:${JSON.stringify(job.snapshot)}});
-    const count=async(rateKey)=>(await pool.query('SELECT count FROM admission_limits WHERE key=$1',[rateKey])).rows[0]?.count;
+    // Count committed permits from the active slot representation, not the
+    // retained legacy counter. Assert the window and permit cardinality too:
+    // changing the representation must not weaken quota/rollback acceptance.
+    const count=async(rateKey)=>{
+      const row=(await pool.query('SELECT w.limit_count,w.legacy_count,(SELECT count(*)::int FROM admission_slots s WHERE s.key=w.key) AS slots,(SELECT count(*)::int FROM admission_slots s WHERE s.key=w.key AND s.claimed) AS claimed FROM admission_windows w WHERE w.key=$1',[rateKey])).rows[0];
+      if(!row)return undefined;
+      assert.equal(row.limit_count,3);assert.equal(row.slots,3);
+      assert.equal(row.legacy_count,0);
+      assert.ok(row.claimed>=0&&row.claimed<=row.limit_count);
+      return row.claimed;
+    };
     const counts=async()=> (await pool.query('SELECT (SELECT count(*)::int FROM jobs WHERE workspace=$1) AS jobs,(SELECT count(*)::int FROM outbox WHERE job_id IN (SELECT id FROM jobs WHERE workspace=$1)) AS outbox',[workspace])).rows[0];
     try {
       const disabledKey=workspace+':disabled';
@@ -110,6 +120,9 @@ await check('PostgreSQL atomically enforces quotas, rolls back duplicate keys an
     } finally {
       await pool.query('DELETE FROM outbox WHERE job_id IN (SELECT id FROM jobs WHERE workspace=$1)',[workspace]);
       await pool.query('DELETE FROM jobs WHERE workspace=$1',[workspace]);
+      // The synthetic window belongs only to this disposable integration run.
+      // Its slots cascade; no historical/cloud quota or business data is used.
+      await pool.query('DELETE FROM admission_windows WHERE key LIKE $1',[workspace+':%']);
       await pool.query('DELETE FROM admission_limits WHERE key LIKE $1',[workspace+':%']);
       await pool.end();
     }
