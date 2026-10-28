@@ -87,7 +87,11 @@ export async function evaluation(app: FastifyInstance) {
       await response.body?.cancel().catch(() => {});
       throw new HttpError(response.status === 404 ? 404 : 503, 'Upstream service unavailable or record not found');
     }
-    const snapshot = await response.json() as any; checkpoint('registrySnapshot'); if (abandoned()) return stoppedReply();
+    const snapshot = await response.json() as any;
+    if (!snapshot || typeof snapshot !== 'object' || snapshot.application?.data === undefined || snapshot.suite?.data === undefined || !Array.isArray(snapshot.suite.data.cases)) {
+      throw new HttpError(503, 'Upstream service returned an invalid snapshot');
+    }
+    checkpoint('registrySnapshot'); if (abandoned()) return stoppedReply();
     if (input.outputs?.some(o => !snapshot.suite.data.cases.some((c: any) => c.id === o.caseId)) || (input.outputs && new Set(input.outputs.map(o => o.caseId)).size !== input.outputs.length)) throw new HttpError(400, 'Unknown or duplicate output case');
     if (input.source !== 'imported' && !snapshot.application.data.runnerUrl) throw new HttpError(400, 'Application runner required');
     const id = uuid();

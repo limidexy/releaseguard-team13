@@ -186,12 +186,16 @@ jobs:
           git rev-parse HEAD > evidence/source-commit.txt
           docker save releaseguard-course-v2:local -o image.tar
           node scripts/image-identity.mjs archive image.tar evidence/image-config-id.txt
-      - uses: actions/upload-artifact@v4
+      # Pull-request verification must not consume the repository's retained
+      # artifact quota. The tested image is only needed after a main-branch
+      # verification when a separately authorized CD may consume it.
+      - if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
         with:
           name: tested-image
           path: image.tar
       - name: Preserve test reports
-        if: always()
+        if: always() && github.event_name != 'pull_request'
         uses: actions/upload-artifact@v4
         with:
           name: verification-evidence

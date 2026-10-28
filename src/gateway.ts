@@ -2,12 +2,12 @@ import type { FastifyInstance } from 'fastify';
 import { readFile } from 'node:fs/promises';
 import { HttpError, uuid, digest } from './common.js';
 import { installFetchTiming, newFetchTiming, withinFetch, publicFetchTiming, unknownSubmission, validSubmissionKey, keyHash } from './submission-state.js';
-import { SubmissionTransport } from './submission-transport.js';
+import { SubmissionTransport, configuredSubmissionConnectionLimit } from './submission-transport.js';
 import { createSubmissionDeadline, SUBMISSION_BUDGET_HEADER, SUBMISSION_BUDGET_MS } from './submission-deadline.js';
 import { revisedReturnsSuite, returnsSuiteV22 } from './returns-policy.js';
 export async function gateway(app: FastifyInstance) {
   installFetchTiming(app);
-  const submissions = new SubmissionTransport(16);
+  const submissions = new SubmissionTransport(configuredSubmissionConnectionLimit());
   app.addHook('onClose', async () => submissions.close());
   app.get('/', async (_req, reply) => reply.type('text/html').send(await readFile('public/index.html', 'utf8')));
   app.get('/app.js', async (_req, reply) => reply.type('application/javascript').send(await readFile('public/app.js', 'utf8')));
