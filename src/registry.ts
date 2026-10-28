@@ -45,11 +45,18 @@ export async function registry(app: FastifyInstance) {
       keySha256: String(req.headers[SUBMISSION_KEY_HASH_HEADER] ?? ''), bodySha256: digest(null), authorizationSha256: keyHash(req.headers.authorization ?? '') },
       process.env.INTERNAL_SECRET, clockSkewBoundMs, undefined, 'registry'); }
     catch (error) { if (error instanceof InvalidSubmissionDeadlineError) throw new HttpError(401, 'Invalid submission deadline context'); throw error; }
-    const application = (await databaseQuery(pool, 'registry_application', 'SELECT id,data FROM applications WHERE id=$1 AND workspace=$2', [appId, workspace], { isAbandoned: abandoned, observe: s => databaseSpans.push(s) })).rows[0];
-    const suite = (await databaseQuery(pool, 'registry_suite', 'SELECT id,version,data FROM suites WHERE id=$1 AND workspace=$2', [suiteId, workspace], { isAbandoned: abandoned, observe: s => databaseSpans.push(s) })).rows[0];
+    const snapshotRow = (await databaseQuery(pool, 'registry_snapshot', `
+      SELECT a.id AS application_id,a.data AS application_data,
+             s.id AS suite_id,s.version AS suite_version,s.data AS suite_data
+      FROM applications a
+      JOIN suites s ON s.id=$2 AND s.workspace=$3
+      WHERE a.id=$1 AND a.workspace=$3`, [appId, suiteId, workspace],
+      { isAbandoned: abandoned, observe: s => databaseSpans.push(s) })).rows[0];
     if (disconnected()) return reply;
     if (budget.expired()) return reply.code(504).send({ error: 'snapshot_deadline_expired' });
-    if (!application || !suite) throw new HttpError(404, 'Application or suite not found');
+    if (!snapshotRow) throw new HttpError(404, 'Application or suite not found');
+    const application = { id: snapshotRow.application_id, data: snapshotRow.application_data };
+    const suite = { id: snapshotRow.suite_id, version: snapshotRow.suite_version, data: snapshotRow.suite_data };
     snapshotReadyMs = performance.now() - started;
     return { application, suite };
     } catch (error) {

@@ -2,6 +2,13 @@ import http from 'node:http';
 import https from 'node:https';
 import type { FetchTiming } from './submission-state.js';
 
+export function configuredSubmissionConnectionLimit(value = process.env.SUBMISSION_UPSTREAM_CONNECTIONS): number {
+  if (value === undefined || value === '') return 128;
+  const parsed = Number(value);
+  if (!Number.isInteger(parsed) || parsed < 16 || parsed > 256) throw new Error('SUBMISSION_UPSTREAM_CONNECTIONS must be an integer from 16 to 256');
+  return parsed;
+}
+
 export type SubmissionTransportTiming = {
   kind: 'native_http_bounded'; connectionLimit: number; socketAssignedMs: number | null;
   connectedMs: number | null; reusedSocket: boolean | null;
