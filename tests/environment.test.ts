@@ -31,6 +31,7 @@ for (const [configuration, environment] of [
     assert.equal(response.headers['cache-control'], 'no-store');
     assert.equal(response.headers['referrer-policy'], 'no-referrer');
     assert.match(response.headers['content-security-policy'] ?? '', /connect-src 'self'/);
+    assert.match(response.headers['content-security-policy'] ?? '', /form-action 'self'/);
     assert.deepEqual(response.json(), { environment, configurationOnly: true,
       provider: environment === 'gcp-trial' ? 'Google Cloud / GKE' : null, region: null,
       modelApproval: 'See each job; human review required' });
