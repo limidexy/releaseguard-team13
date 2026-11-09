@@ -67,7 +67,7 @@ export function rollbackTarget(env, reportDir, execute = execFileSync) {
     }
   }
   async function identity(reference) {
-    const info = JSON.parse(run('image', 'inspect', reference, '--format', '{"Id":{{json .Id}},"Labels":{{json .Config.Labels}}}'));
+    const info = JSON.parse(run('image', 'inspect', reference, '--format', '{"Id":{{json .Id}},"Labels":{{json (index .Config "Labels")}}}'));
     assert.match(info.Id, imageId, 'Invalid retained local image identity');
     const temp = await mkdtemp(join(tmpdir(), 'rg-rollback-inspect-'));
     try {
