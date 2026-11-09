@@ -6,6 +6,10 @@ The source under test was the public `limidexy/releaseguard-team13` `main` commi
 
 These are **local scan artifacts**. The historical hosted CI run did not execute Semgrep or ZAP, and the fix branch has not been merged into `main`.
 
+## Hosted pull-request check
+
+The first hosted check for PR #53, [run 42651826186](https://github.com/limidexy/releaseguard-team13/actions/runs/42651826186), is **failed**, despite the local security rescan and 440 passing local tests. Its Linux verification job stopped in the existing retained-artifact Governance rollback check: `docker image inspect` could not read `.Config.Labels` from the retained previous image because that field was absent. The Windows job passed. Later Linux gates, including the existing dependency and image scans, did not run. This is a separate CI compatibility issue and must be resolved before describing the PR as CI-verified; it does not reverse the local Semgrep or ZAP observations.
+
 ## Results
 
 | Check | Before fix | After fix | Interpretation |
