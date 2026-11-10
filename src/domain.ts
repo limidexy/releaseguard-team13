@@ -14,7 +14,7 @@ export function evaluate(cases: Case[], policy: z.infer<typeof policySchema>, ou
   if (byId.size !== outputs.length || outputs.some(o => !cases.some(c => c.id === o.caseId))) throw new Error('Duplicate or unknown output ID');
   const results = cases.map(c => {
     const o = byId.get(c.id), actual = o?.output?.trim();
-    let status = 'failed', reason = 'Rule failed';
+    let status: string, reason = 'Rule failed';
     const revision = c.rule === 'returns_policy_v2' ? 'v2.0' : c.rule === 'returns_policy_v2_1' ? 'v2.1' : c.rule === 'returns_policy_v2_2' ? 'v2.2' : undefined;
     let policyCheck: ReturnType<typeof checkReturnsPolicy> | undefined;
     if (!o || o.error !== undefined || actual === undefined || actual.length === 0 || (policy.maxLatencyMs !== null && o.latencyMs === undefined)) { status = 'error'; reason = o?.error ?? 'Required non-empty evidence missing'; }
@@ -25,7 +25,7 @@ export function evaluate(cases: Case[], policy: z.infer<typeof policySchema>, ou
       if (c.rule === 'not_contains') passed = !actual.toLowerCase().includes(expected.toLowerCase());
       if (c.rule === 'exact') passed = actual === expected;
       if (c.rule === 'not_empty') passed = actual.length > 0;
-      if (c.rule === 'json_keys') { try { const v = JSON.parse(actual); passed = v !== null && typeof v === 'object' && !Array.isArray(v) && expected.split(',').every(k => Object.hasOwn(v, k.trim())); } catch {} }
+      if (c.rule === 'json_keys') { try { const v = JSON.parse(actual); passed = v !== null && typeof v === 'object' && !Array.isArray(v) && expected.split(',').every(k => Object.hasOwn(v, k.trim())); } catch { /* Invalid JSON means this rule does not pass. */ } }
       if (revision) { policyCheck = checkReturnsPolicy(expected, actual, revision); passed = policyCheck.passed; reason = policyCheck.reason; }
       if (policy.maxLatencyMs !== null && (o.latencyMs ?? Infinity) > policy.maxLatencyMs) { passed = false; reason = 'Latency exceeds policy'; }
       status = passed ? 'passed' : 'failed'; if (passed && !policyCheck) reason = 'Rule passed';

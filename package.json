@@ -6,6 +6,7 @@
   "engines": { "node": ">=24" },
   "scripts": {
     "build": "tsc",
+    "lint": "node -e \"require('node:fs').mkdirSync('evidence',{recursive:true})\" && eslint src tests scripts public --format json --output-file evidence/lint.json",
     "start": "node dist/src/main.js",
     "test": "npm run build && node --test dist/tests/*.test.js",
     "tokens": "node scripts/dev-tokens.mjs",
@@ -20,9 +21,13 @@
     "zod": "4.6.6"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/amqplib": "^0.10.7",
     "@types/node": "^24.0.0",
     "@types/pg": "^8.15.5",
-    "typescript": "^5.9.3"
+    "eslint": "^10.10.0",
+    "globals": "^17.14.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.70.0"
   }
 }

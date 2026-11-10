@@ -5,7 +5,7 @@ import { createECDH, createPrivateKey, createPublicKey, getDiffieHellman, sign }
 const B=Buffer;
 function tlv(tag,bytes){const n=bytes.length,len=n<128?B.from([n]):n<256?B.from([0x81,n]):B.from([0x82,n>>8,n&255]);return B.concat([B.from([tag]),len,bytes]);}
 const seq=(...v)=>tlv(0x30,B.concat(v)),set=(...v)=>tlv(0x31,B.concat(v));
-function oid(text){const p=text.split('.').map(Number),out=[40*p[0]+p[1]];for(let n of p.slice(2)){const a=[n&127];while(n=Math.floor(n/128))a.unshift((n&127)|128);out.push(...a);}return tlv(6,B.from(out));}
+function oid(text){const p=text.split('.').map(Number),out=[40*p[0]+p[1]];for(let n of p.slice(2)){const a=[n&127];while((n=Math.floor(n/128)))a.unshift((n&127)|128);out.push(...a);}return tlv(6,B.from(out));}
 const name=text=>seq(set(seq(oid('2.5.4.3'),tlv(12,B.from(text)))));
 const alg=k=>k.asymmetricKeyType==='rsa'?seq(oid('1.2.840.113549.1.1.11'),tlv(5,B.alloc(0))):seq(oid('1.2.840.10045.4.3.2'));
 const pem=(label,bytes)=>'-----BEGIN '+label+'-----\n'+bytes.toString('base64').match(/.{1,64}/g).join('\n')+'\n-----END '+label+'-----\n';

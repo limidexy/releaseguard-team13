@@ -1,6 +1,6 @@
 # Cloud deployment requirements
 
-These files are templates and a manifest generator, not a record of deployed cloud infrastructure. No cloud platform/account is selected. Use a Kubernetes cluster only if the team can operate it within the course schedule; managed container platforms with queue-based scaling can implement the same boundaries.
+These files are templates and a manifest generator, not a record of deployed cloud infrastructure. The [disposable GKE rebuild configuration](../terraform/README.md) provisions the cloud resources required for a new trial. Use a Kubernetes cluster only if the team can operate it within the course schedule; managed container platforms with queue-based scaling can implement the same boundaries.
 
 ## Before deployment
 
