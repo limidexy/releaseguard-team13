@@ -81,6 +81,7 @@ test('only the edge is public and it routes identity before gateway while blocki
   assert.deepEqual(publicServices.map(d=>d.metadata.name),['edge']);
   assert.equal(publicServices[0].spec.loadBalancerIP,'203.0.113.10');
   const caddy=doc(p,'ConfigMap','edge-config').data.Caddyfile;
+  assert.match(caddy, /route \{\n    header >Strict-Transport-Security "max-age=86400"\n/);
   assert.match(caddy,/respond @admin 404/);
   assert.match(caddy,/@admin path \/auth\/admin\* \/auth\/realms\/master\*/);
   assert.ok(caddy.indexOf('reverse_proxy identity:8080') < caddy.indexOf('reverse_proxy gateway:8080'));
