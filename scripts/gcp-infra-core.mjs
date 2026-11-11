@@ -141,7 +141,7 @@ export function renderGcpInfrastructure(input, bootstrapSql) {
       volumes: [{ name: 'realm', secret: { secretName: 'rg-identity' } }, { name: 'trust', secret: { secretName: 'rg-internal-ca' } }],
     },
   } } }, 'apps/v1');
-  cm('edge-config', { Caddyfile: new URL(origin).hostname + ' {\n  encode gzip\n  route {\n    header >Strict-Transport-Security "max-age=86400"\n    @admin path /auth/admin* /auth/realms/master*\n    respond @admin 404\n    handle /auth/* {\n      reverse_proxy identity:8080\n    }\n    handle {\n      reverse_proxy gateway:8080\n    }\n  }\n}\n' });
+  cm('edge-config', { Caddyfile: new URL(origin).hostname + ' {\n  encode gzip\n  route {\n    header ?Strict-Transport-Security "max-age=86400"\n    @admin path /auth/admin* /auth/realms/master*\n    respond @admin 404\n    handle /auth/* {\n      reverse_proxy identity:8080\n    }\n    handle {\n      reverse_proxy gateway:8080\n    }\n  }\n}\n' });
   pvc('edge-data', '1Gi');
   add('Deployment', 'edge', { spec: { replicas: 1, strategy: { type: 'Recreate' }, selector: { matchLabels: { app: 'edge' } }, template: {
     metadata: { labels: { app: 'edge' } }, spec: { automountServiceAccountToken: false,
