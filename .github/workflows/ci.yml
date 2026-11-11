@@ -8,8 +8,6 @@ permissions:
   contents: read
 jobs:
   verify:
-    # Enable only after the owner verifies included minutes and a zero-spend budget.
-    if: vars.RG_ENABLE_HOSTED_CI == 'true'
     # Read only this public repository's pinned historical verification artifacts.
     # No Actions writes, id-token, registry publishing or cloud permissions.
     permissions:
@@ -21,6 +19,16 @@ jobs:
       # Every Compose operation, including fault/recovery checks, uses this runner-only project.
       COMPOSE_PROJECT_NAME: rg-ci-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
+      # A skipped job can satisfy branch protection. Fail before setup when CI is disabled.
+      - name: Require hosted CI to be enabled
+        id: hosted-ci
+        env:
+          RG_ENABLE_HOSTED_CI: ${{ vars.RG_ENABLE_HOSTED_CI }}
+        run: |
+          if [ "$RG_ENABLE_HOSTED_CI" != true ]; then
+            echo '::error::Set RG_ENABLE_HOSTED_CI=true before running the required verification.'
+            exit 1
+          fi
       - uses: actions/checkout@v4
         with:
           # Compare the whole push range, not only its last commit.
@@ -42,7 +50,7 @@ jobs:
           if-no-files-found: error
       - name: Semgrep source security gate
         id: semgrep
-        if: "!cancelled()"
+        if: "!cancelled() && steps.hosted-ci.outcome == 'success'"
         run: |
           mkdir -p evidence
           docker run --rm -w /scan -v "$PWD/src:/scan/src:ro" -v "$PWD/scripts:/scan/scripts:ro" -v "$PWD/public:/scan/public:ro" \
@@ -238,13 +246,13 @@ jobs:
           name: tested-image
           path: image.tar
       - name: Preserve test reports
-        if: always()
+        if: always() && steps.hosted-ci.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
           name: verification-evidence
           path: evidence/
       - name: Stop containers
-        if: always()
+        if: always() && steps.hosted-ci.outcome == 'success'
         run: docker compose stop
   windows-tooling:
     # Public-repository standard runner; no install, Docker, cloud or model steps.
