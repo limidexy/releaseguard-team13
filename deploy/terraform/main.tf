@@ -23,6 +23,7 @@ locals {
 resource "google_project_service" "required" {
   for_each = toset([
     "artifactregistry.googleapis.com",
+    "cloudresourcemanager.googleapis.com",
     "compute.googleapis.com",
     "container.googleapis.com",
     "iam.googleapis.com",
@@ -99,6 +100,8 @@ resource "google_project_iam_member" "nodes" {
   project = var.project_id
   role    = "roles/container.defaultNodeServiceAccount"
   member  = google_service_account.nodes.member
+
+  depends_on = [google_project_service.required["cloudresourcemanager.googleapis.com"]]
 }
 
 resource "google_artifact_registry_repository_iam_member" "nodes" {
