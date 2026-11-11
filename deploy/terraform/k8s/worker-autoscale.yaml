@@ -1,0 +1,62 @@
+apiVersion: keda.sh/v1alpha1
+kind: TriggerAuthentication
+metadata:
+  name: rg-rabbit-scaler
+  namespace: releaseguard
+spec:
+  secretTargetRef:
+    - parameter: host
+      name: rg-broker
+      key: KEDA_MANAGEMENT_URL
+    - parameter: tls
+      name: rg-broker
+      key: KEDA_TLS
+    - parameter: ca
+      name: rg-internal-ca
+      key: ca.crt
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-rabbit-scaling
+  namespace: releaseguard
+spec:
+  podSelector:
+    matchLabels: {app: rabbitmq}
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels: {kubernetes.io/metadata.name: keda}
+      ports:
+        - {protocol: TCP, port: 15671}
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: evaluation-worker
+  namespace: releaseguard
+spec:
+  scaleTargetRef: {name: worker}
+  pollingInterval: 5
+  cooldownPeriod: 60
+  minReplicaCount: 1
+  maxReplicaCount: 3
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleDown:
+          stabilizationWindowSeconds: 60
+          policies:
+            - {type: Pods, value: 2, periodSeconds: 30}
+  triggers:
+    - type: rabbitmq
+      metadata:
+        protocol: http
+        mode: QueueLength
+        value: '10'
+        vhostName: releaseguard
+        queueName: releaseguard.evaluate
+        excludeUnacknowledged: 'false'
+        unsafeSsl: 'false'
+      authenticationRef: {name: rg-rabbit-scaler}

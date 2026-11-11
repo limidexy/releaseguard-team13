@@ -58,7 +58,11 @@ export function rollbackFixture(t) {
     if (command === 'image') {
       if (args[0] === 'inspect') {
         const id = tags.get(args[1]) ?? args[1], image = images.get(id); if (!image) throw Error('Missing local image');
-        assert.equal(args[2], '--format'); return args[3] === '{{.Id}}' ? id : JSON.stringify({ Id: id, Labels: image.labels });
+        assert.equal(args[2], '--format');
+        if (image.labels === undefined && args[3].includes('.Config.Labels')) {
+          throw Error('template parsing error: map has no entry for key "Labels"');
+        }
+        return args[3] === '{{.Id}}' ? id : JSON.stringify({ Id: id, Labels: image.labels ?? null });
       }
       if (args[0] === 'save') {
         assert.equal(args[2], '-o'); const image = images.get(args[1]); assert.ok(image);

@@ -1,0 +1,89 @@
+{
+  "timestamp": "2026-11-09T16:58:29.433Z",
+  "source": "d9cfa9e69a97eace5977524b230175614f8ec26d",
+  "target": "http://127.0.0.1:5202",
+  "environment": "isolated eight-service local Compose; synthetic dev identities and data",
+  "authMode": "dev",
+  "protectedApiChecks": [
+    {
+      "name": "Applications reject no identity",
+      "expected": 401,
+      "observed": 401,
+      "passed": true
+    },
+    {
+      "name": "Applications reject malformed identity",
+      "expected": 401,
+      "observed": 401,
+      "passed": true
+    },
+    {
+      "name": "Jobs reject no identity",
+      "expected": 401,
+      "observed": 401,
+      "passed": true
+    },
+    {
+      "name": "Evidence rejects no identity",
+      "expected": 401,
+      "observed": 401,
+      "passed": true
+    },
+    {
+      "name": "Viewer cannot create an application",
+      "expected": 403,
+      "observed": 403,
+      "passed": true
+    },
+    {
+      "name": "Contributor cross-origin mutation rejected",
+      "expected": 403,
+      "observed": 403,
+      "passed": true
+    },
+    {
+      "name": "Contributor cross-site mutation rejected",
+      "expected": 403,
+      "observed": 403,
+      "passed": true
+    },
+    {
+      "name": "Contributor can create in its own workspace",
+      "expected": 201,
+      "observed": 201,
+      "passed": true
+    },
+    {
+      "name": "Contributor can read own workspace",
+      "expected": 200,
+      "observed": 200,
+      "passed": true
+    },
+    {
+      "name": "Other workspace can read its own list",
+      "expected": 200,
+      "observed": 200,
+      "passed": true
+    },
+    {
+      "name": "Viewer can read same-workspace list",
+      "expected": 200,
+      "observed": 200,
+      "passed": true
+    },
+    {
+      "name": "Rejected mutations created no application records",
+      "expected": 1,
+      "observed": 1,
+      "passed": true
+    },
+    {
+      "name": "Gateway sends CSP form-action self",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "note": "Read/write requests used only a disposable local workspace. Tokens and application IDs are omitted. No cloud or production target was tested."
+}

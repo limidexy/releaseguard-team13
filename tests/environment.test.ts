@@ -31,6 +31,7 @@ for (const [configuration, environment] of [
     assert.equal(response.headers['cache-control'], 'no-store');
     assert.equal(response.headers['referrer-policy'], 'no-referrer');
     assert.match(response.headers['content-security-policy'] ?? '', /connect-src 'self'/);
+    assert.match(response.headers['content-security-policy'] ?? '', /form-action 'self'/);
     assert.deepEqual(response.json(), { environment, configurationOnly: true,
       provider: environment === 'gcp-trial' ? 'Google Cloud / GKE' : null, region: null,
       modelApproval: 'See each job; human review required' });
@@ -39,6 +40,16 @@ for (const [configuration, environment] of [
 test('host, forwarded headers and query parameters cannot assert a cloud deployment', async () => {
   const response = await inspect({ AUTH_MODE: 'oidc' }, '/environment.json?environment=gcp-trial', { host: 'cloud.example', 'x-forwarded-host': 'gcp-trial.example', 'x-rg-environment': 'gcp-trial' });
   assert.equal(response.json().environment, 'unconfirmed');
+});
+test('gateway sends isolation and permissions headers for HTML, script and JSON', async () => {
+  for (const url of ['/', '/app.js', '/environment.json', '/api/v2/applications']) {
+    const response = await inspect({ AUTH_MODE: 'dev' }, url);
+    assert.equal(response.statusCode, url.startsWith('/api/') ? 503 : 200, url);
+    assert.equal(response.headers['cross-origin-embedder-policy'], 'require-corp', url);
+    assert.equal(response.headers['cross-origin-opener-policy'], 'same-origin', url);
+    assert.equal(response.headers['cross-origin-resource-policy'], 'same-origin', url);
+    assert.equal(response.headers['permissions-policy'], 'camera=(), microphone=(), geolocation=(), payment=(), usb=()', url);
+  }
 });
 test('region is explicit, bounded configuration only, never a hardcoded location or secret dump', async () => {
   for (const region of [undefined, 'asia-southeast1', 'https://user:secret@host.invalid', 'secret\nvalue', 'x'.repeat(100)]) {

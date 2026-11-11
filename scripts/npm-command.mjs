@@ -2,7 +2,7 @@
 // Node.js refuses to spawn .cmd/.bat files without a shell on Windows (CVE-2024-27980 hardening,
 // Node >= 18.20.2 / 20.12.2), so spawnSync('npm.cmd', [...]) fails with EINVAL and prints nothing.
 // On Windows we start npm through the shell with a fixed, validated command line; elsewhere npm runs directly.
-const SAFE_ARG = /^[A-Za-z0-9@._=:\/-]+$/;
+const SAFE_ARG = /^[A-Za-z0-9@._=:/-]+$/;
 
 export function npmSpawn(args, options = {}, platform = process.platform) {
   if (!Array.isArray(args) || args.some(a => typeof a !== 'string' || !SAFE_ARG.test(a))) {

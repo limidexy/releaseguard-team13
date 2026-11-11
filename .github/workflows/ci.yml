@@ -8,8 +8,6 @@ permissions:
   contents: read
 jobs:
   verify:
-    # Enable only after the owner verifies included minutes and a zero-spend budget.
-    if: vars.RG_ENABLE_HOSTED_CI == 'true'
     # Read only this public repository's pinned historical verification artifacts.
     # No Actions writes, id-token, registry publishing or cloud permissions.
     permissions:
@@ -21,6 +19,16 @@ jobs:
       # Every Compose operation, including fault/recovery checks, uses this runner-only project.
       COMPOSE_PROJECT_NAME: rg-ci-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
+      # A skipped job can satisfy branch protection. Fail before setup when CI is disabled.
+      - name: Require hosted CI to be enabled
+        id: hosted-ci
+        env:
+          RG_ENABLE_HOSTED_CI: ${{ vars.RG_ENABLE_HOSTED_CI }}
+        run: |
+          if [ "$RG_ENABLE_HOSTED_CI" != true ]; then
+            echo '::error::Set RG_ENABLE_HOSTED_CI=true before running the required verification.'
+            exit 1
+          fi
       - uses: actions/checkout@v4
         with:
           # Compare the whole push range, not only its last commit.
@@ -30,6 +38,33 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci --no-audit --no-fund
+      - name: ESLint source and tooling gate
+        id: lint
+        run: npm run lint -- --max-warnings 0
+      - name: Preserve ESLint report
+        if: always() && steps.lint.outcome != 'skipped'
+        uses: actions/upload-artifact@v4
+        with:
+          name: eslint-report
+          path: evidence/lint.json
+          if-no-files-found: error
+      - name: Semgrep source security gate
+        id: semgrep
+        if: "!cancelled() && steps.hosted-ci.outcome == 'success'"
+        run: |
+          mkdir -p evidence
+          docker run --rm -w /scan -v "$PWD/src:/scan/src:ro" -v "$PWD/scripts:/scan/scripts:ro" -v "$PWD/public:/scan/public:ro" \
+            semgrep/semgrep@sha256:2e45517a85e13a9cca14a2a00df6bb48affd66b8ebfae1b0991cd57578362fb0 \
+            semgrep scan --strict --error --metrics=off --disable-version-check \
+            --config p/owasp-top-ten --json src scripts public > evidence/sast-semgrep.json
+          node --input-type=module -e 'import { readFileSync } from "node:fs"; const r = JSON.parse(readFileSync("evidence/sast-semgrep.json")); if (!r.paths?.scanned?.length || r.errors?.length || r.results?.length) process.exit(1);'
+      - name: Preserve Semgrep report
+        if: always() && steps.semgrep.outcome != 'skipped'
+        uses: actions/upload-artifact@v4
+        with:
+          name: semgrep-report
+          path: evidence/sast-semgrep.json
+          if-no-files-found: error
       - run: npm test
       - name: Cross-platform tooling regressions
         run: node --test tests/windows-compat.test.mjs tests/tooling-checkout.test.mjs tests/tooling-consumers.test.mjs tests/hooks-and-ignore.test.mjs
@@ -95,6 +130,26 @@ jobs:
       - run: node scripts/setup-local.mjs
       - run: docker compose build gateway postgres
       - run: docker compose up -d --no-build --wait
+      - name: OWASP ZAP passive gateway gate
+        id: zap
+        shell: bash
+        run: |
+          mkdir -p evidence/zap
+          chmod a+rwx evidence/zap
+          curl --fail --silent --show-error http://127.0.0.1:5189/health/ready > /dev/null
+          docker run --rm --network "${COMPOSE_PROJECT_NAME}_default" \
+            -v "$PWD/evidence/zap:/zap/wrk:rw" \
+            ghcr.io/zaproxy/zaproxy@sha256:9624669db72f54d86c4b46a7064518bd9bf79d8c61a4c31befa9923489f328af \
+            zap-baseline.py -t http://gateway:8080 -m 1 -T 3 -I \
+            -J baseline.json -r baseline.html 2>&1 | tee evidence/zap/scan.log
+          node scripts/check-zap-baseline.mjs
+      - name: Preserve ZAP reports
+        if: always() && steps.zap.outcome != 'skipped'
+        uses: actions/upload-artifact@v4
+        with:
+          name: zap-baseline-reports
+          path: evidence/zap/
+          if-no-files-found: error
       - name: Submission deadlines and database atomicity integration
         shell: bash
         env:
@@ -191,13 +246,13 @@ jobs:
           name: tested-image
           path: image.tar
       - name: Preserve test reports
-        if: always()
+        if: always() && steps.hosted-ci.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
           name: verification-evidence
           path: evidence/
       - name: Stop containers
-        if: always()
+        if: always() && steps.hosted-ci.outcome == 'success'
         run: docker compose stop
   windows-tooling:
     # Public-repository standard runner; no install, Docker, cloud or model steps.

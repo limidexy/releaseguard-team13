@@ -15,6 +15,15 @@ test('proven rollback uses distinct archive config identities, not ambiguous ima
   assert.deepEqual(f.mutations, []);
 });
 
+test('retained image without Docker labels still proves its archive identity', posix, async t => {
+  const f = rollbackFixture(t); delete f.images.get(previousId).labels;
+  const r = target(f), detail = await r.prove();
+  assert.equal(detail.previous.id, previousId);
+  assert.equal(detail.previous.config, f.images.get(previousId).digest);
+  assert.equal(detail.previous.embeddedSource, null);
+  assert.deepEqual(f.mutations, []);
+});
+
 test('an early business-request error cannot trigger any Governance recreation', posix, async t => {
   const f = rollbackFixture(t), r = target(f); await r.prove();
   await r.restoreOriginal();

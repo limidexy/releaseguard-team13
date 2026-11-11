@@ -36,7 +36,14 @@ export async function gateway(app: FastifyInstance) {
     const suite = returnsSuiteV22(legacy.suite);
     return { application: legacy.application, cases: suite.cases, suite };
   });
-  app.addHook('onSend', async (_req, reply) => { reply.header('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'").header('Referrer-Policy', 'no-referrer'); });
+  app.addHook('onSend', async (_req, reply) => {
+    reply.header('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'")
+      .header('Referrer-Policy', 'no-referrer')
+      .header('Cross-Origin-Embedder-Policy', 'require-corp')
+      .header('Cross-Origin-Opener-Policy', 'same-origin')
+      .header('Cross-Origin-Resource-Policy', 'same-origin')
+      .header('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=(), usb=()');
+  });
   app.all('/api/v2/*', async (req, reply) => {
     const entryMonotonic = performance.now(), entryEpochMs = Date.now();
     const tail = req.url.replace(/^\/api\/v2\//, ''), resource = tail.split(/[/?]/)[0];

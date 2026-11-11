@@ -124,6 +124,8 @@ export async function runAcceptance({ profile, runId, node, clock, record, run,
       try {
         await record({ kind: 'cleanup_intent' });
         const result = await cleanup();
+        // This exception is caught below to mark cleanup unknown; it cannot escape finally.
+        // eslint-disable-next-line no-unsafe-finally
         if (result?.stoppedAndVerified !== true) throw Error('Cleanup unconfirmed');
         report.lifecycle.cleanup = 'stopped_and_verified';
         await record({ kind: 'cleanup_result', status: 'stopped_and_verified' });
