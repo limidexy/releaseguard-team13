@@ -150,6 +150,46 @@ jobs:
           name: zap-baseline-reports
           path: evidence/zap/
           if-no-files-found: error
+      - name: OWASP ZAP authenticated passive API gate
+        id: zap-authenticated
+        shell: bash
+        run: |
+          mkdir -p evidence/zap-authenticated
+          zap_container="$COMPOSE_PROJECT_NAME-zap-authenticated"
+          zap_network="$COMPOSE_PROJECT_NAME-zap-internal"
+          gateway="$(docker compose ps -q gateway)"
+          zap_key="$(openssl rand -hex 32)"
+          cleanup() {
+            docker rm -f "$zap_container" >/dev/null 2>&1 || true
+            docker network disconnect "$zap_network" "$gateway" >/dev/null 2>&1 || true
+            docker network rm "$zap_network" >/dev/null 2>&1 || true
+          }
+          test -n "$gateway"
+          docker network create --internal "$zap_network" >/dev/null
+          trap cleanup EXIT
+          docker network connect --alias gateway "$zap_network" "$gateway"
+          docker run -d --name "$zap_container" --network "$zap_network" \
+            -v "$PWD/scripts/zap-authenticated.py:/zap/rg-verify.py:ro" \
+            ghcr.io/zaproxy/zaproxy@sha256:9624669db72f54d86c4b46a7064518bd9bf79d8c61a4c31befa9923489f328af \
+            zap.sh -daemon -silent -host 127.0.0.1 -port 8090 -config "api.key=$zap_key" >/dev/null
+          RG_ZAP_API_KEY="$zap_key" node --input-type=module -e '
+            import { randomUUID } from "node:crypto";
+            import { token } from "./scripts/dev-tokens.mjs";
+            const workspace = "zap-" + randomUUID();
+            console.log(JSON.stringify({
+              apiKey: process.env.RG_ZAP_API_KEY,
+              contributor: await token("zap-contributor", "contributor", workspace),
+              viewer: await token("zap-viewer", "viewer", workspace),
+              other: await token("zap-other", "contributor", workspace + "-other"),
+            }));
+          ' | docker exec -i "$zap_container" python3 /zap/rg-verify.py | tee evidence/zap-authenticated/summary.json
+      - name: Preserve authenticated ZAP summary
+        if: always() && steps.zap-authenticated.outcome != 'skipped'
+        uses: actions/upload-artifact@v4
+        with:
+          name: zap-authenticated-report
+          path: evidence/zap-authenticated/summary.json
+          if-no-files-found: error
       - name: Submission deadlines and database atomicity integration
         shell: bash
         env:

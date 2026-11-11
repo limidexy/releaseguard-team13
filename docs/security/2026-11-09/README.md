@@ -4,7 +4,7 @@
 
 The source under test was the public `limidexy/releaseguard-team13` `main` commit `d89ca78ff6828659f6f127915f117365546828b2`. The first dynamic scan ran against an isolated eight-service Docker Compose instance built from that commit, bound only to `127.0.0.1:5199`. A separate worktree, `fix/security-scan-headers-20261109`, changed the gateway CSP and one regression assertion; the second isolated instance used `127.0.0.1:5200`. The scan target in both instances was the gateway on its private Compose network, `http://gateway:8080/`. No live model key, cloud deployment, real user data, or external production target was used.
 
-These are **local scan artifacts**. The historical hosted CI run did not execute Semgrep or ZAP, and the fix branch has not been merged into `main`.
+These are **local scan artifacts**. The historical hosted CI runs described below did not execute Semgrep or ZAP. [PR #53](https://github.com/limidexy/releaseguard-team13/pull/53) later merged the fixes into `main`. The [gateway header follow-up](LOW_HEADER_FOLLOWUP_20261110.md) links to the current hosted security gates.
 
 ## Hosted pull-request check
 
@@ -23,7 +23,7 @@ The first hosted check for PR #53, [run 42651826186](https://github.com/limidexy
 
 The full scan reported `CSP: Failure to Define Directive with No Fallback` (ZAP rule 10055, medium risk, high confidence). Its detail identified the missing `form-action` directive. The gateway already set a CSP, including `frame-ancestors 'none'`, but the missing form rule allowed a page form to target another origin. The fix adds `form-action 'self'` to the existing CSP and checks it in `tests/environment.test.ts`. The fixed gateway's captured response headers contain the new directive. The repeat full scan no longer reports rule 10055.
 
-Four low-risk alert types remain: absent Cross-Origin-Embedder-Policy, Cross-Origin-Opener-Policy, Cross-Origin-Resource-Policy, and Permissions-Policy response headers. They are recorded here for compatibility review before deployment rather than silently suppressed. Two informational alerts are a benign comment in the public JavaScript and the deliberate `Cache-Control: no-store` setting. No high-severity alert was found in the scanned surface. Selected authenticated API operations were tested later; see the [10 November follow-up](FOLLOWUP_20261110.md). No claim is made about all application routes or production security.
+Four low-risk alert types remained in this rescan: absent Cross-Origin-Embedder-Policy, Cross-Origin-Opener-Policy, Cross-Origin-Resource-Policy, and Permissions-Policy response headers. A [later fix and rescan](LOW_HEADER_FOLLOWUP_20261110.md) addressed those headers. Two informational alerts are a benign comment in the public JavaScript and the deliberate `Cache-Control: no-store` setting. No high-severity alert was found in the scanned surface. The [10 November follow-up](FOLLOWUP_20261110.md) covers selected authenticated API operations. This evidence covers the scanned routes in local Compose.
 
 ## Coverage limits
 

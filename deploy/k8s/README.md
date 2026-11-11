@@ -41,4 +41,14 @@ Deploy the tested digest after protected-environment approval. Run `scripts/clou
 
 Recover the previous application digest through rolling deployment and rerun smoke. Rollback of code does not restore data or prove RPO/RTO. Destructive schema changes require separate versioned migrations; initial CREATE IF NOT EXISTS bootstrap is for a new database. Worker scale-down or node failure may require lease expiry/retry and may repeat external provider calls. Test this with replay before any paid provider workload.
 
+## Production acceptance
+
+The current [cloud deployment workflow](../../.github/workflows/cd.yml) targets `cloud-test`. For a production release, identify the production project, cluster, HTTPS origin and OIDC issuer, and verify that the deployment identity can roll out the tested digest to that target. Use a dedicated test workspace and approved traffic window. Keep the last known-good digest and the method to stop test traffic available during the run.
+
+Record these results against the deployed commit and image digest:
+
+- **Scaling:** Capture the approved workload's arrival rate, RabbitMQ queue depth, HPA decisions, Ready Worker replicas, completion rate and latency on the same timeline. Verify scale-out and scale-in against the configured limits. Label generated load and observed customer traffic separately.
+- **Real model:** Submit an end-to-end evaluation in `real` mode with approved non-sensitive inputs and configured provider credentials. Set a request cap and cost limit for the run. Match the successful evaluation's provider evidence to the provider's own request or usage record.
+- **Security:** Passively observe the authorized HTTPS and authenticated OIDC/API journey on the production origin with a least-privilege test identity. Record the observed paths, statuses, rule IDs and severity counts. Keep bearer tokens, payloads, raw proxy sessions and provider secrets out of shared evidence.
+
 See [KEDA stable RabbitMQ guidance](https://keda.sh/docs/2.21/scalers/rabbitmq-queue/) and [RabbitMQ delivery reliability](https://www.rabbitmq.com/docs/reliability).

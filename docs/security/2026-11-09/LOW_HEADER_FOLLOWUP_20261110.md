@@ -15,4 +15,4 @@ This rescan used a gateway with no upstream business services. ZAP recorded netw
 - [Original ZAP JSON, Markdown, scan log and SHA-256 checksums](ReleaseGuard_Low_Header_Rescan_20261110.zip)
 - [Previous authenticated scan and API checks](FOLLOWUP_20261110.md)
 
-The isolated gateway used synthetic test secrets and no model key. The report paths are relative to this PR branch. SAST and DAST are still local checks; the hosted CI workflow does not run Semgrep or ZAP.
+The isolated gateway used synthetic test secrets and no model key. The [hosted verification workflow](../../../.github/workflows/ci.yml) now gates changes on Semgrep and two passive ZAP checks: a public gateway baseline and an authenticated API journey on disposable Compose services. The authenticated job repeats the 13 local API checks, adds explicit workspace-isolation and authenticated jobs and releases checks, and publishes a summary with status results and ZAP rule IDs. It uses synthetic identities and does not exercise the production identity provider.
